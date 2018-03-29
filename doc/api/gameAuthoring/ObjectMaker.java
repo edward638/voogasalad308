@@ -7,5 +7,4 @@ public interface ObjectManager {
 	
 	public List<> getGameObjects();
 
-	
 }

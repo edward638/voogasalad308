@@ -5,8 +5,8 @@
 * August -Game Data - Front End
 * Summer - Game Authoring Environment 
 * Maddie - Game Authoring Environment
-* Calvin - Game Player - Front end
-* Jeffrey - Game Player - Back end
+* Calvin - Game Player - Front End
+* Jeffrey - Game Player - Back End
 * Yashas - Game Engine - Back End
 * Gouttham - Game Engine - Back End
 * Martin - Game Engine - Back End

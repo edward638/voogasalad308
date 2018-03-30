@@ -10,6 +10,7 @@ public interface GameElement {
  * this behavior given a gameEvent. 
  */
 public interface Behavior {
+	public Behavior(GameElement ge);
 	public Map<String, int> getProperty();
 }
 

@@ -15,4 +15,10 @@ public interface GameObject {
 	
 	public Image getImage(); //returns the objects image
 	
+	public void setImageSize(double x, double y); //sets the size of the image
+	
+	public double getImageWidth(); //returns the width of the image representing the object
+	
+	public double getImageHeight(); //returns the height of the image representing the object
+	
 }

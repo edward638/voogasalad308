@@ -1,5 +1,5 @@
 
-public interface PlayerFrontend {
+public interface GUI{
 	/*
 	 1. Be able to select a game.
 	 2. Be able to switch from one game to another.
@@ -22,7 +22,23 @@ public interface PlayerFrontend {
 	 * comboboxes, HUD, game engine, etc)
 	 */
 	
+	/**
+	 * general setting up display for GUI
+	 */
+	void setScene();
 	
+	/**
+	 * initialising buttons
+	 */
+	void initialiseButtons();
 	
+	/**
+	 * initialising isplays such as HUD
+	 */
+	void initialiseDisplays();
 	
+	/**
+	 * switches to authoring environment
+	 */
+	void goAuthoring();
 }

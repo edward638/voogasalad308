@@ -17,6 +17,9 @@ public interface PlayerFrontend {
 	/*
 	 * We need a HUD class that takes in values from its update method, which is given by the 
 	 * game engine. 
+	 * 
+	 * We need GUI class to hold everything (go into slightly more depth - it needs to hold buttons, 
+	 * comboboxes, HUD, game engine, etc)
 	 */
 	
 	

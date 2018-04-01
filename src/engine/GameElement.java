@@ -1,5 +1,8 @@
 package engine;
 
+import java.util.List;
+import java.util.ArrayList;
+
 public class GameElement {
 	private String elementName;
 	private Double xPos;
@@ -20,6 +23,19 @@ public class GameElement {
 		yPos = y;
 	}
 	
+	public List<Double> getPosition() {
+		List<Double> ret = new ArrayList<>();
+		ret.add(xPos); ret.add(yPos);
+		return ret;
+	}
+	
+	public Double getX() {
+		return xPos;
+	}
+	
+	public Double getY() {
+		return yPos;
+	}
 	public String getName() {
 		return elementName;
 	}

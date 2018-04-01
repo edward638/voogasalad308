@@ -7,6 +7,9 @@ import engine.GameElement;
 
 public class Movable extends Behavior{
 	
+	public static final int X_LIST_POS = 0; // Position of X in direction 
+	public static final int Y_LIST_POS = 1; // Position of Y in direction
+	
 	private Double velocity;
 	private List<Double> direction;
 	
@@ -16,8 +19,9 @@ public class Movable extends Behavior{
 		setDirection(dir);
 	}
 	
-	public void moveRight() {
-		
+	public void moveRight(Double time) {
+		GameElement p = getParent();
+		p.setPosition(p.getX() + velocity * time * direction.get(X_LIST_POS), p.getY() + velocity * time * direction.get(Y_LIST_POS));
 	}
 	
 	public void setDirection(List<Double> dir) {

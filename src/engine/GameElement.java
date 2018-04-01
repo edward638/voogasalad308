@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import engine.behaviors.BasicGameElement;
 import engine.behaviors.Behavior;
+import engine.exceptions.TooManyBehaviorsException;
 
 public class GameElement {
 	private Set<Behavior> behaviors;
@@ -16,22 +17,32 @@ public class GameElement {
 	}
 	
 	/*
-	 * Adds the object containing the fields and methods that correspond to a specific behavior
+	 * Adds the Behavior object containing the fields and methods that correspond to a specific behavior
 	 */
 	public void addBehavior(Behavior behave) {
-		behaviors.add(behave);
+		List<Behavior> existing = behaviors.stream()
+				.filter(b -> b.getClass() == behave.getClass())
+				.collect(Collectors.toList());
+		if (existing.size() > 0) {
+			throw new TooManyBehaviorsException("Trying to add " + behave.getClass() + " to a GameElement that already has this behavior");
+		}
 	}
 	
+	/*
+	 * Get the behavior object corresponding to the 
+	 */
 	public Behavior getBehavior (Class<?> behavior_type) {
 		try {
-			return behaviors.stream().filter(behavior -> behavior.getClass() == behavior_type).collect(Collectors.toList()).get(0));
+			return behaviors.stream()
+					.filter(behavior -> behavior.getClass() == behavior_type)
+					.collect(Collectors.toList())
+					.get(0);
+		}
 		catch (NullPointerException n) {
 			throw new IllegalArgumentException(behavior_type + " does not exist for GameElement" + getIdentifier());
 		}
-		}
-	/*
-	 * Adds the ability for this game element to respond to an ElementEvent in a certain way
-	 */
+	}
+	
 	
 	/*
 	 * Defines the method we will use to identify this game element. Should be done according the 
@@ -39,10 +50,14 @@ public class GameElement {
 	 */
 	public String getIdentifier() {
 		BasicGameElement el = (BasicGameElement) behaviors.stream()
-				.filter(b -> b.getClass() == new BasicGameElement(this, " ", 100.0, 100.0).getClass())
+				.filter(b -> b.getClass() == new BasicGameElement(this, " ", 0.0, 0.0).getClass())
 				.collect(Collectors.toList()).get(0);
 		return el.getName();
 	}
+	
+	/*
+	 * Adds the ability for this game element to respond to an ElementEvent in a certain way
+	 */
 	public void addEventReaction() {
 		
 	}

@@ -15,13 +15,14 @@ public abstract class Behavior {
 		parent = ge;
 	}
 	
-	public Map<String, Object> getValues() {
-		
+	
+	public Map<String, Object> reportValues() {
 		Map <String, Object> returnValues = new HashMap<>();
 		
 		Class<?> objClass = this.getClass();
-	    Field[] fields = objClass.getFields();
+	    Field[] fields = objClass.getDeclaredFields();
 	    for(Field field : fields) {
+	    		field.setAccessible(true);
 	        String name = field.getName();
 	        Object value;
 			try {

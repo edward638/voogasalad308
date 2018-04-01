@@ -25,8 +25,8 @@ public class Movable extends Behavior{
 	}
 	
 	public void move(Double time) {
-		GameElement p = getParent();
-		p.setPosition(p.getX() + velocity * time * direction.get(X_LIST_POS), p.getY() + velocity * time * direction.get(Y_LIST_POS));
+		BasicGameElement bge = (BasicGameElement) getParent().getBehavior(BasicGameElement.class);
+		bge.setPosition(bge.getX() + velocity * time * direction.get(X_LIST_POS), bge.getY() + velocity * time * direction.get(Y_LIST_POS));
 	}
 	
 	public void setDirection(List<Double> dir) {
@@ -35,7 +35,8 @@ public class Movable extends Behavior{
 			List<Double> normalized = dir.stream().map(n -> n/total).collect(Collectors.toList());
 			direction = normalized;
 		} else {
-			throw new IllegalArgumentException("Illegal Direction for " + getParent().getName() + ": " + dir);
+			BasicGameElement bge = (BasicGameElement) getParent().getBehavior(BasicGameElement.class);
+			throw new IllegalArgumentException("Illegal Direction for " + bge.getName() + ": " + dir);
 		}
 	}
 	
@@ -43,7 +44,8 @@ public class Movable extends Behavior{
 		if (isValidVelocity(v)) {
 			velocity = v;
 		} else {
-			throw new IllegalArgumentException("Illegal Velocity for " + getParent().getName() + ": " + v);
+			BasicGameElement bge = (BasicGameElement) getParent().getBehavior(BasicGameElement.class);
+			throw new IllegalArgumentException("Illegal Velocity for " + bge.getName() + ": " + v);
 		}
 	}
 	

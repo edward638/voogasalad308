@@ -1,18 +1,22 @@
 package engine;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import engine.behaviors.BasicGameElement;
 import engine.behaviors.Behavior;
+import engine.eventresponses.EventResponse;
 import engine.exceptions.TooManyBehaviorsException;
 
 public class GameElement {
 	private Set<Behavior> behaviors;
-	
-	
+	private Set<EventResponse> responses;
+
 	public GameElement() {
+		behaviors = new HashSet<>();
+		responses = new HashSet<>();
 		addBehavior(new BasicGameElement(this, "Mario", 100.0, 100.0));
 	}
 	
@@ -45,6 +49,13 @@ public class GameElement {
 	
 	
 	/*
+	 * Adds the ability for this game element to respond to an ElementEvent in a certain way
+	 */
+	public void addEventReaction() {
+		
+	}
+	
+	/*
 	 * Defines the method we will use to identify this game element. Should be done according the 
 	 * BasicGameElement behavior since every element in the game will implement that
 	 */
@@ -53,13 +64,6 @@ public class GameElement {
 				.filter(b -> b.getClass() == new BasicGameElement(this, " ", 0.0, 0.0).getClass())
 				.collect(Collectors.toList()).get(0);
 		return el.getName();
-	}
-	
-	/*
-	 * Adds the ability for this game element to respond to an ElementEvent in a certain way
-	 */
-	public void addEventReaction() {
-		
 	}
 	
 }

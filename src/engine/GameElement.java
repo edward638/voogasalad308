@@ -1,42 +1,30 @@
 package engine;
 
-import java.util.List;
-import java.util.ArrayList;
+import java.util.Set;
+
+import engine.behaviors.BasicGameElement;
+import engine.behaviors.Behavior;
 
 public class GameElement {
-	private String elementName;
-	private Double xPos;
-	private Double yPos;
+	private Set<Behavior> behaviors;
 	
-	public GameElement(String name, Double x, Double y) {
-		elementName = name;
-		xPos = x;
-		yPos = y;
+	
+	public GameElement() {
+		addBehavior(new BasicGameElement(this, "Mario", 100.0, 100.0));
 	}
 	
-	public GameElement(String name) {
-		this(name, 0.0, 0.0);
+	/*
+	 * Adds the object containing the fields and methods that correspond to a specific behavior
+	 */
+	public void addBehavior(Behavior behave) {
+		behaviors.add(behave);
 	}
 	
-	public void setPosition(double x, double y) {
-		xPos = x;
-		yPos = y;
+	/*
+	 * Adds the ability for this game element to respond to an ElementEvent in a certain way
+	 */
+	public void addEventReaction() {
+		
 	}
 	
-	public List<Double> getPosition() {
-		List<Double> ret = new ArrayList<>();
-		ret.add(xPos); ret.add(yPos);
-		return ret;
-	}
-	
-	public Double getX() {
-		return xPos;
-	}
-	
-	public Double getY() {
-		return yPos;
-	}
-	public String getName() {
-		return elementName;
-	}
 }

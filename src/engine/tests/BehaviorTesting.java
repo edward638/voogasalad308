@@ -13,7 +13,7 @@ public class BehaviorTesting {
 	}
 	
 	public static void getValuesTest() {
-		GameElement ge = new GameElement("Mario", 100.0, 100.0);
+		GameElement ge = new GameElement();
 		Behavior b = new Movable(ge);
 		Map<String, Object> bProperties = b.reportValues();
 		for (String s: bProperties.keySet()) {

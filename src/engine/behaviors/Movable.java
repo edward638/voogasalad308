@@ -2,7 +2,7 @@ package engine.behaviors;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 import engine.GameElement;
 
@@ -21,7 +21,7 @@ public class Movable extends Behavior{
 	}
 	
 	public Movable(GameElement ge) {
-		this(ge, 0.0, Arrays.asList(0.0, 1.0));
+		this(ge, 0.0, Arrays.asList(0.0, 10.0));
 	}
 	
 	public void move(Double time) {
@@ -31,7 +31,9 @@ public class Movable extends Behavior{
 	
 	public void setDirection(List<Double> dir) {
 		if (isValidDirection(dir)) {
-			direction = dir;
+			Double total = dir.stream().reduce(0.0, (a, b) -> a + b);
+			List<Double> normalized = dir.stream().map(n -> n/total).collect(Collectors.toList());
+			direction = normalized;
 		} else {
 			throw new IllegalArgumentException("Illegal Direction for " + getParent().getName() + ": " + dir);
 		}
@@ -54,12 +56,10 @@ public class Movable extends Behavior{
 	}
 	
 	private boolean isValidDirection(List<Double> d) {
-		if (d.size() > 2) {
+		if (d.size() > 2 || 
+				d.stream().reduce(0.0, (a, b) -> Math.abs(a) + Math.abs(b)) == 0) {
 			return false;
 		}
-		Stream<Double> st = d.stream();
-		Double sum = st.mapToDouble(f -> f.doubleValue()).sum();
-		st.map(n -> n / sum);
 		return true;
 	}
 	

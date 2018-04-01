@@ -16,7 +16,7 @@ public abstract class Behavior {
 	}
 	
 	
-	public Map<String, Object> reportValues() {
+	public Map<String, Object> reportProperties() {
 		Map <String, Object> returnValues = new HashMap<>();
 		
 		Class<?> objClass = this.getClass();

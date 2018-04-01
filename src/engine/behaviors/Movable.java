@@ -24,6 +24,9 @@ public class Movable extends Behavior{
 		this(ge, 0.0, Arrays.asList(0.0, 1.0));
 	}
 	
+	/*
+	 * Moves the parent game element according to the time amount requested
+	 */
 	public void move(Double time) {
 		BasicGameElement bge = (BasicGameElement) getParent().getBehavior(BasicGameElement.class);
 		bge.setPosition(bge.getX() + velocity * time * direction.get(X_LIST_POS), bge.getY() + velocity * time * direction.get(Y_LIST_POS));

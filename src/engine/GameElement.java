@@ -1,7 +1,9 @@
 package engine;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -22,7 +24,9 @@ public class GameElement {
 	}
 	
 	/*
-	 * Adds the Behavior object containing the fields and methods that correspond to a specific behavior
+	 * Adds the Behavior object containing the fields and methods that correspond to a specific behavior.
+	 * Checks if there already exists a behavior object for this behavior and throws an exception if the 
+	 * type of the one being added matches that of an existing behavior
 	 */
 	public void addBehavior(Behavior behave) {
 		List<Behavior> existing = behaviors.stream()
@@ -31,6 +35,7 @@ public class GameElement {
 		if (existing.size() > 0) {
 			throw new TooManyBehaviorsException("Trying to add " + behave.getClass() + " to a GameElement that already has this behavior");
 		}
+		behaviors.add(behave);
 	}
 	
 	/*
@@ -75,6 +80,17 @@ public class GameElement {
 				.filter(b -> b.getClass() == new BasicGameElement(this, " ", 0.0, 0.0).getClass())
 				.collect(Collectors.toList()).get(0);
 		return el.getName();
+	}
+	
+	public Map<String, Object> reportProperties() {
+		List<Map<String, Object>> behaviorResponses = behaviors.stream()
+				.map(behavior -> behavior.reportProperties())
+				.collect(Collectors.toList());
+		Map<String, Object> returning = new HashMap<String, Object>();
+		for (Map<String, Object> map: behaviorResponses) {
+			returning.putAll(map);
+		}
+		return returning;
 	}
 	
 }

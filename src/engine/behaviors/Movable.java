@@ -1,5 +1,6 @@
 package engine.behaviors;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -19,7 +20,11 @@ public class Movable extends Behavior{
 		setDirection(dir);
 	}
 	
-	public void moveRight(Double time) {
+	public Movable(GameElement ge) {
+		this(ge, 0.0, Arrays.asList(0.0, 1.0));
+	}
+	
+	public void move(Double time) {
 		GameElement p = getParent();
 		p.setPosition(p.getX() + velocity * time * direction.get(X_LIST_POS), p.getY() + velocity * time * direction.get(Y_LIST_POS));
 	}

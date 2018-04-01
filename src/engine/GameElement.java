@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import engine.behaviors.BasicGameElement;
 import engine.behaviors.Behavior;
 import engine.eventresponses.EventResponse;
+import engine.events.ElementEvent;
 import engine.exceptions.TooManyBehaviorsException;
 
 public class GameElement {
@@ -51,8 +52,18 @@ public class GameElement {
 	/*
 	 * Adds the ability for this game element to respond to an ElementEvent in a certain way
 	 */
-	public void addEventReaction() {
-		
+	public void addEventResponse(EventResponse response) {
+		responses.add(response);
+	}
+	
+	/*
+	 * Tells element to respond to an event
+	 */
+	public void processEvent(ElementEvent event) {
+		List<EventResponse> allResponses = responses.stream()
+				.filter(resp -> resp.getEventRespondingTo().getClass() == event.getClass())
+				.collect(Collectors.toList());
+		allResponses.forEach(response -> response.execute(event, this));
 	}
 	
 	/*

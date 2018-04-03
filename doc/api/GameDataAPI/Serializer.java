@@ -13,10 +13,10 @@ public interface Serializer {
      * @param gameObjects list of GameObjects which the game is comprised of
      */
     void gameEngineToXML(String fileName, List<GameObject> gameObjects);
-    
+
     /**
      * Retrieves game information from an XML file specified by an inputted string
-     * @param fileName name of game file 
+     * @param fileName name of game file
      * @return XML file of specified game
      */
     File getXMLFile(String fileName);

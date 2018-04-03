@@ -12,7 +12,7 @@ public class GameObject {
 	private Image myImage;
 	private double myImageHeight;
 	private double myImageWidth;
-	private Set<Behavior> behaviors;
+	private Set<Behavior> myBehaviors;
 	
 	public GameObject() {
 		
@@ -20,12 +20,12 @@ public class GameObject {
 	
 	//each game object will have properties that describe how it behaves. 
 	public void addBehavior(Behavior behaviorToAdd) {
-		behaviors.add(behaviorToAdd);
+		myBehaviors.add(behaviorToAdd);
 	}
 	
 	//the user can remove a property after assigning it
 	public void removeBehavior(Behavior behaviorToRemove) {
-		behaviors.remove(behaviorToRemove);
+		myBehaviors.remove(behaviorToRemove);
 	}
 	
 	//each object is known by its name
@@ -40,7 +40,7 @@ public class GameObject {
 	
 	//returns the list of all properties associated with the object
 	public Set<Behavior> getBehaviors() {
-		return behaviors;
+		return myBehaviors;
 	}
 	
 	//sets the image that represents the object

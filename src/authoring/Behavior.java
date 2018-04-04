@@ -7,6 +7,10 @@ public class Behavior {
 	
 	private Set<Property> myProperties;
 	private String myName;
+	
+	public Behavior() {
+		
+	}
 
 	public Behavior (String name, Set<Property> properties) {
 		myName = name;

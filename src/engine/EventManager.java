@@ -30,7 +30,7 @@ public class EventManager {
 			gameEvents.addAll(gameState.updateElements(elementEvent));
 		}
 		
-		updateDisplayState(gameState);
+		updateDisplayState();
 		
 		/*List<GameEvent> gameEvents = collisionEvents.stream()
 		.map(Object::gameState.updateElements)
@@ -38,11 +38,8 @@ public class EventManager {
 		
 	}
 	
-	private void updateDisplayState(GameState gameState) {
-		for (GameElement gameElement : gameState) {
-			Map<String, Object> elementProperties = gameElement.reportProperties();
-			elementProperties.get()
-		}
+	private void updateDisplayState() {
+		displayState.updateImageElements();
 	}
 
 	public List<ElementEvent> getKeyEvent(GameState gameState) {
@@ -61,7 +58,7 @@ public class EventManager {
 	}
 	
 	public List<ElementEvent> getCollisionEvent(GameState gameState) {
-		List<ElementEvent> collisionEvents = gameState.detectCollisions();
+		List<ElementEvent> collisionEvents = displayState.detectCollisions();
 		return collisionEvents;
 		
 	}

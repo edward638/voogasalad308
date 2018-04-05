@@ -18,7 +18,7 @@ public class EventManager {
 	}
 	
 	public void step(GameState gameState) {
-		List<GameEvent> gameEvents = new LinkedList<GameEvent>();
+		//List<GameEvent> gameEvents = new LinkedList<GameEvent>();
 		List<ElementEvent> elementEvents = new LinkedList<ElementEvent>();
 		
 		elementEvents.addAll(getKeyEvent(gameState));
@@ -26,15 +26,17 @@ public class EventManager {
 		elementEvents.addAll(getTimeEvent(gameState));
 		elementEvents.addAll(getCollisionEvent(gameState));
 		
-		for (ElementEvent elementEvent : elementEvents) {
+		gameState.updateElements(elementEvents);
+		
+		/*for (ElementEvent elementEvent : elementEvents) {
 			gameEvents.addAll(gameState.updateElements(elementEvent));
-		}
+		}*/
 		
 		updateDisplayState();
 		
-		/*List<GameEvent> gameEvents = collisionEvents.stream()
-		.map(Object::gameState.updateElements)
-		.collect(Collectors.toList());*/
+		List<List<GameEvent>> gameEvents = elementEvents.stream()
+				.map(gameState::updateElements)
+				.collect(Collectors.toList());
 		
 	}
 	

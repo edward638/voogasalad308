@@ -8,17 +8,17 @@ import engine.behaviors.Movable;
 
 public class BehaviorTesting {
 	
-//	public static void main(String[] args) {
-//		getValuesTest();
-//	}
-//
-//	public static void getValuesTest() {
-//		GameElement ge = new GameElement();
-//		Behavior b = new Movable(ge);
-//		Map<String, Object> bProperties = b.reportValues();
-//		for (String s: bProperties.keySet()) {
-//			System.out.println(s + " -> " + bProperties.get(s));
-//		}
-//	}
+	public static void main(String[] args) {
+		getValuesTest();
+	}
+	
+	public static void getValuesTest() {
+		GameElement ge = new GameElement();
+		Behavior b = new Movable(ge);
+		Map<String, Object> bProperties = b.reportProperties();
+		for (String s: bProperties.keySet()) {
+			System.out.println(s + " -> " + bProperties.get(s));
+		}
+	}
 
 }

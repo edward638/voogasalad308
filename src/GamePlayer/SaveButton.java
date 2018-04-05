@@ -9,13 +9,14 @@ public class SaveButton extends Button{
 		this.setLayoutY(y);
 		this.setWidth(width);
 		this.setHeight(height);
+		this.setText("save");
 		setAction();
 	}
 	
 	private void setAction() {
-		GamePlayerActionCreator.saveGame();
-		or
-		gameEngine.save(); 
+//		GamePlayerActionCreator.saveGame();
+//		or
+//		gameEngine.save(); 
 		
 		//depending on what we decide on = gameplayeractioncreator would be the command design pattern
 	}

@@ -1,12 +1,9 @@
 package GamePlayer;
 
+import javafx.scene.Scene;
+
 public interface GamePlayer {
-	
-	/**
-	 * called by the Display/Splash screen when user selects gamePlayer. 
-	 */
-	public void initializePlayer();
-	
+		
 	/**
 	 * called when a new game is started or old game loaded.
 	 * initialises a new game engine with parameters appropriate to the specific game.
@@ -20,4 +17,11 @@ public interface GamePlayer {
 	  * 
 	  */
 	 void saveGame();
+	 
+	 /**
+	  * allows the display to retrieve the scene associated the game player
+	  * @return scene to be displayed
+	  */
+	 public Scene getScene();
+	 
 }

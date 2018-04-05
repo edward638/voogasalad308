@@ -18,15 +18,8 @@ import javafx.stage.Stage;
  */
 public class MainPlayerTemp extends Application {
 
-	private final static Paint BACKGROUND = Color.ANTIQUEWHITE;
 
-	private String title;
-	private final static double SCREEN_HEIGHT = 300;
-	private final static double SCREEN_WIDTH = 500;// 915;
 	private Stage myStage;
-	private int workSpaceNum = 1;
-	private Group root;
-	private TabPane tabPane;
 
 	// private static final Map<String, double[]> GUIProperties = createMap();
 
@@ -47,18 +40,18 @@ public class MainPlayerTemp extends Application {
 	 * workspaces
 	 */
 	private void initialize() {
-		root = new Group();
-		myScene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND);
+
+		GamePlayer gamePlayer = new ConcreteGamePlayer(myStage);
+
+
 		setStage();
-		tabPane = new TabPane();
 
 	}
 
 	private void setStage() {
-		myStage.setScene(myScene);
-		myStage.setTitle(title);
 		myStage.show();
 		myStage.setResizable(false);
+
 	}
 
 	public static void main(String[] args) {

@@ -1,46 +1,68 @@
 package engine;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
+import engine.eventresponses.EventResponse;
 import engine.events.ElementEvent;
 import engine.events.GameEvent;
 
 public class EventManager {
 	
+	private DisplayState displayState;
+	
+	public EventManager(DisplayState displayState) {
+		this.displayState = displayState;
+	}
 	
 	public void step(GameState gameState) {
-		sendKeyEvent(gameState);
-		sendMouseEvent(gameState);
-		sendTimeEvent(gameState);
-		sendCollisionEvent(gameState);
+		List<GameEvent> gameEvents = new LinkedList<GameEvent>();
+		List<ElementEvent> elementEvents = new LinkedList<ElementEvent>();
 		
+		elementEvents.addAll(getKeyEvent(gameState));
+		elementEvents.addAll(getMouseEvent(gameState));
+		elementEvents.addAll(getTimeEvent(gameState));
+		elementEvents.addAll(getCollisionEvent(gameState));
 		
+		for (ElementEvent elementEvent : elementEvents) {
+			gameEvents.addAll(gameState.updateElements(elementEvent));
+		}
 		
-		ElementEvent timeStepEvent = new TimeStepEvent();
+		updateDisplayState(gameState);
 		
-		List<GameEvent> gameEvents = gameState.updateElements(timeStepEvent);
+		/*List<GameEvent> gameEvents = collisionEvents.stream()
+		.map(Object::gameState.updateElements)
+		.collect(Collectors.toList());*/
+		
 	}
 	
-	public List<ElementEvent> sendKeyEvent(GameState gameState) {
+	private void updateDisplayState(GameState gameState) {
+		for (GameElement gameElement : gameState) {
+			Map<String, Object> elementProperties = gameElement.reportProperties();
+			elementProperties.get()
+		}
+	}
+
+	public List<ElementEvent> getKeyEvent(GameState gameState) {
 		return null;
 		
 	}
 	
-	public List<ElementEvent> sendMouseEvent(GameState gameState) {
+	public List<ElementEvent> getMouseEvent(GameState gameState) {
 		return null;
 		
 	}
 	
-	public List<ElementEvent> sendTimeEvent(GameState gameState) {
+	public List<ElementEvent> getTimeEvent(GameState gameState) {
 		return null;
 		
 	}
 	
-	public List<ElementEvent> sendCollisionEvent(GameState gameState) {
+	public List<ElementEvent> getCollisionEvent(GameState gameState) {
 		List<ElementEvent> collisionEvents = gameState.detectCollisions();
-		for (ElementEvent collision : collisionEvents)
-			gameState.updateElements(collision);
-		return null;
+		return collisionEvents;
 		
 	}
 	

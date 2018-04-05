@@ -4,6 +4,20 @@ import engine.GameElement;
 import engine.events.ElementEvent;
 
 public abstract class EventResponse {
-	public abstract ElementEvent getEventRespondingTo();
+	
+	private Class<?> respondingTo;
+	
+	public EventResponse(Class<?> responseTo) {
+		respondingTo = responseTo;
+	}
+
+	public Class<?> getEventRespondingToType() {
+		return respondingTo;
+	}
+	
+	protected boolean isValidEvent(ElementEvent event) {
+		return event.getClass() == respondingTo;
+	}
+	
 	public abstract void execute (ElementEvent event, GameElement element);
 }

@@ -6,6 +6,12 @@ import javafx.scene.image.ImageView;
 
 public class DisplayState {
 	List<ImageView> activeElements;
-	List<ImageView> addingElements;
-	List<ImageView> removingElements;
+	List<ImageView> newElements;
+	List<ImageView> removeElements;
+	
+	public void addNewElements() {
+		
+	}
+	
+	
 }

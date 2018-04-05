@@ -27,6 +27,7 @@ public class GameElementTesting {
 	
 	public static void testEventHandling() {
 		GameElement ge = new GameElement();
+		
 		ge.addBehavior(new BasicGameElement(ge, "Mario", 100.0, 100.0));
 		System.out.println(ge.reportProperties());
 		

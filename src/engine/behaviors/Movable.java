@@ -21,7 +21,7 @@ public class Movable extends Behavior{
 	}
 	
 	public Movable(GameElement ge) {
-		this(ge, 0.0, Arrays.asList(0.0, 1.0));
+		this(ge, 5.0, Arrays.asList(0.0, 1.0));
 	}
 	
 	/*

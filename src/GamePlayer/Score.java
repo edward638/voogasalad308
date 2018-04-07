@@ -15,20 +15,20 @@ public class Score {
 		return playerName +": " + score;
 	}
 	
-	public String getplayerName() {
+	public String getPlayerName() {
 		return playerName;
 	}
 	
-	public int getscore() {
+	public int getScore() {
 		return score;
 	}
 	
-	public void setVarName(String newplayerName) {
+	public void setPlayerName(String newplayerName) {
 		playerName = newplayerName;
 
 	}
 
-	public void setValue(int newscore) {
+	public void setScore(int newscore) {
 		score = newscore;
 
 	}

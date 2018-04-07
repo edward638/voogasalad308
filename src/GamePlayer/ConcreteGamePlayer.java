@@ -15,7 +15,8 @@ public class ConcreteGamePlayer implements GamePlayer {
 	Button saveButton;
 	Button loadButton;
 	HUD hud;
-
+	ConcreteHighScores highScores;
+	
 	private final static double SCREEN_HEIGHT = 300;
 	private final static double SCREEN_WIDTH = 500;// 915;
 	private Group root;
@@ -26,6 +27,13 @@ public class ConcreteGamePlayer implements GamePlayer {
 		myScene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND);
 		myStage = stage;
 		myStage.setScene(myScene);
+		
+		highScores = new ConcreteHighScores("hi");
+		highScores.addScore("bfd", 4);
+		highScores.printQ();
+		root.getChildren().add(highScores.getScores());
+		highScores.addScore("43", 9);
+
 
 		setupButtons();
 		initializeEngine();
@@ -46,6 +54,8 @@ public class ConcreteGamePlayer implements GamePlayer {
 
 		loadButton = new LoadButton(60, 60, 60, 60, myStage);
 		root.getChildren().add(loadButton);
+		
+		
 
 	}
 

@@ -10,11 +10,17 @@ import javafx.scene.shape.Rectangle;
 
 public class ConcreteHUD extends HBox implements HUD{
 	
+	int currentScore;
+	int livesRemaining;
+	Map<?, ?> otherInfo;
+	
 	public ConcreteHUD() {
 		setupPane();
-		
 	}
 	
+	/**
+	 * setting up front end JavaFX of the pane
+	 */
 	private void setupPane() {
 		this.setLayoutX(90);
 		this.setLayoutY(90);
@@ -24,16 +30,12 @@ public class ConcreteHUD extends HBox implements HUD{
 		rect.setFill(Color.BLACK);
 		this.getChildren().add(rect);
 	}
-	
-	public Pane getPane() {
-		return this;
-	}
-	
 
 	@Override
 	public void updateInfo(int score, int lives, Map<?, ?> OtherInfo) {
-		// TODO Auto-generated method stub
-		
+		currentScore = score;
+		livesRemaining = lives;
+		otherInfo = OtherInfo;
 	}
 
 }

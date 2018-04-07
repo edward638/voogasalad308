@@ -15,6 +15,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 	Button saveButton;
 	Button loadButton;
 	HUD hud;
+	
 
 	private final static double SCREEN_HEIGHT = 300;
 	private final static double SCREEN_WIDTH = 500;// 915;
@@ -28,16 +29,10 @@ public class ConcreteGamePlayer implements GamePlayer {
 		myStage.setScene(myScene);
 
 		setupButtons();
-		initializeEngine();
+//		initializeEngine();
 		hud = new ConcreteHUD();
 		root.getChildren().add((Node) hud);
 		
-	}
-	
-
-	private void initializeEngine() {
-		// TODO Auto-generated method stub
-
 	}
 
 	private void setupButtons() {
@@ -51,7 +46,6 @@ public class ConcreteGamePlayer implements GamePlayer {
 
 	@Override
 	public void playGame(String game) {
-		// TODO Auto-generated method stub
 
 	}
 

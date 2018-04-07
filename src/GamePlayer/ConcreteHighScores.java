@@ -1,8 +1,16 @@
 package GamePlayer;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableView;
 
 /**
  * 
@@ -13,6 +21,8 @@ public class ConcreteHighScores implements HighScores {
 
 	Queue<Score> scoreQueue;
 	String gameName;
+
+	private TableView table;
 
 	/**
 	 * initializes a "ConcreteHighScore" by creating a new priorityqueue for the
@@ -25,7 +35,18 @@ public class ConcreteHighScores implements HighScores {
 	public ConcreteHighScores(String game) {
 		scoreQueue = new PriorityQueue<Score>(new Score.ScoreComparator());
 		gameName = game;
+		setupTableProperties(0, 0, 100, 100);
 	}
+	
+	private void setupTableProperties(double xPos, double yPos, double width, double height) {
+		table.setEditable(false);
+		table.setLayoutX(xPos);
+		table.setLayoutY(yPos);
+		table.setMaxWidth(width);
+		table.setMaxHeight(height);
+	}
+
+
 
 	/*
 	 * (non-Javadoc)
@@ -44,13 +65,16 @@ public class ConcreteHighScores implements HighScores {
 		}
 	}
 
-	// public void printQ() {
-	// int queueSize = scoreQueue.size();
-	// for (int i = 0; i < queueSize; i++) {
-	// System.out.println("hi");
-	// System.out.println(scoreQueue.poll().toString());
-	// }
-	// }
+	public void printQ() {
+		int size = scoreQueue.size();
+		PriorityQueue<Score> copy = new PriorityQueue(scoreQueue);
+		for (int i = 0; i < size; i++){
+			System.out.println(copy.poll());
+		}
+		System.out.println(scoreQueue.size());
+		System.out.println(copy.size());
+
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -76,5 +100,6 @@ public class ConcreteHighScores implements HighScores {
 		chs.addScore("hi6", 10);
 		chs.addScore("hi5", 11);
 		chs.addScore("h6", 12);
+		chs.printQ();
 	}
 }

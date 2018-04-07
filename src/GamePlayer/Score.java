@@ -14,6 +14,25 @@ public class Score {
 	public String toString() {
 		return playerName +": " + score;
 	}
+	
+	public String getplayerName() {
+		return playerName;
+	}
+	
+	public int getscore() {
+		return score;
+	}
+	
+	public void setVarName(String newplayerName) {
+		playerName = newplayerName;
+
+	}
+
+	public void setValue(int newscore) {
+		score = newscore;
+
+	}
+	
 
 
 	public static class ScoreComparator implements Comparator<Score> {

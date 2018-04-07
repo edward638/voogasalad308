@@ -20,7 +20,6 @@ public class GameElement {
 	public GameElement() {
 		behaviors = new HashSet<>();
 		responses = new HashSet<>();
-		addBehavior(new BasicGameElement(this, "Mario", 100.0, 100.0));
 	}
 	
 	/*
@@ -65,10 +64,9 @@ public class GameElement {
 	 * Tells element to respond to an event
 	 */
 	public void processEvent(ElementEvent event) {
-		List<EventResponse> allResponses = responses.stream()
-				.filter(resp -> resp.getEventRespondingTo().getClass() == event.getClass())
-				.collect(Collectors.toList());
-		allResponses.forEach(response -> response.execute(event, this));
+		responses.stream()
+				.filter(resp -> resp.getEventRespondingToType() == event.getClass())
+				.forEach(response -> response.execute(event, this));
 	}
 	
 	/*
@@ -77,7 +75,7 @@ public class GameElement {
 	 */
 	public String getIdentifier() {
 		BasicGameElement el = (BasicGameElement) behaviors.stream()
-				.filter(b -> b.getClass() == new BasicGameElement(this, " ", 0.0, 0.0).getClass())
+				.filter(b -> b.getClass() == BasicGameElement.class)
 				.collect(Collectors.toList()).get(0);
 		return el.getName();
 	}

@@ -77,6 +77,9 @@ public class ConcreteGamePlayer implements GamePlayer {
 		currentGameName = serializer.getGameName(file);
 		mostRecentFile = file;
 		gameDisplay = engine.getDisplay();
+		gameDisplay.setLayoutX(30);
+		gameDisplay.setLayoutY(30);
+		gameDisplay.setPrefSize(900, 590);
 		hud = new ConcreteHUD(currentGameName);
 		root.getChildren().add(gameDisplay);
 		root.getChildren().add((Node) hud);
@@ -89,18 +92,20 @@ public class ConcreteGamePlayer implements GamePlayer {
 		currentGameName = "Super Mario Smash Bros";
 		mostRecentFile = file;
 
-		// gameDisplay = engine.getDisplay();
+		// gameDisplay = engine.getDisplay();	
 		Pane canvas = new Pane();
-		canvas.setLayoutX(30);
-		canvas.setLayoutY(30);
-		canvas.setPrefSize(900, 590);
+		
+		gameDisplay = canvas;
+		gameDisplay.setLayoutX(30);
+		gameDisplay.setLayoutY(30);
+		gameDisplay.setPrefSize(900, 590);
+		
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream("images/dummy-mario.png"));
 		ImageView imageView = new ImageView();
 		imageView.setImage(image);
 		imageView.setFitHeight(590);
 		imageView.setFitWidth(900);
 		canvas.getChildren().add(imageView);
-		gameDisplay = canvas;
 		
 		hud = new ConcreteHUD(currentGameName);
 		root.getChildren().add(gameDisplay);

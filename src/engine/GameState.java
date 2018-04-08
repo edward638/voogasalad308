@@ -15,24 +15,6 @@ import javafx.scene.shape.Shape;
 public class GameState implements Iterable<GameElement>{
 	private HashSet<GameElement> elements;
 	private HashMap<String, String> gameproperties; 
-
-
-	public List<ElementEvent> detectCollisions() {
-		LinkedList<ElementEvent> events = new LinkedList<ElementEvent>();
-		for (GameElement e1 : elements) {
-			for (GameElement e2 : elements) {
-				if (e1 != e2) {
-					Shape intersect = Shape.intersect(e1.getImageView(), e2.getImageView());
-					if (intersect.getBoundsInLocal().getWidth() != -1) {
-						ElementEvent collision = new CollisionEvent(e1, e2);
-						events.add(collision);
-					}
-				}
-			}
-		}
-
-			
-	}
 	
 	public void addGameElement(GameElement gameElement) {
 		elements.add(gameElement);

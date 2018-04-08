@@ -38,7 +38,7 @@ public class ConcreteHighScores implements HighScores {
 		scoreQueue = new PriorityQueue<Score>(new Score.ScoreComparator());
 		gameName = game;
 		table = new TableView<Score>();
-		setupTableProperties(0, 0, 300, 300);
+		setupTableProperties(970, 30, 235, 265);
 	}
 
 	private void setupTableProperties(double xPos, double yPos, double width, double height) {

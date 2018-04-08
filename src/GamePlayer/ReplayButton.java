@@ -9,9 +9,9 @@ public class ReplayButton extends Button{
 	public ReplayButton(double x, double y, double width, double height, ConcreteGamePlayer gamePlayer) {
 		this.setLayoutX(x);
 		this.setLayoutY(y);
-		this.setWidth(width);
+		this.setMinWidth(width);
 		this.setHeight(height);
-		this.setText("restart game");
+		this.setText("Restart Current Game");
 		this.gamePlayer = gamePlayer;
 		setAction();
 	}

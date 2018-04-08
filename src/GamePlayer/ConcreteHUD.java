@@ -1,5 +1,6 @@
 package GamePlayer;
 
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -29,6 +30,15 @@ public class ConcreteHUD extends HBox implements HUD{
 		Rectangle rect = new Rectangle(0,0,500,500);
 		rect.setFill(Color.BLACK);
 		this.getChildren().add(rect);
+		
+		this.addDummyValues();
+	}
+	
+	private void addDummyValues() {
+		HashMap other = new HashMap<String, Integer>();
+		other.put("Kills", 12);
+		other.put("Ammo", 8);
+		updateInfo(758, 7, other);
 	}
 
 	@Override

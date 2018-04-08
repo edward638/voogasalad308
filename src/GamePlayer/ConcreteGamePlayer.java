@@ -32,7 +32,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 	ConcreteHighScores highScores;
 
 	private final static double SCREEN_HEIGHT = 300;
-	private final static double SCREEN_WIDTH = 500;// 915;
+	private final static double SCREEN_WIDTH = 500;
 	private Group root;
 	private final static Paint BACKGROUND = Color.ANTIQUEWHITE;
 
@@ -64,7 +64,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 
 		loadButton = new LoadButton(60, 60, 60, 60, this, myStage);
 		root.getChildren().add(loadButton);
-		replayButton = new ReplayButton(60, 60, 60, 60, this);
+		replayButton = new ReplayButton(90, 90, 90, 90, this);
 		root.getChildren().add(replayButton);
 
 

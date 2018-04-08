@@ -15,4 +15,10 @@ public interface HighScores {
 	 * @param scores - a map of name of player to corresponding score
 	 */
 	void loadScores(Map<?, ?> scores);
+	
+	/**
+	 * clears the high scores
+	 */
+	void clear();
+		
 }

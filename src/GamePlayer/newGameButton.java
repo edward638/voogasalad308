@@ -38,7 +38,6 @@ public class newGameButton extends Button {
 			}
 
 			gamePlayer.playGame(fileString);
-
 		});
 
 	}

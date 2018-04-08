@@ -39,6 +39,17 @@ public class ConcreteHighScores implements HighScores {
 		gameName = game;
 		table = new TableView<Score>();
 		setupTableProperties(0, 0, 300, 300);
+		
+		this.addDummyScores();
+	}
+	
+	private void addDummyScores() {
+		addScore("Calvin", 400);
+		addScore("Maddy", 450);
+		addScore("August", 473);
+		addScore("Jeffrey", 324);
+		addScore("Gouttham", 934);
+		addScore("Summer", 234);
 	}
 
 	private void setupTableProperties(double xPos, double yPos, double width, double height) {
@@ -93,7 +104,9 @@ public class ConcreteHighScores implements HighScores {
 		table.setItems(observableScoreList);
 	}
 	
-
+	/**
+	 * method for printing the current high scores for testing
+	 */
 	public void printQ() {
 		int size = scoreQueue.size();
 		PriorityQueue<Score> copy = new PriorityQueue(scoreQueue);
@@ -102,7 +115,6 @@ public class ConcreteHighScores implements HighScores {
 		}
 		System.out.println(scoreQueue.size());
 		System.out.println(copy.size());
-
 	}
 
 	/*
@@ -117,5 +129,10 @@ public class ConcreteHighScores implements HighScores {
 
 	public TableView<Score> getScores() {
 		return table;
+	}
+
+	@Override
+	public void clear() {
+		scoreQueue.clear();
 	}
 }

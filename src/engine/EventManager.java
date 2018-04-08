@@ -27,18 +27,17 @@ public class EventManager {
 		elementEvents.addAll(getTimeEvent(gameState));
 		elementEvents.addAll(getCollisionEvent(gameState));
 		
-		gameState.updateElements(elementEvents);
-		
-		/*for (ElementEvent elementEvent : elementEvents) {
-			gameEvents.addAll(gameState.updateElements(elementEvent));
-		}*/
-		
-		updateDisplayState();
-		
-		List<List<GameEvent>> gameEvents = elementEvents.stream()
+		List<GameEvent> gameEvents = elementEvents.stream()
 				.map(gameState::updateElements)
+				.flatMap(List::stream)
 				.collect(Collectors.toList());
 		
+		
+		
+		gameState = handleElementEvents(gameState, gameEvents);
+		
+		
+		updateDisplayState();
 	}
 	
 	private void updateDisplayState() {

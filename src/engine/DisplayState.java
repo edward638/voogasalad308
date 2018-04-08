@@ -27,18 +27,19 @@ public class DisplayState {
 	
 	public List<ElementEvent> detectCollisions() {
 		List<ElementEvent> collisionEvents = new LinkedList<CollisionEvent>();
-		for (ImageElement element1 : activeElements) {
-			for (ImageElement element2 : activeElements) {
-				if (element1 != element2) {
-					Shape intersect = Shape.intersect(element1.toShape(), element2.toShape());
-					Point2D intersectCenter = getCenter(intersect);
+		
+		for (int i = 0; i < activeElements.size(); i++) {
+			for (int j = i+1; j < activeElements.size(); j++) {
+				ImageElement element1 = activeElements.get(i);
+				ImageElement element2 = activeElements.get(j);
+				Shape intersect = Shape.intersect(element1.toShape(), element2.toShape());
+				Point2D intersectCenter = getCenter(intersect);
+				
+				/*if (element1.getBoundsInLocal().intersects(element2.getBoundsInLocal())) {
+					ElementEvent collision = new CollisionEvent(e1, e2);
+					collisionEvents.add(collision);
+				}*/
 					
-					/*if (element1.getBoundsInLocal().intersects(element2.getBoundsInLocal())) {
-						ElementEvent collision = new CollisionEvent(e1, e2);
-						collisionEvents.add(collision);
-					}*/
-					
-				}
 			}
 		}
 		return collisionEvents;

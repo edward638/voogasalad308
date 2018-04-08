@@ -55,8 +55,9 @@ public class GameState implements Iterable<GameElement>{
 	}
 	
 	public List<GameEvent> updateElements(ElementEvent elementEvent) {
-		List<GameEvent> gameEvents = elements.stream()
+		List<GameEvent> gameEvents = elements.parallelStream()
 				.map(c -> c.processEvent(elementEvent))
+				.flatMap(List::stream)
 				.collect(Collectors.toList());
 		
 		
@@ -64,15 +65,6 @@ public class GameState implements Iterable<GameElement>{
 			gameEvents.addAll(e1.processEvent(elementEvent));
 		}*/
 		return null;
-	}
-	
-	public List<GameEvent> updateElements(List<ElementEvent> elementEvents) {
-		//LinkedList<GameEvent> gameEvents = new LinkedList<GameEvent>();
-		GameElement e = new GameElement();
-		
-		List<GameEvent> gameEvents = elementEvents.stream()
-				.map(e::processEvent)
-				.collect(Collectors.toList());
 	}
 
 	@Override

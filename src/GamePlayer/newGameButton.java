@@ -17,7 +17,7 @@ public class newGameButton extends Button {
 		this.setLayoutY(y);
 		this.setMinWidth(width);
 		this.setHeight(height);
-		this.setText("new game");
+		this.setText("New Game");
 		this.gamePlayer = gamePlayer;
 		this.mainStage = stage;
 		setAction();

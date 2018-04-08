@@ -52,10 +52,8 @@ public class ConcreteGamePlayer implements GamePlayer {
 		root.getChildren().add((Node) hud);
 
 		highScores = new ConcreteHighScores("hi");
-		highScores.addScore("bfd", 4);
 		highScores.printQ();
 		root.getChildren().add(highScores.getScores());
-		highScores.addScore("43", 9);
 		setupButtons();	
 		
 	}

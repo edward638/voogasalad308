@@ -38,8 +38,8 @@ public class ConcreteHighScores implements HighScores {
 	public ConcreteHighScores(String game) {
 		scores = new ArrayList<Score>();
 		gameName = game;
-		//table = new TableView<Score>();
-		//setupTableProperties(970, 30, 235, 265);
+		table = new TableView<Score>();
+		setupTableProperties(970, 30, 235, 265);
 
 		this.addDummyScores();
 	}
@@ -97,12 +97,12 @@ public class ConcreteHighScores implements HighScores {
 			}
 		}
 		Collections.sort(scores, new Score.ScoreComparator());
-		// addToScoreTable();
+		addToScoreTable();
 	}
 
 	private void addToScoreTable() {
-		ArrayList<Score> scoreList = new ArrayList(scores);
-		ObservableList<Score> observableScoreList = FXCollections.observableArrayList(scoreList);
+		ObservableList<Score> observableScoreList = FXCollections.observableArrayList(scores);
+		Collections.reverse(observableScoreList);
 		table.setItems(observableScoreList);
 	}
 
@@ -135,22 +135,22 @@ public class ConcreteHighScores implements HighScores {
 	public void clear() {
 		scores.clear();
 	}
-	
-	public static void main(String[] args) {
-		ConcreteHighScores chs = new ConcreteHighScores("test");
-		chs.addScore("hi2", 1);
-		chs.addScore("hi3", 2);
-		chs.addScore("hi4", 3);
-		chs.addScore("hi5", 4);
-		chs.addScore("hi6", 5);
-		chs.addScore("hi2", 6);
-		chs.addScore("hi3", 7);
-		chs.addScore("hi4", 8);
-		chs.addScore("hi5", 9);
-		chs.addScore("hi6", 10);
-		chs.addScore("hi5", 11);
-		chs.addScore("h6", 12);
-		chs.printQ();
-	}
+//	
+//	public static void main(String[] args) {
+//		ConcreteHighScores chs = new ConcreteHighScores("test");
+//		chs.addScore("hi2", 1);
+//		chs.addScore("hi3", 2);
+//		chs.addScore("hi4", 3);
+//		chs.addScore("hi5", 4);
+//		chs.addScore("hi6", 5);
+//		chs.addScore("hi2", 6);
+//		chs.addScore("hi3", 7);
+//		chs.addScore("hi4", 8);
+//		chs.addScore("hi5", 9);
+//		chs.addScore("hi6", 10);
+//		chs.addScore("hi5", 11);
+//		chs.addScore("h6", 12);
+//		chs.printQ();
+//	}
 
 }

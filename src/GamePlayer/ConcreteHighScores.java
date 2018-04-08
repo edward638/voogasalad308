@@ -39,9 +39,10 @@ public class ConcreteHighScores implements HighScores {
 		gameName = game;
 		table = new TableView<Score>();
 		setupTableProperties(970, 30, 235, 265);
-		
+
 		this.addDummyScores();
-	
+	}
+
 	private void addDummyScores() {
 		addScore("Calvin", 400);
 		addScore("Maddy", 450);
@@ -49,8 +50,6 @@ public class ConcreteHighScores implements HighScores {
 		addScore("Jeffrey", 324);
 		addScore("Gouttham", 934);
 		addScore("Summer", 234);
-
-
 
 	}
 
@@ -75,9 +74,8 @@ public class ConcreteHighScores implements HighScores {
 		scoreCol.setMinWidth(150);
 		scoreCol.setResizable(false);
 		scoreCol.setEditable(true);
-		
-		table.getColumns().addAll(nameCol, scoreCol);
 
+		table.getColumns().addAll(nameCol, scoreCol);
 
 	}
 
@@ -101,17 +99,21 @@ public class ConcreteHighScores implements HighScores {
 	}
 
 	private void addToScoreTable() {
-		ArrayList<Score> scoreList = new ArrayList(scoreQueue);
+		
+		PriorityQueue<Score> scoreList = new PriorityQueue(scoreQueue);
+		ArrayList<Score> sortedList = new ArrayList<>();
+		
 		ObservableList<Score> observableScoreList = FXCollections.observableArrayList(scoreList);
 		table.setItems(observableScoreList);
 	}
-	
+
 	/**
 	 * method for printing the current high scores for testing
 	 */
 	public void printQ() {
 		int size = scoreQueue.size();
 		PriorityQueue<Score> copy = new PriorityQueue(scoreQueue);
+		System.out.println("aosidhfaisdhfsi");
 		for (int i = 0; i < size; i++) {
 			System.out.println(copy.poll());
 		}

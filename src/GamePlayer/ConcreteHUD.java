@@ -3,13 +3,15 @@ package GamePlayer;
 import java.util.HashMap;
 import java.util.Map;
 
-
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 
-public class ConcreteHUD extends HBox implements HUD{
+public class ConcreteHUD extends Pane implements HUD{
 	
 	int currentScore;
 	int livesRemaining;
@@ -27,13 +29,39 @@ public class ConcreteHUD extends HBox implements HUD{
 		this.setLayoutY(30);
 		this.setWidth(800);
 		this.setHeight(650);
-		Rectangle rect = new Rectangle(0,0,900,100);
-		rect.setFill(Color.BLACK);
-		this.getChildren().add(rect);
+		//Rectangle rect = new Rectangle(0,0,900,100);
+		//rect.setFill(Color.ALICEBLUE);
+		createHUDLabels();
+		//this.getChildren().add(rect);
 		
 		this.addDummyValues();
 	}
 	
+	private void createHUDLabels() {
+		
+		setupScoreText();
+		setupLivesText();
+		
+		
+	}
+
+	private void setupLivesText() {
+		Label livesText = new Label("Lives: " + livesRemaining);
+		livesText.setLayoutX(400);
+		livesText.setLayoutY(0);
+
+		this.getChildren().add(livesText);
+		
+	}
+
+	private void setupScoreText() {
+		Label scoreText = new Label("Score: " + currentScore);
+		scoreText.setLayoutX(0);
+		scoreText.setLayoutY(0);
+		this.getChildren().add(scoreText);
+		
+	}
+
 	private void addDummyValues() {
 		HashMap other = new HashMap<String, Integer>();
 		other.put("Kills", 12);

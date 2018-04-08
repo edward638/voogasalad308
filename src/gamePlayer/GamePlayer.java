@@ -21,5 +21,8 @@ public interface GamePlayer {
 	  * @return scene to be displayed
 	  */
 	 public Scene getScene();
+
+
+	void DummyPlayGame(String file);
 	 
 }

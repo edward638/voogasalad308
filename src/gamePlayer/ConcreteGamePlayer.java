@@ -6,6 +6,12 @@ import java.text.SimpleDateFormat;
 import Data.Serializer;
 import engine.Engine;
 import engine.GameState;
+import gamePlayer.buttons.ClearHighScoresButton;
+import gamePlayer.buttons.ConcreteButtonData;
+import gamePlayer.buttons.LoadButton;
+import gamePlayer.buttons.SaveButton;
+import gamePlayer.buttons.NewGameButton;
+import gamePlayer.buttons.ReplayButton;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -30,6 +36,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 	Button loadButton;
 	Button replayButton;
 	Button newGameButton;
+	Button clearHighScoresButton;
 	HUD hud;
 	Pane gameDisplay;
 
@@ -38,6 +45,8 @@ public class ConcreteGamePlayer implements GamePlayer {
 	String currentGameName;
 	Serializer serializer;
 	String mostRecentFile;
+	
+	private ConcreteButtonData buttonData;
 
 	ConcreteHighScores highScores;
 
@@ -58,9 +67,14 @@ public class ConcreteGamePlayer implements GamePlayer {
 		myStage.setScene(myScene);
 
 		highScores = new ConcreteHighScores("hi");
-		highScores.printQ();
+		
 		root.getChildren().add(highScores.getScores());
+		
+		buttonData = new ConcreteButtonData(stage, this, serializer);
+		
 		setupButtons();
+		buttonData.setHighScores(highScores);
+		
 
 	}
 	
@@ -68,13 +82,15 @@ public class ConcreteGamePlayer implements GamePlayer {
 	 * initialises buttons on screen
 	 */
 	private void setupButtons() {
-		newGameButton = new newGameButton(970, 310, 235, 60, this, myStage);
+		clearHighScoresButton = new ClearHighScoresButton(970, 310, 235, 60, buttonData);
+		root.getChildren().add(clearHighScoresButton);
+		newGameButton = new NewGameButton(970, 350, 235, 60, buttonData);
 		root.getChildren().add(newGameButton);
-		loadButton = new LoadButton(970, 350, 235, 60, this, myStage);
+		loadButton = new LoadButton(970, 390, 235, 60, buttonData);
 		root.getChildren().add(loadButton);
-		saveButton = new SaveButton(970, 390, 235, 60, this);
+		saveButton = new SaveButton(970, 430, 235, 60, buttonData);
 		root.getChildren().add(saveButton);
-		replayButton = new ReplayButton(970, 430, 235, 60, this);
+		replayButton = new ReplayButton(970, 470, 235, 60, buttonData);
 		root.getChildren().add(replayButton);
 
 	}
@@ -83,7 +99,9 @@ public class ConcreteGamePlayer implements GamePlayer {
 	public void playGame(String file) {
 		engine = new Engine(file);
 		currentGameName = serializer.getGameName(file);
+		buttonData.setCurrentGameName(currentGameName);
 		mostRecentFile = file;
+		buttonData.setMostRecentFile(mostRecentFile);
 		gameDisplay = engine.getDisplay();
 		gameDisplay.setLayoutX(30);
 		gameDisplay.setLayoutY(30);
@@ -128,10 +146,6 @@ public class ConcreteGamePlayer implements GamePlayer {
 	@Override
 	public Scene getScene() {
 		return myScene;
-	}
-
-	public String getMostRecentFile() {
-		return mostRecentFile;
 	}
 
 }

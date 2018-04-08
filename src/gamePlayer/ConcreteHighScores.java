@@ -97,10 +97,10 @@ public class ConcreteHighScores implements HighScores {
 			}
 		}
 		Collections.sort(scores, new Score.ScoreComparator());
-		addToScoreTable();
+		updateScoreTable();
 	}
 
-	private void addToScoreTable() {
+	private void updateScoreTable() {
 
 		ObservableList<Score> observableScoreList = FXCollections.observableArrayList(scores);
 		Collections.reverse(observableScoreList);
@@ -135,6 +135,7 @@ public class ConcreteHighScores implements HighScores {
 	@Override
 	public void clear() {
 		scores.clear();
+		updateScoreTable();
 	}
 //	
 //	public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package GamePlayer;
+package gamePlayer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,18 +11,17 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
-public class ConcreteHUD extends Pane implements HUD{
-	
+public class ConcreteHUD extends Pane implements HUD {
+
 	String gameName;
 	int currentScore;
 	int livesRemaining;
 	Map<?, ?> otherInfo;
-	
+
 	public ConcreteHUD(String name) {
 		setupPane();
 		gameName = name;
 	}
-
 
 	/**
 	 * setting up front end JavaFX of the pane
@@ -32,20 +31,16 @@ public class ConcreteHUD extends Pane implements HUD{
 		this.setLayoutY(30);
 		this.setWidth(800);
 		this.setHeight(650);
-		//Rectangle rect = new Rectangle(0,0,900,100);
-		//rect.setFill(Color.ALICEBLUE);
 		createHUDLabels();
-		//this.getChildren().add(rect);
-		
+
 		this.addDummyValues();
 	}
-	
+
 	private void createHUDLabels() {
-		
+
 		setupScoreText();
 		setupLivesText();
-		
-		
+
 	}
 
 	private void setupLivesText() {
@@ -54,7 +49,7 @@ public class ConcreteHUD extends Pane implements HUD{
 		livesText.setLayoutY(0);
 
 		this.getChildren().add(livesText);
-		
+
 	}
 
 	private void setupScoreText() {
@@ -62,7 +57,7 @@ public class ConcreteHUD extends Pane implements HUD{
 		scoreText.setLayoutX(0);
 		scoreText.setLayoutY(0);
 		this.getChildren().add(scoreText);
-		
+
 	}
 
 	private void addDummyValues() {

@@ -1,4 +1,4 @@
-package GamePlayer;
+package gamePlayer;
 
 import javafx.application.Application;
 import javafx.scene.Group;

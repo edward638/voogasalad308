@@ -1,4 +1,4 @@
-package GamePlayer;
+package gamePlayer;
 
 import java.io.IOException;
 
@@ -15,12 +15,6 @@ public interface GamePlayer {
 	 */
 	 void playGame(String game);
 	 
-	 /**
-	  * saves game, uses XML writer to write a file containing all current positions of game elements.
-	 * @throws IOException 
-	  * 
-	  */
-	 void saveGame() throws IOException;
 	 
 	 /**
 	  * allows the display to retrieve the scene associated the game player

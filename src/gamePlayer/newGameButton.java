@@ -1,4 +1,4 @@
-package GamePlayer;
+package gamePlayer;
 
 import java.io.File;
 import java.nio.file.Paths;

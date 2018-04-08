@@ -1,4 +1,6 @@
-package GamePlayer;
+package gamePlayer;
+
+import java.text.SimpleDateFormat;
 
 import javafx.scene.control.Button;
 
@@ -17,11 +19,9 @@ public class SaveButton extends Button{
 	
 	private void setAction() {
 		this.setOnAction(event -> {
-
-			//gamePlayer.saveGame();
-
+			String timeStamp = new SimpleDateFormat("MM/dd HH:mm").format(new java.util.Date());
+		//	gamePlayer.serializer.gameEngineToXML(gamePlayer.currentGameName + " " + "MM/dd HH:mm", gamePlayer.gameState.getDisplayStates());
 		});
 	}
-		
 
 }

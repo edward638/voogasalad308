@@ -1,4 +1,4 @@
-package GamePlayer;
+package gamePlayer;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -17,6 +17,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
+/**
+ * 
+ * @author jeffreyli, calvinma
+ * Concrete game player, manages game selection, loading, saving, HUD and high scores.
+ */
 public class ConcreteGamePlayer implements GamePlayer {
 
 	Scene myScene;
@@ -58,7 +63,10 @@ public class ConcreteGamePlayer implements GamePlayer {
 		setupButtons();
 
 	}
-
+	
+	/**
+	 * initialises buttons on screen
+	 */
 	private void setupButtons() {
 		newGameButton = new newGameButton(970, 310, 235, 60, this, myStage);
 		root.getChildren().add(newGameButton);
@@ -85,40 +93,38 @@ public class ConcreteGamePlayer implements GamePlayer {
 		root.getChildren().add((Node) hud);
 
 	}
-
+	
+	/**
+	 * created for purposes of demonstration, simulates what front end will look like once game engine is running
+	 * @param file
+	 */
 	public void DummyPlayGame(String file) {
 		engine = new Engine(file);
 		// currentGameName = serializer.getGameName(file);
 		currentGameName = "Super Mario Smash Bros";
 		mostRecentFile = file;
 
-		// gameDisplay = engine.getDisplay();	
+		// gameDisplay = engine.getDisplay();
 		Pane canvas = new Pane();
-		
+
 		gameDisplay = canvas;
 		gameDisplay.setLayoutX(30);
 		gameDisplay.setLayoutY(30);
 		gameDisplay.setPrefSize(900, 590);
-		
+
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream("images/dummy-mario.png"));
 		ImageView imageView = new ImageView();
 		imageView.setImage(image);
 		imageView.setFitHeight(590);
 		imageView.setFitWidth(900);
 		canvas.getChildren().add(imageView);
-		
+
 		hud = new ConcreteHUD(currentGameName);
 		root.getChildren().add(gameDisplay);
 		root.getChildren().add((Node) hud);
 	}
 
-	// are we meant to deal with the exception?
-	@Override
-	public void saveGame() throws IOException {
-		String timeStamp = new SimpleDateFormat("MM/dd HH:mm").format(new java.util.Date());
-		serializer.gameEngineToXML(currentGameName + " " + "MM/dd HH:mm", gameState.getDisplayStates());
-	}
-
+	
 	@Override
 	public Scene getScene() {
 		return myScene;

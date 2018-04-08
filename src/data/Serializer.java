@@ -1,4 +1,4 @@
-package data;
+package Data;
 
 import authoring.GameObject;
 import authoring.GameScene;
@@ -25,7 +25,7 @@ public class Serializer {
      * @param fileName    desired name of XML game file to be created
      * @param objectMap  map provided from authoring environment which maps GameScene to a list of GameObjects contained on that scene
      */
-    void gameAuthorToXML(String fileName, Map<GameScene, List<GameObject>> objectMap) throws IOException {
+    public void gameAuthorToXML(String fileName, Map<GameScene, List<GameObject>> objectMap) throws IOException {
         String topLevelGameDestination = "./src/Data/XMLFiles/" + fileName;
         new File(topLevelGameDestination).mkdirs();
 
@@ -91,4 +91,9 @@ public class Serializer {
 
 
       }
+
+	public String getGameName(String file) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

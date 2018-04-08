@@ -1,4 +1,4 @@
-/* Classes that implement GameElement represent concrete objects within the game. They accept
+w/* Classes that implement GameElement represent concrete objects within the game. They accept
  * ElementEvents in order to use its behaviors manage its properties. They also return 
  */
 public interface GameElement {

@@ -9,15 +9,17 @@ import javafx.stage.Stage;
 
 public class LoadButton extends Button {
 
+	ConcreteGamePlayer gamePlayer;
 	Stage mainStage;
 
-	public LoadButton(double x, double y, double width, double height, Stage stage) {
+	public LoadButton(double x, double y, double width, double height, ConcreteGamePlayer gamePlayer,Stage stage) {
 		this.setLayoutX(x);
 		this.setLayoutY(y);
 		this.setWidth(width);
 		this.setHeight(height);
 		this.setText("load");
-		mainStage = stage;
+		this.gamePlayer = gamePlayer;
+		this.mainStage = stage;
 		setAction();
 	}
 
@@ -34,7 +36,7 @@ public class LoadButton extends Button {
 				fileString = fileName.getPath();
 			}
 
-			System.out.println(fileString);
+			gamePlayer.playGame(fileString);
 
 		});
 

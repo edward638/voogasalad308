@@ -112,7 +112,6 @@ public class ConcreteGamePlayer implements GamePlayer {
 		hud = new ConcreteHUD(currentGameName);
 		root.getChildren().add(gameDisplay);
 		root.getChildren().add((Node) hud);
-
 	}
 
 	// are we meant to deal with the exception?

@@ -1,7 +1,7 @@
 package engine.eventresponses;
 
 import engine.GameElement;
-import engine.events.ElementEvent;
+import engine.events.elementevents.ElementEvent;
 
 public abstract class EventResponse {
 	

@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import engine.events.ElementEvent;
-import engine.events.GameEvent;
+import engine.events.elementevents.ElementEvent;
+import engine.events.gameevents.GameEvent;
 import javafx.scene.shape.Shape;
 
 public class GameState implements Iterable<GameElement>{

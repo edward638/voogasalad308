@@ -26,8 +26,6 @@ public class SplashScreen {
 
 	public SplashScreen(Stage stage) {
 		this.currStage = stage;
-
-        
         addButtons();
 	}
 	private void addButtons() {

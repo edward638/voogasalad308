@@ -9,6 +9,10 @@ import javafx.scene.shape.Shape;
 
 public class ImageElement extends ImageView {
 	public GameElement elementReference;
+	
+	public ImageElement(GameElement elementReference) {
+		updateState();
+	}
 
 	public void updateState() {
 		Map<String, Object> properties = elementReference.reportProperties();

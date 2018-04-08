@@ -19,7 +19,7 @@ public class EventManager {
 	}
 	
 	public void step(GameState gameState) {
-		List<GameEvent> gameEvents = new LinkedList<GameEvent>();
+		//List<GameEvent> gameEvents = new LinkedList<GameEvent>();
 		List<ElementEvent> elementEvents = new LinkedList<ElementEvent>();
 		
 		elementEvents.addAll(getKeyEvent(gameState));
@@ -27,23 +27,22 @@ public class EventManager {
 		elementEvents.addAll(getTimeEvent(gameState));
 		elementEvents.addAll(getCollisionEvent(gameState));
 		
-		for (ElementEvent elementEvent : elementEvents) {
+		gameState.updateElements(elementEvents);
+		
+		/*for (ElementEvent elementEvent : elementEvents) {
 			gameEvents.addAll(gameState.updateElements(elementEvent));
-		}
+		}*/
 		
-		updateDisplayState(gameState);
+		updateDisplayState();
 		
-		/*List<GameEvent> gameEvents = collisionEvents.stream()
-		.map(Object::gameState.updateElements)
-		.collect(Collectors.toList());*/
+		List<List<GameEvent>> gameEvents = elementEvents.stream()
+				.map(gameState::updateElements)
+				.collect(Collectors.toList());
 		
 	}
 	
-	private void updateDisplayState(GameState gameState) {
-		for (GameElement gameElement : gameState) {
-			Map<String, Object> elementProperties = gameElement.reportProperties();
-			elementProperties.get()
-		}
+	private void updateDisplayState() {
+		displayState.updateImageElements();
 	}
 
 	public List<ElementEvent> getKeyEvent(GameState gameState) {
@@ -72,7 +71,7 @@ public class EventManager {
 	}
 	
 	public List<ElementEvent> getCollisionEvent(GameState gameState) {
-		List<ElementEvent> collisionEvents = gameState.detectCollisions();
+		List<ElementEvent> collisionEvents = displayState.detectCollisions();
 		return collisionEvents;
 		
 	}

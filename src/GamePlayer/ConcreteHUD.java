@@ -21,12 +21,13 @@ public class ConcreteHUD extends Pane implements HUD{
 	private int xLabel = 0;
 	private int yLabel = 0;
 	
-	
+
 	public ConcreteHUD(String name) {
 		setupPane();
 		gameName = name;
 	}
-	
+
+
 	/**
 	 * setting up front end JavaFX of the pane
 	 */

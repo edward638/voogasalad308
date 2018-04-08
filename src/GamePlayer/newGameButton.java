@@ -37,7 +37,8 @@ public class newGameButton extends Button {
 				fileString = fileName.getPath();
 			}
 
-			gamePlayer.playGame(fileString);
+			// gamePlayer.playGame(fileString);
+			gamePlayer.DummyPlayGame(fileString);
 		});
 
 	}

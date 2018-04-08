@@ -10,6 +10,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
@@ -22,6 +23,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 	Button loadButton;
 	Button replayButton;
 	HUD hud;
+	Pane gameDisplay;
 
 	Engine engine;
 	GameState gameState;
@@ -48,7 +50,6 @@ public class ConcreteGamePlayer implements GamePlayer {
 		myScene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND);
 		myStage = stage;
 		myStage.setScene(myScene);
-		hud = new ConcreteHUD();
 		root.getChildren().add((Node) hud);
 
 		highScores = new ConcreteHighScores("hi");
@@ -68,13 +69,24 @@ public class ConcreteGamePlayer implements GamePlayer {
 
 
 	}
-
+	
 	@Override
 	public void playGame(String file) {
 		engine = new Engine(file);
-		// parse file to get name of game.
 		currentGameName = serializer.getGameName(file);
 		mostRecentFile = file;
+		gameDisplay = engine.getDisplay();
+		hud = new ConcreteHUD(currentGameName);
+	}
+	
+	public void DummyPlayGame(String file) {
+		engine = new Engine(file);
+		// currentGameName = serializer.getGameName(file);
+		currentGameName = "Super Mario Smash Bros";
+		mostRecentFile = file;
+		// gameDisplay = engine.getDisplay();
+//		gameDisplay = 
+		hud = new ConcreteHUD(currentGameName);
 	}
 
 	// are we meant to deal with the exception?

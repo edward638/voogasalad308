@@ -6,9 +6,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import engine.eventresponses.EventResponse;
-import engine.events.ElementEvent;
-import engine.events.GameEvent;
-import engine.events.TimeEvent;
+import engine.events.elementevents.ElementEvent;
+import engine.events.elementevents.TimeEvent;
+import engine.events.gameevents.GameEvent;
 
 public class EventManager {
 	
@@ -75,8 +75,9 @@ public class EventManager {
 		
 	}
 	
-	public void handleElementEvents(GameState gameState, GameEvent gameEvent) {
-		
+	public GameState handleGameEvents(GameState gameState, List<GameEvent> gameEvents) {
+		gameEvents.stream().map(c-> c.execute(gameState));
+		return gameState;
 	}
 
 

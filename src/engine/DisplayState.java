@@ -3,7 +3,7 @@ package engine;
 import java.util.LinkedList;
 import java.util.List;
 
-import engine.events.ElementEvent;
+import engine.events.elementevents.ElementEvent;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;

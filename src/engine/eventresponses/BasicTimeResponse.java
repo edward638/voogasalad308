@@ -2,8 +2,8 @@ package engine.eventresponses;
 
 import engine.GameElement;
 import engine.behaviors.Movable;
-import engine.events.ElementEvent;
-import engine.events.TimeEvent;
+import engine.events.elementevents.ElementEvent;
+import engine.events.elementevents.TimeEvent;
 
 public class BasicTimeResponse extends EventResponse {
 	

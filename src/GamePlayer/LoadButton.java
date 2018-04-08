@@ -15,9 +15,9 @@ public class LoadButton extends Button {
 	public LoadButton(double x, double y, double width, double height, ConcreteGamePlayer gamePlayer,Stage stage) {
 		this.setLayoutX(x);
 		this.setLayoutY(y);
-		this.setWidth(width);
+		this.setMinWidth(width);
 		this.setHeight(height);
-		this.setText("load");
+		this.setText("Load Game");
 		this.gamePlayer = gamePlayer;
 		this.mainStage = stage;
 		setAction();

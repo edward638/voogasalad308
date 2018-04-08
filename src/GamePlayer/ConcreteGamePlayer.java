@@ -31,8 +31,9 @@ public class ConcreteGamePlayer implements GamePlayer {
 	
 	ConcreteHighScores highScores;
 
-	private final static double SCREEN_HEIGHT = 300;
-	private final static double SCREEN_WIDTH = 500;
+
+	private final static double SCREEN_HEIGHT = 650;
+	private final static double SCREEN_WIDTH = 1250;
 	private Group root;
 	private final static Paint BACKGROUND = Color.ANTIQUEWHITE;
 
@@ -47,24 +48,24 @@ public class ConcreteGamePlayer implements GamePlayer {
 		myScene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND);
 		myStage = stage;
 		myStage.setScene(myScene);
-		setupButtons();	
+		hud = new ConcreteHUD();
+		root.getChildren().add((Node) hud);
+
 		highScores = new ConcreteHighScores("hi");
 		highScores.addScore("bfd", 4);
 		highScores.printQ();
 		root.getChildren().add(highScores.getScores());
 		highScores.addScore("43", 9);
-		hud = new ConcreteHUD();
-		root.getChildren().add((Node) hud);
+		setupButtons();	
 		
 	}
 
 	private void setupButtons() {
-		saveButton = new SaveButton(30, 30, 30, 30, this);
-		root.getChildren().add(saveButton);
-
-		loadButton = new LoadButton(60, 60, 60, 60, this, myStage);
+		loadButton = new LoadButton(970, 310, 235, 60, this, myStage);
 		root.getChildren().add(loadButton);
-		replayButton = new ReplayButton(90, 90, 90, 90, this);
+		saveButton = new SaveButton(970, 350, 235, 60, this);
+		root.getChildren().add(saveButton);
+		replayButton = new ReplayButton(970, 390, 235, 60, this);
 		root.getChildren().add(replayButton);
 
 
@@ -94,8 +95,4 @@ public class ConcreteGamePlayer implements GamePlayer {
 		return mostRecentFile;
 	}
 	
-	public static void main(String[] args) {
-		String timeStamp = new SimpleDateFormat("MM/dd HH:mm").format(new java.util.Date());
-		System.out.println("Mario " + timeStamp);
-	}
 }

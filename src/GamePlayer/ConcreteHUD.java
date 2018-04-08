@@ -23,11 +23,11 @@ public class ConcreteHUD extends HBox implements HUD{
 	 * setting up front end JavaFX of the pane
 	 */
 	private void setupPane() {
-		this.setLayoutX(90);
-		this.setLayoutY(90);
-		this.setWidth(90);
-		this.setHeight(20);
-		Rectangle rect = new Rectangle(0,0,500,500);
+		this.setLayoutX(30);
+		this.setLayoutY(30);
+		this.setWidth(800);
+		this.setHeight(650);
+		Rectangle rect = new Rectangle(0,0,900,100);
 		rect.setFill(Color.BLACK);
 		this.getChildren().add(rect);
 		

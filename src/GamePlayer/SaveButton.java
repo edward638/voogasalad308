@@ -8,16 +8,18 @@ public class SaveButton extends Button{
 	public SaveButton(double x, double y, double width, double height, ConcreteGamePlayer gamePlayer) {
 		this.setLayoutX(x);
 		this.setLayoutY(y);
-		this.setWidth(width);
+		this.setMinWidth(width);
 		this.setHeight(height);
-		this.setText("save");
+		this.setText("Save Current State");
 		this.gamePlayer = gamePlayer;
 		setAction();
 	}
 	
 	private void setAction() {
 		this.setOnAction(event -> {
-			//gamePlayer.saveGame();;
+
+			//gamePlayer.saveGame();
+
 		});
 	}
 		

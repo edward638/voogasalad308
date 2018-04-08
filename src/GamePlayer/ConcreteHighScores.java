@@ -38,10 +38,9 @@ public class ConcreteHighScores implements HighScores {
 		scoreQueue = new PriorityQueue<Score>(new Score.ScoreComparator());
 		gameName = game;
 		table = new TableView<Score>();
-		setupTableProperties(0, 0, 300, 300);
+		setupTableProperties(970, 30, 235, 265);
 		
 		this.addDummyScores();
-	}
 	
 	private void addDummyScores() {
 		addScore("Calvin", 400);
@@ -50,6 +49,9 @@ public class ConcreteHighScores implements HighScores {
 		addScore("Jeffrey", 324);
 		addScore("Gouttham", 934);
 		addScore("Summer", 234);
+
+
+
 	}
 
 	private void setupTableProperties(double xPos, double yPos, double width, double height) {

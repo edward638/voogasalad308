@@ -12,8 +12,9 @@ import engine.events.GameEvent;
 import javafx.scene.shape.Shape;
 
 public class GameState implements Iterable<GameElement>{
-	private HashSet<GameElement> 
 	private HashSet<GameElement> elements;
+	private HashMap<String, String> gameproperties; 
+
 
 	public List<ElementEvent> detectCollisions() {
 		LinkedList<ElementEvent> events = new LinkedList<ElementEvent>();
@@ -43,6 +44,13 @@ public class GameState implements Iterable<GameElement>{
 	public List<Map<String, Integer>> getDisplayStates() {
 		return null;
 		
+	}
+	
+	/**
+	 * @returns a map containing general information about the game which is defined by the user. 
+	 */
+	protected Map<String,String> getGameProperties() {
+		return gameproperties;
 	}
 	
 	public List<GameEvent> updateElements(ElementEvent elementEvent) {

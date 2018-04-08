@@ -22,12 +22,14 @@ public class ConcreteGamePlayer implements GamePlayer {
 	Button loadButton;
 	Button replayButton;
 	HUD hud;
+
 	Engine engine;
 	GameState gameState;
 	String currentGameName;
 	Serializer serializer;
 	String mostRecentFile;
 	
+	ConcreteHighScores highScores;
 
 	private final static double SCREEN_HEIGHT = 300;
 	private final static double SCREEN_WIDTH = 500;// 915;
@@ -46,6 +48,12 @@ public class ConcreteGamePlayer implements GamePlayer {
 		myStage = stage;
 		myStage.setScene(myScene);
 		setupButtons();	
+		highScores = new ConcreteHighScores("hi");
+		highScores.addScore("bfd", 4);
+		highScores.printQ();
+		root.getChildren().add(highScores.getScores());
+		highScores.addScore("43", 9);
+		hud = new ConcreteHUD();
 		root.getChildren().add((Node) hud);
 		
 	}
@@ -56,9 +64,9 @@ public class ConcreteGamePlayer implements GamePlayer {
 
 		loadButton = new LoadButton(60, 60, 60, 60, this, myStage);
 		root.getChildren().add(loadButton);
-		
 		replayButton = new ReplayButton(60, 60, 60, 60, this);
 		root.getChildren().add(replayButton);
+
 
 	}
 

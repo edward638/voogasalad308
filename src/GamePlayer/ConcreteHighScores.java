@@ -10,7 +10,9 @@ import java.util.Queue;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * 
@@ -22,7 +24,7 @@ public class ConcreteHighScores implements HighScores {
 	Queue<Score> scoreQueue;
 	String gameName;
 
-	private TableView table;
+	private TableView<Score> table;
 
 	/**
 	 * initializes a "ConcreteHighScore" by creating a new priorityqueue for the
@@ -35,18 +37,36 @@ public class ConcreteHighScores implements HighScores {
 	public ConcreteHighScores(String game) {
 		scoreQueue = new PriorityQueue<Score>(new Score.ScoreComparator());
 		gameName = game;
-		setupTableProperties(0, 0, 100, 100);
+		table = new TableView<Score>();
+		setupTableProperties(0, 0, 300, 300);
 	}
-	
+
 	private void setupTableProperties(double xPos, double yPos, double width, double height) {
 		table.setEditable(false);
 		table.setLayoutX(xPos);
 		table.setLayoutY(yPos);
 		table.setMaxWidth(width);
 		table.setMaxHeight(height);
+		setupTableColumns();
 	}
 
+	private void setupTableColumns() {
+		table.setEditable(true);
+		TableColumn<Score, String> nameCol = new TableColumn("Name");
+		nameCol.setCellValueFactory(new PropertyValueFactory<Score, String>("playerName"));
+		nameCol.setMaxWidth(150);
+		nameCol.setResizable(false);
 
+		TableColumn<Score, Integer> scoreCol = new TableColumn("Score");
+		scoreCol.setCellValueFactory(new PropertyValueFactory<Score, Integer>("score"));
+		scoreCol.setMinWidth(150);
+		scoreCol.setResizable(false);
+		scoreCol.setEditable(true);
+		
+		table.getColumns().addAll(nameCol, scoreCol);
+
+
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -63,12 +83,21 @@ public class ConcreteHighScores implements HighScores {
 			scoreQueue.add(newScore);
 
 		}
+
+		addToScoreTable();
 	}
+
+	private void addToScoreTable() {
+		ArrayList<Score> scoreList = new ArrayList(scoreQueue);
+		ObservableList<Score> observableScoreList = FXCollections.observableArrayList(scoreList);
+		table.setItems(observableScoreList);
+	}
+	
 
 	public void printQ() {
 		int size = scoreQueue.size();
 		PriorityQueue<Score> copy = new PriorityQueue(scoreQueue);
-		for (int i = 0; i < size; i++){
+		for (int i = 0; i < size; i++) {
 			System.out.println(copy.poll());
 		}
 		System.out.println(scoreQueue.size());
@@ -86,20 +115,7 @@ public class ConcreteHighScores implements HighScores {
 		// TODO Auto-generated method stub
 	}
 
-	public static void main(String[] args) {
-		ConcreteHighScores chs = new ConcreteHighScores("test");
-		chs.addScore("hi2", 1);
-		chs.addScore("hi3", 2);
-		chs.addScore("hi4", 3);
-		chs.addScore("hi5", 4);
-		chs.addScore("hi6", 5);
-		chs.addScore("hi2", 6);
-		chs.addScore("hi3", 7);
-		chs.addScore("hi4", 8);
-		chs.addScore("hi5", 9);
-		chs.addScore("hi6", 10);
-		chs.addScore("hi5", 11);
-		chs.addScore("h6", 12);
-		chs.printQ();
+	public TableView<Score> getScores() {
+		return table;
 	}
 }

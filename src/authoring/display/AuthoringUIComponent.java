@@ -1,5 +1,6 @@
 package authoring.display;
 
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -17,7 +18,12 @@ public abstract class AuthoringUIComponent {
 	public Button makeButton (String property, EventHandler<ActionEvent> handler) {
 		Button result = new Button();
 		String label = "";
+		try {
 		label = myResources.getString(property);
+		}
+		catch(MissingResourceException e){
+			label = property;
+		}
 		result.setText(label);
 		result.setOnAction(handler);
 		return result;

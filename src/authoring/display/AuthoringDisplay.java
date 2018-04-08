@@ -27,7 +27,7 @@ import javafx.stage.Stage;
 
 public class AuthoringDisplay {
 	public static final String DEFAULT_RESOURCE_PATH = "authoring.display.resources/";
-	public static final String DEFAULT_RESOURCE_PATH_1 = "authoring/display/resources/"; //rename?
+	public static final String DEFAULT_CSS_PATH = "authoring/display/resources/"; //rename?
 
 	public static final String DEFAULT_LANGUAGE = "English";
 	public static final String DEFAULT_STYLE = "myStyle.css";
@@ -55,7 +55,7 @@ public class AuthoringDisplay {
 
 	public Scene setUpScene() {
 		root = new BorderPane();
-		root.setLeft(makePlacedObjectPanel());
+		root.setLeft(makeLevelPanel());
 		root.setRight(makeObjectPropertyPanel());
 		root.setBottom(makeTemplateObjectPanel());
 		root.setTop(makeSaveBar());
@@ -63,9 +63,9 @@ public class AuthoringDisplay {
 		return new Scene(root);
 	}
 
-	public Node makePlacedObjectPanel() {
-		LevelPanel leftPanel = new LevelPanel(myResources);
-		return leftPanel.asVBox();
+	public Node makeLevelPanel() {
+		LevelPanel levelPanel = new LevelPanel(myResources);
+		return levelPanel.asVBox();
 	}
 
 	public Node makeTemplateObjectPanel() {
@@ -73,7 +73,8 @@ public class AuthoringDisplay {
 	}
 
 	public Node makeObjectPropertyPanel() {
-		return new Pane();
+		PropertyPanel propertyPanel = new PropertyPanel(myResources);
+		return propertyPanel.asScrollPane();
 	}
 
 	public Node makeGameVisPane() {
@@ -84,19 +85,4 @@ public class AuthoringDisplay {
 		SaveBar saveBar = new SaveBar(myResources);
 		return saveBar.asHBox();
 	}
-
-	public Button makeButton (String property, EventHandler<ActionEvent> handler) {
-		Button result = new Button();
-		String label = "";
-		label = myResources.getString(property);
-		result.setText(label);
-		result.setOnAction(handler);
-		return result;
-	}
-	
-	//this will be a filler method for buttons and such, before their actual functions are implemented
-	public void doNothing() {
-		
-	}
-
 }

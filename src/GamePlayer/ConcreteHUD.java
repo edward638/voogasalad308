@@ -13,14 +13,17 @@ import javafx.scene.text.Text;
 
 public class ConcreteHUD extends Pane implements HUD{
 	
+	String gameName;
 	int currentScore;
 	int livesRemaining;
 	Map<?, ?> otherInfo;
 	
-	public ConcreteHUD() {
+	public ConcreteHUD(String name) {
 		setupPane();
+		gameName = name;
 	}
-	
+
+
 	/**
 	 * setting up front end JavaFX of the pane
 	 */

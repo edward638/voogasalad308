@@ -2,6 +2,7 @@ package GamePlayer;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +22,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 public class ConcreteHighScores implements HighScores {
 
-	Queue<Score> scoreQueue;
+	List<Score> scores;
 	String gameName;
 
 	private TableView<Score> table;
@@ -35,13 +36,14 @@ public class ConcreteHighScores implements HighScores {
 	 *            high score is matched to the specific game.
 	 */
 	public ConcreteHighScores(String game) {
-		scoreQueue = new PriorityQueue<Score>(new Score.ScoreComparator());
+		scores = new ArrayList<Score>();
 		gameName = game;
-		table = new TableView<Score>();
-		setupTableProperties(970, 30, 235, 265);
-		
+		//table = new TableView<Score>();
+		//setupTableProperties(970, 30, 235, 265);
+
 		this.addDummyScores();
-	
+	}
+
 	private void addDummyScores() {
 		addScore("Calvin", 400);
 		addScore("Maddy", 450);
@@ -49,8 +51,6 @@ public class ConcreteHighScores implements HighScores {
 		addScore("Jeffrey", 324);
 		addScore("Gouttham", 934);
 		addScore("Summer", 234);
-
-
 
 	}
 
@@ -75,9 +75,8 @@ public class ConcreteHighScores implements HighScores {
 		scoreCol.setMinWidth(150);
 		scoreCol.setResizable(false);
 		scoreCol.setEditable(true);
-		
-		table.getColumns().addAll(nameCol, scoreCol);
 
+		table.getColumns().addAll(nameCol, scoreCol);
 
 	}
 
@@ -89,34 +88,33 @@ public class ConcreteHighScores implements HighScores {
 	@Override
 	public void addScore(String name, int score) {
 		Score newScore = new Score(name, score);
-		if (scoreQueue.size() < 10) {
-			scoreQueue.add(newScore);
+		if (scores.size() < 10) {
+			scores.add(newScore);
 		} else {
-			System.out.println(scoreQueue.poll().score);
-			scoreQueue.add(newScore);
-
+			if (scores.get(0).score < score) {
+				scores.remove(0);
+				scores.add(newScore);
+			}
 		}
-
-		addToScoreTable();
+		Collections.sort(scores, new Score.ScoreComparator());
+		// addToScoreTable();
 	}
 
 	private void addToScoreTable() {
-		ArrayList<Score> scoreList = new ArrayList(scoreQueue);
+		ArrayList<Score> scoreList = new ArrayList(scores);
 		ObservableList<Score> observableScoreList = FXCollections.observableArrayList(scoreList);
 		table.setItems(observableScoreList);
 	}
-	
+
 	/**
 	 * method for printing the current high scores for testing
 	 */
 	public void printQ() {
-		int size = scoreQueue.size();
-		PriorityQueue<Score> copy = new PriorityQueue(scoreQueue);
+		int size = scores.size();
 		for (int i = 0; i < size; i++) {
-			System.out.println(copy.poll());
+			System.out.println(scores.get(i));
 		}
-		System.out.println(scoreQueue.size());
-		System.out.println(copy.size());
+
 	}
 
 	/*
@@ -135,6 +133,24 @@ public class ConcreteHighScores implements HighScores {
 
 	@Override
 	public void clear() {
-		scoreQueue.clear();
+		scores.clear();
 	}
+	
+	public static void main(String[] args) {
+		ConcreteHighScores chs = new ConcreteHighScores("test");
+		chs.addScore("hi2", 1);
+		chs.addScore("hi3", 2);
+		chs.addScore("hi4", 3);
+		chs.addScore("hi5", 4);
+		chs.addScore("hi6", 5);
+		chs.addScore("hi2", 6);
+		chs.addScore("hi3", 7);
+		chs.addScore("hi4", 8);
+		chs.addScore("hi5", 9);
+		chs.addScore("hi6", 10);
+		chs.addScore("hi5", 11);
+		chs.addScore("h6", 12);
+		chs.printQ();
+	}
+
 }

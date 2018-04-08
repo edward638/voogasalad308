@@ -43,7 +43,6 @@ public class MainPlayerTemp extends Application {
 
 		GamePlayer gamePlayer = new ConcreteGamePlayer(myStage);
 
-
 		setStage();
 
 	}

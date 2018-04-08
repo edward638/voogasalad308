@@ -11,6 +11,7 @@ import java.util.Queue;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -64,9 +65,9 @@ public class ConcreteHighScores implements HighScores {
 	}
 
 	private void setupTableColumns() {
-		
+				
 		table.setEditable(true);
-		
+				
 		TableColumn<Score, String> nameCol = new TableColumn("Name");
 		nameCol.setCellValueFactory(new PropertyValueFactory<Score, String>("playerName"));
 		nameCol.setMaxWidth(150);
@@ -76,7 +77,6 @@ public class ConcreteHighScores implements HighScores {
 		scoreCol.setCellValueFactory(new PropertyValueFactory<Score, Integer>("score"));
 		scoreCol.setMinWidth(150);
 		scoreCol.setResizable(false);
-		scoreCol.setEditable(true);
 
 		table.getColumns().addAll(nameCol, scoreCol);
 

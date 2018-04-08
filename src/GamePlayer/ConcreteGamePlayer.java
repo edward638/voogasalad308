@@ -43,19 +43,17 @@ public class ConcreteGamePlayer implements GamePlayer {
 		
 		// back end set up.
 		Serializer serializer = new Serializer();	
-		hud = new ConcreteHUD();
 		
 		// front end set up;
 		root = new Group();
 		myScene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND);
 		myStage = stage;
 		myStage.setScene(myScene);
-		root.getChildren().add((Node) hud);
 
 		highScores = new ConcreteHighScores("hi");
 		highScores.printQ();
 		root.getChildren().add(highScores.getScores());
-		setupButtons();	
+		//setupButtons();	
 		
 	}
 
@@ -77,6 +75,8 @@ public class ConcreteGamePlayer implements GamePlayer {
 		mostRecentFile = file;
 		gameDisplay = engine.getDisplay();
 		hud = new ConcreteHUD(currentGameName);
+		root.getChildren().add((Node) hud);
+
 	}
 	
 	public void DummyPlayGame(String file) {

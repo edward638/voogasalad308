@@ -64,7 +64,9 @@ public class ConcreteHighScores implements HighScores {
 	}
 
 	private void setupTableColumns() {
+		
 		table.setEditable(true);
+		
 		TableColumn<Score, String> nameCol = new TableColumn("Name");
 		nameCol.setCellValueFactory(new PropertyValueFactory<Score, String>("playerName"));
 		nameCol.setMaxWidth(150);

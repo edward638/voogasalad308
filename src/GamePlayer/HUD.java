@@ -10,6 +10,6 @@ public interface HUD {
 	 * @param lives
 	 * @param OtherInfo
 	 */
-	public void updateInfo(int score, int lives, Map<?, ?> OtherInfo);
+	public void updateInfo(int score, int lives, Map<String, ?> OtherInfo);
 	
 }

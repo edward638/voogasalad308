@@ -1,21 +1,9 @@
 package engine;
 
-import java.awt.Point;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
-import engine.events.elementevents.CollisionEvent;
-import engine.events.elementevents.ElementEvent;
-import engine.events.gameevents.GameEvent;
-import javafx.scene.input.KeyCode;
-import javafx.scene.shape.Shape;
-
-public class GameState implements Iterable<GameElement>{
-	private Set<GameElement> elements;
+public class GameState{
+	private List<GameElement> elements;
 	private double gameSpeed;
 	private double gameTime;
 	
@@ -48,28 +36,13 @@ public class GameState implements Iterable<GameElement>{
 		elements.remove(gameElement);
 	}
 	
-	public List<Map<String, Integer>> getDisplayStates() {
-		return null;
-		
-	}
-	
-	public Set<GameElement> getGameElements() { 
+	public List<GameElement> getElements() {
 		return elements;
 	}
 	
-
 	
-	public List<GameEvent> updateElements(ElementEvent elementEvent) {
-		List<GameEvent> gameEvents = elements.parallelStream()
-				.map(c -> c.processEvent(elementEvent))
-				.flatMap(List::stream)
-				.collect(Collectors.toList());
-		return null;
-	}
-
-	@Override
-	public Iterator<GameElement> iterator() {
-		return elements.iterator();
+	public List<GameElement> getGameElements() { 
+		return elements;
 	}
 
 }

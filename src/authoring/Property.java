@@ -4,7 +4,7 @@ public class Property {
 
 	private Object myValue;
 	private String myName;
-	private Class myValueType;
+//	private Class myValueType;
 	
 	public Property(String name, Object value) {
 		myName = name;

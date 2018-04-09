@@ -2,20 +2,20 @@ package authoring;
 
 public class GameManager {
 
-	private ElementManager objects;
+	private ObjectManager objects;
 	private SceneManager scenes;
 	
 	public GameManager() {
-		objects = new ElementManager("Mario Game");
+		objects = new ObjectManager("Mario Game");
 		scenes = new SceneManager();
 	}
 	
-	public GameManager(ElementManager allObjects, SceneManager allScenes) {
+	public GameManager(ObjectManager allObjects, SceneManager allScenes) {
 		objects = allObjects;
 		scenes = allScenes;
 	}
 	
-	public ElementManager getObjectManager() {
+	public ObjectManager getObjectManager() {
 		return objects;
 	}
 	

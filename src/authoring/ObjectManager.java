@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ElementManager {
+public class ObjectManager {
 
 	private String gameName;
 	private String gameDescription;
@@ -13,7 +13,7 @@ public class ElementManager {
 	private Map<GameScene, List<GameObject>> placedObjects;
 	private GameObject currentObject;
 	
-	public ElementManager(String name) {
+	public ObjectManager(String name) {
 		placedObjects = new HashMap<>();
 		gameName = name;
 	}

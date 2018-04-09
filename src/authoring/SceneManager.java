@@ -6,16 +6,16 @@ import java.util.Set;
 public class SceneManager {
 	
 	private GameScene currentScene;
-	private Set<GameScene> levels;
+	private Set<GameScene> myLevels;
 
 	public SceneManager() {
 		currentScene = new GameScene();
-		levels = new HashSet<>();
+		myLevels = new HashSet<>();
 	}
 	
 	public GameScene makeScene() {
 		GameScene newLevel = new GameScene();
-		levels.add(newLevel);
+		myLevels.add(newLevel);
 		return newLevel;
 	}
 	
@@ -28,7 +28,11 @@ public class SceneManager {
 	}
 	
 	public void removeScene(GameScene toRemove) {
-		levels.remove(toRemove);
+		myLevels.remove(toRemove);
+	}
+	
+	public Set<GameScene> getScenes(){
+		return myLevels;
 	}
 	
 }

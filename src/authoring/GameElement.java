@@ -3,17 +3,23 @@ package authoring;
 import java.util.HashSet;
 import java.util.Set;
 
-public class GameObject {
+public class GameElement {
 	
 	private Set<Behavior> myBehaviors;
 	private Set<Event> myEvents;
 	
-	public GameObject() {
+	//add basic behavior elements to the constructor
+	public GameElement() {
 		myBehaviors = new HashSet<>();
 		myEvents = new HashSet<>();
 	}
 	
-	//each game object will have behaviors that describe how it behaves. 
+	public GameElement(GameElement toCopy) {
+		myBehaviors = toCopy.getBehaviors();
+		myEvents = toCopy.getEvents();
+	}
+	
+	//each game object will have properties that describe how it behaves. 
 	public void addBehavior(Behavior behaviorToAdd) {
 		myBehaviors.add(behaviorToAdd);
 	}
@@ -33,6 +39,11 @@ public class GameObject {
 		}
 	}
 	
+
+	public Set<Event> getEvents(){
+		return myEvents;
+	}
+
 	//returns the list of all behaviors associated with the object
 	public Set<Behavior> getBehaviors() {
 		return myBehaviors;

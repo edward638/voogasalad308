@@ -17,16 +17,24 @@ import javafx.scene.shape.Shape;
 public class GameState implements Iterable<GameElement>{
 	private Set<GameElement> elements;
 	private double gameSpeed;
+	private double gameTime;
 	
 	public GameState() {
 		//Talk to game data about reading info from file
 		gameSpeed = 1;
+		gameTime = 0;
 		
 		
 		elements = null;
 	}
 
-
+	public void incrementgameTime(double timeElapsed) {
+		gameTime+=timeElapsed;
+	}
+	
+	public double getGameTime() {
+		return gameTime;
+	}
 	
 	protected double getGameSpeed() {
 		return gameSpeed;

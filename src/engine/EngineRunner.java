@@ -25,7 +25,6 @@ public class EngineRunner {
 	EventManager eventManager;
     //starts animation
 	
-	
     public void startAnimation() {
     	animation = new Timeline();
     	root = new Group();
@@ -51,14 +50,13 @@ public class EngineRunner {
     	return curr_scene;
 
     }
-    
-
-
 
 	private void timeStep (double elapsedTime) {
-    	eventManager.processInputEvent(new TimeEvent(gameState.getGameSpeed()), gameState);
+		double gameSteps = elapsedTime*gameState.getGameSpeed();
+		gameState.incrementgameTime(gameSteps);
+    	eventManager.processInputEvent(new TimeEvent(gameSteps), gameState);
     }
-    
+	
 	public List<ElementEvent> handleKeyInput(KeyCode code) {
 		eventManager.processInputEvent(new KeyInputEvent(code), gameState);
 	}

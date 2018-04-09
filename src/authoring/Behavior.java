@@ -15,7 +15,7 @@ public class Behavior {
 	private String myName;
 	
 	public Behavior() {
-		
+		myProperties = new HashSet<>();
 	}
 
 	public Behavior (String name, Set<Property> properties) {

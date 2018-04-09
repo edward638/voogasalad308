@@ -6,8 +6,9 @@ import javafx.scene.image.Image;
 
 public class GameScene {
 	
+	//has a list of objects
 	private Image myBackground;
-	private List<GameObject> myObjects;
+	private List<GameElement> myElements;
 
 	public GameScene() {
 		
@@ -21,6 +22,14 @@ public class GameScene {
 	//sets image for scene background
 	public void setBackgroundImage(Image backgroundImage) {
 		myBackground = backgroundImage;
+	}
+	
+	public void addElement(GameElement toAdd) {
+		myElements.add(toAdd);
+	}
+	
+	public List<GameElement> getMyElements(){
+		return myElements;
 	}
 	
 }

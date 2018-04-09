@@ -6,7 +6,7 @@ import engine.GameElement;
 import engine.behaviors.MandatoryBehavior;
 import engine.behaviors.Behavior;
 import engine.behaviors.Movable;
-import engine.eventresponses.BasicTimeResponse;
+import engine.eventresponses.TimeMovableResponse;
 import engine.events.elementevents.TimeEvent;
 
 public class GameElementTesting {
@@ -33,7 +33,7 @@ public class GameElementTesting {
 		
 		ge.addBehavior(new Movable(ge));
 		
-		ge.addEventResponse(new BasicTimeResponse());
+		ge.addEventResponse(new TimeMovableResponse());
 		System.out.println(ge.reportProperties());
 		
 		ge.processEvent(new TimeEvent(5.0));

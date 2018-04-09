@@ -40,7 +40,6 @@ public class GameState{
 		return elements;
 	}
 	
-	
 	public List<GameElement> getGameElements() { 
 		return elements;
 	}

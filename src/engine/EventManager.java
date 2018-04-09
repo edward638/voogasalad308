@@ -1,5 +1,6 @@
 package engine;
 
+import java.awt.Point;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -7,67 +8,50 @@ import java.util.stream.Collectors;
 
 import engine.eventresponses.EventResponse;
 import engine.events.elementevents.ElementEvent;
+import engine.events.elementevents.KeyInputEvent;
+import engine.events.elementevents.MouseInputEvent;
 import engine.events.elementevents.TimeEvent;
 import engine.events.gameevents.GameEvent;
+import javafx.scene.input.KeyCode;
 
 public class EventManager {
 	
 	private DisplayState displayState;
-	
 	public EventManager(DisplayState displayState) {
 		this.displayState = displayState;
 	}
 	
-	public void step(GameState gameState) {
-		//List<GameEvent> gameEvents = new LinkedList<GameEvent>();
+	public void processInputEvent(ElementEvent event, GameState gameState) {
 		List<ElementEvent> elementEvents = new LinkedList<ElementEvent>();
+		elementEvents.add(event);
+		gameState = updateGameState(elementEvents, gameState);
+		gameState = processCollisionEvents(gameState);
 		
-		elementEvents.addAll(getKeyEvent(gameState));
-		elementEvents.addAll(getMouseEvent(gameState));
-		elementEvents.addAll(getTimeEvent(gameState));
+	}
+	
+	public GameState processCollisionEvents(GameState gameState) {
+		List<ElementEvent> elementEvents = new LinkedList<ElementEvent>();
 		elementEvents.addAll(getCollisionEvent(gameState));
+		gameState = updateGameState(elementEvents, gameState);
+		updateDisplayState();
+		return gameState;
 		
+		
+	}
+	
+	private GameState updateGameState(List<ElementEvent> elementEvents, GameState gameState) {
 		List<GameEvent> gameEvents = elementEvents.stream()
 				.map(gameState::updateElements)
 				.flatMap(List::stream)
 				.collect(Collectors.toList());
-		
-		
-		
-		gameState = handleElementEvents(gameState, gameEvents);
-		
-		
-		updateDisplayState();
+		gameState = handleGameEvents(gameState, gameEvents);
+		return gameState;
 	}
 	
 	private void updateDisplayState() {
 		displayState.updateImageElements();
 	}
 
-	public List<ElementEvent> getKeyEvent(GameState gameState) {
-		
-		return null;
-		
-	}
-	
-	public List<ElementEvent> getMouseEvent(GameState gameState) {
-		return null;
-		
-	}
-	
-	/**
-	 * @param gameState 
-	 * @returns a list of timeEvents which are sent to every object which represent the incrementing/speed of the level. 
-	 */
-	public List<ElementEvent> getTimeEvent(GameState gameState) {
-		List<ElementEvent> timeEvents = new LinkedList<ElementEvent>();
-		double stepRate = Double.parseDouble(gameState.getGameProperties().get(gameSpeed));
-		for (GameElement gameElement : gameState) {
-			timeEvents.add(new TimeEvent(stepRate));
-		}
-		return timeEvents;
-		// or return new TimeEvent(stepRate); ...depends on our code design. 
-	}
 	
 	public List<ElementEvent> getCollisionEvent(GameState gameState) {
 		List<ElementEvent> collisionEvents = displayState.detectCollisions();

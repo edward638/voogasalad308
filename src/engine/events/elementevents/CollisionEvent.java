@@ -7,17 +7,15 @@ public class CollisionEvent extends ElementEvent {
 	private GameElement e1;
 	private GameElement e2;
 	
-	public Collision(Double t) {
-		timeElapsed = t;
+	public CollisionEvent(GameElement elem1, GameElement elem2) {
+		e1 = elem1;
+		e2 = elem2;
 	}
-	
-	public Double getTime() {
-		return timeElapsed;
-	}
+
 	
 	@Override
 	public String toString() {
-		return "Time Event: " + timeElapsed + " seconds elapsed";
+		return "Collision Event: " + e1 + " " + e2 + " collided.";
 	}
 
 }

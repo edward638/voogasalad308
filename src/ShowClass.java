@@ -25,9 +25,9 @@ public class ShowClass {
 	 */
 	public static void main (String[] args) throws ClassNotFoundException {
 		//Class<?> clazz = Class.forName((args.length > 0) ? args[0] : "java.lang.String");
-		Class<?> clazz = Class.forName((args.length > 0) ? args[0] : "nodes.CommandNode");
+		Class<?> clazz = Class.forName((args.length > 0) ? args[0] : "engine.behaviors.Movable");
 		printClass(clazz);
-		makeClass(clazz);
+//		makeClass(clazz);
 	}
 
 	/**

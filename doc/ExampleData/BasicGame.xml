@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<BasicGame>
+    <Level>
+        <Scene>
+            basicscene.jpg
+        </Scene>
+        <ObjectData>
+            <Object>
+                <Name>Mario</Name>
+                <Image>Mario.png</Image>
+                <Type>Player</Type>
+                <Location>40,50</Location>
+                <Size>50,50</Size>
+                <Properties>
+                    <Property id="Health">
+                        4
+                    </Property>
+                </Properties>
+                <Behaviors>
+                    <Jumping>
+                        <Height>3</Height>
+                        <Velocity>2</Velocity>
+                    </Jumping>
+                </Behaviors>
+            </Object>
+            <Object>
+                <Name>Goomba</Name>
+                <Image>Goomba.png</Image>
+                <Type>Enemy</Type>
+                <Location>40,60</Location>
+                <Size>30,30</Size>
+                <Properties>
+                    <Property id="Health">
+                        1
+                    </Property>
+                </Properties>
+                <Behaviors>
+                    <Damage>1</Damage>
+                </Behaviors>
+            </Object>
+            <Object>
+                <Name>Brick</Name>
+                <Image>Brick.png</Image>
+                <Type>Block</Type>
+                <Location>30,40</Location>
+                <Size>40,40</Size>
+                <Properties></Properties>
+                <Behaviors></Behaviors>
+            </Object>
+        </ObjectData>
+    </Level>
+</BasicGame>

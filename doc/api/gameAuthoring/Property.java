@@ -1,9 +1,9 @@
 
 public interface Property {
 	
-	public void setParameters(List<> paramList); //sets the parameters of the property
+	public void setValue(Object value); //sets the value of the property
 	
-	public List<> getParameters(); //returns the parameters of the property
+	public Object getParameters(); //returns the value of the property
 	
 	public String getName(); //returns the name of the property
 	

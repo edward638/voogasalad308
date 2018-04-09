@@ -28,4 +28,9 @@ public class Property {
 		return myName;
 	}
 	
+	//returns the name of the property
+	public String toString() {
+		return myName + " = " + myValue;
+	}
+	
 }

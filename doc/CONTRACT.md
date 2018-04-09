@@ -1,5 +1,5 @@
-# TEAM CONTRACT:
-## By signing this document, I swear to give my life to the vooga salad:
+# TEAM CONTRACT
+### By signing this document, I swear to give my life to the VOOGASalad:
 ### Team Rules
 - Promise to respect each other’s ideas and work.
 -  Promise to be active team members and do our fair share of the work as best as we can.
@@ -24,5 +24,4 @@ Promise to communicate with the team regularly to keep everyone in the loop abou
 - Organized classes in this order: imports, class definition, final variables, instance variables, class constructor(s), methods.
 - Methods Under ‘15’ Lines
 - Implement Polymorphism at all opportunities. 
-
-### Use Modular code:
+- Use modular code.

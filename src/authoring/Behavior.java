@@ -45,4 +45,8 @@ public class Behavior {
 		return myName;
 	}
 	
+	public String toString() {
+		return myName + ": " + myProperties.toString();
+	}
+	
 }

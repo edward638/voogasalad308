@@ -24,14 +24,9 @@ public class GameElement {
 		myBehaviors.add(behaviorToAdd);
 	}
 	
-	//the user can remove a property after assigning it
+	//the user can remove a behavior after assigning it
 	public void removeBehavior(Behavior behaviorToRemove) {
 		myBehaviors.remove(behaviorToRemove);
-	}
-	
-	//returns the list of all properties associated with the object
-	public Set<Behavior> getBehaviors() {
-		return myBehaviors;
 	}
 	
 	public void addEvent(Event toAdd) {
@@ -44,8 +39,14 @@ public class GameElement {
 		}
 	}
 	
+
 	public Set<Event> getEvents(){
 		return myEvents;
+	}
+
+	//returns the list of all behaviors associated with the object
+	public Set<Behavior> getBehaviors() {
+		return myBehaviors;
 	}
 	
 	public Behavior getBehavior(String behavior) {
@@ -61,4 +62,6 @@ public class GameElement {
 		}
 		return new Behavior();
 	}
+	
+	
 }

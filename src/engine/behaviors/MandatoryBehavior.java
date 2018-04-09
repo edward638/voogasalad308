@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import engine.GameElement;
+import javafx.scene.shape.Shape;
 
 public class MandatoryBehavior extends Behavior{
 	
@@ -35,6 +36,10 @@ public class MandatoryBehavior extends Behavior{
 	
 	public Double getY() {
 		return yPos;
+	}
+	
+	public Shape getShape() {
+		
 	}
 	public String getName() {
 		return elementName;

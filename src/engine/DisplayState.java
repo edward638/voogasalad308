@@ -21,7 +21,9 @@ public class DisplayState {
 		activeElements.add(imageElement);
 	}
 	
-	public void removeElements()
+	public void removeElements(){
+		
+	}
 
 	public void updateImageElements() {
 		for (ImageElement imageElement : activeElements) {

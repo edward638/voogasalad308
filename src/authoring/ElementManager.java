@@ -9,14 +9,41 @@ import java.util.Set;
 
 public class ElementManager {
 
+	private String gameName;
+	private String gameDescription;
+	private String gameImage;
 	private Map<GameScene, List<GameElement>> placedObjects;
-	private Set<GameElement> objectTemplates;
 	private GameElement currentObject;
 	
-	public ElementManager() {
+	public ElementManager(String name) {
 		placedObjects = new HashMap<>();
 		objectTemplates = new HashSet<>();
 		currentObject = new GameElement();
+		gameName = name;
+	}
+	
+	public void setGameName(String name) {
+		gameName = name;
+	}
+	
+	public String getName() {
+		return gameName;
+	}
+	
+	public void setGameDescription(String description) {
+		gameDescription = description;
+	}
+	
+	public String getGameDescription() {
+		return gameDescription;
+	}
+	
+	public void setGameImage(String image) {
+		gameImage = image;
+	}
+	
+	public String getGameImage() {
+		return gameImage;
 	}
 	
 	//makes a game object with no properties

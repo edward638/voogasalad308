@@ -9,9 +9,21 @@ public class GameElement {
 	private Set<Event> myEvents;
 	
 	//add basic behavior elements to the constructor
-	public GameElement() {
+	public GameElement(int x, int y, String image) {
 		myBehaviors = new HashSet<>();
 		myEvents = new HashSet<>();
+		addBasicBehavior(x, y, image);
+	}
+	
+	private void addBasicBehavior(int x, int y, String image) {
+		Property xLoc = new Property("xLoc", x);
+		Property yLoc = new Property("yLoc", y);
+		Property image = new Property("image", image);
+		List<Property> basicProps = new ArrayList<>();
+		basicProps.add(xLoc); 
+		basicProps.add(yLoc); 
+		basicProps.add(image); 
+		Behavior basic = new Behavior(basicProps);
 	}
 	
 	public GameElement(GameElement toCopy) {

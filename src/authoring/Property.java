@@ -2,9 +2,9 @@ package authoring;
 
 public class Property {
 
-	//add Class instance variable to check that myValue is an instance of that class
 	private Object myValue;
 	private String myName;
+	private Class myValueType;
 	
 	public Property(String name, Object value) {
 		myName = name;
@@ -12,10 +12,13 @@ public class Property {
 	}
 	
 	//sets the value of the property
-	//make sure object is the correct class
 	public void setValue(Object value) {
-		System.out.println(value.getClass());
-		myValue = value;
+		if (value instanceof myValueType) {
+			myValue = value;
+		}
+		else { 
+			new Error("value entered is not the correct type");
+		}
 	}
 	
 	//returns the value of the property

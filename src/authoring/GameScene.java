@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 
 public class GameScene {
 	
+	//has a list of objects
 	private Image myBackground;
 
 	public GameScene() {

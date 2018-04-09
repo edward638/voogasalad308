@@ -12,8 +12,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-public class ConcreteHUD extends Pane implements HUD{
-	
+public class ConcreteHUD extends Pane implements HUD {
+
 	String gameName;
 	int currentScore;
 	int livesRemaining;
@@ -21,13 +21,11 @@ public class ConcreteHUD extends Pane implements HUD{
 	private int xLabel = 0;
 	private int yLabel = 0;
 	
-
 	public ConcreteHUD(String name) {
 		gameName = name;
 		setupPane();
 
 	}
-
 
 	/**
 	 * setting up front end JavaFX of the pane
@@ -37,11 +35,7 @@ public class ConcreteHUD extends Pane implements HUD{
 		this.setLayoutY(30);
 		this.setWidth(800);
 		this.setHeight(650);
-		//Rectangle rect = new Rectangle(0,0,900,100);
-		//rect.setFill(Color.ALICEBLUE);
 
-		//this.getChildren().add(rect);
-		
 		this.addDummyValues();
 		setupHUDText();
 	}
@@ -56,7 +50,6 @@ public class ConcreteHUD extends Pane implements HUD{
 		this.getChildren().add(nameText);
 		Label scoreText = new Label("Score: " + currentScore);
 		scoreText.setTextFill(Color.WHITE);
-
 		scoreText.setLayoutX(xLabel);
 		xLabel = xLabel + 150;
 		scoreText.setLayoutY(yLabel);
@@ -84,8 +77,6 @@ public class ConcreteHUD extends Pane implements HUD{
 			otherText.setFont(new Font(20));
 			this.getChildren().add(otherText);
 		}
-
-
 	}
 
 	private void addDummyValues() {

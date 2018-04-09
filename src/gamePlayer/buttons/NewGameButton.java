@@ -1,25 +1,24 @@
-package GamePlayer;
+package gamePlayer.buttons;
 
 import java.io.File;
 import java.nio.file.Paths;
 
+import gamePlayer.ConcreteGamePlayer;
 import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class newGameButton extends Button {
+public class NewGameButton extends Button {
 
-	ConcreteGamePlayer gamePlayer;
-	Stage mainStage;
+	private ButtonData buttonData;
 
-	public newGameButton(double x, double y, double width, double height, ConcreteGamePlayer gamePlayer, Stage stage) {
+	public NewGameButton(double x, double y, double width, double height, ButtonData buttonData) {
 		this.setLayoutX(x);
 		this.setLayoutY(y);
 		this.setMinWidth(width);
 		this.setHeight(height);
 		this.setText("New Game");
-		this.gamePlayer = gamePlayer;
-		this.mainStage = stage;
+		this.buttonData = buttonData;
 		setAction();
 	}
 
@@ -31,14 +30,14 @@ public class newGameButton extends Button {
 			String currentPath = Paths.get(".").toAbsolutePath().normalize().toString() + "/data";
 			fileChooser.setInitialDirectory(new File(currentPath));
 
-			File fileName = fileChooser.showOpenDialog(mainStage);
+			File fileName = fileChooser.showOpenDialog(buttonData.getStage());
 			String fileString = "No File Selected";
 			if (fileName != null) {
 				fileString = fileName.getPath();
 			}
 
-			// gamePlayer.playGame(fileString);
-			gamePlayer.DummyPlayGame(fileString);
+			buttonData.playGame(fileString);
+			
 		});
 
 	}

@@ -1,4 +1,4 @@
-package GamePlayer;
+package gamePlayer;
 
 public class ScoreInsertion {
 

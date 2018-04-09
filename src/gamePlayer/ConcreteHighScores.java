@@ -124,7 +124,7 @@ public class ConcreteHighScores implements HighScores {
 	 * (non-Javadoc)
 	 * 
 	 * @see GamePlayer.HighScores#loadScores(java.util.Map)
-	 */
+	 */ 
 	@Override
 	public void loadScores(Map<?, ?> scores) {
 		// TODO Auto-generated method stub

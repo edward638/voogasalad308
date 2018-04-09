@@ -15,9 +15,13 @@ public class DisplayState {
 	public List<ImageElement> newElements;
 	public List<ImageElement> removeElements;
 	
-	public void addNewElements() {
-		
+	public void addNewElement(GameElement element) {
+		ImageElement imageElement = new ImageElement(element);
+		newElements.add(imageElement);
+		activeElements.add(imageElement);
 	}
+	
+	public void removeElements()
 
 	public void updateImageElements() {
 		for (ImageElement imageElement : activeElements) {
@@ -74,6 +78,7 @@ public class DisplayState {
 		Shape intersect = Shape.intersect(r1, r2);
 		int side = getCollisionSide(getCenter(r1), getCenter(intersect));
 		System.out.println(side);
+		
 	}
 	
 }

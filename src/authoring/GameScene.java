@@ -1,11 +1,14 @@
 package authoring;
 
+import java.util.List;
+
 import javafx.scene.image.Image;
 
 public class GameScene {
 	
 	//has a list of objects
 	private Image myBackground;
+	private List<GameObject> myObjects;
 
 	public GameScene() {
 		

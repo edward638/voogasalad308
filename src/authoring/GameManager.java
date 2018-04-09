@@ -23,11 +23,11 @@ public class GameManager {
 		return scenes;
 	}
 	
-	public void placeGameObject(GameElement toPlace) {
+	public void placeGameObject(GameObject toPlace) {
 		objects.placeGameObject(scenes.getCurrentScene(), toPlace);
 	}
 	
-	public void removeGameObject(GameElement toRemove) {
+	public void removeGameObject(GameObject toRemove) {
 		objects.removeGameObject(scenes.getCurrentScene(), toRemove);
 	}
 }

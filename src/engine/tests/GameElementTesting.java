@@ -1,10 +1,9 @@
 package engine.tests;
 
-import java.util.Arrays;
-
 import engine.GameElement;
-import engine.behaviors.MandatoryBehavior;
+import engine.actions.TimeMovable;
 import engine.behaviors.Behavior;
+import engine.behaviors.MandatoryBehavior;
 import engine.behaviors.Movable;
 import engine.eventresponses.TimeMovableResponse;
 import engine.events.elementevents.TimeEvent;
@@ -33,7 +32,7 @@ public class GameElementTesting {
 		
 		ge.addBehavior(new Movable(ge));
 		
-		ge.addEventResponse(new TimeMovableResponse());
+		ge.addEventResponse(new TimeEvent(0.0), new TimeMovable());
 		System.out.println(ge.reportProperties());
 		
 		ge.processEvent(new TimeEvent(5.0));

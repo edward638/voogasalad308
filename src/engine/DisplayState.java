@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import engine.events.elementevents.ElementEvent;
+import engine.events.elementevents.CollisionEvent;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
@@ -21,7 +22,15 @@ public class DisplayState {
 		activeElements.add(imageElement);
 	}
 	
-	public void removeElements()
+	public void removeElement(GameElement element) {
+		ImageElement remove = null;
+		activeElements.stream().co
+		for (ImageElement imageElement : activeElements) {
+			if (imageElement.hasReference(element)) {
+				
+			}
+		}
+	}
 
 	public void updateImageElements() {
 		for (ImageElement imageElement : activeElements) {
@@ -29,20 +38,21 @@ public class DisplayState {
 		}
 	}
 	
-	public List<ElementEvent> detectCollisions() {
-		List<ElementEvent> collisionEvents = new LinkedList<CollisionEvent>();
+	/*public List<ElementEvent> detectCollisions() {
+		List<ElementEvent> collisionEvents = new LinkedList<ElementEvent>();
 		
 		for (int i = 0; i < activeElements.size(); i++) {
 			for (int j = i+1; j < activeElements.size(); j++) {
+				
 				ImageElement element1 = activeElements.get(i);
 				ImageElement element2 = activeElements.get(j);
-				Shape intersect = Shape.intersect(element1.toShape(), element2.toShape());
-				Point2D intersectCenter = getCenter(intersect);
 				
-				/*if (element1.getBoundsInLocal().intersects(element2.getBoundsInLocal())) {
-					ElementEvent collision = new CollisionEvent(e1, e2);
+				if (element1.getBoundsInLocal().intersects(element2.getBoundsInLocal())) {
+					Shape intersect = Shape.intersect(element1.toShape(), element2.toShape());
+					Point2D intersectCenter = getCenter(intersect);
+					ElementEvent collision = new CollisionEvent(element1, element2);
 					collisionEvents.add(collision);
-				}*/
+				}
 					
 			}
 		}
@@ -79,6 +89,6 @@ public class DisplayState {
 		int side = getCollisionSide(getCenter(r1), getCenter(intersect));
 		System.out.println(side);
 		
-	}
+	}*/
 	
 }

@@ -4,6 +4,7 @@ import engine.GameElement;
 
 public class CollisionEvent extends ElementEvent {
 	
+	
 	private GameElement e1;
 	private GameElement e2;
 	

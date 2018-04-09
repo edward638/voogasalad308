@@ -3,7 +3,7 @@ package data;
 import authoring.GameObject;
 import authoring.GameScene;
 import com.thoughtworks.xstream.XStream;
-
+//
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -15,45 +15,58 @@ public class Serializer {
     private static final String GAMEOBJECT = "gameobject";
     private XStream xstream;
 
-    public Serializer(){
+    public Serializer() {
         xstream = new XStream();
     }
 
     /**
      * Converts game to XML. Used by game authoring environment.
      *
-     * @param fileName    desired name of XML game file to be created
-     * @param objectMap  map provided from authoring environment which maps GameScene to a list of GameObjects contained on that scene
+     * @param fileName  desired name of XML game file to be created
+     * @param gameSceneList map provided from authoring environment which maps GameScene to a list of GameObjects contained on that scene
      */
-    void gameAuthorToXML(String fileName, Map<GameScene, List<GameObject>> objectMap) throws IOException {
-        String topLevelGameDestination = "./src/Data/XMLFiles/" + fileName;
+    //TODO: fix! maybe have the gamescene have a name so we know what the level is?
+//    void gameAuthorToXML(String fileName, Map<GameScene, List<GameObject>> objectMap) throws IOException {
+//        String topLevelGameDestination = fileName;
+//        new File(topLevelGameDestination).mkdirs();
+//
+//        int x = 1;
+//        for (GameScene key : objectMap.keySet()) {
+//            String levelGameDestination = topLevelGameDestination + "/" + LEVEL + x;
+//            for (GameObject gameObject : objectMap.get(key)) {
+//                String xmlString = xstream.toXML(gameObject);
+//                stringToDom(xmlString, levelGameDestination + "/" + gameObject + ".xml");
+//            }
+//            x++;
+//        }
+//    }
+
+    void gameAuthorToXML(String fileName, List<GameScene> gameSceneList) throws IOException {
+        String topLevelGameDestination = fileName;
         new File(topLevelGameDestination).mkdirs();
 
         int x = 1;
-        for (GameScene key: objectMap.keySet()){
+        for (GameScene aGameSceneList : gameSceneList) {
             String levelGameDestination = topLevelGameDestination + "/" + LEVEL + x;
-            for (GameObject gameObject: objectMap.get(key)){
-                String xmlString = xstream.toXML(gameObject);
-                stringToDom(xmlString, levelGameDestination + "/" + gameObject.getName() + ".xml");
-            }
+            String xmlString = xstream.toXML(aGameSceneList);
+            stringToDom(xmlString, levelGameDestination + ".xml");
             x++;
         }
     }
 
     // taken from https://stackoverflow.com/questions/17853541/java-how-to-convert-a-xml-string-into-an-xml-file
 
-    private static void stringToDom(String xmlSource, String fileName)
+    private void stringToDom(String xmlSource, String fileName)
             throws IOException {
         java.io.FileWriter fw = new java.io.FileWriter(fileName);
         fw.write(xmlSource);
         fw.close();
     }
 
-    void testGameAuthorToXML(String fileName, TestObject gameObjects) throws IOException {
-        String test = xstream.toXML(gameObjects);
-        stringToDom(test, "./src/Data/XMLFiles/hello/test.xml");
-        System.out.println(test);
-    }
+//    void testGameAuthorToXML(String fileName, TestObject gameObjects) throws IOException {
+//        String test = xstream.toXML(gameObjects);
+//        stringToDom(test, fileName + "/test.xml");
+//    }
 
     /**
      * Converts game to XML. Used by game engine.
@@ -75,20 +88,6 @@ public class Serializer {
 //        return new File();
 //    }
 
-
-      public static void main(String args[]){
-          Serializer serializer = new Serializer();
-
-          String[] stringList = {"hello", "goodbye", "yo", "hello"};
-          TestObject testObject = new TestObject(3, "biiiiich", stringList, "Goomba.png");
-          try {
-              serializer.testGameAuthorToXML("hello", testObject);
-          } catch (IOException e) {
-              e.printStackTrace();
-          }
-
-//
-
-
-      }
 }
+
+

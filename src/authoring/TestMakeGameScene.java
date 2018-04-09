@@ -1,5 +1,9 @@
 package authoring;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+import data.*;
 import javafx.scene.image.Image;
 
 public class TestMakeGameScene {
@@ -8,7 +12,7 @@ public class TestMakeGameScene {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		
 		GameScene gameScene = new GameScene("Level 1");
 		BehaviorFactory bf = new BehaviorFactory();
@@ -23,6 +27,19 @@ public class TestMakeGameScene {
 //		System.out.println(go2.getBehaviors());
 
 		gameScene.addObject(go1);
+		
+		ArrayList<GameScene> gameList = new ArrayList<>();
+		gameList.add(gameScene);
+		
+		GameSaver gameSaver = new GameSaver("TestGameRIP");
+		gameSaver.gameAuthorToXML(gameList);
+		
+		GameLoader gameLoader = new GameLoader("TestGameRIP");
+		GameScene pls = gameLoader.getGameScenes().get(0);
+		System.out.println(pls.getMyElements().get(0).getBehaviors());
+		
+		
+		
 	}
 
 }

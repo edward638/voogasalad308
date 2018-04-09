@@ -5,6 +5,7 @@ public class Game {
 	private String gameName;
 	private String gameDescription;
 	private String gameImage;
+	private SceneManager mySceneManager;
 	
 	public Game() {
 		
@@ -32,5 +33,18 @@ public class Game {
 	
 	public String getGameImage() {
 		return gameImage;
+	}
+	
+	//makes a game object with the given property
+	public GameObject makeGameObject(Behavior basic) { 
+		GameObject gameObject = new GameObject(basic);
+		return gameObject;
+	}
+	
+	//removes a game object from placedObjects
+	public void removeGameObject(GameScene currScene, GameObject gameObject) {
+		if(placedObjects.containsKey(currScene)) {
+			placedObjects.get(currScene).remove(gameObject);
+		}
 	}
 }

@@ -11,7 +11,6 @@ public class GameScene {
 	private String myName;
 	private Image myBackground;
 	private List<GameObject> myObjects;
-	//have some kind of index that tells what order the levels play in
 
 	public GameScene(String name) {
 		myName = name;

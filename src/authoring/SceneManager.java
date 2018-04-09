@@ -1,21 +1,19 @@
 package authoring;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SceneManager {
 	
 	private GameScene currentScene;
-	private Set<GameScene> myLevels;
+	private List<GameScene> myLevels;
 
 	public SceneManager() {
-		myLevels = new HashSet<>();
+		myLevels = new ArrayList<>();
 	}
 	
-	public GameScene makeScene() {
-		int level = myLevels.size() + 1;
-		String currLevel = "level" + level;
-		GameScene newLevel = new GameScene(currLevel);
+	public GameScene makeScene(String name, int level) {
+		GameScene newLevel = new GameScene(name);
 		myLevels.add(newLevel);
 		return newLevel;
 	}
@@ -32,7 +30,7 @@ public class SceneManager {
 		myLevels.remove(toRemove);
 	}
 	
-	public Set<GameScene> getScenes(){
+	public List<GameScene> getScenes(){
 		return myLevels;
 	}
 	

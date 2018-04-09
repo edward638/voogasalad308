@@ -1,5 +1,6 @@
 package engine;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -7,19 +8,22 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import engine.behaviors.MandatoryBehavior;
+import engine.actions.Action;
 import engine.behaviors.Behavior;
-import engine.eventresponses.EventResponse;
+import engine.behaviors.MandatoryBehavior;
 import engine.events.elementevents.ElementEvent;
+import engine.events.gameevents.GameEvent;
 import engine.exceptions.TooManyBehaviorsException;
 
 public class GameElement {
 	private Set<Behavior> behaviors;
-	private Set<EventResponse> responses;
-
+	private EventResponder responder;
+	private List<GameEvent> returnedGameEvents;
+	
 	public GameElement() {
 		behaviors = new HashSet<>();
-		responses = new HashSet<>();
+		responder = new EventResponder(this);
+		returnedGameEvents = new ArrayList<>();
 	}
 	
 	/*
@@ -38,7 +42,7 @@ public class GameElement {
 	}
 	
 	/*
-	 * Get the behavior object corresponding to the 
+	 * Get the behavior object corresponding to the class type specified
 	 */
 	public Behavior getBehavior (Class<?> behavior_type) {
 		try {
@@ -56,19 +60,28 @@ public class GameElement {
 	/*
 	 * Adds the ability for this game element to respond to an ElementEvent in a certain way
 	 */
-	public void addEventResponse(EventResponse response) {
-		responses.add(response);
+	public void addEventResponse(ElementEvent e, Action a) {
+		responder.addResponse(e, a);
 	}
 	
 	/*
 	 * Tells element to respond to an event
 	 */
-	public void processEvent(ElementEvent event) {
-		responses.stream()
-				.filter(resp -> resp.getEventRespondingToType() == event.getClass())
-				.forEach(response -> response.execute(event, this));
+	public List<GameEvent> processEvent(ElementEvent event) {
+		responder.respondTo(event);
+		List<GameEvent> returnableEvents = new ArrayList<>(returnedGameEvents);
+		returnedGameEvents = new ArrayList<>();
+		return returnableEvents;
 	}
 	
+	/*
+	 * Allows behaviors to add GameEvent objects to this GameElement that will 
+	 * be returned at the completion of processEvent
+	 */
+	
+	public void addGameEvent(GameEvent gameevent) {
+		returnedGameEvents.add(gameevent);
+	}
 	/*
 	 * Defines the method we will use to identify this game element. Should be done according the 
 	 * BasicGameElement behavior since every element in the game will implement that

@@ -1,15 +1,19 @@
 package engine.eventresponses;
 
 import engine.GameElement;
-import engine.behaviors.Movable;
+import engine.behaviors.Killable;
 import engine.events.elementevents.ElementEvent;
 import engine.events.elementevents.TimeEvent;
 import engine.events.gameevents.EmptyGameEvent;
 import engine.events.gameevents.GameEvent;
+import engine.events.gameevents.RemoveGameElementEvent;
 
-public class BasicTimeResponse extends EventResponse {
-	
-	public BasicTimeResponse() {
+/**
+ * @author Gouttham Allows a GameElement to Decay over time.
+ *
+ */
+public class BasicDecayTimeResponse extends EventResponse{
+	public BasicDecayTimeResponse() {
 		super(TimeEvent.class);
 	}
 
@@ -19,9 +23,10 @@ public class BasicTimeResponse extends EventResponse {
 			return new EmptyGameEvent();
 		}
 		TimeEvent te = (TimeEvent) event;
-		Movable b = (Movable) element.getBehavior(Movable.class);
-		b.move(te.getTime());
+		Killable b = (Killable) element.getBehavior(Killable.class);
+		if (b.decayHealth(te.getTime())) {
+			return new RemoveGameElementEvent(element);
+		}
 		return new EmptyGameEvent();
 	}
-
 }

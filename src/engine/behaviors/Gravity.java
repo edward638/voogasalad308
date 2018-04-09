@@ -5,7 +5,7 @@ import engine.GameElement;
 
 /**
  * @author Gouttham 
- * The Game Elements which inherit this property have the ability to inherit event responses that allow it to respond to gravity. 
+ * The Game Elements which acquires this property have the ability to inherit event responses that allow it to respond to gravity. 
  *
  */
 public class Gravity extends Behavior{

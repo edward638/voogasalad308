@@ -2,20 +2,20 @@ package authoring;
 
 public class GameManager {
 
-	private ObjectManager objects;
+	private ElementManager objects;
 	private SceneManager scenes;
 	
 	public GameManager() {
-		objects = new ObjectManager();
+		objects = new ElementManager();
 		scenes = new SceneManager();
 	}
 	
-	public GameManager(ObjectManager allObjects, SceneManager allScenes) {
+	public GameManager(ElementManager allObjects, SceneManager allScenes) {
 		objects = allObjects;
 		scenes = allScenes;
 	}
 	
-	public ObjectManager getObjectManager() {
+	public ElementManager getObjectManager() {
 		return objects;
 	}
 	
@@ -23,11 +23,11 @@ public class GameManager {
 		return scenes;
 	}
 	
-	public void placeGameObject(GameObject toPlace) {
+	public void placeGameObject(GameElement toPlace) {
 		objects.placeGameObject(scenes.getCurrentScene(), toPlace);
 	}
 	
-	public void removeGameObject(GameObject toRemove) {
+	public void removeGameObject(GameElement toRemove) {
 		objects.removeGameObject(scenes.getCurrentScene(), toRemove);
 	}
 }

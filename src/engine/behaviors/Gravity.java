@@ -28,10 +28,5 @@ public class Gravity extends Behavior{
 	public void reverseGravity(Double time) {
 		b.setYVelocity(b.getYVelocity()+(GRAVITATIONAL_FORCE*time));
 	}
-	
-	
-	
-	
-	
-	
+
 }

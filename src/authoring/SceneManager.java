@@ -9,12 +9,13 @@ public class SceneManager {
 	private Set<GameScene> myLevels;
 
 	public SceneManager() {
-		currentScene = new GameScene();
 		myLevels = new HashSet<>();
 	}
 	
 	public GameScene makeScene() {
-		GameScene newLevel = new GameScene();
+		int level = myLevels.size() + 1;
+		String currLevel = "level" + level;
+		GameScene newLevel = new GameScene(currLevel);
 		myLevels.add(newLevel);
 		return newLevel;
 	}

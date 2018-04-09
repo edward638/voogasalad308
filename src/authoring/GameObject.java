@@ -13,19 +13,14 @@ public class GameObject {
 		myEvents = new HashSet<>();
 	}
 	
-	//each game object will have properties that describe how it behaves. 
+	//each game object will have behaviors that describe how it behaves. 
 	public void addBehavior(Behavior behaviorToAdd) {
 		myBehaviors.add(behaviorToAdd);
 	}
 	
-	//the user can remove a property after assigning it
+	//the user can remove a behavior after assigning it
 	public void removeBehavior(Behavior behaviorToRemove) {
 		myBehaviors.remove(behaviorToRemove);
-	}
-	
-	//returns the list of all properties associated with the object
-	public Set<Behavior> getBehaviors() {
-		return myBehaviors;
 	}
 	
 	public void addEvent(Event toAdd) {
@@ -36,6 +31,11 @@ public class GameObject {
 		if(myEvents.contains(toDelete)) {
 			myEvents.remove(toDelete);
 		}
+	}
+	
+	//returns the list of all behaviors associated with the object
+	public Set<Behavior> getBehaviors() {
+		return myBehaviors;
 	}
 	
 	public Behavior getBehavior(String behavior) {
@@ -51,4 +51,6 @@ public class GameObject {
 		}
 		return new Behavior();
 	}
+	
+	
 }

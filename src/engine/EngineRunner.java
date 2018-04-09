@@ -20,10 +20,19 @@ import javafx.util.Duration;
 public class EngineRunner {
     private Timeline animation;
     private Group root;
-    private GameState gameState = GameReader.initializeGameState();
-	public final int FRAMES_PER_SECOND = 60;
-	EventManager eventManager;
+    private GameState gameState;
+    private DisplayState displayState;
+    private EventManager eventManager;
+    
+	public static final int FRAMES_PER_SECOND = 60;
+	
     //starts animation
+	
+	public EngineRunner() {
+		gameState = GameReader.initializeGameState();
+		displayState = new DisplayState();
+		eventManager = new EventManager();
+	}
 	
     public void startAnimation() {
     	animation = new Timeline();
@@ -56,6 +65,7 @@ public class EngineRunner {
 		double gameSteps = elapsedTime*gameState.getGameSpeed();
 		gameState.incrementgameTime(gameSteps);
     	eventManager.processInputEvent(new TimeEvent(gameSteps), gameState);
+    	displayState.updateImageElements();
     }
 	
 	public List<ElementEvent> handleKeyInput(KeyCode code) {

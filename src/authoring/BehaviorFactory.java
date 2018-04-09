@@ -20,7 +20,6 @@ public class BehaviorFactory {
 			Class<?> clazz = Class.forName(BEHAVIORS_LOCATION + className);
 			Set<Property> properties = makeProperties(clazz);
 			return new Behavior(className, properties);
-
 		} catch (ClassNotFoundException e) {
 			new Error("Invalid Behavior");
 			e.printStackTrace();

@@ -35,5 +35,13 @@ public class GameScene {
 	public List<GameObject> getMyElements(){
 		return myObjects;
 	}
+
+	public String getName() {
+		return myName;
+	}
+
+	public void setName(String name) {
+		myName = name;
+	}
 	
 }

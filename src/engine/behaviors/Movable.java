@@ -57,6 +57,34 @@ public class Movable extends Behavior{
 		}
 	}
 	
+	public void setXVelocity (Double xv) {
+		if (isValidVelocity(xv)) {
+			Double tempvelocity = getYVelocity() + xv;
+			setDirection(Arrays.asList(xv/tempvelocity, getYVelocity()/xv));
+			velocity = tempvelocity;
+		} else {
+			throw new IllegalArgumentException("Illegal Velocity for " + getParent().getIdentifier() + ": " + xv);
+		}
+	}
+	
+	public void setYVelocity (Double yv) {
+		if (isValidVelocity(yv)) {
+			Double tempvelocity = getXVelocity() + yv;
+			setDirection(Arrays.asList(yv/tempvelocity, getXVelocity()/yv));
+			velocity = tempvelocity;
+		} else {
+			throw new IllegalArgumentException("Illegal Velocity for " + getParent().getIdentifier() + ": " + yv);
+		}
+	}
+	
+	public double getXVelocity () {
+		return velocity * direction.get(X_LIST_POS);
+	}
+	
+	public double getYVelocity () {
+		return velocity * direction.get(Y_LIST_POS);
+	}
+	
 	public Double getVelocity () {
 		return velocity;
 	}

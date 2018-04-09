@@ -39,6 +39,18 @@ public class Behavior {
 	}
 	
 	/*
+	 * returns all the properties
+	 */
+	public Property getProperty(String propName)  {
+		for(Property p : myProperties) {
+			if(p.getName() == propName) {
+				return p;
+			}
+		}
+		return null;
+	}
+	
+	/*
 	 * returns the name of the Behavior
 	 */
 	public String getName() {

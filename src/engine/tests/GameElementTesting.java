@@ -7,7 +7,7 @@ import engine.behaviors.BasicGameElement;
 import engine.behaviors.Behavior;
 import engine.behaviors.Movable;
 import engine.eventresponses.BasicTimeResponse;
-import engine.events.TimeEvent;
+import engine.events.elementevents.TimeEvent;
 
 public class GameElementTesting {
 	

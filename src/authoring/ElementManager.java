@@ -10,8 +10,8 @@ public class ElementManager {
 	private String gameName;
 	private String gameDescription;
 	private String gameImage;
-	private Map<GameScene, List<GameElement>> placedObjects;
-	private GameElement currentObject;
+	private Map<GameScene, List<GameObject>> placedObjects;
+	private GameObject currentObject;
 	
 	public ElementManager(String name) {
 		placedObjects = new HashMap<>();
@@ -42,37 +42,37 @@ public class ElementManager {
 		return gameImage;
 	}
 	
-	public void placeGameObject(GameScene currScene, GameElement toPlace) {
+	public void placeGameObject(GameScene currScene, GameObject toPlace) {
 		if (!placedObjects.containsKey(currScene)) {
-			List<GameElement> objects = new ArrayList<>();
+			List<GameObject> objects = new ArrayList<>();
 			placedObjects.put(currScene, objects);
 		}
 		placedObjects.get(currScene).add(toPlace);
 	}
 
 	//makes a game object with the given property
-	public GameElement makeGameObject(Behavior basic) { 
-		GameElement gameObject = new GameElement(basic);
+	public GameObject makeGameObject(Behavior basic) { 
+		GameObject gameObject = new GameObject(basic);
 		return gameObject;
 	}
 	
 	//removes a game object from placedObjects
-	public void removeGameObject(GameScene currScene, GameElement gameObject) {
+	public void removeGameObject(GameScene currScene, GameObject gameObject) {
 		if(placedObjects.containsKey(currScene)) {
 			placedObjects.get(currScene).remove(gameObject);
 		}
 	}
 
 	//returns the list of all game objects currently placed in the game
-	public Map<GameScene, List<GameElement>> getPlacedObjects() {
+	public Map<GameScene, List<GameObject>> getPlacedObjects() {
 		return placedObjects;
 	}
 	
-	public GameElement getCurrentObject() {
+	public GameObject getCurrentObject() {
 		return currentObject;
 	}
 	
-	public void setCurrentObject(GameElement current) {
+	public void setCurrentObject(GameObject current) {
 		currentObject = current;
 	}
 }

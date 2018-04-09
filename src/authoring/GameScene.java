@@ -1,5 +1,6 @@
 package authoring;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.scene.image.Image;
@@ -7,11 +8,14 @@ import javafx.scene.image.Image;
 public class GameScene {
 	
 	//has a list of objects
+	private String myName;
 	private Image myBackground;
-	private List<GameElement> myElements;
+	private List<GameObject> myObjects;
+	//have some kind of index that tells what order the levels play in
 
-	public GameScene() {
-		
+	public GameScene(String name) {
+		myName = name;
+		myObjects = new ArrayList<>();
 	}
 	
 	//gets image set as scene background
@@ -24,12 +28,12 @@ public class GameScene {
 		myBackground = backgroundImage;
 	}
 	
-	public void addElement(GameElement toAdd) {
-		myElements.add(toAdd);
+	public void addObject(GameObject toAdd) {
+		myObjects.add(toAdd);
 	}
 	
-	public List<GameElement> getMyElements(){
-		return myElements;
+	public List<GameObject> getMyElements(){
+		return myObjects;
 	}
 	
 }

@@ -3,38 +3,46 @@ package authoring;
 import java.util.HashSet;
 import java.util.Set;
 
-public class GameElement {
+public class GameObject {
 	
 	private String myName;
 	private Set<Behavior> myBehaviors;
 	private Set<Event> myEvents;
 	
 	//add basic behavior elements to the constructor
-	public GameElement(double x, double y, String image) {
+	
+	//do we need this?
+	public GameObject(double x, double y, String image) {
 		myBehaviors = new HashSet<>();
 		myEvents = new HashSet<>();
-		addBasicBehavior(x, y, image);
+//		addBasicBehavior(x, y, image);
 	}
 	
-	public GameElement(Behavior basic) {
+	public GameObject(Behavior basic) {
 		myBehaviors = new HashSet<>();
 		myEvents = new HashSet<>();
 		myBehaviors.add(basic);
 	}
 	
-	private void addBasicBehavior(double x, double y, String image) {
-		Property xLoc = new Property("xLoc", x);
-		Property yLoc = new Property("yLoc", y);
-		Property myImage = new Property("image", image);
-		Set<Property> basicProps = new HashSet<>();
-		basicProps.add(xLoc); 
-		basicProps.add(yLoc); 
-		basicProps.add(myImage); 
-		Behavior basic = new Behavior("Basic", basicProps);
-		myBehaviors.add(basic);
+	public GameObject() {
+		myBehaviors = new HashSet<>();
+		myEvents = new HashSet<>();
 	}
 	
-	public GameElement(GameElement toCopy) {
+//	BehaviorFactory should do this
+//	private void addBasicBehavior(Double x, Double y, String image) {
+//		Property xLoc = new Property("xLoc", x.getClass());
+//		Property yLoc = new Property("yLoc", y.getClass());
+//		Property myImage = new Property("image", image);
+//		Set<Property> basicProps = new HashSet<>();
+//		basicProps.add(xLoc); 
+//		basicProps.add(yLoc); 
+//		basicProps.add(myImage); 
+//		Behavior basic = new Behavior("Basic", basicProps);
+//		myBehaviors.add(basic);
+//	}
+	
+	public GameObject(GameObject toCopy) {
 		myBehaviors = toCopy.getBehaviors();
 		myEvents = toCopy.getEvents();
 	}

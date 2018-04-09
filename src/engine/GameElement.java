@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import engine.behaviors.BasicGameElement;
 import engine.behaviors.Behavior;
 import engine.eventresponses.EventResponse;
-import engine.events.ElementEvent;
+import engine.events.elementevents.ElementEvent;
 import engine.exceptions.TooManyBehaviorsException;
 
 public class GameElement {

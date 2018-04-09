@@ -11,16 +11,14 @@ class AuthoringTest {
 	
 	@Test
 	void testGameObjectAddBehavior() {
-		GameElement go = new GameElement();
-		go.addBehavior(new Behavior());
-		assertNotEquals(0, go.getBehaviors().size());
+		GameElement go = new GameElement(new Behavior());
+		assertEquals(1, go.getBehaviors().size());
 	}
 	
 	@Test
 	void testGameObjectCopy() {
-		GameElement go = new GameElement();
 		Behavior behave = new Behavior("Moveable", new HashSet<Property>());
-		go.addBehavior(behave);
+		GameElement go = new GameElement(behave);
 		GameElement goCopy = new GameElement(go);
 		assertEquals("Moveable", goCopy.getBehavior("Moveable").getName());
 	}

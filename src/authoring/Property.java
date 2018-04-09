@@ -13,12 +13,12 @@ public class Property {
 	
 	//sets the value of the property
 	public void setValue(Object value) {
-		if (value instanceof myValueType) {
+//		if (value instanceof myValueType) {
 			myValue = value;
-		}
-		else { 
-			new Error("value entered is not the correct type");
-		}
+//		}
+//		else { 
+//			new Error("value entered is not the correct type");
+//		}
 	}
 	
 	//returns the value of the property

@@ -17,8 +17,6 @@ public class ElementManager {
 	
 	public ElementManager(String name) {
 		placedObjects = new HashMap<>();
-		objectTemplates = new HashSet<>();
-		currentObject = new GameElement();
 		gameName = name;
 	}
 	
@@ -46,17 +44,6 @@ public class ElementManager {
 		return gameImage;
 	}
 	
-	//makes a game object with no properties
-	public GameElement makeObjectTemplate() {
-		GameElement gameObject = new GameElement();
-		return gameObject;
-	}
-	
-	public GameElement saveAsTemplate(GameElement o) {
-		objectTemplates.add(o);
-		return o;
-	}
-	
 	public void placeGameObject(GameScene currScene, GameElement toPlace) {
 		if (!placedObjects.containsKey(currScene)) {
 			List<GameElement> objects = new ArrayList<>();
@@ -66,9 +53,8 @@ public class ElementManager {
 	}
 
 	//makes a game object with the given property
-	public GameElement makeGameObject(Behavior toAdd) { 
-		GameElement gameObject = new GameElement();
-		gameObject.addBehavior(toAdd);
+	public GameElement makeGameObject(Behavior basic) { 
+		GameElement gameObject = new GameElement(basic);
 		return gameObject;
 	}
 	
@@ -82,11 +68,6 @@ public class ElementManager {
 	//returns the list of all game objects currently placed in the game
 	public Map<GameScene, List<GameElement>> getPlacedObjects() {
 		return placedObjects;
-	}
-
-	//returns the list of all game object "templates" available to use
-	public Set<GameElement> getObjectTemplates() {
-		return objectTemplates;
 	}
 	
 	public GameElement getCurrentObject() {

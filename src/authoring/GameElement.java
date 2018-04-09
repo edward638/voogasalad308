@@ -5,25 +5,33 @@ import java.util.Set;
 
 public class GameElement {
 	
+	private String myName;
 	private Set<Behavior> myBehaviors;
 	private Set<Event> myEvents;
 	
 	//add basic behavior elements to the constructor
-	public GameElement(int x, int y, String image) {
+	public GameElement(double x, double y, String image) {
 		myBehaviors = new HashSet<>();
 		myEvents = new HashSet<>();
 		addBasicBehavior(x, y, image);
 	}
 	
-	private void addBasicBehavior(int x, int y, String image) {
+	public GameElement(Behavior basic) {
+		myBehaviors = new HashSet<>();
+		myEvents = new HashSet<>();
+		myBehaviors.add(basic);
+	}
+	
+	private void addBasicBehavior(double x, double y, String image) {
 		Property xLoc = new Property("xLoc", x);
 		Property yLoc = new Property("yLoc", y);
-		Property image = new Property("image", image);
-		List<Property> basicProps = new ArrayList<>();
+		Property myImage = new Property("image", image);
+		Set<Property> basicProps = new HashSet<>();
 		basicProps.add(xLoc); 
 		basicProps.add(yLoc); 
-		basicProps.add(image); 
-		Behavior basic = new Behavior(basicProps);
+		basicProps.add(myImage); 
+		Behavior basic = new Behavior("Basic", basicProps);
+		myBehaviors.add(basic);
 	}
 	
 	public GameElement(GameElement toCopy) {
@@ -51,6 +59,13 @@ public class GameElement {
 		}
 	}
 	
+	public void setName(String name) {
+		myName = name;
+	}
+	
+	public String getName() {
+		return myName;
+	}
 
 	public Set<Event> getEvents(){
 		return myEvents;

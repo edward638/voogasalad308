@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import engine.behaviors.BasicGameElement;
+import engine.behaviors.MandatoryBehavior;
 import engine.behaviors.Behavior;
 import engine.eventresponses.EventResponse;
 import engine.events.elementevents.ElementEvent;
@@ -74,8 +74,8 @@ public class GameElement {
 	 * BasicGameElement behavior since every element in the game will implement that
 	 */
 	public String getIdentifier() {
-		BasicGameElement el = (BasicGameElement) behaviors.stream()
-				.filter(b -> b.getClass() == BasicGameElement.class)
+		MandatoryBehavior el = (MandatoryBehavior) behaviors.stream()
+				.filter(b -> b.getClass() == MandatoryBehavior.class)
 				.collect(Collectors.toList()).get(0);
 		return el.getName();
 	}

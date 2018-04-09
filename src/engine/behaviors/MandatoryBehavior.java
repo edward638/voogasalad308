@@ -5,13 +5,13 @@ import java.util.List;
 
 import engine.GameElement;
 
-public class BasicGameElement extends Behavior{
+public class MandatoryBehavior extends Behavior{
 	
 	private Double xPos;
 	private Double yPos;
 	private String elementName;
 	
-	public BasicGameElement(GameElement ge, String name, Double startX, Double startY) {
+	public MandatoryBehavior(GameElement ge, String name, Double startX, Double startY) {
 		super(ge);
 		xPos = startX;
 		yPos = startY;

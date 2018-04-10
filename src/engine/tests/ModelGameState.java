@@ -39,7 +39,8 @@ public class ModelGameState {
 	
 	public GameElement getMario() {
 		GameElement mario = new GameElement();
-		mario.addBehavior(new MandatoryBehavior(mario, "Mario", 100.0, 100.0, new RectangleShape(20.0, 40.0)));
+		//Note: Image path untested
+		mario.addBehavior(new MandatoryBehavior(mario, "Mario", 300.0, 20.0, new RectangleShape(256.0, 256.0), "data/images/mario_1.jpg"));
 		List<Double> direction = new ArrayList<>(); direction.add(1.0); direction.add(0.0);
 ;		mario.addBehavior(new Movable(mario, 0.0, direction));
 		mario.addBehavior(new Gravity(mario));
@@ -70,7 +71,7 @@ public class ModelGameState {
 	
 	public GameElement getBlock(Double xpos, Double ypos) {
 		GameElement block = new GameElement();
-		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, new RectangleShape(20.0, 20.0)));
+		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, new RectangleShape(20.0, 20.0), "data/images/20pixbox.png"));
 		block.addEventResponse(new CollisionEvent(getMario(), block), (event, element) -> {
 			CollisionEvent ce = (CollisionEvent) event;
 			GameElement other = ce.getCollidedWith(element);

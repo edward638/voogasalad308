@@ -71,7 +71,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 		root.getChildren().add(highScores.getScores());
 
 		
-		buttonData = new ConcreteButtonData(stage, this, serializer);
+		buttonData = new ConcreteButtonData(stage, this, serializer, root);
 		
 		setupButtons();
 		buttonData.setHighScores(highScores);

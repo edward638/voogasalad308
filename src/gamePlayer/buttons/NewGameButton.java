@@ -29,13 +29,16 @@ public class NewGameButton extends Button {
 
 		this.setOnAction(event -> {
 			
-			Popup popup = new Popup();
-			popup.setX(40);
-	        popup.setY(55);
-	        popup.getContent().add(new GameSelector());
-			popup.show(buttonData.getStage());
+			GameSelector gs = new GameSelector();
 			
+			String fileString = "dummy-mario.pngasdfa";
+
 			
+			buttonData.playGame(fileString);
+
+			
+			buttonData.addToRoot(gs);
+
 			
 //			FileChooser fileChooser = new FileChooser();
 //			fileChooser.setTitle("CHOOSE GAME");
@@ -48,9 +51,7 @@ public class NewGameButton extends Button {
 //				fileString = fileName.getPath();
 //			}
 			
-			String fileString = "dummy-mario.pngasdfa";
 
-			buttonData.playGame(fileString);
 			
 		});
 

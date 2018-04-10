@@ -4,22 +4,26 @@ import Data.Serializer;
 import engine.GameState;
 import gamePlayer.GamePlayer;
 import gamePlayer.HighScores;
+import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.stage.Stage;
 
 public class ConcreteButtonData implements ButtonData{
 	private Stage stage;
 	private GamePlayer gamePlayer;
 	private Serializer serializer;
+	private Group root;
 
 	private HighScores highScores;
 	private String currentGameName;
 	private GameState gameState;
 	private String mostRecentFile;
 
-	public ConcreteButtonData(Stage stage, GamePlayer gamePlayer, Serializer serializer) {
+	public ConcreteButtonData(Stage stage, GamePlayer gamePlayer, Serializer serializer, Group root) {
 		this.stage = stage;
 		this.gamePlayer = gamePlayer;
 		this.serializer = serializer;
+		this.root = root;
 	}
 	
 	@Override
@@ -67,6 +71,10 @@ public class ConcreteButtonData implements ButtonData{
 	@Override
 	public String getMostRecentFile() {
 		return mostRecentFile;
+	}
+	@Override
+	public void addToRoot(Node node) {
+		root.getChildren().add(node);
 	}
 
 }

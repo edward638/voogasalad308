@@ -2,6 +2,7 @@ package gamePlayer.buttons;
 
 import Data.Serializer;
 import engine.GameState;
+import javafx.scene.Node;
 import javafx.stage.Stage;
 
 public interface ButtonData {
@@ -12,4 +13,5 @@ public interface ButtonData {
 	public String getCurrentGameName();
 	public GameState getGameState();
 	public void clearHighScores();
+	public void addToRoot(Node node);
 }

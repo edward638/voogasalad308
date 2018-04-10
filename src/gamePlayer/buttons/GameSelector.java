@@ -15,7 +15,8 @@ import javafx.scene.text.Text;
 public class GameSelector extends ScrollPane {
 
 	public GameSelector() {
-
+		this.setLayoutX(30);
+		this.setLayoutY(30);
 		this.setPrefSize(900, 590);
 		this.setHbarPolicy(ScrollBarPolicy.NEVER);
 		initializeGameSelections();

@@ -1,22 +1,14 @@
 package engine;
 
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
-import engine.eventresponses.EventResponse;
+import engine.behaviors.MandatoryBehavior;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.ElementEvent;
-import engine.events.elementevents.KeyInputEvent;
-import engine.events.elementevents.MouseInputEvent;
-import engine.events.elementevents.TimeEvent;
 import engine.events.gameevents.GameEvent;
-import javafx.geometry.Bounds;
-import javafx.geometry.Point2D;
-import javafx.scene.input.KeyCode;
 import javafx.scene.shape.Shape;
 
 public class EventManager {
@@ -58,13 +50,12 @@ public class EventManager {
 	public List<ElementEvent> getCollisionEvents(GameState gameState) {
 		List<ElementEvent> collisionEvents = new ArrayList<ElementEvent>();
 		for (int i = 0; i < gameState.getElements().size(); i++) {
-			BasicElementBehavior a = (BasicElementBehavior) gameState.getElements().get(i).getBehavior(BasicElementBehavior.class);
+			MandatoryBehavior a = (MandatoryBehavior) gameState.getElements().get(i).getBehavior(MandatoryBehavior.class);
 			
 			for (int j = i+1; j < gameState.getElements().size(); j++) {
-				BasicElementBehavior b = (BasicElementBehavior) gameState.getElements().get(j).getBehavior(BasicElementBehavior.class);
-				if (a.getShape().getBoundsInLocal.intersects(b.getShape().getBoundsInLocal)) {
-					//getCollisionDirection(a.getShape(), b.getShape());
-					
+				MandatoryBehavior b = (MandatoryBehavior) gameState.getElements().get(j).getBehavior(MandatoryBehavior.class);
+				if (a.getShape().getBoundsInLocal().intersects(b.getShape().getBoundsInLocal())) {
+					Shape intersect = Shape.intersect(a.getShape(), b.getShape());
 					collisionEvents.add(new CollisionEvent(gameState.getElements().get(i), gameState.getElements().get(j)));
 				}
 			}
@@ -86,7 +77,7 @@ public class EventManager {
 	}
 	
 	public GameState handleGameEvents(GameState gameState, List<GameEvent> gameEvents) {
-		gameEvents.stream().map(c-> c.execute(gameState));
+		gameEvents.stream().forEach(c-> c.execute(gameState));
 		return gameState;
 	}
 

@@ -6,7 +6,6 @@ public class MouseInputEvent extends ElementEvent {
 	
 	Point mouseLocation;
 	
-	
 	public MouseInputEvent(Point p) {
 		this.mouseLocation = p;
 	}
@@ -31,5 +30,15 @@ public class MouseInputEvent extends ElementEvent {
 	public String toString() {
 		return "Mouse Input Event: " + "xpos(" + getMouseX() + ") " + "ypos(" + getMouseY() + " ) location clicked";
 	}
+
+	@Override
+	public boolean matchesEvent(ElementEvent other) {
+		if (other instanceof MouseInputEvent) {
+			return (getMouseX() == ((MouseInputEvent)(other)).getMouseX() && 
+					getMouseY() == ((MouseInputEvent)(other)).getMouseY());
+		}
+		return false;
+	}
+	
 	
 }

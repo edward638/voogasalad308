@@ -28,7 +28,7 @@ public class Movable extends Behavior{
 	 * Moves the parent game element according to the time amount requested
 	 */
 	public void move(Double time) {
-		BasicGameElement bge = (BasicGameElement) getParent().getBehavior(BasicGameElement.class);
+		MandatoryBehavior bge = (MandatoryBehavior) getParent().getBehavior(MandatoryBehavior.class);
 		bge.setPosition(bge.getX() + velocity * time * direction.get(X_LIST_POS), bge.getY() + velocity * time * direction.get(Y_LIST_POS));
 	}
 	
@@ -55,6 +55,34 @@ public class Movable extends Behavior{
 		} else {
 			throw new IllegalArgumentException("Illegal Velocity for " + getParent().getIdentifier() + ": " + v);
 		}
+	}
+	
+	public void setXVelocity (Double xv) {
+		if (isValidVelocity(xv)) {
+			Double tempvelocity = getYVelocity() + xv;
+			setDirection(Arrays.asList(xv/tempvelocity, getYVelocity()/xv));
+			velocity = tempvelocity;
+		} else {
+			throw new IllegalArgumentException("Illegal Velocity for " + getParent().getIdentifier() + ": " + xv);
+		}
+	}
+	
+	public void setYVelocity (Double yv) {
+		if (isValidVelocity(yv)) {
+			Double tempvelocity = getXVelocity() + yv;
+			setDirection(Arrays.asList(yv/tempvelocity, getXVelocity()/yv));
+			velocity = tempvelocity;
+		} else {
+			throw new IllegalArgumentException("Illegal Velocity for " + getParent().getIdentifier() + ": " + yv);
+		}
+	}
+	
+	public double getXVelocity () {
+		return velocity * direction.get(X_LIST_POS);
+	}
+	
+	public double getYVelocity () {
+		return velocity * direction.get(Y_LIST_POS);
 	}
 	
 	public Double getVelocity () {

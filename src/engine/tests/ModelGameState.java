@@ -42,11 +42,11 @@ public class ModelGameState {
 		mario.addBehavior(new MandatoryBehavior(mario, "Mario", 100.0, 100.0, new RectangleShape(20.0, 40.0)));
 		List<Double> direction = new ArrayList<>(); direction.add(1.0); direction.add(0.0);
 ;		mario.addBehavior(new Movable(mario, 0.0, direction));
-		mario.addBehavior(new Gravity(mario));
+//		mario.addBehavior(new Gravity(mario));
 		
 		//Adding Time Responses
 		mario.addEventResponse(new TimeEvent(0.0), new TimeMovable());
-		mario.addEventResponse(new TimeEvent(0.0), new TimeGravity());
+//		mario.addEventResponse(new TimeEvent(0.0), new TimeGravity());
 		
 		// Response to up arrow key is to jump
 		mario.addEventResponse(new KeyInputEvent(KeyCode.UP), (event, element) -> {

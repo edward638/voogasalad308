@@ -9,7 +9,9 @@ import org.junit.jupiter.api.Test;
 
 import engine.EventManager2;
 import engine.GameState;
+import engine.events.elementevents.KeyInputEvent;
 import engine.events.elementevents.TimeEvent;
+import javafx.scene.input.KeyCode;
 
 class GameStateTesting {
 	
@@ -28,9 +30,17 @@ class GameStateTesting {
 		List<String> propertiesToPrint = Arrays.asList("elementName", "xPos", "yPos", "velocity", "direction");
 		state = new ModelGameState().getState();
 		manager = new EventManager2(state);
+		
 		printState(propertiesToPrint);
 		manager.processElementEvent(new TimeEvent(1.0));
 		printState(propertiesToPrint);
+		
+		manager.processElementEvent(new TimeEvent(1.0));
+		printState(propertiesToPrint);
+		
+		manager.processElementEvent(new KeyInputEvent(KeyCode.UP));
+		printState(propertiesToPrint);
+		
 		manager.processElementEvent(new TimeEvent(1.0));
 		printState(propertiesToPrint);
 		

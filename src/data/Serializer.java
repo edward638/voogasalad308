@@ -1,4 +1,4 @@
-package Data;
+package data;
 
 import authoring.GameObject;
 import authoring.GameScene;

@@ -2,7 +2,7 @@ package gamePlayer.buttons;
 
 import java.io.File;
 import java.nio.file.Paths;
-
+//
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -36,24 +36,24 @@ public class GameSelector extends ScrollPane {
 		String currentPath = Paths.get(".").toAbsolutePath().normalize().toString() + "/src/testGameFolder";
 		File directory = new File(currentPath);
 
-		File[] fList = directory.listFiles();
-		for (File file : fList) {
-			String gamePath = currentPath + "/" + file.getName();
-			File gameDirectory = new File(gamePath);
-			File[] gameList = gameDirectory.listFiles();
-			for (File gameFile : gameList) {
-				String path = gameFile.getName();
-				System.out.println(path); // this gets name for each file
-				String extension = "";
-				int i = path.lastIndexOf('.');
-				if (i > 0) {
-					extension = path.substring(i + 1);
-				}
-				//create pane in this loop
-				
-			}
-
-		}
+//		File[] fList = directory.listFiles();
+//		for (File file : fList) {
+//			String gamePath = currentPath + "/" + file.getName();
+//			File gameDirectory = new File(gamePath);
+//			File[] gameList = gameDirectory.listFiles();
+//			for (File gameFile : gameList) {
+//				String path = gameFile.getName();
+//				System.out.println(path); // this gets name for each file
+//				String extension = "";
+//				int i = path.lastIndexOf('.');
+//				if (i > 0) {
+//					extension = path.substring(i + 1);
+//				}
+//				//create pane in this loop
+//				
+//			}
+//
+//		}
 
 		Text t = new Text("1412412412");
 		t.setY(12);

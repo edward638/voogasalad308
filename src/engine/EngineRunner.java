@@ -31,6 +31,11 @@ public class EngineRunner {
 	
     //starts animation
 	
+	/**
+	 * Create a new engine runner, which is used to run the engine for a certain game.
+	 * 
+	 * @param gameName 	Name of the game to run
+	 */
 	public EngineRunner(String gameName) {
 		gameState = GameReader.initializeGameState();
 		displayState = new DisplayState();
@@ -48,6 +53,11 @@ public class EngineRunner {
 				.collect(Collectors.toList());
 	}
 	
+	/** Translate an authoring GameObject to an engine GameElement
+	 * 
+	 * @param object 	Authoring GameObject to be translated
+	 * @return			GameElement representing the translated GameObject
+	 */
 	private GameElement toGameElement(GameObject object) {
 		GameElement element = new GameElement();
 		object.getBehaviors().stream().map(b -> element.addBehavior(b));
@@ -81,9 +91,11 @@ public class EngineRunner {
 
 	private void timeStep (double elapsedTime) {
 		double gameSteps = elapsedTime*gameState.getGameSpeed();
-		gameState.incrementgameTime(gameSteps);
+		gameState.incrementGameTime(gameSteps);
     	eventManager.processInputEvent(new TimeEvent(gameSteps), gameState);
     	displayState.updateImageElements();
+    	engine.updateDisplay(displayState);
+    	
     }
 	
 	public List<ElementEvent> handleKeyInput(KeyCode code) {

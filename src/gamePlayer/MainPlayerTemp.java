@@ -1,4 +1,4 @@
-package GamePlayer;
+package gamePlayer;
 
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -42,7 +42,6 @@ public class MainPlayerTemp extends Application {
 	private void initialize() {
 
 		GamePlayer gamePlayer = new ConcreteGamePlayer(myStage);
-
 
 		setStage();
 

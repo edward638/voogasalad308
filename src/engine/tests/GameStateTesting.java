@@ -27,7 +27,7 @@ class GameStateTesting {
 	
 	@Test
 	public void testMove() {
-		List<String> propertiesToPrint = Arrays.asList("elementName", "xPos", "yPos", "velocity", "direction");
+		List<String> propertiesToPrint = Arrays.asList("elementName", "xPos", "yPos", "xVel", "yVel");
 		state = new ModelGameState().getState();
 		manager = new EventManager2(state);
 		
@@ -41,7 +41,10 @@ class GameStateTesting {
 		manager.processElementEvent(new KeyInputEvent(KeyCode.UP));
 		printState(propertiesToPrint);
 		
-		manager.processElementEvent(new TimeEvent(1.0));
+		manager.processElementEvent(new TimeEvent(.1));
+		printState(propertiesToPrint);
+		
+		manager.processElementEvent(new TimeEvent(.1));
 		printState(propertiesToPrint);
 		
 	}

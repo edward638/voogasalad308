@@ -11,8 +11,6 @@ public class Movable extends Behavior{
 	public static final int X_LIST_POS = 0; // Position of X in direction 
 	public static final int Y_LIST_POS = 1; // Position of Y in direction
 	
-//	private Double velocity;
-//	private List<Double> direction;
 	private Double xVel;
 	private Double yVel;
 	
@@ -21,7 +19,11 @@ public class Movable extends Behavior{
 		xVel = 0.0;
 		yVel = 1.0;
 		setVelocity(vel);
-		setDirection(dir);
+		if (dir.stream().reduce(0.0, (a, b) -> a + b) != 0) {
+			setDirection(dir);
+		} else {
+			throw new IllegalArgumentException("Invalid Direction for " + ge.getIdentifier() + ": " + dir);
+		}
 	}
 	
 	public Movable (GameElement ge, Double xv, Double yv) {

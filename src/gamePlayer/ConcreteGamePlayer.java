@@ -132,7 +132,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 		gameDisplay.setLayoutY(30);
 		gameDisplay.setPrefSize(900, 590);
 
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream("images/dummy-mario.png"));
+		Image image = new Image(getClass().getClassLoader().getResourceAsStream("testGameFolder/testMario/dummy-mario.png"));
 		ImageView imageView = new ImageView();
 		imageView.setImage(image);
 		imageView.setFitHeight(590);

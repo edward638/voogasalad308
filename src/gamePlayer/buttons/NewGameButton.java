@@ -5,7 +5,10 @@ import java.nio.file.Paths;
 
 import gamePlayer.ConcreteGamePlayer;
 import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 public class NewGameButton extends Button {
@@ -25,16 +28,27 @@ public class NewGameButton extends Button {
 	private void setAction() {
 
 		this.setOnAction(event -> {
-			FileChooser fileChooser = new FileChooser();
-			fileChooser.setTitle("CHOOSE GAME");
-			String currentPath = Paths.get(".").toAbsolutePath().normalize().toString() + "/data";
-			fileChooser.setInitialDirectory(new File(currentPath));
+			
+			Popup popup = new Popup();
+			popup.setX(40);
+	        popup.setY(55);
+	        popup.getContent().add(new GameSelector());
+			popup.show(buttonData.getStage());
+			
+			
+			
+//			FileChooser fileChooser = new FileChooser();
+//			fileChooser.setTitle("CHOOSE GAME");
+//			String currentPath = Paths.get(".").toAbsolutePath().normalize().toString() + "/data";
+//			fileChooser.setInitialDirectory(new File(currentPath));
 
-			File fileName = fileChooser.showOpenDialog(buttonData.getStage());
-			String fileString = "No File Selected";
-			if (fileName != null) {
-				fileString = fileName.getPath();
-			}
+//			File fileName = fileChooser.showOpenDialog(buttonData.getStage());
+//			String fileString = "No File Selected";
+//			if (fileName != null) {
+//				fileString = fileName.getPath();
+//			}
+			
+			String fileString = "dummy-mario.pngasdfa";
 
 			buttonData.playGame(fileString);
 			

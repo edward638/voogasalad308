@@ -56,6 +56,14 @@ public class GameElement {
 		}
 	}
 	
+	/*
+	 * Checks if this GameElement has a Behavior object of the requested type
+	 */
+	public boolean hasBehavior(Class<?> behavior_type) {
+		return behaviors.stream()
+			.filter(behavior -> behavior.getClass() == behavior_type)
+			.collect(Collectors.toList()).size() > 0;
+	}
 	
 	/*
 	 * Adds the ability for this game element to respond to an ElementEvent in a certain way

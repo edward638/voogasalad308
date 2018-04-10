@@ -40,4 +40,11 @@ public class CollisionEvent extends ElementEvent {
 		}
 		return false;
 	}
+	
+	public GameElement getCollidedWith(GameElement me) {
+		if (!e1.equals(me)) {
+			return e1;
+		}
+		return e2;
+	}
 }

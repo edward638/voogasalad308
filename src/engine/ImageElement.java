@@ -17,6 +17,8 @@ public class ImageElement extends ImageView {
 	public void updateState() {
 		Map<String, Object> properties = elementReference.reportProperties();
 		this.setX((double) properties.get("xpos"));
+		this.setY((double) properties.get("ypos"));
+		//this.setImage(value);
 	}
 	
 	public GameElement getReference() {

@@ -35,8 +35,8 @@ class GameStateTesting {
 		manager.processElementEvent(new TimeEvent(1.0));
 		printState(propertiesToPrint);
 		
-		manager.processElementEvent(new TimeEvent(1.0));
-		printState(propertiesToPrint);
+//		manager.processElementEvent(new TimeEvent(1.0));
+//		printState(propertiesToPrint);
 		
 		manager.processElementEvent(new KeyInputEvent(KeyCode.UP));
 		printState(propertiesToPrint);

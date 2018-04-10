@@ -59,9 +59,13 @@ public class Movable extends Behavior{
 	
 	public void setXVelocity (Double xv) {
 		if (isValidVelocity(xv)) {
-			Double tempvelocity = getYVelocity() + xv;
-			setDirection(Arrays.asList(xv/tempvelocity, getYVelocity()/xv));
-			velocity = tempvelocity;
+			Double newxv = getXVelocity() + xv;
+			Double yv = getYVelocity();
+			setDirection(Arrays.asList(newxv, yv));
+			velocity = Math.sqrt(Math.pow(newxv, 2.0) + Math.pow(yv, 2.0));
+//			Double tempvelocity = getYVelocity() + xv;
+//			setDirection(Arrays.asList(xv/tempvelocity, getYVelocity()/xv));
+//			velocity = tempvelocity;
 		} else {
 			throw new IllegalArgumentException("Illegal Velocity for " + getParent().getIdentifier() + ": " + xv);
 		}
@@ -69,9 +73,13 @@ public class Movable extends Behavior{
 	
 	public void setYVelocity (Double yv) {
 		if (isValidVelocity(yv)) {
-			Double tempvelocity = getXVelocity() + yv;
-			setDirection(Arrays.asList(yv/tempvelocity, getXVelocity()/yv));
-			velocity = tempvelocity;
+			Double xv = getXVelocity();
+			Double newyv = getYVelocity() + yv;
+			setDirection(Arrays.asList(xv, newyv));
+			velocity = Math.sqrt(Math.pow(xv, 2.0) + Math.pow(newyv, 2.0));
+//			Double tempvelocity = getXVelocity() + yv;
+//			setDirection(Arrays.asList(yv/tempvelocity, getXVelocity()/yv));
+//			velocity = tempvelocity;
 		} else {
 			throw new IllegalArgumentException("Illegal Velocity for " + getParent().getIdentifier() + ": " + yv);
 		}

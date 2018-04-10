@@ -26,6 +26,7 @@ public class EngineRunner {
     private GameState gameState;
     private DisplayState displayState;
     private EventManager eventManager;
+    private int level = 0;
     
 	public static final int FRAMES_PER_SECOND = 60;
 	
@@ -37,12 +38,10 @@ public class EngineRunner {
 	 * @param gameName 	Name of the game to run
 	 */
 	public EngineRunner(String gameName) {
-		gameState = GameReader.initializeGameState();
-		displayState = new DisplayState();
-		eventManager = new EventManager();
 		GameLoader loader = new GameLoader(gameName);
 		initializeScene(loader);
-		
+		displayState = new DisplayState();
+		eventManager = new EventManager();
 	}
 	
 	private void initializeScene(GameLoader loader) {

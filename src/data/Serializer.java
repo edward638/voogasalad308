@@ -11,8 +11,7 @@ import java.util.Map;
 
 public class Serializer {
 
-    private static final String LEVEL = "level";
-    private static final String GAMEOBJECT = "gameobject";
+    private static final String SCENE = "scene";
     private XStream xstream;
 
     public Serializer() {
@@ -45,12 +44,10 @@ public class Serializer {
         String topLevelGameDestination = fileName;
         new File(topLevelGameDestination).mkdirs();
 
-        int x = 1;
         for (GameScene aGameSceneList : gameSceneList) {
-            String levelGameDestination = topLevelGameDestination + "/" + LEVEL + x;
+            String levelGameDestination = topLevelGameDestination + "/" + SCENE + gameSceneList.indexOf(aGameSceneList);
             String xmlString = xstream.toXML(aGameSceneList);
             stringToDom(xmlString, levelGameDestination + ".xml");
-            x++;
         }
     }
 

@@ -2,6 +2,7 @@ package data;
 
 import authoring.GameObject;
 import authoring.GameScene;
+import data.propertiesFiles.ResourceBundleManager;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -16,12 +17,10 @@ import java.util.Scanner;
 public class GameSaver {
 
     private Serializer serializer;
-    private static final String baseLocation = "./data/gamedata/games/";
+    private String baseLocation = ResourceBundleManager.getPath("BASELOCATION");
     private String gameLocation;
     private String gameDescriptionLocation;
-    private String gameLevelLocation;
-    private String gameLevelSceneLocation;
-    private String gameLevelObjectsLocation;
+    private String gameScenesLocation;
     private String gameImagesLocation;
 
     /**
@@ -29,29 +28,17 @@ public class GameSaver {
      * @param gameName desired name of game root file
      */
     public GameSaver(String gameName){
-        gameLocation = baseLocation + gameName + "/";
-        gameDescriptionLocation = gameLocation + "description" + "/";
-        gameLevelLocation = gameLocation + "levels" + "/";
-        gameLevelSceneLocation = gameLevelLocation + "scene" + "/";
-        gameLevelObjectsLocation = gameLevelLocation + "objects" + "/";
-        gameImagesLocation = gameLocation + "images" + "/";
-        serializer = new Serializer();
+    	 gameLocation = baseLocation + gameName + "/";
+         gameDescriptionLocation = gameLocation + ResourceBundleManager.getPath("DESCRIPTION");
+         gameScenesLocation = gameLocation + ResourceBundleManager.getPath("SCENES");
+         gameImagesLocation = gameLocation + ResourceBundleManager.getPath("IMAGES");
+         serializer = new Serializer();
 
         if (! new File(gameLocation).exists()){
-            makeDirectories();
+            System.out.println("Please initialize game first."); // TODO: throw an error here that says game isn't initialized!
         }
-    }
-
-    /**
-     * makes directories for a game
-     */
-    private void makeDirectories(){
-        new File(gameLocation).mkdirs();
-        new File(gameDescriptionLocation).mkdirs();
-        new File(gameLevelLocation).mkdirs();
-//        new File(gameLevelObjectsLocation).mkdirs();
-//        new File(gameLevelSceneLocation).mkdirs();
-        new File(gameImagesLocation).mkdirs();
+        
+        System.out.println(gameScenesLocation);
     }
 
     /**
@@ -61,16 +48,18 @@ public class GameSaver {
      * @param descriptionImage thumbnail image to represent game
      */
     public void addDescription(String name, String description, BufferedImage descriptionImage) throws FileNotFoundException {
-        try (PrintWriter out = new PrintWriter(gameDescriptionLocation + "name.txt")){
+        try (PrintWriter out = new PrintWriter(gameDescriptionLocation + ResourceBundleManager.getPath("NAME"))){
             out.println(name);
         }
-        try (PrintWriter out = new PrintWriter(gameDescriptionLocation + "description.txt")){
+        try (PrintWriter out = new PrintWriter(gameDescriptionLocation + ResourceBundleManager.getPath("DESCRIPTIONTEXT"))){
             out.println(description);
         }
-        try {
-            ImageIO.write(descriptionImage, "jpg", new File(gameDescriptionLocation + "descriptionImage.jpg"));
-        } catch (IOException e) {
-            e.printStackTrace(); //TODO: remove this print stacktrace!
+        if (!(descriptionImage == null)) {
+	        try {
+	            ImageIO.write(descriptionImage, "jpg", new File(gameDescriptionLocation + ResourceBundleManager.getPath("DESCRIPTIONIMAGE")));
+	        } catch (IOException e) {
+	            e.printStackTrace(); //TODO: remove this print stacktrace!
+	        }
         }
 
     }
@@ -81,7 +70,7 @@ public class GameSaver {
      * @param objectMap map of gamescenes (levels) to game objects in that level
      */
     public void gameAuthorToXML(List<GameScene> gameSceneList) throws IOException {
-        serializer.gameAuthorToXML(gameLevelLocation, gameSceneList);
+        serializer.gameAuthorToXML(gameScenesLocation, gameSceneList);
     }
 
     /**

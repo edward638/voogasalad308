@@ -2,6 +2,7 @@ package data;
 
 import authoring.GameObject;
 import authoring.GameScene;
+import data.propertiesFiles.ResourceBundleManager;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -13,27 +14,24 @@ import java.util.Map;
 import java.util.Scanner;
 
 
-public class GameLoader {
+public class GameLoader implements DescriptionProvider {
 
     private Deserializer deserializer;
-    private static final String baseLocation = "./data/gamedata/games/";
+    private String baseLocation = ResourceBundleManager.getPath("BASELOCATION");
     private String gameLocation;
     private String gameDescriptionLocation;
-    private String gameLevelLocation;
-    private String gameLevelSceneLocation;
-    private String gameLevelObjectsLocation;
-    private String gameNameLocation;
+    private String gameScenesLocation;
+
 
     /**
      * GameLoader constructor
      * @param fileName name of games root file
      */
-    public GameLoader(String fileName){
+    public GameLoader(String gameName){
         deserializer = new Deserializer();
-        gameLocation = baseLocation + fileName + "/";
-        gameDescriptionLocation = gameLocation + "description" + "/" ;
-        gameNameLocation = gameDescriptionLocation + "name.txt";
-        gameLevelLocation = gameLocation + "levels" + "/";
+        gameLocation = baseLocation + gameName + "/";
+        gameDescriptionLocation = gameLocation + ResourceBundleManager.getPath("DESCRIPTION");
+        gameScenesLocation = gameLocation + ResourceBundleManager.getPath("SCENES");
     }
 
     /**
@@ -41,7 +39,7 @@ public class GameLoader {
      * @return name of game
      */
     public String getGameName(){
-        return retrieveStringFromTextFile(gameNameLocation);
+        return retrieveStringFromTextFile(gameDescriptionLocation + ResourceBundleManager.getPath("DESCRIPTIONTEXT"));
     }
 
     /**
@@ -49,7 +47,7 @@ public class GameLoader {
      * @return description of game
      */
     public String getGameDescription(){
-        return retrieveStringFromTextFile(gameDescriptionLocation + "description.txt");
+        return retrieveStringFromTextFile(gameDescriptionLocation + ResourceBundleManager.getPath("DESCRIPTIONTEXT"));
     }
 
     /**
@@ -58,7 +56,7 @@ public class GameLoader {
      */
     public Image getDescriptionImage(){
         try {
-            return ImageIO.read(new File(gameDescriptionLocation + "descriptionImage.jpg"));
+            return ImageIO.read(new File(gameDescriptionLocation + ResourceBundleManager.getPath("DESCRIPTIONIMAGE")));
         } catch (IOException e) {
             e.printStackTrace(); //TODO: fix!
         }
@@ -70,7 +68,7 @@ public class GameLoader {
      * @return map
      */
     public List<GameScene> getGameScenes(){
-        return deserializer.getGameScenes(gameLevelLocation);
+        return deserializer.getGameScenes(gameScenesLocation);
     }
 
     /**

@@ -31,10 +31,12 @@ public class TestMakeGameScene {
 		ArrayList<GameScene> gameList = new ArrayList<>();
 		gameList.add(gameScene);
 		
-		GameSaver gameSaver = new GameSaver("TestGameRIP");
+		GameInitializer gameInitializer = new GameInitializer("Yolo");
+		GameSaver gameSaver = new GameSaver("Yolo");
+		gameSaver.addDescription("YOLOTHEGAME", "THIS IS A TEST GAME.", null);
 		gameSaver.gameAuthorToXML(gameList);
 		
-		GameLoader gameLoader = new GameLoader("TestGameRIP");
+		GameLoader gameLoader = new GameLoader("Yolo");
 		GameScene pls = gameLoader.getGameScenes().get(0);
 		System.out.println(pls.getMyElements().get(0).getBehaviors());
 		

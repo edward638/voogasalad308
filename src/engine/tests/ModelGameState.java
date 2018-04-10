@@ -24,13 +24,22 @@ public class ModelGameState {
 	
 	public GameState getState() {
 		state = new GameState();
+		System.out.println(getMario());
 		state.addGameElement(getMario());
+		state.addGameElement(getBlock(10.0, 20.0));
+		state.addGameElement(getBlock(30.0, 20.0));
+		state.addGameElement(getBlock(50.0, 20.0));
+		state.addGameElement(getBlock(70.0, 20.0));
+		state.addGameElement(getBlock(90.0, 20.0));
+		state.addGameElement(getBlock(110.0, 20.0));
+		state.addGameElement(getBlock(50.0, 80.0));
+		System.out.println(state.getElements());
 		return state;
 	}
 	
 	public GameElement getMario() {
 		GameElement mario = new GameElement();
-		mario.addBehavior(new MandatoryBehavior(mario, "Mario", 10.0, 10.0, new RectangleShape(20.0, 40.0)));
+		mario.addBehavior(new MandatoryBehavior(mario, "Mario", 100.0, 100.0, new RectangleShape(20.0, 40.0)));
 		List<Double> direction = new ArrayList<>(); direction.add(1.0); direction.add(0.0);
 ;		mario.addBehavior(new Movable(mario, 0.0, direction));
 		mario.addBehavior(new Gravity(mario));
@@ -38,6 +47,7 @@ public class ModelGameState {
 		//Adding Time Responses
 		mario.addEventResponse(new TimeEvent(0.0), new TimeMovable());
 		mario.addEventResponse(new TimeEvent(0.0), new TimeGravity());
+		
 		// Response to up arrow key is to jump
 		mario.addEventResponse(new KeyInputEvent(KeyCode.UP), (event, element) -> {
 			Movable mov = (Movable) element.getBehavior(Movable.class);
@@ -63,7 +73,11 @@ public class ModelGameState {
 		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, new RectangleShape(20.0, 20.0)));
 		block.addEventResponse(new CollisionEvent(getMario(), block), (event, element) -> {
 			CollisionEvent ce = (CollisionEvent) event;
-			event.
+			GameElement other = ce.getCollidedWith(element);
+			if (other.hasBehavior(Movable.class)) {
+				Movable mov = (Movable) other.getBehavior(Movable.class);
+				mov.setYVelocity(0.0);
+			}
 		});
 		return block;
 	}

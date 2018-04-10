@@ -2,6 +2,8 @@ package data;
 
 import authoring.GameObject;
 import authoring.GameScene;
+import engine.GameState;
+
 import com.thoughtworks.xstream.XStream;
 //
 import java.io.File;
@@ -12,6 +14,7 @@ import java.util.Map;
 public class Serializer {
 
     private static final String SCENE = "scene";
+    private static final String SAVE = "save";
     private XStream xstream;
 
     public Serializer() {
@@ -60,11 +63,6 @@ public class Serializer {
         fw.close();
     }
 
-//    void testGameAuthorToXML(String fileName, TestObject gameObjects) throws IOException {
-//        String test = xstream.toXML(gameObjects);
-//        stringToDom(test, fileName + "/test.xml");
-//    }
-
     /**
      * Converts game to XML. Used by game engine.
      *
@@ -74,6 +72,24 @@ public class Serializer {
     void gameEngineToXML(String fileName, List<Object> gameObjects) {
 
     }
+    
+    /**
+     * 
+     * @param fileName
+     * @param gameState
+     */
+    public void saveStateToXML(String fileName, GameState gameState) throws IOException {
+    	int x = 1;
+    	String topLevelGameDestination = fileName;
+    	String xmlString = xstream.toXML(gameState);
+    	String levelGameDestination = topLevelGameDestination + "/" + SAVE + x;
+        stringToDom(xmlString, levelGameDestination + ".xml");
+    }
+    
+//    private int checkNumberOfSaves() {
+//    	
+//    };
+    
 
     /**
      * Retrieves game information from an XML file specified by an inputted string

@@ -39,7 +39,7 @@ public class GameLoader implements DescriptionProvider {
      * @return name of game
      */
     public String getGameName(){
-        return retrieveStringFromTextFile(gameDescriptionLocation + ResourceBundleManager.getPath("DESCRIPTIONTEXT"));
+        return retrieveStringFromTextFile(gameDescriptionLocation + ResourceBundleManager.getPath("NAME"));
     }
 
     /**

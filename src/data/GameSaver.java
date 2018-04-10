@@ -3,6 +3,7 @@ package data;
 import authoring.GameObject;
 import authoring.GameScene;
 import data.propertiesFiles.ResourceBundleManager;
+import engine.GameState;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -22,6 +23,7 @@ public class GameSaver {
     private String gameDescriptionLocation;
     private String gameScenesLocation;
     private String gameImagesLocation;
+    private String gameSavesLocation;
 
     /**
      * GameSaver constructor
@@ -32,13 +34,15 @@ public class GameSaver {
          gameDescriptionLocation = gameLocation + ResourceBundleManager.getPath("DESCRIPTION");
          gameScenesLocation = gameLocation + ResourceBundleManager.getPath("SCENES");
          gameImagesLocation = gameLocation + ResourceBundleManager.getPath("IMAGES");
+         gameSavesLocation = gameLocation + ResourceBundleManager.getPath("SAVES");
+         
          serializer = new Serializer();
 
         if (! new File(gameLocation).exists()){
             System.out.println("Please initialize game first."); // TODO: throw an error here that says game isn't initialized!
         }
         
-        System.out.println(gameScenesLocation);
+//        System.out.println(gameScenesLocation);
     }
 
     /**
@@ -75,9 +79,10 @@ public class GameSaver {
 
     /**
      * Saves the game when the game is being played in game engine
+     * @throws IOException 
      */
-    public void saveGameState() {
-
+    public void saveGameState(GameState gameState) throws IOException {
+    	serializer.saveStateToXML(gameSavesLocation, gameState);
     }
 
 }

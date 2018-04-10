@@ -8,7 +8,7 @@ public class Game {
 	private SceneManager mySceneManager;
 	
 	public Game() {
-		
+		mySceneManager = new SceneManager();
 	}
 	
 	public void setGameName(String name) {
@@ -41,10 +41,4 @@ public class Game {
 		return gameObject;
 	}
 	
-	//removes a game object from placedObjects
-	public void removeGameObject(GameScene currScene, GameObject gameObject) {
-		if(placedObjects.containsKey(currScene)) {
-			placedObjects.get(currScene).remove(gameObject);
-		}
-	}
 }

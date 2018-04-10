@@ -58,7 +58,7 @@ public class Behavior {
 	}
 	
 	public String toString() {
-		return myName + ": " + myProperties.toString();
+		return " " + myName + ": " + myProperties.toString();
 	}
 	
 }

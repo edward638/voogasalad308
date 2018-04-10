@@ -2,6 +2,7 @@ package authoring.display;
 
 import java.util.ResourceBundle;
 
+import authoring.Game;
 import authoring.GameScene;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,8 +17,8 @@ public class LevelPanel extends AuthoringUIComponent {
 	
 	private VBox myVBox;
 
-	public LevelPanel(ResourceBundle resources) {
-		super(resources); //pass resources to super constructor
+	public LevelPanel(ResourceBundle resources, Game game) {
+		super(resources, game); //pass resources to super constructor
 		myVBox = new VBox();
 		myVBox.getChildren().addAll(makeLevelChooser(), makeObjectList());
 	}

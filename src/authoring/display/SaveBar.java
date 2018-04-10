@@ -2,6 +2,7 @@ package authoring.display;
 
 import java.util.ResourceBundle;
 
+import authoring.Game;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -12,8 +13,8 @@ public class SaveBar extends AuthoringUIComponent {
 	
 	private HBox myHBox;
 
-	public SaveBar(ResourceBundle resources) {
-		super(resources);
+	public SaveBar(ResourceBundle resources, Game game) {
+		super(resources, game);
 		myHBox = new HBox();
 		
 		myHBox.getChildren().addAll(makeNewGameButton(), makeLoadGameButton(), makeSaveGameButton());

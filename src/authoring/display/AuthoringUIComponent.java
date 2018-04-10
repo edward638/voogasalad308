@@ -3,16 +3,19 @@ package authoring.display;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import authoring.Game;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 
 public abstract class AuthoringUIComponent {
 	private ResourceBundle myResources;
+	private Game myGame;
 
 	
-	public AuthoringUIComponent(ResourceBundle resources) {
+	public AuthoringUIComponent(ResourceBundle resources, Game game) {
 		myResources = resources;
+		myGame = game;
 	}
 	
 	public Button makeButton (String property, EventHandler<ActionEvent> handler) {

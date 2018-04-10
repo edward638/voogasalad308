@@ -8,6 +8,7 @@ public class GameObject {
 	private String myName;
 	private Set<Behavior> myBehaviors;
 	private Set<Event> myEvents;
+	private BehaviorFactory myBehaviorFactory;
 	
 	//add basic behavior elements to the constructor
 	
@@ -98,5 +99,7 @@ public class GameObject {
 		return new Behavior();
 	}
 	
-	
+	public String toString() {
+		return myName;
+	}
 }

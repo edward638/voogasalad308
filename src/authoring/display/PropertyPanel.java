@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
+import authoring.Game;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
@@ -28,8 +29,8 @@ public class PropertyPanel extends AuthoringUIComponent {
 
 
 	//in AuthoringDisplay, don't forget to remove and re-add this to the root every time it changes
-	public PropertyPanel(ResourceBundle resources) {
-		super(resources);
+	public PropertyPanel(ResourceBundle resources, Game game) {
+		super(resources, game);
 		myScrollPane = new ScrollPane();
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Choose Object Image");

@@ -3,7 +3,7 @@ package authoring.tests;
 import java.util.HashSet;
 
 import authoring.Behavior;
-import authoring.GameElement;
+import authoring.GameObject;
 import authoring.Property;
 
 public class GameObjectTesting {
@@ -14,16 +14,11 @@ public class GameObjectTesting {
 	
 	public static void main(String[] args) {
 		Behavior b = new Behavior("Behavior!", new HashSet<Property>());
-<<<<<<< HEAD
-		Property prop0 = new Property("awesomeness", new Double(1000000));
-		Property prop1 = new Property("coolness", new Double(10));
-		GameElement go = new GameElement(b);
+		GameObject go = new GameObject(b);
 		System.out.println(go.getBehaviors());
-=======
 		Property prop0 = new Property("awesomeness",  Double.class);
 		Property prop1 = new Property("coolness", Double.class);
 		go.addBehavior(b);
->>>>>>> 724c3507de63e290948f2e57a4daa379f1151e3e
 		go.getBehavior("Behavior!").addProperty(prop0);
 		go.getBehavior("Behavior!").addProperty(prop1);
 		System.out.println(go.getBehaviors());

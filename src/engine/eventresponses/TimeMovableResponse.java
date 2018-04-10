@@ -7,9 +7,9 @@ import engine.events.elementevents.TimeEvent;
 import engine.events.gameevents.EmptyGameEvent;
 import engine.events.gameevents.GameEvent;
 
-public class BasicTimeResponse extends EventResponse {
+public class TimeMovableResponse extends EventResponse {
 	
-	public BasicTimeResponse() {
+	public TimeMovableResponse() {
 		super(TimeEvent.class);
 	}
 

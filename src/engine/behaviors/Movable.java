@@ -13,6 +13,8 @@ public class Movable extends Behavior{
 	
 	private Double velocity;
 	private List<Double> direction;
+	private Double xVel;
+	private Double yVel;
 	
 	public Movable(GameElement ge, Double vel, List<Double> dir) {
 		super(ge);
@@ -29,7 +31,7 @@ public class Movable extends Behavior{
 	 */
 	public void move(Double time) {
 		MandatoryBehavior bge = (MandatoryBehavior) getParent().getBehavior(MandatoryBehavior.class);
-		bge.setPosition(bge.getX() + velocity * time * direction.get(X_LIST_POS), bge.getY() + velocity * time * direction.get(Y_LIST_POS));
+		bge.setPosition(bge.getX() + xVel * time, bge.getY() + yVel * time);
 	}
 	
 	/*

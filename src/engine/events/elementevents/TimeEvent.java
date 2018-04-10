@@ -1,4 +1,4 @@
-package engine.events;
+package engine.events.elementevents;
 
 public class TimeEvent extends ElementEvent {
 	

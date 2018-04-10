@@ -1,12 +1,11 @@
 package engine.tests;
 
-import java.util.Arrays;
-
 import engine.GameElement;
-import engine.behaviors.BasicGameElement;
+import engine.actions.TimeMovable;
 import engine.behaviors.Behavior;
+import engine.behaviors.MandatoryBehavior;
 import engine.behaviors.Movable;
-import engine.eventresponses.BasicTimeResponse;
+import engine.eventresponses.TimeMovableResponse;
 import engine.events.elementevents.TimeEvent;
 
 public class GameElementTesting {
@@ -18,7 +17,7 @@ public class GameElementTesting {
 	
 	public static void addBehaviorTest() {
 		GameElement ge = new GameElement();
-		ge.addBehavior(new BasicGameElement(ge, "Mario", 100.0, 100.0));
+		ge.addBehavior(new MandatoryBehavior(ge, "Mario", 100.0, 100.0));
 		System.out.println(ge.reportProperties());
 		Behavior b = new Movable(ge);
 		ge.addBehavior(b);
@@ -28,12 +27,12 @@ public class GameElementTesting {
 	public static void testEventHandling() {
 		GameElement ge = new GameElement();
 		
-		ge.addBehavior(new BasicGameElement(ge, "Mario", 100.0, 100.0));
+		ge.addBehavior(new MandatoryBehavior(ge, "Mario", 100.0, 100.0));
 		System.out.println(ge.reportProperties());
 		
 		ge.addBehavior(new Movable(ge));
 		
-		ge.addEventResponse(new BasicTimeResponse());
+		ge.addEventResponse(new TimeEvent(0.0), new TimeMovable());
 		System.out.println(ge.reportProperties());
 		
 		ge.processEvent(new TimeEvent(5.0));

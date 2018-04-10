@@ -27,23 +27,6 @@ public class DisplayState {
 		}
 	}
 	
-	/*
-	
-	private static Point2D getCenter(Shape s) {
-		Bounds b = s.getBoundsInLocal();
-		double x = (b.getMinX() + b.getMaxX())/2;
-		double y = (b.getMinY() + b.getMaxY())/2;
-		System.out.println(x + " " + y);
-		return new Point2D(x, y);
-	}
-	
-	private static int getCollisionSide(Point2D element, Point2D collision) {
-		double angle = element.angle(collision);
-		System.out.println(angle);
-		int side = (int) (angle % 90 % 4);
-		return side;
-	}*/
-	
 	public static void main(String[] args) {
 		Rectangle r1 = new Rectangle();
 		Rectangle r2 = new Rectangle();

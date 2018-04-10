@@ -25,17 +25,23 @@ public class EventManager {
 		List<ElementEvent> elementEvents = new LinkedList<ElementEvent>();
 		elementEvents.addAll(getCollisionEvents(gameState));
 		gameState = propogateElementEvents(elementEvents, gameState);
-		updateDisplayState();
+//		updateDisplayState();
 		return gameState;
 		
 		
 	}
 	
 	private GameState propogateElementEvents(List<ElementEvent> elementEvents, GameState gameState) {
-		List<GameEvent> gameEvents = elementEvents.stream()
-				.map(c -> deliverElementEvent(c, gameState))
-				.flatMap(List::stream)
-				.collect(Collectors.toList());
+		List<GameEvent> gameEvents = new ArrayList<>();
+		for (GameElement ge: gameState.getElements()) {
+			for (ElementEvent ee: elementEvents) {
+				gameEvents.addAll(ge.processEvent(ee));
+			}
+		}
+//		List<GameEvent> gameEvents = gameState.getElements().stream()
+//				.map(c -> c.processEvent(event))
+//				.flatMap(List::stream)
+//				.collect(Collectors.toList());
 		gameState = handleGameEvents(gameState, gameEvents);
 		return gameState;
 	}

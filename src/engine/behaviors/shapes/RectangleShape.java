@@ -15,5 +15,10 @@ public class RectangleShape extends ShapeDefinition{
 	public Shape getShape(MandatoryBehavior mandatory) {
 		return new Rectangle(mandatory.getX(), mandatory.getY(), width, height);
 	}
+	
+	@Override
+	public String toString() {
+		return "Rectangle: Width " + width + " , Height: " + height;
+	}
 
 }

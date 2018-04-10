@@ -6,4 +6,5 @@ import javafx.scene.shape.Shape;
 public abstract class ShapeDefinition {
 	
 	public abstract Shape getShape(MandatoryBehavior mandatory);
+	public abstract String toString();
 }

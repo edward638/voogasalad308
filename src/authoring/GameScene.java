@@ -31,7 +31,7 @@ public class GameScene {
 		myObjects.add(toAdd);
 	}
 	
-	public List<GameObject> getMyElements(){
+	public List<GameObject> getMyObjects(){
 		return myObjects;
 	}
 

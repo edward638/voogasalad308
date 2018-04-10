@@ -1,5 +1,6 @@
 package engine;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameState{
@@ -10,10 +11,8 @@ public class GameState{
 	public GameState() {
 		//Talk to game data about reading info from file
 		gameSpeed = 1;
-		gameTime = 0;
-		
-		
-		elements = null;
+		gameTime = 0;	
+		elements = new ArrayList<>();
 	}
 
 	public void incrementgameTime(double timeElapsed) {

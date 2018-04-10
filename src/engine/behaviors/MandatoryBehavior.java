@@ -14,17 +14,19 @@ public class MandatoryBehavior extends Behavior{
 	private Double yPos;
 	private String elementName;
 	private ShapeDefinition shapeDef;
+	private String imagePath;
 	
-	public MandatoryBehavior(GameElement ge, String name, Double startX, Double startY, ShapeDefinition shp) {
+	public MandatoryBehavior(GameElement ge, String name, Double startX, Double startY, ShapeDefinition shp, String imagepath) {
 		super(ge);
 		xPos = startX;
 		yPos = startY;
 		elementName = name;
 		shapeDef = shp;
+		imagePath = imagepath;
 	}
 	
 	public MandatoryBehavior(GameElement ge, String name, Double startX, Double startY) {
-		this(ge, name, startX, startY, new RectangleShape(100.0, 100.0));
+		this(ge, name, startX, startY, new RectangleShape(100.0, 100.0), "data/images/mario_1.jpg");
 	}
 	
 	public void setPosition(double x, double y) {

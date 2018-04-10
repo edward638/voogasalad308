@@ -14,7 +14,7 @@ public class SceneManager {
 	
 	public GameScene makeScene(String name, int level) {
 		GameScene newLevel = new GameScene(name);
-		myLevels.add(newLevel);
+		myLevels.add(level-1, newLevel);
 		return newLevel;
 	}
 	

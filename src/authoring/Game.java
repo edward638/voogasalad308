@@ -41,10 +41,22 @@ public class Game {
 		return gameObject;
 	}
 	
-	//removes a game object from placedObjects
-	public void removeGameObject(GameScene currScene, GameObject gameObject) {
-		if(placedObjects.containsKey(currScene)) {
-			placedObjects.get(currScene).remove(gameObject);
+	//removes a game object from its scenes list of objects
+	public void removeGameObject(GameObject gameObject) {
+		for(GameScene current : mySceneManager.getScenes()) {
+			for(GameObject object : current.getMyObjects()) {
+				if (object.equals(gameObject)) {
+					current.getMyObjects().remove(gameObject);
+				}
+			}
 		}
+	}
+	
+	public SceneManager returnSceneManager() {
+		return mySceneManager;
+	}
+	
+	public void setSceneManager(SceneManager scenes) {
+		mySceneManager = scenes;
 	}
 }

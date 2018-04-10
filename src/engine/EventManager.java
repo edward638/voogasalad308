@@ -65,6 +65,17 @@ public class EventManager {
 		
 	}
 	
+	private CollisionEvent getCollisionDirection(Shape shape1, Shape shape2) {
+		Shape intersect = Shape.intersect(shape1, shape2);
+		Point2D intersectCenter = getCenter(intersect);
+		Point2D vector1 = intersectCenter.subtract(getCenter(shape1));
+	}
+	
+	private Point2D getCenter(Shape s) {
+		Bounds b = s.getBoundsInLocal();
+		return new Point2D((b.getMinX() + b.getMaxX())/2, (b.getMinY() + b.getMaxY())/2);
+	}
+	
 	public GameState handleGameEvents(GameState gameState, List<GameEvent> gameEvents) {
 		gameEvents.stream().forEach(c-> c.execute(gameState));
 		return gameState;

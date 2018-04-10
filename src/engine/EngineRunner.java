@@ -28,10 +28,17 @@ public class EngineRunner {
 	
     //starts animation
 	
-	public EngineRunner() {
+	public EngineRunner(String gameName) {
 		gameState = GameReader.initializeGameState();
 		displayState = new DisplayState();
 		eventManager = new EventManager();
+		GameLoader loader = new GameLoader(gameName);
+		initializeScene();
+		
+	}
+	
+	private void initializeScene() {
+		
 	}
 	
     public void startAnimation() {
@@ -46,7 +53,7 @@ public class EngineRunner {
     }
     
     
-    private Scene setupLevel (int width, int height, Paint background,String textfileName) {
+    private Scene setupLevel (int width, int height, Paint background, String textfileName) {
     	Scene curr_scene = new Scene(root);
         curr_scene.setOnKeyPressed(e -> {
 			try {

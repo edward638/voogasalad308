@@ -14,6 +14,8 @@ import engine.events.elementevents.KeyInputEvent;
 import engine.events.elementevents.MouseInputEvent;
 import engine.events.elementevents.TimeEvent;
 import engine.events.gameevents.GameEvent;
+import javafx.geometry.Bounds;
+import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.shape.Shape;
 
@@ -61,7 +63,8 @@ public class EventManager {
 			for (int j = i+1; j < gameState.getElements().size(); j++) {
 				BasicElementBehavior b = (BasicElementBehavior) gameState.getElements().get(j).getBehavior(BasicElementBehavior.class);
 				if (a.getShape().getBoundsInLocal.intersects(b.getShape().getBoundsInLocal)) {
-					Shape intersect = Shape.intersect(a.getShape(), b.getShape());
+					//getCollisionDirection(a.getShape(), b.getShape());
+					
 					collisionEvents.add(new CollisionEvent(gameState.getElements().get(i), gameState.getElements().get(j)));
 				}
 			}
@@ -69,6 +72,17 @@ public class EventManager {
 		
 		return collisionEvents;
 		
+	}
+	
+	private CollisionEvent getCollisionDirection(Shape shape1, Shape shape2) {
+		Shape intersect = Shape.intersect(shape1, shape2);
+		Point2D intersectCenter = getCenter(intersect);
+		Point2D vector1 = intersectCenter.subtract(getCenter(shape1));
+	}
+	
+	private Point2D getCenter(Shape s) {
+		Bounds b = s.getBoundsInLocal();
+		return new Point2D((b.getMinX() + b.getMaxX())/2, (b.getMinY() + b.getMaxY())/2);
 	}
 	
 	public GameState handleGameEvents(GameState gameState, List<GameEvent> gameEvents) {

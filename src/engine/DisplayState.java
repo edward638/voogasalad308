@@ -1,27 +1,34 @@
 package engine;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 public class DisplayState {
-	public List<ImageElement> activeElements;
-	public List<ImageElement> newElements;
-	public List<ImageElement> removeElements;
+	protected List<ImageElement> activeElements;
+	protected List<ImageElement> newElements;
+	protected List<ImageElement> removeElements;
 	
-	public void addNewElement(GameElement element) {
+	public DisplayState() {
+		activeElements = new ArrayList<>();
+		newElements = new ArrayList<>();
+		removeElements = new ArrayList<>();
+	}
+	
+	protected void addNewElement(GameElement element) {
 		ImageElement imageElement = new ImageElement(element);
 		newElements.add(imageElement);
 		activeElements.add(imageElement);
 	}
 	
-	public void removeElement(GameElement element) {
+	protected void removeElement(GameElement element) {
 		activeElements.stream().filter(c -> c.getReference() == element).map(c -> activeElements.remove(c));
 		activeElements.stream().filter(c -> c.getReference() == element).map(c -> removeElements.add(c));
 	}
 
-	public void updateImageElements() {
+	protected void updateImageElements() {
 		for (ImageElement imageElement : activeElements) {
 			imageElement.updateState();
 		}

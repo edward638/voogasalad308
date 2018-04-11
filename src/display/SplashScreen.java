@@ -3,6 +3,7 @@ package display;
 import java.util.ArrayList;
 import java.util.List;
 
+import display.buttonevents.GameAuthoringPress;
 import display.buttonevents.GamePlayerPress;
 import display.buttons.GUIButton;
 import javafx.scene.Group;
@@ -31,7 +32,9 @@ public class SplashScreen {
 	private void addButtons() {
         buttons = new ArrayList<>();
         GUIButton gamePlayerButton = new GUIButton(10, 10, "Game Player", new GamePlayerPress(currStage));
+        GUIButton gameAuthoringButton = new GUIButton(10, 50, "Game Authoring", new GameAuthoringPress(currStage));
         buttons.add(gamePlayerButton);
+        buttons.add(gameAuthoringButton);
 	}
 	/**
 	 * @return a Scene that can be displayed on the splash screen

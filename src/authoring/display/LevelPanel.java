@@ -59,7 +59,7 @@ public class LevelPanel extends AuthoringUIComponent {
 	
 	private Button makeAddGameObjectButton() {
 		myAddGameObjectButton =  makeButton("AddGameObjectButton", event -> { 
-			new NewLevelWindow(getResources(), getGame(), getRoot(), myLevelDropdown);
+			new NewGameObjectWindow(getResources(), getGame(), getRoot(), myLevelObjects);
 		});
 		return myAddGameObjectButton;
 	}

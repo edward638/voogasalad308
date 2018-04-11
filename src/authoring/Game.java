@@ -1,14 +1,24 @@
 package authoring;
 
+import data.GameInitializer;
+import data.ImageManager;
+
 public class Game {
 
 	private String gameName;
 	private String gameDescription;
 	private String gameImage;
 	private SceneManager mySceneManager;
+	private ImageManager myImageManager;
 	
 	public Game() {
+		this("TestGame");
+	}
+	
+	public Game(String name) {
 		mySceneManager = new SceneManager();
+		myImageManager = new ImageManager(gameName);
+		new GameInitializer(name);
 	}
 	
 	public void setGameName(String name) {
@@ -56,7 +66,11 @@ public class Game {
 		return mySceneManager;
 	}
 	
-	public void setSceneManager(SceneManager scenes) {
-		mySceneManager = scenes;
+	public ImageManager getImageManager() {
+		return myImageManager;
+	}
+	
+	public void setSceneManager(SceneManager sceneManager) {
+		mySceneManager = sceneManager;
 	}
 }

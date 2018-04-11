@@ -17,7 +17,7 @@ public class DisplayState {
 		removeElements = new ArrayList<>();
 	}
 	
-	protected void addNewElement(GameElement element) {
+	public void addNewElement(GameElement element) {
 		ImageElement imageElement = new ImageElement(element);
 		newElements.add(imageElement);
 		activeElements.add(imageElement);

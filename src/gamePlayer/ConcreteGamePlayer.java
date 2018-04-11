@@ -3,7 +3,7 @@ package gamePlayer;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 
-import data.Serializer;
+import data.GameDescriptionProvider;
 import engine.Engine;
 import engine.GameState;
 import gamePlayer.buttons.ClearHighScoresButton;
@@ -25,8 +25,8 @@ import javafx.stage.Stage;
 
 /**
  * 
- * @author jeffreyli, calvinma
- * Concrete game player, manages game selection, loading, saving, HUD and high scores.
+ * @author jeffreyli, calvinma Concrete game player, manages game selection,
+ *         loading, saving, HUD and high scores.
  */
 public class ConcreteGamePlayer implements GamePlayer {
 
@@ -43,9 +43,9 @@ public class ConcreteGamePlayer implements GamePlayer {
 	Engine engine;
 	GameState gameState;
 	String currentGameName;
-	Serializer serializer;
+	GameDescriptionProvider gameDescriptionProvider;
 	String mostRecentFile;
-	
+
 	private ConcreteButtonData buttonData;
 
 	ConcreteHighScores highScores;
@@ -58,8 +58,8 @@ public class ConcreteGamePlayer implements GamePlayer {
 	public ConcreteGamePlayer(Stage stage) {
 
 		// back end set up.
-		Serializer serializer = new Serializer();	
-		
+		gameDescriptionProvider = new GameDescriptionProvider();
+
 		// front end set up;
 		root = new Group();
 		myScene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND);
@@ -67,18 +67,16 @@ public class ConcreteGamePlayer implements GamePlayer {
 		myStage.setScene(myScene);
 
 		highScores = new ConcreteHighScores("hi");
-		
+
 		root.getChildren().add(highScores.getScores());
 
-		
-		buttonData = new ConcreteButtonData(stage, this, serializer, root);
-		
+		buttonData = new ConcreteButtonData(stage, this, gameDescriptionProvider, root);
+
 		setupButtons();
 		buttonData.setHighScores(highScores);
-		
 
 	}
-	
+
 	/**
 	 * initialises buttons on screen
 	 */
@@ -99,7 +97,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 	@Override
 	public void playGame(String file) {
 		engine = new Engine(file);
-		currentGameName = serializer.getGameName(file);
+		currentGameName = gameDescriptionProvider.getGameName(file);
 		buttonData.setCurrentGameName(currentGameName);
 		mostRecentFile = file;
 		buttonData.setMostRecentFile(mostRecentFile);
@@ -113,9 +111,11 @@ public class ConcreteGamePlayer implements GamePlayer {
 		root.getChildren().add((Node) hud);
 
 	}
-	
+
 	/**
-	 * created for purposes of demonstration, simulates what front end will look like once game engine is running
+	 * created for purposes of demonstration, simulates what front end will look
+	 * like once game engine is running
+	 * 
 	 * @param file
 	 */
 	public void DummyPlayGame(String file) {
@@ -132,7 +132,8 @@ public class ConcreteGamePlayer implements GamePlayer {
 		gameDisplay.setLayoutY(30);
 		gameDisplay.setPrefSize(900, 590);
 
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream("testGameFolder/testMario/dummy-mario.png"));
+		Image image = new Image(
+				getClass().getClassLoader().getResourceAsStream("testGameFolder/testMario/dummy-mario.png"));
 		ImageView imageView = new ImageView();
 		imageView.setImage(image);
 		imageView.setFitHeight(590);
@@ -144,7 +145,6 @@ public class ConcreteGamePlayer implements GamePlayer {
 		root.getChildren().add((Node) hud);
 	}
 
-	
 	@Override
 	public Scene getScene() {
 		return myScene;

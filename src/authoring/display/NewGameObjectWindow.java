@@ -3,57 +3,59 @@ package authoring.display;
 import java.util.ResourceBundle;
 
 import authoring.Game;
+import authoring.GameObject;
 import authoring.GameScene;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 /**
  * @author Maddie Wilkinson
  *
  */
-public class NewLevelWindow extends NewComponentWindow {
+public class NewGameObjectWindow extends NewComponentWindow {
 
-	private ComboBox<GameScene> myLevelDropdown;
+	private ListView<GameObject> myLevelObjects;
 
-	public NewLevelWindow(ResourceBundle resources, Game game, Node root, ComboBox<GameScene> levelDropdown) {
+	
+	public NewGameObjectWindow(ResourceBundle resources, Game game, Node root, ListView<GameObject> levelObjects) {
 		super(resources, game, root);
-		myLevelDropdown = levelDropdown;
+		myLevelObjects = levelObjects;
 		setStage(setUpScene());
 	}
 
+	@Override
 	protected Scene setUpScene() {
 		VBox root = new VBox();
 
-		HBox nameLevel = new HBox();
-		TextField levelText = new TextField();
-		nameLevel.getChildren().addAll(new Label("Level name: "), levelText);
+		HBox nameObject = new HBox();
+		TextField nameText = new TextField();
+		nameObject.getChildren().addAll(new Label("Name: "), nameText);
 
-		HBox levelIndex = new HBox();
+		HBox xPosValues = new HBox();
 		TextField indexText = new TextField();
-		levelIndex.getChildren().addAll(new Label("Index: "), indexText);
+		xPosValues.getChildren().addAll(new Label("Index: "), indexText);
 
 		Button closeButton = makeButton("Close", event -> {
-			saveLevel(levelText, indexText);
+			saveGameObject(nameText, indexText);
 		});
 
-		root.getChildren().addAll(nameLevel, levelIndex, closeButton);
+		root.getChildren().addAll(nameObject, xPosValues, closeButton);
 		return new Scene(root);
 	}
 
-	private void saveLevel(TextField levelText, TextField indexText) {
+	private void saveGameObject(TextField levelText, TextField indexText) {
 		if(!levelText.getText().isEmpty() && !indexText.getText().isEmpty()) {
 			try {
 				String levelName = levelText.getText();
-				Integer levelIndex = Integer.parseInt(indexText.getText());
-				GameScene newScene = getGame().getSceneManager().makeScene(levelName, levelIndex);
-				myLevelDropdown.getItems().add(levelIndex - 1, newScene);
+				GameObject go = new GameObject();
+				myLevelObjects.getItems().add(0, go);
 				getStage().close();
 				//after slider is implemented, only catch general exception
 			} catch(NumberFormatException e) {
@@ -68,4 +70,5 @@ public class NewLevelWindow extends NewComponentWindow {
 			getStage().close();
 		}
 	}
+
 }

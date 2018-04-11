@@ -17,7 +17,7 @@ public class EngineTesting extends Application {
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 	public static final Paint BACKGROUND = Color.WHITE;
 	
-	private Timeline animation;
+	//private Timeline animation;
 	
 	private Engine gameEngine;
 
@@ -30,7 +30,6 @@ public class EngineTesting extends Application {
 		gameEngine = new Engine("");
 		stage.setScene(setupLevel(900, 590, BACKGROUND));
 		stage.show();
-		
 		
 		startAnimation();
 	}
@@ -51,7 +50,7 @@ public class EngineTesting extends Application {
 	private void startAnimation() {
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
                 e -> gameEngine.timeStep(SECOND_DELAY));
-		animation = new Timeline();
+		Timeline animation = new Timeline();
 		animation.setCycleCount(Timeline.INDEFINITE);
         animation.getKeyFrames().add(frame);
         animation.play();

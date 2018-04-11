@@ -8,11 +8,14 @@ public class GameState{
 	private double gameSpeed;
 	private double gameTime;
 	
+	protected DisplayState displayState;
+	
 	public GameState() {
 		//Talk to game data about reading info from file
 		gameSpeed = 1;
 		gameTime = 0;	
 		elements = new ArrayList<>();
+		displayState = new DisplayState();
 	}
 
 	public void incrementGameTime(double timeElapsed) {
@@ -29,10 +32,12 @@ public class GameState{
 
 	public void addGameElement(GameElement gameElement) {
 		elements.add(gameElement);
+		displayState.addNewElement(gameElement);
 	}
 	
 	public void removeGameElement(GameElement gameElement) {
 		elements.remove(gameElement);
+		displayState.removeElement(gameElement);
 	}
 	
 	public List<GameElement> getElements() {

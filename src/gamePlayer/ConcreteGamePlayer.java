@@ -125,6 +125,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 		mostRecentFile = file;
 
 		// gameDisplay = engine.getDisplay();
+		//
 		Pane canvas = new Pane();
 
 		gameDisplay = canvas;

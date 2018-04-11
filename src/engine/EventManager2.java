@@ -33,7 +33,7 @@ public class EventManager2 {
 		gameEvent.execute(gameState);
 	}
 	
-	private void handleCollisions() {
+	/*private void handleCollisions() {
 		for (GameElement g1: gameState.getElements()) {
 			for (GameElement g2:gameState.getElements()) {
 				if (!(g1 == g2)) {
@@ -46,7 +46,23 @@ public class EventManager2 {
 				}
 			}
 		}
-	}
+	}*/
+	
+	public void handleCollisions() {
+		for (int i = 0; i < gameState.getElements().size(); i++) {
+			MandatoryBehavior a = (MandatoryBehavior) gameState.getElements().get(i).getBehavior(MandatoryBehavior.class);
+			
+			for (int j = i+1; j < gameState.getElements().size(); j++) {
+				MandatoryBehavior b = (MandatoryBehavior) gameState.getElements().get(j).getBehavior(MandatoryBehavior.class);
+				if (a.getShape().getBoundsInLocal().intersects(b.getShape().getBoundsInLocal())) {
+					Shape intersect = Shape.intersect(a.getShape(), b.getShape());
+					GameElement g1 = gameState.getElements().get(i);
+					GameElement g2 = gameState.getElements().get(j);
+					g1.processEvent(new CollisionEvent(g1, g2));
+					g2.processEvent(new CollisionEvent(g1, g2));
+				}
+			}
+		}
 	
 	public GameState getCurrentState() {
 		return gameState;

@@ -29,9 +29,13 @@ public class LevelPanel extends AuthoringUIComponent {
 	private Button myAddLevelButton;
 	private Button myAddGameObjectButton;
 	private ListView<GameObject> myLevelObjects;
+	
+	private GameViewWindow myGameViewWindow;
 
-	public LevelPanel(ResourceBundle resources, Game game, Node root) {
+	public LevelPanel(ResourceBundle resources, Game game, Node root, GameViewWindow gameViewWindow) {
 		super(resources, game, root); //pass resources to super constructor
+		myGameViewWindow = gameViewWindow;
+		System.out.println(myGameViewWindow == null);
 
 		myVBox = new VBox();
 		myVBox.getChildren().addAll(makeLevelChooser(), makeObjectList(), makeAddGameObjectButton());
@@ -59,7 +63,7 @@ public class LevelPanel extends AuthoringUIComponent {
 	
 	private Button makeAddGameObjectButton() {
 		myAddGameObjectButton =  makeButton("AddGameObjectButton", event -> { 
-			new NewGameObjectWindow(getResources(), getGame(), getRoot(), myLevelObjects);
+			new NewGameObjectWindow(getResources(), getGame(), getRoot(), myLevelObjects, myGameViewWindow);
 		});
 		return myAddGameObjectButton;
 	}

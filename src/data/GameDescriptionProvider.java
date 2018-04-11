@@ -1,6 +1,6 @@
 package data;
 
-import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,6 +9,8 @@ import java.util.Scanner;
 import javax.imageio.ImageIO;
 
 import data.propertiesFiles.ResourceBundleManager;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
 
 public class GameDescriptionProvider {
 	
@@ -36,8 +38,9 @@ public class GameDescriptionProvider {
 		String gameDescriptionLocation = gameLocation + ResourceBundleManager.getPath("DESCRIPTION");
 		
 	    try {
-            return ImageIO.read(new File(gameDescriptionLocation + ResourceBundleManager.getPath("DESCRIPTIONIMAGE")));
-        } catch (IOException e) {
+	    	BufferedImage bufferedImage = ImageIO.read(new File(gameDescriptionLocation + ResourceBundleManager.getPath("DESCRIPTIONIMAGE")));
+	    	return SwingFXUtils.toFXImage(bufferedImage, null);
+	    } catch (IOException e) {
             e.printStackTrace(); //TODO: fix!
         }
         return null;

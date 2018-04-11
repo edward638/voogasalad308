@@ -40,7 +40,7 @@ public class ModelGameState {
 	public GameElement getMario() {
 		GameElement mario = new GameElement();
 		//Note: Image path untested
-		mario.addBehavior(new MandatoryBehavior(mario, "Mario", 300.0, 20.0, new RectangleShape(256.0, 256.0), "data/images/mario_1.jpg"));
+		mario.addBehavior(new MandatoryBehavior(mario, "Mario", 200.0, 20.0, new RectangleShape(100.0, 100.0), "mario_1.jpg"));
 		List<Double> direction = new ArrayList<>(); direction.add(1.0); direction.add(0.0);
 ;		mario.addBehavior(new Movable(mario, 0.0, direction));
 		mario.addBehavior(new Gravity(mario));
@@ -52,7 +52,7 @@ public class ModelGameState {
 		// Response to up arrow key is to jump
 		mario.addEventResponse(new KeyInputEvent(KeyCode.UP), (event, element) -> {
 			Movable mov = (Movable) element.getBehavior(Movable.class);
-			mov.setYVelocity(mov.getYVelocity() + 30);
+			mov.setYVelocity(mov.getYVelocity() - 30);
 		});
 		
 		// Response to Right arrow key is to move right
@@ -62,7 +62,7 @@ public class ModelGameState {
 		});
 		
 		// Response to Left arrow key is to move left
-		mario.addEventResponse(new KeyInputEvent(KeyCode.RIGHT), (event, element) -> {
+		mario.addEventResponse(new KeyInputEvent(KeyCode.LEFT), (event, element) -> {
 			Movable mov = (Movable) element.getBehavior(Movable.class);
 			mov.setXVelocity(-10.0);
 		});
@@ -71,7 +71,7 @@ public class ModelGameState {
 	
 	public GameElement getBlock(Double xpos, Double ypos) {
 		GameElement block = new GameElement();
-		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, new RectangleShape(20.0, 20.0), "data/images/20pixbox.png"));
+		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, new RectangleShape(20.0, 20.0), "20pxbox.png"));
 		block.addEventResponse(new CollisionEvent(getMario(), block), (event, element) -> {
 			CollisionEvent ce = (CollisionEvent) event;
 			GameElement other = ce.getCollidedWith(element);

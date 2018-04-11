@@ -1,6 +1,5 @@
 package engine;
 
-import java.io.IOException;
 import java.util.List;
 
 import engine.events.elementevents.ElementEvent;
@@ -79,7 +78,7 @@ public class Engine extends Application {
 	
 	private void timeStep (double elapsedTime) {
 		double gameSteps = elapsedTime*gameState.getGameSpeed();
-		gameState.incrementgameTime(gameSteps);
+		gameState.incrementGameTime(gameSteps);
     	eventManager.processElementEvent(new TimeEvent(gameSteps));
     	//gameState.displayState.updateImageElements();
     	updateDisplay(gameState.displayState.newElements, gameState.displayState.removeElements);

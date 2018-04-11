@@ -2,12 +2,15 @@ package engine;
 
 import java.util.Map;
 
+import data.ImageManager;
 import engine.behaviors.shapes.ShapeDefinition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class ImageElement extends ImageView {
 	private GameElement elementReference;
+	
+	ImageManager imageManager = new ImageManager("");
 	
 	public ImageElement(GameElement elementReference) {
 		//updateState();

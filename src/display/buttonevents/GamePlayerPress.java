@@ -22,7 +22,7 @@ public class GamePlayerPress implements ButtonEvent {
 
 	@Override
 	public void pressed() {
-		splashStage.close();
+//		splashStage.close();
 		
 	new ConcreteGamePlayer(gamePlayerStage);
 	gamePlayerStage.show();

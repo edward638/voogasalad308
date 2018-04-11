@@ -6,10 +6,12 @@ import java.util.List;
 import engine.DisplayState;
 import engine.GameElement;
 import engine.GameState;
+import engine.actions.CollisionGround;
 import engine.actions.CollisionKillable;
 import engine.actions.TimeGravity;
 import engine.actions.TimeMovable;
 import engine.behaviors.Gravity;
+import engine.behaviors.Killable;
 import engine.behaviors.MandatoryBehavior;
 import engine.behaviors.Movable;
 import engine.behaviors.shapes.RectangleShape;
@@ -26,13 +28,13 @@ public class ModelGameState {
 		ArrayList<GameElement> elements = new ArrayList<GameElement>();
 		
 		
-		//elements.add(getBack(0.0,0.0));
-		for (double i = 0; i < 900; i+=45) {
+		elements.add(getBack(0.0,0.0));
+		for (double i = 0; i < 900; i+=40) {
 			elements.add(getBlock(i, 500.0));
 		}
 		elements.add(getMario());
 		
-		for (double i = 500; i < 2000; i+=150) {
+		for (double i = 500; i < 3000; i+=400) {
 			elements.add(getKoopa(i, 100.0));
 		}
 
@@ -44,7 +46,7 @@ public class ModelGameState {
 		GameElement e7 = getBlock(110.0, 20.0);
 		GameElement e8 = getBlock(50.0, 80.0);*/
 		state = new GameState();
-		display = new DisplayState();
+		display = new DisplayState("enginetestmario");
 		for (GameElement el : elements) {
 			state.addGameElement(el);
 			display.addNewElement(el);
@@ -109,7 +111,7 @@ public class ModelGameState {
 		//Adding Time Responses
 		mario.addEventResponse(new TimeEvent(0.0), new TimeMovable());
 		mario.addEventResponse(new TimeEvent(0.0), new TimeGravity());
-		mario.addEventResponse(new CollisionEvent(mario, mario), new CollisionKillable());
+		mario.addEventResponse(new CollisionEvent(mario, getBlock(0.0, 0.0)), new CollisionGround());
 		
 		// Response to up arrow key is to jump
 		mario.addEventResponse(new KeyInputEvent(KeyCode.W), (event, element) -> {
@@ -120,13 +122,13 @@ public class ModelGameState {
 		// Response to Right arrow key is to move right
 		mario.addEventResponse(new KeyInputEvent(KeyCode.D), (event, element) -> {
 			Movable mov = (Movable) element.getBehavior(Movable.class);
-			mov.setXVelocity(mov.getXVelocity()+20.0);
+			mov.setXVelocity(200.0);
 		});
 		
 		// Response to Left arrow key is to move left
 		mario.addEventResponse(new KeyInputEvent(KeyCode.A), (event, element) -> {
 			Movable mov = (Movable) element.getBehavior(Movable.class);
-			mov.setXVelocity(mov.getXVelocity()-20.0);
+			mov.setXVelocity(-200.0);
 		});
 		return mario;
 	}
@@ -134,14 +136,6 @@ public class ModelGameState {
 	public GameElement getBlock(Double xpos, Double ypos) {
 		GameElement block = new GameElement();
 		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, new RectangleShape(40.0, 40.0), "mario_block.png"));
-		block.addEventResponse(new CollisionEvent(getMario(), block), (event, element) -> {
-			CollisionEvent ce = (CollisionEvent) event;
-			GameElement other = ce.getCollidedWith(element);
-			if (other.hasBehavior(Movable.class)) {
-				Movable mov = (Movable) other.getBehavior(Movable.class);
-				mov.setYVelocity(0.0);
-			}
-		});
 		return block;
 	}
 	
@@ -156,16 +150,10 @@ public class ModelGameState {
 		
 		block.addBehavior(new MandatoryBehavior(block, "Koopa", xpos, ypos, new RectangleShape(60.0, 80.0), "koopa.png"));
 		List<Double> direction = new ArrayList<>(); direction.add(-1.0); direction.add(0.0);
-		block.addBehavior(new Movable(block, 10.0, direction));
+		block.addBehavior(new Movable(block, 20.0, direction));
+		block.addBehavior(new Killable(block, 100.0));
 		block.addEventResponse(new TimeEvent(0.0), new TimeMovable());
-		block.addEventResponse(new CollisionEvent(getMario(), block), (event, element) -> {
-			CollisionEvent ce = (CollisionEvent) event;
-			GameElement other = ce.getCollidedWith(element);
-			if (other.hasBehavior(Movable.class)) {
-				Movable mov = (Movable) other.getBehavior(Movable.class);
-				mov.setYVelocity(0.0);
-			}
-		});
+		block.addEventResponse(new CollisionEvent(block, getMario()), new CollisionKillable());
 		return block;
 	}
 }

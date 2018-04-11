@@ -13,8 +13,8 @@ public class SaveBar extends AuthoringUIComponent {
 	
 	private HBox myHBox;
 
-	public SaveBar(ResourceBundle resources, Game game) {
-		super(resources, game);
+	public SaveBar(ResourceBundle resources, Game game, Node root) {
+		super(resources, game, root);
 		myHBox = new HBox();
 		
 		myHBox.getChildren().addAll(makeNewGameButton(), makeLoadGameButton(), makeSaveGameButton());

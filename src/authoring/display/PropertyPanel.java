@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import authoring.Game;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
@@ -29,8 +30,8 @@ public class PropertyPanel extends AuthoringUIComponent {
 
 
 	//in AuthoringDisplay, don't forget to remove and re-add this to the root every time it changes
-	public PropertyPanel(ResourceBundle resources, Game game) {
-		super(resources, game);
+	public PropertyPanel(ResourceBundle resources, Game game, Node root) {
+		super(resources, game, root);
 		myScrollPane = new ScrollPane();
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Choose Object Image");

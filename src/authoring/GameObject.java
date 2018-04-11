@@ -16,7 +16,7 @@ public class GameObject {
 	public GameObject(double x, double y, String image) {
 		myBehaviors = new HashSet<>();
 		myEvents = new HashSet<>();
-//		addBasicBehavior(x, y, image);
+		myBehaviorFactory = new BehaviorFactory();
 	}
 	
 	public GameObject(Behavior basic) {

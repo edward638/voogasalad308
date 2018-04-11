@@ -52,7 +52,7 @@ public class Game {
 		}
 	}
 	
-	public SceneManager returnSceneManager() {
+	public SceneManager getSceneManager() {
 		return mySceneManager;
 	}
 	

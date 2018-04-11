@@ -14,7 +14,7 @@ public class SceneManager {
 	
 	public GameScene makeScene(String name, int level) {
 		GameScene newLevel = new GameScene(name);
-		myLevels.add(level-1, newLevel);
+		myLevels.add(level - 1, newLevel);
 		return newLevel;
 	}
 	
@@ -24,6 +24,7 @@ public class SceneManager {
 	
 	public void setCurrentScene(GameScene on) {
 		currentScene = on;
+		System.out.println("current scene is " + currentScene);
 	}
 	
 	public void removeScene(GameScene toRemove) {

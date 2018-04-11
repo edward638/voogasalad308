@@ -43,4 +43,8 @@ public class GameScene {
 		myName = name;
 	}
 	
+	public String toString() {
+		return myName;
+	}
+	
 }

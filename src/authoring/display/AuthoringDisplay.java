@@ -28,7 +28,7 @@ import javafx.stage.Stage;
 
 public class AuthoringDisplay {
 	public static final String DEFAULT_RESOURCE_PATH = "authoring.display.resources/";
-	public static final String DEFAULT_CSS_PATH = "authoring/display/resources/"; //rename?
+	public static final String DEFAULT_CSS_PATH = "authoring/display/resources/";
 
 	public static final String DEFAULT_LANGUAGE = "English";
 	public static final String DEFAULT_STYLE = "myStyle.css";
@@ -38,9 +38,9 @@ public class AuthoringDisplay {
 	private Game myGame;
 
 	public AuthoringDisplay(Stage stage, Game game) {
+		myGame = new Game();
 		loadResources();
 		initialize(stage);
-		myGame = new Game();
 	}
 	
 	public void loadResources() {
@@ -66,7 +66,8 @@ public class AuthoringDisplay {
 	}
 
 	public Node makeLevelPanel() {
-		LevelPanel levelPanel = new LevelPanel(myResources, myGame);
+		LevelPanel levelPanel = new LevelPanel(myResources, myGame, root);
+		System.out.println(myGame == null);
 		return levelPanel.asVBox();
 	}
 
@@ -75,7 +76,7 @@ public class AuthoringDisplay {
 	}
 
 	public Node makeObjectPropertyPanel() {
-		PropertyPanel propertyPanel = new PropertyPanel(myResources, myGame);
+		PropertyPanel propertyPanel = new PropertyPanel(myResources, myGame, root);
 		return propertyPanel.asScrollPane();
 	}
 
@@ -84,7 +85,7 @@ public class AuthoringDisplay {
 	}
 	
 	public Node makeSaveBar() {
-		SaveBar saveBar = new SaveBar(myResources, myGame);
+		SaveBar saveBar = new SaveBar(myResources, myGame, root);
 		return saveBar.asHBox();
 	}
 }

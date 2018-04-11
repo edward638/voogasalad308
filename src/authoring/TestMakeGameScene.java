@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import data.*;
+import engine.tests.ModelGameState;
 import javafx.scene.image.Image;
 
 public class TestMakeGameScene {
@@ -16,12 +17,12 @@ public class TestMakeGameScene {
 		
 		GameScene gameScene = new GameScene("Level 1");
 		BehaviorFactory bf = new BehaviorFactory();
-		GameObject go1 = new GameObject(bf.makeBehavior("BasicGameElement"));
-		go1.getBehavior("BasicGameElement").getProperty("xPos").setValue(new Double(2));
-		go1.getBehavior("BasicGameElement").getProperty("yPos").setValue(new Double(7));
-		go1.getBehavior("BasicGameElement").getProperty("elementName").setValue("this is my name");
+		GameObject go1 = new GameObject(bf.makeBehavior("MandatoryBehavior"));
+		go1.getBehavior("MandatoryBehavior").getProperty("xPos").setValue(new Double(2));
+		go1.getBehavior("MandatoryBehavior").getProperty("yPos").setValue(new Double(7));
+		go1.getBehavior("MandatoryBehavior").getProperty("elementName").setValue("this is my name");
 
-//		GameObject go2 = new GameObject(bf.makeBehavior("BasicGameElement"));
+//		GameObject go2 = new GameObject(bf.makeBehavior("MandatoryBehavior"));
 //		go2.addBehavior(bf.makeBehavior("Movable"));
 		System.out.println(go1.getBehaviors());
 //		System.out.println(go2.getBehaviors());
@@ -38,7 +39,7 @@ public class TestMakeGameScene {
 		
 		GameLoader gameLoader = new GameLoader("gouttham");
 		GameScene pls = gameLoader.getGameScenes().get(0);
-		System.out.println(pls.getMyElements().get(0).getBehaviors());
+		System.out.println(pls.getMyObjects().get(0).getBehaviors());
 		
 		
 		

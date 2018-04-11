@@ -14,22 +14,21 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class NewLevelWindow extends AuthoringUIComponent {
+/**
+ * @author Maddie Wilkinson
+ *
+ */
+public class NewLevelWindow extends NewComponentWindow {
 
-	private Stage myStage;
 	private ComboBox<GameScene> myLevelDropdown;
 
 	public NewLevelWindow(ResourceBundle resources, Game game, Node root, ComboBox<GameScene> levelDropdown) {
 		super(resources, game, root);
-		myStage = new Stage();
 		myLevelDropdown = levelDropdown;
-		Scene newLevelScene = setUpScene();
-		myStage.setScene(newLevelScene);
-		myStage.centerOnScreen();
-		myStage.show();
+		setStage(setUpScene());
 	}
 
-	private Scene setUpScene() {
+	protected Scene setUpScene() {
 		VBox root = new VBox();
 
 		HBox nameLevel = new HBox();
@@ -40,7 +39,7 @@ public class NewLevelWindow extends AuthoringUIComponent {
 		TextField indexText = new TextField();
 		levelIndex.getChildren().addAll(new Label("Index: "), indexText);
 
-		Button closeButton = makeButton("Close", event -> {
+		Button closeButton = makeButton("Save", event -> {
 			saveLevel(levelText, indexText);
 		});
 
@@ -55,18 +54,18 @@ public class NewLevelWindow extends AuthoringUIComponent {
 				Integer levelIndex = Integer.parseInt(indexText.getText());
 				GameScene newScene = getGame().getSceneManager().makeScene(levelName, levelIndex);
 				myLevelDropdown.getItems().add(levelIndex - 1, newScene);
-				myStage.close();
-				//after slider is implemented, only hatch general exception
+				getStage().close();
+				//after slider is implemented, only catch general exception
 			} catch(NumberFormatException e) {
 				System.out.println("Invalid index input numFormat");
 				new Error("Invalid index input"); //this isn't being displayed yet
 			}catch(IndexOutOfBoundsException e) {
 				System.out.println("Invalid index input OOB");
-				 //this isn't being displayed yet 
+				//this isn't being displayed yet 
 				new Error("Invalid index input"); //eventually to fix this you can get the size of the array and make a slider so they can choose where to put it
 			}	
 		} else {
-			myStage.close();
+			getStage().close();
 		}
 	}
 }

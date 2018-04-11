@@ -40,7 +40,7 @@ public class ModelGameState {
 		state.addGameElement(e7);
 		state.addGameElement(e8);
 		
-		display = new DisplayState();
+		display = new DisplayState("enginetestmario");
 		display.addNewElement(e1);
 		display.addNewElement(e2);
 		display.addNewElement(e3);
@@ -93,19 +93,19 @@ public class ModelGameState {
 		mario.addEventResponse(new TimeEvent(0.0), new TimeGravity());
 		
 		// Response to up arrow key is to jump
-		mario.addEventResponse(new KeyInputEvent(KeyCode.UP), (event, element) -> {
+		mario.addEventResponse(new KeyInputEvent(KeyCode.W), (event, element) -> {
 			Movable mov = (Movable) element.getBehavior(Movable.class);
 			mov.setYVelocity(-60.0);
 		});
 		
 		// Response to Right arrow key is to move right
-		mario.addEventResponse(new KeyInputEvent(KeyCode.RIGHT), (event, element) -> {
+		mario.addEventResponse(new KeyInputEvent(KeyCode.D), (event, element) -> {
 			Movable mov = (Movable) element.getBehavior(Movable.class);
 			mov.setXVelocity(40.0);
 		});
 		
 		// Response to Left arrow key is to move left
-		mario.addEventResponse(new KeyInputEvent(KeyCode.LEFT), (event, element) -> {
+		mario.addEventResponse(new KeyInputEvent(KeyCode.A), (event, element) -> {
 			Movable mov = (Movable) element.getBehavior(Movable.class);
 			mov.setXVelocity(-40.0);
 		});

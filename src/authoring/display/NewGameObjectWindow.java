@@ -63,7 +63,7 @@ public class NewGameObjectWindow extends NewComponentWindow {
 				String objectName = nameText.getText();
 				Double xPos = Double.parseDouble(xText.getText());
 				Double yPos = Double.parseDouble(yText.getText());
-				GameObject go = makeGameObject(objectName, xPos, yPos);
+				GameObject go = makeGameObject(objectName, xPos, yPos, objectName);
 				myLevelObjects.getItems().add(0, go);
 				getStage().close();
 				//after slider is implemented, only catch general exception
@@ -80,12 +80,14 @@ public class NewGameObjectWindow extends NewComponentWindow {
 		}
 	}
 	
-	private GameObject makeGameObject(String name, Double xPos, Double yPos) {
+	private GameObject makeGameObject(String name, Double xPos, Double yPos, String imageName) {
 		GameObject newObject = new GameObject("MandatoryBehavior");
 		newObject.setName(name);
 		newObject.getBehavior("MandatoryBehavior").getProperty("elementName").setValue(name);
 		newObject.getBehavior("MandatoryBehavior").getProperty("xPos").setValue(xPos);
 		newObject.getBehavior("MandatoryBehavior").getProperty("yPos").setValue(yPos);
+		newObject.getBehavior("MandatoryBehavior").getProperty("imagePath").setValue(imageName);
+
 		return newObject;
 	}
 	

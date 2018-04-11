@@ -43,7 +43,7 @@ public class ModelGameState {
 		GameElement e7 = getBlock(110.0, 20.0);
 		GameElement e8 = getBlock(50.0, 80.0);*/
 		state = new GameState();
-		display = new DisplayState();
+		display = new DisplayState("enginetestmario");
 		for (GameElement el : elements) {
 			state.addGameElement(el);
 			display.addNewElement(el);

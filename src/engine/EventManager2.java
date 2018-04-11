@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import engine.behaviors.MandatoryBehavior;
+import engine.collision.CollisionManager;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.ElementEvent;
 import engine.events.gameevents.GameEvent;
@@ -13,10 +14,12 @@ public class EventManager2 {
 	
 	private GameState gameState;
 	private Engine engine;
+	private CollisionManager collisionManager;
 	
 	public EventManager2 (GameState state, Engine engine) {
 		gameState = state;
 		this.engine = engine;
+		collisionManager = new CollisionManager();
 	}
 	
 	public void processElementEvent(ElementEvent ee) {
@@ -26,13 +29,14 @@ public class EventManager2 {
 			gameEvents.addAll(ge.processEvent(ee));
 		}
 		
+		//collisionManager.handleCollisions(gameState);
 		handleCollisions();
 		gameEvents.stream().forEach(event -> processGameEvent(event));
 		
 	}
 	
 	private void processGameEvent(GameEvent gameEvent) {
-		gameEvent.execute(gameState, engine);
+		gameEvent.execute(gameState, displayState, engine);
 	}
 	
 	/*private void handleCollisions() {
@@ -65,6 +69,7 @@ public class EventManager2 {
 				}
 			}
 		}
+	}
 	
 	public GameState getCurrentState() {
 		return gameState;

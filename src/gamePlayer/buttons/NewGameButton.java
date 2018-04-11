@@ -29,14 +29,8 @@ public class NewGameButton extends Button {
 
 		this.setOnAction(event -> {
 			
-			GameSelector gs = new GameSelector();
-			
-			String fileString = "dummy-mario.pngasdfa";
-
-			
-			buttonData.playGame(fileString);
-
-			
+			GameSelector gs = new GameSelector(buttonData);
+						
 			buttonData.addToRoot(gs);
 
 			

@@ -1,5 +1,8 @@
 package engine.eventresponses;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import engine.GameElement;
 import engine.behaviors.Movable;
 import engine.events.elementevents.ElementEvent;
@@ -14,14 +17,15 @@ public class TimeMovableResponse extends EventResponse {
 	}
 
 	@Override
-	public GameEvent execute(ElementEvent event, GameElement element) {
+	public List<GameEvent> execute(ElementEvent event, GameElement element) {
+		List<GameEvent> gameEventList = new ArrayList<GameEvent>();
 		if (!isValidEvent(event)) { 
-			return new EmptyGameEvent();
+			return gameEventList;
 		}
 		TimeEvent te = (TimeEvent) event;
 		Movable b = (Movable) element.getBehavior(Movable.class);
 		b.move(te.getTime());
-		return new EmptyGameEvent();
+		return gameEventList;
 	}
 
 }

@@ -8,43 +8,28 @@ public class GameObject {
 	private String myName;
 	private Set<Behavior> myBehaviors;
 	private Set<Event> myEvents;
-	
-	//add basic behavior elements to the constructor
-	
-	//do we need this?
-	public GameObject(double x, double y, String image) {
-		myBehaviors = new HashSet<>();
-		myEvents = new HashSet<>();
-//		addBasicBehavior(x, y, image);
-	}
-	
-	public GameObject(Behavior basic) {
-		myBehaviors = new HashSet<>();
-		myEvents = new HashSet<>();
-		myBehaviors.add(basic);
-	}
+	private BehaviorFactory myBehaviorFactory;
 	
 	public GameObject() {
 		myBehaviors = new HashSet<>();
 		myEvents = new HashSet<>();
+		myBehaviorFactory = new BehaviorFactory();
+	}
+
+	public GameObject(Behavior basic) {
+		this();
+		myBehaviors.add(basic);
 	}
 	
-//	BehaviorFactory should do this
-//	private void addBasicBehavior(Double x, Double y, String image) {
-//		Property xLoc = new Property("xLoc", x.getClass());
-//		Property yLoc = new Property("yLoc", y.getClass());
-//		Property myImage = new Property("image", image);
-//		Set<Property> basicProps = new HashSet<>();
-//		basicProps.add(xLoc); 
-//		basicProps.add(yLoc); 
-//		basicProps.add(myImage); 
-//		Behavior basic = new Behavior("Basic", basicProps);
-//		myBehaviors.add(basic);
-//	}
-	
 	public GameObject(GameObject toCopy) {
+		this();
 		myBehaviors = toCopy.getBehaviors();
 		myEvents = toCopy.getEvents();
+	}
+	
+	public void addBehavior(String behaviorToAdd) {
+		Behavior newBehavior = myBehaviorFactory.makeBehavior(behaviorToAdd);
+		myBehaviors.add(newBehavior);
 	}
 	
 	//each game object will have properties that describe how it behaves. 
@@ -98,5 +83,7 @@ public class GameObject {
 		return new Behavior();
 	}
 	
-	
+	public String toString() {
+		return myName;
+	}
 }

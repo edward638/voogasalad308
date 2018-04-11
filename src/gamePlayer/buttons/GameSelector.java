@@ -3,18 +3,29 @@ package gamePlayer.buttons;
 import java.io.File;
 import java.nio.file.Paths;
 
+import data.GameDescriptionProvider;
+import data.GameLoader;
+//
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class GameSelector extends ScrollPane {
 
-	public GameSelector() {
+	ButtonData buttonData;
+	
+	public GameSelector(ButtonData buttonData) {
+		this.buttonData = buttonData;
 		this.setLayoutX(30);
 		this.setLayoutY(30);
 		this.setPrefSize(900, 590);
@@ -24,58 +35,79 @@ public class GameSelector extends ScrollPane {
 
 	private void initializeGameSelections() {
 		VBox box = new VBox();
+		box.setSpacing(5);
+		box.setStyle("-fx-background-color:white;");
 
-		box.setMinWidth(500);
-		box.setMaxWidth(500);
-		Pane p = new Pane();
-		p.setMinWidth(400);
-		p.setMaxWidth(400);
-		p.setMinHeight(200);
-		p.setMaxHeight(200);
-
-		String currentPath = Paths.get(".").toAbsolutePath().normalize().toString() + "/src/testGameFolder";
+		box.setMinWidth(900);
+		box.setMaxWidth(900);
+		
+		String currentPath = Paths.get(".").toAbsolutePath().normalize().toString() + "/data/gamedata/games";
 		File directory = new File(currentPath);
-
+		GameDescriptionProvider gameDescriptionProvider = new GameDescriptionProvider();
+		
 		File[] fList = directory.listFiles();
 		for (File file : fList) {
-			String gamePath = currentPath + "/" + file.getName();
-			File gameDirectory = new File(gamePath);
-			File[] gameList = gameDirectory.listFiles();
-			for (File gameFile : gameList) {
-				String path = gameFile.getName();
-				System.out.println(path); // this gets name for each file
-				String extension = "";
-				int i = path.lastIndexOf('.');
-				if (i > 0) {
-					extension = path.substring(i + 1);
-				}
-				//create pane in this loop
-				
-			}
+			String gameName = file.getName();
+			String gameString = gameDescriptionProvider.getGameName(gameName);
+			String gameDescription = gameDescriptionProvider.getGameDescription(gameName);
+			Image gameImage = gameDescriptionProvider.getDescriptionImage(gameName);
+			
+			Pane gameDescriptionPane = setupNewGamePane(gameName, gameString, gameDescription, gameImage);
+
+			Button playButton = new Button("Select Game");
+			playButton.setLayoutX(750);
+			playButton.setLayoutY(90);
+			playButton.setOnAction((event) -> {
+				buttonData.playGame(gameName);
+			});
+			
+			gameDescriptionPane.getChildren().add(playButton);
+			
+			
+			box.getChildren().add(gameDescriptionPane);
+			
 
 		}
-
-		Text t = new Text("1412412412");
-		t.setY(12);
-		t.setX(120);
-
-		Rectangle rect1 = new Rectangle(0, 0, 500, 500);
-		rect1.setFill(Color.BISQUE);
-
-		p.getChildren().add(t);
-
-		Pane p1 = new Pane();
-		p1.setMinWidth(400);
-		p1.setMaxWidth(400);
-		p1.setMinHeight(900);
-		p1.setMaxHeight(900);
-		p1.getChildren().add(rect1);
-
-		box.getChildren().add(p);
-		box.getChildren().add(p1);
-
+		
 		this.setContent(box);
 
+	}
+
+	private Pane setupNewGamePane(String gameName, String gameString, String gameDescription, Image gameImage) {
+		Pane pane = new Pane();
+		
+		pane.setMinWidth(900);
+		pane.setMaxWidth(900);
+		pane.setMinHeight(200);
+		pane.setMaxHeight(200);
+		pane.setStyle("-fx-background-color:black;");
+		
+		ImageView imageView = new ImageView();
+		imageView.setImage(gameImage);
+		imageView.setX(20);
+		imageView.setY(20);
+		imageView.setFitHeight(160);
+		imageView.setFitWidth(160);
+		
+		Text nameText = new Text(gameString);
+		nameText.setX(225);
+		nameText.setY(60);
+		nameText.setStyle(" -fx-font: 50px Helvetica;\r\n" + 
+				"    -fx-fill: linear-gradient(from 0% 0% to 100% 200%, repeat, aqua 0%, red 50%);\r\n" + 
+				"    -fx-stroke: black;\r\n" + 
+				"    -fx-stroke-width: 1;");
+		
+				
+		Text descriptionText = new Text(gameDescription);
+		descriptionText.setX(230);
+		descriptionText.setY(90);
+		descriptionText.setFont(new Font("Times New Roman", 20));
+		descriptionText.setFill(Color.WHITE);
+		
+		
+		pane.getChildren().addAll(imageView, nameText, descriptionText);
+		
+		return pane;
 	}
 
 }

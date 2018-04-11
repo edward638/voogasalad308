@@ -3,12 +3,12 @@ package authoring;
 import java.util.HashSet;
 import java.util.Set;
 
-/* 
+/** 
  * Behavior is a characteristic that is held by a GameObject
  * It includes characteristics such as movable, shoots, can die, etc.
  * 
  * @author: Summer
- */
+ **/
 public class Behavior {
 	
 	private Set<Property> myProperties;
@@ -58,7 +58,7 @@ public class Behavior {
 	}
 	
 	public String toString() {
-		return myName + ": " + myProperties.toString();
+		return " " + myName + ": " + myProperties.toString();
 	}
 	
 }

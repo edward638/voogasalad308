@@ -1,14 +1,16 @@
 package gamePlayer.buttons;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 
+import data.GameSaver;
 import gamePlayer.ConcreteGamePlayer;
 import javafx.scene.control.Button;
 
-public class SaveButton extends Button{
+public class SaveButton extends Button {
 
 	private ButtonData buttonData;
-	
+
 	public SaveButton(double x, double y, double width, double height, ButtonData buttonData) {
 		this.setLayoutX(x);
 		this.setLayoutY(y);
@@ -18,11 +20,16 @@ public class SaveButton extends Button{
 		this.buttonData = buttonData;
 		setAction();
 	}
-	
+
 	private void setAction() {
 		this.setOnAction(event -> {
-			String timeStamp = new SimpleDateFormat("MM/dd HH:mm").format(new java.util.Date());
-			//buttonData.getSerializer().gameEngineToXML(buttonData.getCurrentGameName() + " " + "MM/dd HH:mm", buttonData.getGameState().getDisplayStates());
+			String rootFolder = "CALVIN FILL IN HOW TO MAKE THIS STRING = ROOTFOLDER";
+			GameSaver gameSaver = new GameSaver(rootFolder);
+			try {
+				gameSaver.saveGameState(buttonData.getGameState());
+			} catch (IOException e) {
+				System.out.println("e dot print stack trace");
+			}
 		});
 	}
 

@@ -22,12 +22,14 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
+/**
+ * @author Maddie Wilkinson
+ *
+ */
 public class PropertyPanel extends AuthoringUIComponent {
 
 	private ScrollPane myScrollPane;
 	private static final String IMAGES_FILEPATH = "./";
-
-
 
 	//in AuthoringDisplay, don't forget to remove and re-add this to the root every time it changes
 	public PropertyPanel(ResourceBundle resources, Game game, Node root) {

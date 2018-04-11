@@ -22,12 +22,12 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class Engine /*extends Application*/ {
-	/*public static final int FRAMES_PER_SECOND = 60;
+	public static final int FRAMES_PER_SECOND = 60;
 	public static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
-	public static final Paint BACKGROUND = Color.WHITE;
+	/*public static final Paint BACKGROUND = Color.WHITE;*/
 	
-	private Timeline animation;*/
+	private Timeline animation;
 	
 	private Pane enginePane = new Pane();
 	private GameState gameState;
@@ -43,13 +43,14 @@ public class Engine /*extends Application*/ {
 		displayState = modelGameState.getDisplay();
 		eventManager = new EventManager2(gameState, this);
 		
+		startAnimation();
 	}
 	
 	public Pane getDisplay() {
 		return enginePane;
 	}
 	
-	/*private void startAnimation() {
+	private void startAnimation() {
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
                 e -> timeStep(SECOND_DELAY));
 		animation = new Timeline();
@@ -57,7 +58,7 @@ public class Engine /*extends Application*/ {
         animation.getKeyFrames().add(frame);
         animation.play();
     }
-	
+	/*
 	private Scene setupLevel (int width, int height, Paint background) {
 		Group root = new Group();
 		Scene scene = new Scene(root, width, height, background);

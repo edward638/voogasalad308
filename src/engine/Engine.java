@@ -33,14 +33,15 @@ public class Engine extends Application {
 	private GameState gameState;
 	private EventManager2 eventManager;
 	
-	/*public Engine(String gamePath) {
+	public Engine(String gamePath) {
 		//EngineRunner engineRunner = new EngineRunner(gamePath);
 		
-		gameState = new ModelGameState().getState();
-		eventManager = new EventManager2(gameState);
-	}*/
+		
+		/*gameState = new ModelGameState().getState();
+		eventManager = new EventManager2(gameState);*/
+	}
 	
-	public Pane startGame() {
+	public Pane getDisplay() {
 		return enginePane;
 	}
 	
@@ -94,11 +95,6 @@ public class Engine extends Application {
 			enginePane.getChildren().remove(e);
 		}
 		removeElements.clear();
-	}
-
-	public Pane getDisplay() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 	public static void main(String[] args) {

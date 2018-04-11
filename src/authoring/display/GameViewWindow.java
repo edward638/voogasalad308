@@ -10,6 +10,7 @@ import authoring.Property;
 import data.ImageManager;
 import engine.behaviors.MandatoryBehavior;
 import javafx.scene.Node;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
@@ -29,6 +30,8 @@ public class GameViewWindow extends AuthoringUIComponent{
 		pane = new Pane();
 		setGameObjectList(game);
 		addObjectsToPane();
+		stackPane.getChildren().add(tilePane);
+		stackPane.getChildren().add(pane);
 	}
 
 	private void setGameObjectList(Game game){
@@ -50,7 +53,10 @@ public class GameViewWindow extends AuthoringUIComponent{
 	}
 	
 	private void placeObject(Double x, Double y, String imagePath) {
-		
+		ImageView imageView = new ImageView(imageManager.getImage(imagePath));
+		imageView.setLayoutX(x);
+		imageView.setLayoutY(y);
+		pane.getChildren().add(imageView);
 	}
 	
 	private void makeBackgroundPane() {

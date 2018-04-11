@@ -2,6 +2,8 @@ package data;
 
 import authoring.GameObject;
 import authoring.GameScene;
+import engine.GameState;
+
 import com.thoughtworks.xstream.XStream;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -22,7 +24,8 @@ public class Deserializer {
 
     private Map<GameScene, List<GameObject>> objectMap;
     private XStream xstream;
-
+    private static final String SAVE = "save";
+    
     public Deserializer(){
         xstream = new XStream();
     }
@@ -91,6 +94,13 @@ public class Deserializer {
         File file = new File(fileName);
         return (GameScene) xstream.fromXML(convertXMLFileToString(file));
     }
+    
+    public GameState getSaveState(String fileName) {
+    	String saveState = fileName + "/" + SAVE + ".xml";
+    	File file = new File(saveState);
+        return (GameState) xstream.fromXML(convertXMLFileToString(file));
+    }
+   
 
     /**
      * converts a file to string. taken from http://techdiary.bitourea.com/2008/07/convert-xml-file-to-xml-string-in-java.html

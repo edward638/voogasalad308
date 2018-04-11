@@ -6,9 +6,8 @@ import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
-class BehaviorMakerTest {
+class BehaviorFactoryTest {
 
-	
 	@Test
 	void testGameObjectAddBehavior() {
 		GameObject go = new GameObject(new Behavior());

@@ -8,6 +8,7 @@ public class GameObject {
 	private String myName;
 	private Set<Behavior> myBehaviors;
 	private Set<Event> myEvents;
+	private BehaviorFactory myBehaviorFactory;
 	
 	//add basic behavior elements to the constructor
 	
@@ -15,7 +16,7 @@ public class GameObject {
 	public GameObject(double x, double y, String image) {
 		myBehaviors = new HashSet<>();
 		myEvents = new HashSet<>();
-//		addBasicBehavior(x, y, image);
+		myBehaviorFactory = new BehaviorFactory();
 	}
 	
 	public GameObject(Behavior basic) {
@@ -98,5 +99,7 @@ public class GameObject {
 		return new Behavior();
 	}
 	
-	
+	public String toString() {
+		return myName;
+	}
 }

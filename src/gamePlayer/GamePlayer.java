@@ -1,9 +1,12 @@
-package GamePlayer;
+package gamePlayer;
+
+import java.io.IOException;
 
 import javafx.scene.Scene;
 
 public interface GamePlayer {
 		
+
 	/**
 	 * called when a new game is started or old game loaded.
 	 * initialises a new game engine with parameters appropriate to the specific game.
@@ -12,16 +15,14 @@ public interface GamePlayer {
 	 */
 	 void playGame(String game);
 	 
-	 /**
-	  * saves game, uses XML writer to write a file containing all current positions of game elements.
-	  * 
-	  */
-	 void saveGame();
 	 
 	 /**
 	  * allows the display to retrieve the scene associated the game player
 	  * @return scene to be displayed
 	  */
 	 public Scene getScene();
+
+
+	void DummyPlayGame(String file);
 	 
 }

@@ -17,4 +17,9 @@ public class TimeEvent extends ElementEvent {
 		return "Time Event: " + timeElapsed + " seconds elapsed";
 	}
 
+	@Override
+	public boolean matchesEvent(ElementEvent other) {
+		return other instanceof TimeEvent;
+	}
+
 }

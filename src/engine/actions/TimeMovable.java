@@ -1,24 +1,16 @@
-package engine.eventresponses;
+package engine.actions;
 
 import engine.GameElement;
 import engine.behaviors.Movable;
 import engine.events.elementevents.ElementEvent;
 import engine.events.elementevents.TimeEvent;
 
-public class BasicTimeResponse extends EventResponse {
+public class TimeMovable implements Action{
 	
-	public BasicTimeResponse() {
-		super(TimeEvent.class);
-	}
-
 	@Override
-	public void execute(ElementEvent event, GameElement element) {
-		if (!isValidEvent(event)) { 
-			return;
-		}
+	public void act(ElementEvent event, GameElement element) {
 		TimeEvent te = (TimeEvent) event;
 		Movable b = (Movable) element.getBehavior(Movable.class);
 		b.move(te.getTime());
 	}
-
 }

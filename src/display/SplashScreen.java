@@ -30,7 +30,7 @@ public class SplashScreen {
 	private List<GUIButton> buttons;
 	private static final int SIZE_X = 400;
 	private static final int SIZE_Y = 400;
-	private static final String SPLASH_IMAGE = "./data/images/rcd.jpg";
+	private static final String SPLASH_IMAGE = "./data/images/mario.png";
 
 	public SplashScreen(Stage stage) {
 		this.currStage = stage;
@@ -52,9 +52,11 @@ public class SplashScreen {
 //		splashImage.setFitWidth(300);
 //		splashImage.setLayoutX(50);
 //		splashImage.setLayoutY(120);
+		
 		splashImage.setFitHeight(200);
 		splashImage.setLayoutX(120);
 		splashImage.setLayoutY(120);
+		
 		return splashImage;
 		} catch (Exception e) {
 			throw new IllegalArgumentException();

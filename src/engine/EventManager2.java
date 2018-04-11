@@ -65,6 +65,7 @@ public class EventManager2 {
 				}
 			}
 		}
+	}
 	
 	public GameState getCurrentState() {
 		return gameState;

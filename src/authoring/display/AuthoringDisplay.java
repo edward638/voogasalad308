@@ -3,6 +3,7 @@ package authoring.display;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import authoring.Game;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,29 +26,34 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+/**
+ * @author madelinewilkinson
+ *
+ */
 public class AuthoringDisplay {
 	public static final String DEFAULT_RESOURCE_PATH = "authoring.display.resources/";
-	public static final String DEFAULT_CSS_PATH = "authoring/display/resources/"; //rename?
+	public static final String DEFAULT_CSS_PATH = "authoring/display/resources/";
 
 	public static final String DEFAULT_LANGUAGE = "English";
 	public static final String DEFAULT_STYLE = "myStyle.css";
 
-
 	private BorderPane root;
-	private ResourceBundle myResources; //rename more accurately
+	private ResourceBundle myResources; //rename more accurately; it's the button names & stuff specifically
+	private Game myGame;
 
-	public AuthoringDisplay(Stage stage) {
+	public AuthoringDisplay(Stage stage, Game game) {
+		myGame = new Game();
 		loadResources();
 		initialize(stage);
 	}
-
+	
 	public void loadResources() {
 		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PATH + DEFAULT_LANGUAGE);
 	}
 
 	public void initialize(Stage stage) {
 		Scene newScene = setUpScene();
-//		newScene.getStylesheets().add(DEFAULT_RESOURCE_PACKAGE1 + DEFAULT_STYLE);
+		newScene.getStylesheets().add(DEFAULT_CSS_PATH + DEFAULT_STYLE);
 		stage.setScene(newScene);
 		stage.show();
 	}
@@ -59,12 +65,12 @@ public class AuthoringDisplay {
 		root.setRight(makeObjectPropertyPanel());
 		root.setBottom(makeTemplateObjectPanel());
 		root.setTop(makeSaveBar());
-		root.setCenter(makeGameVisPane());
+		root.setCenter(makeGameVisWindow());
 		return new Scene(root);
 	}
 
 	public Node makeLevelPanel() {
-		LevelPanel levelPanel = new LevelPanel(myResources);
+		LevelPanel levelPanel = new LevelPanel(myResources, myGame, root);
 		return levelPanel.asVBox();
 	}
 
@@ -73,16 +79,17 @@ public class AuthoringDisplay {
 	}
 
 	public Node makeObjectPropertyPanel() {
-		PropertyPanel propertyPanel = new PropertyPanel(myResources);
+		PropertyPanel propertyPanel = new PropertyPanel(myResources, myGame, root);
 		return propertyPanel.asScrollPane();
 	}
 
-	public Node makeGameVisPane() {
-		return new Pane();
+	public Node makeGameVisWindow() {
+		GameViewWindow gameViewWindow = new GameViewWindow(myResources, myGame, root);
+		return gameViewWindow.asPane();
 	}
 	
 	public Node makeSaveBar() {
-		SaveBar saveBar = new SaveBar(myResources);
+		SaveBar saveBar = new SaveBar(myResources, myGame, root);
 		return saveBar.asHBox();
 	}
 }

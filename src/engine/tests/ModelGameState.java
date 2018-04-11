@@ -6,6 +6,7 @@ import java.util.List;
 import engine.DisplayState;
 import engine.GameElement;
 import engine.GameState;
+import engine.actions.CollisionKillable;
 import engine.actions.TimeGravity;
 import engine.actions.TimeMovable;
 import engine.behaviors.Gravity;
@@ -108,6 +109,7 @@ public class ModelGameState {
 		//Adding Time Responses
 		mario.addEventResponse(new TimeEvent(0.0), new TimeMovable());
 		mario.addEventResponse(new TimeEvent(0.0), new TimeGravity());
+		mario.addEventResponse(new CollisionEvent(mario, mario), new CollisionKillable());
 		
 		// Response to up arrow key is to jump
 		mario.addEventResponse(new KeyInputEvent(KeyCode.W), (event, element) -> {

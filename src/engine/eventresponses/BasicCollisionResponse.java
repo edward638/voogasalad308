@@ -24,7 +24,6 @@ public class BasicCollisionResponse extends EventResponse {
 		Movable m = (Movable) element.getBehavior(Movable.class);
 		MandatoryBehavior mb = (MandatoryBehavior) element.getBehavior(MandatoryBehavior.class);
 		m.setYVelocity(0.0);
-		mb.setPosition(mb.getX(), mb.getY());
 		return gameEventList;
 	}
 }

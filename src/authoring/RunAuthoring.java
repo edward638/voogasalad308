@@ -4,6 +4,10 @@ import authoring.display.AuthoringDisplay;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * @author Maddie Wilkinson
+ *
+ */
 public class RunAuthoring extends Application{
 
 	@Override

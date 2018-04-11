@@ -27,7 +27,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
- * @author madelinewilkinson
+ * @author Maddie Wilkinson
  *
  */
 public class AuthoringDisplay {
@@ -85,7 +85,8 @@ public class AuthoringDisplay {
 
 	public Node makeGameVisWindow() {
 		GameViewWindow gameViewWindow = new GameViewWindow(myResources, myGame, root);
-		return gameViewWindow.asPane();
+//		return gameViewWindow.asPane();
+		return new Pane();
 	}
 	
 	public Node makeSaveBar() {

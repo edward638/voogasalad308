@@ -18,6 +18,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * @author Maddie Wilkinson
+ *
+ */
 public class LevelPanel extends AuthoringUIComponent {
 
 	private VBox myVBox;

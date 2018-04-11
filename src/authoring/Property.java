@@ -37,7 +37,7 @@ public class Property {
 	
 	//returns the name of the property
 	public String toString() {
-		return myValueType + myName + " = " + myValue;
+		return myValueType + " " + myName + " = " + myValue;
 	}
 	
 }

@@ -27,6 +27,7 @@ public class BasicKillableCollisionResponse extends EventResponse {
 			return gameEventList;
 		}
 		
+		
 		return gameEventList;
 		
 	}

@@ -15,7 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * @author madelinewilkinson
+ * @author Maddie Wilkinson
  *
  */
 public class NewLevelWindow extends NewComponentWindow {
@@ -55,7 +55,7 @@ public class NewLevelWindow extends NewComponentWindow {
 				GameScene newScene = getGame().getSceneManager().makeScene(levelName, levelIndex);
 				myLevelDropdown.getItems().add(levelIndex - 1, newScene);
 				getStage().close();
-				//after slider is implemented, only hatch general exception
+				//after slider is implemented, only catch general exception
 			} catch(NumberFormatException e) {
 				System.out.println("Invalid index input numFormat");
 				new Error("Invalid index input"); //this isn't being displayed yet

@@ -29,7 +29,7 @@ public class GameSaver {
      * GameSaver constructor
      * @param gameName desired name of game root file
      */
-    public GameSaver(String gameName){
+	public GameSaver(String gameName){
     	 gameLocation = baseLocation + gameName + "/";
          gameDescriptionLocation = gameLocation + ResourceBundleManager.getPath("DESCRIPTION");
          gameScenesLocation = gameLocation + ResourceBundleManager.getPath("SCENES");
@@ -77,10 +77,11 @@ public class GameSaver {
         serializer.gameAuthorToXML(gameScenesLocation, gameSceneList);
     }
 
-    /**
-     * Saves the game when the game is being played in game engine
-     * @throws IOException 
-     */
+	/**
+	 * Saves the game when the game is being played in game engine
+	 * 
+	 * @throws IOException
+	 */
     public void saveGameState(GameState gameState) throws IOException {
     	serializer.saveStateToXML(gameSavesLocation, gameState);
     }

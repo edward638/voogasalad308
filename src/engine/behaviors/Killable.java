@@ -5,6 +5,7 @@ import engine.events.gameevents.RemoveGameElementEvent;
 
 public class Killable extends Behavior{
 	private Double health;
+	
 	private Double decayRate;
 	private Double lifeHealth;
 

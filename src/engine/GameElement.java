@@ -56,6 +56,14 @@ public class GameElement {
 		}
 	}
 	
+	/*
+	 * Checks if this GameElement has a Behavior object of the requested type
+	 */
+	public boolean hasBehavior(Class<?> behavior_type) {
+		return behaviors.stream()
+			.filter(behavior -> behavior.getClass() == behavior_type)
+			.collect(Collectors.toList()).size() > 0;
+	}
 	
 	/*
 	 * Adds the ability for this game element to respond to an ElementEvent in a certain way
@@ -69,7 +77,9 @@ public class GameElement {
 	 */
 	public List<GameEvent> processEvent(ElementEvent event) {
 		responder.respondTo(event);
-		List<GameEvent> returnableEvents = new ArrayList<>(returnedGameEvents);
+		// Save the GameEvents added on this processEvent and return it. Reset the field returnedGameEvents for the next time this 
+		// element processes an event
+		List<GameEvent> returnableEvents = new ArrayList<>(returnedGameEvents); 
 		returnedGameEvents = new ArrayList<>();
 		return returnableEvents;
 	}
@@ -78,7 +88,6 @@ public class GameElement {
 	 * Allows behaviors to add GameEvent objects to this GameElement that will 
 	 * be returned at the completion of processEvent
 	 */
-	
 	public void addGameEvent(GameEvent gameevent) {
 		returnedGameEvents.add(gameevent);
 	}

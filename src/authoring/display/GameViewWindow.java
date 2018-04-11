@@ -30,6 +30,7 @@ public class GameViewWindow extends AuthoringUIComponent{
 		pane = new Pane();
 		setGameObjectList(game);
 		addObjectsToPane();
+		imageManager = new ImageManager(game.getName());
 		stackPane.getChildren().add(tilePane);
 		stackPane.getChildren().add(pane);
 	}
@@ -38,6 +39,10 @@ public class GameViewWindow extends AuthoringUIComponent{
 		gameObjects = game.getSceneManager().getCurrentScene().getMyObjects();
 	}
 	
+	public void updateWindow(List<GameObject> gameObjectsList) {
+		gameObjects = gameObjectsList;
+		addObjectsToPane();
+	}
 	
 	private void addObjectsToPane() {
 		for (GameObject object: gameObjects) {

@@ -40,7 +40,7 @@ public class ModelGameState {
 	public GameElement getMario() {
 		GameElement mario = new GameElement();
 		//Note: Image path untested
-		mario.addBehavior(new MandatoryBehavior(mario, "Mario", 300.0, 20.0, new RectangleShape(256.0, 256.0), "mario_1.jpg"));
+		mario.addBehavior(new MandatoryBehavior(mario, "Mario", 200.0, 20.0, new RectangleShape(100.0, 100.0), "mario_1.jpg"));
 		List<Double> direction = new ArrayList<>(); direction.add(1.0); direction.add(0.0);
 ;		mario.addBehavior(new Movable(mario, 0.0, direction));
 		mario.addBehavior(new Gravity(mario));

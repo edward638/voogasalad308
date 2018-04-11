@@ -33,13 +33,13 @@ public class Engine extends Application {
 	private GameState gameState;
 	private EventManager2 eventManager;
 	
-	public Engine(String gamePath) {
+	/*public Engine(String gamePath) {
 		//EngineRunner engineRunner = new EngineRunner(gamePath);
 		
 		
-		/*gameState = new ModelGameState().getState();
-		eventManager = new EventManager2(gameState);*/
-	}
+		//gameState = new ModelGameState().getState();
+		//eventManager = new EventManager2(gameState);
+	}*/
 	
 	public Pane getDisplay() {
 		return enginePane;

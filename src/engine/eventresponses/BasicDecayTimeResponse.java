@@ -1,5 +1,8 @@
 package engine.eventresponses;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import engine.GameElement;
 import engine.behaviors.Killable;
 import engine.events.elementevents.ElementEvent;
@@ -18,15 +21,17 @@ public class BasicDecayTimeResponse extends EventResponse{
 	}
 
 	@Override
-	public GameEvent execute(ElementEvent event, GameElement element) {
+	public List<GameEvent> execute(ElementEvent event, GameElement element) {
+		List<GameEvent> gameEventList = new ArrayList<GameEvent>();
 		if (!isValidEvent(event)) { 
-			return new EmptyGameEvent();
+			return gameEventList;
 		}
 		TimeEvent te = (TimeEvent) event;
 		Killable b = (Killable) element.getBehavior(Killable.class);
 		if (b.decayHealth(te.getTime())) {
-			return new RemoveGameElementEvent(element);
+			gameEventList.add(new RemoveGameElementEvent(element));
+			return gameEventList;
 		}
-		return new EmptyGameEvent();
+		return gameEventList;
 	}
 }

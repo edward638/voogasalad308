@@ -30,7 +30,7 @@ public class ConcreteButtonData implements ButtonData {
 
 	@Override
 	public void playGame(String file) {
-		gamePlayer.DummyPlayGame(file);
+		gamePlayer.playGame(file);
 	}
 
 	public void setCurrentGameName(String name) {

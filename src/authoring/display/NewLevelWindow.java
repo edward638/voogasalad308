@@ -39,7 +39,7 @@ public class NewLevelWindow extends NewComponentWindow {
 		TextField indexText = new TextField();
 		levelIndex.getChildren().addAll(new Label("Index: "), indexText);
 
-		Button closeButton = makeButton("Close", event -> {
+		Button closeButton = makeButton("Save", event -> {
 			saveLevel(levelText, indexText);
 		});
 

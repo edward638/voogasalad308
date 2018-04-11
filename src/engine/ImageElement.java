@@ -2,6 +2,7 @@ package engine;
 
 import java.util.Map;
 
+import engine.behaviors.shapes.ShapeDefinition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -11,12 +12,13 @@ public class ImageElement extends ImageView {
 	public ImageElement(GameElement elementReference) {
 		//updateState();
 		
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream("Goomba.png"));
+		Image image = new Image(getClass().getClassLoader().getResourceAsStream("./Goomba.png"));
 		this.setImage(image);
-		//this.setFitWidth((double) elementReference.reportProperties().get("Width"));
-		System.out.println(elementReference.reportProperties().get("shapeDef"));
-		//this.setFitHeight((double) elementReference.reportProperties().get("Height"));
-		System.out.println(elementReference.reportProperties());//.get("imagePath").toString());
+		this.setFitWidth(((ShapeDefinition)elementReference.reportProperties().get("shapeDef")).getWidth());
+		this.setFitHeight(((ShapeDefinition)elementReference.reportProperties().get("shapeDef")).getHeight());
+		this.setTranslateX((double) elementReference.reportProperties().get("xPos"));
+		this.setTranslateY((double) elementReference.reportProperties().get("yPos"));
+		System.out.println(elementReference.reportProperties().get("imagePath").toString());
 	}
 
 	public void updateState() {

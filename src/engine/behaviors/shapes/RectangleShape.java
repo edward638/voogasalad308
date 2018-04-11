@@ -20,5 +20,15 @@ public class RectangleShape extends ShapeDefinition{
 	public String toString() {
 		return "Rectangle: Width " + width + " , Height: " + height;
 	}
+	
+	@Override
+	public double getWidth() {
+		return width;
+	}
+	
+	@Override
+	public double getHeight() {
+		return height;
+	}
 
 }

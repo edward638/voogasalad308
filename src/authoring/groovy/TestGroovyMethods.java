@@ -6,7 +6,6 @@ public class TestGroovyMethods {
 	    GroovyCommandFactory factory = new GroovyCommandFactory();
 	    System.out.println(factory.getBehaviorFields());
 	    System.out.println(factory.getBehaviorMethods());
-	    
     }
     
 }

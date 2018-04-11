@@ -80,7 +80,7 @@ public class Engine extends Application {
 		double gameSteps = elapsedTime*gameState.getGameSpeed();
 		gameState.incrementGameTime(gameSteps);
     	eventManager.processElementEvent(new TimeEvent(gameSteps));
-    	//gameState.displayState.updateImageElements();
+    	gameState.displayState.updateImageElements();
     	updateDisplay(gameState.displayState.newElements, gameState.displayState.removeElements);
     }
 

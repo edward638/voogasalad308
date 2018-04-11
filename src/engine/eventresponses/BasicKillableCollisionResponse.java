@@ -6,9 +6,9 @@ import java.util.List;
 import engine.GameElement;
 import engine.behaviors.Killable;
 import engine.behaviors.Killer;
+import engine.behaviors.Movable;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.ElementEvent;
-import engine.events.elementevents.TimeEvent;
 import engine.events.gameevents.EmptyGameEvent;
 import engine.events.gameevents.GameEvent;
 import engine.events.gameevents.RemoveGameElementEvent;
@@ -21,13 +21,11 @@ public class BasicKillableCollisionResponse extends EventResponse {
 	@Override
 	public List<GameEvent> execute(ElementEvent event, GameElement element1) {
 		List<GameEvent> gameEventList = new ArrayList<GameEvent>();
-		CollisionEvent ce = (CollisionEvent) event;
-		gameEventList.addAll(damageEachOther(element1, ce.getCollidedWith(element1)));
 		if (!isValidEvent(event)) { 
 			return gameEventList;
 		}
-		
-		
+		CollisionEvent ce = (CollisionEvent) event;
+		gameEventList.addAll(damageEachOther(element1, ce.getCollidedWith(element1)));
 		return gameEventList;
 		
 	}

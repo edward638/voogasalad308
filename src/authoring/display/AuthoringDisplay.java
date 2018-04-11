@@ -26,6 +26,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+/**
+ * @author Maddie Wilkinson
+ *
+ */
 public class AuthoringDisplay {
 	public static final String DEFAULT_RESOURCE_PATH = "authoring.display.resources/";
 	public static final String DEFAULT_CSS_PATH = "authoring/display/resources/";
@@ -49,7 +53,7 @@ public class AuthoringDisplay {
 
 	public void initialize(Stage stage) {
 		Scene newScene = setUpScene();
-//		newScene.getStylesheets().add(DEFAULT_CSS_PATH + DEFAULT_STYLE);
+		newScene.getStylesheets().add(DEFAULT_CSS_PATH + DEFAULT_STYLE);
 		stage.setScene(newScene);
 		stage.show();
 	}
@@ -61,13 +65,12 @@ public class AuthoringDisplay {
 		root.setRight(makeObjectPropertyPanel());
 		root.setBottom(makeTemplateObjectPanel());
 		root.setTop(makeSaveBar());
-		root.setCenter(makeGameVisPane());
+		root.setCenter(makeGameVisWindow());
 		return new Scene(root);
 	}
 
 	public Node makeLevelPanel() {
 		LevelPanel levelPanel = new LevelPanel(myResources, myGame, root);
-		System.out.println(myGame == null);
 		return levelPanel.asVBox();
 	}
 
@@ -80,7 +83,9 @@ public class AuthoringDisplay {
 		return propertyPanel.asScrollPane();
 	}
 
-	public Node makeGameVisPane() {
+	public Node makeGameVisWindow() {
+		GameViewWindow gameViewWindow = new GameViewWindow(myResources, myGame, root);
+//		return gameViewWindow.asPane();
 		return new Pane();
 	}
 	

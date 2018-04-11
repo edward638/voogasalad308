@@ -6,25 +6,34 @@
         <authoring.Behavior>
           <myProperties>
             <authoring.Property>
-              <myValue class="string">this is my name</myValue>
-              <myName>elementName</myName>
+              <myName>imagePath</myName>
               <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">7.0</myValue>
-              <myName>yPos</myName>
-              <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
               <myValue class="double">2.0</myValue>
               <myName>xPos</myName>
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">this is my name</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeDef</myName>
+              <myValueType>engine.behaviors.shapes.ShapeDefinition</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">7.0</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
           </myProperties>
-          <myName>BasicGameElement</myName>
+          <myName>MandatoryBehavior</myName>
         </authoring.Behavior>
       </myBehaviors>
       <myEvents/>
+      <myBehaviorFactory/>
     </authoring.GameObject>
   </myObjects>
 </authoring.GameScene>

@@ -83,7 +83,7 @@ public class ModelGameState {
 	public GameElement getMario() {
 		GameElement mario = new GameElement();
 		//Note: Image path untested
-		mario.addBehavior(new MandatoryBehavior(mario, "Mario", 200.0, 20.0, new RectangleShape(100.0, 100.0), "mario_1.jpg"));
+		mario.addBehavior(new MandatoryBehavior(mario, "Mario", 200.0, 20.0, new RectangleShape(100.0, 100.0), "MarioSMR.png"));
 		List<Double> direction = new ArrayList<>(); direction.add(1.0); direction.add(0.0);
 ;		mario.addBehavior(new Movable(mario, 0.0, direction));
 		mario.addBehavior(new Gravity(mario));
@@ -95,19 +95,19 @@ public class ModelGameState {
 		// Response to up arrow key is to jump
 		mario.addEventResponse(new KeyInputEvent(KeyCode.UP), (event, element) -> {
 			Movable mov = (Movable) element.getBehavior(Movable.class);
-			mov.setYVelocity(mov.getYVelocity() - 30);
+			mov.setYVelocity(-60.0);
 		});
 		
 		// Response to Right arrow key is to move right
 		mario.addEventResponse(new KeyInputEvent(KeyCode.RIGHT), (event, element) -> {
 			Movable mov = (Movable) element.getBehavior(Movable.class);
-			mov.setXVelocity(10.0);
+			mov.setXVelocity(40.0);
 		});
 		
 		// Response to Left arrow key is to move left
 		mario.addEventResponse(new KeyInputEvent(KeyCode.LEFT), (event, element) -> {
 			Movable mov = (Movable) element.getBehavior(Movable.class);
-			mov.setXVelocity(-10.0);
+			mov.setXVelocity(-40.0);
 		});
 		return mario;
 	}

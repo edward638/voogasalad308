@@ -4,16 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import engine.GameElement;
+import engine.behaviors.MandatoryBehavior;
 import engine.behaviors.Movable;
+import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.ElementEvent;
-import engine.events.elementevents.TimeEvent;
-import engine.events.gameevents.EmptyGameEvent;
 import engine.events.gameevents.GameEvent;
 
-public class TimeMovableResponse extends EventResponse {
-	
-	public TimeMovableResponse() {
-		super(TimeEvent.class);
+public class BasicCollisionResponse extends EventResponse {
+	public BasicCollisionResponse() {
+		super(CollisionEvent.class);
 	}
 
 	@Override
@@ -22,10 +21,10 @@ public class TimeMovableResponse extends EventResponse {
 		if (!isValidEvent(event)) { 
 			return gameEventList;
 		}
-		TimeEvent te = (TimeEvent) event;
-		Movable b = (Movable) element.getBehavior(Movable.class);
-		b.move(te.getTime());
+		Movable m = (Movable) element.getBehavior(Movable.class);
+		MandatoryBehavior mb = (MandatoryBehavior) element.getBehavior(MandatoryBehavior.class);
+		m.setYVelocity(0.0);
+		mb.setPosition(mb.getX(), mb.getY()+100);
 		return gameEventList;
 	}
-
 }

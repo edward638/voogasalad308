@@ -8,7 +8,7 @@ public class Killable extends Behavior{
 	
 	private Double decayRate;
 	private Double lifeHealth;
-
+	
 	public Killable(GameElement ge, Double health, Double decayRate, Double lifeHealth) {
 		super(ge);
 		this.health = health;

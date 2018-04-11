@@ -18,7 +18,7 @@ public class GameState{
 		displayState = new DisplayState();
 	}
 
-	public void incrementgameTime(double timeElapsed) {
+	public void incrementGameTime(double timeElapsed) {
 		gameTime+=timeElapsed;
 	}
 	
@@ -41,10 +41,6 @@ public class GameState{
 	}
 	
 	public List<GameElement> getElements() {
-		return elements;
-	}
-	
-	public List<GameElement> getGameElements() { 
 		return elements;
 	}
 

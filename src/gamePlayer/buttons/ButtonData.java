@@ -1,6 +1,6 @@
 package gamePlayer.buttons;
 
-import Data.Serializer;
+import data.Serializer;
 import engine.GameState;
 import javafx.scene.Node;
 import javafx.stage.Stage;

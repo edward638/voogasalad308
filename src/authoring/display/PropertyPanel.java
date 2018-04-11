@@ -22,6 +22,10 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
+/**
+ * @author madelinewilkinson
+ *
+ */
 public class PropertyPanel extends AuthoringUIComponent {
 
 	private ScrollPane myScrollPane;

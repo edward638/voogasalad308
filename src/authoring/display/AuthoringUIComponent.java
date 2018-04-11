@@ -9,6 +9,10 @@ import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 
+/**
+ * @author madelinewilkinson
+ *
+ */
 public abstract class AuthoringUIComponent {
 	private ResourceBundle myResources;
 	private Game myGame;

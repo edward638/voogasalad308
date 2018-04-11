@@ -23,13 +23,14 @@ public class LevelPanel extends AuthoringUIComponent {
 	private VBox myVBox;
 	private ComboBox<GameScene> myLevelDropdown;
 	private Button myAddLevelButton;
+	private Button myAddGameObjectButton;
 	private ListView<GameObject> myLevelObjects;
 
 	public LevelPanel(ResourceBundle resources, Game game, Node root) {
 		super(resources, game, root); //pass resources to super constructor
 
 		myVBox = new VBox();
-		myVBox.getChildren().addAll(makeLevelChooser(), makeObjectList());
+		myVBox.getChildren().addAll(makeLevelChooser(), makeObjectList(), makeAddGameObjectButton());
 	}
 
 	public VBox asVBox() {
@@ -40,6 +41,7 @@ public class LevelPanel extends AuthoringUIComponent {
 		HBox levelChooser = new HBox();
 		makeLevelDropdown();
 		makeAddLevelButton();
+		
 		levelChooser.getChildren().addAll(myAddLevelButton, myLevelDropdown);
 		return levelChooser;
 	}
@@ -52,10 +54,10 @@ public class LevelPanel extends AuthoringUIComponent {
 	}
 	
 	private Button makeAddGameObjectButton() {
-		myAddLevelButton =  makeButton("AddGameObjectButton", event -> { 
+		myAddGameObjectButton =  makeButton("AddGameObjectButton", event -> { 
 			new NewLevelWindow(getResources(), getGame(), getRoot(), myLevelDropdown);
 		});
-		return myAddLevelButton;
+		return myAddGameObjectButton;
 	}
 
 	private ComboBox<GameScene> makeLevelDropdown() {

@@ -1,6 +1,5 @@
 package engine;
 
-import java.io.IOException;
 import java.util.List;
 
 import engine.events.elementevents.ElementEvent;
@@ -32,16 +31,19 @@ public class Engine extends Application {
 	
 	private Pane enginePane = new Pane();
 	private GameState gameState;
+	private DisplayState displayState;
 	private EventManager2 eventManager;
 	
 	/*public Engine(String gamePath) {
 		//EngineRunner engineRunner = new EngineRunner(gamePath);
+		GameLoader loader = new GameLoader(gamePath);
 		
-		gameState = new ModelGameState().getState();
-		eventManager = new EventManager2(gameState);
+		
+		//gameState = new ModelGameState().getState();
+		//eventManager = new EventManager2(gameState);
 	}*/
 	
-	public Pane startGame() {
+	public Pane getDisplay() {
 		return enginePane;
 	}
 	
@@ -79,10 +81,10 @@ public class Engine extends Application {
 	
 	private void timeStep (double elapsedTime) {
 		double gameSteps = elapsedTime*gameState.getGameSpeed();
-		gameState.incrementgameTime(gameSteps);
+		gameState.incrementGameTime(gameSteps);
     	eventManager.processElementEvent(new TimeEvent(gameSteps));
-    	//gameState.displayState.updateImageElements();
-    	updateDisplay(gameState.displayState.newElements, gameState.displayState.removeElements);
+    	displayState.updateImageElements();
+    	updateDisplay(displayState.newElements, displayState.removeElements);
     }
 
 	protected void updateDisplay(List<ImageElement> newElements, List<ImageElement> removeElements) {
@@ -106,7 +108,9 @@ public class Engine extends Application {
 		stage.setScene(setupLevel(500, 500, BACKGROUND));
 		stage.show();
 		
-		gameState = new ModelGameState().getState();
+		ModelGameState modelGameState = new ModelGameState(); 
+		gameState = modelGameState.getState();
+		displayState = modelGameState.getDisplay();
 		eventManager = new EventManager2(gameState);
 		
 		startAnimation();

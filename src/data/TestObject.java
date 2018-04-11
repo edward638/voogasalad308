@@ -1,8 +1,6 @@
 package data;
 
-import javafx.scene.image.Image;
 
-import javax.imageio.ImageIO;
 import java.util.HashMap;
 
 public class TestObject {

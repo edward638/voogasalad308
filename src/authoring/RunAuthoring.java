@@ -1,5 +1,6 @@
-package authoring.display;
+package authoring;
 
+import authoring.display.AuthoringDisplay;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

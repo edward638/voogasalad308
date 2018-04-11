@@ -7,6 +7,10 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * @author Maddie Wilkinson
+ *
+ */
 public abstract class NewComponentWindow extends AuthoringUIComponent {
 
 	private Stage myStage;

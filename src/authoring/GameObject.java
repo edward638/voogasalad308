@@ -17,12 +17,12 @@ public class GameObject {
 	}
 
 	public GameObject(Behavior basic) {
-		super();
+		this();
 		myBehaviors.add(basic);
 	}
 	
 	public GameObject(GameObject toCopy) {
-		super();
+		this();
 		myBehaviors = toCopy.getBehaviors();
 		myEvents = toCopy.getEvents();
 	}

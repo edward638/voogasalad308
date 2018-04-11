@@ -10,7 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 
 /**
- * @author madelinewilkinson
+ * @author Maddie Wilkinson
  *
  */
 public abstract class AuthoringUIComponent {
@@ -25,7 +25,7 @@ public abstract class AuthoringUIComponent {
 		myRoot = root;
 	}
 	
-	public Button makeButton (String property, EventHandler<ActionEvent> handler) {
+	protected Button makeButton (String property, EventHandler<ActionEvent> handler) {
 		Button result = new Button();
 		String label = "";
 		try {
@@ -39,15 +39,15 @@ public abstract class AuthoringUIComponent {
 		return result;
 	}
 	
-	protected ResourceBundle getResources() { //merits of protected vs private?
+	protected ResourceBundle getResources() { 
 		return myResources;
 	}
 	
-	protected Game getGame() { //merits of protected vs private?
+	protected Game getGame() {
 		return myGame;
 	}
 	
-	public Node getRoot() {
+	protected Node getRoot() {
 		return myRoot;
 	}
 	

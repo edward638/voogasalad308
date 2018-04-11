@@ -30,6 +30,7 @@ public class GameViewWindow extends AuthoringUIComponent{
 		pane = new Pane();
 		setGameObjectList(game);
 		addObjectsToPane();
+		makeBackgroundPane(game.getGameImage(), 400, 400);
 		stackPane.getChildren().add(tilePane);
 		stackPane.getChildren().add(pane);
 	}

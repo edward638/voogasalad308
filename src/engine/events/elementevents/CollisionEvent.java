@@ -28,17 +28,17 @@ public class CollisionEvent extends ElementEvent {
 	}
 	
 	public boolean matchesEvent(ElementEvent other) {
-		if (other instanceof CollisionEvent) {
-			CollisionEvent otherCollision = (CollisionEvent) other;
-			List<GameElement> collisionElements = otherCollision.getCollidedElements();
-			if (collisionElements.contains(e1)) {
-				collisionElements.remove(e1);
-				if (collisionElements.get(0).getClass() == e2.getClass()) {
-					return true;
-				}
-			}
-		}
-		return false;
+//		if (other instanceof CollisionEvent) {
+//			CollisionEvent otherCollision = (CollisionEvent) other;
+//			List<GameElement> collisionElements = otherCollision.getCollidedElements();
+//			if (collisionElements.contains(e1)) {
+//				collisionElements.remove(e1);
+//				if (collisionElements.get(0).getClass() == e2.getClass()) {
+//					return true;
+//				}
+//			}
+//		}
+		return other instanceof CollisionEvent;
 	}
 	
 	public GameElement getCollidedWith(GameElement me) {

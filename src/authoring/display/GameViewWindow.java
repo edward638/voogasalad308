@@ -76,7 +76,7 @@ public class GameViewWindow extends AuthoringUIComponent{
 	
 	public Node asPane() {
 		// TODO Auto-generated method stub
-		return null;
+		return stackPane;
 	}
 
 }

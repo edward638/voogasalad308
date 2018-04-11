@@ -1,7 +1,5 @@
 package engine;
 
-import java.util.Map;
-
 import data.ImageManager;
 import engine.behaviors.shapes.ShapeDefinition;
 import javafx.scene.image.Image;

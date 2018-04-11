@@ -1,6 +1,7 @@
 package engine.behaviors;
 import java.util.Arrays;
 import java.util.List;
+
 import engine.GameElement;
 
 /**
@@ -24,7 +25,7 @@ public class Gravity extends Behavior{
 	public void experienceGravity(Double time) {
 		b.setYVelocity(b.getYVelocity()-(GRAVITATIONAL_FORCE*time));
 	}
-	
+
 	public void reverseGravity(Double time) {
 		b.setYVelocity(b.getYVelocity()+(GRAVITATIONAL_FORCE*time));
 	}

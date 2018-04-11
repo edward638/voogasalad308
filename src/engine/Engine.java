@@ -2,6 +2,7 @@ package engine;
 
 import java.util.List;
 
+import data.GameLoader;
 import engine.events.elementevents.ElementEvent;
 import engine.events.elementevents.KeyInputEvent;
 import engine.events.elementevents.MouseInputEvent;
@@ -33,14 +34,14 @@ public class Engine extends Application {
 	private GameState gameState;
 	private EventManager2 eventManager;
 	
-	/*public Engine(String gamePath) {
+	public Engine(String gamePath) {
 		//EngineRunner engineRunner = new EngineRunner(gamePath);
 		GameLoader loader = new GameLoader(gamePath);
 		
 		
 		//gameState = new ModelGameState().getState();
 		//eventManager = new EventManager2(gameState);
-	}*/
+	}
 	
 	public Pane getDisplay() {
 		return enginePane;

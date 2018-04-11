@@ -11,7 +11,6 @@ public class GameScene {
 	private String myName;
 	private Image myBackground;
 	private List<GameObject> myObjects;
-	//have some kind of index that tells what order the levels play in
 
 	public GameScene(String name) {
 		myName = name;
@@ -32,7 +31,7 @@ public class GameScene {
 		myObjects.add(toAdd);
 	}
 	
-	public List<GameObject> getMyElements(){
+	public List<GameObject> getMyObjects(){
 		return myObjects;
 	}
 
@@ -42,6 +41,10 @@ public class GameScene {
 
 	public void setName(String name) {
 		myName = name;
+	}
+	
+	public String toString() {
+		return myName;
 	}
 	
 }

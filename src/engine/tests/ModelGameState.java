@@ -3,6 +3,7 @@ package engine.tests;
 import java.util.ArrayList;
 import java.util.List;
 
+import engine.DisplayState;
 import engine.GameElement;
 import engine.GameState;
 import engine.actions.TimeGravity;
@@ -18,13 +19,42 @@ import javafx.scene.input.KeyCode;
 
 public class ModelGameState {
 	private GameState state;
+	private DisplayState display;
 	
 	public ModelGameState() {
+		GameElement e1 = getMario();
+		GameElement e2 = getBlock(10.0, 20.0);
+		GameElement e3 = getBlock(30.0, 20.0);
+		GameElement e4 = getBlock(50.0, 20.0);
+		GameElement e5 = getBlock(70.0, 20.0);
+		GameElement e6 = getBlock(90.0, 20.0);
+		GameElement e7 = getBlock(110.0, 20.0);
+		GameElement e8 = getBlock(50.0, 80.0);
+		state = new GameState();
+		state.addGameElement(e1);
+		state.addGameElement(e2);
+		state.addGameElement(e3);
+		state.addGameElement(e4);
+		state.addGameElement(e5);
+		state.addGameElement(e6);
+		state.addGameElement(e7);
+		state.addGameElement(e8);
+		
+		display = new DisplayState();
+		display.addNewElement(e1);
+		display.addNewElement(e2);
+		display.addNewElement(e3);
+		display.addNewElement(e4);
+		display.addNewElement(e5);
+		display.addNewElement(e6);
+		display.addNewElement(e7);
+		display.addNewElement(e8);
 	}
 	
 	public GameState getState() {
-		state = new GameState();
+		
 		System.out.println(getMario());
+		/*
 		state.addGameElement(getMario());
 		state.addGameElement(getBlock(10.0, 20.0));
 		state.addGameElement(getBlock(30.0, 20.0));
@@ -32,9 +62,22 @@ public class ModelGameState {
 		state.addGameElement(getBlock(70.0, 20.0));
 		state.addGameElement(getBlock(90.0, 20.0));
 		state.addGameElement(getBlock(110.0, 20.0));
-		state.addGameElement(getBlock(50.0, 80.0));
+		state.addGameElement(getBlock(50.0, 80.0));*/
 		System.out.println(state.getElements());
 		return state;
+	}
+	
+	public DisplayState getDisplay() {
+		/*display = new DisplayState();
+		display.addNewElement(getMario());
+		display.addNewElement(getBlock(10.0, 20.0));
+		display.addNewElement(getBlock(30.0, 20.0));
+		display.addNewElement(getBlock(50.0, 20.0));
+		display.addNewElement(getBlock(70.0, 20.0));
+		display.addNewElement(getBlock(90.0, 20.0));
+		display.addNewElement(getBlock(110.0, 20.0));
+		display.addNewElement(getBlock(50.0, 80.0));*/
+		return display;
 	}
 	
 	public GameElement getMario() {

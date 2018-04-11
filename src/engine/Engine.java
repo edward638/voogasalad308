@@ -32,6 +32,7 @@ public class Engine extends Application {
 	
 	private Pane enginePane = new Pane();
 	private GameState gameState;
+	private DisplayState displayState;
 	private EventManager2 eventManager;
 	
 	public Engine(String gamePath) {
@@ -83,8 +84,8 @@ public class Engine extends Application {
 		double gameSteps = elapsedTime*gameState.getGameSpeed();
 		gameState.incrementGameTime(gameSteps);
     	eventManager.processElementEvent(new TimeEvent(gameSteps));
-    	gameState.displayState.updateImageElements();
-    	updateDisplay(gameState.displayState.newElements, gameState.displayState.removeElements);
+    	displayState.updateImageElements();
+    	updateDisplay(displayState.newElements, displayState.removeElements);
     }
 
 	protected void updateDisplay(List<ImageElement> newElements, List<ImageElement> removeElements) {
@@ -108,7 +109,9 @@ public class Engine extends Application {
 		stage.setScene(setupLevel(500, 500, BACKGROUND));
 		stage.show();
 		
-		gameState = new ModelGameState().getState();
+		ModelGameState modelGameState = new ModelGameState(); 
+		gameState = modelGameState.getState();
+		displayState = modelGameState.getDisplay();
 		eventManager = new EventManager2(gameState);
 		
 		startAnimation();

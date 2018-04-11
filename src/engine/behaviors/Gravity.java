@@ -9,7 +9,7 @@ import engine.GameElement;
  *
  */
 public class Gravity extends Behavior{
-	public static final double GRAVITATIONAL_FORCE = -9.8;
+	public static final double GRAVITATIONAL_FORCE = -9.8*3;
 	private Movable b;
 	
 	public Gravity(GameElement ge, Double vel, List<Double> dir) {

@@ -1,1 +1,2 @@
-THIS IS A TEST GAME.
+Guide a four-legged creature up a never-ending series of
+platforms without falling. 

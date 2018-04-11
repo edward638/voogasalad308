@@ -61,6 +61,7 @@ public class EventManager2 {
 			for (int j = i+1; j < gameState.getElements().size(); j++) {
 				MandatoryBehavior b = (MandatoryBehavior) gameState.getElements().get(j).getBehavior(MandatoryBehavior.class);
 				if (a.getShape().getBoundsInLocal().intersects(b.getShape().getBoundsInLocal())) {
+					
 					Shape intersect = Shape.intersect(a.getShape(), b.getShape());
 					GameElement g1 = gameState.getElements().get(i);
 					GameElement g2 = gameState.getElements().get(j);

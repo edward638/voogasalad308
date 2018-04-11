@@ -82,7 +82,7 @@ public class Serializer {
     	int x = 1;
     	String topLevelGameDestination = fileName;
     	String xmlString = xstream.toXML(gameState);
-    	String levelGameDestination = topLevelGameDestination + "/" + SAVE + x;
+    	String levelGameDestination = topLevelGameDestination + "/" + SAVE;
         stringToDom(xmlString, levelGameDestination + ".xml");
     }
     

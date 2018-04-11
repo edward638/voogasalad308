@@ -1,6 +1,6 @@
 package data;
 
-import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,7 +9,14 @@ import java.util.Scanner;
 import javax.imageio.ImageIO;
 
 import data.propertiesFiles.ResourceBundleManager;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
 
+/**
+ * 
+ * @author edwar
+ *
+ */
 public class GameDescriptionProvider {
 	
 	private String baseLocation = ResourceBundleManager.getPath("BASELOCATION");
@@ -36,12 +43,15 @@ public class GameDescriptionProvider {
 		String gameDescriptionLocation = gameLocation + ResourceBundleManager.getPath("DESCRIPTION");
 		
 	    try {
-            return ImageIO.read(new File(gameDescriptionLocation + ResourceBundleManager.getPath("DESCRIPTIONIMAGE")));
+	    	BufferedImage bi = null;
+	    	bi = ImageIO.read(new File(gameDescriptionLocation + ResourceBundleManager.getPath("DESCRIPTIONIMAGE")));
+	    	 return SwingFXUtils.toFXImage(bi, null);
         } catch (IOException e) {
             e.printStackTrace(); //TODO: fix!
         }
         return null;
 	}
+	
 	
     /**
      * Converts a text file into a string

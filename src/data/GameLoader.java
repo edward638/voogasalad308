@@ -3,6 +3,7 @@ package data;
 import authoring.GameObject;
 import authoring.GameScene;
 import data.propertiesFiles.ResourceBundleManager;
+import engine.GameState;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -14,13 +15,14 @@ import java.util.Map;
 import java.util.Scanner;
 
 
-public class GameLoader implements DescriptionProvider {
+public class GameLoader {
 
     private Deserializer deserializer;
     private String baseLocation = ResourceBundleManager.getPath("BASELOCATION");
     private String gameLocation;
     private String gameDescriptionLocation;
     private String gameScenesLocation;
+    private String gameSavesLocation;
 
 
     /**
@@ -32,36 +34,9 @@ public class GameLoader implements DescriptionProvider {
         gameLocation = baseLocation + gameName + "/";
         gameDescriptionLocation = gameLocation + ResourceBundleManager.getPath("DESCRIPTION");
         gameScenesLocation = gameLocation + ResourceBundleManager.getPath("SCENES");
+        gameSavesLocation = gameLocation + ResourceBundleManager.getPath("SAVES");
     }
 
-    /**
-     * Gets name of the game
-     * @return name of game
-     */
-    public String getGameName(){
-        return retrieveStringFromTextFile(gameDescriptionLocation + ResourceBundleManager.getPath("NAME"));
-    }
-
-    /**
-     * Gets description of game
-     * @return description of game
-     */
-    public String getGameDescription(){
-        return retrieveStringFromTextFile(gameDescriptionLocation + ResourceBundleManager.getPath("DESCRIPTIONTEXT"));
-    }
-
-    /**
-     * Gets a game description image
-     * @return game description image
-     */
-    public Image getDescriptionImage(){
-        try {
-            return ImageIO.read(new File(gameDescriptionLocation + ResourceBundleManager.getPath("DESCRIPTIONIMAGE")));
-        } catch (IOException e) {
-            e.printStackTrace(); //TODO: fix!
-        }
-        return null;
-    }
 
     /**
      * Gets map for game authoring/game engine to use to load game
@@ -71,22 +46,8 @@ public class GameLoader implements DescriptionProvider {
         return deserializer.getGameScenes(gameScenesLocation);
     }
 
-    /**
-     * Converts a text file into a string
-     * @param fileName text file
-     * @return string version of text file
-     */
-    private String retrieveStringFromTextFile(String fileName){
-        Scanner scanner = null;
-        try {
-            scanner = new Scanner( new File(fileName));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace(); //TODO: fix!
-        }
-        String text = scanner.useDelimiter("\\A").next();
-        scanner.close();
-
-        return text;
+    public GameState getGameState(){
+    	return deserializer.getSaveState(gameSavesLocation);
     }
 
 }

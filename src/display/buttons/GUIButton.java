@@ -13,8 +13,8 @@ public class GUIButton extends Button {
 	private ButtonEvent eventResponse;
 	private final int X_LOC;
 	private final int Y_LOC;
-	private static final int X_SIZE = 100;
-	private static final int Y_SIZE = 20;
+	private static final int X_SIZE = 150;
+	private static final int Y_SIZE = 40;
 	
 	/**
 	 * @param xloc 		X location of the button on a stage

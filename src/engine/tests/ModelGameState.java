@@ -52,7 +52,7 @@ public class ModelGameState {
 		// Response to up arrow key is to jump
 		mario.addEventResponse(new KeyInputEvent(KeyCode.UP), (event, element) -> {
 			Movable mov = (Movable) element.getBehavior(Movable.class);
-			mov.setYVelocity(mov.getYVelocity() + 30);
+			mov.setYVelocity(mov.getYVelocity() - 30);
 		});
 		
 		// Response to Right arrow key is to move right
@@ -62,7 +62,7 @@ public class ModelGameState {
 		});
 		
 		// Response to Left arrow key is to move left
-		mario.addEventResponse(new KeyInputEvent(KeyCode.RIGHT), (event, element) -> {
+		mario.addEventResponse(new KeyInputEvent(KeyCode.LEFT), (event, element) -> {
 			Movable mov = (Movable) element.getBehavior(Movable.class);
 			mov.setXVelocity(-10.0);
 		});

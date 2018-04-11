@@ -8,8 +8,8 @@ import authoring.Game;
 import authoring.GameObject;
 import authoring.Property;
 import data.ImageManager;
-import engine.behaviors.MandatoryBehavior;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -31,6 +31,7 @@ public class GameViewWindow extends AuthoringUIComponent{
 		setGameObjectList(game);
 		addObjectsToPane();
 		imageManager = new ImageManager(game.getName());
+		makeBackgroundPane(game.getGameImage(), 400, 400);
 		stackPane.getChildren().add(tilePane);
 		stackPane.getChildren().add(pane);
 	}
@@ -64,13 +65,23 @@ public class GameViewWindow extends AuthoringUIComponent{
 		pane.getChildren().add(imageView);
 	}
 	
-	private void makeBackgroundPane() {
+	private void makeBackgroundPane(String imageName, int xSize, int ySize) {
+		tilePane.setMaxSize(xSize, ySize);
+		Image image = imageManager.getImage(imageName);
+		ImageView bgImage = new ImageView(image);
+		int bgImageWidth = (int) bgImage.getFitWidth();
+		int bgImageHeight = (int) bgImage.getFitHeight();
+		int columnCount = xSize / bgImageWidth;
+		int rowCount = ySize / bgImageHeight;
 		
+		for (int i = 0; i < columnCount * rowCount; i++) {
+			tilePane.getChildren().add(bgImage);
+		}
 	}
 	
 	public Node asPane() {
 		// TODO Auto-generated method stub
-		return null;
+		return stackPane;
 	}
 
 }

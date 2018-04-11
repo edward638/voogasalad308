@@ -25,4 +25,9 @@ public class Engine {
 			enginePane.getChildren().remove(e);
 		}
 	}
+
+	public Pane getDisplay() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

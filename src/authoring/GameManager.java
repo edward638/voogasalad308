@@ -6,7 +6,7 @@ public class GameManager {
 	private SceneManager scenes;
 	
 	public GameManager() {
-		objects = new ObjectManager();
+		objects = new ObjectManager("Mario Game");
 		scenes = new SceneManager();
 	}
 	

@@ -9,25 +9,39 @@ import java.util.Set;
 
 public class ObjectManager {
 
+	private String gameName;
+	private String gameDescription;
+	private String gameImage;
 	private Map<GameScene, List<GameObject>> placedObjects;
-	private Set<GameObject> objectTemplates;
 	private GameObject currentObject;
 	
-	public ObjectManager() {
+	public ObjectManager(String name) {
 		placedObjects = new HashMap<>();
-		objectTemplates = new HashSet<>();
-		currentObject = new GameObject();
+		gameName = name;
 	}
 	
-	//makes a game object with no properties
-	public GameObject makeObjectTemplate() {
-		GameObject gameObject = new GameObject();
-		return gameObject;
+	public void setGameName(String name) {
+		gameName = name;
 	}
 	
-	public GameObject saveAsTemplate(GameObject o) {
-		objectTemplates.add(o);
-		return o;
+	public String getName() {
+		return gameName;
+	}
+	
+	public void setGameDescription(String description) {
+		gameDescription = description;
+	}
+	
+	public String getGameDescription() {
+		return gameDescription;
+	}
+	
+	public void setGameImage(String image) {
+		gameImage = image;
+	}
+	
+	public String getGameImage() {
+		return gameImage;
 	}
 	
 	public void placeGameObject(GameScene currScene, GameObject toPlace) {
@@ -39,9 +53,8 @@ public class ObjectManager {
 	}
 
 	//makes a game object with the given property
-	public GameObject makeGameObject(Behavior toAdd) { 
-		GameObject gameObject = new GameObject();
-		gameObject.addBehavior(toAdd);
+	public GameObject makeGameObject(Behavior basic) { 
+		GameObject gameObject = new GameObject(basic);
 		return gameObject;
 	}
 	
@@ -55,11 +68,6 @@ public class ObjectManager {
 	//returns the list of all game objects currently placed in the game
 	public Map<GameScene, List<GameObject>> getPlacedObjects() {
 		return placedObjects;
-	}
-
-	//returns the list of all game object "templates" available to use
-	public Set<GameObject> getObjectTemplates() {
-		return objectTemplates;
 	}
 	
 	public GameObject getCurrentObject() {

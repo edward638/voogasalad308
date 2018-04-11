@@ -1,7 +1,7 @@
 package display.buttonevents;
 
-import GamePlayer.ConcreteGamePlayer;
-import GamePlayer.GamePlayer;
+import gamePlayer.ConcreteGamePlayer;
+import gamePlayer.GamePlayer;
 import javafx.stage.Stage;
 
 /**

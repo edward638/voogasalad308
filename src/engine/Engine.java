@@ -34,6 +34,8 @@ public class Engine /*extends Application*/ {
 	private DisplayState displayState;
 	private EventManager2 eventManager;
 	
+	private String musicPath = "data/music/WiiShopChannelMusic.mp3";
+	
 	public Engine(String gamePath) {
 		//EngineRunner engineRunner = new EngineRunner(gamePath);
 		//GameLoader loader = new GameLoader(gamePath);
@@ -43,6 +45,7 @@ public class Engine /*extends Application*/ {
 		displayState = modelGameState.getDisplay();
 		eventManager = new EventManager2(gameState, this);
 		
+		new AudioPlayer(musicPath);
 		startAnimation();
 	}
 	

@@ -33,8 +33,8 @@ public class CollisionEvent extends ElementEvent {
 			List<GameElement> collisionElements = otherCollision.getCollidedElements();
 			if (collisionElements.contains(e1)) {
 				collisionElements.remove(e1);
-				System.out.println(collisionElements.get(0).getIdentifier());
-				System.out.println("Second Value: " + e2.getIdentifier());
+				//System.out.println(collisionElements.get(0).getIdentifier());
+				//System.out.println("Second Value: " + e2.getIdentifier());
 				
 				if (collisionElements.get(0).getIdentifier().equals(e2.getIdentifier())) {
 					return true;

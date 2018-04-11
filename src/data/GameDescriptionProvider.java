@@ -10,6 +10,11 @@ import javax.imageio.ImageIO;
 
 import data.propertiesFiles.ResourceBundleManager;
 
+/**
+ * 
+ * @author edwar
+ *
+ */
 public class GameDescriptionProvider {
 	
 	private String baseLocation = ResourceBundleManager.getPath("BASELOCATION");

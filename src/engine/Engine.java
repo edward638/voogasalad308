@@ -36,6 +36,7 @@ public class Engine extends Application {
 	
 	/*public Engine(String gamePath) {
 		//EngineRunner engineRunner = new EngineRunner(gamePath);
+		GameLoader loader = new GameLoader(gamePath);
 		
 		gameState = new ModelGameState().getState();
 		eventManager = new EventManager2(gameState);

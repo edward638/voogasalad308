@@ -12,9 +12,11 @@ import javafx.scene.shape.Shape;
 public class EventManager2 {
 	
 	private GameState gameState;
+	private Engine engine;
 	
-	public EventManager2 (GameState state) {
+	public EventManager2 (GameState state, Engine engine) {
 		gameState = state;
+		this.engine = engine;
 	}
 	
 	public void processElementEvent(ElementEvent ee) {
@@ -30,7 +32,7 @@ public class EventManager2 {
 	}
 	
 	private void processGameEvent(GameEvent gameEvent) {
-		gameEvent.execute(gameState);
+		gameEvent.execute(gameState, engine);
 	}
 	
 	/*private void handleCollisions() {

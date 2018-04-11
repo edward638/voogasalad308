@@ -17,5 +17,15 @@ public class KeyInputEvent extends ElementEvent {
 	public String toString() {
 		return "Key Input Event: " + code.toString() + " key pressed";
 	}
+
+	@Override
+	public boolean matchesEvent(ElementEvent other) {
+		if (other instanceof KeyInputEvent) {
+			KeyInputEvent oth = (KeyInputEvent) other;
+			return getKeyCode().compareTo(oth.getKeyCode()) == 0;
+		}
+		return false;
+	}
+	
 	
 }

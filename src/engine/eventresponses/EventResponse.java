@@ -2,6 +2,7 @@ package engine.eventresponses;
 
 import engine.GameElement;
 import engine.events.elementevents.ElementEvent;
+import engine.events.gameevents.GameEvent;
 
 public abstract class EventResponse {
 	
@@ -19,5 +20,5 @@ public abstract class EventResponse {
 		return event.getClass() == respondingTo;
 	}
 	
-	public abstract void execute (ElementEvent event, GameElement element);
+	public abstract GameEvent execute (ElementEvent event, GameElement element);
 }

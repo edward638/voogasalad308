@@ -3,7 +3,10 @@ package engine;
 import java.awt.Point;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import authoring.GameObject;
+import authoring.GameScene;
 import engine.events.elementevents.ElementEvent;
 import engine.events.elementevents.KeyInputEvent;
 import engine.events.elementevents.MouseInputEvent;
@@ -28,10 +31,26 @@ public class EngineRunner {
 	
     //starts animation
 	
-	public EngineRunner() {
+	public EngineRunner(String gameName) {
 		gameState = GameReader.initializeGameState();
 		displayState = new DisplayState();
 		eventManager = new EventManager();
+		GameLoader loader = new GameLoader(gameName);
+		initializeScene(loader);
+		
+	}
+	
+	private void initializeScene(GameLoader loader) {
+		List<GameScene> scene = loader.getGameScene();
+		List<GameObject> objects = scene.get(0).getMyElements();
+		List<GameElement> gameElements = objects.stream()
+				.map(o -> toGameElement(o))
+				.collect(Collectors.toList());
+	}
+	
+	private GameElement toGameElement(GameObject object) {
+		GameElement element = new GameElement();
+		object.getBehaviors().stream().map(b -> element.addBehavior(b));
 	}
 	
     public void startAnimation() {
@@ -46,7 +65,7 @@ public class EngineRunner {
     }
     
     
-    private Scene setupLevel (int width, int height, Paint background,String textfileName) {
+    private Scene setupLevel (int width, int height, Paint background, String textfileName) {
     	Scene curr_scene = new Scene(root);
         curr_scene.setOnKeyPressed(e -> {
 			try {

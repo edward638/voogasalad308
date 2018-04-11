@@ -1,5 +1,9 @@
 package engine.events.gameevents;
 
-public abstract class GameEvent {
+import engine.GameState;
 
+public abstract class GameEvent {
+	
+	public abstract void execute(GameState state);
+	
 }

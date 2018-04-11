@@ -16,9 +16,14 @@ public class GameObject {
 		myBehaviorFactory = new BehaviorFactory();
 	}
 
-	public GameObject(Behavior basic) {
+	public GameObject(Behavior initBehavior) {
 		this();
-		myBehaviors.add(basic);
+		myBehaviors.add(initBehavior);
+	}
+	
+	public GameObject(String initBehavior) {
+		this();
+		addBehavior(initBehavior);
 	}
 	
 	public GameObject(GameObject toCopy) {

@@ -53,7 +53,7 @@ public class AuthoringDisplay {
 
 	public void initialize(Stage stage) {
 		Scene newScene = setUpScene();
-		newScene.getStylesheets().add(DEFAULT_CSS_PATH + DEFAULT_STYLE);
+//		newScene.getStylesheets().add(DEFAULT_CSS_PATH + DEFAULT_STYLE);
 		stage.setScene(newScene);
 		stage.show();
 	}

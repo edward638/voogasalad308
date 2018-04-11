@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import data.*;
+import engine.tests.ModelGameState;
 import javafx.scene.image.Image;
 
 public class TestMakeGameScene {

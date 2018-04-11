@@ -1,10 +1,13 @@
 package authoring.display;
 
 import java.util.ResourceBundle;
+import java.util.Set;
 
+import authoring.Behavior;
 import authoring.Game;
 import authoring.GameObject;
 import authoring.GameScene;
+import authoring.Property;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -39,22 +42,28 @@ public class NewGameObjectWindow extends NewComponentWindow {
 		nameObject.getChildren().addAll(new Label("Name: "), nameText);
 
 		HBox xPosValues = new HBox();
-		TextField indexText = new TextField();
-		xPosValues.getChildren().addAll(new Label("Index: "), indexText);
+		TextField xText = new TextField();
+		xPosValues.getChildren().addAll(new Label("X Position: "), xText);
+		
+		HBox yPosValues = new HBox();
+		TextField yText = new TextField();
+		yPosValues.getChildren().addAll(new Label("Y Position: "), yText);
 
-		Button closeButton = makeButton("Close", event -> {
-			saveGameObject(nameText, indexText);
+		Button closeButton = makeButton("Save", event -> {
+			saveGameObject(nameText, xText, yText);
 		});
 
-		root.getChildren().addAll(nameObject, xPosValues, closeButton);
+		root.getChildren().addAll(nameObject, xPosValues, yPosValues, closeButton);
 		return new Scene(root);
 	}
 
-	private void saveGameObject(TextField levelText, TextField indexText) {
-		if(!levelText.getText().isEmpty() && !indexText.getText().isEmpty()) {
+	private void saveGameObject(TextField nameText, TextField xText, TextField yText) {
+		if(!nameText.getText().isEmpty() && !xText.getText().isEmpty() && !yText.getText().isEmpty()) {
 			try {
-				String levelName = levelText.getText();
-				GameObject go = new GameObject();
+				String objectName = nameText.getText();
+				Double xPos = Double.parseDouble(xText.getText());
+				Double yPos = Double.parseDouble(yText.getText());
+				GameObject go = makeGameObject(objectName, xPos, yPos, objectName);
 				myLevelObjects.getItems().add(0, go);
 				getStage().close();
 				//after slider is implemented, only catch general exception
@@ -70,5 +79,16 @@ public class NewGameObjectWindow extends NewComponentWindow {
 			getStage().close();
 		}
 	}
+	
+	private GameObject makeGameObject(String name, Double xPos, Double yPos, String imageName) {
+		GameObject newObject = new GameObject("MandatoryBehavior");
+		newObject.setName(name);
+		newObject.getBehavior("MandatoryBehavior").getProperty("elementName").setValue(name);
+		newObject.getBehavior("MandatoryBehavior").getProperty("xPos").setValue(xPos);
+		newObject.getBehavior("MandatoryBehavior").getProperty("yPos").setValue(yPos);
+		newObject.getBehavior("MandatoryBehavior").getProperty("imagePath").setValue(imageName);
 
+		return newObject;
+	}
+	
 }

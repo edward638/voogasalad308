@@ -30,6 +30,8 @@ public class GameViewWindow extends AuthoringUIComponent{
 		pane = new Pane();
 		setGameObjectList(game);
 		addObjectsToPane();
+		stackPane.getChildren().add(tilePane);
+		stackPane.getChildren().add(pane);
 	}
 
 	private void setGameObjectList(Game game){
@@ -51,7 +53,10 @@ public class GameViewWindow extends AuthoringUIComponent{
 	}
 	
 	private void placeObject(Double x, Double y, String imagePath) {
-		
+		ImageView imageView = new ImageView(imageManager.getImage(imagePath));
+		imageView.setLayoutX(x);
+		imageView.setLayoutY(y);
+		pane.getChildren().add(imageView);
 	}
 	
 	private void makeBackgroundPane(String imageName, int xSize, int ySize) {

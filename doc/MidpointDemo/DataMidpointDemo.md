@@ -58,7 +58,7 @@ The Data filepath hiearchy. Each game corresponds to its own named folder, and e
 ![Data file hierarchy](Directory.PNG)
 
 ## Notes
-Design is limited by XStream since we are still trying to redefine how we want to structure the game files, so it is not very closed, but flexible, as it is very easy to extend for new requirement from , and add new serializers/managers for new desired functionality. 
+Design is limited by XStream since we are still trying to redefine how we want to structure the game files, so it is not very closed, but flexible, as it is very easy to extend for new requirement from and add new serializers/managers for new desired functionality. 
 
 GameData has no information about front end implementation, as we tried to isolate the functionality of this component as much as possible.
 
@@ -70,8 +70,8 @@ complex.
 Tradeoffs:
 
 Currently, we do not have the capability to serialize any type of object. At the same time, however, this allows us to exercise more advanced error checking and helps us maintain a uniform game data structure.
-    * throw informative errors for front end notifications
-    * dynamic saving for every time step
-    * help with standardizing object save format
+* throw informative errors for front end notifications
+* dynamic saving for every time step
+* help with standardizing object save format
 
 In our current model, the Serializer class is isolated from the other game components, and is only accessed through another game data class Gamesaver. As a result, this gives the Game Engine and Game Authoring much less freedom in how they can save their data, but we felt as it encapsulating the Serializer within the Gamesaver helped limit the implementation details in a way that would be more beneficial overall. It also reduces the amount of filepath management they need to keep track of.

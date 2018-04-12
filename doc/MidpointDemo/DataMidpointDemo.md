@@ -1,9 +1,5 @@
 ## Display midpoint demo
 
-Each sub-team should present its high level design, including a brief overview describing the design's primary architecture and goals and specifics about how each part works together and what is closed to modification, but open to allowing a variety of extensions to be implemented (specific algorithms or other implementation decisions should not be presented). It must be clear what each sub-team plans to implement and what you expect others to implement to use your design (e.g., game designers or future maintainers of the project). Your sub-team will sound better if it can describe trade-offs you considered during your design meetings.
-
-Each sub-team must present a working demo that shows you have completed the fundamental core of your design. In general, you can best demonstrate your design by showing examples of how it will be used (either with a simple game, GUI component, or example test code). Included in your example code should be data files that drive your code. Thus, I suggest your presentation be driven by example code you have written to test it, even if they are not quite working yet. Your team will look better if it can demo a program that shows sub-teams projects working together.
-
 
 ### High level design
 * Goal is to allow Game Authoring to save their game templates to XML

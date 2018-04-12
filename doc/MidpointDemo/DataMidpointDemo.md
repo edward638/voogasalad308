@@ -17,6 +17,8 @@ Each sub-team must present a working demo that shows you have completed the fund
 
 ## Image Manager API
 
+This util is used to create JavaFX images from the string name of the image within a specific game, used in game authoring and game engine. It manages filepath and accessing the images.
+
 ```java 
 public class ImageManager {
 
@@ -46,7 +48,18 @@ public class ImageManager {
 
 
 ```
+## Images
+This is how a serialized Game Authoring file (GameScene class) looks like.
 
+![XML file format](XML.PNG)
+
+This is how a serialized Game Engine file (GameState class) looks like. This XML file can easily be over 1000 lines long.
+
+![Serialized save file format](SaveXML.PNG)
+
+The Data filepath hiearchy. Each game corresponds to its own named folder, and each game will have descriptions, images, saves, and scenes, which is used by authoring, engine, and playing.
+
+![Data file hierarchy](Directory.PNG)
 
 ## Notes
 Design is limited by XStream since we are still trying to redefine how we want to structure the game files, so it is not very closed, but flexible, as it is very easy to extend for new requirement from , and add new serializers/managers for new desired functionality. 

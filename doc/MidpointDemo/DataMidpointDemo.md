@@ -1,4 +1,4 @@
-## Display midpoint demo
+## Data midpoint demo
 
 
 ### High level design

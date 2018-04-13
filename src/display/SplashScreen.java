@@ -24,12 +24,12 @@ public class SplashScreen {
 	
 	private Stage currStage; 
 	private Group myRoot;
-	private Color BACKGROUND_COLOR = Color.BLACK;
+	private Color BACKGROUND_COLOR = Color.LIGHTSTEELBLUE;
 	private Color TEXT_COLOR = Color.WHITE;
 	private List<GUIButton> buttons;
-	private static final int SIZE_X = 400;
+	private static final int SIZE_X = 600;
 	private static final int SIZE_Y = 400;
-	private static final String SPLASH_IMAGE = "./data/images/mario.png";
+	private static final String SPLASH_IMAGE = "./data/images/Logo.png";
 
 	public SplashScreen(Stage stage) {
 		this.currStage = stage;
@@ -39,6 +39,8 @@ public class SplashScreen {
         buttons = new ArrayList<>();
         GUIButton gamePlayerButton = new GUIButton(20, 350, "Game Player", new GamePlayerPress(currStage));
         GUIButton gameAuthoringButton = new GUIButton(230, 350, "Game Authoring", new GameAuthoringPress(currStage));
+        gamePlayerButton.setId("enginebutton");
+        gameAuthoringButton.setId("authoringbutton");
         buttons.add(gamePlayerButton);
         buttons.add(gameAuthoringButton);
 	}
@@ -52,9 +54,9 @@ public class SplashScreen {
 //		splashImage.setLayoutX(50);
 //		splashImage.setLayoutY(120);
 		
-		splashImage.setFitHeight(200);
-		splashImage.setLayoutX(120);
-		splashImage.setLayoutY(120);
+		splashImage.setFitHeight(100);
+		splashImage.setLayoutX(50);
+		splashImage.setLayoutY(50);
 		
 		return splashImage;
 		} catch (Exception e) {
@@ -66,10 +68,12 @@ public class SplashScreen {
 	 */
 	public Scene getSplashScreen() {
 		myRoot = new Group();
+		myRoot.setId("pane");
 		Scene scene = new Scene(myRoot, SIZE_X, SIZE_Y, BACKGROUND_COLOR);
+		scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 		myRoot.getChildren().addAll(buttons);
-		myRoot.getChildren().add(new SplashText("VOOGASALAD", 70, 50, TEXT_COLOR, 40));
-		myRoot.getChildren().add(new SplashText("2dessertz", 140, 100, TEXT_COLOR, 30));
+//		myRoot.getChildren().add(new SplashText("VOOGASALAD", 70, 50, TEXT_COLOR, 40));
+//		myRoot.getChildren().add(new SplashText("2dessertz", 140, 100, TEXT_COLOR, 30));
 		myRoot.getChildren().add(makeSplashImage());
 		return scene;
 	}

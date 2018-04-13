@@ -26,6 +26,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+/**
+ * @author Maddie Wilkinson
+ *
+ */
 public class AuthoringDisplay {
 	public static final String DEFAULT_RESOURCE_PATH = "authoring.display.resources/";
 	public static final String DEFAULT_CSS_PATH = "authoring/display/resources/";
@@ -35,6 +39,8 @@ public class AuthoringDisplay {
 
 	private BorderPane root;
 	private ResourceBundle myResources; //rename more accurately; it's the button names & stuff specifically
+	private Node myLevelPanel;
+	private GameViewWindow myGameViewWindow;
 	private Game myGame;
 
 	public AuthoringDisplay(Stage stage, Game game) {
@@ -56,18 +62,27 @@ public class AuthoringDisplay {
 
 
 	public Scene setUpScene() {
+		initVars();
 		root = new BorderPane();
-		root.setLeft(makeLevelPanel());
-		root.setRight(makeObjectPropertyPanel());
+//		root.setLeft(makeLevelPanel());
+		root.setLeft(myLevelPanel);
+//		root.setRight(makeObjectPropertyPanel());
 		root.setBottom(makeTemplateObjectPanel());
 		root.setTop(makeSaveBar());
-		root.setCenter(makeGameVisPane());
+//		root.setCenter(makeGameVisWindow());
+		root.setCenter(myGameViewWindow.asPane());
+
 		return new Scene(root);
 	}
 
+	private void initVars() {
+		myGameViewWindow = makeGameVisWindow();
+		System.out.println(myGameViewWindow == null);
+		myLevelPanel = makeLevelPanel();
+	}
+
 	public Node makeLevelPanel() {
-		LevelPanel levelPanel = new LevelPanel(myResources, myGame, root);
-		System.out.println(myGame == null);
+		LevelPanel levelPanel = new LevelPanel(myResources, myGame, root, myGameViewWindow);
 		return levelPanel.asVBox();
 	}
 
@@ -80,8 +95,12 @@ public class AuthoringDisplay {
 		return propertyPanel.asScrollPane();
 	}
 
-	public Node makeGameVisPane() {
-		return new Pane();
+	public GameViewWindow makeGameVisWindow() {
+//		GameViewWindow gameViewWindow = new GameViewWindow(myResources, myGame, root);
+		myGameViewWindow = new GameViewWindow(myResources, myGame, root);
+		return myGameViewWindow;
+//		return myGameViewWindow.asPane();
+//		return new Pane();
 	}
 	
 	public Node makeSaveBar() {

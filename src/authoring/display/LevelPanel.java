@@ -18,18 +18,27 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * @author Maddie Wilkinson
+ *
+ */
 public class LevelPanel extends AuthoringUIComponent {
 
 	private VBox myVBox;
 	private ComboBox<GameScene> myLevelDropdown;
 	private Button myAddLevelButton;
+	private Button myAddGameObjectButton;
 	private ListView<GameObject> myLevelObjects;
+	
+	private GameViewWindow myGameViewWindow;
 
-	public LevelPanel(ResourceBundle resources, Game game, Node root) {
+	public LevelPanel(ResourceBundle resources, Game game, Node root, GameViewWindow gameViewWindow) {
 		super(resources, game, root); //pass resources to super constructor
+		myGameViewWindow = gameViewWindow;
+		System.out.println(myGameViewWindow == null);
 
 		myVBox = new VBox();
-		myVBox.getChildren().addAll(makeLevelChooser(), makeObjectList());
+		myVBox.getChildren().addAll(makeLevelChooser(), makeObjectList(), makeAddGameObjectButton());
 	}
 
 	public VBox asVBox() {
@@ -40,6 +49,7 @@ public class LevelPanel extends AuthoringUIComponent {
 		HBox levelChooser = new HBox();
 		makeLevelDropdown();
 		makeAddLevelButton();
+		
 		levelChooser.getChildren().addAll(myAddLevelButton, myLevelDropdown);
 		return levelChooser;
 	}
@@ -52,10 +62,10 @@ public class LevelPanel extends AuthoringUIComponent {
 	}
 	
 	private Button makeAddGameObjectButton() {
-		myAddLevelButton =  makeButton("AddGameObjectButton", event -> { 
-			new NewLevelWindow(getResources(), getGame(), getRoot(), myLevelDropdown);
+		myAddGameObjectButton =  makeButton("AddGameObjectButton", event -> { 
+			new NewGameObjectWindow(getResources(), getGame(), getRoot(), myLevelObjects, myGameViewWindow);
 		});
-		return myAddLevelButton;
+		return myAddGameObjectButton;
 	}
 
 	private ComboBox<GameScene> makeLevelDropdown() {

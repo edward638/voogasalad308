@@ -1,5 +1,8 @@
 package engine.eventresponses;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import engine.GameElement;
 import engine.behaviors.Gravity;
 import engine.events.elementevents.ElementEvent;
@@ -13,14 +16,15 @@ public class BasicGravityTimeResponse extends EventResponse {
 	}
 
 	@Override
-	public GameEvent execute(ElementEvent event, GameElement element) {
+	public List<GameEvent> execute(ElementEvent event, GameElement element) {
+		List<GameEvent> gameEventList = new ArrayList<GameEvent>();
 		if (!isValidEvent(event)) { 
-			return null;
+			return gameEventList;
 		}
 		TimeEvent te = (TimeEvent) event;
 		Gravity b = (Gravity) element.getBehavior(Gravity.class);
 		b.experienceGravity(te.getTime());
-		return null;
+		return gameEventList;
 	}
 
 }

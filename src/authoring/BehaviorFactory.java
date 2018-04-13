@@ -7,6 +7,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * @author Maddie Wilkinson
+ *
+ */
 public class BehaviorFactory {
 
 	private static final String BEHAVIORS_LOCATION = "engine.behaviors.";
@@ -22,6 +26,7 @@ public class BehaviorFactory {
 			return new Behavior(className, properties);
 		} catch (ClassNotFoundException e) {
 			new Error("Invalid Behavior");
+			System.out.println("Invalid Behavior");
 			e.printStackTrace();
 		}
 		return null;

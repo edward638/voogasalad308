@@ -3,6 +3,7 @@ package gamePlayer;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 
+import data.Serializer;
 import data.GameDescriptionProvider;
 import engine.Engine;
 import engine.GameState;
@@ -12,16 +13,21 @@ import gamePlayer.buttons.LoadButton;
 import gamePlayer.buttons.SaveButton;
 import gamePlayer.buttons.NewGameButton;
 import gamePlayer.buttons.ReplayButton;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * 
@@ -105,8 +111,12 @@ public class ConcreteGamePlayer implements GamePlayer {
 		gameDisplay.setLayoutX(30);
 		gameDisplay.setLayoutY(30);
 		gameDisplay.setPrefSize(900, 590);
+		gameDisplay.setStyle("-fx-background-color: white;");
 		hud = new ConcreteHUD(currentGameName);
 
+		myScene.setOnKeyPressed(e -> engine.handleKeyInput(e.getCode()));
+		//myScene.setOnMouseClicked(e -> engine.handleMouseInput(e.getX(), e.getY())); 
+		
 		root.getChildren().add(gameDisplay);
 		root.getChildren().add((Node) hud);
 

@@ -1,10 +1,14 @@
 package engine.eventresponses;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import engine.GameElement;
 import engine.behaviors.Killable;
+import engine.behaviors.Killer;
+import engine.behaviors.Movable;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.ElementEvent;
-import engine.events.elementevents.TimeEvent;
 import engine.events.gameevents.EmptyGameEvent;
 import engine.events.gameevents.GameEvent;
 import engine.events.gameevents.RemoveGameElementEvent;
@@ -15,18 +19,32 @@ public class BasicKillableCollisionResponse extends EventResponse {
 	}
 
 	@Override
-	public GameEvent execute(ElementEvent event, GameElement element) {
+	public List<GameEvent> execute(ElementEvent event, GameElement element1) {
+		List<GameEvent> gameEventList = new ArrayList<GameEvent>();
 		if (!isValidEvent(event)) { 
-			return new EmptyGameEvent();
+			return gameEventList;
 		}
 		CollisionEvent ce = (CollisionEvent) event;
-		//Get second killing behavior parameter from second object and figure out how much health to remove
-		Double health = ce.getCollider.damage();
-		Killable b = (Killable) element.getBehavior(Killable.class);
-		if (b.reduceHealth(health)) {
-			return new RemoveGameElementEvent(element);
-		}
-		return new EmptyGameEvent();
+		gameEventList.addAll(damageEachOther(element1, ce.getCollidedWith(element1)));
+		return gameEventList;
 		
 	}
+	
+	private List<GameEvent> damageEachOther(GameElement g1, GameElement g2) {
+		List<GameEvent> gameEventList = new ArrayList<GameEvent>();
+		gameEventList.add(doDamage(g1, g2));
+		gameEventList.add(doDamage(g2, g1));
+		return gameEventList;
+	}
+	
+	private GameEvent doDamage(GameElement g1, GameElement g2) {
+		Double damagePower = ((Killer) g1.getBehavior(Killer.class)).getDamagePower();
+		Killable target = (Killable) g2.getBehavior(Killable.class);
+		if (target.reduceHealth(damagePower)) {
+			return new RemoveGameElementEvent(g2);
+		}
+		return new EmptyGameEvent();
+	}
+	
+
 }

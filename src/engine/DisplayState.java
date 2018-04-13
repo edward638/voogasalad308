@@ -3,6 +3,7 @@ package engine;
 import java.util.ArrayList;
 import java.util.List;
 
+import data.ImageManager;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
@@ -11,14 +12,17 @@ public class DisplayState {
 	protected List<ImageElement> newElements;
 	protected List<ImageElement> removeElements;
 	
-	public DisplayState() {
+	private String gameName;
+	
+	public DisplayState(String gameName) {
+		this.gameName = gameName;
 		activeElements = new ArrayList<>();
 		newElements = new ArrayList<>();
 		removeElements = new ArrayList<>();
 	}
 	
-	protected void addNewElement(GameElement element) {
-		ImageElement imageElement = new ImageElement(element);
+	public void addNewElement(GameElement element) {
+		ImageElement imageElement = new ImageElement(element, new ImageManager(gameName));
 		newElements.add(imageElement);
 		activeElements.add(imageElement);
 	}

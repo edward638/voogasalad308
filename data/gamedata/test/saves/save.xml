@@ -1,0 +1,675 @@
+<engine.GameState>
+  <elements>
+    <engine.GameElement>
+      <behaviors>
+        <engine.behaviors.Movable>
+          <parent reference="../../.."/>
+          <xVel>0.0</xVel>
+          <yVel>0.0</yVel>
+        </engine.behaviors.Movable>
+        <engine.behaviors.MandatoryBehavior>
+          <parent reference="../../.."/>
+          <xPos>200.0</xPos>
+          <yPos>20.0</yPos>
+          <elementName>Mario</elementName>
+          <shapeDef class="engine.behaviors.shapes.RectangleShape">
+            <width>100.0</width>
+            <height>100.0</height>
+          </shapeDef>
+          <imagePath>mario_1.jpg</imagePath>
+        </engine.behaviors.MandatoryBehavior>
+        <engine.behaviors.Gravity>
+          <parent reference="../../.."/>
+          <b reference="../../engine.behaviors.Movable"/>
+        </engine.behaviors.Gravity>
+      </behaviors>
+      <responder>
+        <responses>
+          <entry>
+            <engine.events.elementevents.KeyInputEvent>
+              <code>RIGHT</code>
+            </engine.events.elementevents.KeyInputEvent>
+            <null/>
+          </entry>
+          <entry>
+            <engine.events.elementevents.TimeEvent>
+              <timeElapsed>0.0</timeElapsed>
+            </engine.events.elementevents.TimeEvent>
+            <engine.actions.TimeGravity/>
+          </entry>
+          <entry>
+            <engine.events.elementevents.KeyInputEvent>
+              <code>LEFT</code>
+            </engine.events.elementevents.KeyInputEvent>
+            <null/>
+          </entry>
+          <entry>
+            <engine.events.elementevents.KeyInputEvent>
+              <code>UP</code>
+            </engine.events.elementevents.KeyInputEvent>
+            <null/>
+          </entry>
+          <entry>
+            <engine.events.elementevents.TimeEvent>
+              <timeElapsed>0.0</timeElapsed>
+            </engine.events.elementevents.TimeEvent>
+            <engine.actions.TimeMovable/>
+          </entry>
+        </responses>
+        <parent reference="../.."/>
+      </responder>
+      <returnedGameEvents/>
+    </engine.GameElement>
+    <engine.GameElement>
+      <behaviors>
+        <engine.behaviors.MandatoryBehavior>
+          <parent reference="../../.."/>
+          <xPos>10.0</xPos>
+          <yPos>20.0</yPos>
+          <elementName>Block</elementName>
+          <shapeDef class="engine.behaviors.shapes.RectangleShape">
+            <width>20.0</width>
+            <height>20.0</height>
+          </shapeDef>
+          <imagePath>20pxbox.png</imagePath>
+        </engine.behaviors.MandatoryBehavior>
+      </behaviors>
+      <responder>
+        <responses>
+          <entry>
+            <engine.events.elementevents.CollisionEvent>
+              <e1>
+                <behaviors>
+                  <engine.behaviors.Movable>
+                    <parent reference="../../.."/>
+                    <xVel>0.0</xVel>
+                    <yVel>0.0</yVel>
+                  </engine.behaviors.Movable>
+                  <engine.behaviors.MandatoryBehavior>
+                    <parent reference="../../.."/>
+                    <xPos>200.0</xPos>
+                    <yPos>20.0</yPos>
+                    <elementName>Mario</elementName>
+                    <shapeDef class="engine.behaviors.shapes.RectangleShape">
+                      <width>100.0</width>
+                      <height>100.0</height>
+                    </shapeDef>
+                    <imagePath>mario_1.jpg</imagePath>
+                  </engine.behaviors.MandatoryBehavior>
+                  <engine.behaviors.Gravity>
+                    <parent reference="../../.."/>
+                    <b reference="../../engine.behaviors.Movable"/>
+                  </engine.behaviors.Gravity>
+                </behaviors>
+                <responder>
+                  <responses>
+                    <entry>
+                      <engine.events.elementevents.TimeEvent>
+                        <timeElapsed>0.0</timeElapsed>
+                      </engine.events.elementevents.TimeEvent>
+                      <engine.actions.TimeMovable/>
+                    </entry>
+                    <entry>
+                      <engine.events.elementevents.KeyInputEvent>
+                        <code>UP</code>
+                      </engine.events.elementevents.KeyInputEvent>
+                      <null reference="../../../../../../../../../../engine.GameElement/responder/responses/entry[4]/null"/>
+                    </entry>
+                    <entry>
+                      <engine.events.elementevents.KeyInputEvent>
+                        <code>LEFT</code>
+                      </engine.events.elementevents.KeyInputEvent>
+                      <null reference="../../../../../../../../../../engine.GameElement/responder/responses/entry[3]/null"/>
+                    </entry>
+                    <entry>
+                      <engine.events.elementevents.KeyInputEvent>
+                        <code>RIGHT</code>
+                      </engine.events.elementevents.KeyInputEvent>
+                      <null reference="../../../../../../../../../../engine.GameElement/responder/responses/entry/null"/>
+                    </entry>
+                    <entry>
+                      <engine.events.elementevents.TimeEvent>
+                        <timeElapsed>0.0</timeElapsed>
+                      </engine.events.elementevents.TimeEvent>
+                      <engine.actions.TimeGravity/>
+                    </entry>
+                  </responses>
+                  <parent reference="../.."/>
+                </responder>
+                <returnedGameEvents/>
+              </e1>
+              <e2 reference="../../../../.."/>
+            </engine.events.elementevents.CollisionEvent>
+            <null/>
+          </entry>
+        </responses>
+        <parent reference="../.."/>
+      </responder>
+      <returnedGameEvents/>
+    </engine.GameElement>
+    <engine.GameElement>
+      <behaviors>
+        <engine.behaviors.MandatoryBehavior>
+          <parent reference="../../.."/>
+          <xPos>30.0</xPos>
+          <yPos>20.0</yPos>
+          <elementName>Block</elementName>
+          <shapeDef class="engine.behaviors.shapes.RectangleShape">
+            <width>20.0</width>
+            <height>20.0</height>
+          </shapeDef>
+          <imagePath>20pxbox.png</imagePath>
+        </engine.behaviors.MandatoryBehavior>
+      </behaviors>
+      <responder>
+        <responses>
+          <entry>
+            <engine.events.elementevents.CollisionEvent>
+              <e1>
+                <behaviors>
+                  <engine.behaviors.Gravity>
+                    <parent reference="../../.."/>
+                    <b>
+                      <parent reference="../../../.."/>
+                      <xVel>0.0</xVel>
+                      <yVel>0.0</yVel>
+                    </b>
+                  </engine.behaviors.Gravity>
+                  <engine.behaviors.Movable reference="../engine.behaviors.Gravity/b"/>
+                  <engine.behaviors.MandatoryBehavior>
+                    <parent reference="../../.."/>
+                    <xPos>200.0</xPos>
+                    <yPos>20.0</yPos>
+                    <elementName>Mario</elementName>
+                    <shapeDef class="engine.behaviors.shapes.RectangleShape">
+                      <width>100.0</width>
+                      <height>100.0</height>
+                    </shapeDef>
+                    <imagePath>mario_1.jpg</imagePath>
+                  </engine.behaviors.MandatoryBehavior>
+                </behaviors>
+                <responder>
+                  <responses>
+                    <entry>
+                      <engine.events.elementevents.KeyInputEvent>
+                        <code>LEFT</code>
+                      </engine.events.elementevents.KeyInputEvent>
+                      <null reference="../../../../../../../../../../engine.GameElement/responder/responses/entry[3]/null"/>
+                    </entry>
+                    <entry>
+                      <engine.events.elementevents.TimeEvent>
+                        <timeElapsed>0.0</timeElapsed>
+                      </engine.events.elementevents.TimeEvent>
+                      <engine.actions.TimeMovable/>
+                    </entry>
+                    <entry>
+                      <engine.events.elementevents.KeyInputEvent>
+                        <code>RIGHT</code>
+                      </engine.events.elementevents.KeyInputEvent>
+                      <null reference="../../../../../../../../../../engine.GameElement/responder/responses/entry/null"/>
+                    </entry>
+                    <entry>
+                      <engine.events.elementevents.TimeEvent>
+                        <timeElapsed>0.0</timeElapsed>
+                      </engine.events.elementevents.TimeEvent>
+                      <engine.actions.TimeGravity/>
+                    </entry>
+                    <entry>
+                      <engine.events.elementevents.KeyInputEvent>
+                        <code>UP</code>
+                      </engine.events.elementevents.KeyInputEvent>
+                      <null reference="../../../../../../../../../../engine.GameElement/responder/responses/entry[4]/null"/>
+                    </entry>
+                  </responses>
+                  <parent reference="../.."/>
+                </responder>
+                <returnedGameEvents/>
+              </e1>
+              <e2 reference="../../../../.."/>
+            </engine.events.elementevents.CollisionEvent>
+            <null reference="../../../../../engine.GameElement[2]/responder/responses/entry/null"/>
+          </entry>
+        </responses>
+        <parent reference="../.."/>
+      </responder>
+      <returnedGameEvents/>
+    </engine.GameElement>
+    <engine.GameElement>
+      <behaviors>
+        <engine.behaviors.MandatoryBehavior>
+          <parent reference="../../.."/>
+          <xPos>50.0</xPos>
+          <yPos>20.0</yPos>
+          <elementName>Block</elementName>
+          <shapeDef class="engine.behaviors.shapes.RectangleShape">
+            <width>20.0</width>
+            <height>20.0</height>
+          </shapeDef>
+          <imagePath>20pxbox.png</imagePath>
+        </engine.behaviors.MandatoryBehavior>
+      </behaviors>
+      <responder>
+        <responses>
+          <entry>
+            <engine.events.elementevents.CollisionEvent>
+              <e1>
+                <behaviors>
+                  <engine.behaviors.Gravity>
+                    <parent reference="../../.."/>
+                    <b>
+                      <parent reference="../../../.."/>
+                      <xVel>0.0</xVel>
+                      <yVel>0.0</yVel>
+                    </b>
+                  </engine.behaviors.Gravity>
+                  <engine.behaviors.Movable reference="../engine.behaviors.Gravity/b"/>
+                  <engine.behaviors.MandatoryBehavior>
+                    <parent reference="../../.."/>
+                    <xPos>200.0</xPos>
+                    <yPos>20.0</yPos>
+                    <elementName>Mario</elementName>
+                    <shapeDef class="engine.behaviors.shapes.RectangleShape">
+                      <width>100.0</width>
+                      <height>100.0</height>
+                    </shapeDef>
+                    <imagePath>mario_1.jpg</imagePath>
+                  </engine.behaviors.MandatoryBehavior>
+                </behaviors>
+                <responder>
+                  <responses>
+                    <entry>
+                      <engine.events.elementevents.KeyInputEvent>
+                        <code>RIGHT</code>
+                      </engine.events.elementevents.KeyInputEvent>
+                      <null reference="../../../../../../../../../../engine.GameElement/responder/responses/entry/null"/>
+                    </entry>
+                    <entry>
+                      <engine.events.elementevents.KeyInputEvent>
+                        <code>LEFT</code>
+                      </engine.events.elementevents.KeyInputEvent>
+                      <null reference="../../../../../../../../../../engine.GameElement/responder/responses/entry[3]/null"/>
+                    </entry>
+                    <entry>
+                      <engine.events.elementevents.TimeEvent>
+                        <timeElapsed>0.0</timeElapsed>
+                      </engine.events.elementevents.TimeEvent>
+                      <engine.actions.TimeGravity/>
+                    </entry>
+                    <entry>
+                      <engine.events.elementevents.TimeEvent>
+                        <timeElapsed>0.0</timeElapsed>
+                      </engine.events.elementevents.TimeEvent>
+                      <engine.actions.TimeMovable/>
+                    </entry>
+                    <entry>
+                      <engine.events.elementevents.KeyInputEvent>
+                        <code>UP</code>
+                      </engine.events.elementevents.KeyInputEvent>
+                      <null reference="../../../../../../../../../../engine.GameElement/responder/responses/entry[4]/null"/>
+                    </entry>
+                  </responses>
+                  <parent reference="../.."/>
+                </responder>
+                <returnedGameEvents/>
+              </e1>
+              <e2 reference="../../../../.."/>
+            </engine.events.elementevents.CollisionEvent>
+            <null reference="../../../../../engine.GameElement[2]/responder/responses/entry/null"/>
+          </entry>
+        </responses>
+        <parent reference="../.."/>
+      </responder>
+      <returnedGameEvents/>
+    </engine.GameElement>
+    <engine.GameElement>
+      <behaviors>
+        <engine.behaviors.MandatoryBehavior>
+          <parent reference="../../.."/>
+          <xPos>70.0</xPos>
+          <yPos>20.0</yPos>
+          <elementName>Block</elementName>
+          <shapeDef class="engine.behaviors.shapes.RectangleShape">
+            <width>20.0</width>
+            <height>20.0</height>
+          </shapeDef>
+          <imagePath>20pxbox.png</imagePath>
+        </engine.behaviors.MandatoryBehavior>
+      </behaviors>
+      <responder>
+        <responses>
+          <entry>
+            <engine.events.elementevents.CollisionEvent>
+              <e1>
+                <behaviors>
+                  <engine.behaviors.MandatoryBehavior>
+                    <parent reference="../../.."/>
+                    <xPos>200.0</xPos>
+                    <yPos>20.0</yPos>
+                    <elementName>Mario</elementName>
+                    <shapeDef class="engine.behaviors.shapes.RectangleShape">
+                      <width>100.0</width>
+                      <height>100.0</height>
+                    </shapeDef>
+                    <imagePath>mario_1.jpg</imagePath>
+                  </engine.behaviors.MandatoryBehavior>
+                  <engine.behaviors.Gravity>
+                    <parent reference="../../.."/>
+                    <b>
+                      <parent reference="../../../.."/>
+                      <xVel>0.0</xVel>
+                      <yVel>0.0</yVel>
+                    </b>
+                  </engine.behaviors.Gravity>
+                  <engine.behaviors.Movable reference="../engine.behaviors.Gravity/b"/>
+                </behaviors>
+                <responder>
+                  <responses>
+                    <entry>
+                      <engine.events.elementevents.KeyInputEvent>
+                        <code>UP</code>
+                      </engine.events.elementevents.KeyInputEvent>
+                      <null reference="../../../../../../../../../../engine.GameElement/responder/responses/entry[4]/null"/>
+                    </entry>
+                    <entry>
+                      <engine.events.elementevents.KeyInputEvent>
+                        <code>RIGHT</code>
+                      </engine.events.elementevents.KeyInputEvent>
+                      <null reference="../../../../../../../../../../engine.GameElement/responder/responses/entry/null"/>
+                    </entry>
+                    <entry>
+                      <engine.events.elementevents.TimeEvent>
+                        <timeElapsed>0.0</timeElapsed>
+                      </engine.events.elementevents.TimeEvent>
+                      <engine.actions.TimeMovable/>
+                    </entry>
+                    <entry>
+                      <engine.events.elementevents.TimeEvent>
+                        <timeElapsed>0.0</timeElapsed>
+                      </engine.events.elementevents.TimeEvent>
+                      <engine.actions.TimeGravity/>
+                    </entry>
+                    <entry>
+                      <engine.events.elementevents.KeyInputEvent>
+                        <code>LEFT</code>
+                      </engine.events.elementevents.KeyInputEvent>
+                      <null reference="../../../../../../../../../../engine.GameElement/responder/responses/entry[3]/null"/>
+                    </entry>
+                  </responses>
+                  <parent reference="../.."/>
+                </responder>
+                <returnedGameEvents/>
+              </e1>
+              <e2 reference="../../../../.."/>
+            </engine.events.elementevents.CollisionEvent>
+            <null reference="../../../../../engine.GameElement[2]/responder/responses/entry/null"/>
+          </entry>
+        </responses>
+        <parent reference="../.."/>
+      </responder>
+      <returnedGameEvents/>
+    </engine.GameElement>
+    <engine.GameElement>
+      <behaviors>
+        <engine.behaviors.MandatoryBehavior>
+          <parent reference="../../.."/>
+          <xPos>90.0</xPos>
+          <yPos>20.0</yPos>
+          <elementName>Block</elementName>
+          <shapeDef class="engine.behaviors.shapes.RectangleShape">
+            <width>20.0</width>
+            <height>20.0</height>
+          </shapeDef>
+          <imagePath>20pxbox.png</imagePath>
+        </engine.behaviors.MandatoryBehavior>
+      </behaviors>
+      <responder>
+        <responses>
+          <entry>
+            <engine.events.elementevents.CollisionEvent>
+              <e1>
+                <behaviors>
+                  <engine.behaviors.MandatoryBehavior>
+                    <parent reference="../../.."/>
+                    <xPos>200.0</xPos>
+                    <yPos>20.0</yPos>
+                    <elementName>Mario</elementName>
+                    <shapeDef class="engine.behaviors.shapes.RectangleShape">
+                      <width>100.0</width>
+                      <height>100.0</height>
+                    </shapeDef>
+                    <imagePath>mario_1.jpg</imagePath>
+                  </engine.behaviors.MandatoryBehavior>
+                  <engine.behaviors.Movable>
+                    <parent reference="../../.."/>
+                    <xVel>0.0</xVel>
+                    <yVel>0.0</yVel>
+                  </engine.behaviors.Movable>
+                  <engine.behaviors.Gravity>
+                    <parent reference="../../.."/>
+                    <b reference="../../engine.behaviors.Movable"/>
+                  </engine.behaviors.Gravity>
+                </behaviors>
+                <responder>
+                  <responses>
+                    <entry>
+                      <engine.events.elementevents.KeyInputEvent>
+                        <code>LEFT</code>
+                      </engine.events.elementevents.KeyInputEvent>
+                      <null reference="../../../../../../../../../../engine.GameElement/responder/responses/entry[3]/null"/>
+                    </entry>
+                    <entry>
+                      <engine.events.elementevents.TimeEvent>
+                        <timeElapsed>0.0</timeElapsed>
+                      </engine.events.elementevents.TimeEvent>
+                      <engine.actions.TimeMovable/>
+                    </entry>
+                    <entry>
+                      <engine.events.elementevents.KeyInputEvent>
+                        <code>UP</code>
+                      </engine.events.elementevents.KeyInputEvent>
+                      <null reference="../../../../../../../../../../engine.GameElement/responder/responses/entry[4]/null"/>
+                    </entry>
+                    <entry>
+                      <engine.events.elementevents.TimeEvent>
+                        <timeElapsed>0.0</timeElapsed>
+                      </engine.events.elementevents.TimeEvent>
+                      <engine.actions.TimeGravity/>
+                    </entry>
+                    <entry>
+                      <engine.events.elementevents.KeyInputEvent>
+                        <code>RIGHT</code>
+                      </engine.events.elementevents.KeyInputEvent>
+                      <null reference="../../../../../../../../../../engine.GameElement/responder/responses/entry/null"/>
+                    </entry>
+                  </responses>
+                  <parent reference="../.."/>
+                </responder>
+                <returnedGameEvents/>
+              </e1>
+              <e2 reference="../../../../.."/>
+            </engine.events.elementevents.CollisionEvent>
+            <null reference="../../../../../engine.GameElement[2]/responder/responses/entry/null"/>
+          </entry>
+        </responses>
+        <parent reference="../.."/>
+      </responder>
+      <returnedGameEvents/>
+    </engine.GameElement>
+    <engine.GameElement>
+      <behaviors>
+        <engine.behaviors.MandatoryBehavior>
+          <parent reference="../../.."/>
+          <xPos>110.0</xPos>
+          <yPos>20.0</yPos>
+          <elementName>Block</elementName>
+          <shapeDef class="engine.behaviors.shapes.RectangleShape">
+            <width>20.0</width>
+            <height>20.0</height>
+          </shapeDef>
+          <imagePath>20pxbox.png</imagePath>
+        </engine.behaviors.MandatoryBehavior>
+      </behaviors>
+      <responder>
+        <responses>
+          <entry>
+            <engine.events.elementevents.CollisionEvent>
+              <e1>
+                <behaviors>
+                  <engine.behaviors.MandatoryBehavior>
+                    <parent reference="../../.."/>
+                    <xPos>200.0</xPos>
+                    <yPos>20.0</yPos>
+                    <elementName>Mario</elementName>
+                    <shapeDef class="engine.behaviors.shapes.RectangleShape">
+                      <width>100.0</width>
+                      <height>100.0</height>
+                    </shapeDef>
+                    <imagePath>mario_1.jpg</imagePath>
+                  </engine.behaviors.MandatoryBehavior>
+                  <engine.behaviors.Movable>
+                    <parent reference="../../.."/>
+                    <xVel>0.0</xVel>
+                    <yVel>0.0</yVel>
+                  </engine.behaviors.Movable>
+                  <engine.behaviors.Gravity>
+                    <parent reference="../../.."/>
+                    <b reference="../../engine.behaviors.Movable"/>
+                  </engine.behaviors.Gravity>
+                </behaviors>
+                <responder>
+                  <responses>
+                    <entry>
+                      <engine.events.elementevents.KeyInputEvent>
+                        <code>UP</code>
+                      </engine.events.elementevents.KeyInputEvent>
+                      <null reference="../../../../../../../../../../engine.GameElement/responder/responses/entry[4]/null"/>
+                    </entry>
+                    <entry>
+                      <engine.events.elementevents.KeyInputEvent>
+                        <code>RIGHT</code>
+                      </engine.events.elementevents.KeyInputEvent>
+                      <null reference="../../../../../../../../../../engine.GameElement/responder/responses/entry/null"/>
+                    </entry>
+                    <entry>
+                      <engine.events.elementevents.TimeEvent>
+                        <timeElapsed>0.0</timeElapsed>
+                      </engine.events.elementevents.TimeEvent>
+                      <engine.actions.TimeMovable/>
+                    </entry>
+                    <entry>
+                      <engine.events.elementevents.TimeEvent>
+                        <timeElapsed>0.0</timeElapsed>
+                      </engine.events.elementevents.TimeEvent>
+                      <engine.actions.TimeGravity/>
+                    </entry>
+                    <entry>
+                      <engine.events.elementevents.KeyInputEvent>
+                        <code>LEFT</code>
+                      </engine.events.elementevents.KeyInputEvent>
+                      <null reference="../../../../../../../../../../engine.GameElement/responder/responses/entry[3]/null"/>
+                    </entry>
+                  </responses>
+                  <parent reference="../.."/>
+                </responder>
+                <returnedGameEvents/>
+              </e1>
+              <e2 reference="../../../../.."/>
+            </engine.events.elementevents.CollisionEvent>
+            <null reference="../../../../../engine.GameElement[2]/responder/responses/entry/null"/>
+          </entry>
+        </responses>
+        <parent reference="../.."/>
+      </responder>
+      <returnedGameEvents/>
+    </engine.GameElement>
+    <engine.GameElement>
+      <behaviors>
+        <engine.behaviors.MandatoryBehavior>
+          <parent reference="../../.."/>
+          <xPos>50.0</xPos>
+          <yPos>80.0</yPos>
+          <elementName>Block</elementName>
+          <shapeDef class="engine.behaviors.shapes.RectangleShape">
+            <width>20.0</width>
+            <height>20.0</height>
+          </shapeDef>
+          <imagePath>20pxbox.png</imagePath>
+        </engine.behaviors.MandatoryBehavior>
+      </behaviors>
+      <responder>
+        <responses>
+          <entry>
+            <engine.events.elementevents.CollisionEvent>
+              <e1>
+                <behaviors>
+                  <engine.behaviors.Movable>
+                    <parent reference="../../.."/>
+                    <xVel>0.0</xVel>
+                    <yVel>0.0</yVel>
+                  </engine.behaviors.Movable>
+                  <engine.behaviors.MandatoryBehavior>
+                    <parent reference="../../.."/>
+                    <xPos>200.0</xPos>
+                    <yPos>20.0</yPos>
+                    <elementName>Mario</elementName>
+                    <shapeDef class="engine.behaviors.shapes.RectangleShape">
+                      <width>100.0</width>
+                      <height>100.0</height>
+                    </shapeDef>
+                    <imagePath>mario_1.jpg</imagePath>
+                  </engine.behaviors.MandatoryBehavior>
+                  <engine.behaviors.Gravity>
+                    <parent reference="../../.."/>
+                    <b reference="../../engine.behaviors.Movable"/>
+                  </engine.behaviors.Gravity>
+                </behaviors>
+                <responder>
+                  <responses>
+                    <entry>
+                      <engine.events.elementevents.KeyInputEvent>
+                        <code>LEFT</code>
+                      </engine.events.elementevents.KeyInputEvent>
+                      <null reference="../../../../../../../../../../engine.GameElement/responder/responses/entry[3]/null"/>
+                    </entry>
+                    <entry>
+                      <engine.events.elementevents.KeyInputEvent>
+                        <code>UP</code>
+                      </engine.events.elementevents.KeyInputEvent>
+                      <null reference="../../../../../../../../../../engine.GameElement/responder/responses/entry[4]/null"/>
+                    </entry>
+                    <entry>
+                      <engine.events.elementevents.TimeEvent>
+                        <timeElapsed>0.0</timeElapsed>
+                      </engine.events.elementevents.TimeEvent>
+                      <engine.actions.TimeGravity/>
+                    </entry>
+                    <entry>
+                      <engine.events.elementevents.KeyInputEvent>
+                        <code>RIGHT</code>
+                      </engine.events.elementevents.KeyInputEvent>
+                      <null reference="../../../../../../../../../../engine.GameElement/responder/responses/entry/null"/>
+                    </entry>
+                    <entry>
+                      <engine.events.elementevents.TimeEvent>
+                        <timeElapsed>0.0</timeElapsed>
+                      </engine.events.elementevents.TimeEvent>
+                      <engine.actions.TimeMovable/>
+                    </entry>
+                  </responses>
+                  <parent reference="../.."/>
+                </responder>
+                <returnedGameEvents/>
+              </e1>
+              <e2 reference="../../../../.."/>
+            </engine.events.elementevents.CollisionEvent>
+            <null reference="../../../../../engine.GameElement[2]/responder/responses/entry/null"/>
+          </entry>
+        </responses>
+        <parent reference="../.."/>
+      </responder>
+      <returnedGameEvents/>
+    </engine.GameElement>
+  </elements>
+  <gameSpeed>1.0</gameSpeed>
+  <gameTime>0.0</gameTime>
+</engine.GameState>

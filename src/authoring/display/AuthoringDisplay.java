@@ -44,6 +44,7 @@ public class AuthoringDisplay {
 	private Node myLevelPanel;
 	private GameViewWindow myGameViewWindow;
 	private Game myGame;
+	private TemplateObjectPanel templatePanel;
 
 	public AuthoringDisplay(Stage stage, Game game) {
 		myGame = new Game();
@@ -68,8 +69,8 @@ public class AuthoringDisplay {
 		root = new BorderPane();
 //		root.setLeft(makeLevelPanel());
 		root.setLeft(myLevelPanel);
-//		root.setRight(makeObjectPropertyPanel());
-		root.setBottom(makeTemplateObjectPanel());
+//		root.setRight(templatePanel.asPane());
+		root.setRight(makeTemplateObjectPanel());
 		root.setTop(makeSaveBar());
 //		root.setCenter(makeGameVisWindow());
 		root.setCenter(myGameViewWindow.asPane());
@@ -89,7 +90,8 @@ public class AuthoringDisplay {
 	}
 
 	public Node makeTemplateObjectPanel() {
-		return new FlowPane();
+		templatePanel = new TemplateObjectPanel(myResources, myGame, root);
+		return templatePanel.asPane();
 	}
 
 	public Node makeObjectPropertyPanel() {

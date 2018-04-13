@@ -1,6 +1,7 @@
 package authoring.display;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -12,6 +13,7 @@ import authoring.Game;
 import authoring.GameObject;
 import authoring.GameScene;
 import authoring.Property;
+import data.GameObjectManager;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -125,6 +127,18 @@ public class NewGameObjectWindow extends NewComponentWindow {
 		newObject.getBehavior("MandatoryBehavior").getProperty("yPos").setValue(yPos);
 		newObject.getBehavior("MandatoryBehavior").getProperty("imagePath").setValue(imageName);
 
+		/**
+		 * This is only temporary!! to see if we can add game objects to the template.
+		 */
+		GameObjectManager manager = new GameObjectManager();
+		try {
+			manager.saveCustomGameObject(newObject, imageName);
+		} catch (IOException e) {
+			System.out.println("rip");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return newObject;
 	}
 

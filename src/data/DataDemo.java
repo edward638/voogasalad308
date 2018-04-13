@@ -19,7 +19,7 @@ public class DataDemo {
 		BufferedImage image = ImageIO.read(imageFile);
 		
 		GameInitializer gameInitializer = new GameInitializer("Demo308");
-//		
+		
 //		GameSaver gameSaver = new GameSaver("Demo308");
 //		gameSaver.addDescription("Demo308Game", "This is for demo purposes", image);
 //		
@@ -27,6 +27,6 @@ public class DataDemo {
 //		GameState testState = model.getState();
 //		
 //		gameSaver.saveGameState(testState);
-//	
+	
 	}
 }

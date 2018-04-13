@@ -1,6 +1,7 @@
 package display;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,12 +9,15 @@ import display.buttonevents.GameAuthoringPress;
 import display.buttonevents.GamePlayerPress;
 import display.buttons.GUIButton;
 import display.text.SplashText;
+import javafx.animation.Animation;
+import javafx.animation.RotateTransition;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * @author August Ning
@@ -24,12 +28,12 @@ public class SplashScreen {
 	
 	private Stage currStage; 
 	private Group myRoot;
-	private Color BACKGROUND_COLOR = Color.BLACK;
+	private Color BACKGROUND_COLOR = Color.LIGHTSTEELBLUE;
 	private Color TEXT_COLOR = Color.WHITE;
 	private List<GUIButton> buttons;
-	private static final int SIZE_X = 400;
-	private static final int SIZE_Y = 400;
-	private static final String SPLASH_IMAGE = "./data/images/mario.png";
+	private static final int SIZE_X = 600;
+	private static final int SIZE_Y = 200;
+	private static final String SPLASH_IMAGE = "./data/images/Logo.png";
 
 	public SplashScreen(Stage stage) {
 		this.currStage = stage;
@@ -37,10 +41,51 @@ public class SplashScreen {
 	}
 	private void addButtons() {
         buttons = new ArrayList<>();
-        GUIButton gamePlayerButton = new GUIButton(20, 350, "Game Player", new GamePlayerPress(currStage));
-        GUIButton gameAuthoringButton = new GUIButton(230, 350, "Game Authoring", new GameAuthoringPress(currStage));
+        GUIButton gamePlayerButton = new GUIButton(500, 30, "", new GamePlayerPress(currStage));
+        GUIButton gameAuthoringButton = new GUIButton(500, 120, "", new GameAuthoringPress(currStage));
+        gamePlayerButton.setId("enginebutton");
+        gameAuthoringButton.setId("authoringbutton");
+        
+        File playImageFile = new File("./data/images/play.png");
+		Image imagePlay;
+		try {
+			imagePlay = new Image(playImageFile.toURI().toURL().toExternalForm());
+			ImageView im = new ImageView(imagePlay);
+			im.setPreserveRatio(true);
+			im.setFitHeight(20);
+			gamePlayerButton.setGraphic(im);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+		File authorImageFile = new File("./data/images/write.png");
+		Image imageAuthor;
+		try {
+			imageAuthor = new Image(authorImageFile.toURI().toURL().toExternalForm());
+			ImageView im = new ImageView(imageAuthor);
+			im.setPreserveRatio(true);
+			im.setFitHeight(20);
+			gameAuthoringButton.setGraphic(im);    
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		RotateTransition rotation = new RotateTransition(Duration.seconds(0.25), gamePlayerButton);
+		RotateTransition rotation1 = new RotateTransition(Duration.seconds(0.25), gameAuthoringButton);
+		rotation.setCycleCount(1);
+		rotation.setByAngle(360);
+		rotation1.setCycleCount(1);
+		rotation1.setByAngle(360);
+       
+		gamePlayerButton.setOnMouseEntered(e -> rotation.play());
+		
+		gameAuthoringButton.setOnMouseEntered(e -> rotation1.play());
+		
         buttons.add(gamePlayerButton);
         buttons.add(gameAuthoringButton);
+        
 	}
 	private ImageView makeSplashImage() {
 		try {
@@ -52,9 +97,9 @@ public class SplashScreen {
 //		splashImage.setLayoutX(50);
 //		splashImage.setLayoutY(120);
 		
-		splashImage.setFitHeight(200);
-		splashImage.setLayoutX(120);
-		splashImage.setLayoutY(120);
+		splashImage.setFitHeight(100);
+		splashImage.setLayoutX(50);
+		splashImage.setLayoutY(50);
 		
 		return splashImage;
 		} catch (Exception e) {
@@ -66,10 +111,12 @@ public class SplashScreen {
 	 */
 	public Scene getSplashScreen() {
 		myRoot = new Group();
+		myRoot.setId("pane");
 		Scene scene = new Scene(myRoot, SIZE_X, SIZE_Y, BACKGROUND_COLOR);
+		scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 		myRoot.getChildren().addAll(buttons);
-		myRoot.getChildren().add(new SplashText("VOOGASALAD", 70, 50, TEXT_COLOR, 40));
-		myRoot.getChildren().add(new SplashText("2dessertz", 140, 100, TEXT_COLOR, 30));
+//		myRoot.getChildren().add(new SplashText("VOOGASALAD", 70, 50, TEXT_COLOR, 40));
+//		myRoot.getChildren().add(new SplashText("2dessertz", 140, 100, TEXT_COLOR, 30));
 		myRoot.getChildren().add(makeSplashImage());
 		return scene;
 	}

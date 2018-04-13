@@ -36,6 +36,8 @@ public class AuthoringDisplay {
 
 	public static final String DEFAULT_LANGUAGE = "English";
 	public static final String DEFAULT_STYLE = "myStyle.css";
+	
+	
 
 	private BorderPane root;
 	private ResourceBundle myResources; //rename more accurately; it's the button names & stuff specifically
@@ -97,7 +99,7 @@ public class AuthoringDisplay {
 
 	public GameViewWindow makeGameVisWindow() {
 //		GameViewWindow gameViewWindow = new GameViewWindow(myResources, myGame, root);
-		myGameViewWindow = new GameViewWindow(myResources, myGame, root);
+		myGameViewWindow = new GameViewWindow(myResources, myGame, root, 1000, 1000);
 		return myGameViewWindow;
 //		return myGameViewWindow.asPane();
 //		return new Pane();

@@ -15,6 +15,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -27,13 +28,15 @@ import javafx.util.Duration;
 public class SplashScreen {
 	
 	private Stage currStage; 
-	private Group myRoot;
+	private Pane myRoot;
 	private Color BACKGROUND_COLOR = Color.LIGHTSTEELBLUE;
 	private Color TEXT_COLOR = Color.WHITE;
 	private List<GUIButton> buttons;
-	private static final int SIZE_X = 600;
-	private static final int SIZE_Y = 200;
-	private static final String SPLASH_IMAGE = "./data/images/Logo.png";
+	private static final int SIZE_X = 1310;
+	private static final int SIZE_Y = 700;
+	private static final String SPLASH_IMAGE = "./data/images/Logo1.png";
+	private static final String CREATE = "./data/images/createText.png";
+	private static final String PLAY = "./data/images/playText.png";
 
 	public SplashScreen(Stage stage) {
 		this.currStage = stage;
@@ -41,8 +44,8 @@ public class SplashScreen {
 	}
 	private void addButtons() {
         buttons = new ArrayList<>();
-        GUIButton gamePlayerButton = new GUIButton(500, 30, "", new GamePlayerPress(currStage));
-        GUIButton gameAuthoringButton = new GUIButton(500, 120, "", new GameAuthoringPress(currStage));
+        GUIButton gamePlayerButton = new GUIButton(900, 400, "", new GamePlayerPress(currStage));
+        GUIButton gameAuthoringButton = new GUIButton(900, 480, "", new GameAuthoringPress(currStage));
         gamePlayerButton.setId("enginebutton");
         gameAuthoringButton.setId("authoringbutton");
         
@@ -71,35 +74,33 @@ public class SplashScreen {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		RotateTransition rotation = new RotateTransition(Duration.seconds(0.25), gamePlayerButton);
-		RotateTransition rotation1 = new RotateTransition(Duration.seconds(0.25), gameAuthoringButton);
-		rotation.setCycleCount(1);
-		rotation.setByAngle(360);
-		rotation1.setCycleCount(1);
-		rotation1.setByAngle(360);
-       
-		gamePlayerButton.setOnMouseEntered(e -> rotation.play());
-		
-		gameAuthoringButton.setOnMouseEntered(e -> rotation1.play());
-		
         buttons.add(gamePlayerButton);
         buttons.add(gameAuthoringButton);
         
+        rotateButtons(buttons);
 	}
-	private ImageView makeSplashImage() {
+	
+	private void rotateButtons(List<GUIButton> buttons) {
+		for (GUIButton b: buttons) {
+			RotateTransition rotation = new RotateTransition(Duration.seconds(0.25), b);
+			rotation.setCycleCount(1);
+			rotation.setByAngle(360);
+			b.setOnMouseEntered(e -> rotation.play());
+		}
+	}
+	
+	
+	
+	private ImageView makeSplashImage(String image1, double ratio, double x, double y) {
 		try {
-		File imageFile = new File(SPLASH_IMAGE);
+		File imageFile = new File(image1);
 		Image image = new Image(imageFile.toURI().toURL().toExternalForm());
 		ImageView splashImage = new ImageView(image);
 		splashImage.setPreserveRatio(true);
-//		splashImage.setFitWidth(300);
-//		splashImage.setLayoutX(50);
-//		splashImage.setLayoutY(120);
-		
-		splashImage.setFitHeight(100);
-		splashImage.setLayoutX(50);
-		splashImage.setLayoutY(50);
+
+		splashImage.setFitHeight(ratio);
+		splashImage.setLayoutX(x);
+		splashImage.setLayoutY(y);
 		
 		return splashImage;
 		} catch (Exception e) {
@@ -110,14 +111,16 @@ public class SplashScreen {
 	 * @return a Scene that can be displayed on the splash screen
 	 */
 	public Scene getSplashScreen() {
-		myRoot = new Group();
+		myRoot = new Pane();
 		myRoot.setId("pane");
 		Scene scene = new Scene(myRoot, SIZE_X, SIZE_Y, BACKGROUND_COLOR);
 		scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 		myRoot.getChildren().addAll(buttons);
 //		myRoot.getChildren().add(new SplashText("VOOGASALAD", 70, 50, TEXT_COLOR, 40));
 //		myRoot.getChildren().add(new SplashText("2dessertz", 140, 100, TEXT_COLOR, 30));
-		myRoot.getChildren().add(makeSplashImage());
+		myRoot.getChildren().add(makeSplashImage(SPLASH_IMAGE, 100, 850, 120));
+		myRoot.getChildren().add(makeSplashImage(PLAY, 50, 885, 415));
+		myRoot.getChildren().add(makeSplashImage(CREATE, 50, 900, 495));
 		return scene;
 	}
 

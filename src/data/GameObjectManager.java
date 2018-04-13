@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import authoring.GameObject;
 import authoring.GameScene;
@@ -19,20 +21,20 @@ public class GameObjectManager {
 		serializer = new Serializer();
 	}
 	
-	public List<GameObject> getSavedGameObjects(){
-		ArrayList<GameObject> objectList = new ArrayList<>();
+	public Map<String,GameObject> getSavedGameObjects(){
+		TreeMap<String,GameObject> map = new TreeMap<>();
+		
 		File directory = new File(defaultObjectLocation);
 	
         File[] directoryListing = directory.listFiles();
-        ArrayList<GameScene> list = new ArrayList<>();
         
         if (directoryListing != null){
             for (File level : directoryListing){
                 String path = level.getAbsolutePath();
-                objectList.add(deserializer.getGameObject(path));
+               map.put(deserializer.getGameObject(path).getName(), deserializer.getGameObject(path));
             }
         }
-        return objectList;
+        return map;
 		
 	}
 	

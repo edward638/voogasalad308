@@ -20,7 +20,7 @@ public class ConcreteHUD extends Pane implements HUD {
 	Map<String, ?> otherInfo;
 	private int xLabel = 0;
 	private int yLabel = 0;
-	
+
 	public ConcreteHUD(String name) {
 		gameName = name;
 		setupPane();
@@ -36,12 +36,11 @@ public class ConcreteHUD extends Pane implements HUD {
 		this.setWidth(800);
 		this.setHeight(650);
 
-		this.addDummyValues();
+		updateInfo(0, 0, new HashMap<>());
 		setupHUDText();
 	}
-	
+
 	private void setupHUDText() {
-		System.out.println(gameName);
 		Label nameText = new Label(gameName);
 		nameText.setTextFill(Color.BLACK);
 		nameText.setLayoutX(xLabel);
@@ -79,19 +78,19 @@ public class ConcreteHUD extends Pane implements HUD {
 		}
 	}
 
-	private void addDummyValues() {
-		HashMap other = new HashMap<String, Integer>();
-		other.put("Kills", 12);
-		other.put("Ammo", 8);
-		other.put("Ammo1", 8);
-		other.put("Ammo2", 8);
-		other.put("Ammo3", 8);
-		other.put("Ammo4", 8);
-		other.put("Ammo5", 8);
-
-		other.put("Current Player", "Jeffrey");
-		updateInfo(758, 7, other);
-	}
+	// private void addDummyValues() {
+	// HashMap other = new HashMap<String, Integer>();
+	// other.put("Kills", 12);
+	// other.put("Ammo", 8);
+	// other.put("Ammo1", 8);
+	// other.put("Ammo2", 8);
+	// other.put("Ammo3", 8);
+	// other.put("Ammo4", 8);
+	// other.put("Ammo5", 8);
+	//
+	// other.put("Current Player", "Jeffrey");
+	// updateInfo(758, 7, other);
+	// }
 
 	@Override
 	public void updateInfo(int score, int lives, Map<String, ?> OtherInfo) {

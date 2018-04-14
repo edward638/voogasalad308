@@ -21,7 +21,7 @@ public class GameAuthoringPress implements ButtonEvent {
 
 	@Override
 	public void pressed() {
-		splashStage.close();
+//		splashStage.close();
 		
 		new AuthoringDisplay(gameAuthoringStage, new Game());
 

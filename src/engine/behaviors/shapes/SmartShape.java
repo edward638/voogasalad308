@@ -13,7 +13,7 @@ public class SmartShape extends ShapeDefinition {
 	}
 	@Override
 	public Shape getShape(MandatoryBehavior mandatory) {
-		mandatory.ge
+		mandatory.getImagePath();
 		return new Rectangle(mandatory.getX(), mandatory.getY(), width, height);
 	}
 	

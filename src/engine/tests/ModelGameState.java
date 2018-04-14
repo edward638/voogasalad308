@@ -29,7 +29,7 @@ public class ModelGameState {
 		
 		
 		//elements.add(getBack(0.0,0.0));
-		for (double i = 0; i < 900; i+=41) {
+		for (double i = 0; i < 900; i+=40) {
 			elements.add(getBlock(i, 500.0));
 		}
 		elements.add(getMario());

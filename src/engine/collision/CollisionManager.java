@@ -19,16 +19,15 @@ public class CollisionManager {
 				MandatoryBehavior b = (MandatoryBehavior) gameState.getElements().get(j).getBehavior(MandatoryBehavior.class);
 				if (a.getShape().getBoundsInLocal().intersects(b.getShape().getBoundsInLocal())) {
 					Shape intersect = Shape.intersect(a.getShape(), b.getShape());
-					
-					
-					GameElement g1 = gameState.getElements().get(i);
-					GameElement g2 = gameState.getElements().get(j);
-					System.out.println(findCollisionDirection(a.getShape(), intersect) + " " + g1.getIdentifier() + " " + g2.getIdentifier());
-					//CollisionEvent collision = new CollisionEvent(g1, findCollisionDirection(a.getShape(), intersect), g2, findCollisionDirection(a.getShape(), intersect));
-					CollisionEvent collision = new CollisionEvent(g1, g2);
-					
-					g1.processEvent(collision);
-					g2.processEvent(collision);
+					if (((Path) intersect).getElements().size() != 0) {
+						GameElement g1 = gameState.getElements().get(i);
+						GameElement g2 = gameState.getElements().get(j);
+						System.out.println(findCollisionDirection(a.getShape(), intersect) + " " + g1.getIdentifier() + " " + g2.getIdentifier());
+						CollisionEvent collision = new CollisionEvent(g1, findCollisionDirection(a.getShape(), intersect), g2, findCollisionDirection(a.getShape(), intersect));
+						
+						g1.processEvent(collision);
+						g2.processEvent(collision);
+					}
 				}
 			}
 		}
@@ -43,9 +42,6 @@ public class CollisionManager {
 	 * rectangle, 0, 1, 2, 3
 	 */
 	private int findCollisionDirection(Shape element, Shape intersect) {
-		if (((Path) intersect).getElements().size() == 0) {
-			return -1;
-		}
 		Point2D intersectCenter = getCenter(intersect);
 		Point2D elementCenter = getCenter(element);
 		/*Point2D collisionVector = intersectCenter.subtract(getCenter(element));

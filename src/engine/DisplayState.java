@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import data.ImageManager;
+import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
@@ -45,12 +46,12 @@ public class DisplayState {
 		r1.setY(4);
 		r1.setWidth(4);
 		r1.setHeight(4);
-		r2.setX(10);
-		r2.setY(10);
+		r2.setX(3);
+		r2.setY(2);
 		r2.setWidth(4);
 		r2.setHeight(5);
 		Shape intersect = Shape.intersect(r1, r2);
-		//System.out.println(intersect.getBoundsInLocal());
+		System.out.println(((Path) intersect).getElements());
 		//int side = getCollisionSide(getCenter(r1), getCenter(intersect));
 		//System.out.println(side);
 		

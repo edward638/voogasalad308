@@ -35,4 +35,5 @@ public class SubtractiveRectangleExtrapolator implements ShapeExtrapolator {
 		}
 		return result;
 	}
+	
 }

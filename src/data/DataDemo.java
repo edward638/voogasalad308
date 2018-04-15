@@ -17,16 +17,16 @@ public class DataDemo {
 		String descriptionImage = "./data/images/rcd.jpg";
 		File imageFile = new File(descriptionImage);
 		BufferedImage image = ImageIO.read(imageFile);
+//		
+//		GameInitializer gameInitializer = new GameInitializer("Demo308");
 		
-		GameInitializer gameInitializer = new GameInitializer("Demo308");
-//		
-//		GameSaver gameSaver = new GameSaver("Demo308");
-//		gameSaver.addDescription("Demo308Game", "This is for demo purposes", image);
-//		
-//		ModelGameState model = new ModelGameState();
-//		GameState testState = model.getState();
-//		
-//		gameSaver.saveGameState(testState);
-//	
+		GameSaver gameSaver = new GameSaver("Demo308");
+		gameSaver.addDescription("Demo308Game", "This is for demo purposes", image);
+		
+		ModelGameState model = new ModelGameState();
+		GameState testState = model.getState();
+		
+		gameSaver.saveGameState(testState);
+	
 	}
 }

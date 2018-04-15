@@ -43,7 +43,7 @@ public class Serializer {
 //        }
 //    }
 
-    void gameAuthorToXML(String fileName, List<GameScene> gameSceneList) throws IOException {
+    public void gameAuthorToXML(String fileName, List<GameScene> gameSceneList) throws IOException {
         String topLevelGameDestination = fileName;
         new File(topLevelGameDestination).mkdirs();
 
@@ -53,6 +53,8 @@ public class Serializer {
             stringToDom(xmlString, levelGameDestination + ".xml");
         }
     }
+    
+  
 
     // taken from https://stackoverflow.com/questions/17853541/java-how-to-convert-a-xml-string-into-an-xml-file
 
@@ -85,6 +87,12 @@ public class Serializer {
     	String levelGameDestination = topLevelGameDestination + "/" + SAVE;
         stringToDom(xmlString, levelGameDestination + ".xml");
     }
+
+	public void saveGameObject(String location, GameObject object, String name) throws IOException {
+		// TODO Auto-generated method stub
+         String xmlString = xstream.toXML(object);
+         stringToDom(xmlString, location + name  + ".xml");
+	}
     
 //    private int checkNumberOfSaves() {
 //    	

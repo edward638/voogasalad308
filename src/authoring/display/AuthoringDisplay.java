@@ -36,12 +36,15 @@ public class AuthoringDisplay {
 
 	public static final String DEFAULT_LANGUAGE = "English";
 	public static final String DEFAULT_STYLE = "myStyle.css";
+	
+	
 
 	private BorderPane root;
 	private ResourceBundle myResources; //rename more accurately; it's the button names & stuff specifically
 	private Node myLevelPanel;
 	private GameViewWindow myGameViewWindow;
 	private Game myGame;
+	private TemplateObjectPanel templatePanel;
 
 	public AuthoringDisplay(Stage stage, Game game) {
 		myGame = new Game();
@@ -66,8 +69,8 @@ public class AuthoringDisplay {
 		root = new BorderPane();
 //		root.setLeft(makeLevelPanel());
 		root.setLeft(myLevelPanel);
-//		root.setRight(makeObjectPropertyPanel());
-		root.setBottom(makeTemplateObjectPanel());
+//		root.setRight(templatePanel.asPane());
+		root.setRight(makeTemplateObjectPanel());
 		root.setTop(makeSaveBar());
 		root.setCenter(myGameViewWindow.asPane());
 
@@ -85,7 +88,8 @@ public class AuthoringDisplay {
 	}
 
 	public Node makeTemplateObjectPanel() {
-		return new FlowPane();
+		templatePanel = new TemplateObjectPanel(myResources, myGame, root);
+		return templatePanel.asPane();
 	}
 
 	public Node makeObjectPropertyPanel() {
@@ -95,7 +99,7 @@ public class AuthoringDisplay {
 
 	public GameViewWindow makeGameVisWindow() {
 //		GameViewWindow gameViewWindow = new GameViewWindow(myResources, myGame, root);
-		myGameViewWindow = new GameViewWindow(myResources, myGame, root);
+		myGameViewWindow = new GameViewWindow(myResources, myGame, root, 1000, 1000);
 		return myGameViewWindow;
 //		return myGameViewWindow.asPane();
 //		return new Pane();

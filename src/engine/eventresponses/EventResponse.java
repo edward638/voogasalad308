@@ -1,5 +1,7 @@
 package engine.eventresponses;
 
+import java.util.List;
+
 import engine.GameElement;
 import engine.events.elementevents.ElementEvent;
 import engine.events.gameevents.GameEvent;
@@ -20,5 +22,5 @@ public abstract class EventResponse {
 		return event.getClass() == respondingTo;
 	}
 	
-	public abstract GameEvent execute (ElementEvent event, GameElement element);
+	public abstract List<GameEvent> execute (ElementEvent event, GameElement element);
 }

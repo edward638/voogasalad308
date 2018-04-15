@@ -77,7 +77,9 @@ public class GameElement {
 	 */
 	public List<GameEvent> processEvent(ElementEvent event) {
 		responder.respondTo(event);
-		List<GameEvent> returnableEvents = new ArrayList<>(returnedGameEvents);
+		// Save the GameEvents added on this processEvent and return it. Reset the field returnedGameEvents for the next time this 
+		// element processes an event
+		List<GameEvent> returnableEvents = new ArrayList<>(returnedGameEvents); 
 		returnedGameEvents = new ArrayList<>();
 		return returnableEvents;
 	}
@@ -86,7 +88,6 @@ public class GameElement {
 	 * Allows behaviors to add GameEvent objects to this GameElement that will 
 	 * be returned at the completion of processEvent
 	 */
-	
 	public void addGameEvent(GameEvent gameevent) {
 		returnedGameEvents.add(gameevent);
 	}

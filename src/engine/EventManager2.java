@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import engine.behaviors.MandatoryBehavior;
+import engine.collision.CollisionManager;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.ElementEvent;
 import engine.events.gameevents.GameEvent;
@@ -12,9 +13,13 @@ import javafx.scene.shape.Shape;
 public class EventManager2 {
 	
 	private GameState gameState;
+	private Engine engine;
+	private CollisionManager collisionManager;
 	
-	public EventManager2 (GameState state) {
+	public EventManager2 (GameState state, Engine engine) {
 		gameState = state;
+		this.engine = engine;
+		collisionManager = new CollisionManager();
 	}
 	
 	public void processElementEvent(ElementEvent ee) {
@@ -24,29 +29,16 @@ public class EventManager2 {
 			gameEvents.addAll(ge.processEvent(ee));
 		}
 		
-		handleCollisions();
+		collisionManager.handleCollisions(gameState);
+		//handleCollisions();
 		gameEvents.stream().forEach(event -> processGameEvent(event));
 		
 	}
 	
 	private void processGameEvent(GameEvent gameEvent) {
-		gameEvent.execute(gameState);
+		gameEvent.execute(gameState, displayState, engine);
 	}
-	
-	private void handleCollisions() {
-		for (GameElement g1: gameState.getElements()) {
-			for (GameElement g2:gameState.getElements()) {
-				if (!(g1 == g2)) {
-					MandatoryBehavior g1Mand = (MandatoryBehavior) g1.getBehavior(MandatoryBehavior.class);
-					MandatoryBehavior g2Mand = (MandatoryBehavior) g2.getBehavior(MandatoryBehavior.class);
-					if (Shape.intersect(g1Mand.getShape(), g2Mand.getShape()) != null) {
-						g1.processEvent(new CollisionEvent(g1, g2));
-						g2.processEvent(new CollisionEvent(g1, g2));
-					}
-				}
-			}
-		}
-	}
+
 	
 	public GameState getCurrentState() {
 		return gameState;

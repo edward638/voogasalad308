@@ -18,7 +18,6 @@ public class EventManager {
 		elementEvents.add(event);
 		gameState = propogateElementEvents(elementEvents, gameState);
 		gameState = processCollisionEvents(gameState);
-		
 	}
 	
 	public GameState processCollisionEvents(GameState gameState) {
@@ -27,10 +26,15 @@ public class EventManager {
 		gameState = propogateElementEvents(elementEvents, gameState);
 //		updateDisplayState();
 		return gameState;
-		
-		
 	}
 	
+	/**
+	 * Propogate ElementEvents to be executed by all elements
+	 * 
+	 * @param elementEvents 	List of element events to be propogated
+	 * @param gameState			GameState, which contains a list of GameElements
+	 * @return					An updated GameState
+	 */
 	private GameState propogateElementEvents(List<ElementEvent> elementEvents, GameState gameState) {
 		List<GameEvent> gameEvents = new ArrayList<>();
 		for (GameElement ge: gameState.getElements()) {
@@ -46,13 +50,19 @@ public class EventManager {
 		return gameState;
 	}
 	
-	private List<GameEvent> deliverElementEvent(ElementEvent elementEvent, GameState gameState) {
+	/*private List<GameEvent> deliverElementEvent(ElementEvent elementEvent, GameState gameState) {
 		return gameState.getElements().parallelStream()
 				.map(c -> c.processEvent(elementEvent))
 				.flatMap(List::stream)
 				.collect(Collectors.toList());
-	}
+	}*/
 	
+	/**
+	 * Finds all collisions between elements within a GameState, and returns these collisions as element events.
+	 * 
+	 * @param gameState 	
+	 * @return				List of ElementEvents containing the collision information
+	 */
 	public List<ElementEvent> getCollisionEvents(GameState gameState) {
 		List<ElementEvent> collisionEvents = new ArrayList<ElementEvent>();
 		for (int i = 0; i < gameState.getElements().size(); i++) {
@@ -71,16 +81,6 @@ public class EventManager {
 		
 	}
 	
-	private CollisionEvent getCollisionDirection(Shape shape1, Shape shape2) {
-		Shape intersect = Shape.intersect(shape1, shape2);
-		Point2D intersectCenter = getCenter(intersect);
-		Point2D vector1 = intersectCenter.subtract(getCenter(shape1));
-	}
-	
-	private Point2D getCenter(Shape s) {
-		Bounds b = s.getBoundsInLocal();
-		return new Point2D((b.getMinX() + b.getMaxX())/2, (b.getMinY() + b.getMaxY())/2);
-	}
 	
 	public GameState handleGameEvents(GameState gameState, List<GameEvent> gameEvents) {
 		gameEvents.stream().forEach(c-> c.execute(gameState));

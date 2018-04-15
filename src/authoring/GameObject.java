@@ -5,15 +5,39 @@ import java.util.Set;
 
 public class GameObject {
 	
+	private String myName;
 	private Set<Behavior> myBehaviors;
 	private Set<Event> myEvents;
+	private BehaviorFactory myBehaviorFactory;
 	
 	public GameObject() {
 		myBehaviors = new HashSet<>();
 		myEvents = new HashSet<>();
+		myBehaviorFactory = new BehaviorFactory();
+	}
+
+	public GameObject(Behavior initBehavior) {
+		this();
+		myBehaviors.add(initBehavior);
 	}
 	
-	//each game object will have behaviors that describe how it behaves. 
+	public GameObject(String initBehavior) {
+		this();
+		addBehavior(initBehavior);
+	}
+	
+	public GameObject(GameObject toCopy) {
+		this();
+		myBehaviors = toCopy.getBehaviors();
+		myEvents = toCopy.getEvents();
+	}
+	
+	public void addBehavior(String behaviorToAdd) {
+		Behavior newBehavior = myBehaviorFactory.makeBehavior(behaviorToAdd);
+		myBehaviors.add(newBehavior);
+	}
+	
+	//each game object will have properties that describe how it behaves. 
 	public void addBehavior(Behavior behaviorToAdd) {
 		myBehaviors.add(behaviorToAdd);
 	}
@@ -33,6 +57,18 @@ public class GameObject {
 		}
 	}
 	
+	public void setName(String name) {
+		myName = name;
+	}
+	
+	public String getName() {
+		return myName;
+	}
+
+	public Set<Event> getEvents(){
+		return myEvents;
+	}
+
 	//returns the list of all behaviors associated with the object
 	public Set<Behavior> getBehaviors() {
 		return myBehaviors;
@@ -52,5 +88,7 @@ public class GameObject {
 		return new Behavior();
 	}
 	
-	
+	public String toString() {
+		return myName;
+	}
 }

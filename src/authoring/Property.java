@@ -4,15 +4,21 @@ public class Property {
 
 	private Object myValue;
 	private String myName;
+	private Class<?> myValueType;
 	
-	public Property(String name, Object value) {
+	public Property(String name, Class<?> clazz) {
 		myName = name;
-		myValue = value;
+		setValueType(clazz);
 	}
 	
 	//sets the value of the property
 	public void setValue(Object value) {
-		myValue = value;
+		if (value.getClass().equals(myValueType)) {
+			myValue = value;
+		}
+		else { 
+			new Error("value entered is not the correct type");
+		}
 	}
 	
 	//returns the value of the property
@@ -25,9 +31,13 @@ public class Property {
 		return myName;
 	}
 	
+	private void setValueType(Class<?> clazz) {
+		myValueType = clazz;
+	}
+	
 	//returns the name of the property
 	public String toString() {
-		return myName + " = " + myValue;
+		return myValueType + " " + myName + " = " + myValue;
 	}
 	
 }

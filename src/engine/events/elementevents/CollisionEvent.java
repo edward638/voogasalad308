@@ -11,6 +11,11 @@ public class CollisionEvent extends ElementEvent {
 	private GameElement e1;
 	private GameElement e2;
 	
+	public CollisionEvent(GameElement elem1, int side1, GameElement elem2, int side2) {
+		e1 = elem1;
+		e2 = elem2;
+	}
+	
 	public CollisionEvent(GameElement elem1, GameElement elem2) {
 		e1 = elem1;
 		e2 = elem2;
@@ -33,7 +38,10 @@ public class CollisionEvent extends ElementEvent {
 			List<GameElement> collisionElements = otherCollision.getCollidedElements();
 			if (collisionElements.contains(e1)) {
 				collisionElements.remove(e1);
-				if (collisionElements.get(0).getClass() == e2.getClass()) {
+				//System.out.println(collisionElements.get(0).getIdentifier());
+				//System.out.println("Second Value: " + e2.getIdentifier());
+				
+				if (collisionElements.get(0).getIdentifier().equals(e2.getIdentifier())) {
 					return true;
 				}
 			}

@@ -51,6 +51,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 	String currentGameName;
 	GameDescriptionProvider gameDescriptionProvider;
 	String mostRecentFile;
+	KeyInputDictionary keyInputDictionary;
 
 	private ConcreteButtonData buttonData;
 
@@ -113,8 +114,16 @@ public class ConcreteGamePlayer implements GamePlayer {
 		gameDisplay.setStyle("-fx-background-color: white;");
 		hud = new ConcreteHUD(currentGameName);
 		highScores = new ConcreteHighScores(currentGameName);
+		keyInputDictionary = new KeyInputDictionary(engine);
 
-		myScene.setOnKeyPressed(e -> engine.handleKeyInput(e.getCode()));
+		// keyInputDictionary.addKey(KeyCode.A, KeyCode.D);
+		myScene.setOnKeyPressed(e -> keyInputDictionary.handleAction(e.getCode()));
+
+		// scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+		// if(key.getCode()==KeyCode.ENTER) {
+		// System.out.println("You pressed enter");
+		// }
+		// });
 		// myScene.setOnMouseClicked(e -> engine.handleMouseInput(e.getX(), e.getY()));
 
 		root.getChildren().add(gameDisplay);

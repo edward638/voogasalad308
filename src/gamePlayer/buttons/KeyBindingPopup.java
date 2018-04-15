@@ -28,27 +28,21 @@ public class KeyBindingPopup extends Pane {
 	}
 
 	private void setupChangeButtons() {
-
-		// for (KeyCode k : keyMap.keySet()) {
-		// System.out.println(k.toString());
-		// }
 		int yVal = 50;
-		for (KeyCode k : keyMap.getKeySet()) {
-			Button changeA = new Button("Press and Type Key to Change Binding. Current Key = " + k.toString());
+		for (KeyCode keyCode : keyMap.getKeySet()) {
+			Button changeA = new Button("Press and Type Key to Change Binding. Current Key = " + keyCode.toString());
 			changeA.setLayoutY(yVal);
 			yVal = yVal + 60;
 			System.out.println(yVal);
-			changeA.setOnAction(event -> {
-				this.setOnKeyPressed(event1 -> {
-					keyMap.replaceKey(event1.getCode(), k, k);
-					changeA.setText("Press and Type Key to Change Binding. Current Key = " + event1.getCode().toString());
+			changeA.setOnAction(pushButtonEvent -> {
+				this.setOnKeyPressed(keyPressInput -> {
+					keyMap.replaceKey(keyPressInput.getCode(), keyCode, keyCode);
+					changeA.setText("Press and Type Key to Change Binding. Current Key = "
+							+ keyPressInput.getCode().toString());
 				});
 			});
 			this.getChildren().add(changeA);
-
 		}
-
-
 	}
 
 	private void setupCloseButton() {

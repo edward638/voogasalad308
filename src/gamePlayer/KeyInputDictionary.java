@@ -2,23 +2,23 @@ package gamePlayer;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import engine.Engine;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 public class KeyInputDictionary {
 	Map<KeyCode, KeyCode> dictionary;
 	Engine engine;
-
-	public KeyInputDictionary() {
-	}
 
 	public KeyInputDictionary(Engine engine) {
 		dictionary = new HashMap<KeyCode, KeyCode>();
 		this.engine = engine;
 	}
 
-	public void addKey(KeyCode newInput, KeyCode oldInput) {
+	public void replaceKey(KeyCode newInput, KeyCode oldInput) {
+		dictionary.remove(oldInput);
 		dictionary.put(newInput, oldInput);
 	}
 
@@ -31,6 +31,27 @@ public class KeyInputDictionary {
 			System.out.println(input);
 		}
 	}
+	
+	public void setGame(Engine engine) {
+		this.engine = engine;
+		
+		
+	}
+
+	public Set<KeyCode> getKeySet() {
+		return dictionary.keySet();
+	}
+
+	public KeyCode getKey(KeyCode k) {
+		return dictionary.get(k);
+	}
+
+	public void removeKey(KeyCode k) {
+		System.out.println(dictionary);
+		dictionary.remove(k);
+		
+	}
+	
 
 	// public static void main(String[] args) {
 	// KeyInputDictionary hi = new KeyInputDictionary();

@@ -9,6 +9,7 @@ import engine.Engine;
 import engine.GameState;
 import gamePlayer.buttons.ClearHighScoresButton;
 import gamePlayer.buttons.ConcreteButtonData;
+import gamePlayer.buttons.KeyboardBindingButton;
 import gamePlayer.buttons.LoadButton;
 import gamePlayer.buttons.SaveButton;
 import gamePlayer.buttons.NewGameButton;
@@ -43,6 +44,8 @@ public class ConcreteGamePlayer implements GamePlayer {
 	Button replayButton;
 	Button newGameButton;
 	Button clearHighScoresButton;
+	Button keyboardBindingButton;
+
 	HUD hud;
 	Pane gameDisplay;
 
@@ -53,7 +56,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 	String mostRecentFile;
 	KeyInputDictionary keyInputDictionary;
 
-	private ConcreteButtonData buttonData;
+	ConcreteButtonData buttonData;
 
 	ConcreteHighScores highScores;
 
@@ -79,8 +82,10 @@ public class ConcreteGamePlayer implements GamePlayer {
 
 		highScores = new ConcreteHighScores("hi");
 		root.getChildren().add(highScores.getScores());
+		keyInputDictionary = new KeyInputDictionary(engine);
 
-		buttonData = new ConcreteButtonData(stage, this, gameDescriptionProvider, root);
+		buttonData = new ConcreteButtonData(stage, this, gameDescriptionProvider, root, keyInputDictionary);
+
 
 		setupButtons();
 		buttonData.setHighScores(highScores);
@@ -101,6 +106,8 @@ public class ConcreteGamePlayer implements GamePlayer {
 		root.getChildren().add(saveButton);
 		replayButton = new ReplayButton(970, 470, 235, 60, buttonData);
 		root.getChildren().add(replayButton);
+		keyboardBindingButton = new KeyboardBindingButton(970, 510, 235, 60, buttonData);
+		root.getChildren().add(keyboardBindingButton);
 		//toggleGameSoundButton = new toggleButton(970, 500, 235, 60, buttonData);
 		
 
@@ -112,6 +119,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 		root.getChildren().remove((Node) hud);
 		root.getChildren().remove(highScores.getScores());
 		engine = new Engine(file);
+		keyInputDictionary.setGame(engine);
 		currentGameName = gameDescriptionProvider.getGameName(file);
 		buttonData.setCurrentGameName(currentGameName);
 		mostRecentFile = file;
@@ -123,7 +131,6 @@ public class ConcreteGamePlayer implements GamePlayer {
 		gameDisplay.setStyle("-fx-background-color: white;");
 		hud = new ConcreteHUD(currentGameName);
 		highScores = new ConcreteHighScores(currentGameName);
-		keyInputDictionary = new KeyInputDictionary(engine);
 
 		// keyInputDictionary.addKey(KeyCode.A, KeyCode.D);
 		myScene.setOnKeyPressed(e -> keyInputDictionary.handleAction(e.getCode()));

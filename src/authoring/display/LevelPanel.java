@@ -71,7 +71,6 @@ public class LevelPanel extends AuthoringUIComponent {
 	private ComboBox<GameScene> makeLevelDropdown() {
 		myLevelDropdown = new ComboBox<>();
 		myLevelDropdown.setPromptText(super.getResources().getString("SelectSceneDropDown")); //make super.getString method?
-		//below line contains dummy objects
 		myLevelDropdown.getItems().addAll(getGame().getSceneManager().getScenes());
 		myLevelDropdown.valueProperty().addListener((o, old, neww) -> {
 			getGame().getSceneManager().setCurrentScene(neww);

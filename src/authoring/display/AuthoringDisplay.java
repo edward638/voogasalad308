@@ -69,7 +69,6 @@ public class AuthoringDisplay {
 //		root.setRight(makeObjectPropertyPanel());
 		root.setBottom(makeTemplateObjectPanel());
 		root.setTop(makeSaveBar());
-//		root.setCenter(makeGameVisWindow());
 		root.setCenter(myGameViewWindow.asPane());
 
 		return new Scene(root);
@@ -77,7 +76,6 @@ public class AuthoringDisplay {
 
 	private void initVars() {
 		myGameViewWindow = makeGameVisWindow();
-		System.out.println(myGameViewWindow == null);
 		myLevelPanel = makeLevelPanel();
 	}
 

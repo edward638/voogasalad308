@@ -48,6 +48,7 @@ public class GameSelector extends ScrollPane {
 		File[] fList = directory.listFiles();
 		for (File file : fList) {
 			String gameName = file.getName();
+			if (gameName.contains(".DS_Store")) {continue;}
 			String gameString = gameDescriptionProvider.getGameName(gameName);
 			String gameDescription = gameDescriptionProvider.getGameDescription(gameName);
 			Image gameImage = gameDescriptionProvider.getDescriptionImage(gameName);

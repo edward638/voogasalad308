@@ -19,10 +19,6 @@ public class KeyBindingPopup extends Pane {
 		this.setLayoutY(300);
 		keyMap = buttonData.getKeyBindings();
 
-		keyMap.replaceKey(KeyCode.A, KeyCode.A);
-		keyMap.replaceKey(KeyCode.D, KeyCode.D);
-		keyMap.replaceKey(KeyCode.W, KeyCode.W);
-
 		this.buttonData = buttonData;
 
 		setupBackground();
@@ -44,7 +40,7 @@ public class KeyBindingPopup extends Pane {
 			System.out.println(yVal);
 			changeA.setOnAction(event -> {
 				this.setOnKeyPressed(event1 -> {
-					keyMap.replaceKey(event1.getCode(), k);
+					keyMap.replaceKey(event1.getCode(), k, k);
 					changeA.setText("Press and Type Key to Change Binding. Current Key = " + event1.getCode().toString());
 				});
 			});

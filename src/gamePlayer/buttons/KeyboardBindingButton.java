@@ -1,5 +1,7 @@
 package gamePlayer.buttons;
 
+import javafx.scene.input.KeyCode;
+
 public class KeyboardBindingButton extends PlayerButtons {
 
 	private ButtonData buttonData;
@@ -9,6 +11,14 @@ public class KeyboardBindingButton extends PlayerButtons {
 		this.buttonData = buttonData;
 		this.setText("Change Key Bindings");
 		setAction();
+		initialiseOGKeyBindings();
+	}
+
+	private void initialiseOGKeyBindings() {
+		buttonData.getKeyBindings().replaceKey(KeyCode.A, KeyCode.A ,KeyCode.A);
+		buttonData.getKeyBindings().replaceKey(KeyCode.D, KeyCode.D, KeyCode.D);
+		buttonData.getKeyBindings().replaceKey(KeyCode.W, KeyCode.W, KeyCode.W);
+		buttonData.getKeyBindings().replaceKey(KeyCode.S, KeyCode.S, KeyCode.S);
 	}
 
 	@Override
@@ -16,6 +26,7 @@ public class KeyboardBindingButton extends PlayerButtons {
 		this.setOnAction(event -> {
 
 			KeyBindingPopup keyPopup = new KeyBindingPopup(buttonData);
+
 			keyPopup.show();
 		});
 	}

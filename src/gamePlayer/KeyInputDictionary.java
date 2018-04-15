@@ -17,9 +17,10 @@ public class KeyInputDictionary {
 		this.engine = engine;
 	}
 
-	public void replaceKey(KeyCode newInput, KeyCode oldInput) {
+	public void replaceKey(KeyCode input, KeyCode mapTo, KeyCode oldInput) {
+		
 		dictionary.remove(oldInput);
-		dictionary.put(newInput, oldInput);
+		dictionary.put(input, mapTo);
 	}
 
 	public void handleAction(KeyCode input) {

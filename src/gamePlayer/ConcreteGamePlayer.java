@@ -1,12 +1,7 @@
 package gamePlayer;
 
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-
-import data.Serializer;
 import data.GameDescriptionProvider;
 import engine.Engine;
-import engine.GameState;
 import gamePlayer.buttons.ClearHighScoresButton;
 import gamePlayer.buttons.ConcreteButtonData;
 import gamePlayer.buttons.KeyboardBindingButton;
@@ -14,21 +9,14 @@ import gamePlayer.buttons.LoadButton;
 import gamePlayer.buttons.SaveButton;
 import gamePlayer.buttons.NewGameButton;
 import gamePlayer.buttons.ReplayButton;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 /**
  * 
@@ -37,44 +25,47 @@ import javafx.util.Duration;
  */
 public class ConcreteGamePlayer implements GamePlayer {
 
-	Scene myScene;
-	Stage myStage;
-	Button saveButton;
-	Button loadButton;
-	Button replayButton;
-	Button newGameButton;
-	Button clearHighScoresButton;
-	Button keyboardBindingButton;
-
-	HUD hud;
-	Pane gameDisplay;
-
-	Engine engine;
-	GameState gameState;
-	String currentGameName;
-	GameDescriptionProvider gameDescriptionProvider;
-	String mostRecentFile;
-	KeyInputDictionary keyInputDictionary;
-
-	ConcreteButtonData buttonData;
-
-	ConcreteHighScores highScores;
-
-	private final static double SCREEN_HEIGHT = 650;
-	private final static double SCREEN_WIDTH = 1250;
+	private Scene myScene;
+	private Stage myStage;
 	private Group root;
-	private final static Paint BACKGROUND = Color.ANTIQUEWHITE;
-	
-	private boolean gameSoundsOn = true;
-	private boolean musicOn = true;
-	private int soundLevel = 0;
+
+	private Button saveButton;
+	private Button loadButton;
+	private Button replayButton;
+	private Button newGameButton;
+	private Button clearHighScoresButton;
+	private Button keyboardBindingButton;
+	private ConcreteButtonData buttonData;
+
+	private HUD hud;
+	private Pane gameDisplay;
+	private ConcreteHighScores highScores;
+
+	private Engine engine;
+	private String currentGameName;
+	private GameDescriptionProvider gameDescriptionProvider;
+	private String mostRecentFile;
+	private KeyInputDictionary keyInputDictionary;
+
+	private static final double SCREEN_HEIGHT = 650;
+	private static final double SCREEN_WIDTH = 1250;
+	private static final Paint BACKGROUND = Color.ANTIQUEWHITE;
+	private static final int buttonXLocation = 970;
+	private static final int buttonWidth = 235;
+	private static final int buttonHeight = 60;
+
+	private boolean gameSoundsOn;
+	private boolean musicOn;
+	private int soundLevel;
 
 	public ConcreteGamePlayer(Stage stage) {
 
-		// back end set up.
 		gameDescriptionProvider = new GameDescriptionProvider();
 
-		// front end set up;
+		gameSoundsOn = true;
+		musicOn = true;
+		soundLevel = 0;
+
 		root = new Group();
 		myScene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND);
 		myStage = stage;
@@ -85,31 +76,27 @@ public class ConcreteGamePlayer implements GamePlayer {
 		keyInputDictionary = new KeyInputDictionary(engine);
 
 		buttonData = new ConcreteButtonData(stage, this, gameDescriptionProvider, root, keyInputDictionary);
-
-
 		setupButtons();
 		buttonData.setHighScores(highScores);
-
 	}
 
 	/**
 	 * initialises buttons on screen
 	 */
 	private void setupButtons() {
-		clearHighScoresButton = new ClearHighScoresButton(970, 310, 235, 60, buttonData);
+		clearHighScoresButton = new ClearHighScoresButton(buttonXLocation, 310, buttonWidth, buttonHeight, buttonData);
 		root.getChildren().add(clearHighScoresButton);
-		newGameButton = new NewGameButton(970, 350, 235, 60, buttonData);
+		newGameButton = new NewGameButton(buttonXLocation, 350, buttonWidth, buttonHeight, buttonData);
 		root.getChildren().add(newGameButton);
-		loadButton = new LoadButton(970, 390, 235, 60, buttonData);
+		loadButton = new LoadButton(buttonXLocation, 390, buttonWidth, buttonHeight, buttonData);
 		root.getChildren().add(loadButton);
-		saveButton = new SaveButton(970, 430, 235, 60, buttonData);
+		saveButton = new SaveButton(buttonXLocation, 430, buttonWidth, buttonHeight, buttonData);
 		root.getChildren().add(saveButton);
-		replayButton = new ReplayButton(970, 470, 235, 60, buttonData);
+		replayButton = new ReplayButton(buttonXLocation, 470, buttonWidth, buttonHeight, buttonData);
 		root.getChildren().add(replayButton);
-		keyboardBindingButton = new KeyboardBindingButton(970, 510, 235, 60, buttonData);
+		keyboardBindingButton = new KeyboardBindingButton(970, 510, buttonWidth, buttonHeight, buttonData);
 		root.getChildren().add(keyboardBindingButton);
-		//toggleGameSoundButton = new toggleButton(970, 500, 235, 60, buttonData);
-		
+		// toggleGameSoundButton = new toggleButton(buttonLocation, 500, buttonWidth, buttonHeight, buttonData);
 
 	}
 
@@ -128,20 +115,10 @@ public class ConcreteGamePlayer implements GamePlayer {
 		gameDisplay.setLayoutX(30);
 		gameDisplay.setLayoutY(30);
 		gameDisplay.setPrefSize(900, 590);
-		gameDisplay.setStyle("-fx-background-color: white;");
+		// gameDisplay.setStyle("-fx-background-color: white;");
 		hud = new ConcreteHUD(currentGameName);
 		highScores = new ConcreteHighScores(currentGameName);
-
-		// keyInputDictionary.addKey(KeyCode.A, KeyCode.D);
 		myScene.setOnKeyPressed(e -> keyInputDictionary.handleAction(e.getCode()));
-
-		// scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-		// if(key.getCode()==KeyCode.ENTER) {
-		// System.out.println("You pressed enter");
-		// }
-		// });
-		// myScene.setOnMouseClicked(e -> engine.handleMouseInput(e.getX(), e.getY()));
-
 		root.getChildren().add(gameDisplay);
 		root.getChildren().add((Node) hud);
 		root.getChildren().add(highScores.getScores());

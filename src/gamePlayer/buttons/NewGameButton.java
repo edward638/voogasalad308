@@ -11,21 +11,18 @@ import javafx.stage.FileChooser;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 
-public class NewGameButton extends Button {
+public class NewGameButton extends PlayerButtons {
 
 	private ButtonData buttonData;
 
 	public NewGameButton(double x, double y, double width, double height, ButtonData buttonData) {
-		this.setLayoutX(x);
-		this.setLayoutY(y);
-		this.setMinWidth(width);
-		this.setHeight(height);
-		this.setText("New Game");
+		super(x, y, width, height);
 		this.buttonData = buttonData;
+		this.setText("New Game");
 		setAction();
 	}
 
-	private void setAction() {
+	protected void setAction() {
 
 		this.setOnAction(event -> {
 			

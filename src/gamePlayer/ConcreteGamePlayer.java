@@ -60,6 +60,10 @@ public class ConcreteGamePlayer implements GamePlayer {
 	private final static double SCREEN_WIDTH = 1250;
 	private Group root;
 	private final static Paint BACKGROUND = Color.ANTIQUEWHITE;
+	
+	private boolean gameSoundsOn = true;
+	private boolean musicOn = true;
+	private int soundLevel = 0;
 
 	public ConcreteGamePlayer(Stage stage) {
 
@@ -96,11 +100,16 @@ public class ConcreteGamePlayer implements GamePlayer {
 		root.getChildren().add(saveButton);
 		replayButton = new ReplayButton(970, 470, 235, 60, buttonData);
 		root.getChildren().add(replayButton);
+		//toggleGameSoundButton = new toggleButton(970, 500, 235, 60, buttonData);
+		
 
 	}
 
 	@Override
 	public void playGame(String file) {
+		root.getChildren().remove(gameDisplay);
+		root.getChildren().remove((Node) hud);
+		root.getChildren().remove(highScores.getScores());
 		engine = new Engine(file);
 		currentGameName = gameDescriptionProvider.getGameName(file);
 		buttonData.setCurrentGameName(currentGameName);
@@ -120,6 +129,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 		root.getChildren().add(gameDisplay);
 		root.getChildren().add((Node) hud);
 		root.getChildren().add(highScores.getScores());
+		setupButtons();
 
 	}
 

@@ -14,5 +14,8 @@ public interface ButtonData {
 	public GameState getGameState();
 	public void clearHighScores();
 	public void addToRoot(Node node);
+	//public void toggleGameSounds(boolean setting);
+	//public void toggleMusic(boolean setting);
+	//public void setSoundLevel
 	// public GameDescriptionProvider getGameDescriptionProvider();
 }

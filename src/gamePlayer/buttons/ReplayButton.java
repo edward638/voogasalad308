@@ -3,21 +3,18 @@ package gamePlayer.buttons;
 import gamePlayer.ConcreteGamePlayer;
 import javafx.scene.control.Button;
 
-public class ReplayButton extends Button{
+public class ReplayButton extends PlayerButtons{
 	
 	private ButtonData buttonData;
 	
 	public ReplayButton(double x, double y, double width, double height, ButtonData buttonData) {
-		this.setLayoutX(x);
-		this.setLayoutY(y);
-		this.setMinWidth(width);
-		this.setHeight(height);
-		this.setText("Restart Current Game");
+		super(x, y, width, height);
 		this.buttonData = buttonData;
+		this.setText("Restart Current Game");
 		setAction();
 	}
 	
-	private void setAction() {
+	protected void setAction() {
 
 		this.setOnAction(event -> {
 			buttonData.playGame(buttonData.getMostRecentFile());

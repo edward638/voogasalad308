@@ -16,9 +16,9 @@ public class EventManager2 {
 	private Engine engine;
 	private CollisionManager collisionManager;
 	
-	public EventManager2 (GameState state, Engine engine) {
+	public EventManager2 (GameState state, Engine eng) {
 		gameState = state;
-		this.engine = engine;
+		engine = eng;
 		collisionManager = new CollisionManager();
 	}
 	
@@ -34,7 +34,7 @@ public class EventManager2 {
 	}
 	
 	private void processGameEvent(GameEvent gameEvent) {
-		gameEvent.execute(gameState, displayState, engine);
+		gameEvent.execute(gameState, engine);
 	}
 
 	

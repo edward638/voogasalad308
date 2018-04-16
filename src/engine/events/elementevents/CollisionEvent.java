@@ -10,7 +10,6 @@ import javafx.scene.shape.Shape;
 
 public class CollisionEvent extends ElementEvent {
 	
-	
 	private GameElement e1;
 	private GameElement e2;
 	private List<String> e1side;
@@ -29,6 +28,13 @@ public class CollisionEvent extends ElementEvent {
 		e1side = new ArrayList<String>();
 		e2side = new ArrayList<String>();
 		processCollisionSides(elem1, elem2);
+	}
+	
+	public GameElement getOtherElement(GameElement notThisOne) {
+		if (e1.equals(notThisOne)) {
+			return e2;
+		}
+		return e1;
 	}
 	
 	private void processCollisionSides(GameElement e1, GameElement e2) {

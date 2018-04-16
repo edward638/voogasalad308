@@ -9,6 +9,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 public class DisplayState {
+	private GameState gameState;
 	protected List<ImageElement> activeElements;
 	protected List<ImageElement> newElements;
 	protected List<ImageElement> removeElements;
@@ -22,6 +23,10 @@ public class DisplayState {
 		removeElements = new ArrayList<>();
 	}
 	
+	public void update() {
+		
+	}
+	
 	public void addNewElement(GameElement element) {
 		ImageElement imageElement = new ImageElement(element, new ImageManager(gameName));
 		newElements.add(imageElement);
@@ -33,9 +38,10 @@ public class DisplayState {
 		activeElements.stream().filter(c -> c.getReference() == element).map(c -> removeElements.add(c));
 	}
 
-	protected void updateImageElements() {
+
+	protected void updateImageElements(List<Double> mainCharacterLocation) {
 		for (ImageElement imageElement : activeElements) {
-			imageElement.updateState();
+			imageElement.updateStateWithOffSet(mainCharacterLocation);
 		}
 	}
 	

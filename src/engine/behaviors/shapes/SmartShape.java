@@ -1,20 +1,33 @@
 package engine.behaviors.shapes;
 
+import data.ImageManager;
 import engine.behaviors.MandatoryBehavior;
+import engine.collision.SubtractiveRectangleExtrapolator;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 public class SmartShape extends ShapeDefinition {
-	private ImageView iv;
+	private Double width;
+	private Double height;
+	private SubtractiveRectangleExtrapolator ex;
+	//private ImageView iv;
 
-	public SmartShape(ImageView iv) {
-		this.iv = iv;
+	public SmartShape(double width, double height) {
+		this.width = width;
+		this.height = height;
+		//this.iv = iv;
 	}
 	@Override
 	public Shape getShape(MandatoryBehavior mandatory) {
-		mandatory.getImagePath();
-		return new Rectangle(mandatory.getX(), mandatory.getY(), width, height);
+		//System.out.println(mandatory.getImagePath());
+		Image i = new Image("data\\gamedata\\games\\enginetestmario\\images\\MarioSMR.png");
+		ImageView iv = new ImageView();
+		iv.setImage(i);
+		iv.setX(mandatory.getX());
+		iv.setY(mandatory.getY());
+		return ex.extrapolateShape(iv);
 	}
 	
 	@Override

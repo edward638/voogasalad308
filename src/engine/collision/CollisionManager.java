@@ -22,8 +22,9 @@ public class CollisionManager {
 					if (((Path) intersect).getElements().size() != 0) {
 						GameElement g1 = gameState.getElements().get(i);
 						GameElement g2 = gameState.getElements().get(j);
-						System.out.println(findCollisionDirection(a.getShape(), intersect) + " " + g1.getIdentifier() + " " + g2.getIdentifier());
-						CollisionEvent collision = new CollisionEvent(g1, findCollisionDirection(a.getShape(), intersect), g2, findCollisionDirection(a.getShape(), intersect));
+						String collision1 = findCollisionDirection(a.getShape(), intersect).toString();
+						String collision2 = findCollisionDirection(b.getShape(), intersect).toString();
+						CollisionEvent collision = new CollisionEvent(g1, collision1, g2, collision2);
 						
 						g1.processEvent(collision);
 						g2.processEvent(collision);
@@ -41,7 +42,7 @@ public class CollisionManager {
 	 * @return -1 if no collision, otherwise from the left side and traveling cw around a 
 	 * rectangle, 0, 1, 2, 3
 	 */
-	private int findCollisionDirection(Shape element, Shape intersect) {
+	private Integer findCollisionDirection(Shape element, Shape intersect) {
 		Point2D intersectCenter = getCenter(intersect);
 		Point2D elementCenter = getCenter(element);
 		/*Point2D collisionVector = intersectCenter.subtract(getCenter(element));

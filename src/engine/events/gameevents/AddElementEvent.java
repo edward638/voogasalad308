@@ -7,7 +7,7 @@ import engine.GameState;
 public class AddElementEvent extends GameEvent {
 	private GameElement toAdd;
 	
-	AddElementEvent(GameElement gameElement) {
+	public AddElementEvent(GameElement gameElement) {
 		toAdd = gameElement;
 	}
 

@@ -1,5 +1,7 @@
 package engine.events.gameevents;
 
+import data.GameLoader;
+import engine.DisplayState;
 import engine.Engine;
 import engine.GameElement;
 import engine.GameState;
@@ -13,9 +15,10 @@ private Integer level;
 	}
 
 	@Override
-	public void execute(GameState state, Engine engine) {
-		engine.changeLevel(level);
-		
+	public void execute(DisplayState displayState) {
+		GameLoader loader = new GameLoader(displayState.getGameState().getGameName());
+		GameState gameState = loader.convertScene(loader.getGameScenes().get(level));
+		displayState.getGameState.setGameState();
 	}
 
 	

@@ -42,18 +42,18 @@ public class ConcreteHighScores implements HighScores {
 		table = new TableView<Score>();
 		setupTableProperties(970, 30, 235, 265);
 
-		this.addDummyScores();
+		// this.addDummyScores();
 	}
 
-	private void addDummyScores() {
-		addScore("Calvin", 400);
-		addScore("Maddy", 450);
-		addScore("August", 473);
-		addScore("Jeffrey", 324);
-		addScore("Gouttham", 934);
-		addScore("Summer", 234);
-
-	}
+//	private void addDummyScores() {
+//		addScore("Calvin", 400);
+//		addScore("Maddy", 450);
+//		addScore("August", 473);
+//		addScore("Jeffrey", 324);
+//		addScore("Gouttham", 934);
+//		addScore("Summer", 234);
+//
+//	}
 
 	private void setupTableProperties(double xPos, double yPos, double width, double height) {
 		table.setEditable(false);
@@ -101,7 +101,7 @@ public class ConcreteHighScores implements HighScores {
 		Collections.sort(scores, new Score.ScoreComparator());
 		updateScoreTable();
 	}
-
+	
 	private void updateScoreTable() {
 
 		ObservableList<Score> observableScoreList = FXCollections.observableArrayList(scores);

@@ -71,6 +71,9 @@ public class LevelPanel extends MainWindowComponent {
 		myLevelDropdown.valueProperty().addListener((o, old, neww) -> {
 			getGame().getSceneManager().setCurrentScene(neww);
 			myLevelObjects.setItems(FXCollections.observableArrayList(getGame().getSceneManager().getCurrentScene().getMyObjects()));
+			
+			myGameViewWindow.updateWindow();
+			System.out.println("Level Panel tried to call updateWindow");
 		});
 		return myLevelDropdown;
 	}

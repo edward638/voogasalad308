@@ -9,6 +9,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 public class DisplayState {
+	private GameState gameState;
 	protected List<ImageElement> activeElements;
 	protected List<ImageElement> newElements;
 	protected List<ImageElement> removeElements;
@@ -20,6 +21,10 @@ public class DisplayState {
 		activeElements = new ArrayList<>();
 		newElements = new ArrayList<>();
 		removeElements = new ArrayList<>();
+	}
+	
+	public void update() {
+		
 	}
 	
 	public void addNewElement(GameElement element) {

@@ -38,7 +38,7 @@ public class Engine /*extends Application*/ {
 	
 	public Engine(String gamePath) {
 		//EngineRunner engineRunner = new EngineRunner(gamePath);
-		//GameLoader loader = new GameLoader(gamePath);
+		GameLoader loader = new GameLoader(gamePath);
 		
 		ModelGameState modelGameState = new ModelGameState(); 
 		gameState = modelGameState.getState();

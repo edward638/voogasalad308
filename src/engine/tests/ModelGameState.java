@@ -15,6 +15,7 @@ import engine.behaviors.Killable;
 import engine.behaviors.MandatoryBehavior;
 import engine.behaviors.Movable;
 import engine.behaviors.shapes.RectangleShape;
+import engine.behaviors.shapes.SmartShape;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.KeyInputEvent;
 import engine.events.elementevents.TimeEvent;
@@ -31,6 +32,9 @@ public class ModelGameState {
 		//elements.add(getBack(0.0,0.0));
 		for (double i = 0; i < 900; i+=40) {
 			elements.add(getBlock(i, 500.0));
+		}
+		for (double i = 20; i < 500 ; i+=40) {
+			elements.add(getBlock(0.0, i));
 		}
 		elements.add(getMario());
 		
@@ -73,7 +77,7 @@ public class ModelGameState {
 		// Response to up arrow key is to jump
 		mario.addEventResponse(new KeyInputEvent(KeyCode.W), (event, element) -> {
 			Movable mov = (Movable) element.getBehavior(Movable.class);
-			mov.setYVelocity(-150.0);
+			mov.setYVelocity(-350.0);
 		});
 		
 		// Response to Right arrow key is to move right

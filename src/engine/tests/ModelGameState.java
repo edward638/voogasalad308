@@ -15,6 +15,7 @@ import engine.behaviors.Killable;
 import engine.behaviors.MandatoryBehavior;
 import engine.behaviors.Movable;
 import engine.behaviors.shapes.RectangleShape;
+import engine.behaviors.shapes.SmartShape;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.KeyInputEvent;
 import engine.events.elementevents.TimeEvent;
@@ -28,9 +29,12 @@ public class ModelGameState {
 		ArrayList<GameElement> elements = new ArrayList<GameElement>();
 		
 		
-		elements.add(getBack(0.0,0.0));
+		//elements.add(getBack(0.0,0.0));
 		for (double i = 0; i < 900; i+=40) {
 			elements.add(getBlock(i, 500.0));
+		}
+		for (double i = 20; i < 500 ; i+=40) {
+			elements.add(getBlock(0.0, i));
 		}
 		elements.add(getMario());
 		
@@ -38,65 +42,22 @@ public class ModelGameState {
 			elements.add(getKoopa(i, 100.0));
 		}
 
-		/*GameElement e2 = getBlock(10.0, 20.0);
-		GameElement e3 = getBlock(30.0, 20.0);
-		GameElement e4 = getBlock(50.0, 20.0);
-		GameElement e5 = getBlock(70.0, 20.0);
-		GameElement e6 = getBlock(90.0, 20.0);
-		GameElement e7 = getBlock(110.0, 20.0);
-		GameElement e8 = getBlock(50.0, 80.0);*/
 		state = new GameState();
 		display = new DisplayState("enginetestmario");
 		for (GameElement el : elements) {
 			state.addGameElement(el);
 			display.addNewElement(el);
 		}
-		/*state.addGameElement(e1);
-		state.addGameElement(e2);
-		state.addGameElement(e3);
-		state.addGameElement(e4);
-		state.addGameElement(e5);
-		state.addGameElement(e6);
-		state.addGameElement(e7);
-		state.addGameElement(e8);
-		
-		display = new DisplayState("enginetestmario");
-		display.addNewElement(e1);
-		display.addNewElement(e2);
-		display.addNewElement(e3);
-		display.addNewElement(e4);
-		display.addNewElement(e5);
-		display.addNewElement(e6);
-		display.addNewElement(e7);
-		display.addNewElement(e8);*/
 	}
 	
 	public GameState getState() {
 		
 		System.out.println(getMario());
-		/*
-		state.addGameElement(getMario());
-		state.addGameElement(getBlock(10.0, 20.0));
-		state.addGameElement(getBlock(30.0, 20.0));
-		state.addGameElement(getBlock(50.0, 20.0));
-		state.addGameElement(getBlock(70.0, 20.0));
-		state.addGameElement(getBlock(90.0, 20.0));
-		state.addGameElement(getBlock(110.0, 20.0));
-		state.addGameElement(getBlock(50.0, 80.0));*/
 		System.out.println(state.getElements());
 		return state;
 	}
 	
 	public DisplayState getDisplay() {
-		/*display = new DisplayState();
-		display.addNewElement(getMario());
-		display.addNewElement(getBlock(10.0, 20.0));
-		display.addNewElement(getBlock(30.0, 20.0));
-		display.addNewElement(getBlock(50.0, 20.0));
-		display.addNewElement(getBlock(70.0, 20.0));
-		display.addNewElement(getBlock(90.0, 20.0));
-		display.addNewElement(getBlock(110.0, 20.0));
-		display.addNewElement(getBlock(50.0, 80.0));*/
 		return display;
 	}
 	
@@ -116,7 +77,7 @@ public class ModelGameState {
 		// Response to up arrow key is to jump
 		mario.addEventResponse(new KeyInputEvent(KeyCode.W), (event, element) -> {
 			Movable mov = (Movable) element.getBehavior(Movable.class);
-			mov.setYVelocity(-150.0);
+			mov.setYVelocity(-350.0);
 		});
 		
 		// Response to Right arrow key is to move right

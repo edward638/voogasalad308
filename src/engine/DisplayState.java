@@ -33,9 +33,10 @@ public class DisplayState {
 		activeElements.stream().filter(c -> c.getReference() == element).map(c -> removeElements.add(c));
 	}
 
-	protected void updateImageElements() {
+
+	protected void updateImageElements(List<Double> mainCharacterLocation) {
 		for (ImageElement imageElement : activeElements) {
-			imageElement.updateState();
+			imageElement.updateStateWithOffSet(mainCharacterLocation);
 		}
 	}
 	

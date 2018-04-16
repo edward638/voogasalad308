@@ -1,8 +1,10 @@
 package engine;
 
+import java.util.Arrays;
 import java.util.List;
 
 import data.GameLoader;
+import engine.behaviors.MandatoryBehavior;
 import engine.events.elementevents.ElementEvent;
 import engine.events.elementevents.KeyInputEvent;
 import engine.events.elementevents.MouseInputEvent;
@@ -12,7 +14,10 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Group;
+import javafx.scene.ParallelCamera;
+import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
+import javafx.scene.SubScene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
@@ -29,17 +34,18 @@ public class Engine /*extends Application*/ {
 	
 	private Timeline animation;
 	
-	private Pane enginePane = new Pane();
+	private SubScene engineSubScene;
+	private Group subSceneRoot = new Group();
 	private GameState gameState;
 	private DisplayState displayState;
 	private EventManager2 eventManager;
+	private ParallelCamera viewingCamera;
 	
 	private String musicPath = "data/music/WiiShopChannelMusic.mp3";
 	
 	public Engine(String gamePath) {
 		//EngineRunner engineRunner = new EngineRunner(gamePath);
 		//GameLoader loader = new GameLoader(gamePath);
-		
 		ModelGameState modelGameState = new ModelGameState(); 
 		gameState = modelGameState.getState();
 		displayState = modelGameState.getDisplay();
@@ -49,9 +55,11 @@ public class Engine /*extends Application*/ {
 		startAnimation();
 	}
 	
-	public Pane getDisplay() {
-		return enginePane;
+	public SubScene getDisplay() {
+		engineSubScene = new SubScene(subSceneRoot, 900, 590);
+		return engineSubScene;
 	}
+	
 	
 	private void startAnimation() {
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
@@ -61,20 +69,7 @@ public class Engine /*extends Application*/ {
         animation.getKeyFrames().add(frame);
         animation.play();
     }
-	/*
-	private Scene setupLevel (int width, int height, Paint background) {
-		Group root = new Group();
-		Scene scene = new Scene(root, width, height, background);
-		
-		root.getChildren().add(enginePane);
-		
-		scene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
-        scene.setOnMouseClicked(e -> handleMouseInput(e.getX(), e.getY())); 
-        
-    	return scene;
 
-    }*/
-	
 	public List<ElementEvent> handleKeyInput(KeyCode code) {
 		eventManager.processElementEvent(new KeyInputEvent(code));
 		return null;
@@ -89,37 +84,34 @@ public class Engine /*extends Application*/ {
 		double gameSteps = elapsedTime*gameState.getGameSpeed();
 		gameState.incrementGameTime(gameSteps);
     	eventManager.processElementEvent(new TimeEvent(gameSteps));
-    	displayState.updateImageElements();
+    	displayState.updateImageElements(getImageViewOffset(gameState));
     	updateDisplay(displayState.newElements, displayState.removeElements);
     }
 
 	protected void updateDisplay(List<ImageElement> newElements, List<ImageElement> removeElements) {
 		for (ImageView e:newElements) {
-			enginePane.getChildren().add(e);
+			subSceneRoot.getChildren().add(e);
 		}
 		newElements.clear();
 		
 		for (ImageView e:removeElements) {
-			enginePane.getChildren().remove(e);
+			subSceneRoot.getChildren().remove(e);
 		}
 		removeElements.clear();
 	}
 	
-	/*public static void main(String[] args) {
-		Application.launch(args);
-		//System.out.println("Hello World");
+	private List<Double> getImageViewOffset(GameState gameState) {
+		//Change to isMainCharacter method thats within gameState. 
+		//Add getMainCharacter method
+		for (GameElement e: gameState.getElements()) {
+			if (e.getIdentifier()=="Mario") {
+				MandatoryBehavior main_character = (MandatoryBehavior) e.getBehavior(MandatoryBehavior.class);
+				return main_character.getPosition();
+			}
+		}
+		List<Double> noOffset = Arrays.asList(0.0,0.0);
+		return noOffset;
 	}
-
-	@Override
-	public void start(Stage stage) throws Exception {
-		stage.setScene(setupLevel(900, 590, BACKGROUND));
-		stage.show();
-		
-		ModelGameState modelGameState = new ModelGameState(); 
-		gameState = modelGameState.getState();
-		displayState = modelGameState.getDisplay();
-		eventManager = new EventManager2(gameState, this);
-		
-		startAnimation();
-	}*/
+	
+	
 }

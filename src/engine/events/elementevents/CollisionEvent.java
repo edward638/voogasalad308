@@ -26,6 +26,8 @@ public class CollisionEvent extends ElementEvent {
 	public CollisionEvent(GameElement elem1, GameElement elem2) {
 		e1 = elem1;
 		e2 = elem2;
+		e1side = new ArrayList<String>();
+		e2side = new ArrayList<String>();
 		processCollisionSides(elem1, elem2);
 	}
 	
@@ -35,6 +37,8 @@ public class CollisionEvent extends ElementEvent {
 		Shape s1 = mand1.getShape();
 		Shape s2 = mand2.getShape();
 		Shape intersection = Shape.intersect(s1, s2);
+		System.out.println(s1);
+		System.out.println(intersection);
 		e1side.add(getCollisionSide(s1, intersection));
 		e2side.add(getCollisionSide(s2, intersection));
 	}

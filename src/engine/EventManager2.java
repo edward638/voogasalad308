@@ -28,9 +28,7 @@ public class EventManager2 {
 		for (GameElement ge: gameState.getElements()) {
 			gameEvents.addAll(ge.processEvent(ee));
 		}
-		
 		collisionManager.handleCollisions(gameState);
-		//handleCollisions();
 		gameEvents.stream().forEach(event -> processGameEvent(event));
 		
 	}

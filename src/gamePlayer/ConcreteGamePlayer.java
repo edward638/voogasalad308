@@ -2,6 +2,7 @@ package gamePlayer;
 
 import data.GameDescriptionProvider;
 import engine.Engine;
+import engine.GameState;
 import gamePlayer.buttons.ClearHighScoresButton;
 import gamePlayer.buttons.ConcreteButtonData;
 import gamePlayer.buttons.KeyboardBindingButton;
@@ -26,19 +27,19 @@ import javafx.stage.Stage;
  */
 public class ConcreteGamePlayer implements GamePlayer {
 
-	Button saveButton;
+	/*Button saveButton;
 	Button loadButton;
 	Button replayButton;
 	Button newGameButton;
 	Button clearHighScoresButton;
-	HUD hud;
+	HUD hud;*/
 	SubScene gameDisplay;
 
-	Engine engine;
+	//Engine engine;
 	GameState gameState;
-	String currentGameName;
-	GameDescriptionProvider gameDescriptionProvider;
-	String mostRecentFile;
+	//String currentGameName;
+	//GameDescriptionProvider gameDescriptionProvider;
+	//String mostRecentFile;
 	private Scene myScene;
 	private Stage myStage;
 	private Group root;
@@ -52,7 +53,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 	private ConcreteButtonData buttonData;
 
 	private HUD hud;
-	private Pane gameDisplay;
+	//private Pane gameDisplay;
 	private ConcreteHighScores highScores;
 
 	private Engine engine;
@@ -151,7 +152,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 		return myScene;
 	}
 
-	@Override
+	//@Override
 	public void DummyPlayGame(String file) {
 		// TODO Auto-generated method stub
 		

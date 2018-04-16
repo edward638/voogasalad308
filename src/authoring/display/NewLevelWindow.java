@@ -18,7 +18,7 @@ import javafx.stage.Stage;
  * @author Maddie Wilkinson
  *
  */
-public class NewLevelWindow extends NewComponentWindow {
+public class NewLevelWindow extends PopupWindow {
 
 	private ComboBox<GameScene> myLevelDropdown;
 

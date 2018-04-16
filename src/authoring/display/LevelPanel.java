@@ -22,7 +22,7 @@ import javafx.stage.Stage;
  * @author Maddie Wilkinson
  *
  */
-public class LevelPanel extends AuthoringUIComponent {
+public class LevelPanel extends MainWindowComponent {
 
 	private VBox myVBox;
 	private ComboBox<GameScene> myLevelDropdown;
@@ -39,10 +39,6 @@ public class LevelPanel extends AuthoringUIComponent {
 
 		myVBox = new VBox();
 		myVBox.getChildren().addAll(makeLevelChooser(), makeObjectList(), makeAddGameObjectButton());
-	}
-
-	public VBox asVBox() {
-		return myVBox;
 	}
 
 	private HBox makeLevelChooser() {
@@ -94,6 +90,15 @@ public class LevelPanel extends AuthoringUIComponent {
 		});
 		
 		return myLevelObjects;
+	}
+
+	public VBox asVBox() {
+		return myVBox;
+	}
+	
+	@Override
+	protected Node asNode() {
+		return myVBox;
 	}
 
 }

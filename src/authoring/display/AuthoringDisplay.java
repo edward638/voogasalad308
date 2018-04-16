@@ -36,15 +36,16 @@ public class AuthoringDisplay {
 
 	public static final String DEFAULT_LANGUAGE = "English";
 	public static final String DEFAULT_STYLE = "myStyle.css";
-	
-	
 
 	private BorderPane root;
 	private ResourceBundle myResources; //rename more accurately; it's the button names & stuff specifically
-	private Node myLevelPanel;
-	private GameViewWindow myGameViewWindow;
 	private Game myGame;
-	private TemplateObjectPanel templatePanel;
+	
+	private LevelPanel myLevelPanel;
+	private GameViewWindow myGameViewWindow;
+	private PropertyPanel myPropertyPanel;
+	private TemplateObjectPanel myTemplatePanel;
+	private SaveBar mySaveBar;
 
 	public AuthoringDisplay(Stage stage, Game game) {
 		myGame = new Game();
@@ -67,46 +68,39 @@ public class AuthoringDisplay {
 	public Scene setUpScene() {
 		initVars();
 		root = new BorderPane();
-//		root.setLeft(makeLevelPanel());
-		root.setLeft(myLevelPanel);
-//		root.setRight(templatePanel.asPane());
-		root.setRight(makeTemplateObjectPanel());
+		root.setCenter(makeGameViewWindow());
+		root.setLeft(makeLevelPanel());
+		root.setBottom(makeTemplatePanel());
 		root.setTop(makeSaveBar());
-		root.setCenter(myGameViewWindow.asPane());
 
 		return new Scene(root);
 	}
 
 	private void initVars() {
-		myGameViewWindow = makeGameVisWindow();
-		myLevelPanel = makeLevelPanel();
 	}
 
 	public Node makeLevelPanel() {
-		LevelPanel levelPanel = new LevelPanel(myResources, myGame, root, myGameViewWindow);
-		return levelPanel.asVBox();
+		myLevelPanel = new LevelPanel(myResources, myGame, root, myGameViewWindow);
+		return myLevelPanel.asNode();
 	}
 
-	public Node makeTemplateObjectPanel() {
-		templatePanel = new TemplateObjectPanel(myResources, myGame, root);
-		return templatePanel.asPane();
+	public Node makeTemplatePanel() {
+		myTemplatePanel = new TemplateObjectPanel(myResources, myGame, root);
+		return myTemplatePanel.asNode();
 	}
 
 	public Node makeObjectPropertyPanel() {
-		PropertyPanel propertyPanel = new PropertyPanel(myResources, myGame, root);
-		return propertyPanel.asScrollPane();
+		myPropertyPanel = new PropertyPanel(myResources, myGame, root);
+		return myPropertyPanel.asNode();
 	}
 
-	public GameViewWindow makeGameVisWindow() {
-//		GameViewWindow gameViewWindow = new GameViewWindow(myResources, myGame, root);
-		myGameViewWindow = new GameViewWindow(myResources, myGame, root, 1000, 1000);
-		return myGameViewWindow;
-//		return myGameViewWindow.asPane();
-//		return new Pane();
+	public Node makeGameViewWindow() {
+		myGameViewWindow = new GameViewWindow(myResources, myGame, root, 20, 20);
+		return myGameViewWindow.asNode();
 	}
 	
 	public Node makeSaveBar() {
-		SaveBar saveBar = new SaveBar(myResources, myGame, root);
-		return saveBar.asHBox();
+		mySaveBar = new SaveBar(myResources, myGame, root);
+		return mySaveBar.asNode();
 	}
 }

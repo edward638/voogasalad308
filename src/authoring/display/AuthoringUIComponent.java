@@ -54,5 +54,5 @@ public abstract class AuthoringUIComponent {
 	public void doNothing() {
 		
 	}
-
+	
 }

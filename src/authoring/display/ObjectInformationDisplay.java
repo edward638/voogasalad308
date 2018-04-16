@@ -11,17 +11,17 @@ import javafx.scene.Node;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 
-public class ObjectInformationDisplay extends AuthoringUIComponent {
+public class ObjectInformationDisplay extends MainWindowComponent {
 
-	private Pane pane;
+	private Pane myPane;
 	private TextArea text;
 	
 	public ObjectInformationDisplay(ResourceBundle resources, Game game, Node root) {
 		super(resources, game, root);
 		// TODO Auto-generated constructor stub
 		text = new TextArea();
-		pane = new Pane();
-		pane.getChildren().add(text);
+		myPane = new Pane();
+		myPane.getChildren().add(text);
 		text.setText("This is where all the information about the object can be");
 	}
 
@@ -35,9 +35,13 @@ public class ObjectInformationDisplay extends AuthoringUIComponent {
 		}
 	}
 
-	public Node asPane() {
-		// TODO Auto-generated method stub
-		return pane;
+	public Pane asPane() {
+		return myPane;
+	}
+
+	@Override
+	protected Node asNode() {
+		return myPane;
 	}
 	
 }

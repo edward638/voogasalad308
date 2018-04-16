@@ -32,11 +32,10 @@ import javafx.stage.FileChooser.ExtensionFilter;
  * @author Maddie Wilkinson
  *
  */
-public class NewGameObjectWindow extends NewComponentWindow {
+public class NewGameObjectWindow extends PopupWindow {
 
 	private ListView<GameObject> myLevelObjects;
 	private GameViewWindow myGameViewWindow;
-
 
 	public NewGameObjectWindow(ResourceBundle resources, Game game, Node root, ListView<GameObject> levelObjects, GameViewWindow gameViewWindow) {
 		super(resources, game, root);
@@ -141,5 +140,4 @@ public class NewGameObjectWindow extends NewComponentWindow {
 		
 		return newObject;
 	}
-
 }

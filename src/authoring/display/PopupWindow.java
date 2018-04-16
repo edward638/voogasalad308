@@ -11,11 +11,11 @@ import javafx.stage.Stage;
  * @author Maddie Wilkinson
  *
  */
-public abstract class NewComponentWindow extends AuthoringUIComponent {
+public abstract class PopupWindow extends AuthoringUIComponent {
 
 	private Stage myStage;
 	
-	public NewComponentWindow(ResourceBundle resources, Game game, Node root) {
+	public PopupWindow(ResourceBundle resources, Game game, Node root) {
 		super(resources, game, root);
 		myStage = new Stage();
 	}

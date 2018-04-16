@@ -16,7 +16,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 
-public class GameViewWindow extends AuthoringUIComponent{
+public class GameViewWindow extends MainWindowComponent{
 
 	List<GameObject> gameObjects;
 	ScrollPane scrollPane;
@@ -112,7 +112,12 @@ public class GameViewWindow extends AuthoringUIComponent{
 		
 	}
 
-	public Node asPane() {
+	public Pane asPane() {
+		return stackPane;
+	}
+
+	@Override
+	protected Node asNode() {
 		return stackPane;
 	}
 

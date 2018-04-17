@@ -13,7 +13,9 @@ import authoring.Game;
 import authoring.GameObject;
 import authoring.GameScene;
 import authoring.Property;
+import authoring.display.buttonevents.ChooseImageEvent;
 import data.GameObjectManager;
+import display.buttonevents.ButtonEvent;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -33,12 +35,16 @@ import javafx.stage.FileChooser.ExtensionFilter;
  *
  */
 public class NewGameObjectWindow extends PopupWindow {
-
+	
+	private static final String INITIAL_DIRECTORY = "./data/gamedata/games/";
+	
 	private ListView<GameObject> myLevelObjects;
 	private GameViewWindow myGameViewWindow;
+	private String myInitialDirectory;
 
 	public NewGameObjectWindow(ResourceBundle resources, Game game, Node root, ListView<GameObject> levelObjects, GameViewWindow gameViewWindow) {
 		super(resources, game, root);
+		myInitialDirectory = INITIAL_DIRECTORY + game.getName() + "/images";
 		myLevelObjects = levelObjects;
 		myGameViewWindow = gameViewWindow;
 		setStage(setUpScene());
@@ -63,45 +69,36 @@ public class NewGameObjectWindow extends PopupWindow {
 		HBox imageInfo = new HBox();
 		TextField imageText = new TextField();
 		
-		Button chooseImageButton = makeButton("ChooseImageButton", event -> 
-		{	
-			if(!imageText.getText().isEmpty()) {
-				try {
-					FileChooser fileChooser = new FileChooser();
-					fileChooser.setTitle("Choose Object Image");
-					fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
-					File image = fileChooser.showOpenDialog(new Stage());
-					getGame().getImageManager().storeImage(imageText.getText(), new Image(image.toURI().toString()));
-					//put image.getName into a property of the GameObject
-				} catch (Exception e) {
-					//do nothing
-					//this just means the user didn't choose an image
-					//which is a perfectly fine thing for them to do
-				}
-			}});
+		FileChooser fileChooser = new FileChooser();
+		
+		ChooseImageEvent buttonAction = new ChooseImageEvent(imageText, myInitialDirectory, getGame(), fileChooser);
+		Button chooseImageButton = makeButton("ChooseImageButton", event -> buttonAction.pressed()); 
 		
 		imageInfo.getChildren().addAll(new Label("Image name: "), imageText, chooseImageButton);
 
+//		put this in saveButton
+//		myGame.getImageManager().storeImage(myTextField.getText(), new Image(image.toURI().toString()));
+
 		Button saveButton = makeButton("Save", event -> {
-			saveGameObject(nameText, xText, yText, imageText);
+			saveGameObject(nameText, xText, yText, imageText, buttonAction.getImage());
 		});
 
 		root.getChildren().addAll(nameObject, xPosValues, yPosValues, imageInfo, saveButton);
 		return new Scene(root);
 	}
 
-	private void saveGameObject(TextField nameText, TextField xText, TextField yText, TextField imageText) {
-		if(!nameText.getText().isEmpty() && !xText.getText().isEmpty() && !yText.getText().isEmpty()) {
+	private void saveGameObject(TextField nameText, TextField xText, TextField yText, TextField imageText, Image image) {
+		if(!nameText.getText().isEmpty() && !xText.getText().isEmpty() && !yText.getText().isEmpty() && !imageText.getText().isEmpty()) {
 			try {
 				String objectName = nameText.getText();
 				Double xPos = Double.parseDouble(xText.getText());
 				Double yPos = Double.parseDouble(yText.getText());
 				String imageName = imageText.getText();
+				getGame().getImageManager().storeImage(imageName, image);
 
 				GameObject go = makeGameObject(objectName, xPos, yPos, imageName);
 				getGame().getSceneManager().getCurrentScene().getMyObjects().add(go);
 				myLevelObjects.getItems().add(0, go);
-				System.out.println(myGameViewWindow == null);
 				myGameViewWindow.updateWindow();
 				getStage().close();
 				//after slider is implemented, only catch general exception

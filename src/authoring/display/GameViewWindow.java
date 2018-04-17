@@ -44,13 +44,6 @@ public class GameViewWindow extends MainWindowComponent{
 
 	private void setGameObjectList(){
 		gameObjects = getGame().getSceneManager().getCurrentScene().getMyObjects();
-		System.out.println((gameObjects == null) + "gameobjets");
-		System.out.println((getGame().getSceneManager() == null) + "sceneman");
-		System.out.println((getGame().getSceneManager().getCurrentScene() == null) + "curr");
-		System.out.println((getGame().getSceneManager().getCurrentScene().getMyObjects() == null) + "myobjs");
-		System.out.println( gameObjects.size() + "  objs size");
-
-
 	}
 
 //	public void updateWindow(List<GameObject> gameObjectsList) {

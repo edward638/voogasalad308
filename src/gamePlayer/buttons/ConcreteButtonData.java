@@ -1,12 +1,16 @@
 package gamePlayer.buttons;
 
+import java.util.Map;
+
 import data.GameDescriptionProvider;
 import data.Serializer;
 import engine.GameState;
 import gamePlayer.GamePlayer;
 import gamePlayer.HighScores;
+import gamePlayer.KeyInputDictionary;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 public class ConcreteButtonData implements ButtonData {
@@ -19,18 +23,20 @@ public class ConcreteButtonData implements ButtonData {
 	private String currentGameName;
 	private GameState gameState;
 	private String mostRecentFile;
+	private KeyInputDictionary keyBindingMap;
 
 	public ConcreteButtonData(Stage stage, GamePlayer gamePlayer, GameDescriptionProvider gameDescriptionProvider,
-			Group root) {
+			Group root, KeyInputDictionary keyInputDictionary) {
 		this.stage = stage;
 		this.gamePlayer = gamePlayer;
 		this.gameDescriptionProvider = gameDescriptionProvider;
 		this.root = root;
+		keyBindingMap = keyInputDictionary;
 	}
 
 	@Override
 	public void playGame(String file) {
-		gamePlayer.DummyPlayGame(file);
+		gamePlayer.playGame(file);
 	}
 
 	public void setCurrentGameName(String name) {
@@ -84,6 +90,18 @@ public class ConcreteButtonData implements ButtonData {
 	public void addToRoot(Node node) {
 		root.getChildren().add(node);
 	}
+
+	@Override
+	public KeyInputDictionary getKeyBindings() {
+		return keyBindingMap;
+	}
+
+	@Override
+	public void removeFromRoot(Node node) {
+		root.getChildren().remove(node);
+		
+	}
+
 
 
 }

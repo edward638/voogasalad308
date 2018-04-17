@@ -13,9 +13,15 @@ public class GUIButton extends Button {
 	private ButtonEvent eventResponse;
 	private final int X_LOC;
 	private final int Y_LOC;
-	private static final int X_SIZE = 100;
-	private static final int Y_SIZE = 20;
+	private static final int X_SIZE = 150;
+	private static final int Y_SIZE = 40;
 	
+	/**
+	 * @param xloc 		X location of the button on a stage
+	 * @param yloc 		Y location of the button on a stage
+	 * @param label 	String label of the button
+	 * @param response 	ButtonEvent class that is assigned to the button's setOnAction method
+	 */
 	public GUIButton(int xloc, int yloc, String label, ButtonEvent response) {
 		X_LOC = xloc;
 		Y_LOC = yloc;

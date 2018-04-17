@@ -26,7 +26,7 @@ import javafx.stage.Stage;
  * @author Maddie Wilkinson
  *
  */
-public class PropertyPanel extends AuthoringUIComponent {
+public class PropertyPanel extends MainWindowComponent {
 
 	private ScrollPane myScrollPane;
 	private static final String IMAGES_FILEPATH = "./";
@@ -59,6 +59,11 @@ public class PropertyPanel extends AuthoringUIComponent {
 	}
 
 	public ScrollPane asScrollPane() {
+		return myScrollPane;
+	}
+
+	@Override
+	protected Node asNode() {
 		return myScrollPane;
 	}
 

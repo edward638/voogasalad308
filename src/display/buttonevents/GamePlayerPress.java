@@ -14,7 +14,7 @@ public class GamePlayerPress implements ButtonEvent {
 
 	private Stage splashStage;
 	private Stage gamePlayerStage;
-	
+
 	public GamePlayerPress(Stage stage) {
 		splashStage = stage;
 		gamePlayerStage = new Stage();
@@ -22,11 +22,11 @@ public class GamePlayerPress implements ButtonEvent {
 
 	@Override
 	public void pressed() {
-		splashStage.close();
-		
-	GamePlayer gamePlayer = new ConcreteGamePlayer(gamePlayerStage);
-	gamePlayerStage.show();
-	gamePlayerStage.setResizable(false);
+		//		splashStage.close();
+
+		new ConcreteGamePlayer(gamePlayerStage);
+		gamePlayerStage.show();
+		gamePlayerStage.setResizable(false);
 
 	}
 

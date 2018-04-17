@@ -17,7 +17,6 @@ public abstract class AuthoringUIComponent {
 	private ResourceBundle myResources;
 	private Game myGame;
 	private Node myRoot;
-
 	
 	public AuthoringUIComponent(ResourceBundle resources, Game game, Node root) {
 		myResources = resources;
@@ -55,5 +54,5 @@ public abstract class AuthoringUIComponent {
 	public void doNothing() {
 		
 	}
-
+	
 }

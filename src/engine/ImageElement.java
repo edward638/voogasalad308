@@ -8,12 +8,13 @@ import javafx.scene.image.ImageView;
 public class ImageElement extends ImageView {
 	private GameElement elementReference;
 	
-	ImageManager imageManager = new ImageManager("enginetestmario");
+	ImageManager imageManager;
 	String imageName;
 	
-	public ImageElement(GameElement elementReference) {
+	public ImageElement(GameElement elementReference, ImageManager imageManager) {
 		this.elementReference = elementReference;
 		
+		this.imageManager = imageManager;
 		imageName = (String)elementReference.reportProperties().get("imagePath");
 		Image image = imageManager.getImage(imageName);
 		this.setImage(image);

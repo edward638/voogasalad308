@@ -22,7 +22,7 @@ import javafx.stage.Stage;
  * @author Maddie Wilkinson
  *
  */
-public class LevelPanel extends AuthoringUIComponent {
+public class LevelPanel extends MainWindowComponent {
 
 	private VBox myVBox;
 	private ComboBox<GameScene> myLevelDropdown;
@@ -39,10 +39,6 @@ public class LevelPanel extends AuthoringUIComponent {
 
 		myVBox = new VBox();
 		myVBox.getChildren().addAll(makeLevelChooser(), makeObjectList(), makeAddGameObjectButton());
-	}
-
-	public VBox asVBox() {
-		return myVBox;
 	}
 
 	private HBox makeLevelChooser() {
@@ -71,11 +67,13 @@ public class LevelPanel extends AuthoringUIComponent {
 	private ComboBox<GameScene> makeLevelDropdown() {
 		myLevelDropdown = new ComboBox<>();
 		myLevelDropdown.setPromptText(super.getResources().getString("SelectSceneDropDown")); //make super.getString method?
-		//below line contains dummy objects
 		myLevelDropdown.getItems().addAll(getGame().getSceneManager().getScenes());
 		myLevelDropdown.valueProperty().addListener((o, old, neww) -> {
 			getGame().getSceneManager().setCurrentScene(neww);
 			myLevelObjects.setItems(FXCollections.observableArrayList(getGame().getSceneManager().getCurrentScene().getMyObjects()));
+			
+			myGameViewWindow.updateWindow();
+			System.out.println("Level Panel tried to call updateWindow");
 		});
 		return myLevelDropdown;
 	}
@@ -95,6 +93,15 @@ public class LevelPanel extends AuthoringUIComponent {
 		});
 		
 		return myLevelObjects;
+	}
+
+	public VBox asVBox() {
+		return myVBox;
+	}
+	
+	@Override
+	protected Node asNode() {
+		return myVBox;
 	}
 
 }

@@ -10,12 +10,9 @@ import javafx.stage.Stage;
 
 public class LoadButton extends PlayerButtons {
 
-	private ButtonData buttonData;
-
 	public LoadButton(double x, double y, double width, double height, ButtonData buttonData) {
-		super(x, y, width, height);
+		super(x, y, width, height, buttonData);
 		this.setText("Load Game");
-		this.buttonData = buttonData;
 		setAction();
 	}
 

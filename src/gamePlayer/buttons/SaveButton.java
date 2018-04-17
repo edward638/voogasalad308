@@ -9,11 +9,8 @@ import javafx.scene.control.Button;
 
 public class SaveButton extends PlayerButtons {
 
-	private ButtonData buttonData;
-
 	public SaveButton(double x, double y, double width, double height, ButtonData buttonData) {
-		super(x, y, width, height);
-		this.buttonData = buttonData;
+		super(x, y, width, height, buttonData);
 		this.setText("Save Current State");
 		setAction();
 	}

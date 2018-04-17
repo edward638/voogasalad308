@@ -1,9 +1,8 @@
 package gamePlayer.buttons;
 
-import java.util.Map;
-
 import gamePlayer.KeyInputDictionary;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -19,46 +18,54 @@ public class KeyBindingPopup extends Pane {
 		this.setLayoutY(100);
 		keyMap = buttonData.getKeyBindings();
 
-		keyMap.replaceKey(KeyCode.A, KeyCode.A);
-		keyMap.replaceKey(KeyCode.D, KeyCode.D);
-		keyMap.replaceKey(KeyCode.W, KeyCode.W);
-
 		this.buttonData = buttonData;
 
 		setupBackground();
 		setupChangeButtons();
 		setupCloseButton();
+		setUpTitle();
 
 	}
+
+	private void setUpTitle() {
+		Label title = new Label("Press Button and Keyboard Input to Change Text");
+		title.setLayoutX(10);
+		title.setTextFill(Color.WHITE);
+		this.getChildren().add(title);
+	}
+
 
 	private void setupChangeButtons() {
-
-		// for (KeyCode k : keyMap.keySet()) {
-		// System.out.println(k.toString());
-		// }
-		int yVal = 70;
-		for (KeyCode k : keyMap.getKeySet()) {
-			Button changeA = new Button("Press and Type Key to Change Binding. Current Key = " + k.toString());
-			changeA.setLayoutY(yVal);
-			changeA.setLayoutX(35);
-			yVal = yVal + 60;
-			System.out.println(yVal);
-			changeA.setOnAction(event -> {
-				this.setOnKeyPressed(event1 -> {
-					keyMap.replaceKey(event1.getCode(), k);
-					changeA.setText("Press and Type Key to Change Binding. Current Key = " + event1.getCode().toString());
-				});
-			});
-			this.getChildren().add(changeA);
-
-		}
-
-
+		makeKeyChangeButton(90, KeyCode.W, "Jump");
+		makeKeyChangeButton(150, KeyCode.A, "Left");
+		makeKeyChangeButton(210, KeyCode.D, "Right");
 	}
+	
+	/**
+	 * makes a button to change the key binding for a command
+	 * @param yVal: y value of position
+	 * @param keyCode: DEFAULT keycode of action
+	 * @param action: name of action/command
+	 */
+	private void makeKeyChangeButton(int yVal, KeyCode keyCode, String action) {
+		KeyCode currentBinding = keyMap.getKeyForValue(keyCode);
+		Button changeA = new Button("Key for " + action + " is: " + currentBinding.toString());
+		changeA.setLayoutY(yVal);
+		changeA.setLayoutX(200);
+		changeA.setOnAction(pushButtonEvent -> {
 
+			this.setOnKeyPressed(keyPressInput -> {
+				keyMap.replaceKey(keyPressInput.getCode(), keyCode, currentBinding);
+				changeA.setText("Key for " + action + " is: " + keyPressInput.getCode().toString());
+			});
+		});
+		this.getChildren().add(changeA);
+	}
+	
 	private void setupCloseButton() {
 		Button close = new Button("Close");
-
+		close.setLayoutX(200);
+		close.setLayoutY(30);
 		close.setOnAction(event -> {
 			buttonData.removeFromRoot(this);
 		});

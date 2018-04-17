@@ -13,11 +13,8 @@ import javafx.stage.Stage;
 
 public class NewGameButton extends PlayerButtons {
 
-	private ButtonData buttonData;
-
 	public NewGameButton(double x, double y, double width, double height, ButtonData buttonData) {
-		super(x, y, width, height);
-		this.buttonData = buttonData;
+		super(x, y, width, height, buttonData);
 		this.setText("New Game");
 		setAction();
 	}
@@ -29,20 +26,7 @@ public class NewGameButton extends PlayerButtons {
 			GameSelector gs = new GameSelector(buttonData);
 						
 			buttonData.addToRoot(gs);
-
-			
-//			FileChooser fileChooser = new FileChooser();
-//			fileChooser.setTitle("CHOOSE GAME");
-//			String currentPath = Paths.get(".").toAbsolutePath().normalize().toString() + "/data";
-//			fileChooser.setInitialDirectory(new File(currentPath));
-
-//			File fileName = fileChooser.showOpenDialog(buttonData.getStage());
-//			String fileString = "No File Selected";
-//			if (fileName != null) {
-//				fileString = fileName.getPath();
-//			}
-			
-
+			// remove the game from the root or have a back option in the game selector which removes gameSelector
 			
 		});
 

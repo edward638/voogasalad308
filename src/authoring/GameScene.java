@@ -5,6 +5,11 @@ import java.util.List;
 
 import javafx.scene.image.Image;
 
+/** 
+ * GameScene is the background image of each level
+ * 
+ * @author: Summer
+ **/
 public class GameScene {
 	
 	//has a list of objects

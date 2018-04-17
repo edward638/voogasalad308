@@ -1,5 +1,9 @@
 package engine.groovy;
 
+/** 
+ * 
+ * @author: Summer
+ **/
 public class GroovyException extends RuntimeException{
 
 	/**

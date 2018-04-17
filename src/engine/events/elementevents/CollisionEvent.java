@@ -31,7 +31,6 @@ public class CollisionEvent extends ElementEvent {
 		e1side = new ArrayList<String>();
 		e2side = new ArrayList<String>();
 		processCollisionSides();
-		separateElements();
 	}
 	
 	public GameElement getOtherElement(GameElement notThisOne) {
@@ -49,37 +48,6 @@ public class CollisionEvent extends ElementEvent {
 		Shape intersection = Shape.intersect(s1, s2);
 		e1side.add(getCollisionSide(s1, intersection));
 		e2side.add(getCollisionSide(s2, intersection));
-	}
-	
-	private void separateElements() {
-		MandatoryBehavior mand1 = (MandatoryBehavior) e1.getBehavior(MandatoryBehavior.class);
-		MandatoryBehavior mand2 = (MandatoryBehavior) e2.getBehavior(MandatoryBehavior.class);
-		Shape s1 = mand1.getShape();
-		Shape s2 = mand2.getShape();
-		if (e1.hasBehavior(Movable.class)) {
-			moveElementOutOfContact(e1, Shape.intersect(s1, s2));
-		} else if (e2.hasBehavior(Movable.class)){
-			moveElementOutOfContact(e2, Shape.intersect(s1, s2));
-		}
-
-	}
-	
-	private void moveElementOutOfContact(GameElement ge, Shape intersection) {
-		MandatoryBehavior mand = (MandatoryBehavior) ge.getBehavior(MandatoryBehavior.class);
-		if (Math.abs(getCenter(mand.getShape()).get(0) - getCenter(intersection).get(0)) > 
-		Math.abs(getCenter(mand.getShape()).get(1) - getCenter(intersection).get(1))) {
-			if (getCenter(mand.getShape()).get(0) < getCenter(intersection).get(0)) {
-				mand.setPosition(mand.getX() - intersection.getBoundsInLocal().getWidth() , mand.getY());
-			} else {
-				mand.setPosition(mand.getX() + intersection.getBoundsInLocal().getWidth() , mand.getY());
-			}
-		} else {
-			if (getCenter(mand.getShape()).get(1) < getCenter(intersection).get(1)) {
-				mand.setPosition(mand.getX(), mand.getY() - intersection.getBoundsInLocal().getHeight());
-			} else {
-				mand.setPosition(mand.getX(), mand.getY() + intersection.getBoundsInLocal().getHeight());
-			}
-		}
 	}
 	
 	private String getCollisionSide(Shape elementShape, Shape intersection) {

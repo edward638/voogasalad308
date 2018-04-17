@@ -23,7 +23,7 @@ import javafx.scene.text.Text;
 public class GameSelector extends ScrollPane {
 
 	ButtonData buttonData;
-	
+
 	public GameSelector(ButtonData buttonData) {
 		this.buttonData = buttonData;
 		this.setLayoutX(30);
@@ -34,79 +34,74 @@ public class GameSelector extends ScrollPane {
 	}
 
 	private void initializeGameSelections() {
-		VBox box = new VBox();
-		box.setSpacing(5);
-		box.setStyle("-fx-background-color:white;");
+		VBox gameSelectorBox = new VBox();
+		gameSelectorBox.setSpacing(5);
+		gameSelectorBox.setStyle("-fx-background-color:white;");
 
-		box.setMinWidth(900);
-		box.setMaxWidth(900);
-		
+		gameSelectorBox.setMinWidth(900);
+		gameSelectorBox.setMaxWidth(900);
+
 		String currentPath = Paths.get(".").toAbsolutePath().normalize().toString() + "/data/gamedata/games";
 		File directory = new File(currentPath);
 		GameDescriptionProvider gameDescriptionProvider = new GameDescriptionProvider();
-		
+
 		File[] fList = directory.listFiles();
 		for (File file : fList) {
 			String gameName = file.getName();
 			String gameString = gameDescriptionProvider.getGameName(gameName);
 			String gameDescription = gameDescriptionProvider.getGameDescription(gameName);
 			Image gameImage = gameDescriptionProvider.getDescriptionImage(gameName);
-			
+
 			Pane gameDescriptionPane = setupNewGamePane(gameName, gameString, gameDescription, gameImage);
 
 			Button playButton = new Button("Select Game");
 			playButton.setLayoutX(750);
 			playButton.setLayoutY(90);
 			playButton.setOnAction((event) -> {
+				buttonData.removeFromRoot(gameSelectorBox);
 				buttonData.playGame(gameName);
 			});
-			
+
 			gameDescriptionPane.getChildren().add(playButton);
-			
-			
-			box.getChildren().add(gameDescriptionPane);
-			
+			gameSelectorBox.getChildren().add(gameDescriptionPane);
 
 		}
-		
-		this.setContent(box);
+
+		this.setContent(gameSelectorBox);
 
 	}
 
 	private Pane setupNewGamePane(String gameName, String gameString, String gameDescription, Image gameImage) {
 		Pane pane = new Pane();
-		
+
 		pane.setMinWidth(900);
 		pane.setMaxWidth(900);
 		pane.setMinHeight(200);
 		pane.setMaxHeight(200);
 		pane.setStyle("-fx-background-color:black;");
-		
+
 		ImageView imageView = new ImageView();
 		imageView.setImage(gameImage);
 		imageView.setX(20);
 		imageView.setY(20);
 		imageView.setFitHeight(160);
 		imageView.setFitWidth(160);
-		
+
 		Text nameText = new Text(gameString);
 		nameText.setX(225);
 		nameText.setY(60);
-		nameText.setStyle(" -fx-font: 50px Helvetica;\r\n" + 
-				"    -fx-fill: linear-gradient(from 0% 0% to 100% 200%, repeat, aqua 0%, red 50%);\r\n" + 
-				"    -fx-stroke: black;\r\n" + 
-				"    -fx-stroke-width: 1;");
-		
-				
+		nameText.setStyle(" -fx-font: 50px Helvetica;\r\n"
+				+ "    -fx-fill: linear-gradient(from 0% 0% to 100% 200%, repeat, aqua 0%, red 50%);\r\n"
+				+ "    -fx-stroke: black;\r\n" + "    -fx-stroke-width: 1;");
+
 		Text descriptionText = new Text(gameDescription);
 		descriptionText.setX(230);
 		descriptionText.setY(90);
 		descriptionText.setFont(new Font("Times New Roman", 20));
 		descriptionText.setFill(Color.WHITE);
-		
-		
+
 		pane.getChildren().addAll(imageView, nameText, descriptionText);
-		
+
 		return pane;
 	}
 

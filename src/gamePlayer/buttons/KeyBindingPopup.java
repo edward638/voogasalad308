@@ -1,7 +1,5 @@
 package gamePlayer.buttons;
 
-import java.util.Map;
-
 import gamePlayer.KeyInputDictionary;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -41,21 +39,28 @@ public class KeyBindingPopup extends Pane {
 		makeKeyChangeButton(150, KeyCode.A, "Left");
 		makeKeyChangeButton(210, KeyCode.D, "Right");
 	}
-
+	
+	/**
+	 * makes a button to change the key binding for a command
+	 * @param yVal: y value of position
+	 * @param keyCode: DEFAULT keycode of action
+	 * @param action: name of action/command
+	 */
 	private void makeKeyChangeButton(int yVal, KeyCode keyCode, String action) {
-		Button changeA = new Button("Key for " + action + " is: " + keyCode.toString());
+		KeyCode currentBinding = keyMap.getKeyForValue(keyCode);
+		Button changeA = new Button("Key for " + action + " is: " + currentBinding.toString());
 		changeA.setLayoutY(yVal);
 		changeA.setLayoutX(200);
 		changeA.setOnAction(pushButtonEvent -> {
 
 			this.setOnKeyPressed(keyPressInput -> {
-				keyMap.replaceKey(keyPressInput.getCode(), keyCode, keyCode);
+				keyMap.replaceKey(keyPressInput.getCode(), keyCode, currentBinding);
 				changeA.setText("Key for " + action + " is: " + keyPressInput.getCode().toString());
 			});
 		});
 		this.getChildren().add(changeA);
 	}
-
+	
 	private void setupCloseButton() {
 		Button close = new Button("Close");
 		close.setLayoutX(200);

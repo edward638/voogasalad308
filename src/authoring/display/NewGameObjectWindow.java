@@ -1,25 +1,16 @@
 package authoring.display;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ResourceBundle;
-import java.util.Set;
 
 import authoring.Behavior;
 import authoring.Game;
 import authoring.GameObject;
-import authoring.GameScene;
-import authoring.Property;
 import authoring.display.buttonevents.ChooseImageEvent;
 import data.GameObjectManager;
-import display.buttonevents.ButtonEvent;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -27,8 +18,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import javafx.stage.FileChooser.ExtensionFilter;
 
 /**
  * @author Maddie Wilkinson
@@ -37,6 +26,8 @@ import javafx.stage.FileChooser.ExtensionFilter;
 public class NewGameObjectWindow extends PopupWindow {
 	
 	private static final String INITIAL_DIRECTORY = "./data/gamedata/games/";
+	private static final String MANDATORY_BEHAVIOR_NAME = "MandatoryBehavior";
+
 	
 	private ListView<GameObject> myLevelObjects;
 	private GameViewWindow myGameViewWindow;
@@ -71,13 +62,10 @@ public class NewGameObjectWindow extends PopupWindow {
 		
 		FileChooser fileChooser = new FileChooser();
 		
-		ChooseImageEvent buttonAction = new ChooseImageEvent(imageText, myInitialDirectory, getGame(), fileChooser);
+		ChooseImageEvent buttonAction = new ChooseImageEvent(imageText, myInitialDirectory, fileChooser);
 		Button chooseImageButton = makeButton("ChooseImageButton", event -> buttonAction.pressed()); 
 		
-		imageInfo.getChildren().addAll(new Label("Image name: "), imageText, chooseImageButton);
-
-//		put this in saveButton
-//		myGame.getImageManager().storeImage(myTextField.getText(), new Image(image.toURI().toString()));
+		imageInfo.getChildren().addAll(new Label("Image name: "), imageText, chooseImageButton);;
 
 		Button saveButton = makeButton("Save", event -> {
 			saveGameObject(nameText, xText, yText, imageText, buttonAction.getImage());
@@ -116,16 +104,18 @@ public class NewGameObjectWindow extends PopupWindow {
 	}
 
 	private GameObject makeGameObject(String name, Double xPos, Double yPos, String imageName) {
-		GameObject newObject = new GameObject("MandatoryBehavior");
+		GameObject newObject = new GameObject(MANDATORY_BEHAVIOR_NAME);
 		newObject.setName(name);
-		newObject.getBehavior("MandatoryBehavior").getProperty("elementName").setValue(name);
-		newObject.getBehavior("MandatoryBehavior").getProperty("xPos").setValue(xPos);
-		newObject.getBehavior("MandatoryBehavior").getProperty("yPos").setValue(yPos);
-		newObject.getBehavior("MandatoryBehavior").getProperty("imagePath").setValue(imageName);
+		Behavior mandatory = newObject.getBehavior(MANDATORY_BEHAVIOR_NAME);
+		mandatory.getProperty("elementName").setValue(name);
+		mandatory.getProperty("xPos").setValue(xPos);
+		mandatory.getProperty("yPos").setValue(yPos);
+		mandatory.getProperty("imagePath").setValue(imageName);
 
 		/**
 		 * This is only temporary!! to see if we can add game objects to the template.
 		 */
+		//
 		GameObjectManager manager = new GameObjectManager();
 		try {
 			manager.saveCustomGameObject(newObject, imageName);
@@ -134,7 +124,7 @@ public class NewGameObjectWindow extends PopupWindow {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		//
 		return newObject;
 	}
 }

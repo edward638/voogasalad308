@@ -2,7 +2,6 @@ package authoring.display.buttonevents;
 
 import java.io.File;
 
-import authoring.Game;
 import display.buttonevents.ButtonEvent;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -13,11 +12,10 @@ import javafx.stage.FileChooser.ExtensionFilter;
 public class ChooseImageEvent implements ButtonEvent {
 	private TextField myTextField;
 	private String myDirectory;
-	private Game myGame;
 	private FileChooser myFileChooser;
 	private File myImage;
 
-	public ChooseImageEvent(TextField textField, String directory, Game game, FileChooser fileChooser) {
+	public ChooseImageEvent(TextField textField, String directory, FileChooser fileChooser) {
 		myTextField = textField;
 		myDirectory = directory;
 		myFileChooser = fileChooser;
@@ -26,15 +24,12 @@ public class ChooseImageEvent implements ButtonEvent {
 	@Override
 	public void pressed() {
 		try {
-//			myFileChooser = new FileChooser();
 			myFileChooser.setTitle("Choose Object Image");
 			myFileChooser.setInitialDirectory(new File(myDirectory));
 			myFileChooser.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
 			myImage = myFileChooser.showOpenDialog(new Stage());
 			myTextField.setText(myImage.getName().substring(0, myImage.getName().indexOf(".")));
 			
-//			myGame.getImageManager().storeImage(myTextField.getText(), new Image(image.toURI().toString()));
-			//put image.getName into a property of the GameObject
 		} catch (Exception e) {
 			//do nothing
 			//this just means the user didn't choose an image

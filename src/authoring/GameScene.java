@@ -11,6 +11,7 @@ public class GameScene {
 	private String myName;
 	private Image myBackground;
 	private List<GameObject> myObjects;
+	private GameObject currentGameObject;
 
 	public GameScene(String name) {
 		myName = name;
@@ -33,6 +34,15 @@ public class GameScene {
 	
 	public List<GameObject> getMyObjects(){
 		return myObjects;
+	}
+
+	public GameObject getCurrentGameObject() {
+		return currentGameObject;
+	}
+
+	public void setCurrentGameObject(GameObject selectedGameObject) {
+		currentGameObject = selectedGameObject;
+		System.out.println("Current game object is: " + currentGameObject);
 	}
 
 	public String getName() {

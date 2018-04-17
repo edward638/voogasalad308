@@ -15,6 +15,7 @@ import engine.behaviors.Gravity;
 import engine.behaviors.Killable;
 import engine.behaviors.MandatoryBehavior;
 import engine.behaviors.Movable;
+import engine.behaviors.MovableCharacter;
 import engine.behaviors.shapes.RectangleShape;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.KeyInputEvent;
@@ -66,7 +67,7 @@ public class ModelGameState {
 		//Note: Image path untested
 		mario.addBehavior(new MandatoryBehavior(mario, "Mario", 200.0, 20.0, new RectangleShape(100.0, 100.0), "MarioSMR.png"));
 		List<Double> direction = new ArrayList<>(); direction.add(1.0); direction.add(0.0);
-		mario.addBehavior(new Movable(mario, 0.0, direction));
+		mario.addBehavior(new MovableCharacter(mario, 0.0, direction));
 		mario.addBehavior(new Gravity(mario));
 		
 		//Adding Time Responses
@@ -75,8 +76,8 @@ public class ModelGameState {
 		
 		// Response to up arrow key is to jump
 		mario.addEventResponse(new KeyInputEvent(KeyCode.W), (event, element) -> {
-			Movable mov = (Movable) element.getBehavior(Movable.class);
-			mov.setYVelocity(-80.0);
+			MovableCharacter mov = (MovableCharacter) element.getBehavior(MovableCharacter.class);
+			mov.jump();
 		});
 		
 		

@@ -70,11 +70,11 @@ public class Movable extends Behavior{
 		yVel = yv;
 	}
 	
-	public double getXVelocity () {
+	public Double getXVelocity () {
 		return xVel;
 	}
 	
-	public double getYVelocity () {
+	public Double getYVelocity () {
 		return yVel;
 	}
 	

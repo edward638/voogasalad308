@@ -17,12 +17,14 @@ public class SmartShape extends ShapeDefinition {
 	public SmartShape(double width, double height) {
 		this.width = width;
 		this.height = height;
-		//this.iv = iv;
+		ex = new SubtractiveRectangleExtrapolator();
 	}
 	@Override
 	public Shape getShape(MandatoryBehavior mandatory) {
 		//System.out.println(mandatory.getImagePath());
-		Image i = new Image("data\\gamedata\\games\\enginetestmario\\images\\MarioSMR.png");
+		ImageManager im = new ImageManager("enginetestmario");
+		Image i = im.getImage(mandatory.getImagePath());
+		//Image i = new Image("data\\gamedata\\games\\enginetestmario\\images\\MarioSMR.png");
 		ImageView iv = new ImageView();
 		iv.setImage(i);
 		iv.setX(mandatory.getX());

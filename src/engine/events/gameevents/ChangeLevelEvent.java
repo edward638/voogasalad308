@@ -15,7 +15,7 @@ private Integer level;
 	}
 
 	@Override
-	public void execute(DisplayState displayState) {
+	public void execute(GameState gstate) {
 		GameLoader loader = new GameLoader(displayState.getGameState().getGameName());
 		GameState gameState = loader.convertScene(loader.getGameScenes().get(level));
 		displayState.getGameState.setGameState();

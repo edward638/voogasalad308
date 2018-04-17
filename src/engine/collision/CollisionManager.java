@@ -1,17 +1,22 @@
 package engine.collision;
 
-import javafx.geometry.Bounds;
+import java.util.ArrayList;
+import java.util.List;
+
 import engine.GameElement;
 import engine.GameState;
-import javafx.geometry.Point2D;
 import engine.behaviors.MandatoryBehavior;
 import engine.events.elementevents.CollisionEvent;
+import engine.events.gameevents.GameEvent;
+import javafx.geometry.Bounds;
+import javafx.geometry.Point2D;
 import javafx.scene.shape.Path;
 import javafx.scene.shape.Shape;
 
 public class CollisionManager {
 	
-	public void handleCollisions(GameState gameState) {
+	public List<GameEvent> handleCollisions(GameState gameState) {
+		List<GameEvent> returnEvents = new ArrayList<>();
 		for (int i = 0; i < gameState.getElements().size(); i++) {
 			MandatoryBehavior a = (MandatoryBehavior) gameState.getElements().get(i).getBehavior(MandatoryBehavior.class);
 			
@@ -22,16 +27,14 @@ public class CollisionManager {
 					if (((Path) intersect).getElements().size() != 0) {
 						GameElement g1 = gameState.getElements().get(i);
 						GameElement g2 = gameState.getElements().get(j);
-						String collision1 = findCollisionDirection(a.getShape(), intersect).toString();
-						String collision2 = findCollisionDirection(b.getShape(), intersect).toString();
-						CollisionEvent collision = new CollisionEvent(g1, collision1, g2, collision2);
-						
-						g1.processEvent(collision);
-						g2.processEvent(collision);
+						CollisionEvent collision = new CollisionEvent(g1, g2);
+						returnEvents.addAll(g1.processEvent(collision));
+						returnEvents.addAll(g2.processEvent(collision));
 					}
 				}
 			}
 		}
+		return returnEvents;
 	}
 	
 	/**

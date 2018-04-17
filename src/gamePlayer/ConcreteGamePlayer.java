@@ -18,6 +18,7 @@ import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -44,7 +45,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 	Button newGameButton;
 	Button clearHighScoresButton;
 	HUD hud;
-	Pane gameDisplay;
+	SubScene gameDisplay;
 
 	Engine engine;
 	GameState gameState;
@@ -108,57 +109,29 @@ public class ConcreteGamePlayer implements GamePlayer {
 		mostRecentFile = file;
 		buttonData.setMostRecentFile(mostRecentFile);
 		gameDisplay = engine.getDisplay();
+		gameDisplay.setWidth(300);
+		gameDisplay.setHeight(300);
 		gameDisplay.setLayoutX(30);
 		gameDisplay.setLayoutY(30);
-		gameDisplay.setPrefSize(900, 590);
 		gameDisplay.setStyle("-fx-background-color: white;");
 		hud = new ConcreteHUD(currentGameName);
 
 		myScene.setOnKeyPressed(e -> engine.handleKeyInput(e.getCode()));
 		//myScene.setOnMouseClicked(e -> engine.handleMouseInput(e.getX(), e.getY())); 
-		
-		root.getChildren().add(gameDisplay);
-		root.getChildren().add((Node) hud);
-
-	}
-
-	/**
-	 * created for purposes of demonstration, simulates what front end will look
-	 * like once game engine is running
-	 * 
-	 * @param file
-	 */
-	public void DummyPlayGame(String file) {
-		engine = new Engine(file);
-		// currentGameName = serializer.getGameName(file);
-		currentGameName = "Super Mario Smash Bros";
-		mostRecentFile = file;
-
-		// gameDisplay = engine.getDisplay();
-		//
-		Pane canvas = new Pane();
-
-		gameDisplay = canvas;
-		gameDisplay.setLayoutX(30);
-		gameDisplay.setLayoutY(30);
-		gameDisplay.setPrefSize(900, 590);
-
-		Image image = new Image(
-				getClass().getClassLoader().getResourceAsStream("testGameFolder/testMario/dummy-mario.png"));
-		ImageView imageView = new ImageView();
-		imageView.setImage(image);
-		imageView.setFitHeight(590);
-		imageView.setFitWidth(900);
-		canvas.getChildren().add(imageView);
-
-		hud = new ConcreteHUD(currentGameName);
 		root.getChildren().add(gameDisplay);
 		root.getChildren().add((Node) hud);
 	}
+	
 
 	@Override
 	public Scene getScene() {
 		return myScene;
+	}
+
+	@Override
+	public void DummyPlayGame(String file) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

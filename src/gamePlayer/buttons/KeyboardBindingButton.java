@@ -5,9 +5,7 @@ import javafx.scene.input.KeyCode;
 public class KeyboardBindingButton extends PlayerButtons {
 
 	public KeyboardBindingButton(double x, double y, double width, double height, ButtonData buttonData) {
-		super(x, y, width, height, buttonData);
-		this.setText("Change Key Bindings");
-		setAction();
+		super(x, y, width, height, buttonData, "Change Key Bindings");
 		initialiseOGKeyBindings();
 	}
 

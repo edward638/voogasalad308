@@ -22,10 +22,7 @@ public class CollisionManager {
 					if (((Path) intersect).getElements().size() != 0) {
 						GameElement g1 = gameState.getElements().get(i);
 						GameElement g2 = gameState.getElements().get(j);
-						String collision1 = findCollisionDirection(a.getShape(), intersect).toString();
-						String collision2 = findCollisionDirection(b.getShape(), intersect).toString();
-						CollisionEvent collision = new CollisionEvent(g1, collision1, g2, collision2);
-						
+						CollisionEvent collision = new CollisionEvent(g1, g2);
 						g1.processEvent(collision);
 						g2.processEvent(collision);
 					}

@@ -36,25 +36,31 @@ public class SceneBackgroundImage {
 		myImage.setPreserveRatio(true);
 		myImage.setFitWidth(DEFAULT_X);
 			
+		
 		imageHolder = new Pane();
 		
 		updateDimensions();
 		
+		myPane.getChildren().add(imageHolder);
+		
 		cornerCircle = new Circle();
-		cornerCircle.setCenterX(imageHolder.getBoundsInParent().getWidth());
-		cornerCircle.setCenterY(imageHolder.getBoundsInParent().getHeight());
-		cornerCircle.setRadius(5);
+		
+		System.out.println(imageHolder.getBoundsInParent().getWidth() + " width height " + imageHolder.getBoundsInParent().getHeight());
+		
+		cornerCircle.setCenterX(width);
+		cornerCircle.setCenterY(height);
+		cornerCircle.setRadius(10);
 		cornerCircle.setFill(Color.TRANSPARENT);
 		cornerCircle.setStroke(Color.BLACK);
 		
 		imageHolder.setOnMousePressed(t -> onMousePressed(t));
 		imageHolder.setOnMouseDragged(t -> onMouseDragged(t));
 		imageHolder.setOnMouseClicked(t -> onMouseClicked());
+		cornerCircle.setOnMouseDragged(t -> onMouseDraggedCircle(t));
 		
 		imageHolder.getChildren().add(myImage);
 		imageHolder.setStyle("-fx-border-color: red");
 		
-		myPane.getChildren().add(imageHolder);
 		imageHolder.getChildren().add(cornerCircle);		
 	}
 	
@@ -81,15 +87,37 @@ public class SceneBackgroundImage {
 		positionX = ((Pane)(t.getSource())).getTranslateX();
 		positionY = ((Pane)(t.getSource())).getTranslateY();
 		
+//		System.out.println("This is the mouse scene location: " + currentX + ", " + currentY);
+//		System.out.println("This is the mouse position location: " + positionX + ", " + positionY);
+//		System.out.println("This is the pane location: " + imageHolder.getTranslateX() + ", " + imageHolder.getTranslateY());
+//		System.out.println("This is the Circle location: " + cornerCircle.getCenterX() + ", " + cornerCircle.getCenterY());
 	}
 	
 	private void onMouseDragged(MouseEvent t) {
+		
+		double currentX2 = t.getSceneX();
+		double currentY2 = t.getSceneY();
+		
 		if (selected) {
-//			dragImage(t);
-			resizeImage(t);
+			if (Math.hypot(currentX2-(cornerCircle.getCenterX()+imageHolder.getTranslateX()), currentY2-(cornerCircle.getCenterY()+imageHolder.getTranslateY())) < cornerCircle.getRadius()*5) {
+				resizeImage(t);	
+			} else {
+				dragImage(t);
+			}
+			
 			imageHolder.setStyle("-fx-border-color: green");
 			selected = true;
 		}
+	}
+	
+	private void onMouseDraggedCircle(MouseEvent t) {
+		
+		if (selected) {
+				resizeImage(t);	
+			imageHolder.setStyle("-fx-border-color: green");
+			selected = true;
+		}
+		
 	}
 	
 	private void dragImage(MouseEvent t) {
@@ -114,6 +142,18 @@ public class SceneBackgroundImage {
 		
 		myImage.setFitWidth(newSize);
 		updateDimensions();
+		
+//		System.out.println(width + " width height" + height);
+//		System.out.println(imageHolder.getWidth() + " width imageholder height" + imageHolder.getHeight());
+//		
+		cornerCircle.setCenterX(imageHolder.getWidth());
+		cornerCircle.setCenterY(imageHolder.getHeight());
+		imageHolder.getChildren().remove(cornerCircle);
+		
+		imageHolder.getChildren().add(cornerCircle);
+		
+//		System.out.println(cornerCircle.getLayoutX() + " x y " + cornerCircle.getLayoutY());
+		
 		wasEdited = true;
 		
 	}
@@ -121,9 +161,11 @@ public class SceneBackgroundImage {
 	private void updateDimensions() {
 		height = myImage.getBoundsInLocal().getHeight();
 		width = myImage.getBoundsInLocal().getWidth();
-		imageHolder.setMinSize(height, width);
+		imageHolder.setMaxWidth(width);
+		imageHolder.setMaxHeight(height);
 		
 	}
+	
 	
 	private void remove() {
 		

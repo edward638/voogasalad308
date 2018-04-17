@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import engine.actions.Action;
 import engine.behaviors.Behavior;
 import engine.behaviors.MandatoryBehavior;
+import engine.behaviors.Movable;
 import engine.events.elementevents.ElementEvent;
 import engine.events.gameevents.GameEvent;
 import engine.exceptions.TooManyBehaviorsException;
@@ -103,6 +104,21 @@ public class GameElement {
 				.filter(b -> b.getClass() == MandatoryBehavior.class)
 				.collect(Collectors.toList()).get(0);
 		return el.getName();
+	}
+	
+	/*
+	 * Easy Printing
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		Double locX = ((MandatoryBehavior)(getBehavior(MandatoryBehavior.class))).getX();
+		Double locY = ((MandatoryBehavior)(getBehavior(MandatoryBehavior.class))).getY();
+		return getIdentifier() + " at (" + locX + ", " + locY + ")";
+	}
+	
+	public boolean matchesType(GameElement other) {
+		return other.getIdentifier().equals(getIdentifier()) || other.getIdentifier().equals(MandatoryBehavior.REFER_ALL_ELEMENTS);
 	}
 	
 	/*

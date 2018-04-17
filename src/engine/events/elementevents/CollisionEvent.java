@@ -6,6 +6,7 @@ import java.util.List;
 
 import engine.GameElement;
 import engine.behaviors.MandatoryBehavior;
+import engine.behaviors.Movable;
 import javafx.scene.shape.Shape;
 
 public class CollisionEvent extends ElementEvent {
@@ -18,6 +19,8 @@ public class CollisionEvent extends ElementEvent {
 	public CollisionEvent(GameElement elem1, List<String> sides1, GameElement elem2, List<String> sides2) {
 		e1 = elem1;
 		e2 = elem2;
+		e1side = new ArrayList<>();
+		e2side = new ArrayList<>();
 		e1side.addAll(sides1);
 		e2side.addAll(sides2);
 	}
@@ -27,7 +30,8 @@ public class CollisionEvent extends ElementEvent {
 		e2 = elem2;
 		e1side = new ArrayList<String>();
 		e2side = new ArrayList<String>();
-		processCollisionSides(elem1, elem2);
+		processCollisionSides();
+		separateElements();
 	}
 	
 	public GameElement getOtherElement(GameElement notThisOne) {
@@ -37,16 +41,45 @@ public class CollisionEvent extends ElementEvent {
 		return e1;
 	}
 	
-	private void processCollisionSides(GameElement e1, GameElement e2) {
+	private void processCollisionSides() {
 		MandatoryBehavior mand1 = (MandatoryBehavior) e1.getBehavior(MandatoryBehavior.class);
 		MandatoryBehavior mand2 = (MandatoryBehavior) e2.getBehavior(MandatoryBehavior.class);
 		Shape s1 = mand1.getShape();
 		Shape s2 = mand2.getShape();
 		Shape intersection = Shape.intersect(s1, s2);
-		System.out.println(s1);
-		System.out.println(intersection);
 		e1side.add(getCollisionSide(s1, intersection));
 		e2side.add(getCollisionSide(s2, intersection));
+	}
+	
+	private void separateElements() {
+		MandatoryBehavior mand1 = (MandatoryBehavior) e1.getBehavior(MandatoryBehavior.class);
+		MandatoryBehavior mand2 = (MandatoryBehavior) e2.getBehavior(MandatoryBehavior.class);
+		Shape s1 = mand1.getShape();
+		Shape s2 = mand2.getShape();
+		if (e1.hasBehavior(Movable.class)) {
+			moveElementOutOfContact(e1, Shape.intersect(s1, s2));
+		} else if (e2.hasBehavior(Movable.class)){
+			moveElementOutOfContact(e2, Shape.intersect(s1, s2));
+		}
+
+	}
+	
+	private void moveElementOutOfContact(GameElement ge, Shape intersection) {
+		MandatoryBehavior mand = (MandatoryBehavior) ge.getBehavior(MandatoryBehavior.class);
+		if (Math.abs(getCenter(mand.getShape()).get(0) - getCenter(intersection).get(0)) > 
+		Math.abs(getCenter(mand.getShape()).get(1) - getCenter(intersection).get(1))) {
+			if (getCenter(mand.getShape()).get(0) < getCenter(intersection).get(0)) {
+				mand.setPosition(mand.getX() - intersection.getBoundsInLocal().getWidth() , mand.getY());
+			} else {
+				mand.setPosition(mand.getX() + intersection.getBoundsInLocal().getWidth() , mand.getY());
+			}
+		} else {
+			if (getCenter(mand.getShape()).get(1) < getCenter(intersection).get(1)) {
+				mand.setPosition(mand.getX(), mand.getY() - intersection.getBoundsInLocal().getHeight());
+			} else {
+				mand.setPosition(mand.getX(), mand.getY() + intersection.getBoundsInLocal().getHeight());
+			}
+		}
 	}
 	
 	private String getCollisionSide(Shape elementShape, Shape intersection) {
@@ -87,30 +120,45 @@ public class CollisionEvent extends ElementEvent {
 		return "Collision Event: " + e1 + " " + e2 + " collided.";
 	}
 	
-	public boolean matchesEvent(ElementEvent other) {
-		if (other instanceof CollisionEvent) {
-			CollisionEvent otherCollision = (CollisionEvent) other;
-			List<GameElement> collisionElements = otherCollision.getCollidedElements();
-			if (collisionElements.contains(e1)) {
-				collisionElements.remove(e1);
-				GameElement incomingOne = e1;
-				GameElement incomingTwo = collisionElements.get(0);
-				
-				if (incomingOne.getIdentifier().equals(incomingTwo.getIdentifier()) && 
-						e1side.contains(otherCollision.e1side) &&
-						e2side.contains(otherCollision.e2side)) {
-					return true;
+	public boolean containsElement(GameElement el) {
+		return getCollidedElements().contains(el);
+	}
+	
+	/*
+	 * Checks if another Collision matches this one as a trigger
+	 * For a collision this means:
+	 * other has this.e1 as one of the elements that collided
+	 * the element that is not e1 in other.collidedElements() is has 
+	 * the same identifier as this.e2
+	 * 
+	 */
+	public boolean matchesEvent(ElementEvent incomingEvent) {
+		if (incomingEvent instanceof CollisionEvent) {
+			CollisionEvent incomingCollision = (CollisionEvent) incomingEvent;
+//			System.out.println(incomingCollision);
+			if (incomingCollision.containsElement(e1)) {
+//				System.out.println("Contains e1");
+				GameElement incomingOther = incomingCollision.getOtherElement(e1);
+				if (incomingOther.matchesType(e2)) {
+//					System.out.println("Matches other type");
+					String incomingOtherSide = incomingCollision.getSidesForElement(incomingOther).get(0);
+					String incomingThisSide = incomingCollision.getSidesForElement(e1).get(0);
+					if (e1side.contains(incomingThisSide) && e2side.contains(incomingOtherSide)) {
+						return true;
+					}
 				}
-				return true;
 			}
 		}
 		return false;
 	}
 	
-	public GameElement getCollidedWith(GameElement me) {
-		if (!e1.equals(me)) {
-			return e1;
+	private List<String> getSidesForElement(GameElement ge) {
+		if (ge == e1) {
+			return e1side;
+		} else if (ge == e2) {
+			return e2side;
 		}
-		return e2;
+		return null;
 	}
+	
 }

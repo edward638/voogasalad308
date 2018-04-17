@@ -1,13 +1,14 @@
 package engine.tests;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import engine.DisplayState;
 import engine.GameElement;
 import engine.GameState;
-import engine.actions.CollisionGround;
 import engine.actions.CollisionKillable;
+import engine.actions.CollisionStopYMotion;
 import engine.actions.TimeGravity;
 import engine.actions.TimeMovable;
 import engine.behaviors.Gravity;
@@ -15,7 +16,6 @@ import engine.behaviors.Killable;
 import engine.behaviors.MandatoryBehavior;
 import engine.behaviors.Movable;
 import engine.behaviors.shapes.RectangleShape;
-import engine.behaviors.shapes.SmartShape;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.KeyInputEvent;
 import engine.events.elementevents.TimeEvent;
@@ -72,7 +72,6 @@ public class ModelGameState {
 		//Adding Time Responses
 		mario.addEventResponse(new TimeEvent(0.0), new TimeMovable());
 		mario.addEventResponse(new TimeEvent(0.0), new TimeGravity());
-		mario.addEventResponse(new CollisionEvent(mario, getBlock(0.0, 0.0)), new CollisionGround());
 		
 		// Response to up arrow key is to jump
 		mario.addEventResponse(new KeyInputEvent(KeyCode.W), (event, element) -> {
@@ -97,6 +96,9 @@ public class ModelGameState {
 	public GameElement getBlock(Double xpos, Double ypos) {
 		GameElement block = new GameElement();
 		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, new RectangleShape(40.0, 40.0), "mario_block.png"));
+		GameElement other = new GameElement();
+		other.addBehavior(new MandatoryBehavior(other));
+		block.addEventResponse(new CollisionEvent(block, Arrays.asList("top", "bottom"), other, Arrays.asList("top", "bottom")), new CollisionStopYMotion());
 		return block;
 	}
 	

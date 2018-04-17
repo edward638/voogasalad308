@@ -28,13 +28,14 @@ public class EventManager2 {
 		for (GameElement ge: gameState.getElements()) {
 			gameEvents.addAll(ge.processEvent(ee));
 		}
-		collisionManager.handleCollisions(gameState);
+		gameEvents.addAll(collisionManager.handleCollisions(gameState));
 		gameEvents.stream().forEach(event -> processGameEvent(event));
 		
 	}
 	
 	private void processGameEvent(GameEvent gameEvent) {
-		gameEvent.execute(gameState, engine);
+		System.out.println("GameEvent processed");
+		gameEvent.execute(gameState);
 	}
 
 	

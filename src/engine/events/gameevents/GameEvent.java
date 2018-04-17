@@ -6,6 +6,6 @@ import engine.GameState;
 
 public abstract class GameEvent {
 	
-	public abstract void execute(DisplayState displayState);
+	public abstract void execute(GameState gameState);
 	
 }

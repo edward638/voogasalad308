@@ -16,7 +16,7 @@ public class MovableCharacter extends Movable {
 	@Override
 	public void move(Double time) {
 		super.move(time);
-		this.setXVelocity(this.getXVelocity() * .99);
+		this.setXVelocity(this.getXVelocity() * .98);
 	}
 	
 	public void jump() {

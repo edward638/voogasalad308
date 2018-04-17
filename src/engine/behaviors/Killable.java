@@ -27,14 +27,18 @@ public class Killable extends Behavior{
 		this(ge, 30.0, 0.0);
 	}
 	
-	public void reduceHealth(Double health) {
-		this.health -= health;
+	public void reduceHealth(Double h) {
+		this.health -= h;
+		System.out.println("health less than 0 1");
+
 		if (health < 0) {
+			System.out.println("health less than 0");
 			getParent().addGameEvent(new RemoveGameElementEvent(getParent()));
 		}
 	}
 	
 	public void loseLife() {
+		System.out.println("Losing life: " + health);
 		reduceHealth(lifeHealth);
 	}
 	

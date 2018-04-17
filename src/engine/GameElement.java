@@ -82,7 +82,8 @@ public class GameElement {
 		// Save the GameEvents added on this processEvent and return it. Reset the field 
 		// returnedGameEvents for the next time this 
 		// element processes an event
-		List<GameEvent> returnableEvents = new ArrayList<>(returnedGameEvents); 
+		List<GameEvent> returnableEvents = returnedGameEvents.stream()
+				.collect(Collectors.toList()); 
 		returnedGameEvents = new ArrayList<>();
 		return returnableEvents;
 	}

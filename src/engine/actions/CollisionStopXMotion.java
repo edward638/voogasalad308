@@ -10,14 +10,14 @@ import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.ElementEvent;
 import javafx.scene.shape.Shape;
 
-public class CollisionStopYMotion implements Action{
+public class CollisionStopXMotion implements Action{
 
 	@Override
 	public void act(ElementEvent e, GameElement ge) {
 		CollisionEvent ce = (CollisionEvent) e;
 		if (ge.hasBehavior(Movable.class)) {
 			Movable movable = (Movable) ge.getBehavior(Movable.class);
-			movable.setYVelocity(0.0);
+			movable.setXVelocity(0.0);
 		}
 		separateElements(ge, ce.getOtherElement(ge));
 	}
@@ -37,10 +37,10 @@ public class CollisionStopYMotion implements Action{
 	
 	private void moveElementOutOfContact(GameElement ge, Shape intersection) {
 		MandatoryBehavior mand = (MandatoryBehavior) ge.getBehavior(MandatoryBehavior.class);
-		if (getCenter(mand.getShape()).get(1) < getCenter(intersection).get(1)) {
-			mand.setPosition(mand.getX(), mand.getY() - intersection.getBoundsInLocal().getHeight());
+		if (getCenter(mand.getShape()).get(0) < getCenter(intersection).get(0)) {
+			mand.setPosition(mand.getX() - intersection.getBoundsInLocal().getWidth(), mand.getY());
 		} else {
-			mand.setPosition(mand.getX(), mand.getY() + intersection.getBoundsInLocal().getHeight());
+			mand.setPosition(mand.getX() + intersection.getBoundsInLocal().getWidth(), mand.getY());
 		}
 	}
 	

@@ -15,7 +15,7 @@ public class MandatoryBehavior extends Behavior{
 	private String elementName;
 	private ShapeDefinition shapeDef;
 	private String imagePath;
-	private List<String> tags;
+	private List<String> ignoreTags;
 	
 	public static final String REFER_ALL_ELEMENTS = "ANY_ELEMENT";
 	
@@ -26,7 +26,7 @@ public class MandatoryBehavior extends Behavior{
 		elementName = name;
 		shapeDef = shp;
 		imagePath = imagepath;
-		tags = incomingTags;
+		ignoreTags = incomingTags;
 	}
 	
 	public MandatoryBehavior(GameElement ge, String name, Double startX, Double startY, ShapeDefinition shp, String imagepath) {

@@ -11,6 +11,15 @@ import javafx.scene.shape.Shape;
 
 public class CollisionEvent extends ElementEvent {
 	
+	public static final String LEFT = "LEFT";
+	public static final String RIGHT = "RIGHT";
+	public static final String TOP = "TOP";
+	public static final String BOTTOM = "BOTTOM";
+	public static final List<String> ALL_SIDES = Arrays.asList(LEFT, RIGHT, TOP, BOTTOM);
+	public static final List<String> SIDES = Arrays.asList(LEFT, RIGHT);
+	public static final List<String> VERTICALS = Arrays.asList(TOP, BOTTOM);
+
+	
 	private GameElement e1;
 	private GameElement e2;
 	private List<String> e1side;
@@ -56,16 +65,16 @@ public class CollisionEvent extends ElementEvent {
 		List<Double> diffVector = Arrays.asList(centerIntersect.get(0) - centerElement.get(0), centerIntersect.get(1) - centerElement.get(1));
 		if (Math.abs(diffVector.get(1)) > Math.abs(diffVector.get(0))) {
 			if (diffVector.get(1) < 0) {
-				return "bottom";
+				return BOTTOM;
 			} else {
-				return "top";
+				return TOP;
 			} 
 		} 
 		else {
 			if (diffVector.get(0) < 0) {
-				return "right";
+				return RIGHT;
 			} else {
-				return "left";
+				return LEFT;
 			}
 		}
 	}

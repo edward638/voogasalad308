@@ -1,13 +1,13 @@
 package engine.tests;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import engine.DisplayState;
 import engine.GameElement;
 import engine.GameState;
 import engine.actions.CollisionKillable;
+import engine.actions.CollisionStopXMotion;
 import engine.actions.CollisionStopYMotion;
 import engine.actions.TimeGravity;
 import engine.actions.TimeMovable;
@@ -76,8 +76,9 @@ public class ModelGameState {
 		// Response to up arrow key is to jump
 		mario.addEventResponse(new KeyInputEvent(KeyCode.W), (event, element) -> {
 			Movable mov = (Movable) element.getBehavior(Movable.class);
-			mov.setYVelocity(-350.0);
+			mov.setYVelocity(-80.0);
 		});
+		
 		
 		// Response to Right arrow key is to move right
 		mario.addEventResponse(new KeyInputEvent(KeyCode.D), (event, element) -> {
@@ -90,15 +91,16 @@ public class ModelGameState {
 			Movable mov = (Movable) element.getBehavior(Movable.class);
 			mov.setXVelocity(-200.0);
 		});
+		
+		mario.addEventResponse(new CollisionEvent(mario, CollisionEvent.VERTICALS, getBlock(0.0, 0.0), CollisionEvent.VERTICALS), new CollisionStopYMotion());
+		mario.addEventResponse(new CollisionEvent(mario, CollisionEvent.SIDES, getBlock(0.0, 0.0), CollisionEvent.SIDES), new CollisionStopXMotion());
+
 		return mario;
 	}
 	
 	public GameElement getBlock(Double xpos, Double ypos) {
 		GameElement block = new GameElement();
 		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, new RectangleShape(40.0, 40.0), "mario_block.png"));
-		GameElement other = new GameElement();
-		other.addBehavior(new MandatoryBehavior(other));
-		block.addEventResponse(new CollisionEvent(block, Arrays.asList("top", "bottom"), other, Arrays.asList("top", "bottom")), new CollisionStopYMotion());
 		return block;
 	}
 	
@@ -116,7 +118,7 @@ public class ModelGameState {
 		block.addBehavior(new Movable(block, 20.0, direction));
 		block.addBehavior(new Killable(block, 100.0));
 		block.addEventResponse(new TimeEvent(0.0), new TimeMovable());
-		block.addEventResponse(new CollisionEvent(block, getMario()), new CollisionKillable());
+		block.addEventResponse(new CollisionEvent(block, CollisionEvent.ALL_SIDES, getMario(), CollisionEvent.ALL_SIDES), new CollisionKillable());
 		return block;
 	}
 }

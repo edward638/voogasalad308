@@ -20,7 +20,6 @@ public class Gravity extends Behavior{
 	
 	public void experienceGravity(Double time) {
 		b.setYVelocity(b.getYVelocity()+(GRAVITATIONAL_FORCE*time));
-		System.out.println(b.getYVelocity());
 	}
 
 	public void reverseGravity(Double time) {

@@ -21,8 +21,8 @@ public class KeyBindingPopup extends Pane {
 		this.buttonData = buttonData;
 
 		setupBackground();
-		setupCloseButton();
 		setupChangeButtons();
+		setupCloseButton();
 		setUpTitle();
 
 	}
@@ -33,6 +33,7 @@ public class KeyBindingPopup extends Pane {
 		title.setTextFill(Color.WHITE);
 		this.getChildren().add(title);
 	}
+
 
 	private void setupChangeButtons() {
 		makeKeyChangeButton(90, KeyCode.W, "Jump");

@@ -48,7 +48,7 @@ public class GameElement {
 	public Behavior getBehavior (Class<?> behavior_type) {
 		try {
 			return behaviors.stream()
-					.filter(behavior -> behavior.getClass() == behavior_type)
+					.filter(behavior -> behavior_type.isAssignableFrom(behavior.getClass()))
 					.collect(Collectors.toList())
 					.get(0);
 		}
@@ -62,7 +62,7 @@ public class GameElement {
 	 */
 	public boolean hasBehavior(Class<?> behavior_type) {
 		return behaviors.stream()
-			.filter(behavior -> behavior.getClass() == behavior_type)
+			.filter(behavior -> behavior_type.isAssignableFrom(behavior.getClass()))
 			.collect(Collectors.toList()).size() > 0;
 	}
 	
@@ -82,7 +82,8 @@ public class GameElement {
 		// Save the GameEvents added on this processEvent and return it. Reset the field 
 		// returnedGameEvents for the next time this 
 		// element processes an event
-		List<GameEvent> returnableEvents = new ArrayList<>(returnedGameEvents); 
+		List<GameEvent> returnableEvents = returnedGameEvents.stream()
+				.collect(Collectors.toList()); 
 		returnedGameEvents = new ArrayList<>();
 		return returnableEvents;
 	}

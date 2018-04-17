@@ -12,18 +12,15 @@ public class KeyboardBindingButton extends PlayerButtons {
 	}
 
 	private void initialiseOGKeyBindings() {
-		buttonData.getKeyBindings().replaceKey(KeyCode.A, KeyCode.A ,KeyCode.A);
+		buttonData.getKeyBindings().replaceKey(KeyCode.A, KeyCode.A, KeyCode.A);
 		buttonData.getKeyBindings().replaceKey(KeyCode.D, KeyCode.D, KeyCode.D);
 		buttonData.getKeyBindings().replaceKey(KeyCode.W, KeyCode.W, KeyCode.W);
-		buttonData.getKeyBindings().replaceKey(KeyCode.S, KeyCode.S, KeyCode.S);
 	}
 
 	@Override
 	protected void setAction() {
 		this.setOnAction(event -> {
-
 			KeyBindingPopup keyPopup = new KeyBindingPopup(buttonData);
-
 			keyPopup.show();
 		});
 	}

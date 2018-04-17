@@ -4,6 +4,7 @@ import java.util.Map;
 
 import gamePlayer.KeyInputDictionary;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -16,7 +17,7 @@ public class KeyBindingPopup extends Pane {
 
 	public KeyBindingPopup(ButtonData buttonData) {
 		this.setLayoutX(300);
-		this.setLayoutY(300);
+		this.setLayoutY(100);
 		keyMap = buttonData.getKeyBindings();
 
 		this.buttonData = buttonData;
@@ -24,30 +25,41 @@ public class KeyBindingPopup extends Pane {
 		setupBackground();
 		setupCloseButton();
 		setupChangeButtons();
+		setUpTitle();
 
 	}
 
+	private void setUpTitle() {
+		Label title = new Label("Press Button and Keyboard Input to Change Text");
+		title.setLayoutX(10);
+		title.setTextFill(Color.WHITE);
+		this.getChildren().add(title);
+	}
+
 	private void setupChangeButtons() {
-		int yVal = 50;
-		for (KeyCode keyCode : keyMap.getKeySet()) {
-			Button changeA = new Button("Press and Type Key to Change Binding. Current Key = " + keyCode.toString());
-			changeA.setLayoutY(yVal);
-			yVal = yVal + 60;
-			System.out.println(yVal);
-			changeA.setOnAction(pushButtonEvent -> {
-				this.setOnKeyPressed(keyPressInput -> {
-					keyMap.replaceKey(keyPressInput.getCode(), keyCode, keyCode);
-					changeA.setText("Press and Type Key to Change Binding. Current Key = "
-							+ keyPressInput.getCode().toString());
-				});
+		makeKeyChangeButton(90, KeyCode.W, "Jump");
+		makeKeyChangeButton(150, KeyCode.A, "Left");
+		makeKeyChangeButton(210, KeyCode.D, "Right");
+	}
+
+	private void makeKeyChangeButton(int yVal, KeyCode keyCode, String action) {
+		Button changeA = new Button("Key for " + action + " is: " + keyCode.toString());
+		changeA.setLayoutY(yVal);
+		changeA.setLayoutX(200);
+		changeA.setOnAction(pushButtonEvent -> {
+
+			this.setOnKeyPressed(keyPressInput -> {
+				keyMap.replaceKey(keyPressInput.getCode(), keyCode, keyCode);
+				changeA.setText("Key for " + action + " is: " + keyPressInput.getCode().toString());
 			});
-			this.getChildren().add(changeA);
-		}
+		});
+		this.getChildren().add(changeA);
 	}
 
 	private void setupCloseButton() {
 		Button close = new Button("Close");
-
+		close.setLayoutX(200);
+		close.setLayoutY(30);
 		close.setOnAction(event -> {
 			buttonData.removeFromRoot(this);
 		});

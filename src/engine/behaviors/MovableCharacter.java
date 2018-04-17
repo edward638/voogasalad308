@@ -1,7 +1,5 @@
 package engine.behaviors;
-
 import java.util.List;
-
 import engine.GameElement;
 
 public class MovableCharacter extends Movable {

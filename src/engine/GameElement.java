@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import engine.actions.Action;
 import engine.behaviors.Behavior;
 import engine.behaviors.MandatoryBehavior;
+import engine.behaviors.Movable;
 import engine.events.elementevents.ElementEvent;
 import engine.events.gameevents.GameEvent;
 import engine.exceptions.TooManyBehaviorsException;
@@ -47,7 +48,7 @@ public class GameElement {
 	public Behavior getBehavior (Class<?> behavior_type) {
 		try {
 			return behaviors.stream()
-					.filter(behavior -> behavior.getClass() == behavior_type)
+					.filter(behavior -> behavior_type.isAssignableFrom(behavior.getClass()))
 					.collect(Collectors.toList())
 					.get(0);
 		}
@@ -56,12 +57,13 @@ public class GameElement {
 		}
 	}
 	
+	
 	/*
 	 * Checks if this GameElement has a Behavior object of the requested type
 	 */
 	public boolean hasBehavior(Class<?> behavior_type) {
 		return behaviors.stream()
-			.filter(behavior -> behavior.getClass() == behavior_type)
+			.filter(behavior -> behavior_type.isAssignableFrom(behavior.getClass()))
 			.collect(Collectors.toList()).size() > 0;
 	}
 	
@@ -77,9 +79,12 @@ public class GameElement {
 	 */
 	public List<GameEvent> processEvent(ElementEvent event) {
 		responder.respondTo(event);
-		// Save the GameEvents added on this processEvent and return it. Reset the field returnedGameEvents for the next time this 
+		
+		// Save the GameEvents added on this processEvent and return it. Reset the field 
+		// returnedGameEvents for the next time this 
 		// element processes an event
-		List<GameEvent> returnableEvents = new ArrayList<>(returnedGameEvents); 
+		List<GameEvent> returnableEvents = returnedGameEvents.stream()
+				.collect(Collectors.toList()); 
 		returnedGameEvents = new ArrayList<>();
 		return returnableEvents;
 	}
@@ -91,6 +96,7 @@ public class GameElement {
 	public void addGameEvent(GameEvent gameevent) {
 		returnedGameEvents.add(gameevent);
 	}
+	
 	/*
 	 * Defines the method we will use to identify this game element. Should be done according the 
 	 * BasicGameElement behavior since every element in the game will implement that
@@ -102,6 +108,24 @@ public class GameElement {
 		return el.getName();
 	}
 	
+	/*
+	 * Easy Printing
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		Double locX = ((MandatoryBehavior)(getBehavior(MandatoryBehavior.class))).getX();
+		Double locY = ((MandatoryBehavior)(getBehavior(MandatoryBehavior.class))).getY();
+		return getIdentifier() + " at (" + locX + ", " + locY + ")";
+	}
+	
+	public boolean matchesType(GameElement other) {
+		return other.getIdentifier().equals(getIdentifier()) || other.getIdentifier().equals(MandatoryBehavior.REFER_ALL_ELEMENTS);
+	}
+	
+	/*
+	 * Returns a map of every behavior's instance variables to their value (represented as an object)
+	 */
 	public Map<String, Object> reportProperties() {
 		List<Map<String, Object>> behaviorResponses = behaviors.stream()
 				.map(behavior -> behavior.reportProperties())

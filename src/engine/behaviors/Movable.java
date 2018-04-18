@@ -70,17 +70,18 @@ public class Movable extends Behavior{
 		yVel = yv;
 	}
 	
-	public double getXVelocity () {
+	public Double getXVelocity () {
 		return xVel;
 	}
 	
-	public double getYVelocity () {
+	public Double getYVelocity () {
 		return yVel;
 	}
 	
 	public Double getVelocity () {
 		return Math.sqrt(Math.pow(xVel, 2) + Math.pow(yVel, 2));
 	}
+	
 	
 	public List<Double> getDirection() {
 		return Arrays.asList(xVel / getVelocity(), yVel /getVelocity());

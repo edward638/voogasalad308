@@ -47,8 +47,8 @@ public class ImageElement extends ImageView {
 		}
 		this.setFitWidth(((ShapeDefinition)elementReference.reportProperties().get("shapeDef")).getWidth());
 		this.setFitHeight(((ShapeDefinition)elementReference.reportProperties().get("shapeDef")).getHeight());
-		this.setTranslateX((double) elementReference.reportProperties().get("xPos") - mainCharacterLocation.get(0) + 450);
-		this.setTranslateY(((double) elementReference.reportProperties().get("yPos")));
+		this.setTranslateX((double) elementReference.reportProperties().get("xPos") + mainCharacterLocation.get(0));
+		this.setTranslateY((double) elementReference.reportProperties().get("yPos") + mainCharacterLocation.get(1));
 	}
 	
 	public GameElement getReference() {

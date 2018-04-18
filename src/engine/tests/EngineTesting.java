@@ -35,7 +35,6 @@ public class EngineTesting extends Application {
 		gameEngine = new Engine("");
 		stage.setScene(setupLevel(900, 590, BACKGROUND));
 		stage.show();
-		
 		startAnimation();
 	}
 	
@@ -46,9 +45,7 @@ public class EngineTesting extends Application {
 		root.getChildren().add(gameSubScene);
 		scene.setOnKeyPressed(e -> gameEngine.handleKeyInput(e.getCode()));
         scene.setOnMouseClicked(e -> gameEngine.handleMouseInput(e.getX(), e.getY())); 
-        
     	return scene;
-
     }
 
 	private void startAnimation() {

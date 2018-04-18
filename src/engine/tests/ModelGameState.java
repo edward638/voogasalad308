@@ -9,13 +9,18 @@ import engine.GameState;
 import engine.actions.CollisionKillable;
 import engine.actions.CollisionStopXMotion;
 import engine.actions.CollisionStopYMotion;
+import engine.actions.IncrementTimeTracker;
 import engine.actions.TimeGravity;
 import engine.actions.TimeMovable;
+import engine.actions.TimeSwitchXMotion;
 import engine.behaviors.Gravity;
 import engine.behaviors.Killable;
+import engine.behaviors.MainCharacter;
 import engine.behaviors.MandatoryBehavior;
 import engine.behaviors.Movable;
 import engine.behaviors.MovableCharacter;
+import engine.behaviors.TimeRoutine;
+import engine.behaviors.TimeTracker;
 import engine.behaviors.shapes.RectangleShape;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.KeyInputEvent;
@@ -35,8 +40,9 @@ public class ModelGameState {
 			elements.add(getBlock(i, 500.0));
 		}
 		for (double i = 20; i < 500 ; i+=40) {
-			elements.add(getBlock(0.0, i));
+			elements.add(getMovableBlock(0.0, i));
 		}
+		
 		elements.add(getMario());
 		
 		for (double i = 500; i < 3000; i+=400) {
@@ -51,6 +57,19 @@ public class ModelGameState {
 		}
 	}
 	
+	private GameElement getMovableBlock(double xpos, double ypos) {
+		List<Double> direction = new ArrayList<>(); direction.add(1.0); direction.add(0.0);
+		GameElement block = new GameElement();
+		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, new RectangleShape(40.0, 40.0), "mario_block.png"));
+		block.addBehavior(new TimeTracker(block));
+		block.addBehavior(new TimeRoutine(block, 5));
+		block.addBehavior(new Movable(block, 20.0, direction));
+		block.addEventResponse(new TimeEvent(0.0), new IncrementTimeTracker());
+		block.addEventResponse(new TimeEvent(0.0), new TimeMovable());
+		block.addEventResponse(new TimeEvent(0.0), new TimeSwitchXMotion());
+		return block;
+	}
+
 	public GameState getState() {
 		
 		System.out.println(getMario());
@@ -68,6 +87,7 @@ public class ModelGameState {
 		mario.addBehavior(new MandatoryBehavior(mario, "Mario", 200.0, 20.0, new RectangleShape(100.0, 100.0), "MarioSMR.png"));
 		List<Double> direction = new ArrayList<>(); direction.add(1.0); direction.add(0.0);
 		mario.addBehavior(new MovableCharacter(mario, 0.0, direction));
+		mario.addBehavior(new MainCharacter(mario, 1, false, false));
 		mario.addBehavior(new Gravity(mario));
 		
 		//Adding Time Responses

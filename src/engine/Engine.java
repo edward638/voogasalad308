@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import data.GameLoader;
+import engine.behaviors.MainCharacter;
 import engine.behaviors.MandatoryBehavior;
 import engine.events.elementevents.ElementEvent;
 import engine.events.elementevents.KeyInputEvent;
@@ -30,6 +31,8 @@ public class Engine /*extends Application*/ {
 	public static final int FRAMES_PER_SECOND = 60;
 	public static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
+    public static final double SUBSCENE_WIDTH =  900;
+    public static final double SUBSCENE_HEIGHT = 590;
 	/*public static final Paint BACKGROUND = Color.WHITE;*/
 	
 	private Timeline animation;
@@ -57,7 +60,7 @@ public class Engine /*extends Application*/ {
 	}
 	
 	public SubScene getDisplay() {
-		engineSubScene = new SubScene(subSceneRoot, 900, 590);
+		engineSubScene = new SubScene(subSceneRoot, SUBSCENE_WIDTH, SUBSCENE_HEIGHT);
 		return engineSubScene;
 	}
 	
@@ -85,7 +88,7 @@ public class Engine /*extends Application*/ {
 		double gameSteps = elapsedTime*gameState.getGameSpeed();
 		gameState.incrementGameTime(gameSteps);
     	eventManager.processElementEvent(new TimeEvent(gameSteps));
-    	displayState.updateImageElements(getImageViewOffset(gameState));
+    	displayState.updateImageElements(scrollingAroundMainCharacter(gameState));
     	updateDisplay(displayState.newElements, displayState.removeElements);
     }
 
@@ -101,17 +104,16 @@ public class Engine /*extends Application*/ {
 		removeElements.clear();
 	}
 	
-	private List<Double> getImageViewOffset(GameState gameState) {
-		//Change to isMainCharacter method thats within gameState. 
-		//Add getMainCharacter method
+	private List<Double> scrollingAroundMainCharacter(GameState gameState) {
+		List<Double> offset = Arrays.asList(0.0,0.0);
 		for (GameElement e: gameState.getElements()) {
-			if (e.getIdentifier()=="Mario") {
-				MandatoryBehavior main_character = (MandatoryBehavior) e.getBehavior(MandatoryBehavior.class);
-				return main_character.getPosition();
+			if (e.hasBehavior(MainCharacter.class)) {
+			
+				MainCharacter mc_props = (MainCharacter) e.getBehavior(MainCharacter.class);
+				offset = mc_props.getImageViewOffset(SUBSCENE_WIDTH, SUBSCENE_HEIGHT);
 			}
 		}
-		List<Double> noOffset = Arrays.asList(0.0,0.0);
-		return noOffset;
+		return offset;
 	}
 	
 	

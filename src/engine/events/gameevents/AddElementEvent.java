@@ -12,7 +12,7 @@ public class AddElementEvent extends GameEvent {
 	}
 
 	@Override
-	public void execute(GameState state, Engine engine) {
+	public void execute(GameState state) {
 		state.addGameElement(toAdd);
 	}
 

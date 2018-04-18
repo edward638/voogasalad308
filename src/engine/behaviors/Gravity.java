@@ -10,7 +10,7 @@ import engine.GameElement;
  *
  */
 public class Gravity extends Behavior{
-	public static final double GRAVITATIONAL_FORCE = -9.8*39;
+	public static final double GRAVITATIONAL_FORCE = 9.8*10;
 	private Movable b;
 	
 	public Gravity(GameElement ge) {
@@ -19,11 +19,11 @@ public class Gravity extends Behavior{
 	}
 	
 	public void experienceGravity(Double time) {
-		b.setYVelocity(b.getYVelocity()-(GRAVITATIONAL_FORCE*time));
+		b.setYVelocity(b.getYVelocity()+(GRAVITATIONAL_FORCE*time));
 	}
 
 	public void reverseGravity(Double time) {
-		b.setYVelocity(b.getYVelocity()+(GRAVITATIONAL_FORCE*time));
+		b.setYVelocity(b.getYVelocity()-(GRAVITATIONAL_FORCE*time));
 	}
 
 }

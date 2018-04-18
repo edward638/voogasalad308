@@ -19,7 +19,7 @@ public class ImageManager {
     private static final String IMAGES = "images";
     private String gameLocation;
     private String gameImagesLocation;
-    private static final String defaultImageLocation = "./data/gamedata/defaultimages";
+    private static final String defaultImageLocation = "./data/gamedata/defaultimages/";
     private static final String baseLocation = "./data/gamedata/games/";
     private static final String GAMES = "games/";
     private static final String DEFAULT = "default";
@@ -56,6 +56,7 @@ public class ImageManager {
     private BufferedImage getBufferedImage(String imageName) {
         BufferedImage img = null;
         try {	
+//        	System.out.println(gameImagesLocation + imageName);
             img = ImageIO.read(new File(gameImagesLocation + imageName));
         } catch (IOException e) {
             e.printStackTrace(); //TODO: remove this print stacktrace!

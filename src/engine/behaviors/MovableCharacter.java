@@ -20,7 +20,7 @@ public class MovableCharacter extends Movable {
 	}
 	
 	public void jump() {
-		setYVelocity(getYVelocity() - 200);
+		setYVelocity(getYVelocity() - 100);
 	}
 
 }

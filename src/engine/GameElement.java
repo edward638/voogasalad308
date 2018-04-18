@@ -57,6 +57,7 @@ public class GameElement {
 		}
 	}
 	
+	
 	/*
 	 * Checks if this GameElement has a Behavior object of the requested type
 	 */

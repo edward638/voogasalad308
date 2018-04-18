@@ -82,6 +82,10 @@ public class Movable extends Behavior{
 		return Math.sqrt(Math.pow(xVel, 2) + Math.pow(yVel, 2));
 	}
 	
+	public void jump (Double pow) {
+		yVel = pow;
+	}
+	
 	public List<Double> getDirection() {
 		return Arrays.asList(xVel / getVelocity(), yVel /getVelocity());
 	}

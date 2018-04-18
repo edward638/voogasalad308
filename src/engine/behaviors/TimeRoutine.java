@@ -5,10 +5,12 @@ import engine.GameElement;
 public class TimeRoutine extends Behavior{
 	
 	GameElement ge;
-	public TimeRoutine(GameElement ge) {
+	int routineTime;
+	public TimeRoutine(GameElement ge, int i) {
 		super(ge);
 		this.ge = ge;
 		addUnimplementedMethods();
+		routineTime = i;
 		
 	}
 	
@@ -24,7 +26,6 @@ public class TimeRoutine extends Behavior{
 			TimeTracker timetracker = (TimeTracker) ge.getBehavior(TimeTracker.class);
 			if (timetracker.isMultipleOf(step)) {
 				timetracker.setTimePassed(Math.ceil(timetracker.getTimePassed()));
-				System.out.println(movable.getXVelocity());
 				movable.setXVelocity(-movable.getXVelocity());
 				
 			}
@@ -37,6 +38,7 @@ public class TimeRoutine extends Behavior{
 			Movable movable = (Movable) ge.getBehavior(Movable.class);
 			TimeTracker timetracker = (TimeTracker) ge.getBehavior(TimeTracker.class);
 			if (timetracker.isMultipleOf(step)) {
+				timetracker.setTimePassed(Math.ceil(timetracker.getTimePassed()));
 				movable.setYVelocity(-movable.getYVelocity());
 			}
 			
@@ -55,5 +57,9 @@ public class TimeRoutine extends Behavior{
 	
 	public void shootEveryNSteps(int step) {
 		
+	}
+
+	public int getStepIncrement() {
+		return routineTime;
 	}
 }

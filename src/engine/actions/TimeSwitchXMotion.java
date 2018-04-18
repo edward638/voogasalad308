@@ -8,6 +8,6 @@ public class TimeSwitchXMotion implements Action{
 	@Override
 	public void act(ElementEvent event, GameElement element) {
 		TimeRoutine tr = (TimeRoutine) element.getBehavior(TimeRoutine.class);
-		tr.switchXEveryNSteps(5);
+		tr.switchXEveryNSteps(tr.getStepIncrement());
 	}
 }

@@ -17,13 +17,11 @@ public class TimeTracker extends Behavior{
 		timePassed = time;
 	}
 	
-	public boolean isMultipleOf(int time) {
-		return ((int) timePassed % time)==0 && timePassed>1;
+	public boolean isMultipleOf(int i) {
+		return ((int) timePassed % i)==0 && timePassed>1;
 	}
 	
 	public void incrementTimePass(Double steps) {
-		System.out.println("Time passed: " + timePassed);
-		System.out.println("steps: " + steps);
 		timePassed+=steps;
 	}
 }

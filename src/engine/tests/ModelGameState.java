@@ -62,7 +62,7 @@ public class ModelGameState {
 		GameElement block = new GameElement();
 		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, new RectangleShape(40.0, 40.0), "mario_block.png"));
 		block.addBehavior(new TimeTracker(block));
-		block.addBehavior(new TimeRoutine(block));
+		block.addBehavior(new TimeRoutine(block, 5));
 		block.addBehavior(new Movable(block, 20.0, direction));
 		block.addEventResponse(new TimeEvent(0.0), new IncrementTimeTracker());
 		block.addEventResponse(new TimeEvent(0.0), new TimeMovable());

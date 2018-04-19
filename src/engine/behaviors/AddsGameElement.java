@@ -19,7 +19,7 @@ public class AddsGameElement extends Behavior{
 		System.out.println("Creator " + creator.getIdentifier());
 		System.out.println("Element to create " + elementToCreate.getIdentifier());
 		System.out.println("Created position " + mbcreated.getPosition());
-		GameElement newElement = new GameElement(elementToCreate);
-		getParent().addGameEvent(new AddGameElementEvent(newElement));
+		//GameElement newElement = new GameElement(elementToCreate);
+		//getParent().addGameEvent(new AddGameElementEvent(newElement));
 	}
 }

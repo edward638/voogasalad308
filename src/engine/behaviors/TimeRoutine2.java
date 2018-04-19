@@ -20,6 +20,7 @@ public class TimeRoutine2 extends Behavior{
 	
 	public void addRoutine(Double time, Action routine) {
 		routineTimes.put(routine, time);
+		timeRemaining.put(routine, time);
 	}
 	
 	@Override
@@ -30,6 +31,7 @@ public class TimeRoutine2 extends Behavior{
 				timeRemaining.put(routine, timeRemaining.get(routine) - te.getTime());
 				if (timeRemaining.get(routine) < 0) {
 					routine.act(new TimeEvent(0.0), getParent());
+					timeRemaining.put(routine, routineTimes.get(routine));
 				}
 			}
 		});

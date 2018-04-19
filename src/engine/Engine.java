@@ -54,7 +54,7 @@ public class Engine {
 	public Engine(GameState g) {
 		gameState = g;
 		displayState = new DisplayState("enginetestmario", g);
-		eventManager = new EventManager2(gameState, this);
+		eventManager = new EventManager2(gameState);
 		audioPlayer = new AudioPlayer(musicPath);
 		startAnimation();
 	}

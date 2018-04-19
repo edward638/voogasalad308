@@ -3,34 +3,23 @@ package engine.tests;
 import java.util.ArrayList;
 import java.util.List;
 
-import engine.DisplayState;
 import engine.GameElement;
 import engine.GameState;
 import engine.actions.CollisionKillable;
 import engine.actions.CollisionStopXMotion;
 import engine.actions.CollisionStopYMotion;
-import engine.actions.IncrementTimeTracker;
-import engine.actions.MoveIfMoving;
-import engine.actions.TimeCreateGameElement;
-import engine.actions.TimeGravity;
-import engine.actions.TimeMovable;
-import engine.actions.TimeSwitchXMotion;
-import engine.actions.TimeSwitchYMotion;
-import engine.behaviors.AddsGameElement;
 import engine.behaviors.Gravity;
 import engine.behaviors.Killable;
 import engine.behaviors.MainCharacter;
 import engine.behaviors.MandatoryBehavior;
 import engine.behaviors.Movable;
 import engine.behaviors.MovableCharacter;
-import engine.behaviors.TimeRoutine;
+import engine.behaviors.TimeRoutine2;
 import engine.behaviors.TimeTracker;
-import engine.behaviors.TrackMainCharacter;
 import engine.behaviors.shapes.EllipseShape;
 import engine.behaviors.shapes.RectangleShape;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.KeyInputEvent;
-import engine.events.elementevents.TimeEvent;
 import javafx.scene.input.KeyCode;
 
 public class ModelGameState2 {
@@ -82,7 +71,12 @@ public class ModelGameState2 {
 		mario.addBehavior(new MainCharacter(mario, 1, true, true));
 		mario.addBehavior(new Gravity(mario));
 		mario.addBehavior(new TimeTracker(mario));
-		mario.addBehavior(new TimeRoutine(mario, 7, true));
+		TimeRoutine2 marioRoutines = new TimeRoutine2(mario);
+		marioRoutines.addRoutine(5.0, (e, ge) -> {
+			MovableCharacter mc = (MovableCharacter) mario.getBehavior(MovableCharacter.class);
+			mc.jump();
+		});
+		mario.addBehavior(new TimeRoutine2(mario));
 		
 		// Response to up arrow key is to jump
 		mario.addEventResponse(new KeyInputEvent(KeyCode.W), (event, element) -> {

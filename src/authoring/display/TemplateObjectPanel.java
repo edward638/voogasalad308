@@ -36,8 +36,7 @@ public class TemplateObjectPanel extends MainWindowComponent {
 		myPane.setCenter(myInformationDisplay.asPane());
 		update();
 	}
-	
-	
+		
 	/**
 	 * When new object is added, this will provide an updated list
 	 */

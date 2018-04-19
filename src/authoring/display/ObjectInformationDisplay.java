@@ -2,7 +2,6 @@ package authoring.display;
 
 import java.util.HashSet;
 import java.util.ResourceBundle;
-import java.util.TreeSet;
 
 import authoring.Behavior;
 import authoring.Game;
@@ -43,5 +42,4 @@ public class ObjectInformationDisplay extends MainWindowComponent {
 	protected Node asNode() {
 		return myPane;
 	}
-	
 }

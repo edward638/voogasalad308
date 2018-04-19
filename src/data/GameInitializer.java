@@ -31,7 +31,7 @@ public class GameInitializer {
         gameSavesLocation = gameLocation + ResourceBundleManager.getPath("SAVES");
 
         if ( new File(gameLocation).exists()){
-        	System.out.println("game exists already!");
+//        	System.out.println("game exists already!");
         } else {
         	 makeDirectories();
         	 addDefaultDescription(gameName);

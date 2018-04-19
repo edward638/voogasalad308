@@ -6,22 +6,23 @@ import java.util.ResourceBundle;
 import authoring.Behavior;
 import authoring.Game;
 import authoring.GameObject;
+import authoring.GameScene;
 import authoring.Property;
+import authoring.SceneBackground;
+import authoring.SceneManager;
 import data.ImageManager;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.TilePane;
 
 public class GameViewWindow extends AuthoringUIComponent{
 
 	List<GameObject> gameObjects;
 	ScrollPane scrollPane;
 	StackPane stackPane;
-	TilePane tilePane;
+	Pane tilePane;
 	Pane myPane;
 	ImageManager imageManager;
 	int xSize, ySize;
@@ -30,14 +31,15 @@ public class GameViewWindow extends AuthoringUIComponent{
 		super(resources, game, root);
 		scrollPane = new ScrollPane();
 		stackPane = new StackPane();
-		tilePane = new TilePane();
+		tilePane = new Pane();
 		myPane = new Pane();
 		//		setGameObjectList(game);
 		//		addObjectsToPane();
 		imageManager = new ImageManager(getGame().getName());
 		xSize = x_Size;
 		ySize = y_Size;
-		makeBackgroundPane(getGame().getGameImage(), xSize, ySize);
+//		makeBackgroundPane(getGame().getGameImage(), xSize, ySize);
+		initBackground();
 		stackPane.getChildren().add(tilePane);
 		stackPane.getChildren().add(myPane);
 	}
@@ -61,7 +63,8 @@ public class GameViewWindow extends AuthoringUIComponent{
 		myPane.getChildren().clear();
 		setGameObjectList();
 		addObjectsToPane();
-		makeBackgroundPane(getGame().getGameImage(), xSize, ySize);
+//		makeBackgroundPane(getGame().getGameImage(), xSize, ySize);
+		makeBackgroundPane();
 //		stackPane.getChildren().add(tilePane);
 //		stackPane.getChildren().add(myPane);
 	}
@@ -97,22 +100,32 @@ public class GameViewWindow extends AuthoringUIComponent{
 	 * @param xSize refers to total size of the game/platform
 	 * @param ySize refers to the total size of the game/platform
 	 */
-	private void makeBackgroundPane(String imageName, int xSize, int ySize) {
-		tilePane.setMaxSize(xSize, ySize);
-		Image image = imageManager.getImage(imageName);
-		ImageView bgImage = new ImageView(image);
-//		int bgImageWidth = (int) bgImage.getFitWidth();
-//		int bgImageHeight = (int) bgImage.getFitHeight();
-		int bgImageWidth = xSize;
-		int bgImageHeight = ySize;
-		int columnCount = xSize / bgImageWidth;
-		int rowCount = ySize / bgImageHeight;
-		bgImage.setFitHeight(bgImageHeight);
-		bgImage.setFitWidth(bgImageWidth);
-
-		for (int i = 0; i < columnCount * rowCount; i++) {
-			tilePane.getChildren().add(bgImage);
-		}
+	private void makeBackgroundPane() {
+//		tilePane.setMaxSize(xSize, ySize);
+//		Image image = imageManager.getImage(imageName);
+//		ImageView bgImage = new ImageView(image);
+////		int bgImageWidth = (int) bgImage.getFitWidth();
+////		int bgImageHeight = (int) bgImage.getFitHeight();
+//		int bgImageWidth = xSize;
+//		int bgImageHeight = ySize;
+//		int columnCount = xSize / bgImageWidth;
+//		int rowCount = ySize / bgImageHeight;
+//		bgImage.setFitHeight(bgImageHeight);
+//		bgImage.setFitWidth(bgImageWidth);
+//
+//		for (int i = 0; i < columnCount * rowCount; i++) {
+//			tilePane.getChildren().add(bgImage);
+//		}
+//		tilePane = getGame().getSceneManager().getCurrentScene().getScenceBackground().getPane();
+		SceneManager sm = getGame().getSceneManager();
+		GameScene gs = sm.getCurrentScene();
+		SceneBackground sb = gs.getSceneBackground();
+		tilePane = sb.getPane();
+		
+		
+	}
+	private void initBackground() {
+		tilePane.setPrefSize(1000, 1000);
 	}
 	/**
 	 * This creates the scroll pane, and should be the size of the "camera" view in authoring/player

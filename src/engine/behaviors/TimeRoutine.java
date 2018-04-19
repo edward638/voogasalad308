@@ -32,7 +32,6 @@ public class TimeRoutine extends Behavior{
 			Movable movable = (Movable) ge.getBehavior(Movable.class);
 			TimeTracker timetracker = (TimeTracker) ge.getBehavior(TimeTracker.class);
 			if (timetracker.isMultipleOf(routineTime)) {
-				timetracker.setTimePassed(Math.ceil(timetracker.getTimePassed()));
 				movable.setXVelocity(-movable.getXVelocity());
 			}
 			
@@ -44,7 +43,6 @@ public class TimeRoutine extends Behavior{
 			Movable movable = (Movable) ge.getBehavior(Movable.class);
 			TimeTracker timetracker = (TimeTracker) ge.getBehavior(TimeTracker.class);
 			if (timetracker.isMultipleOf(routineTime)) {
-				timetracker.setTimePassed(Math.ceil(timetracker.getTimePassed()));
 				movable.setYVelocity(-movable.getYVelocity());
 			}
 			
@@ -69,7 +67,6 @@ public class TimeRoutine extends Behavior{
 			
 			TimeTracker timetracker = (TimeTracker) ge.getBehavior(TimeTracker.class);
 			if (timetracker.isMultipleOf(routineTime)) {
-				timetracker.setTimePassed(Math.ceil(timetracker.getTimePassed()));
 				System.out.println("Adding game element");
 				age.addGameElement();
 				System.out.println("Added game element");

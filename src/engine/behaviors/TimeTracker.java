@@ -1,10 +1,12 @@
 package engine.behaviors;
 
 import engine.GameElement;
+import engine.actions.IncrementTimeTracker;
+import engine.events.elementevents.TimeEvent;
 
 public class TimeTracker extends Behavior{
 	
-	private Double timePassed = 0.0;
+	private Double timePassed;
 	
 	public TimeTracker(GameElement ge) {
 		super(ge);
@@ -15,15 +17,16 @@ public class TimeTracker extends Behavior{
 		return timePassed;
 	}
 	
-	public void setTimePassed(Double time) {
-		timePassed = time;
-	}
-	
 	public boolean isMultipleOf(int i) {
 		return ((int) Math.ceil(timePassed) % i)==0 && timePassed>1;
 	}
 	
 	public void incrementTimePass(Double time) {
 		timePassed += time;
+	}
+	
+	@Override
+	protected void addDefaultBehavior() {
+		getParent().addEventResponse(new TimeEvent(0.0), new IncrementTimeTracker());
 	}
 }

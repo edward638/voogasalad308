@@ -115,8 +115,6 @@ public class ModelGameState {
 		mario.addEventResponse(new TimeEvent(0.0), new TimeCreateGameElement());
 		
 		
-		//Adding Time Responses
-		mario.addEventResponse(new TimeEvent(0.0), new IncrementTimeTracker());
 		
 		// Response to up arrow key is to jump
 		mario.addEventResponse(new KeyInputEvent(KeyCode.W), (event, element) -> {

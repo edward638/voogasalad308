@@ -12,22 +12,21 @@ public class SmartShape extends ShapeDefinition {
 	private Double width;
 	private Double height;
 	private SubtractiveRectangleExtrapolator ex;
-	//private ImageView iv;
+	private ImageManager im;
+	private Image image;
 
 	public SmartShape(double width, double height) {
 		this.width = width;
 		this.height = height;
-		//this.iv = iv;
+		ex = new SubtractiveRectangleExtrapolator();
+		im = new ImageManager("enginetestmario");
+		
 	}
 	@Override
 	public Shape getShape(MandatoryBehavior mandatory) {
-		//System.out.println(mandatory.getImagePath());
-		Image i = new Image("data\\gamedata\\games\\enginetestmario\\images\\MarioSMR.png");
-		ImageView iv = new ImageView();
-		iv.setImage(i);
-		iv.setX(mandatory.getX());
-		iv.setY(mandatory.getY());
-		return ex.extrapolateShape(iv);
+		if (image == null)
+			image = im.getImage(mandatory.getImagePath());
+		return ex.extrapolateShape(image, mandatory.getX(), mandatory.getY(), width, height);
 	}
 	
 	@Override

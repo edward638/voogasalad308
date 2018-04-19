@@ -5,7 +5,6 @@ import java.util.List;
 
 import data.GameLoader;
 import engine.behaviors.MainCharacter;
-import engine.events.elementevents.ElementEvent;
 import engine.events.elementevents.KeyInputEvent;
 import engine.events.elementevents.MouseInputEvent;
 import engine.events.elementevents.TimeEvent;
@@ -13,11 +12,9 @@ import engine.tests.ModelGameState;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
-import javafx.scene.ParallelCamera;
 import javafx.scene.SubScene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 public class Engine {
@@ -42,6 +39,7 @@ public class Engine {
 	public Engine(String gamePath) {
 		//EngineRunner engineRunner = new EngineRunner(gamePath);
 		GameLoader loader = new GameLoader(gamePath);
+		loader.getGameState();
 		
 		ModelGameState modelGameState = new ModelGameState(); 
 		gameState = modelGameState.getState();

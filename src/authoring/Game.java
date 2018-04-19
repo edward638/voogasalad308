@@ -16,9 +16,11 @@ public class Game {
 	}
 	
 	public Game(String name) {
+		gameName = name;
 		mySceneManager = new SceneManager();
 		myImageManager = new ImageManager(gameName);
-		new GameInitializer(name);
+		new GameInitializer(gameName);
+		gameImage = "draw-more-few-cloud.png";
 	}
 	
 	public void setGameName(String name) {

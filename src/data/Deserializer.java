@@ -65,6 +65,11 @@ public class Deserializer {
         }
         return list;
     }
+    
+    public GameObject getGameObject(String fileName) {
+    	 File file = new File(fileName);
+         return (GameObject) xstream.fromXML(convertXMLFileToString(file));
+    }
 
     
     /**

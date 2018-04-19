@@ -14,4 +14,12 @@ public class AudioPlayer {
 		mediaPlayer = new MediaPlayer(media);
 		mediaPlayer.play();
 	}
+	
+	public void pause() {
+		mediaPlayer.pause();
+	}
+	
+	public void stop() {
+		mediaPlayer.stop();
+	}
 }

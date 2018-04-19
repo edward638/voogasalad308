@@ -9,22 +9,17 @@ public class GameScene {
 	
 	//has a list of objects
 	private String myName;
-	private Image myBackground;
+	private SceneBackground mySceneBackground;
 	private List<GameObject> myObjects;
+	
+	private static final int SCENE_SIZE_X = 1000;
+	private static final int SCENE_SIZE_Y = 1000;
 
 	public GameScene(String name) {
 		myName = name;
 		myObjects = new ArrayList<>();
-	}
-	
-	//gets image set as scene background
-	public Image getBackgroundImage() {
-		return myBackground;
-	}
-	
-	//sets image for scene background
-	public void setBackgroundImage(Image backgroundImage) {
-		myBackground = backgroundImage;
+		mySceneBackground = new SceneBackground(SCENE_SIZE_X, SCENE_SIZE_Y);
+		System.out.println("This shit is being made again isn't it.");
 	}
 	
 	public void addObject(GameObject toAdd) {
@@ -45,6 +40,10 @@ public class GameScene {
 	
 	public String toString() {
 		return myName;
+	}
+	
+	public SceneBackground getSceneBackground() {
+		return mySceneBackground;
 	}
 	
 }

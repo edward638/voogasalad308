@@ -61,8 +61,20 @@ public class TimeRoutine extends Behavior{
 		}
 	}
 	
-	public void shootEveryNSteps() {
+	
+	public void createGameElementEveryNSteps() {
 		
+		if (ge.hasBehavior(AddsGameElement.class)) {
+			AddsGameElement age = (AddsGameElement) ge.getBehavior(AddsGameElement.class);
+			
+			TimeTracker timetracker = (TimeTracker) ge.getBehavior(TimeTracker.class);
+			if (timetracker.isMultipleOf(routineTime)) {
+				timetracker.setTimePassed(Math.ceil(timetracker.getTimePassed()));
+				System.out.println("Adding game element");
+				age.addGameElement();
+				System.out.println("Added game element");
+			}
+		}
 	}
 
 	public int getStepIncrement() {

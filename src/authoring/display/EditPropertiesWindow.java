@@ -6,6 +6,7 @@ import authoring.Behavior;
 import authoring.Game;
 import authoring.Property;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -15,17 +16,23 @@ import javafx.scene.layout.VBox;
  * @author madelinewilkinson
  *
  */
-public class BehaviorView extends MainWindowComponent {
+public class EditPropertiesWindow extends PopupWindow {
 
 	private VBox myVBox;
 	private Behavior myBehavior;
 	//don't think you need the GameObject as an instance var
-
-	public BehaviorView(ResourceBundle resources, Game game, Node root, Behavior behavior) {
+	
+	public EditPropertiesWindow(ResourceBundle resources, Game game, Node root, Behavior behavior) {
 		super(resources, game, root);
 		myBehavior = behavior;
 		myVBox = new VBox(DEFAULT_SPACING);
+		setStage(setUpScene());
+	}
+	
+	@Override
+	protected Scene setUpScene() {
 		initialize();
+		return new Scene(myVBox);
 	}
 	
 	private void initialize() {
@@ -34,8 +41,7 @@ public class BehaviorView extends MainWindowComponent {
 		myVBox.getChildren().add(hBox);
 		for(Property property : myBehavior.getProperties()) {
 			myVBox.getChildren().add(makePropertyFields(property));
-		}
-		
+		}	
 	}
 	
 	private Node makePropertyFields(Property property) {
@@ -45,10 +51,4 @@ public class BehaviorView extends MainWindowComponent {
 		hBox.getChildren().add(propField);
 		return hBox;
 	}
-
-	@Override
-	protected Node asNode() {
-		return myVBox;
-	}
-
 }

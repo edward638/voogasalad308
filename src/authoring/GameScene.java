@@ -2,6 +2,8 @@ package authoring;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javafx.scene.image.Image;
 
@@ -16,11 +18,13 @@ public class GameScene {
 	private String myName;
 	private Image myBackground;
 	private List<GameObject> myObjects;
+	private Set<String> myObjectNames;
 	private GameObject currentGameObject;
 
 	public GameScene(String name) {
 		myName = name;
 		myObjects = new ArrayList<>();
+		myObjectNames = new TreeSet<>();
 	}
 	
 	//gets image set as scene background

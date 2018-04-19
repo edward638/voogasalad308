@@ -12,7 +12,7 @@ public class EventManager2 {
 	private GameState gameState;
 	private CollisionManager collisionManager;
 	
-	public EventManager2 (GameState state, Engine eng) {
+	public EventManager2 (GameState state) {
 		gameState = state;
 		collisionManager = new CollisionManager();
 	}

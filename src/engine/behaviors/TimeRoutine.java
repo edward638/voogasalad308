@@ -7,6 +7,7 @@ public class TimeRoutine extends Behavior{
 	private GameElement ge;
 	private int routineTime;
 	private boolean activateMotion;
+	
 	public TimeRoutine(GameElement ge, int i, boolean activate) {
 		super(ge);
 		this.ge = ge;
@@ -77,4 +78,6 @@ public class TimeRoutine extends Behavior{
 	public int getStepIncrement() {
 		return routineTime;
 	}
+	
+	
 }

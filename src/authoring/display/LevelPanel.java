@@ -31,6 +31,7 @@ public class LevelPanel extends AuthoringUIComponent {
 	private VBox myVBox;
 	private HBox myHBox;
 	private ComboBox<GameScene> myLevelDropdown;
+	private ComboBox<String> myPanelSelectorComboBox; 
 	private Button myAddLevelButton;
 	private Button myAddGameObjectButton;
 	private Button myAddSceneBackgroundImageButton;
@@ -57,8 +58,8 @@ public class LevelPanel extends AuthoringUIComponent {
 		HBox levelChooser = new HBox();
 		makeLevelDropdown();
 		makeAddLevelButton();
-		
-		levelChooser.getChildren().addAll(myAddLevelButton, myLevelDropdown);
+		makePanelSelectorComboBox();
+		levelChooser.getChildren().addAll(myAddLevelButton, myLevelDropdown, myPanelSelectorComboBox); //TODO: maybe move myPanelSelectorComboBox 
 		return levelChooser;
 	}
 
@@ -108,6 +109,18 @@ public class LevelPanel extends AuthoringUIComponent {
 			System.out.println("Level Panel tried to call updateWindow");
 		});
 		return myLevelDropdown;
+	}
+	
+	private ComboBox<String> makePanelSelectorComboBox(){
+		myPanelSelectorComboBox = new ComboBox<>();
+		myPanelSelectorComboBox.setPromptText(super.getResources().getString("ChoosePanel"));
+		myPanelSelectorComboBox.getItems().add("Background");
+		myPanelSelectorComboBox.getItems().add("Foreground");
+		myPanelSelectorComboBox.valueProperty().addListener((o, old, neww) -> {
+			myGameViewWindow.switchPanes(neww);
+		});
+		return myPanelSelectorComboBox; 
+		
 	}
 
 	//you can make this a ListView of GameObjects/GameElements and make a toString method so that it displays properly

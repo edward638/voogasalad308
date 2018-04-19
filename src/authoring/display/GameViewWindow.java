@@ -134,6 +134,18 @@ public class GameViewWindow extends AuthoringUIComponent{
 	private void makeScrollPane() {
 		
 	}
+	
+	public void switchPanes(String key) {
+		if (key.equals("Background")) {
+			stackPane.getChildren().clear();
+			stackPane.getChildren().add(sceneBackgroundPane);
+		} 
+		if (key.equals("Foreground")) {
+			stackPane.getChildren().clear();
+			stackPane.getChildren().add(sceneBackgroundPane);
+			stackPane.getChildren().add(myPane);
+		}
+	}
 
 	public Node asPane() {
 		return stackPane;

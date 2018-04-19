@@ -28,6 +28,21 @@ public class GameElement {
 		returnedGameEvents = new ArrayList<>();
 	}
 	
+	
+	public GameElement(GameElement model) {
+		behaviors = model.getAllBehaviors();
+		responder = model.getResponder();
+		returnedGameEvents = model.returnedGameEvents;
+	}
+	
+	public Set<Behavior> getAllBehaviors() {
+		return behaviors;
+	}
+	
+	public EventResponder getResponder() {
+		return responder;
+	}
+	
 	/*
 	 * Adds the Behavior object containing the fields and methods that correspond to a specific behavior.
 	 * Checks if there already exists a behavior object for this behavior and throws an exception if the 

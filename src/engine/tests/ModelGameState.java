@@ -11,10 +11,12 @@ import engine.actions.CollisionStopXMotion;
 import engine.actions.CollisionStopYMotion;
 import engine.actions.IncrementTimeTracker;
 import engine.actions.MoveIfMoving;
+import engine.actions.TimeCreateGameElement;
 import engine.actions.TimeGravity;
 import engine.actions.TimeMovable;
 import engine.actions.TimeSwitchXMotion;
 import engine.actions.TimeSwitchYMotion;
+import engine.behaviors.AddsGameElement;
 import engine.behaviors.Gravity;
 import engine.behaviors.Killable;
 import engine.behaviors.MainCharacter;
@@ -46,9 +48,9 @@ public class ModelGameState {
 		for (double i = 0; i < 900; i+=40) {
 			elements.add(getBlock(i, 500.0));
 		}
-		for (double i = 20; i < 500 ; i+=40) {
-			elements.add(getMovableBlock(0.0, i));
-		}
+//		for (double i = 20; i < 500 ; i+=40) {
+//			elements.add(getMovableBlock(0.0, i));
+//		}
 		
 		
 		
@@ -107,8 +109,15 @@ public class ModelGameState {
 		mario.addBehavior(new MovableCharacter(mario, 0.0, direction));
 		mario.addBehavior(new MainCharacter(mario, 1, true, true));
 		mario.addBehavior(new Gravity(mario));
+		mario.addBehavior(new TimeTracker(mario));
+		mario.addBehavior(new TimeRoutine(mario, 7, true));
+		mario.addBehavior(new AddsGameElement(mario, getCreatedBlock(0.0, 0.0)));
+		
+		mario.addEventResponse(new TimeEvent(0.0), new TimeCreateGameElement());
+		
 		
 		//Adding Time Responses
+		mario.addEventResponse(new TimeEvent(0.0), new IncrementTimeTracker());
 		mario.addEventResponse(new TimeEvent(0.0), new TimeMovable());
 		mario.addEventResponse(new TimeEvent(0.0), new TimeGravity());
 		
@@ -140,6 +149,15 @@ public class ModelGameState {
 	public GameElement getBlock(Double xpos, Double ypos) {
 		GameElement block = new GameElement();
 		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, new RectangleShape(40.0, 40.0), "mario_block.png"));
+		return block;
+	}
+	
+	public GameElement getCreatedBlock(Double xpos, Double ypos) {
+		List<Double> direction = new ArrayList<>(); direction.add(1.0); direction.add(0.0);
+		GameElement block = new GameElement();
+		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, new RectangleShape(40.0, 40.0), "mario_block.png"));
+		block.addBehavior(new Movable(block, 5.0, direction));
+		block.addEventResponse(new TimeEvent(0.0), new TimeMovable());
 		return block;
 	}
 	

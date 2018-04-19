@@ -107,6 +107,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 		root.getChildren().remove(gameDisplay);
 		root.getChildren().remove((Node) hud);
 		root.getChildren().remove(highScores.getScores());
+		//engine.close();
 		engine = new Engine(file);
 		keyInputDictionary.setGame(engine);
 		currentGameName = gameDescriptionProvider.getGameName(file);
@@ -143,5 +144,12 @@ public class ConcreteGamePlayer implements GamePlayer {
 	public Boolean getMusicOn() {
 		return musicOn;
 	}
+
+	public void closeEngine() {
+		//engine.close();
+		
+	}
+	
+	
 
 }

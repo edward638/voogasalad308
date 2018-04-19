@@ -26,10 +26,7 @@ public class KeyInputDictionary {
 		if (dictionary.containsKey(input)) {
 			engine.handleKeyInput(dictionary.get(input));
 //			System.out.println(dictionary.get(input));
-		} else {
-			engine.handleKeyInput(input);
-//			System.out.println(input);
-		}
+		} 
 	}
 
 	public void setGame(Engine engine) {

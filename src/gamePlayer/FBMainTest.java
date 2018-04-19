@@ -45,7 +45,7 @@ public class FBMainTest {
 				try {
 					file = new FileInputStream(currentPath + "/enginetestmario/description/descriptionImage.jpg");
 					FacebookType response = fbClient.publish("me/photos", FacebookType.class,
-							BinaryAttachment.with("descriptionImage.jpg", file), Parameter.with("message", "hi jeff"));
+							BinaryAttachment.with("descriptionImage.jpg", file));//, Parameter.with("message", "hi jeff")
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

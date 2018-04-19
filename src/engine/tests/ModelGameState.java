@@ -38,9 +38,7 @@ public class ModelGameState {
 	
 	public ModelGameState() {
 		
-		//display = new DisplayState("enginetestmario");
-		//state = new GameState();
-		//addMainCharacter();
+		display = new DisplayState("enginetestmario", state);
 		state = new GameState();
 		addMainCharacter();
 		ArrayList<GameElement> elements = new ArrayList<GameElement>();

@@ -2,7 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="lib/reflection/annotations-2.0.1.jar"/>
-	<classpathentry kind="lib" path="lib/reflection/guava-15.0.jar"/>
 	<classpathentry kind="lib" path="lib/reflection/javassist-3.19.0-GA.jar"/>
 	<classpathentry kind="lib" path="lib/reflection/reflections-0.9.10.jar"/>
 	<classpathentry kind="lib" path="lib/annotations-2.0.1.jar"/>

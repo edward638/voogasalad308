@@ -40,7 +40,7 @@ public class AuthoringDisplay {
 
 	public void initialize(Stage stage) {
 		Scene newScene = setUpScene();
-		//		newScene.getStylesheets().add(DEFAULT_CSS_PATH + DEFAULT_STYLE);
+//		newScene.getStylesheets().add(DEFAULT_CSS_PATH + DEFAULT_STYLE);
 		stage.setScene(newScene);
 		stage.show();
 	}
@@ -49,9 +49,9 @@ public class AuthoringDisplay {
 	public Scene setUpScene() {
 		initVars();
 		root = new BorderPane();
-		root.setCenter(myGameViewWindow.asNode());
+		root.setRight(myGameViewWindow.asNode());
 		root.setLeft(myLevelPanel.asNode());
-		root.setRight(myPropertyPanel.asNode());
+		root.setCenter(myPropertyPanel.asNode());
 		root.setBottom(myTemplatePanel.asNode());
 		root.setTop(mySaveBar.asNode());
 
@@ -60,14 +60,16 @@ public class AuthoringDisplay {
 
 	private void initVars() {
 		makeGameViewWindow();
+		makeObjectPropertyPanel();
+		// dependency: GameViewWindow and PropertyPanel must be created before LevelPanel for it to work
+		// is this removable? the problem is selecting things in the LevelPanel needs to be able to alter things in the other areas
 		makeLevelPanel();
 		makeTemplatePanel();
-		makeObjectPropertyPanel();
 		makeSaveBar();
 	}
 
 	private Node makeLevelPanel() {
-		myLevelPanel = new LevelPanel(myResources, myGame, root, myGameViewWindow);
+		myLevelPanel = new LevelPanel(myResources, myGame, root, myGameViewWindow, myPropertyPanel);
 		return myLevelPanel.asNode();
 	}
 

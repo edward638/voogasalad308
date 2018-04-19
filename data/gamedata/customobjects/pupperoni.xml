@@ -1,24 +1,15 @@
 <authoring.GameObject>
-  <myName>poof pants</myName>
+  <myName>yeet</myName>
   <myBehaviors>
     <authoring.Behavior>
       <myProperties>
         <authoring.Property>
-          <myValue class="string">poof pants</myValue>
+          <myValue class="string">yeet</myValue>
           <myName>elementName</myName>
           <myValueType>java.lang.String</myValueType>
         </authoring.Property>
         <authoring.Property>
-          <myName>shapeDef</myName>
-          <myValueType>engine.behaviors.shapes.ShapeDefinition</myValueType>
-        </authoring.Property>
-        <authoring.Property>
-          <myValue class="string">pupperoni</myValue>
-          <myName>imagePath</myName>
-          <myValueType>java.lang.String</myValueType>
-        </authoring.Property>
-        <authoring.Property>
-          <myValue class="double">50.0</myValue>
+          <myValue class="double">300.0</myValue>
           <myName>xPos</myName>
           <myValueType>java.lang.Double</myValueType>
         </authoring.Property>
@@ -26,6 +17,15 @@
           <myValue class="double">300.0</myValue>
           <myName>yPos</myName>
           <myValueType>java.lang.Double</myValueType>
+        </authoring.Property>
+        <authoring.Property>
+          <myValue class="string">pupperoni</myValue>
+          <myName>imagePath</myName>
+          <myValueType>java.lang.String</myValueType>
+        </authoring.Property>
+        <authoring.Property>
+          <myName>shapeDef</myName>
+          <myValueType>engine.behaviors.shapes.ShapeDefinition</myValueType>
         </authoring.Property>
       </myProperties>
       <myName>MandatoryBehavior</myName>

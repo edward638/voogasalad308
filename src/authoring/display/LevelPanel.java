@@ -27,10 +27,12 @@ public class LevelPanel extends MainWindowComponent {
 	private ListView<GameObject> myLevelObjects;
 	
 	private GameViewWindow myGameViewWindow;
+	private PropertyPanel myPropertyPanel;
 
-	public LevelPanel(ResourceBundle resources, Game game, Node root, GameViewWindow gameViewWindow) {
+	public LevelPanel(ResourceBundle resources, Game game, Node root, GameViewWindow gameViewWindow, PropertyPanel propertyPanel) {
 		super(resources, game, root); //pass resources to super constructor
 		myGameViewWindow = gameViewWindow;
+		myPropertyPanel = propertyPanel;
 		System.out.println(myGameViewWindow == null);
 
 		myVBox = new VBox();
@@ -67,7 +69,6 @@ public class LevelPanel extends MainWindowComponent {
 		myLevelDropdown.valueProperty().addListener((o, old, neww) -> {
 			getGame().getSceneManager().setCurrentScene(neww);
 			myLevelObjects.setItems(FXCollections.observableArrayList(getGame().getSceneManager().getCurrentScene().getMyObjects()));
-			
 			myGameViewWindow.updateWindow();
 			System.out.println("Level Panel tried to call updateWindow");
 		});
@@ -76,8 +77,10 @@ public class LevelPanel extends MainWindowComponent {
 
 	private ListView<GameObject> makeObjectList() {
 		myLevelObjects = new ListView<GameObject>();
-		myLevelObjects.getSelectionModel().selectedItemProperty().addListener(
-				(o, old, neww) -> getGame().getSceneManager().getCurrentScene().setCurrentGameObject(neww));
+		myLevelObjects.getSelectionModel().selectedItemProperty().addListener((o, old, neww) -> {
+			getGame().getSceneManager().getCurrentScene().setCurrentGameObject(neww);
+			myPropertyPanel.updatePanel();
+		});
 		return myLevelObjects;
 	}
 

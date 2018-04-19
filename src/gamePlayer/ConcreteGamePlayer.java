@@ -27,6 +27,7 @@ import javafx.stage.Stage;
  */
 public class ConcreteGamePlayer implements GamePlayer {
 
+
 	private Scene myScene;
 	private Stage myStage;
 	private Group root;
@@ -121,21 +122,22 @@ public class ConcreteGamePlayer implements GamePlayer {
 		gameDisplay.setHeight(590);
 		gameDisplay.setLayoutX(30);
 		gameDisplay.setLayoutY(30);
-		//gameDisplay.setPrefSize(900, 590);
-		gameDisplay.setStyle("-fx-background-color: white;");
-		hud = new ConcreteHUD(currentGameName);
-		highScores = new ConcreteHighScores(currentGameName);
-		//myScene.setOnKeyPressed(e -> engine.handleKeyInput(e.getCode()));
+		
+		myScene.setOnKeyPressed(e -> engine.handleKeyInput(e.getCode()));
 		//myScene.setOnMouseClicked(e -> engine.handleMouseInput(e.getX(), e.getY())); 
 		
-		myScene.setOnKeyPressed(e -> keyInputDictionary.handleAction(e.getCode()));
+		// gameDisplay.setPrefSize(900, 590);
+		// gameDisplay.setStyle("-fx-background-color: white;");
+		hud = new ConcreteHUD(currentGameName);
+		highScores = new ConcreteHighScores(currentGameName);
+		//myScene.setOnKeyPressed(e -> keyInputDictionary.handleAction(e.getCode()));
+		
 		root.getChildren().add(gameDisplay);
 		root.getChildren().add((Node) hud);
 		root.getChildren().add(highScores.getScores());
 		setupButtons();
 
 	}
-	
 	@Override
 	public Scene getScene() {
 		return myScene;

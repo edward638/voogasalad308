@@ -5,17 +5,17 @@ import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
-public class RectangleShape extends ShapeDefinition{
+public class EllipseShape extends ShapeDefinition {
 	private Double width;
 	private Double height;
-	public RectangleShape(Double w, Double h) {
+	public EllipseShape(Double w, Double h) {
 		width = w;
 		height = h;
 	}
 	@Override
 	public Shape getShape(MandatoryBehavior mandatory) {
-		return new Rectangle(mandatory.getX(), mandatory.getY(), width, height);
-		//return new Ellipse(mandatory.getX(), mandatory.getY(), width/2, height/2);
+		//return new Rectangle(mandatory.getX(), mandatory.getY(), width, height);
+		return new Ellipse(mandatory.getX()+width/2, mandatory.getY()+height/2, width/2, height/2);
 	}
 	
 	@Override

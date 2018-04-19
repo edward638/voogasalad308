@@ -27,6 +27,7 @@ import engine.behaviors.TimeRoutine;
 import engine.behaviors.TimeTracker;
 import engine.behaviors.TrackMainCharacter;
 import engine.behaviors.shapes.RectangleShape;
+import engine.behaviors.shapes.SmartShape;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.KeyInputEvent;
 import engine.events.elementevents.TimeEvent;
@@ -38,9 +39,7 @@ public class ModelGameState {
 	
 	public ModelGameState() {
 		
-		//display = new DisplayState("enginetestmario");
-		//state = new GameState();
-		//addMainCharacter();
+		display = new DisplayState("enginetestmario", state);
 		state = new GameState();
 		addMainCharacter();
 		ArrayList<GameElement> elements = new ArrayList<GameElement>();
@@ -104,7 +103,7 @@ public class ModelGameState {
 	public GameElement getMario() {
 		GameElement mario = new GameElement();
 		//Note: Image path untested
-		mario.addBehavior(new MandatoryBehavior(mario, "Mario", 200.0, 20.0, new RectangleShape(100.0, 100.0), "MarioSMR.png"));
+		mario.addBehavior(new MandatoryBehavior(mario, "Mario", 200.0, 20.0, new EllipseShape(100.0, 100.0), "MarioSMR.png"));
 		List<Double> direction = new ArrayList<>(); direction.add(1.0); direction.add(0.0);
 		mario.addBehavior(new MovableCharacter(mario, 0.0, direction));
 		mario.addBehavior(new MainCharacter(mario, 1, true, true));

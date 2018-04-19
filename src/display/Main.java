@@ -5,11 +5,10 @@ import java.net.MalformedURLException;
 
 import javafx.application.Application;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 /**
- * @author August Ning
+ * @author August Ning and Edward Zhuang
  * Main driver class that is used for choosing between game authoring and game player
  */
 public class Main extends Application {

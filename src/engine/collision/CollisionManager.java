@@ -11,6 +11,7 @@ import engine.events.gameevents.GameEvent;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Path;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 public class CollisionManager {
@@ -37,38 +38,4 @@ public class CollisionManager {
 		return returnEvents;
 	}
 	
-	/**
-	 * Returns an integer representing the side of the collision
-	 * 
-	 * @param element 	shape of the element
-	 * @param intersect	shape of the collision intersection
-	 * @return -1 if no collision, otherwise from the left side and traveling cw around a 
-	 * rectangle, 0, 1, 2, 3
-	 */
-	private Integer findCollisionDirection(Shape element, Shape intersect) {
-		Point2D intersectCenter = getCenter(intersect);
-		Point2D elementCenter = getCenter(element);
-		/*Point2D collisionVector = intersectCenter.subtract(getCenter(element));
-		Point2D boundsVector = elementCenter.subtract(-element.getBoundsInLocal().getMinX(), -element.getBoundsInLocal().getMinY());
-		Point2D referenceXVector = new Point2D(-1,0);
-		double referenceAngle = referenceXVector.angle(boundsVector);
-		double collisionAngle = collisionVector.angle(boundsVector);
-		while (collisionAngle > 0) {
-			
-		}
-		return 0;*/
-		double dx = elementCenter.getX() - intersectCenter.getX();
-		double dy = elementCenter.getY() - intersectCenter.getY();
-		if (Math.abs(dx/element.getBoundsInLocal().getWidth()) > Math.abs(dy/element.getBoundsInLocal().getWidth())) {
-			return (int) Math.signum(dx) + 1;
-		}
-		else {
-			return (int) Math.signum(dy) + 2;
-		}
-	}
-	
-	private Point2D getCenter(Shape s) {
-		Bounds b = s.getBoundsInLocal();
-		return new Point2D((b.getMinX() + b.getMaxX())/2, (b.getMinY() + b.getMaxY())/2);
-	}
 }

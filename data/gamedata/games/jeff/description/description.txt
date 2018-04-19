@@ -1,3 +1,0 @@
-Direct a flying bird, named "Fabby", who moves
-continuously to the right, between sets of 
-Mario-like pipes.

@@ -36,7 +36,9 @@ public class ModelGameState {
 	
 	public ModelGameState() {
 		
-		display = new DisplayState("enginetestmario");
+		//display = new DisplayState("enginetestmario");
+		//state = new GameState();
+		//addMainCharacter();
 		state = new GameState();
 		addMainCharacter();
 		ArrayList<GameElement> elements = new ArrayList<GameElement>();
@@ -54,7 +56,6 @@ public class ModelGameState {
 			elements.add(getKoopa(i, 100.0));
 		}
 
-		state = new GameState();
 		
 		for (GameElement el : elements) {
 			state.addGameElement(el);
@@ -67,7 +68,7 @@ public class ModelGameState {
 	private void addMainCharacter() {
 		GameElement mainCharacter = getMario();
 		state.addGameElement(mainCharacter);
-		display.addNewElement(mainCharacter);
+		//display.addNewElement(mainCharacter);
 	}
 	
 	private GameElement getMovableBlock(double xpos, double ypos) {

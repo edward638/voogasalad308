@@ -22,7 +22,7 @@ public class GameViewWindow extends AuthoringUIComponent{
 	List<GameObject> gameObjects;
 	ScrollPane scrollPane;
 	StackPane stackPane;
-	Pane tilePane;
+	Pane sceneBackgroundPane;
 	Pane myPane;
 	ImageManager imageManager;
 	int xSize, ySize;
@@ -31,7 +31,7 @@ public class GameViewWindow extends AuthoringUIComponent{
 		super(resources, game, root);
 		scrollPane = new ScrollPane();
 		stackPane = new StackPane();
-		tilePane = new Pane();
+		sceneBackgroundPane = new Pane();
 		myPane = new Pane();
 		//		setGameObjectList(game);
 		//		addObjectsToPane();
@@ -40,7 +40,7 @@ public class GameViewWindow extends AuthoringUIComponent{
 		ySize = y_Size;
 //		makeBackgroundPane(getGame().getGameImage(), xSize, ySize);
 		initBackground();
-		stackPane.getChildren().add(tilePane);
+		stackPane.getChildren().add(sceneBackgroundPane);
 		stackPane.getChildren().add(myPane);
 	}
 
@@ -58,15 +58,15 @@ public class GameViewWindow extends AuthoringUIComponent{
 //	public void updateWindow(List<GameObject> gameObjectsList) {
 	public void updateWindow() {
 		//		gameObjects = gameObjectsList;
-//		stackPane.getChildren().clear();
-		tilePane.getChildren().clear();
+		stackPane.getChildren().clear();
+//		sceneBackgroundPane.getChildren().clear();
 		myPane.getChildren().clear();
 		setGameObjectList();
 		addObjectsToPane();
 //		makeBackgroundPane(getGame().getGameImage(), xSize, ySize);
 		makeBackgroundPane();
-//		stackPane.getChildren().add(tilePane);
-//		stackPane.getChildren().add(myPane);
+		stackPane.getChildren().add(sceneBackgroundPane);
+		stackPane.getChildren().add(myPane);
 	}
 
 	private void addObjectsToPane() {
@@ -120,18 +120,31 @@ public class GameViewWindow extends AuthoringUIComponent{
 		SceneManager sm = getGame().getSceneManager();
 		GameScene gs = sm.getCurrentScene();
 		SceneBackground sb = gs.getSceneBackground();
-		tilePane = sb.getPane();
+		sceneBackgroundPane = sb.getPane();
+		System.out.println("scene background pane added from game view window");
 		
 		
 	}
 	private void initBackground() {
-		tilePane.setPrefSize(1000, 1000);
+		sceneBackgroundPane.setPrefSize(1000, 1000);
 	}
 	/**
 	 * This creates the scroll pane, and should be the size of the "camera" view in authoring/player
 	 */
 	private void makeScrollPane() {
 		
+	}
+	
+	public void switchPanes(String key) {
+		if (key.equals("Background")) {
+			stackPane.getChildren().clear();
+			stackPane.getChildren().add(sceneBackgroundPane);
+		} 
+		if (key.equals("Foreground")) {
+			stackPane.getChildren().clear();
+			stackPane.getChildren().add(sceneBackgroundPane);
+			stackPane.getChildren().add(myPane);
+		}
 	}
 
 	public Node asPane() {

@@ -3,7 +3,7 @@ package engine.behaviors;
 import engine.GameElement;
 
 public class TimeTracker extends Behavior{
-	Double timePassed = 0.0;
+	private Double timePassed = 0.0;
 	public TimeTracker(GameElement ge) {
 		super(ge);
 		timePassed = 0.0;

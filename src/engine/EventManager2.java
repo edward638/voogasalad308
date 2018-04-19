@@ -3,22 +3,17 @@ package engine;
 import java.util.ArrayList;
 import java.util.List;
 
-import engine.behaviors.MandatoryBehavior;
 import engine.collision.CollisionManager;
-import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.ElementEvent;
 import engine.events.gameevents.GameEvent;
-import javafx.scene.shape.Shape;
 
 public class EventManager2 {
 	
 	private GameState gameState;
-	private Engine engine;
 	private CollisionManager collisionManager;
 	
 	public EventManager2 (GameState state, Engine eng) {
 		gameState = state;
-		engine = eng;
 		collisionManager = new CollisionManager();
 	}
 	

@@ -38,12 +38,29 @@ public class ModelGameState2 {
 	
 	public ModelGameState2() {
 		state = new GameState();		
+	}
+	
+	private void addMainCharacter() {
+		GameElement mainCharacter = getMario();
+		state.addGameElement(mainCharacter);
+		//display.addNewElement(mainCharacter);
+	}
+
+	private GameElement getCreatedMario() {
+		return state.getElements().get(0);
+	}
+	
+	public GameState getState() {
 		addMainCharacter();
-		ArrayList<GameElement> elements = new ArrayList<GameElement>();
+		List<GameElement> elements = new ArrayList<GameElement>();
 		getCreatedMario();
 		for (double i = 0; i < 900; i+=40) {
 			elements.add(getBlock(i, 500.0));
 		}	
+		
+		for (double i = 300; i < 900; i+=40) {
+			elements.add(getBlock(i, 300.0));
+		}
 		
 		for (double i = 500; i < 3000; i+=400) {
 			elements.add(getKoopa(i, 100.0));
@@ -53,35 +70,6 @@ public class ModelGameState2 {
 		for (GameElement el : elements) {
 			state.addGameElement(el);
 		}
-	}
-	
-	private void addMainCharacter() {
-		GameElement mainCharacter = getMario();
-		state.addGameElement(mainCharacter);
-		//display.addNewElement(mainCharacter);
-	}
-	
-	private GameElement getMovableBlock(double xpos, double ypos) {
-		List<Double> direction = new ArrayList<>(); direction.add(1.0); direction.add(1.0);
-		GameElement block = new GameElement();
-		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, new RectangleShape(40.0, 40.0), "mario_block.png"));
-		block.addBehavior(new TimeTracker(block));
-		block.addBehavior(new TimeRoutine(block, 5, true));
-		block.addBehavior(new TrackMainCharacter(block, getCreatedMario()));
-		block.addBehavior(new Movable(block, 20.0, direction));
-		block.addEventResponse(new TimeEvent(0.0), new IncrementTimeTracker());
-		block.addEventResponse(new TimeEvent(0.0), new TimeMovable());
-		block.addEventResponse(new TimeEvent(0.0), new TimeSwitchXMotion());
-		block.addEventResponse(new TimeEvent(0.0), new TimeSwitchYMotion());
-		block.addEventResponse(new TimeEvent(0.0), new MoveIfMoving());
-		return block;
-	}
-
-	private GameElement getCreatedMario() {
-		return state.getElements().get(0);
-	}
-	
-	public GameState getState() {
 		return state;
 	}
 	
@@ -95,15 +83,6 @@ public class ModelGameState2 {
 		mario.addBehavior(new Gravity(mario));
 		mario.addBehavior(new TimeTracker(mario));
 		mario.addBehavior(new TimeRoutine(mario, 7, true));
-		mario.addBehavior(new AddsGameElement(mario, getCreatedBlock(0.0, 0.0)));
-		
-		mario.addEventResponse(new TimeEvent(0.0), new TimeCreateGameElement());
-		
-		
-		//Adding Time Responses
-		mario.addEventResponse(new TimeEvent(0.0), new IncrementTimeTracker());
-		mario.addEventResponse(new TimeEvent(0.0), new TimeMovable());
-		mario.addEventResponse(new TimeEvent(0.0), new TimeGravity());
 		
 		// Response to up arrow key is to jump
 		mario.addEventResponse(new KeyInputEvent(KeyCode.W), (event, element) -> {
@@ -136,15 +115,6 @@ public class ModelGameState2 {
 		return block;
 	}
 	
-	public GameElement getCreatedBlock(Double xpos, Double ypos) {
-		List<Double> direction = new ArrayList<>(); direction.add(1.0); direction.add(0.0);
-		GameElement block = new GameElement();
-		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, new RectangleShape(40.0, 40.0), "mario_block.png"));
-		block.addBehavior(new Movable(block, 5.0, direction));
-		block.addEventResponse(new TimeEvent(0.0), new TimeMovable());
-		return block;
-	}
-	
 	public GameElement getBack(Double xpos, Double ypos) {
 		GameElement block = new GameElement();
 		block.addBehavior(new MandatoryBehavior(block, "Back", xpos, ypos, new RectangleShape(900.0, 590.0), "prairie.jpg"));
@@ -158,7 +128,6 @@ public class ModelGameState2 {
 		List<Double> direction = new ArrayList<>(); direction.add(-1.0); direction.add(0.0);
 		block.addBehavior(new Movable(block, 20.0, direction));
 		block.addBehavior(new Killable(block, 100.0));
-		block.addEventResponse(new TimeEvent(0.0), new TimeMovable());
 		block.addEventResponse(new CollisionEvent(block, CollisionEvent.ALL_SIDES, getMario(), CollisionEvent.ALL_SIDES), new CollisionKillable());
 		return block;
 	}

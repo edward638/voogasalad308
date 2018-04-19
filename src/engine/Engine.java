@@ -88,11 +88,10 @@ public class Engine {
 	public void timeStep (double elapsedTime) {
 		double gameSteps = elapsedTime*gameState.getGameSpeed();
 		gameState.incrementGameTime(gameSteps);
-	//	System.out.println("Number of game elements: " + gameState.getElements().size());
-    	eventManager.processElementEvent(new TimeEvent(gameSteps));
-    	displayState.updateImageElements(scrollingAroundMainCharacter(gameState));
-    	displayState.update(gameState);
-    	updateDisplay(displayState.newElements, displayState.removeElements);
+	    	eventManager.processElementEvent(new TimeEvent(gameSteps));
+	    	displayState.updateImageElements(scrollingAroundMainCharacter(gameState));
+	    	displayState.update(gameState);
+	    	updateDisplay(displayState.newElements, displayState.removeElements);
     }
 
 	protected void updateDisplay(List<ImageElement> newElements, List<ImageElement> removeElements) {

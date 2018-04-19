@@ -55,11 +55,15 @@ public class ModelGameState {
 		for (double i = 500; i < 3000; i+=400) {
 			elements.add(getKoopa(i, 100.0));
 		}
+
+		state = new GameState();
 		
 		for (GameElement el : elements) {
 			state.addGameElement(el);
-			display.addNewElement(el);
+			//display.addNewElement(el);
 		}
+		display = new DisplayState("enginetestmario", state);
+		//display.update(state);
 	}
 	
 	private void addMainCharacter() {
@@ -102,7 +106,7 @@ public class ModelGameState {
 		mario.addBehavior(new MandatoryBehavior(mario, "Mario", 200.0, 20.0, new RectangleShape(100.0, 100.0), "MarioSMR.png"));
 		List<Double> direction = new ArrayList<>(); direction.add(1.0); direction.add(0.0);
 		mario.addBehavior(new MovableCharacter(mario, 0.0, direction));
-		mario.addBehavior(new MainCharacter(mario, 1, false, true));
+		mario.addBehavior(new MainCharacter(mario, 1, true, true));
 		mario.addBehavior(new Gravity(mario));
 		mario.addBehavior(new TimeTracker(mario));
 		mario.addBehavior(new TimeRoutine(mario, 7, true));

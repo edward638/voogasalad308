@@ -24,7 +24,6 @@ public class ImageElement extends ImageView {
 		updateState();
 		
 		System.out.println(elementReference.reportProperties());
-		
 	}
 
 	public void updateState() {

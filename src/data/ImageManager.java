@@ -4,9 +4,14 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
 import javax.imageio.ImageIO;
+
+import authoring.GameScene;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ImageManager {
 
@@ -14,17 +19,44 @@ public class ImageManager {
     private static final String IMAGES = "images";
     private String gameLocation;
     private String gameImagesLocation;
+    private static final String defaultImageLocation = "./data/gamedata/defaultimages/";
     private static final String baseLocation = "./data/gamedata/games/";
+    private static final String GAMES = "games/";
+    private static final String DEFAULT = "default";
 
 
     public ImageManager(String gameName){
-        gameLocation = baseLocation + gameName + BACKSLASH;
-        gameImagesLocation = gameLocation + IMAGES + BACKSLASH;
+    	if (gameName.equals(DEFAULT)) {
+    		gameImagesLocation = defaultImageLocation;
+    	} else {
+	        gameLocation = baseLocation + gameName + BACKSLASH;
+	        gameImagesLocation = gameLocation + IMAGES + BACKSLASH;
+    	}
+    }
+    
+    /**
+     * Provides a list of images for game authoring to use.
+     * @return list of all images (can be used by 
+     */
+    public List<Image> getAllImages(){
+    	ArrayList<Image> imageList = new ArrayList<>();
+    	File directory = new File(gameImagesLocation);
+        File[] directoryListing = directory.listFiles();
+        
+        if (directoryListing != null){
+            for (File level : directoryListing){
+                String path = level.getName();
+                imageList.add(getImage("/" + path));
+            }
+        }
+    	
+    	return imageList;
     }
 
     private BufferedImage getBufferedImage(String imageName) {
         BufferedImage img = null;
-        try {
+        try {	
+//        	System.out.println(gameImagesLocation + imageName);
             img = ImageIO.read(new File(gameImagesLocation + imageName));
         } catch (IOException e) {
             e.printStackTrace(); //TODO: remove this print stacktrace!

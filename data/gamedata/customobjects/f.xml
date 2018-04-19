@@ -1,0 +1,36 @@
+<authoring.GameObject>
+  <myName>qwer ujkfhsdruikfghsdjkfghsdjkh</myName>
+  <myBehaviors>
+    <authoring.Behavior>
+      <myProperties>
+        <authoring.Property>
+          <myValue class="string">qwer ujkfhsdruikfghsdjkfghsdjkh</myValue>
+          <myName>elementName</myName>
+          <myValueType>java.lang.String</myValueType>
+        </authoring.Property>
+        <authoring.Property>
+          <myValue class="double">266.0</myValue>
+          <myName>yPos</myName>
+          <myValueType>java.lang.Double</myValueType>
+        </authoring.Property>
+        <authoring.Property>
+          <myName>shapeDef</myName>
+          <myValueType>engine.behaviors.shapes.ShapeDefinition</myValueType>
+        </authoring.Property>
+        <authoring.Property>
+          <myValue class="double">23.0</myValue>
+          <myName>xPos</myName>
+          <myValueType>java.lang.Double</myValueType>
+        </authoring.Property>
+        <authoring.Property>
+          <myValue class="string">f</myValue>
+          <myName>imagePath</myName>
+          <myValueType>java.lang.String</myValueType>
+        </authoring.Property>
+      </myProperties>
+      <myName>MandatoryBehavior</myName>
+    </authoring.Behavior>
+  </myBehaviors>
+  <myEvents/>
+  <myBehaviorFactory/>
+</authoring.GameObject>

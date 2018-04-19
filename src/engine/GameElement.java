@@ -13,6 +13,7 @@ import engine.behaviors.Behavior;
 import engine.behaviors.MandatoryBehavior;
 import engine.behaviors.Movable;
 import engine.events.elementevents.ElementEvent;
+import engine.events.elementevents.KeyInputEvent;
 import engine.events.gameevents.GameEvent;
 import engine.exceptions.TooManyBehaviorsException;
 
@@ -25,6 +26,21 @@ public class GameElement {
 		behaviors = new HashSet<>();
 		responder = new EventResponder(this);
 		returnedGameEvents = new ArrayList<>();
+	}
+	
+	
+	public GameElement(GameElement model) {
+		behaviors = model.getAllBehaviors();
+		responder = model.getResponder();
+		returnedGameEvents = model.returnedGameEvents;
+	}
+	
+	public Set<Behavior> getAllBehaviors() {
+		return behaviors;
+	}
+	
+	public EventResponder getResponder() {
+		return responder;
 	}
 	
 	/*
@@ -56,6 +72,7 @@ public class GameElement {
 			throw new IllegalArgumentException(behavior_type + " does not exist for GameElement" + getIdentifier());
 		}
 	}
+	
 	
 	/*
 	 * Checks if this GameElement has a Behavior object of the requested type
@@ -135,5 +152,9 @@ public class GameElement {
 		}
 		return returning;
 	}
+
+
+
+
 	
 }

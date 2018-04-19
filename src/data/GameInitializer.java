@@ -1,6 +1,10 @@
 package data;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import data.propertiesFiles.ResourceBundleManager;
 
@@ -27,9 +31,10 @@ public class GameInitializer {
         gameSavesLocation = gameLocation + ResourceBundleManager.getPath("SAVES");
 
         if ( new File(gameLocation).exists()){
-        	System.out.println("game exists already!");
+//        	System.out.println("game exists already!");
         } else {
         	 makeDirectories();
+        	 addDefaultDescription(gameName);
         }
 		
 	}
@@ -43,6 +48,19 @@ public class GameInitializer {
         new File(gameScenesLocation).mkdirs();
         new File(gameImagesLocation).mkdirs();
         new File(gameSavesLocation).mkdirs();
+    }
+    
+    private void addDefaultDescription(String gameName) {
+    	String description = "This is a placeholder description.";
+    	try {
+			BufferedImage img = ImageIO.read(new File(ResourceBundleManager.getPath("DEFAULTIMAGE")));
+			GameSaver saver = new GameSaver(gameName);
+	    	saver.addDescription(gameName, description, img);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
     }
 		
 }

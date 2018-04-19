@@ -13,6 +13,7 @@ public class AddGameElementEvent extends GameEvent{
 
 	@Override
 	public void execute(GameState state) {
-		state.addGameElement(toAdd);
+		GameElement newInstance = new GameElement(toAdd);
+		state.addGameElement(newInstance);
 	}
 }

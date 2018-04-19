@@ -1,5 +1,6 @@
 package authoring.display;
 
+import java.io.File;
 import java.util.ResourceBundle;
 
 import authoring.Game;
@@ -14,9 +15,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 /**
  * @author Maddie Wilkinson
@@ -25,16 +29,25 @@ import javafx.stage.Stage;
 public class LevelPanel extends AuthoringUIComponent {
 
 	private VBox myVBox;
+	private HBox myHBox;
 	private ComboBox<GameScene> myLevelDropdown;
+	private ComboBox<String> myPanelSelectorComboBox; 
 	private Button myAddLevelButton;
 	private Button myAddGameObjectButton;
+	private Button myAddSceneBackgroundImageButton;
 	private ListView<GameObject> myLevelObjects;
+	
+	private GameViewWindow myGameViewWindow;
 
-	public LevelPanel(ResourceBundle resources, Game game, Node root) {
+	public LevelPanel(ResourceBundle resources, Game game, Node root, GameViewWindow gameViewWindow) {
 		super(resources, game, root); //pass resources to super constructor
+		myGameViewWindow = gameViewWindow;
+		System.out.println(myGameViewWindow == null);
 
 		myVBox = new VBox();
-		myVBox.getChildren().addAll(makeLevelChooser(), makeObjectList(), makeAddGameObjectButton());
+		myHBox = new HBox();
+		myHBox.getChildren().addAll(makeAddGameObjectButton(), makeAddSceneBackgroundImageButton());
+		myVBox.getChildren().addAll(makeLevelChooser(), makeObjectList(), myHBox);
 	}
 
 	public VBox asVBox() {
@@ -45,8 +58,8 @@ public class LevelPanel extends AuthoringUIComponent {
 		HBox levelChooser = new HBox();
 		makeLevelDropdown();
 		makeAddLevelButton();
-		
-		levelChooser.getChildren().addAll(myAddLevelButton, myLevelDropdown);
+		makePanelSelectorComboBox();
+		levelChooser.getChildren().addAll(myAddLevelButton, myLevelDropdown, myPanelSelectorComboBox); //TODO: maybe move myPanelSelectorComboBox 
 		return levelChooser;
 	}
 
@@ -59,9 +72,28 @@ public class LevelPanel extends AuthoringUIComponent {
 	
 	private Button makeAddGameObjectButton() {
 		myAddGameObjectButton =  makeButton("AddGameObjectButton", event -> { 
-			new NewGameObjectWindow(getResources(), getGame(), getRoot(), myLevelObjects);
+			new NewGameObjectWindow(getResources(), getGame(), getRoot(), myLevelObjects, myGameViewWindow);
 		});
 		return myAddGameObjectButton;
+	}
+	
+	private Button makeAddSceneBackgroundImageButton() {
+		myAddSceneBackgroundImageButton = makeButton("AddSceneBackgroundImageButton", event -> {
+			try {
+				FileChooser fileChooser = new FileChooser();
+				fileChooser.setTitle("Choose Object Image");
+				fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+				File image = fileChooser.showOpenDialog(new Stage());
+				getGame().getSceneManager().getCurrentScene().getSceneBackground().addImage(new Image(image.toURI().toString()));
+				//put image.getName into SceneBackground
+			} catch (Exception e) {
+				//do nothing
+				//this just means the user didn't choose an image
+				//which is a perfectly fine thing for them to do
+			}
+		});
+				
+		return myAddSceneBackgroundImageButton;
 	}
 
 	private ComboBox<GameScene> makeLevelDropdown() {
@@ -72,8 +104,23 @@ public class LevelPanel extends AuthoringUIComponent {
 		myLevelDropdown.valueProperty().addListener((o, old, neww) -> {
 			getGame().getSceneManager().setCurrentScene(neww);
 			myLevelObjects.setItems(FXCollections.observableArrayList(getGame().getSceneManager().getCurrentScene().getMyObjects()));
+			
+			myGameViewWindow.updateWindow();
+			System.out.println("Level Panel tried to call updateWindow");
 		});
 		return myLevelDropdown;
+	}
+	
+	private ComboBox<String> makePanelSelectorComboBox(){
+		myPanelSelectorComboBox = new ComboBox<>();
+		myPanelSelectorComboBox.setPromptText(super.getResources().getString("ChoosePanel"));
+		myPanelSelectorComboBox.getItems().add("Background");
+		myPanelSelectorComboBox.getItems().add("Foreground");
+		myPanelSelectorComboBox.valueProperty().addListener((o, old, neww) -> {
+			myGameViewWindow.switchPanes(neww);
+		});
+		return myPanelSelectorComboBox; 
+		
 	}
 
 	//you can make this a ListView of GameObjects/GameElements and make a toString method so that it displays properly

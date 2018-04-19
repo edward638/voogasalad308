@@ -20,9 +20,6 @@ public class EngineTesting extends Application {
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 	public static final Paint BACKGROUND = Color.WHITE;
 	private ParallelCamera vcp;
-
-	
-	//private Timeline animation;
 	
 	private Engine gameEngine;
 
@@ -35,7 +32,6 @@ public class EngineTesting extends Application {
 		gameEngine = new Engine("");
 		stage.setScene(setupLevel(900, 590, BACKGROUND));
 		stage.show();
-		
 		startAnimation();
 	}
 	
@@ -46,9 +42,7 @@ public class EngineTesting extends Application {
 		root.getChildren().add(gameSubScene);
 		scene.setOnKeyPressed(e -> gameEngine.handleKeyInput(e.getCode()));
         scene.setOnMouseClicked(e -> gameEngine.handleMouseInput(e.getX(), e.getY())); 
-        
     	return scene;
-
     }
 
 	private void startAnimation() {

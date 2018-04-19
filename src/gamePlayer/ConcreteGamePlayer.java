@@ -27,22 +27,13 @@ import javafx.stage.Stage;
  */
 public class ConcreteGamePlayer implements GamePlayer {
 
-	/*Button saveButton;
-	Button loadButton;
-	Button replayButton;
-	Button newGameButton;
-	Button clearHighScoresButton;
-	HUD hud;*/
-	SubScene gameDisplay;
 
-	//Engine engine;
-	GameState gameState;
-	//String currentGameName;
-	//GameDescriptionProvider gameDescriptionProvider;
-	//String mostRecentFile;
 	private Scene myScene;
 	private Stage myStage;
 	private Group root;
+	private SubScene gameDisplay;
+
+	private GameState gameState;
 
 	private Button saveButton;
 	private Button loadButton;
@@ -127,8 +118,8 @@ public class ConcreteGamePlayer implements GamePlayer {
 		mostRecentFile = file;
 		buttonData.setMostRecentFile(mostRecentFile);
 		gameDisplay = engine.getDisplay();
-		gameDisplay.setWidth(300);
-		gameDisplay.setHeight(300);
+		gameDisplay.setWidth(900);
+		gameDisplay.setHeight(590);
 		gameDisplay.setLayoutX(30);
 		gameDisplay.setLayoutY(30);
 		
@@ -140,13 +131,13 @@ public class ConcreteGamePlayer implements GamePlayer {
 		hud = new ConcreteHUD(currentGameName);
 		highScores = new ConcreteHighScores(currentGameName);
 		//myScene.setOnKeyPressed(e -> keyInputDictionary.handleAction(e.getCode()));
+		
 		root.getChildren().add(gameDisplay);
 		root.getChildren().add((Node) hud);
 		root.getChildren().add(highScores.getScores());
 		setupButtons();
 
 	}
-
 	@Override
 	public Scene getScene() {
 		return myScene;

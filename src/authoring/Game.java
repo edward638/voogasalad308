@@ -3,6 +3,12 @@ package authoring;
 import data.GameInitializer;
 import data.ImageManager;
 
+/** 
+ * Game keeps track of an entire game 
+ * This includes the name, description, image, and managers
+ * 
+ * @author: Summer
+ **/
 public class Game {
 
 	private String gameName;

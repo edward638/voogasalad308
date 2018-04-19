@@ -3,6 +3,10 @@ package authoring;
 import java.util.HashSet;
 import java.util.Set;
 
+/** 
+ * 
+ * @author: Summer and Maddie
+ **/
 public class GameObject {
 	
 	private String myName;

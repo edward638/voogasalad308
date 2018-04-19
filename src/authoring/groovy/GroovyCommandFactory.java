@@ -13,6 +13,10 @@ import org.reflections.scanners.FieldAnnotationsScanner;
 import org.reflections.scanners.MethodAnnotationsScanner;
 import org.reflections.scanners.Scanner;
 
+/** 
+ * 
+ * @author: Summer
+ **/
 public class GroovyCommandFactory {
 
 	private final String PACKAGE_NAME = "engine.behaviors";

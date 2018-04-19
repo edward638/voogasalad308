@@ -3,6 +3,12 @@ package authoring;
 import java.util.ArrayList;
 import java.util.List;
 
+/** 
+ * SceneManager keeps track of all the GameScenes
+ * and all the levels
+ * 
+ * @author: Summer
+ **/
 public class SceneManager {
 	
 	private GameScene currentScene;

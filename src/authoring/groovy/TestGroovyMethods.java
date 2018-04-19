@@ -5,6 +5,7 @@ import authoring.GameObject;
 public class TestGroovyMethods {
 
     public static void main(String[] args){
+    		System.out.print("hey");
 	    GroovyCommandFactory factory = new GroovyCommandFactory();
 	    System.out.println(factory.getBehaviorFields());
 	    System.out.println(factory.getBehaviorMethods());

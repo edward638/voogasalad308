@@ -21,7 +21,11 @@ public class ObjectGroovyGenerator {
 	/*
 	 * THESE METHODS SHOULD BE REFACTORED. DUPLICATED CODE
 	 */
-	public List<String> generateGroovyFields(GameObject object) {
+	public Map<Class, List<Object>> generateGroovyFields(GameObject object) {
+//		Map<Class, List<Object>> objectFields = factory.getBehaviorFields().keySet().stream().forEach(clazz -> clazz.toString().contains(object.getBehaviors().stream().forEach(curr -> curr.getName()));
+//		System.out.println("This worked");
+//		System.out.println("hey");
+//		return objectFields;
 		List<Object> objectFields = new ArrayList<>();
 		for(Behavior curr : object.getBehaviors()) {
 			for(Class<?> clazz : factory.getBehaviorFields().keySet()) {

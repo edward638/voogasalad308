@@ -24,9 +24,14 @@ public class GamePlayerPress implements ButtonEvent {
 	public void pressed() {
 //		splashStage.close();
 		
-	new ConcreteGamePlayer(gamePlayerStage);
+	ConcreteGamePlayer gamePlayer = new ConcreteGamePlayer(gamePlayerStage);
 	gamePlayerStage.show();
 	gamePlayerStage.setResizable(false);
+	
+	gamePlayerStage.setOnCloseRequest(event -> {
+		//gamePlayer.closeEngine();
+	    // Save file
+	});
 
 	}
 

@@ -3,7 +3,9 @@ package engine.behaviors;
 import engine.GameElement;
 
 public class TimeTracker extends Behavior{
+	
 	private Double timePassed = 0.0;
+	
 	public TimeTracker(GameElement ge) {
 		super(ge);
 		timePassed = 0.0;
@@ -21,7 +23,7 @@ public class TimeTracker extends Behavior{
 		return ((int) Math.ceil(timePassed) % i)==0 && timePassed>1;
 	}
 	
-	public void incrementTimePass(Double steps) {
-		timePassed+=steps;
+	public void incrementTimePass(Double time) {
+		timePassed += time;
 	}
 }

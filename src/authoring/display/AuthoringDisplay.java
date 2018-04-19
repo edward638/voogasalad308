@@ -24,7 +24,7 @@ public class AuthoringDisplay {
 
 	private LevelPanel myLevelPanel;
 	private GameViewWindow myGameViewWindow;
-	private BehaviorPanel myPropertyPanel;
+	private ObjectInfoPanel myObjectInfoPanel;
 	private TemplateObjectPanel myTemplatePanel;
 	private SaveBar mySaveBar;
 
@@ -51,7 +51,7 @@ public class AuthoringDisplay {
 		root = new BorderPane();
 		root.setRight(myGameViewWindow.asNode());
 		root.setLeft(myLevelPanel.asNode());
-		root.setCenter(myPropertyPanel.asNode());
+		root.setCenter(myObjectInfoPanel.asNode());
 //		root.setBottom(myTemplatePanel.asNode());
 		root.setTop(mySaveBar.asNode());
 
@@ -59,37 +59,35 @@ public class AuthoringDisplay {
 	}
 
 	private void initVars() {
-		makeGameViewWindow();
-		makeObjectPropertyPanel();
-		// dependency: GameViewWindow and PropertyPanel must be created before LevelPanel for it to work
-		// is this removable? the problem is selecting things in the LevelPanel needs to be able to alter things in the other areas
-		makeLevelPanel();
-		makeTemplatePanel();
-		makeSaveBar();
+		myGameViewWindow = makeGameViewWindow();
+		myObjectInfoPanel = makeObjectPropertyPanel();
+		myLevelPanel = makeLevelPanel(myGameViewWindow, myObjectInfoPanel);
+		myTemplatePanel = makeTemplatePanel();
+		mySaveBar = makeSaveBar();
 	}
 
-	private Node makeLevelPanel() {
-		myLevelPanel = new LevelPanel(myResources, myGame, root, myGameViewWindow, myPropertyPanel);
-		return myLevelPanel.asNode();
+	private LevelPanel makeLevelPanel(GameViewWindow gameViewWindow, ObjectInfoPanel objectInfoPanel) {
+		LevelPanel levelPanel = new LevelPanel(myResources, myGame, root, gameViewWindow, objectInfoPanel);
+		return levelPanel;
 	}
 
-	private Node makeTemplatePanel() {
-		myTemplatePanel = new TemplateObjectPanel(myResources, myGame, root);
-		return myTemplatePanel.asNode();
+	private TemplateObjectPanel makeTemplatePanel() {
+		TemplateObjectPanel templatePanel = new TemplateObjectPanel(myResources, myGame, root);
+		return templatePanel;
 	}
 
-	private Node makeObjectPropertyPanel() {
-		myPropertyPanel = new BehaviorPanel(myResources, myGame, root);
-		return myPropertyPanel.asNode();
+	private ObjectInfoPanel makeObjectPropertyPanel() {
+		ObjectInfoPanel objectInfoPanel = new ObjectInfoPanel(myResources, myGame, root);
+		return objectInfoPanel;
 	}
 
-	private Node makeGameViewWindow() {
-		myGameViewWindow = new GameViewWindow(myResources, myGame, root, 600, 600);
-		return myGameViewWindow.asNode();
+	private GameViewWindow makeGameViewWindow() {
+		GameViewWindow gameViewWindow = new GameViewWindow(myResources, myGame, root, 600, 600);
+		return gameViewWindow;
 	}
 
-	private Node makeSaveBar() {
-		mySaveBar = new SaveBar(myResources, myGame, root);
-		return mySaveBar.asNode();
+	private SaveBar makeSaveBar() {
+		SaveBar saveBar = new SaveBar(myResources, myGame, root);
+		return saveBar;
 	}
 }

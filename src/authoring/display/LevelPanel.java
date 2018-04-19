@@ -28,9 +28,9 @@ public class LevelPanel extends MainWindowComponent {
 	private ListView<GameObject> myLevelObjects;
 	
 	private GameViewWindow myGameViewWindow;
-	private BehaviorPanel myPropertyPanel;
+	private ObjectInfoPanel myPropertyPanel;
 
-	public LevelPanel(ResourceBundle resources, Game game, Node root, GameViewWindow gameViewWindow, BehaviorPanel propertyPanel) {
+	public LevelPanel(ResourceBundle resources, Game game, Node root, GameViewWindow gameViewWindow, ObjectInfoPanel propertyPanel) {
 		super(resources, game, root); //pass resources to super constructor
 		myGameViewWindow = gameViewWindow;
 		myPropertyPanel = propertyPanel;

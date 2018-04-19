@@ -19,7 +19,7 @@ import javafx.scene.layout.VBox;
  * @author Maddie Wilkinson
  *
  */
-public class BehaviorPanel extends MainWindowComponent {
+public class ObjectInfoPanel extends MainWindowComponent {
 	private static final String IMAGES_FILEPATH = "./";
 	private static final double PANE_PREF_WIDTH = 250;
 
@@ -29,7 +29,7 @@ public class BehaviorPanel extends MainWindowComponent {
 
 
 	//in AuthoringDisplay, don't forget to remove and re-add this to the root every time it changes
-	public BehaviorPanel(ResourceBundle resources, Game game, Node root) {
+	public ObjectInfoPanel(ResourceBundle resources, Game game, Node root) {
 		super(resources, game, root);
 		myScrollPane = new ScrollPane();
 		myVBox = new VBox(DEFAULT_SPACING);

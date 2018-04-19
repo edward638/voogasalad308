@@ -50,11 +50,13 @@ public class ModelGameState {
 		}
 
 		state = new GameState();
-		display = new DisplayState("enginetestmario");
+		
 		for (GameElement el : elements) {
 			state.addGameElement(el);
-			display.addNewElement(el);
+			//display.addNewElement(el);
 		}
+		display = new DisplayState("enginetestmario", state);
+		//display.update(state);
 	}
 	
 	private GameElement getMovableBlock(double xpos, double ypos) {
@@ -87,7 +89,7 @@ public class ModelGameState {
 		mario.addBehavior(new MandatoryBehavior(mario, "Mario", 200.0, 20.0, new RectangleShape(100.0, 100.0), "MarioSMR.png"));
 		List<Double> direction = new ArrayList<>(); direction.add(1.0); direction.add(0.0);
 		mario.addBehavior(new MovableCharacter(mario, 0.0, direction));
-		mario.addBehavior(new MainCharacter(mario, 1, false, false));
+		mario.addBehavior(new MainCharacter(mario, 1, true, true));
 		mario.addBehavior(new Gravity(mario));
 		
 		//Adding Time Responses

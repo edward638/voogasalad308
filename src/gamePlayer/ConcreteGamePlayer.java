@@ -117,11 +117,11 @@ public class ConcreteGamePlayer implements GamePlayer {
 		mostRecentFile = file;
 		buttonData.setMostRecentFile(mostRecentFile);
 		gameDisplay = engine.getDisplay();
-		gameDisplay.setWidth(300);
-		gameDisplay.setHeight(300);
+		gameDisplay.setWidth(900);
+		gameDisplay.setHeight(590);
 		gameDisplay.setLayoutX(30);
 		gameDisplay.setLayoutY(30);
-		// gameDisplay.setPrefSize(900, 590);
+		//gameDisplay.setPrefSize(900, 590);
 		gameDisplay.setStyle("-fx-background-color: white;");
 		hud = new ConcreteHUD(currentGameName);
 		highScores = new ConcreteHighScores(currentGameName);

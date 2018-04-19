@@ -1,26 +1,28 @@
 package engine.collision;
 
+import javafx.geometry.Bounds;
+import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
-public class SubtractiveRectangleExtrapolator implements ShapeExtrapolator {
+public class RadialPolygonalExtrapolator implements ShapeExtrapolator {
 	int resolution = 8;
+	int sides = 4;
+	double offset = 0;
 
 	@Override
 	public Shape extrapolateShape(ImageView imageview) {
-		Rectangle s = new Rectangle(imageview.getBoundsInLocal().getMinX(), imageview.getBoundsInLocal().getMinY(),
-				imageview.getBoundsInLocal().getWidth(), imageview.getBoundsInLocal().getHeight());
-		Shape result = s;
+		Bounds bounds = imageview.getBoundsInLocal();
+		Point2D center = new Point2D((bounds.getMinX() + bounds.getMaxX())/2, (bounds.getMinY() + bounds.getMaxY())/2);
 		
 		Image image = imageview.getImage();
 		
-		int widthStep = (int) s.getX()/resolution;
-		int heightStep = (int) s.getY()/resolution;
-		Rectangle empty = new Rectangle(imageview.getBoundsInLocal().getMinX(), imageview.getBoundsInLocal().getMinY(),
-				widthStep, heightStep);
+		for (double i = offset; i < 360 + offset; i += 360.0/(double) sides) {
+			bounds.getMinX() - center.getX(); 
+		}
 		
 		PixelReader px = image.getPixelReader();
 		
@@ -35,5 +37,5 @@ public class SubtractiveRectangleExtrapolator implements ShapeExtrapolator {
 		}
 		return result;
 	}
-	
+
 }

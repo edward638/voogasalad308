@@ -28,13 +28,6 @@ public class GameElement {
 		returnedGameEvents = new ArrayList<>();
 	}
 	
-	
-	public GameElement(GameElement model) {
-		behaviors = model.getAllBehaviors();
-		responder = model.getResponder();
-		returnedGameEvents = model.returnedGameEvents;
-	}
-	
 	public Set<Behavior> getAllBehaviors() {
 		return behaviors;
 	}

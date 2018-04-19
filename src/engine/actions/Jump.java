@@ -4,19 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import engine.GameElement;
-import engine.behaviors.TimeTracker;
+import engine.behaviors.MovableCharacter;
 import engine.events.elementevents.ElementEvent;
-import engine.events.elementevents.TimeEvent;
 import engine.events.gameevents.GameEvent;
 
-public class IncrementTimeTracker implements Action{
+public class Jump implements Action{
 
 	@Override
 	public void act(ElementEvent e, GameElement ge) {
+		System.out.println(1);
 		ArrayList<GameEvent> events = new ArrayList<GameEvent>();
-		TimeEvent te = (TimeEvent) e;
-		TimeTracker tt = (TimeTracker) ge.getBehavior(TimeTracker.class);
-		tt.setTimePassed(tt.getTimePassed() + te.getTime());
+		MovableCharacter mov = (MovableCharacter) ge.getBehavior(MovableCharacter.class);
+		mov.jump();
 	}
 	
 }

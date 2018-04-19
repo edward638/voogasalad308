@@ -34,7 +34,6 @@ public class Engine {
 	private GameState gameState;
 	private DisplayState displayState;
 	private EventManager2 eventManager;
-	private ParallelCamera viewingCamera;
 	
 	private String musicPath = "data/music/WiiShopChannelMusic.mp3";
 	

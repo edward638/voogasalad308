@@ -52,6 +52,14 @@ public class Engine {
 		startAnimation();
 	}
 	
+	public Engine(GameState g) {
+		gameState = g;
+		displayState = new DisplayState("Engine Testing", g);
+		eventManager = new EventManager2(gameState, this);
+		audioPlayer = new AudioPlayer(musicPath);
+		startAnimation();
+	}
+	
 	public void close() {
 		audioPlayer.stop();
 	}

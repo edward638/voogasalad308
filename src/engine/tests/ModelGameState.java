@@ -26,8 +26,8 @@ import engine.behaviors.MovableCharacter;
 import engine.behaviors.TimeRoutine;
 import engine.behaviors.TimeTracker;
 import engine.behaviors.TrackMainCharacter;
+import engine.behaviors.shapes.EllipseShape;
 import engine.behaviors.shapes.RectangleShape;
-import engine.behaviors.shapes.SmartShape;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.KeyInputEvent;
 import engine.events.elementevents.TimeEvent;
@@ -38,9 +38,9 @@ public class ModelGameState {
 	private DisplayState display;
 	
 	public ModelGameState() {
-		
-		display = new DisplayState("enginetestmario", state);
 		state = new GameState();
+		display = new DisplayState("enginetestmario", state);
+		
 		addMainCharacter();
 		ArrayList<GameElement> elements = new ArrayList<GameElement>();
 		getCreatedMario();
@@ -115,6 +115,10 @@ public class ModelGameState {
 		mario.addEventResponse(new TimeEvent(0.0), new TimeCreateGameElement());
 		
 		
+		//Adding Time Responses
+		mario.addEventResponse(new TimeEvent(0.0), new IncrementTimeTracker());
+		mario.addEventResponse(new TimeEvent(0.0), new TimeMovable());
+		mario.addEventResponse(new TimeEvent(0.0), new TimeGravity());
 		
 		// Response to up arrow key is to jump
 		mario.addEventResponse(new KeyInputEvent(KeyCode.W), (event, element) -> {

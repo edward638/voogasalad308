@@ -17,7 +17,7 @@ import javafx.scene.layout.VBox;
  */
 public class PropertyPanel extends MainWindowComponent {
 	private static final String IMAGES_FILEPATH = "./";
-	
+
 	private ScrollPane myScrollPane;
 	private VBox myVBox;
 
@@ -26,33 +26,35 @@ public class PropertyPanel extends MainWindowComponent {
 		super(resources, game, root);
 		myScrollPane = new ScrollPane();
 		myVBox = new VBox();
-		initialize();
-	}
-	
-	private void initialize() {
-		myVBox.getChildren().add(new Label("Behaviors"));
-
+		initializeVBox();
 		myScrollPane.setContent(myVBox);
 		myScrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
 	}
-	
+
+	private void initializeVBox() {
+		myVBox.getChildren().add(new Label("Behaviors"));
+
+
+	}
+
 	private void addBehaviors() {
 		try {
-		GameObject currObject = getGame().getSceneManager().getCurrentScene().getCurrentGameObject();
-		if(currObject != null) {
-			for(Behavior b : currObject.getBehaviors()) {
-				BehaviorView view = new BehaviorView(getResources(), getGame(), getRoot(), b);
-				myVBox.getChildren().add(view.asNode());
+			GameObject currObject = getGame().getSceneManager().getCurrentScene().getCurrentGameObject();
+			if(currObject != null) {
+				for(Behavior b : currObject.getBehaviors()) {
+					BehaviorView view = new BehaviorView(getResources(), getGame(), getRoot(), b);
+					myVBox.getChildren().add(view.asNode());
+				}
 			}
-		}
 		} catch (Exception e) {
-			
+
 		}
 
 	}
-	
+
 	public void updatePanel() {
 		myVBox.getChildren().clear();
+		initializeVBox();
 		addBehaviors();
 	}
 
@@ -64,6 +66,4 @@ public class PropertyPanel extends MainWindowComponent {
 	protected Node asNode() {
 		return myScrollPane;
 	}
-
-
 }

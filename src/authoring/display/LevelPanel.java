@@ -1,5 +1,6 @@
 package authoring.display;
 
+import java.io.File;
 import java.util.ResourceBundle;
 
 import authoring.Game;
@@ -14,6 +15,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 /**
  * @author Maddie Wilkinson
@@ -22,9 +29,12 @@ import javafx.scene.layout.VBox;
 public class LevelPanel extends MainWindowComponent {
 
 	private VBox myVBox;
+	private HBox myHBox;
 	private ComboBox<GameScene> myLevelDropdown;
+	private ComboBox<String> myPanelSelectorComboBox; 
 	private Button myAddLevelButton;
 	private Button myAddGameObjectButton;
+	private Button myAddSceneBackgroundImageButton;
 	private ListView<GameObject> myLevelObjects;
 	
 	private GameViewWindow myGameViewWindow;
@@ -35,16 +45,23 @@ public class LevelPanel extends MainWindowComponent {
 		myGameViewWindow = gameViewWindow;
 		myPropertyPanel = propertyPanel;
 
+<<<<<<< src/authoring/display/LevelPanel.java
 		myVBox = new VBox(DEFAULT_SPACING);
 		myVBox.getChildren().addAll(makeLevelChooser(), makeObjectList(), makeAddGameObjectButton());
+=======
+		myVBox = new VBox();
+		myHBox = new HBox();
+		myHBox.getChildren().addAll(makeAddGameObjectButton(), makeAddSceneBackgroundImageButton());
+		myVBox.getChildren().addAll(makeLevelChooser(), makeObjectList(), myHBox);
+>>>>>>> src/authoring/display/LevelPanel.java
 	}
 
 	private HBox makeLevelChooser() {
 		HBox levelChooser = new HBox(DEFAULT_SPACING);
 		makeLevelDropdown();
 		makeAddLevelButton();
-		
-		levelChooser.getChildren().addAll(myAddLevelButton, myLevelDropdown);
+		makePanelSelectorComboBox();
+		levelChooser.getChildren().addAll(myAddLevelButton, myLevelDropdown, myPanelSelectorComboBox); //TODO: maybe move myPanelSelectorComboBox 
 		return levelChooser;
 	}
 
@@ -61,6 +78,25 @@ public class LevelPanel extends MainWindowComponent {
 		});
 		return myAddGameObjectButton;
 	}
+	
+	private Button makeAddSceneBackgroundImageButton() {
+		myAddSceneBackgroundImageButton = makeButton("AddSceneBackgroundImageButton", event -> {
+			try {
+				FileChooser fileChooser = new FileChooser();
+				fileChooser.setTitle("Choose Object Image");
+				fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+				File image = fileChooser.showOpenDialog(new Stage());
+				getGame().getSceneManager().getCurrentScene().getSceneBackground().addImage(new Image(image.toURI().toString()));
+				//put image.getName into SceneBackground
+			} catch (Exception e) {
+				//do nothing
+				//this just means the user didn't choose an image
+				//which is a perfectly fine thing for them to do
+			}
+		});
+				
+		return myAddSceneBackgroundImageButton;
+	}
 
 	private ComboBox<GameScene> makeLevelDropdown() {
 		myLevelDropdown = new ComboBox<>();
@@ -73,6 +109,18 @@ public class LevelPanel extends MainWindowComponent {
 			System.out.println("Level Panel tried to call updateWindow");
 		});
 		return myLevelDropdown;
+	}
+	
+	private ComboBox<String> makePanelSelectorComboBox(){
+		myPanelSelectorComboBox = new ComboBox<>();
+		myPanelSelectorComboBox.setPromptText(super.getResources().getString("ChoosePanel"));
+		myPanelSelectorComboBox.getItems().add("Background");
+		myPanelSelectorComboBox.getItems().add("Foreground");
+		myPanelSelectorComboBox.valueProperty().addListener((o, old, neww) -> {
+			myGameViewWindow.switchPanes(neww);
+		});
+		return myPanelSelectorComboBox; 
+		
 	}
 
 	private ListView<GameObject> makeObjectList() {

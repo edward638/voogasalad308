@@ -19,9 +19,11 @@ public interface ButtonData {
 	public void clearHighScores();
 	public void addToRoot(Node node);
 	public KeyInputDictionary getKeyBindings();
+	public void toggleVolume();
 	//public void toggleGameSounds(boolean setting);
 	//public void toggleMusic(boolean setting);
 	//public void setSoundLevel
 	// public GameDescriptionProvider getGameDescriptionProvider();
 	public void removeFromRoot(Node node);
+	public Boolean getVolumeStatus();
 }

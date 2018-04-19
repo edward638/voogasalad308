@@ -1,22 +1,18 @@
 package gamePlayer.buttons;
 
-import java.util.Map;
-
 import data.GameDescriptionProvider;
-import data.Serializer;
 import engine.GameState;
 import gamePlayer.GamePlayer;
 import gamePlayer.HighScores;
 import gamePlayer.KeyInputDictionary;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 public class ConcreteButtonData implements ButtonData {
 	private Stage stage;
 	private GamePlayer gamePlayer;
-	private GameDescriptionProvider gameDescriptionProvider;
+//	private GameDescriptionProvider gameDescriptionProvider;
 	private Group root;
 
 	private HighScores highScores;
@@ -29,7 +25,7 @@ public class ConcreteButtonData implements ButtonData {
 			Group root, KeyInputDictionary keyInputDictionary) {
 		this.stage = stage;
 		this.gamePlayer = gamePlayer;
-		this.gameDescriptionProvider = gameDescriptionProvider;
+//		this.gameDescriptionProvider = gameDescriptionProvider;
 		this.root = root;
 		keyBindingMap = keyInputDictionary;
 	}
@@ -70,12 +66,6 @@ public class ConcreteButtonData implements ButtonData {
 		return gameState;
 	}
 
-	// @Override
-	// public GameDescriptionProvider getGameDescriptionProvider() {
-	// return gameDescriptionProvider;
-	// }
-	
-	
 	@Override
 	public String getCurrentGameName() {
 		return currentGameName;
@@ -99,9 +89,18 @@ public class ConcreteButtonData implements ButtonData {
 	@Override
 	public void removeFromRoot(Node node) {
 		root.getChildren().remove(node);
-		
+
 	}
 
+	@Override
+	public void toggleVolume() {
+		gamePlayer.toggleMusic();
+	}
 
+	@Override
+	public Boolean getVolumeStatus() {
+		// TODO Auto-generated method stub
+		return gamePlayer.getMusicOn();
+	}
 
 }

@@ -2,16 +2,19 @@ package gamePlayer;
 
 import data.GameDescriptionProvider;
 import engine.Engine;
+import engine.GameState;
 import gamePlayer.buttons.ClearHighScoresButton;
 import gamePlayer.buttons.ConcreteButtonData;
 import gamePlayer.buttons.KeyboardBindingButton;
 import gamePlayer.buttons.LoadButton;
 import gamePlayer.buttons.SaveButton;
+import gamePlayer.buttons.ToggleVolumeButton;
 import gamePlayer.buttons.NewGameButton;
 import gamePlayer.buttons.ReplayButton;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -25,9 +28,13 @@ import javafx.stage.Stage;
  */
 public class ConcreteGamePlayer implements GamePlayer {
 
+
 	private Scene myScene;
 	private Stage myStage;
 	private Group root;
+	private SubScene gameDisplay;
+
+	private GameState gameState;
 
 	private Button saveButton;
 	private Button loadButton;
@@ -35,10 +42,11 @@ public class ConcreteGamePlayer implements GamePlayer {
 	private Button newGameButton;
 	private Button clearHighScoresButton;
 	private Button keyboardBindingButton;
+	private Button toggleVolumeButton;
 	private ConcreteButtonData buttonData;
 
 	private HUD hud;
-	private Pane gameDisplay;
+	//private Pane gameDisplay;
 	private ConcreteHighScores highScores;
 
 	private Engine engine;
@@ -94,10 +102,10 @@ public class ConcreteGamePlayer implements GamePlayer {
 		root.getChildren().add(saveButton);
 		replayButton = new ReplayButton(buttonXLocation, 470, buttonWidth, buttonHeight, buttonData);
 		root.getChildren().add(replayButton);
-		keyboardBindingButton = new KeyboardBindingButton(970, 510, buttonWidth, buttonHeight, buttonData);
+		keyboardBindingButton = new KeyboardBindingButton(buttonXLocation, 510, buttonWidth, buttonHeight, buttonData);
 		root.getChildren().add(keyboardBindingButton);
-		// toggleGameSoundButton = new toggleButton(buttonLocation, 500, buttonWidth, buttonHeight, buttonData);
-
+		toggleVolumeButton = new ToggleVolumeButton(buttonXLocation, 550, buttonWidth, buttonHeight, buttonData);
+		root.getChildren().add(toggleVolumeButton);
 	}
 
 	@Override
@@ -105,6 +113,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 		root.getChildren().remove(gameDisplay);
 		root.getChildren().remove((Node) hud);
 		root.getChildren().remove(highScores.getScores());
+		//engine.close();
 		engine = new Engine(file);
 		keyInputDictionary.setGame(engine);
 		currentGameName = gameDescriptionProvider.getGameName(file);
@@ -112,23 +121,47 @@ public class ConcreteGamePlayer implements GamePlayer {
 		mostRecentFile = file;
 		buttonData.setMostRecentFile(mostRecentFile);
 		gameDisplay = engine.getDisplay();
+		gameDisplay.setWidth(900);
+		gameDisplay.setHeight(590);
 		gameDisplay.setLayoutX(30);
 		gameDisplay.setLayoutY(30);
-		gameDisplay.setPrefSize(900, 590);
+		
+		myScene.setOnKeyPressed(e -> engine.handleKeyInput(e.getCode()));
+		//myScene.setOnMouseClicked(e -> engine.handleMouseInput(e.getX(), e.getY())); 
+		
+		// gameDisplay.setPrefSize(900, 590);
 		// gameDisplay.setStyle("-fx-background-color: white;");
 		hud = new ConcreteHUD(currentGameName);
 		highScores = new ConcreteHighScores(currentGameName);
-		myScene.setOnKeyPressed(e -> keyInputDictionary.handleAction(e.getCode()));
+		//myScene.setOnKeyPressed(e -> keyInputDictionary.handleAction(e.getCode()));
+		
 		root.getChildren().add(gameDisplay);
 		root.getChildren().add((Node) hud);
 		root.getChildren().add(highScores.getScores());
 		setupButtons();
 
 	}
-
 	@Override
 	public Scene getScene() {
 		return myScene;
 	}
+
+	@Override
+	public void toggleMusic() {
+		musicOn = !musicOn;
+
+	}
+
+	@Override
+	public Boolean getMusicOn() {
+		return musicOn;
+	}
+
+	public void closeEngine() {
+		//engine.close();
+		
+	}
+	
+	
 
 }

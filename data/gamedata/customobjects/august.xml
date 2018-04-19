@@ -1,12 +1,12 @@
 <authoring.GameObject>
-  <myName>wassup</myName>
+  <myName>august</myName>
   <myBehaviors>
     <authoring.Behavior>
       <myProperties>
         <authoring.Property>
-          <myValue class="double">400.0</myValue>
-          <myName>yPos</myName>
-          <myValueType>java.lang.Double</myValueType>
+          <myValue class="string">august</myValue>
+          <myName>elementName</myName>
+          <myValueType>java.lang.String</myValueType>
         </authoring.Property>
         <authoring.Property>
           <myValue class="string">august</myValue>
@@ -14,18 +14,18 @@
           <myValueType>java.lang.String</myValueType>
         </authoring.Property>
         <authoring.Property>
-          <myValue class="string">wassup</myValue>
-          <myName>elementName</myName>
-          <myValueType>java.lang.String</myValueType>
+          <myName>shapeDef</myName>
+          <myValueType>engine.behaviors.shapes.ShapeDefinition</myValueType>
         </authoring.Property>
         <authoring.Property>
-          <myValue class="double">30.0</myValue>
+          <myValue class="double">100.0</myValue>
           <myName>xPos</myName>
           <myValueType>java.lang.Double</myValueType>
         </authoring.Property>
         <authoring.Property>
-          <myName>shapeDef</myName>
-          <myValueType>engine.behaviors.shapes.ShapeDefinition</myValueType>
+          <myValue class="double">100.0</myValue>
+          <myName>yPos</myName>
+          <myValueType>java.lang.Double</myValueType>
         </authoring.Property>
       </myProperties>
       <myName>MandatoryBehavior</myName>

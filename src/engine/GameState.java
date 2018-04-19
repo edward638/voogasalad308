@@ -13,7 +13,7 @@ public class GameState{
 	public GameState() {
 		//Talk to game data about reading info from file
 		gameSpeed = 1;
-		gameTime = 0;	
+		gameTime = 0;
 		elements = new ArrayList<>();
 		//displayState = new DisplayState();
 	}

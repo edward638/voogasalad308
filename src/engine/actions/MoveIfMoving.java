@@ -4,19 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import engine.GameElement;
-import engine.behaviors.Killable;
 import engine.behaviors.MandatoryBehavior;
 import engine.behaviors.Movable;
-import engine.events.elementevents.CollisionEvent;
+import engine.behaviors.TrackMainCharacter;
 import engine.events.elementevents.ElementEvent;
 import engine.events.gameevents.GameEvent;
 
-public class CollisionKillable implements Action {
+public class MoveIfMoving implements Action{
 
 	@Override
-	public void act(ElementEvent event, GameElement element) {
-		Killable b = (Killable) element.getBehavior(Killable.class);
-		b.loseLife();
+	public void act(ElementEvent event, GameElement element) {	
+		TrackMainCharacter tmc = (TrackMainCharacter) element.getBehavior(TrackMainCharacter.class);
+		tmc.moveIfMoving();
 	}
-
+	
 }

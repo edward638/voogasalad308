@@ -4,40 +4,46 @@ import engine.GameElement;
 
 public class TimeRoutine extends Behavior{
 	
-	GameElement ge;
-	int routineTime;
-	public TimeRoutine(GameElement ge, int i) {
+	private GameElement ge;
+	private int routineTime;
+	private boolean activateMotion;
+	public TimeRoutine(GameElement ge, int i, boolean activate) {
 		super(ge);
 		this.ge = ge;
+		this.activateMotion = activate;
 		addUnimplementedMethods();
 		routineTime = i;
 		
+	}
+	
+	public void setActivity(boolean state) {
+		activateMotion = state;
 	}
 	
 	private void addUnimplementedMethods() {
 		if (!ge.hasBehavior(TimeTracker.class)) {
 			ge.addBehavior(new TimeTracker(ge));
 		}
+		
 	}
 	
-	public void switchXEveryNSteps(int step) {
-		if (ge.hasBehavior(Movable.class)) {
+	public void switchXEveryNSteps() {
+		if (ge.hasBehavior(Movable.class) && activateMotion) {
 			Movable movable = (Movable) ge.getBehavior(Movable.class);
 			TimeTracker timetracker = (TimeTracker) ge.getBehavior(TimeTracker.class);
-			if (timetracker.isMultipleOf(step)) {
+			if (timetracker.isMultipleOf(routineTime)) {
 				timetracker.setTimePassed(Math.ceil(timetracker.getTimePassed()));
 				movable.setXVelocity(-movable.getXVelocity());
-				
 			}
 			
 		}
 	}
 	
-	public void switchYEveryNSteps(int step) {
-		if (ge.hasBehavior(Movable.class)) {
+	public void switchYEveryNSteps() {
+		if (ge.hasBehavior(Movable.class) && activateMotion) {
 			Movable movable = (Movable) ge.getBehavior(Movable.class);
 			TimeTracker timetracker = (TimeTracker) ge.getBehavior(TimeTracker.class);
-			if (timetracker.isMultipleOf(step)) {
+			if (timetracker.isMultipleOf(routineTime)) {
 				timetracker.setTimePassed(Math.ceil(timetracker.getTimePassed()));
 				movable.setYVelocity(-movable.getYVelocity());
 			}
@@ -45,17 +51,17 @@ public class TimeRoutine extends Behavior{
 		}
 	}
 	
-	public void jumpEveryNSteps(int step) {
-		if (ge.hasBehavior(Movable.class) && ge.hasBehavior(MovableCharacter.class)) {
+	public void jumpEveryNSteps() {
+		if (ge.hasBehavior(Movable.class) && ge.hasBehavior(MovableCharacter.class) && activateMotion) {
 			MovableCharacter mc = (MovableCharacter) ge.getBehavior(MovableCharacter.class);		
 			TimeTracker timetracker = (TimeTracker) ge.getBehavior(TimeTracker.class);
-			if (timetracker.isMultipleOf(step)) {
+			if (timetracker.isMultipleOf(routineTime)) {
 				mc.jump();
 			}
 		}
 	}
 	
-	public void shootEveryNSteps(int step) {
+	public void shootEveryNSteps() {
 		
 	}
 

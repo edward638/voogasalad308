@@ -13,6 +13,7 @@ public class Movable extends Behavior{
 	
 	private Double xVel;
 	private Double yVel;
+	private boolean activate = true;
 	
 	public Movable(GameElement ge, Double vel, List<Double> dir) {
 		super(ge);
@@ -40,8 +41,14 @@ public class Movable extends Behavior{
 	 * Moves the parent game element according to the time amount requested
 	 */
 	public void move(Double time) {
-		MandatoryBehavior bge = (MandatoryBehavior) getParent().getBehavior(MandatoryBehavior.class);
-		bge.setPosition(bge.getX() + xVel * time, bge.getY() + yVel * time);
+		if (activate) {
+			MandatoryBehavior bge = (MandatoryBehavior) getParent().getBehavior(MandatoryBehavior.class);
+			bge.setPosition(bge.getX() + xVel * time, bge.getY() + yVel * time);
+		}
+	}
+	
+	public void setactivity(boolean state) {
+		activate = state;
 	}
 	
 	/*

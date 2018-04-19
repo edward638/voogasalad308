@@ -18,7 +18,6 @@ class GameStateTesting {
 	private GameState state;
 	private EventManager2 manager;
 	
-	
 	@Before
 	public void setUp() {
 		state = new ModelGameState().getState();

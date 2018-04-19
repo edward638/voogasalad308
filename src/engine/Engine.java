@@ -47,14 +47,13 @@ public class Engine {
 		gameState = modelGameState.getState();
 		displayState = modelGameState.getDisplay();
 		eventManager = new EventManager2(gameState, this);
-		
 		audioPlayer = new AudioPlayer(musicPath);
 		startAnimation();
 	}
 	
 	public Engine(GameState g) {
 		gameState = g;
-		displayState = new DisplayState("Engine Testing", g);
+		displayState = new DisplayState("enginetestmario", g);
 		eventManager = new EventManager2(gameState, this);
 		audioPlayer = new AudioPlayer(musicPath);
 		startAnimation();

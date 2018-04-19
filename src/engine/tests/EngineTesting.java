@@ -32,7 +32,7 @@ public class EngineTesting extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		gameEngine = new Engine("");
+		gameEngine = new Engine(new ModelGameState().getState());
 		stage.setScene(setupLevel(900, 590, BACKGROUND));
 		stage.show();
 		startAnimation();

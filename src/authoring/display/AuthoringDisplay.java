@@ -21,7 +21,7 @@ public class AuthoringDisplay {
 	private BorderPane root;
 	private ResourceBundle myResources; //rename more accurately; it's the button names & stuff specifically
 	private Game myGame;
-	
+
 	private LevelPanel myLevelPanel;
 	private GameViewWindow myGameViewWindow;
 	private PropertyPanel myPropertyPanel;
@@ -33,7 +33,7 @@ public class AuthoringDisplay {
 		loadResources();
 		initialize(stage);
 	}
-	
+
 	public void loadResources() {
 		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PATH + DEFAULT_LANGUAGE);
 	}
@@ -49,38 +49,46 @@ public class AuthoringDisplay {
 	public Scene setUpScene() {
 		initVars();
 		root = new BorderPane();
-		root.setCenter(makeGameViewWindow());
-		root.setLeft(makeLevelPanel());
-		root.setBottom(makeTemplatePanel());
-		root.setTop(makeSaveBar());
-		
+		root.setRight(myGameViewWindow.asNode());
+		root.setLeft(myLevelPanel.asNode());
+		root.setCenter(myPropertyPanel.asNode());
+		root.setBottom(myTemplatePanel.asNode());
+		root.setTop(mySaveBar.asNode());
+
 		return new Scene(root);
 	}
 
 	private void initVars() {
+		makeGameViewWindow();
+		makeObjectPropertyPanel();
+		// dependency: GameViewWindow and PropertyPanel must be created before LevelPanel for it to work
+		// is this removable? the problem is selecting things in the LevelPanel needs to be able to alter things in the other areas
+		makeLevelPanel();
+		makeTemplatePanel();
+		makeSaveBar();
 	}
 
-	public Node makeLevelPanel() {
-		myLevelPanel = new LevelPanel(myResources, myGame, root, myGameViewWindow);
+	private Node makeLevelPanel() {
+		myLevelPanel = new LevelPanel(myResources, myGame, root, myGameViewWindow, myPropertyPanel);
 		return myLevelPanel.asNode();
 	}
 
-	public Node makeTemplatePanel() {
+	private Node makeTemplatePanel() {
 		myTemplatePanel = new TemplateObjectPanel(myResources, myGame, root);
 		return myTemplatePanel.asNode();
 	}
 
-	public Node makeObjectPropertyPanel() {
+	private Node makeObjectPropertyPanel() {
 		myPropertyPanel = new PropertyPanel(myResources, myGame, root);
 		return myPropertyPanel.asNode();
 	}
 
-	public Node makeGameViewWindow() {
-		myGameViewWindow = new GameViewWindow(myResources, myGame, root, 20, 20);
+	private Node makeGameViewWindow() {
+		myGameViewWindow = new GameViewWindow(myResources, myGame, root, 600, 600);
 		return myGameViewWindow.asNode();
 	}
-	
-	public Node makeSaveBar() {
+
+	private Node makeSaveBar() {
 		mySaveBar = new SaveBar(myResources, myGame, root);
 		return mySaveBar.asNode();
 	}

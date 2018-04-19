@@ -76,10 +76,11 @@ public class GameViewWindow extends MainWindowComponent{
 	}
 
 	private void placeObject(Double x, Double y, String imagePath) {
+		//Eddie I think this is where you'll put the dragging and dropping stuff, or put those in separate methods and call them here?
 		System.out.println(imagePath);
 		ImageView imageView = new ImageView(imageManager.getImage(imagePath + ".png"));
-		imageView.setFitHeight(50);
-		imageView.setFitWidth(50);
+		imageView.setPreserveRatio(true);
+		imageView.setFitHeight(100);
 		imageView.setLayoutX(x);
 		imageView.setLayoutY(y);
 		myPane.getChildren().add(imageView);

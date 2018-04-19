@@ -14,7 +14,7 @@ public class GamePlayerPress implements ButtonEvent {
 
 	private Stage splashStage;
 	private Stage gamePlayerStage;
-	
+
 	public GamePlayerPress(Stage stage) {
 		splashStage = stage;
 		gamePlayerStage = new Stage();

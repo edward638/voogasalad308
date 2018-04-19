@@ -14,10 +14,11 @@ import javafx.scene.control.Button;
  *
  */
 public abstract class AuthoringUIComponent {
+	protected static final double DEFAULT_SPACING = 5;
+	
 	private ResourceBundle myResources;
 	private Game myGame;
 	private Node myRoot;
-
 	
 	public AuthoringUIComponent(ResourceBundle resources, Game game, Node root) {
 		myResources = resources;
@@ -55,5 +56,5 @@ public abstract class AuthoringUIComponent {
 	public void doNothing() {
 		
 	}
-
+	
 }

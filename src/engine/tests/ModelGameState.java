@@ -62,7 +62,7 @@ public class ModelGameState {
 			state.addGameElement(el);
 			//display.addNewElement(el);
 		}
-		display = new DisplayState("enginetestmario", state);
+		display = new DisplayState(state);
 		//display.update(state);
 	}
 	

@@ -5,7 +5,6 @@ import engine.actions.TimeMovable;
 import engine.behaviors.Behavior;
 import engine.behaviors.MandatoryBehavior;
 import engine.behaviors.Movable;
-import engine.eventresponses.TimeMovableResponse;
 import engine.events.elementevents.TimeEvent;
 
 public class GameElementTesting {

@@ -1,14 +1,17 @@
 package data;
 
 import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import engine.GameState;
-import engine.tests.ModelGameState;
-import javafx.scene.image.Image;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
+import javafx.scene.layout.Pane;
 
 public class DataDemo {
 
@@ -19,7 +22,7 @@ public class DataDemo {
 		BufferedImage image = ImageIO.read(imageFile);
 		
 //		GameInitializer gameInitializer = new GameInitializer("Demo308");
-		
+//		
 //		GameSaver gameSaver = new GameSaver("Demo308");
 //		gameSaver.addDescription("Demo308Game", "This is for demo purposes", image);
 //		
@@ -28,8 +31,71 @@ public class DataDemo {
 //		
 //		gameSaver.saveGameState(testState);
 		
+//		ImageManager im = new ImageManager("default");
+//		im.getAllImages();
+
+//		String gamepath = "Demo308";
+//		
+//		ScoreSaver ss = new ScoreSaver(gamepath);
+//		
+//		List<Score> scores = new ArrayList<>();
+//		
+//		scores.add(new Score("August", 200));
+//		scores.add(new Score("Eddie", 100));
+//		scores.add(new Score("Calvin", 300));
+//		scores.add(new Score("Jeff", 211));
+//		scores.add(new Score("Martin", 330));
+//		scores.add(new Score("Trishul", 110));
+//		scores.add(new Score("Maddie", 540));
+//		scores.add(new Score("Summer", 130));
+//		
+//		ss.saveScores(scores);
+//		System.out.println("lol fuck");
+//		
+//		List<Score> readScores = ss.loadSavedScores();
+//		for (Score s : readScores) {
+//			System.out.println(s);
+//		}
+		
+//		XStream x = new XStream();
 		ImageManager im = new ImageManager("default");
-		im.getAllImages();
-	
+//		SceneBackground sb = new SceneBackground(1000,1000);
+////		sb.addImage(im.getImage("bowser.png"));
+////		sb.addImage(im.getImage("brick1.png"));
+//		
+//		String saved = x.toXML(sb);
+//		System.out.println(saved);
+		
+		Pane pane = new Pane();
+		pane.setPrefSize(2000, 2000);
+		ImageView image1 = new ImageView(im.getImage("bowser.png"));
+		ImageView image2 = new ImageView(im.getImage("brick1.png"));
+		ImageView image3 = new ImageView(im.getImage("brick2.png"));
+
+		image1.setLayoutX(100);
+		image1.setLayoutY(1000);
+
+		image2.setLayoutX(500);
+		image2.setLayoutY(700);
+		
+		image3.setLayoutX(1300);
+		image3.setLayoutY(600);
+		
+		pane.getChildren().add(image1);
+		pane.getChildren().add(image2);
+		pane.getChildren().add(image3);
+			System.out.println(pane.getPrefHeight());
+		 WritableImage wi = new WritableImage((int) pane.getPrefWidth(), (int) pane.getPrefHeight());
+		 pane.snapshot(new SnapshotParameters(), wi);
+
+		    try {
+		    	File f = new File("./data/gamedata/games/Demo308/background.png");
+		    	RenderedImage ri = SwingFXUtils.fromFXImage(wi, null);
+		        ImageIO.write(ri, "png", f);
+		    } catch (Exception e) {
+		    	e.printStackTrace();
+		    }
+
+		
 	}
 }

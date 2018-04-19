@@ -25,7 +25,6 @@ public class KeyInputDictionary {
 	public void handleAction(KeyCode input) {
 		if (dictionary.containsKey(input)) {
 			engine.handleKeyInput(dictionary.get(input));
-//			System.out.println(dictionary.get(input));
 		} 
 	}
 

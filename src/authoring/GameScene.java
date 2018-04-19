@@ -19,6 +19,7 @@ public class GameScene {
 		myName = name;
 		myObjects = new ArrayList<>();
 		mySceneBackground = new SceneBackground(SCENE_SIZE_X, SCENE_SIZE_Y);
+		System.out.println("This shit is being made again isn't it.");
 	}
 	
 	public void addObject(GameObject toAdd) {

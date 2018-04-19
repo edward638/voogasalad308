@@ -29,9 +29,8 @@ public class SceneBackgroundImage {
 	private Pane imageHolder;
 	
 	
-	public SceneBackgroundImage(SceneBackground background, Image image) {
+	public SceneBackgroundImage(Image image) {
 		
-		myPane = background.getPane();
 		myImage = new ImageView(image);
 		myImage.setPreserveRatio(true);
 		myImage.setFitWidth(DEFAULT_X);
@@ -41,11 +40,9 @@ public class SceneBackgroundImage {
 		
 		updateDimensions();
 		
-		myPane.getChildren().add(imageHolder);
 		
 		cornerCircle = new Circle();
-		
-		System.out.println(imageHolder.getBoundsInParent().getWidth() + " width height " + imageHolder.getBoundsInParent().getHeight());
+//		System.out.println(imageHolder.getBoundsInParent().getWidth() + " width height " + imageHolder.getBoundsInParent().getHeight());
 		
 		cornerCircle.setCenterX(width);
 		cornerCircle.setCenterY(height);
@@ -62,6 +59,14 @@ public class SceneBackgroundImage {
 		imageHolder.setStyle("-fx-border-color: red");
 		
 		imageHolder.getChildren().add(cornerCircle);		
+		
+		
+		System.out.println("SceneBackgroundImage()");
+	}
+	
+	public Pane getPane() {
+		System.out.println("SceneBackgroundImage getPane()");
+		return imageHolder;
 	}
 	
 	private void onMouseClicked() {

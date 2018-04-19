@@ -2,6 +2,7 @@ package authoring;
 
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 
 /**
  * 
@@ -18,11 +19,15 @@ public class SceneBackground {
 	}
 	
 	public Pane getPane() {
+		System.out.println("SceneBackground getPane()");
+		System.out.println(pane.getChildren().size());
 		return pane;
 	}
 	
 	public void addImage(Image image) {
-		SceneBackgroundImage i = new SceneBackgroundImage(this, image);
+		SceneBackgroundImage i = new SceneBackgroundImage(image);
+		pane.getChildren().add(i.getPane());
+		System.out.println(pane.getChildren().size());
 	}
 	
 	public void clearPane() {

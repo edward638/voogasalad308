@@ -1,5 +1,9 @@
 package authoring;
 
+/** 
+ * 
+ * @author: Summer and Maddie
+ **/
 public class Property {
 
 	private Object myValue;

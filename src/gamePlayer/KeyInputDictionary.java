@@ -6,7 +6,6 @@ import java.util.Set;
 
 import engine.Engine;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 
 public class KeyInputDictionary {
 	Map<KeyCode, KeyCode> dictionary;
@@ -18,7 +17,7 @@ public class KeyInputDictionary {
 	}
 
 	public void replaceKey(KeyCode input, KeyCode mapTo, KeyCode oldInput) {
-		
+
 		dictionary.remove(oldInput);
 		dictionary.put(input, mapTo);
 	}
@@ -26,17 +25,12 @@ public class KeyInputDictionary {
 	public void handleAction(KeyCode input) {
 		if (dictionary.containsKey(input)) {
 			engine.handleKeyInput(dictionary.get(input));
-			System.out.println(dictionary.get(input));
-		} else {
-			engine.handleKeyInput(input);
-			System.out.println(input);
-		}
+		} 
 	}
-	
+
 	public void setGame(Engine engine) {
 		this.engine = engine;
-		
-		
+
 	}
 
 	public Set<KeyCode> getKeySet() {
@@ -50,13 +44,16 @@ public class KeyInputDictionary {
 	public void removeKey(KeyCode k) {
 		System.out.println(dictionary);
 		dictionary.remove(k);
-		
-	}
-	
 
-	// public static void main(String[] args) {
-	// KeyInputDictionary hi = new KeyInputDictionary();
-	// hi.addKey(KeyCode.A, KeyCode.D);
-	// hi.handleAction(KeyCode.A);
-	// }
+	}
+
+	public KeyCode getKeyForValue(KeyCode keyCode) {
+		for (KeyCode key : dictionary.keySet()) {
+			if (dictionary.get(key) == keyCode) {
+				return key;
+			}
+		}
+		return null;
+	}
+//
 }

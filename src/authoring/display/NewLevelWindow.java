@@ -18,7 +18,7 @@ import javafx.stage.Stage;
  * @author Maddie Wilkinson
  *
  */
-public class NewLevelWindow extends NewComponentWindow {
+public class NewLevelWindow extends PopupWindow {
 
 	private ComboBox<GameScene> myLevelDropdown;
 
@@ -37,7 +37,7 @@ public class NewLevelWindow extends NewComponentWindow {
 
 		HBox levelIndex = new HBox();
 		TextField indexText = new TextField();
-		levelIndex.getChildren().addAll(new Label("Index: "), indexText);
+		levelIndex.getChildren().addAll(new Label("Level number: "), indexText);
 
 		Button closeButton = makeButton("Save", event -> {
 			saveLevel(levelText, indexText);

@@ -18,47 +18,45 @@ import javafx.scene.layout.Pane;
 /*
  * @author Edward Zhuang
  */
-public class TemplateObjectPanel extends AuthoringUIComponent {
+public class TemplateObjectPanel extends MainWindowComponent {
 
-	ListView<String> listView;
-	GameObjectManager gameObjectManager;
-	ObjectInformationDisplay informationDisplay;
-	TreeMap<String, GameObject> map;
-	BorderPane pane;
+	ListView<String> myListView;
+	GameObjectManager myGameObjectManager;
+	TreeMap<String, GameObject> myMap;
+	BorderPane myPane;
 	
 	public TemplateObjectPanel(ResourceBundle resources, Game game, Node root) {
 		super(resources, game, root);
-		listView = new ListView<String>();
-		gameObjectManager = new GameObjectManager();
-		pane = new BorderPane();
-		pane.setTop(listView);
-		informationDisplay = new ObjectInformationDisplay(resources, game, root);
-		pane.setCenter(informationDisplay.asPane());
+		myListView = new ListView<String>();
+		myGameObjectManager = new GameObjectManager();
+		myPane = new BorderPane();
+		myPane.setTop(myListView);
 		update();
 	}
-	
-	
+		
 	/**
 	 * When new object is added, this will provide an updated list
 	 */
 	public void update() {
-		listView.getItems().removeAll();
-		map = (TreeMap<String, GameObject>) gameObjectManager.getSavedGameObjects();
-		SortedSet<String> keys = new TreeSet<>(map.keySet());
+		myListView.getItems().removeAll();
+		myMap = (TreeMap<String, GameObject>) myGameObjectManager.getSavedGameObjects();
+		SortedSet<String> keys = new TreeSet<>(myMap.keySet());
 		for (String key: keys) {
-			listView.getItems().add(key);
+			myListView.getItems().add(key);
 		}
-		listView.setOnMouseClicked(e -> informationDisplay.update(map.get(listView.getSelectionModel().getSelectedItem())));
 	}
 	
 	public void addCustomObject(GameObject gameObject, String name) throws IOException {
-		gameObjectManager.saveCustomGameObject(gameObject, name);
+		myGameObjectManager.saveCustomGameObject(gameObject, name);
 		update();
 	}
 	
-	public Node asPane() {
-		return pane;
+	public BorderPane asPane() {
+		return myPane;
 	}
-	
-	
+
+	@Override
+	protected Node asNode() {
+		return myPane;
+	}	
 }

@@ -14,9 +14,7 @@ import javafx.stage.Stage;
 public class NewGameButton extends PlayerButtons {
 
 	public NewGameButton(double x, double y, double width, double height, ButtonData buttonData) {
-		super(x, y, width, height, buttonData);
-		this.setText("New Game");
-		setAction();
+		super(x, y, width, height, buttonData, "New Game");
 	}
 
 	protected void setAction() {

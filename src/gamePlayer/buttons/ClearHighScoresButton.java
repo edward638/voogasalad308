@@ -8,9 +8,7 @@ import javafx.scene.control.Button;
 public class ClearHighScoresButton extends PlayerButtons {
 
 	public ClearHighScoresButton(double x, double y, double width, double height, ButtonData buttonData) {
-		super(x, y, width, height, buttonData);
-		this.setText("Clear High Scores");
-		setAction();
+		super(x, y, width, height, buttonData, "Clear High Scores");
 	}
 
 	protected void setAction() {

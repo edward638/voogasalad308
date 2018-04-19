@@ -16,7 +16,9 @@ import engine.behaviors.Killable;
 import engine.behaviors.MandatoryBehavior;
 import engine.behaviors.Movable;
 import engine.behaviors.MovableCharacter;
+import engine.behaviors.shapes.EllipseShape;
 import engine.behaviors.shapes.RectangleShape;
+import engine.behaviors.shapes.SmartShape;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.KeyInputEvent;
 import engine.events.elementevents.TimeEvent;
@@ -34,6 +36,8 @@ public class ModelGameState {
 		for (double i = 0; i < 900; i+=40) {
 			elements.add(getBlock(i, 500.0));
 		}
+		elements.add(getBlock(400.0, 460.0));
+		elements.add(getBlock(400.0, 420.0));
 		for (double i = 20; i < 500 ; i+=40) {
 			elements.add(getBlock(0.0, i));
 		}
@@ -65,7 +69,7 @@ public class ModelGameState {
 	public GameElement getMario() {
 		GameElement mario = new GameElement();
 		//Note: Image path untested
-		mario.addBehavior(new MandatoryBehavior(mario, "Mario", 200.0, 20.0, new SmartShape(100.0, 100.0), "MarioSMR.png"));
+		mario.addBehavior(new MandatoryBehavior(mario, "Mario", 200.0, 20.0, new EllipseShape(100.0, 100.0), "MarioSMR.png"));
 		List<Double> direction = new ArrayList<>(); direction.add(1.0); direction.add(0.0);
 		mario.addBehavior(new MovableCharacter(mario, 0.0, direction));
 		mario.addBehavior(new Gravity(mario));

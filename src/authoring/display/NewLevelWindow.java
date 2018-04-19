@@ -37,7 +37,7 @@ public class NewLevelWindow extends PopupWindow {
 
 		HBox levelIndex = new HBox();
 		TextField indexText = new TextField();
-		levelIndex.getChildren().addAll(new Label("Index: "), indexText);
+		levelIndex.getChildren().addAll(new Label("Level number: "), indexText);
 
 		Button closeButton = makeButton("Save", event -> {
 			saveLevel(levelText, indexText);

@@ -4,23 +4,23 @@
     <authoring.Behavior>
       <myProperties>
         <authoring.Property>
+          <myValue class="double">50.0</myValue>
+          <myName>xPos</myName>
+          <myValueType>java.lang.Double</myValueType>
+        </authoring.Property>
+        <authoring.Property>
           <myValue class="string">pup</myValue>
           <myName>elementName</myName>
           <myValueType>java.lang.String</myValueType>
         </authoring.Property>
         <authoring.Property>
-          <myName>shapeDef</myName>
-          <myValueType>engine.behaviors.shapes.ShapeDefinition</myValueType>
-        </authoring.Property>
-        <authoring.Property>
-          <myValue class="double">99.0</myValue>
+          <myValue class="double">40.0</myValue>
           <myName>yPos</myName>
           <myValueType>java.lang.Double</myValueType>
         </authoring.Property>
         <authoring.Property>
-          <myValue class="double">59.0</myValue>
-          <myName>xPos</myName>
-          <myValueType>java.lang.Double</myValueType>
+          <myName>shapeDef</myName>
+          <myValueType>engine.behaviors.shapes.ShapeDefinition</myValueType>
         </authoring.Property>
         <authoring.Property>
           <myValue class="string">coco</myValue>

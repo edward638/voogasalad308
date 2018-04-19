@@ -27,8 +27,8 @@ public class NewGameObjectWindow extends PopupWindow {
 	
 	private static final String INITIAL_DIRECTORY = "./data/gamedata/games/";
 	private static final String MANDATORY_BEHAVIOR_NAME = "MandatoryBehavior";
-
 	
+	private VBox myVBox;
 	private ListView<GameObject> myLevelObjects;
 	private GameViewWindow myGameViewWindow;
 	private String myInitialDirectory;
@@ -43,21 +43,21 @@ public class NewGameObjectWindow extends PopupWindow {
 
 	@Override
 	protected Scene setUpScene() {
-		VBox root = new VBox();
+		myVBox = new VBox(DEFAULT_SPACING);
 
-		HBox nameObject = new HBox();
+		HBox nameObject = new HBox(DEFAULT_SPACING);
 		TextField nameText = new TextField();
 		nameObject.getChildren().addAll(new Label("Name: "), nameText);
 
-		HBox xPosValues = new HBox();
+		HBox xPosValues = new HBox(DEFAULT_SPACING);
 		TextField xText = new TextField();
 		xPosValues.getChildren().addAll(new Label("X Position: "), xText);
 
-		HBox yPosValues = new HBox();
+		HBox yPosValues = new HBox(DEFAULT_SPACING);
 		TextField yText = new TextField();
 		yPosValues.getChildren().addAll(new Label("Y Position: "), yText);
 
-		HBox imageInfo = new HBox();
+		HBox imageInfo = new HBox(DEFAULT_SPACING);
 		TextField imageText = new TextField();
 		
 		FileChooser fileChooser = new FileChooser();
@@ -65,14 +65,14 @@ public class NewGameObjectWindow extends PopupWindow {
 		ChooseImageEvent buttonAction = new ChooseImageEvent(imageText, myInitialDirectory, fileChooser);
 		Button chooseImageButton = makeButton("ChooseImageButton", event -> buttonAction.pressed()); 
 		
-		imageInfo.getChildren().addAll(new Label("Image name: "), imageText, chooseImageButton);;
+		imageInfo.getChildren().addAll(chooseImageButton, new Label("Image name: "), imageText);
 
 		Button saveButton = makeButton("Save", event -> {
 			saveGameObject(nameText, xText, yText, imageText, buttonAction.getImage());
 		});
 
-		root.getChildren().addAll(nameObject, xPosValues, yPosValues, imageInfo, saveButton);
-		return new Scene(root);
+		myVBox.getChildren().addAll(nameObject, xPosValues, yPosValues, imageInfo, saveButton);
+		return new Scene(myVBox);
 	}
 
 	private void saveGameObject(TextField nameText, TextField xText, TextField yText, TextField imageText, Image image) {

@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -27,20 +28,19 @@ public class LevelPanel extends MainWindowComponent {
 	private ListView<GameObject> myLevelObjects;
 	
 	private GameViewWindow myGameViewWindow;
-	private PropertyPanel myPropertyPanel;
+	private BehaviorPanel myPropertyPanel;
 
-	public LevelPanel(ResourceBundle resources, Game game, Node root, GameViewWindow gameViewWindow, PropertyPanel propertyPanel) {
+	public LevelPanel(ResourceBundle resources, Game game, Node root, GameViewWindow gameViewWindow, BehaviorPanel propertyPanel) {
 		super(resources, game, root); //pass resources to super constructor
 		myGameViewWindow = gameViewWindow;
 		myPropertyPanel = propertyPanel;
-		System.out.println(myGameViewWindow == null);
 
-		myVBox = new VBox();
+		myVBox = new VBox(DEFAULT_SPACING);
 		myVBox.getChildren().addAll(makeLevelChooser(), makeObjectList(), makeAddGameObjectButton());
 	}
 
 	private HBox makeLevelChooser() {
-		HBox levelChooser = new HBox();
+		HBox levelChooser = new HBox(DEFAULT_SPACING);
 		makeLevelDropdown();
 		makeAddLevelButton();
 		
@@ -77,6 +77,11 @@ public class LevelPanel extends MainWindowComponent {
 
 	private ListView<GameObject> makeObjectList() {
 		myLevelObjects = new ListView<GameObject>();
+		myLevelObjects.setOnMouseClicked(event -> {
+			if(event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
+		        System.out.println("You double clicked!!!");
+		    }
+		});
 		myLevelObjects.getSelectionModel().selectedItemProperty().addListener((o, old, neww) -> {
 			getGame().getSceneManager().getCurrentScene().setCurrentGameObject(neww);
 			myPropertyPanel.updatePanel();

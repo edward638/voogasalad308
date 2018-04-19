@@ -24,7 +24,7 @@ public class AuthoringDisplay {
 
 	private LevelPanel myLevelPanel;
 	private GameViewWindow myGameViewWindow;
-	private PropertyPanel myPropertyPanel;
+	private BehaviorPanel myPropertyPanel;
 	private TemplateObjectPanel myTemplatePanel;
 	private SaveBar mySaveBar;
 
@@ -52,7 +52,7 @@ public class AuthoringDisplay {
 		root.setRight(myGameViewWindow.asNode());
 		root.setLeft(myLevelPanel.asNode());
 		root.setCenter(myPropertyPanel.asNode());
-		root.setBottom(myTemplatePanel.asNode());
+//		root.setBottom(myTemplatePanel.asNode());
 		root.setTop(mySaveBar.asNode());
 
 		return new Scene(root);
@@ -79,7 +79,7 @@ public class AuthoringDisplay {
 	}
 
 	private Node makeObjectPropertyPanel() {
-		myPropertyPanel = new PropertyPanel(myResources, myGame, root);
+		myPropertyPanel = new BehaviorPanel(myResources, myGame, root);
 		return myPropertyPanel.asNode();
 	}
 

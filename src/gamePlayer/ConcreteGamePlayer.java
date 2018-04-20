@@ -126,14 +126,12 @@ public class ConcreteGamePlayer implements GamePlayer {
 		gameDisplay.setLayoutX(30);
 		gameDisplay.setLayoutY(30);
 		
-		myScene.setOnKeyPressed(e -> engine.handleKeyInput(e.getCode()));
-		//myScene.setOnMouseClicked(e -> engine.handleMouseInput(e.getX(), e.getY())); 
-		
-		// gameDisplay.setPrefSize(900, 590);
-		// gameDisplay.setStyle("-fx-background-color: white;");
+		//myScene.setOnKeyPressed(e -> engine.handleKeyInput(e.getCode()));
+		myScene.setOnKeyPressed(e -> keyInputDictionary.handleAction(e.getCode()));
+	
 		hud = new ConcreteHUD(currentGameName);
 		highScores = new ConcreteHighScores(currentGameName);
-		//myScene.setOnKeyPressed(e -> keyInputDictionary.handleAction(e.getCode()));
+		
 		
 		root.getChildren().add(gameDisplay);
 		root.getChildren().add((Node) hud);

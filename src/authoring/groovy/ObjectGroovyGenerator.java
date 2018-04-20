@@ -1,7 +1,9 @@
 package authoring.groovy;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import authoring.Behavior;
 import authoring.GameObject;
@@ -21,8 +23,9 @@ public class ObjectGroovyGenerator {
 	/*
 	 * THESE METHODS SHOULD BE REFACTORED. DUPLICATED CODE
 	 */
-	public Map<Class, List<Object>> generateGroovyFields(GameObject object) {
-//		Map<Class, List<Object>> objectFields = factory.getBehaviorFields().keySet().stream().forEach(clazz -> clazz.toString().contains(object.getBehaviors().stream().forEach(curr -> curr.getName()));
+	public List<String> generateGroovyFields(GameObject object) {
+//		Map<Class<?>, List<Object>> objectFields = new HashMap<>();
+//		objectFields = factory.getBehaviorFields().keySet().stream().forEach(clazz -> clazz.toString().contains(object.getBehaviors().stream().forEach(curr -> curr.getName())));
 //		System.out.println("This worked");
 //		System.out.println("hey");
 //		return objectFields;

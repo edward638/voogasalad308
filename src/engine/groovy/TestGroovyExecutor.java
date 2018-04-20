@@ -17,9 +17,11 @@ public class TestGroovyExecutor {
     		GroovyExecutor executor = new GroovyExecutor();
     		executor.addToMap("myObject", ge);
     		executor.execute("println myObject");
-    		executor.execute("import engine.GameElement");
+//    		executor.execute("import engine.GameElement");
     		System.out.println(executor.execute("myObject.behaviors.size()"));
 //    		executor.execute()
+    		
+//    		ee.getResponses().stream().forEach(response -> executor.execute(response));
     }
 	
 }

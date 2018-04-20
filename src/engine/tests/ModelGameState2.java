@@ -11,6 +11,7 @@ import engine.actions.CollisionStopXMotion;
 import engine.actions.CollisionStopYMotion;
 import engine.behaviors.Gravity;
 import engine.behaviors.Killable;
+import engine.behaviors.Killer;
 import engine.behaviors.MainCharacter;
 import engine.behaviors.MandatoryBehavior;
 import engine.behaviors.Movable;
@@ -141,10 +142,19 @@ public class ModelGameState2 {
 		return block;
 	}
 	
+	public GameElement getBullet(Double xpos, Double ypos, Double v, List<Double> direction) {
+		GameElement bullet = new GameElement();
+		bullet.addBehavior(new MandatoryBehavior(bullet, "Bullet", xpos, ypos, new RectangleShape(20.0, 20.0), "bullet.png"));
+		bullet.addBehavior(new Movable(bullet, v, direction));
+		bullet.addBehavior(new Killer(bullet, 10.0));
+		return bullet;
+	}
+	
 	public GameElement getBullet(Double xpos, Double ypos, Double v) {
 		GameElement bullet = new GameElement();
 		bullet.addBehavior(new MandatoryBehavior(bullet, "Bullet", xpos, ypos, new RectangleShape(20.0, 20.0), "bullet.png"));
 		bullet.addBehavior(new Movable(bullet, v, Arrays.asList(1.0, 0.0)));
+		bullet.addBehavior(new Killer(bullet, 10.0));
 		return bullet;
 	}
 }

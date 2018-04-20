@@ -21,7 +21,7 @@ public class Movable extends Behavior{
 		xVel = 0.0;
 		yVel = 1.0;
 		setVelocity(vel);
-		if (dir.stream().reduce(0.0, (a, b) -> a + b) != 0) {
+		if (dir.stream().reduce(0.0, (a, b) -> a + Math.abs(b)) != 0) {
 			setDirection(dir);
 		} else {
 			throw new IllegalArgumentException("Invalid Direction for " + ge.getIdentifier() + ": " + dir);

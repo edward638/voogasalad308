@@ -16,7 +16,7 @@ public class IncrementTimeTracker implements Action{
 		ArrayList<GameEvent> events = new ArrayList<GameEvent>();
 		TimeEvent te = (TimeEvent) e;
 		TimeTracker tt = (TimeTracker) ge.getBehavior(TimeTracker.class);
-		tt.setTimePassed(tt.getTimePassed() + te.getTime());
+		tt.incrementTimePass(te.getTime());
 	}
 	
 }

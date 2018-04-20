@@ -2,9 +2,10 @@ package engine.behaviors;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import engine.GameElement;
+import engine.actions.TimeMovable;
+import engine.events.elementevents.TimeEvent;
 
 public class Movable extends Behavior{
 	
@@ -94,4 +95,8 @@ public class Movable extends Behavior{
 		return Arrays.asList(xVel / getVelocity(), yVel /getVelocity());
 	}
 	
+	@Override
+	protected void addDefaultBehavior() {
+		getParent().addEventResponse(new TimeEvent(0.0), new TimeMovable());
+	}
 }

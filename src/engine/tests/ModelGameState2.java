@@ -1,6 +1,7 @@
 package engine.tests;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import engine.GameElement;
@@ -54,6 +55,8 @@ public class ModelGameState2 {
 		for (double i = 500; i < 3000; i+=400) {
 			elements.add(getKoopa(i, 100.0));
 		}
+		
+		elements.add(getBullet(300.0, 400.0, 50.0));
 
 		
 		for (GameElement el : elements) {
@@ -75,6 +78,11 @@ public class ModelGameState2 {
 		marioRoutines.addRoutine(5.0, (e, ge) -> {
 			MovableCharacter mc = (MovableCharacter) mario.getBehavior(MovableCharacter.class);
 			mc.jump();
+		});
+		
+		marioRoutines.addRoutine(7.0, (e, ge) -> {
+			MovableCharacter mc = (MovableCharacter) mario.getBehavior(MovableCharacter.class);
+			mc.setXVelocity(100.0);
 		});
 		mario.addBehavior(new TimeRoutine2(mario));
 		
@@ -124,5 +132,12 @@ public class ModelGameState2 {
 		block.addBehavior(new Killable(block, 100.0));
 		block.addEventResponse(new CollisionEvent(block, CollisionEvent.ALL_SIDES, getMario(), CollisionEvent.ALL_SIDES), new CollisionKillable());
 		return block;
+	}
+	
+	public GameElement getBullet(Double xpos, Double ypos, Double v) {
+		GameElement bullet = new GameElement();
+		bullet.addBehavior(new MandatoryBehavior(bullet, "Bullet", xpos, ypos, new RectangleShape(20.0, 20.0), "bullet.png"));
+		bullet.addBehavior(new Movable(bullet, v, Arrays.asList(1.0, 0.0)));
+		return bullet;
 	}
 }

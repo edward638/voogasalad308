@@ -76,6 +76,7 @@ public class ModelGameState2 {
 		mario.addBehavior(new Gravity(mario));
 		mario.addBehavior(new TimeTracker(mario));
 		TimeRoutine2 marioRoutines = new TimeRoutine2(mario);
+		
 		marioRoutines.addRoutine(5.0, (e, ge) -> {
 			MovableCharacter mc = (MovableCharacter) mario.getBehavior(MovableCharacter.class);
 			mc.jump();
@@ -142,7 +143,6 @@ public class ModelGameState2 {
 	
 	public GameElement getBullet(Double xpos, Double ypos, Double v) {
 		GameElement bullet = new GameElement();
-		System.out.println("Incoming ypos: " + ypos);
 		bullet.addBehavior(new MandatoryBehavior(bullet, "Bullet", xpos, ypos, new RectangleShape(20.0, 20.0), "bullet.png"));
 		bullet.addBehavior(new Movable(bullet, v, Arrays.asList(1.0, 0.0)));
 		return bullet;

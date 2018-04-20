@@ -20,10 +20,15 @@ public class Shooter extends Behavior {
 		distAway = dist;
 	}
 	
+	public Shooter(GameElement ge) {
+		this(ge, 30.0, 10.0);
+	}
+	
 	public void shoot(Double v, List<Double> direction) {
 		MandatoryBehavior mand = (MandatoryBehavior) getParent().getBehavior(MandatoryBehavior.class);
-		Double magDirection = Math.pow(direction.get(0), 2) + Math.pow(direction.get(1), 2);
-		GameElement bullet = new ModelGameState2().getBullet(mand.getX() + distAway * direction.get(0)/magDirection, mand.getY() * direction.get(1)/magDirection, v);
+		Double magDirection = Math.sqrt(Math.pow(direction.get(0), 2) + Math.pow(direction.get(1), 2));
+		GameElement bullet = new ModelGameState2().getBullet(mand.getX() + distAway * direction.get(0)/magDirection, mand.getY() + direction.get(1)/magDirection, v);
+		System.out.println(((Movable)(bullet.getBehavior(Movable.class))).getVelocity());
 		getParent().addGameEvent(new AddElementEvent(bullet));
 	}
 	

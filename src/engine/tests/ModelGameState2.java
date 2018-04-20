@@ -6,6 +6,7 @@ import java.util.List;
 
 import engine.GameElement;
 import engine.GameState;
+import engine.actions.CollisionDamageAllSides;
 import engine.actions.CollisionKillable;
 import engine.actions.CollisionStopXMotion;
 import engine.actions.CollisionStopYMotion;
@@ -147,6 +148,13 @@ public class ModelGameState2 {
 		bullet.addBehavior(new MandatoryBehavior(bullet, "Bullet", xpos, ypos, new RectangleShape(20.0, 20.0), "bullet.png"));
 		bullet.addBehavior(new Movable(bullet, v, direction));
 		bullet.addBehavior(new Killer(bullet, 10.0));
+		bullet.addEventResponse(
+				new CollisionEvent(
+						bullet, 
+						CollisionEvent.ALL_SIDES,
+						new GameElement(MandatoryBehavior.REFER_ALL_ELEMENTS),
+						CollisionEvent.ALL_SIDES),
+				new CollisionDamageAllSides());
 		return bullet;
 	}
 	

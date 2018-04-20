@@ -35,8 +35,12 @@ public class Shooter extends Behavior {
 		getParent().addGameEvent(new AddElementEvent(bullet));
 	}
 	
+	public void shoot(List<Double> direction) {
+		shoot(defaultVelocity, direction);
+	}
+	
 	public void shootRight() {
-		shoot(defaultVelocity, Arrays.asList(-1.0, 1.0));
+		shoot(defaultVelocity, Arrays.asList(-1.0, 0.0));
 	}
 	
 	public void shootLeft() {

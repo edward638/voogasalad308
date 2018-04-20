@@ -36,6 +36,7 @@ public class DisplayState {
 		if (!activeElements.stream().anyMatch(c -> c.getReference() == element)) {
 			ImageElement imageElement = new ImageElement(element, new ImageManager(gameState.gameName));
 			newElements.add(imageElement);
+			System.out.println("DisplayState addNewElement");
 			activeElements.add(imageElement);
 		}
 	}

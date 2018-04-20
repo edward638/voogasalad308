@@ -36,15 +36,12 @@ public class Engine {
 	private String musicPath = "data/music/WiiShopChannelMusic.mp3";
 	private AudioPlayer audioPlayer;
 	
-	public Engine(String gamePath) {
-		//EngineRunner engineRunner = new EngineRunner(gamePath);
-		GameLoader loader = new GameLoader(gamePath);
-		//loader.getGameState();
-		
-		ModelGameState modelGameState = new ModelGameState(); 
-		gameState = modelGameState.getState();
-		displayState = modelGameState.getDisplay();
-		eventManager = new EventManager2(gameState, this);
+	
+	
+	public Engine(GameState g) {
+		gameState = g;
+		displayState = new DisplayState(g);
+		eventManager = new EventManager2(gameState);
 		audioManager = new AudioManager(1);
 		
 		audioPlayer = audioManager.newAudioPlayer(musicPath);
@@ -78,13 +75,12 @@ public class Engine {
 	}
 	
 	public void timeStep (double elapsedTime) {
-		double gameSteps = elapsedTime*gameState.getGameSpeed();
+		double gameSteps = elapsedTime * gameState.getGameSpeed();
 		gameState.incrementGameTime(gameSteps);
-	//	System.out.println("Number of game elements: " + gameState.getElements().size());
-    	eventManager.processElementEvent(new TimeEvent(gameSteps));
-    	displayState.updateImageElements(scrollingAroundMainCharacter(gameState));
-    	displayState.update(gameState);
-    	updateDisplay(displayState.newElements, displayState.removeElements);
+	    	eventManager.processElementEvent(new TimeEvent(gameSteps));
+	    	displayState.updateImageElements(scrollingAroundMainCharacter(gameState));
+	    	displayState.update(gameState);
+	    	updateDisplay(displayState.newElements, displayState.removeElements);
     }
 
 	protected void updateDisplay(List<ImageElement> newElements, List<ImageElement> removeElements) {

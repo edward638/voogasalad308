@@ -14,6 +14,7 @@ public class Movable extends Behavior{
 	
 	private Double xVel;
 	private Double yVel;	
+	
 	public Movable(GameElement ge, Double vel, List<Double> dir) {
 		super(ge);
 		xVel = 0.0;

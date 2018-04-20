@@ -13,6 +13,7 @@ public abstract class Behavior {
 	
 	public Behavior(GameElement ge) {
 		parent = ge;
+		addDefaultBehavior();
 	}
 	
 	
@@ -41,5 +42,9 @@ public abstract class Behavior {
 	
 	protected GameElement getParent() {
 		return parent;
+	}
+	
+	protected void addDefaultBehavior() {
+		// Do Nothing if no default behavior
 	}
 }

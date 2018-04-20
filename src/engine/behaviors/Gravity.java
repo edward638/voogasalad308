@@ -1,8 +1,7 @@
 package engine.behaviors;
-import java.util.Arrays;
-import java.util.List;
-
 import engine.GameElement;
+import engine.actions.TimeGravity;
+import engine.events.elementevents.TimeEvent;
 
 /**
  * @author Gouttham 
@@ -24,6 +23,11 @@ public class Gravity extends Behavior{
 
 	public void reverseGravity(Double time) {
 		b.setYVelocity(b.getYVelocity()-(GRAVITATIONAL_FORCE*time));
+	}
+	
+	@Override
+	protected void addDefaultBehavior() {
+		this.getParent().addEventResponse(new TimeEvent(0.0), new TimeGravity());
 	}
 
 }

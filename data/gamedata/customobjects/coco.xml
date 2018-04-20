@@ -4,9 +4,19 @@
     <authoring.Behavior>
       <myProperties>
         <authoring.Property>
-          <myValue class="string">DANAAA</myValue>
+          <myValue class="double">50.0</myValue>
+          <myName>xPos</myName>
+          <myValueType>java.lang.Double</myValueType>
+        </authoring.Property>
+        <authoring.Property>
+          <myValue class="string">pup</myValue>
           <myName>elementName</myName>
           <myValueType>java.lang.String</myValueType>
+        </authoring.Property>
+        <authoring.Property>
+          <myValue class="double">40.0</myValue>
+          <myName>yPos</myName>
+          <myValueType>java.lang.Double</myValueType>
         </authoring.Property>
         <authoring.Property>
           <myName>shapeDef</myName>
@@ -16,16 +26,6 @@
           <myValue class="string">coco</myValue>
           <myName>imagePath</myName>
           <myValueType>java.lang.String</myValueType>
-        </authoring.Property>
-        <authoring.Property>
-          <myValue class="double">60.0</myValue>
-          <myName>xPos</myName>
-          <myValueType>java.lang.Double</myValueType>
-        </authoring.Property>
-        <authoring.Property>
-          <myValue class="double">60.0</myValue>
-          <myName>yPos</myName>
-          <myValueType>java.lang.Double</myValueType>
         </authoring.Property>
       </myProperties>
       <myName>MandatoryBehavior</myName>

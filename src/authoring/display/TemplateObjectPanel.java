@@ -22,7 +22,6 @@ public class TemplateObjectPanel extends MainWindowComponent {
 
 	ListView<String> myListView;
 	GameObjectManager myGameObjectManager;
-	ObjectInformationDisplay myInformationDisplay;
 	TreeMap<String, GameObject> myMap;
 	BorderPane myPane;
 	
@@ -32,8 +31,6 @@ public class TemplateObjectPanel extends MainWindowComponent {
 		myGameObjectManager = new GameObjectManager();
 		myPane = new BorderPane();
 		myPane.setTop(myListView);
-		myInformationDisplay = new ObjectInformationDisplay(resources, game, root);
-		myPane.setCenter(myInformationDisplay.asPane());
 		update();
 	}
 		
@@ -47,7 +44,6 @@ public class TemplateObjectPanel extends MainWindowComponent {
 		for (String key: keys) {
 			myListView.getItems().add(key);
 		}
-		myListView.setOnMouseClicked(e -> myInformationDisplay.update(myMap.get(myListView.getSelectionModel().getSelectedItem())));
 	}
 	
 	public void addCustomObject(GameObject gameObject, String name) throws IOException {

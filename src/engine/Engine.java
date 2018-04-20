@@ -32,21 +32,22 @@ public class Engine {
 	private DisplayState displayState;
 	private EventManager2 eventManager;
 	
+	private AudioManager audioManager;
 	private String musicPath = "data/music/WiiShopChannelMusic.mp3";
-	
 	private AudioPlayer audioPlayer;
 	
 	public Engine(String gamePath) {
 		//EngineRunner engineRunner = new EngineRunner(gamePath);
 		GameLoader loader = new GameLoader(gamePath);
-		loader.getGameState();
+		//loader.getGameState();
 		
 		ModelGameState modelGameState = new ModelGameState(); 
 		gameState = modelGameState.getState();
 		displayState = modelGameState.getDisplay();
 		eventManager = new EventManager2(gameState, this);
+		audioManager = new AudioManager(1);
 		
-		audioPlayer = new AudioPlayer(musicPath);
+		audioPlayer = audioManager.newAudioPlayer(musicPath);
 		startAnimation();
 	}
 	

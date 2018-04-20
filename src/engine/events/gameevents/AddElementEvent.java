@@ -14,6 +14,7 @@ public class AddElementEvent extends GameEvent {
 	@Override
 	public void execute(GameState state) {
 		state.addGameElement(toAdd);
+		System.out.println("GameElement added to state");
 	}
 
 }

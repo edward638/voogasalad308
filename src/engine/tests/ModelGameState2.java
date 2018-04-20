@@ -15,6 +15,7 @@ import engine.behaviors.MainCharacter;
 import engine.behaviors.MandatoryBehavior;
 import engine.behaviors.Movable;
 import engine.behaviors.MovableCharacter;
+import engine.behaviors.Shooter;
 import engine.behaviors.TimeRoutine2;
 import engine.behaviors.TimeTracker;
 import engine.behaviors.shapes.EllipseShape;
@@ -79,6 +80,11 @@ public class ModelGameState2 {
 			MovableCharacter mc = (MovableCharacter) mario.getBehavior(MovableCharacter.class);
 			mc.jump();
 		});
+		mario.addBehavior(new Shooter(mario));
+		marioRoutines.addRoutine(2.0,  (e, ge) -> {
+			Shooter s = (Shooter) mario.getBehavior(Shooter.class);
+			s.shootRight();
+		});
 		
 		marioRoutines.addRoutine(7.0, (e, ge) -> {
 			MovableCharacter mc = (MovableCharacter) mario.getBehavior(MovableCharacter.class);
@@ -136,6 +142,7 @@ public class ModelGameState2 {
 	
 	public GameElement getBullet(Double xpos, Double ypos, Double v) {
 		GameElement bullet = new GameElement();
+		System.out.println("Incoming ypos: " + ypos);
 		bullet.addBehavior(new MandatoryBehavior(bullet, "Bullet", xpos, ypos, new RectangleShape(20.0, 20.0), "bullet.png"));
 		bullet.addBehavior(new Movable(bullet, v, Arrays.asList(1.0, 0.0)));
 		return bullet;

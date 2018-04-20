@@ -16,8 +16,8 @@ public class TestGroovyExecutor {
 //    		Gravity g = new Gravity(ge, 3.2, doubles);
     		GroovyExecutor executor = new GroovyExecutor();
     		executor.addToMap("myObject", ge);
-    		executor.execute("println myObject");
-//    		executor.execute("import engine.GameElement");
+    		executor.execute("import engine.GameElement");
+    		executor.execute("print myObject");
     		System.out.println(executor.execute("myObject.behaviors.size()"));
 //    		executor.execute()
     		

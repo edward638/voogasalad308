@@ -1,18 +1,25 @@
 package authoring.displayrefactored.authoringuicomponents;
 
+import java.io.File;
 import java.util.Observable;
 import java.util.Observer;
 
 import authoring.GameObject;
 import authoring.GameScene;
+import authoring.displayrefactored.controllers.LevelPanelController;
 import data.propertiesFiles.ResourceBundleManager;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 public class LevelPanelRefactored extends AuthoringUIComponentRefactored implements Observer{
 
@@ -20,16 +27,21 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 	private VBox myVBox;
 	private HBox myHBox;
 	private ComboBox<GameScene> myLevelDropdown;
-	private ComboBox<String> myPanelSelectorComboBox; 
+	private ComboBox<String> myPanelSelector; 
 	private Button myAddLevelButton;
 	private Button myAddGameObjectButton;
 	private Button myAddSceneBackgroundImageButton;
 	private ListView<GameObject> myLevelObjects;
+	private LevelPanelController controller;
 	
-	public LevelPanelRefactored() {
+	public LevelPanelRefactored(LevelPanelController controller) {
 		// TODO Auto-generated constructor stub
+		this.controller = controller;
 		pane = new Pane();
 		initializeButtons();
+		initializeComboBoxes();
+		initializeListViews();
+		setActions();
 	}
 	
 	private void initializeButtons() {
@@ -39,6 +51,37 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 	}
 	
 	private void initializeComboBoxes() {
+		myLevelDropdown = new ComboBox<>();
+		myLevelDropdown.setPromptText(ResourceBundleManager.getAuthoring("SelectSceneDropDown"));
+		myPanelSelector = new ComboBox<>();
+		myPanelSelector.setPromptText(ResourceBundleManager.getAuthoring("ChoosePanel"));
+	}
+	
+	private void initializeListViews() {
+		myLevelObjects = new ListView<>();
+	}
+	
+	private void setActions() {
+		myAddLevelButton.setOnAction(e -> {
+			
+		});
+		myAddGameObjectButton.setOnAction(e -> {
+			
+		});
+		myAddSceneBackgroundImageButton.setOnAction(e -> {
+			try {
+				FileChooser fileChooser = new FileChooser();
+				fileChooser.setTitle("Choose Object Image");
+				fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+				File image = fileChooser.showOpenDialog(new Stage());
+				controller.addBackgroundImage(new Image(image.toURI().toString()));
+				//put image.getName into SceneBackground
+			} catch (Exception exception) {
+				//do nothing
+				//this just means the user didn't choose an image
+		
+			}//
+		});
 		
 	}
 	

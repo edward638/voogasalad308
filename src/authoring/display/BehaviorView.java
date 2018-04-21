@@ -35,7 +35,6 @@ public class BehaviorView extends MainWindowComponent {
 		for(Property property : myBehavior.getProperties()) {
 			myVBox.getChildren().add(makePropertyFields(property));
 		}
-		
 	}
 	
 	private Node makePropertyFields(Property property) {

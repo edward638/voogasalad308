@@ -32,5 +32,4 @@ public class RectangleShape extends ShapeDefinition{
 	public double getHeight() {
 		return height;
 	}
-
 }

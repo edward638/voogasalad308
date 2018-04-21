@@ -25,7 +25,7 @@ public class GameViewWindowController extends Controller {
 	@Override
 	protected void setUpConnections() {
 		// TODO Auto-generated method stub
-		
+		game.addObserver(gameViewWindowRefactored);
 	}
 
 	@Override

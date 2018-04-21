@@ -3,10 +3,7 @@ package authoring.displayrefactored.authoringuicomponents;
 import java.util.List;
 import java.util.Observer;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -30,7 +27,7 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	protected void GenerateComponent() {
 		// TODO Auto-generated method stub
 		BorderPane borderPane = getBorderPane();
-		borderPane.getChildren().add(stackPane);
+		borderPane.setCenter(stackPane);
 		
 	}
 

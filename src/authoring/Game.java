@@ -2,6 +2,8 @@ package authoring;
 
 import data.GameInitializer;
 import data.ImageManager;
+import javafx.beans.InvalidationListener;
+import java.util.Observable;
 
 /** 
  * Game keeps track of an entire game 
@@ -9,7 +11,7 @@ import data.ImageManager;
  * 
  * @author: Summer
  **/
-public class Game {
+public class Game extends Observable{
 
 	private String gameName;
 	private String gameDescription;
@@ -81,4 +83,6 @@ public class Game {
 	public void setSceneManager(SceneManager sceneManager) {
 		mySceneManager = sceneManager;
 	}
+
+	
 }

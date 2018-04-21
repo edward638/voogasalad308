@@ -3,6 +3,8 @@ package engine;
 import java.util.ArrayList;
 import java.util.List;
 
+import engine.behaviors.MainCharacter;
+
 public class GameState{
 	private List<GameElement> elements;
 	private List<GameElement> newElements;
@@ -64,8 +66,14 @@ public class GameState{
 	 * @param level
 	 */
 	public void setState(GameState newState) {
+		//Convert to stream
+		List<GameElement> mainCharacters = new ArrayList<GameElement>();
+		for (GameElement e: elements) {
+			if (e.hasBehavior(MainCharacter.class)) {
+				mainCharacters.add(e);
+			}
+		}
 		elements = newState.getElements();
-		
 	}
 
 }

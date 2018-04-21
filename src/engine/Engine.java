@@ -42,7 +42,6 @@ public class Engine {
 	 * @param gamePath
 	 */
 	public Engine(GameMetaData metaData) {
- 
 		gameState.setState(metaData.getCurrentLevel());
 		displayState = new DisplayState(metaData.getGameName(), gameState);
 		eventManager = new EventManager2(gameState);

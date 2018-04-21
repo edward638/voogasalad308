@@ -17,7 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
-public class GameViewWindow extends AuthoringUIComponent{
+public class GameViewWindow extends MainWindowComponent{
 
 	List<GameObject> gameObjects;
 	ScrollPane scrollPane;
@@ -46,13 +46,6 @@ public class GameViewWindow extends AuthoringUIComponent{
 
 	private void setGameObjectList(){
 		gameObjects = getGame().getSceneManager().getCurrentScene().getMyObjects();
-		System.out.println((gameObjects == null) + "gameobjets");
-		System.out.println((getGame().getSceneManager() == null) + "sceneman");
-		System.out.println((getGame().getSceneManager().getCurrentScene() == null) + "curr");
-		System.out.println((getGame().getSceneManager().getCurrentScene().getMyObjects() == null) + "myobjs");
-		System.out.println( gameObjects.size() + "  objs size");
-
-
 	}
 
 //	public void updateWindow(List<GameObject> gameObjectsList) {
@@ -86,10 +79,11 @@ public class GameViewWindow extends AuthoringUIComponent{
 	}
 
 	private void placeObject(Double x, Double y, String imagePath) {
+		//Eddie I think this is where you'll put the dragging and dropping stuff, or put those in separate methods and call them here?
 		System.out.println(imagePath);
 		ImageView imageView = new ImageView(imageManager.getImage(imagePath + ".png"));
-		imageView.setFitHeight(50);
-		imageView.setFitWidth(50);
+		imageView.setPreserveRatio(true);
+		imageView.setFitHeight(100);
 		imageView.setLayoutX(x);
 		imageView.setLayoutY(y);
 		myPane.getChildren().add(imageView);
@@ -147,7 +141,12 @@ public class GameViewWindow extends AuthoringUIComponent{
 		}
 	}
 
-	public Node asPane() {
+	public Pane asPane() {
+		return stackPane;
+	}
+
+	@Override
+	protected Node asNode() {
 		return stackPane;
 	}
 

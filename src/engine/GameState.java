@@ -66,6 +66,12 @@ public class GameState{
 	 * @param level
 	 */
 	public void setState(GameState newState) {
+		getMainCharacters(elements);
+		elements = newState.getElements();
+		
+	}
+	
+	private List<GameElement> getMainCharacters(List<GameElement> elements) {
 		//Convert to stream
 		List<GameElement> mainCharacters = new ArrayList<GameElement>();
 		for (GameElement e: elements) {
@@ -73,7 +79,7 @@ public class GameState{
 				mainCharacters.add(e);
 			}
 		}
-		elements = newState.getElements();
+		return mainCharacters;
 	}
 
 }

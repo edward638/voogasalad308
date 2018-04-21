@@ -93,7 +93,7 @@ public class Engine {
 	}
 	
 	public void timeStep (double elapsedTime) {
-		double gameSteps = elapsedTime*gameState.getGameSpeed();
+		double gameSteps = elapsedTime * gameState.getGameSpeed();
 		gameState.incrementGameTime(gameSteps);
 	    	eventManager.processElementEvent(new TimeEvent(gameSteps));
 	    	displayState.updateImageElements(scrollingAroundMainCharacter(gameState));

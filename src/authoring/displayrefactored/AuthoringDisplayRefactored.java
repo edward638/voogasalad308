@@ -1,6 +1,7 @@
 package authoring.displayrefactored;
 
 import authoring.Game;
+import authoring.displayrefactored.controllers.AuthoringEnvironmentRefactored;
 import authoring.displayrefactored.popups.NewGamePopupRefactored;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,8 +11,8 @@ import javafx.stage.Stage;
 
 public class AuthoringDisplayRefactored implements LoadAuthoringInterface {
 	
-	private static final int GUI_LAYOUT_X = 50;
-	private static final int GUI_LAYOUT_Y = 50;
+	private static final int GUI_LAYOUT_X = 20;
+	private static final int GUI_LAYOUT_Y = 40;
 	private static final String SAVE_GAME = "Save Game";
 	private static final String LOAD_GAME = "Load Game";
 	private static final String NEW_GAME = "New Game";

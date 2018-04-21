@@ -83,6 +83,5 @@ public class Game extends Observable{
 	public void setSceneManager(SceneManager sceneManager) {
 		mySceneManager = sceneManager;
 	}
-
 	
 }

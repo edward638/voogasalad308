@@ -23,9 +23,9 @@ import javafx.stage.FileChooser.ExtensionFilter;
 
 public class LevelPanelRefactored extends AuthoringUIComponentRefactored implements Observer{
 
-	Pane pane;
 	private VBox myVBox;
 	private HBox myHBox;
+	private HBox levelChooser;
 	private ComboBox<GameScene> myLevelDropdown;
 	private ComboBox<String> myPanelSelector; 
 	private Button myAddLevelButton;
@@ -37,11 +37,7 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 	public LevelPanelRefactored(LevelPanelController controller) {
 		// TODO Auto-generated constructor stub
 		this.controller = controller;
-		pane = new Pane();
-		initializeButtons();
-		initializeComboBoxes();
-		initializeListViews();
-		setActions();
+		
 	}
 	
 	private void initializeButtons() {
@@ -89,7 +85,18 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 	protected void GenerateComponent() {
 		// TODO Auto-generated method stub
 		BorderPane borderPane = getBorderPane();
-		borderPane.setCenter(pane);
+		initializeButtons();
+		initializeComboBoxes();
+		initializeListViews();
+		setActions();
+		
+		levelChooser = new HBox();
+		myVBox = new VBox();
+		myHBox = new HBox();
+		levelChooser.getChildren().addAll(myAddLevelButton, myLevelDropdown, myPanelSelector);
+		myHBox.getChildren().addAll(myAddGameObjectButton, myAddSceneBackgroundImageButton);
+		myVBox.getChildren().addAll(levelChooser, myLevelObjects, myHBox);
+		borderPane.setCenter(myVBox);
 		
 	}
 
@@ -98,5 +105,7 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
 
 }

@@ -4,6 +4,7 @@ import authoring.Game;
 import authoring.displayrefactored.AuthoringEnvironmentGUIRefactored;
 import authoring.displayrefactored.authoringuicomponents.GameViewWindowRefactored;
 import data.propertiesFiles.ResourceBundleManager;
+import javafx.scene.layout.Pane;
 
 public class GameViewWindowController extends Controller {
 	
@@ -18,7 +19,7 @@ public class GameViewWindowController extends Controller {
 	@Override
 	protected void initializeScreenComponents() {
 		// TODO Auto-generated method stub
-		gameViewWindowRefactored = new GameViewWindowRefactored();
+		gameViewWindowRefactored = new GameViewWindowRefactored(this);
 		
 	}
 
@@ -29,11 +30,11 @@ public class GameViewWindowController extends Controller {
 	}
 
 	@Override
-	protected void addToGUI(AuthoringEnvironmentGUIRefactored gui) {
+	protected void addToGUI(Pane pane) {
 		// TODO Auto-generated method stub
 		int x = ResourceBundleManager.getPosition("GAMEVIEWWINDOW_X");
 		int y = ResourceBundleManager.getPosition("GAMEVIEWWINDOW_Y");
-		gameViewWindowRefactored.AttachToPane(gui.getPane(), x, y);
+		gameViewWindowRefactored.AttachToPane(pane, x, y);
 	}
 	
 

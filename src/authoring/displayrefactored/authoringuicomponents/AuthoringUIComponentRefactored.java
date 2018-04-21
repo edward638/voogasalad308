@@ -14,20 +14,19 @@ public abstract class AuthoringUIComponentRefactored {
 	
 	public AuthoringUIComponentRefactored() {
 		borderPane = new BorderPane();
+		GenerateComponent();
 	}
 	
 	protected abstract void GenerateComponent();
-	
-	public BorderPane getUIComponent() {	
-		return borderPane;
-	}
 	
 	protected BorderPane getBorderPane() {
 		return borderPane;
 	}
 	
 	public void AttachToPane(Pane pane, int xPosition, int yPosition) {
-		
+		borderPane.setLayoutX(xPosition);
+		borderPane.setLayoutY(yPosition);
+		pane.getChildren().add(borderPane);
 	}
 	
 }

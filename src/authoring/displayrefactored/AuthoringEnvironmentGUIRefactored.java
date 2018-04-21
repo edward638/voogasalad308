@@ -9,7 +9,7 @@ public class AuthoringEnvironmentGUIRefactored {
 	public AuthoringEnvironmentGUIRefactored() {
 		
 		pane = new Pane();
-		
+	
 	}
 	
 	public Pane getPane() {

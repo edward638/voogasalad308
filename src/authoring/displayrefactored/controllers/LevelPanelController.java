@@ -9,6 +9,7 @@ import authoring.displayrefactored.AuthoringEnvironmentGUIRefactored;
 import authoring.displayrefactored.authoringuicomponents.LevelPanelRefactored;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 
 public class LevelPanelController extends Controller {
 
@@ -34,11 +35,12 @@ public class LevelPanelController extends Controller {
 	}
 
 	@Override
-	protected void addToGUI(AuthoringEnvironmentGUIRefactored gui) {
+	protected void addToGUI(Pane pane) {
 		// TODO Auto-generated method stub
 		int x = ResourceBundleManager.getPosition("LEVELPANEL_X");
 		int y = ResourceBundleManager.getPosition("LEVELPANEL_Y");
-		levelPanelRefactored.AttachToPane(gui.getPane(), x, y);
+		levelPanelRefactored.AttachToPane(pane, x, y);
+		
 	}
 	
 	public void addLevel(String name, int level) {

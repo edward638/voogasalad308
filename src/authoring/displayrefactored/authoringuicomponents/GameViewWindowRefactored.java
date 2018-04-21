@@ -3,6 +3,7 @@ package authoring.displayrefactored.authoringuicomponents;
 import java.util.List;
 import java.util.Observer;
 
+import authoring.displayrefactored.controllers.GameViewWindowController;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -14,19 +15,22 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	StackPane stackPane;
 	Pane backgroundPane;
 	Pane foregroundPane;
+	GameViewWindowController controller;
 	
-	public GameViewWindowRefactored() {
+	public GameViewWindowRefactored(GameViewWindowController controller) {
 		// TODO Auto-generated constructor stub
-		stackPane = new StackPane();
-		backgroundPane = new Pane();
-		foregroundPane = new Pane();
-		
+		this.controller = controller;
 	}
 	
 	@Override
 	protected void GenerateComponent() {
 		// TODO Auto-generated method stub
 		BorderPane borderPane = getBorderPane();
+		stackPane = new StackPane();
+		backgroundPane = new Pane();
+		foregroundPane = new Pane();
+		stackPane.setStyle("-fx-border-color: black");
+		stackPane.setPrefSize(800, 800);
 		borderPane.setCenter(stackPane);
 		
 	}

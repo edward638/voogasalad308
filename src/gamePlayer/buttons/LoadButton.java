@@ -8,21 +8,13 @@ import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class LoadButton extends Button {
-
-	private ButtonData buttonData;
+public class LoadButton extends PlayerButtons {
 
 	public LoadButton(double x, double y, double width, double height, ButtonData buttonData) {
-		this.setLayoutX(x);
-		this.setLayoutY(y);
-		this.setMinWidth(width);
-		this.setHeight(height);
-		this.setText("Load Game");
-		this.buttonData = buttonData;
-		setAction();
+		super(x, y, width, height, buttonData, "Load Game");
 	}
 
-	private void setAction() {
+	protected void setAction() {
 		this.setOnAction(event -> {
 			FileChooser fileChooser = new FileChooser();
 			fileChooser.setTitle("CHOOSE GAME");
@@ -40,4 +32,6 @@ public class LoadButton extends Button {
 		});
 
 	}
+
+
 }

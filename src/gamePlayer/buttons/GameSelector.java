@@ -34,12 +34,12 @@ public class GameSelector extends ScrollPane {
 	}
 
 	private void initializeGameSelections() {
-		VBox box = new VBox();
-		box.setSpacing(5);
-		box.setStyle("-fx-background-color:white;");
+		VBox gameSelectorBox = new VBox();
+		gameSelectorBox.setSpacing(5);
+		gameSelectorBox.setStyle("-fx-background-color:white;");
 
-		box.setMinWidth(900);
-		box.setMaxWidth(900);
+		gameSelectorBox.setMinWidth(900);
+		gameSelectorBox.setMaxWidth(900);
 
 		String currentPath = Paths.get(".").toAbsolutePath().normalize().toString() + "/data/gamedata/games";
 		File directory = new File(currentPath);
@@ -48,6 +48,7 @@ public class GameSelector extends ScrollPane {
 		File[] fList = directory.listFiles();
 		for (File file : fList) {
 			String gameName = file.getName();
+			if (gameName.contains("DS_Store")) {continue;}
 			String gameString = gameDescriptionProvider.getGameName(gameName);
 			String gameDescription = gameDescriptionProvider.getGameDescription(gameName);
 			Image gameImage = gameDescriptionProvider.getDescriptionImage(gameName);
@@ -58,54 +59,28 @@ public class GameSelector extends ScrollPane {
 			playButton.setLayoutX(750);
 			playButton.setLayoutY(90);
 			playButton.setOnAction((event) -> {
+				buttonData.removeFromRoot(gameSelectorBox);
 				buttonData.playGame(gameName);
 			});
 
 			gameDescriptionPane.getChildren().add(playButton);
-
-			box.getChildren().add(gameDescriptionPane);
+			gameSelectorBox.getChildren().add(gameDescriptionPane);
 
 		}
 
-		this.setContent(box);
+		this.setContent(gameSelectorBox);
 
 	}
 
 	private Pane setupNewGamePane(String gameName, String gameString, String gameDescription, Image gameImage) {
-		Pane pane = setupPane();
+		Pane pane = new Pane();
 
-		ImageView imageView = setupImageView(gameImage);
-				
-		Text nameText = setupName(gameString);
-		
-		Text descriptionText = setupDescription(gameDescription);
+		pane.setMinWidth(900);
+		pane.setMaxWidth(900);
+		pane.setMinHeight(200);
+		pane.setMaxHeight(200);
+		pane.setStyle("-fx-background-color:black;");
 
-		pane.getChildren().addAll(imageView, nameText, descriptionText);
-
-		return pane;
-	}
-
-	private Text setupDescription(String gameDescription) {
-		Text descriptionText = new Text(gameDescription);
-		descriptionText.setX(230);
-		descriptionText.setY(90);
-		descriptionText.setFont(new Font("Times New Roman", 20));
-		descriptionText.setFill(Color.WHITE);
-
-		return descriptionText;
-	}
-
-	private Text setupName(String gameString) {
-		Text nameText = new Text(gameString);
-		nameText.setX(225);
-		nameText.setY(60);
-		nameText.setStyle(" -fx-font: 50px Helvetica;\r\n"
-				+ "    -fx-fill: linear-gradient(from 0% 0% to 100% 200%, repeat, aqua 0%, red 50%);\r\n"
-				+ "    -fx-stroke: black;\r\n" + "    -fx-stroke-width: 1;");
-		return nameText;
-	}
-
-	private ImageView setupImageView(Image gameImage) {
 		ImageView imageView = new ImageView();
 		imageView.setImage(gameImage);
 		imageView.setX(20);
@@ -113,16 +88,21 @@ public class GameSelector extends ScrollPane {
 		imageView.setFitHeight(160);
 		imageView.setFitWidth(160);
 
-		return imageView;
-	}
+		Text nameText = new Text(gameString);
+		nameText.setX(225);
+		nameText.setY(60);
+		nameText.setStyle(" -fx-font: 50px Helvetica;\r\n"
+				+ "    -fx-fill: linear-gradient(from 0% 0% to 100% 200%, repeat, aqua 0%, red 50%);\r\n"
+				+ "    -fx-stroke: black;\r\n" + "    -fx-stroke-width: 1;");
 
-	private Pane setupPane() {
-		Pane pane = new Pane();
-		pane.setMinWidth(900);
-		pane.setMaxWidth(900);
-		pane.setMinHeight(200);
-		pane.setMaxHeight(200);
-		pane.setStyle("-fx-background-color:black;");
+		Text descriptionText = new Text(gameDescription);
+		descriptionText.setX(230);
+		descriptionText.setY(90);
+		descriptionText.setFont(new Font("Times New Roman", 20));
+		descriptionText.setFill(Color.WHITE);
+
+		pane.getChildren().addAll(imageView, nameText, descriptionText);
+
 		return pane;
 	}
 

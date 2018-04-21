@@ -18,18 +18,17 @@ class GameStateTesting {
 	private GameState state;
 	private EventManager2 manager;
 	
-	
 	@Before
 	public void setUp() {
 		state = new ModelGameState().getState();
-		manager = new EventManager2(state);
+		manager = new EventManager2(state, null);
 	}
 	
 	@Test
 	public void testMove() {
 		List<String> propertiesToPrint = Arrays.asList("elementName", "xPos", "yPos", "xVel", "yVel");
 		state = new ModelGameState().getState();
-		manager = new EventManager2(state);
+		manager = new EventManager2(state, null);
 		
 		printState(propertiesToPrint);
 		manager.processElementEvent(new TimeEvent(1.0));
@@ -63,4 +62,7 @@ class GameStateTesting {
 			});
 		System.out.println();
 	}
+	
+
+	
 }

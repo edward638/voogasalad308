@@ -3,53 +3,70 @@ package engine;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
+import data.ImageManager;
 
 public class DisplayState {
+	private GameState gameState;
 	protected List<ImageElement> activeElements;
 	protected List<ImageElement> newElements;
 	protected List<ImageElement> removeElements;
 	
-	public DisplayState() {
+	private String gameName;
+	
+//	public DisplayState(String gameName) {
+//		this.gameName = gameName;
+//		activeElements = new ArrayList<>();
+//		newElements = new ArrayList<>();
+//		removeElements = new ArrayList<>();
+//	}
+	
+	public DisplayState (String gameName, GameState gameState) {
+		this.gameName = gameName;
 		activeElements = new ArrayList<>();
 		newElements = new ArrayList<>();
 		removeElements = new ArrayList<>();
-	}
-	
-	public void addNewElement(GameElement element) {
-		ImageElement imageElement = new ImageElement(element);
-		newElements.add(imageElement);
-		activeElements.add(imageElement);
-	}
-	
-	protected void removeElement(GameElement element) {
-		activeElements.stream().filter(c -> c.getReference() == element).map(c -> activeElements.remove(c));
-		activeElements.stream().filter(c -> c.getReference() == element).map(c -> removeElements.add(c));
-	}
-
-	protected void updateImageElements() {
-		for (ImageElement imageElement : activeElements) {
-			imageElement.updateState();
+		for (GameElement e : gameState.getElements()) {
+			addNewElement(e);
 		}
 	}
 	
-	public static void main(String[] args) {
-		Rectangle r1 = new Rectangle();
-		Rectangle r2 = new Rectangle();
-		r1.setX(4);
-		r1.setY(4);
-		r1.setWidth(4);
-		r1.setHeight(4);
-		r2.setX(10);
-		r2.setY(10);
-		r2.setWidth(4);
-		r2.setHeight(5);
-		Shape intersect = Shape.intersect(r1, r2);
-		//System.out.println(intersect.getBoundsInLocal());
-		//int side = getCollisionSide(getCenter(r1), getCenter(intersect));
-		//System.out.println(side);
-		
+	public void update(GameState updatedGameState) {
+		for (GameElement e : updatedGameState.getNewElements()) {
+			addNewElement(e);
+		}
+		updatedGameState.getNewElements().clear();
+		for (GameElement e : updatedGameState.getRemoveElements()) {
+			removeElement(e);
+		}
+		updatedGameState.getRemoveElements().clear();
 	}
 	
+	public void addNewElement(GameElement element) {
+		if (!activeElements.stream().anyMatch(c -> c.getReference() == element)) {
+			ImageElement imageElement = new ImageElement(element, new ImageManager(gameName));
+			newElements.add(imageElement);
+			System.out.println("DisplayState addNewElement");
+			activeElements.add(imageElement);
+		}
+	}
+	
+	protected void removeElement(GameElement element) {
+		for (ImageElement i : activeElements) {
+			if (i.getReference() == element) {
+				removeElements.add(i);
+			}
+		}
+		for (ImageElement i : removeElements) {
+			activeElements.remove(i);
+		}
+		
+		//activeElements.stream().filter(c -> c.getReference() == element).map(c -> activeElements.remove(c));
+		//activeElements.stream().filter(c -> c.getReference() == element).map(c -> removeElements.add(c));
+	}
+
+	protected void updateImageElements(List<Double> mainCharacterLocation) {
+		for (ImageElement imageElement : activeElements) {
+			imageElement.updateStateWithOffSet(mainCharacterLocation);
+		}
+	}
 }

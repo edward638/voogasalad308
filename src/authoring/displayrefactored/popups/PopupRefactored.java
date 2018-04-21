@@ -1,6 +1,5 @@
 package authoring.displayrefactored.popups;
 
-import authoring.display.NewComponentWindow;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;

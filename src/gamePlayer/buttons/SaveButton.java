@@ -7,21 +7,13 @@ import data.GameSaver;
 import gamePlayer.ConcreteGamePlayer;
 import javafx.scene.control.Button;
 
-public class SaveButton extends Button {
-
-	private ButtonData buttonData;
+public class SaveButton extends PlayerButtons {
 
 	public SaveButton(double x, double y, double width, double height, ButtonData buttonData) {
-		this.setLayoutX(x);
-		this.setLayoutY(y);
-		this.setMinWidth(width);
-		this.setHeight(height);
-		this.setText("Save Current State");
-		this.buttonData = buttonData;
-		setAction();
+		super(x, y, width, height, buttonData, "Save Current State");
 	}
 
-	private void setAction() {
+	protected void setAction() {
 		this.setOnAction(event -> {
 			String rootFolder = "CALVIN FILL IN HOW TO MAKE THIS STRING = ROOTFOLDER";
 			GameSaver gameSaver = new GameSaver(rootFolder);

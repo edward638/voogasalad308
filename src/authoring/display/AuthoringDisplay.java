@@ -1,29 +1,10 @@
 package authoring.display;
 
-import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import authoring.Game;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -39,16 +20,20 @@ public class AuthoringDisplay {
 
 	private BorderPane root;
 	private ResourceBundle myResources; //rename more accurately; it's the button names & stuff specifically
-	private Node myLevelPanel;
-	private GameViewWindow myGameViewWindow;
 	private Game myGame;
+
+	private LevelPanel myLevelPanel;
+	private GameViewWindow myGameViewWindow;
+	private ObjectInfoPanel myObjectInfoPanel;
+	private TemplateObjectPanel myTemplatePanel;
+	private SaveBar mySaveBar;
 
 	public AuthoringDisplay(Stage stage, Game game) {
 		myGame = new Game();
 		loadResources();
 		initialize(stage);
 	}
-	
+
 	public void loadResources() {
 		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PATH + DEFAULT_LANGUAGE);
 	}
@@ -64,47 +49,45 @@ public class AuthoringDisplay {
 	public Scene setUpScene() {
 		initVars();
 		root = new BorderPane();
-//		root.setLeft(makeLevelPanel());
-		root.setLeft(myLevelPanel);
-//		root.setRight(makeObjectPropertyPanel());
-		root.setBottom(makeTemplateObjectPanel());
-		root.setTop(makeSaveBar());
-//		root.setCenter(makeGameVisWindow());
-		root.setCenter(myGameViewWindow.asPane());
+		root.setRight(myGameViewWindow.asNode());
+		root.setLeft(myLevelPanel.asNode());
+		root.setCenter(myObjectInfoPanel.asNode());
+//		root.setBottom(myTemplatePanel.asNode());
+		root.setTop(mySaveBar.asNode());
 
 		return new Scene(root);
 	}
 
 	private void initVars() {
-		myGameViewWindow = makeGameVisWindow();
-		System.out.println(myGameViewWindow == null);
-		myLevelPanel = makeLevelPanel();
+		myGameViewWindow = makeGameViewWindow();
+		myObjectInfoPanel = makeObjectPropertyPanel();
+		myLevelPanel = makeLevelPanel(myGameViewWindow, myObjectInfoPanel);
+		myTemplatePanel = makeTemplatePanel();
+		mySaveBar = makeSaveBar();
 	}
 
-	public Node makeLevelPanel() {
-		LevelPanel levelPanel = new LevelPanel(myResources, myGame, root, myGameViewWindow);
-		return levelPanel.asVBox();
+	private LevelPanel makeLevelPanel(GameViewWindow gameViewWindow, ObjectInfoPanel objectInfoPanel) {
+		LevelPanel levelPanel = new LevelPanel(myResources, myGame, root, gameViewWindow, objectInfoPanel);
+		return levelPanel;
 	}
 
-	public Node makeTemplateObjectPanel() {
-		return new FlowPane();
+	private TemplateObjectPanel makeTemplatePanel() {
+		TemplateObjectPanel templatePanel = new TemplateObjectPanel(myResources, myGame, root);
+		return templatePanel;
 	}
 
-	public Node makeObjectPropertyPanel() {
-		PropertyPanel propertyPanel = new PropertyPanel(myResources, myGame, root);
-		return propertyPanel.asScrollPane();
+	private ObjectInfoPanel makeObjectPropertyPanel() {
+		ObjectInfoPanel objectInfoPanel = new ObjectInfoPanel(myResources, myGame, root);
+		return objectInfoPanel;
 	}
 
-	public GameViewWindow makeGameVisWindow() {
-//		GameViewWindow gameViewWindow = new GameViewWindow(myResources, myGame, root);
-		myGameViewWindow = new GameViewWindow(myResources, myGame, root);
-		return myGameViewWindow;
-//		return myGameViewWindow.asPane();
-//		return new Pane();
+	private GameViewWindow makeGameViewWindow() {
+		GameViewWindow gameViewWindow = new GameViewWindow(myResources, myGame, root, 600, 600);
+		return gameViewWindow;
 	}
-	
-	public Node makeSaveBar() {
+
+	private SaveBar makeSaveBar() {
 		SaveBar saveBar = new SaveBar(myResources, myGame, root);
-		return saveBar.asHBox();
+		return saveBar;
 	}
 }

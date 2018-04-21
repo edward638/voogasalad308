@@ -1,13 +1,17 @@
 package authoring.groovy;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import authoring.Behavior;
 import authoring.GameObject;
 
+/** 
+ * 
+ * @author: Summer
+ **/
 public class ObjectGroovyGenerator {
 
 	private GroovyCommandFactory factory;
@@ -19,8 +23,13 @@ public class ObjectGroovyGenerator {
 	/*
 	 * THESE METHODS SHOULD BE REFACTORED. DUPLICATED CODE
 	 */
-	public List<Field> generateGroovyFields(GameObject object) {
-		List<Field> objectFields = new ArrayList<>();
+	public List<String> generateGroovyFields(GameObject object) {
+//		Map<Class<?>, List<Object>> objectFields = new HashMap<>();
+//		objectFields = factory.getBehaviorFields().keySet().stream().forEach(clazz -> clazz.toString().contains(object.getBehaviors().stream().forEach(curr -> curr.getName())));
+//		System.out.println("This worked");
+//		System.out.println("hey");
+//		return objectFields;
+		List<Object> objectFields = new ArrayList<>();
 		for(Behavior curr : object.getBehaviors()) {
 			for(Class<?> clazz : factory.getBehaviorFields().keySet()) {
 				if(clazz.toString().contains(curr.getName())) {
@@ -28,12 +37,11 @@ public class ObjectGroovyGenerator {
 				}
 			}
 		}
-//		return steralizeList(objectFields);
-		return objectFields;
+		return cleanList(objectFields);
 	}
 	
-	public List<Method> generateGroovyMethods(GameObject object) {
-		List<Method> objectMethods = new ArrayList<>();
+	public List<String> generateGroovyMethods(GameObject object) {
+		List<Object> objectMethods = new ArrayList<>();
 		for(Behavior curr : object.getBehaviors()) {
 			for(Class<?> clazz : factory.getBehaviorMethods().keySet()) {
 				if(clazz.toString().contains(curr.getName())) {
@@ -41,10 +49,10 @@ public class ObjectGroovyGenerator {
 				}
 			}
 		}
-		return objectMethods;
+		return cleanList(objectMethods);
 	}
 	
-	private List<String> steralizeList(List<Object> toSteralize) {
+	private List<String> cleanList(List<Object> toSteralize) {
 		List<String> toReturn = new ArrayList<>();
 		for(Object curr : toSteralize) {
 			String[] st = curr.toString().split(" ");

@@ -21,9 +21,10 @@ public class BehaviorFactory {
 
 	public Behavior makeBehavior(String className) {
 		try {
-			Class<?> clazz = Class.forName(BEHAVIORS_LOCATION + className);
+			String behaviorName = BEHAVIORS_LOCATION + className;
+			Class<?> clazz = Class.forName(behaviorName);
 			Set<Property> properties = makeProperties(clazz);
-			return new Behavior(className, properties);
+			return new Behavior(behaviorName, properties);
 		} catch (ClassNotFoundException e) {
 			new Error("Invalid Behavior");
 			System.out.println("Invalid Behavior");

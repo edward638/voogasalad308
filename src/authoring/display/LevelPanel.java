@@ -115,7 +115,6 @@ public class LevelPanel extends MainWindowComponent {
 			myGameViewWindow.switchPanes(neww);
 		});
 		return myPanelSelectorComboBox; 
-		
 	}
 
 	private ListView<GameObject> makeObjectList() {

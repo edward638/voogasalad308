@@ -13,15 +13,14 @@ public class Behavior {
 	
 	private Set<Property> myProperties;
 	private String myName;
-	private String myDisplayName;
 	
-	public Behavior() {
-		myProperties = new HashSet<>();
-	}
+	//likely won't need this constructor
+//	public Behavior() {
+//		myProperties = new HashSet<>();
+//	}
 
 	public Behavior (String name, Set<Property> properties) {
 		myName = name;
-		myProperties = new HashSet<Property>();
 		myProperties = properties;
 	}
 	
@@ -57,14 +56,14 @@ public class Behavior {
 	}
 	
 	/**
-	 * returns the name of the Behavior
+	 * Returns the full package name of the Behavior (e.g. engine.behaviors.Movable)
 	 */
 	public String getName() {
 		return myName;
 	}
 	
 	public String toString() {
-		return " " + myName + ": " + myProperties.toString();
+		return getDisplayName();
 	}
 	
 }

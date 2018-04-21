@@ -7,13 +7,12 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 /**
  * @author madelinewilkinson
  *
  */
-public class SaveBar extends AuthoringUIComponent {
+public class SaveBar extends MainWindowComponent {
 	
 	private HBox myHBox;
 
@@ -27,10 +26,6 @@ public class SaveBar extends AuthoringUIComponent {
 		}
 	}
 	
-	public HBox asHBox() {
-		return myHBox;
-	}
-	
 	private Button makeNewGameButton() {
 		return makeButton("NewGameButton", event -> doNothing());
 	}
@@ -41,6 +36,15 @@ public class SaveBar extends AuthoringUIComponent {
 	
 	private Button makeSaveGameButton() {
 		return makeButton("SaveGameButton", event -> doNothing());
+	}
+
+	public HBox asHBox() {
+		return myHBox;
+	}
+	
+	@Override
+	protected Node asNode() {
+		return myHBox;
 	}
 
 }

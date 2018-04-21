@@ -77,7 +77,6 @@ public class ConcreteHighScores implements HighScores {
 	}
 
 	private void setupTableColumns() {
-
 		table.setEditable(true);
 
 		TableColumn<Score, String> nameCol = new TableColumn(NAMELABEL);
@@ -112,13 +111,26 @@ public class ConcreteHighScores implements HighScores {
 		}
 		Collections.sort(scores, new Score.ScoreComparator());
 		updateScoreTable();
+
+	}
+
+	/**
+	 * Called by gameEngine when player dies
+	 * 
+	 * @param name
+	 * @param score
+	 */
+	public void addScoreWhenGameOver(String name, int score) {
+		this.addScore(name, score);
+		scoreSaver.saveScores(this.scores);
 	}
 
 	private void updateScoreTable() {
-
+		
 		ObservableList<Score> observableScoreList = FXCollections.observableArrayList(scores);
 		Collections.reverse(observableScoreList);
 		table.setItems(observableScoreList);
+
 	}
 
 	/**
@@ -148,7 +160,9 @@ public class ConcreteHighScores implements HighScores {
 
 	@Override
 	public void clear() {
+		System.out.println("Score size before clearing " + scores.size());
 		scores.clear();
+		System.out.println("Score Size After Clearing " + scores.size());
 		updateScoreTable();
 	}
 

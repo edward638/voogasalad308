@@ -16,9 +16,9 @@ public class AddsGameElement extends Behavior{
 		MandatoryBehavior mbcreator = (MandatoryBehavior) creator.getBehavior(MandatoryBehavior.class);
 		MandatoryBehavior mbcreated = (MandatoryBehavior) elementToCreate.getBehavior(MandatoryBehavior.class);
 		mbcreated.setPosition(mbcreator.getX()-50, mbcreator.getY());
-		System.out.println("Creator " + creator.getIdentifier());
-		System.out.println("Element to create " + elementToCreate.getIdentifier());
-		System.out.println("Created position " + mbcreated.getPosition());
+//		System.out.println("Creator " + creator.getIdentifier());
+//		System.out.println("Element to create " + elementToCreate.getIdentifier());
+//		System.out.println("Created position " + mbcreated.getPosition());
 		getParent().addGameEvent(new AddGameElementEvent(elementToCreate));
 	}
 }

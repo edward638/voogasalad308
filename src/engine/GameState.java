@@ -9,6 +9,7 @@ public class GameState{
 	private List<GameElement> removeElements;
 	private double gameSpeed;
 	private double gameTime;
+	private GameMetaData metaData;
 	
 	public GameState() {
 		//Talk to game data about reading info from file
@@ -51,6 +52,20 @@ public class GameState{
 	
 	public List<GameElement> getRemoveElements() {
 		return removeElements;
+	}
+	
+	public GameMetaData getGameMetaData() {
+		return metaData;
+	}
+
+	/**
+	 * Used for level changes
+	 * set the given game state to the new game state
+	 * @param level
+	 */
+	public void setState(GameState newState) {
+		elements = newState.getElements();
+		
 	}
 
 }

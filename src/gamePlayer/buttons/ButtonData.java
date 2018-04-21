@@ -26,4 +26,6 @@ public interface ButtonData {
 	// public GameDescriptionProvider getGameDescriptionProvider();
 	public void removeFromRoot(Node node);
 	public Boolean getVolumeStatus();
+	public void resumeGame();
+	public void pauseGame();
 }

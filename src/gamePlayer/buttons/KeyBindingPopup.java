@@ -111,6 +111,7 @@ public class KeyBindingPopup extends Pane {
 		close.setLayoutX(175);
 		close.setLayoutY(350);
 		close.setOnAction(event -> {
+			buttonData.resumeGame();
 			buttonData.removeFromRoot(this);
 		});
 		this.getChildren().add(close);

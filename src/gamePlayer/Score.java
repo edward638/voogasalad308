@@ -40,10 +40,10 @@ public class Score {
 		@Override
 		public int compare(Score score1, Score score2) {
 			if (score1.score > score2.score) {
-				return 1;
+				return -1;
 			}
 			if (score1.score < score2.score) {
-				return -1;
+				return 1;
 			}
 			return 0;
 		}

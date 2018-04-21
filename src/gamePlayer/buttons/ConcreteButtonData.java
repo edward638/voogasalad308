@@ -103,4 +103,16 @@ public class ConcreteButtonData implements ButtonData {
 		return gamePlayer.getMusicOn();
 	}
 
+	@Override
+	public void resumeGame() {
+		engine.resume();
+		
+	}
+
+	@Override
+	public void pauseGame() {
+		engine.pause();
+		
+	}
+
 }

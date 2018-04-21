@@ -31,6 +31,9 @@ public class GameSelector extends ScrollPane {
 		this.setPrefSize(900, 590);
 		this.setHbarPolicy(ScrollBarPolicy.NEVER);
 		initializeGameSelections();
+		Button b = new Button("FADSFASDFASD");
+		
+
 	}
 
 	private void initializeGameSelections() {
@@ -55,16 +58,19 @@ public class GameSelector extends ScrollPane {
 
 			Pane gameDescriptionPane = setupNewGamePane(gameName, gameString, gameDescription, gameImage);
 
-			Button playButton = new Button("Select Game");
+			Button playButton = new Button("ASDFASDFAS Game");
 			playButton.setLayoutX(750);
 			playButton.setLayoutY(90);
 			playButton.setOnAction((event) -> {
 				buttonData.removeFromRoot(gameSelectorBox);
+				buttonData.removeFromRoot(this);
 				buttonData.playGame(gameName);
+
 			});
 
 			gameDescriptionPane.getChildren().add(playButton);
 			gameSelectorBox.getChildren().add(gameDescriptionPane);
+
 
 		}
 

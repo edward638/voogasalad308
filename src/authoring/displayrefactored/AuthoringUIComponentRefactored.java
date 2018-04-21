@@ -16,12 +16,9 @@ public abstract class AuthoringUIComponentRefactored {
 		borderPane = new BorderPane();
 	}
 	
-	public void GenerateComponent() {
-		
-	}
+	protected abstract void GenerateComponent();
 	
-	public BorderPane getUIComponent() {
-		
+	public BorderPane getUIComponent() {	
 		return borderPane;
 	}
 	

@@ -8,7 +8,7 @@ public class AuthoringEnvironmentRefactored {
 	private AuthoringEnvironmentGUIRefactored authoringEnvironmentGUIRefactored;
 	
 	public AuthoringEnvironmentRefactored(Game game) {
-		
+	
 		authoringEnvironmentGUIRefactored = new AuthoringEnvironmentGUIRefactored();
 		
 	}

@@ -1,6 +1,7 @@
 package authoring.displayrefactored.popups;
 
 import authoring.display.NewComponentWindow;
+import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -11,10 +12,14 @@ public abstract class PopupRefactored {
 	private BorderPane borderPane;
 	
 	public PopupRefactored() {
-		
 		stage = new Stage();
 		borderPane = new BorderPane();
-		
+	}
+	
+	protected void open(int xSize, int ySize) {
+		Scene scene = new Scene(borderPane, xSize, ySize);
+		stage.setScene(scene);
+		stage.show();
 	}
 	
 	protected abstract void GeneratePopup();
@@ -23,5 +28,9 @@ public abstract class PopupRefactored {
 		return borderPane;
 	}
 	
+	protected abstract void mapButtons();
 	
+	protected void close() {
+		stage.close();
+	}
 }

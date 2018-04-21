@@ -30,9 +30,9 @@ class ConverterTester {
 	@Test
 	void convertGameObject() {
 		Behavior behave = new Behavior(Movable.class.getCanonicalName(), new HashSet<Property>());
-		Property propXvel = new Property("xvel", Double.class);
+		Property propXvel = new Property("xVel", Double.class);
 		propXvel.setValue(10.0);
-		Property propYvel = new Property("yvel", Double.class);
+		Property propYvel = new Property("yVel", Double.class);
 		propYvel.setValue(1.0);
 		behave.addProperty(propXvel);
 		behave.addProperty(propYvel);

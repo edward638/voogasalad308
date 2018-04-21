@@ -18,6 +18,7 @@ public abstract class PopupRefactored {
 	protected void open(int xSize, int ySize) {
 		Scene scene = new Scene(borderPane, xSize, ySize);
 		stage.setScene(scene);
+		stage.centerOnScreen();
 		stage.show();
 	}
 	

@@ -13,6 +13,7 @@ public final class ResourceBundleManager {
 	private static final String DEFAULT_RESOURCE_PATH = "data/propertiesFiles/";
 	private static final String PATHS = "Paths";
 	private static final String UI_POSITIONS = "UIPositions";
+	private static final String AUTHORING = "Authoring";
 	
 	/**
 	 * retrieves string from Paths.properties
@@ -27,6 +28,11 @@ public final class ResourceBundleManager {
 	public static int getPosition(String s) {
 		resources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PATH + UI_POSITIONS);
 		return Integer.parseInt(resources.getString(s));
+	}
+	
+	public static String getAuthoring(String s) {
+		resources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PATH + AUTHORING);
+		return resources.getString(s);
 	}
 	
 }

@@ -22,7 +22,6 @@ public class EngineClassRetriever {
 
 	public Set<String> cleanClassSet(Set<?> classes) {
 		Set<String> classNames = new TreeSet<>();
-//		classNames = classes.forEach(item -> System.out.println(item));
 		return classNames;
 	}
 	

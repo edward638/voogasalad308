@@ -2,8 +2,10 @@ package engine;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import engine.behaviors.MainCharacter;
+import engine.behaviors.MandatoryBehavior;
 
 public class GameState{
 	private List<GameElement> elements;
@@ -66,20 +68,34 @@ public class GameState{
 	 * @param level
 	 */
 	public void setState(GameState newState) {
-		getMainCharacters(elements);
-		elements = newState.getElements();
-		
+		List<GameElement> oldMainCharacters = getMainCharacters(elements);
+		List<GameElement> newMainCharacters = updateMainCharacters(oldMainCharacters,getMainCharacters(newState.getElements()));
+		elements = replaceMainCharacters(newState.getElements(), newMainCharacters);		
 	}
 	
 	private List<GameElement> getMainCharacters(List<GameElement> elements) {
-		//Convert to stream
-		List<GameElement> mainCharacters = new ArrayList<GameElement>();
-		for (GameElement e: elements) {
-			if (e.hasBehavior(MainCharacter.class)) {
-				mainCharacters.add(e);
+		return elements.stream()
+				.filter(e -> e.hasBehavior(MainCharacter.class))
+				.collect(Collectors.toList());
+	}
+	
+	private List<GameElement> updateMainCharacters(List<GameElement> oldMainCharacters, List<GameElement> newMainCharacters) {
+		for (GameElement omc: oldMainCharacters) {
+			for (GameElement nmc: newMainCharacters) {
+				omc.setPosition(nmc.getPosition());
 			}
 		}
-		return mainCharacters;
+		return oldMainCharacters;
 	}
+	
+	private List<GameElement> replaceMainCharacters(List<GameElement> tempNewState, List<GameElement> newMainCharacters) {
+		List<GameElement> newState = tempNewState.stream().filter(e -> !e.hasBehavior(MainCharacter.class)).collect(Collectors.toList());
+		newState.addAll(newMainCharacters);	
+		return newState;
+	}
+	
+	
+	
+	
 
 }

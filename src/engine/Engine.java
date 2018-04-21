@@ -36,7 +36,6 @@ public class Engine {
 	private String musicPath = "data/music/WiiShopChannelMusic.mp3";
 	private AudioPlayer audioPlayer;
 	
-	
 	/**
 	 * NEW way to instantiate engine with a MetaData object
 	 * @param gamePath

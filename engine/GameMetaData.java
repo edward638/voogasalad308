@@ -19,6 +19,8 @@ public class GameMetaData {
 	}
 	
 	
+	
+	
 	public GameState getLevel(int level) {
 		return levels.get(level);
 	}
@@ -38,8 +40,6 @@ public class GameMetaData {
 		return gameName;
 	}
 	
-	public Map<String, Object> getMainChararcterData() {
-		return null;
-	}
+	
 	
 }

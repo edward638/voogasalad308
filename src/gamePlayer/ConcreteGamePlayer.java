@@ -8,6 +8,7 @@ import gamePlayer.buttons.ConcreteButtonData;
 import gamePlayer.buttons.KeyboardBindingButton;
 import gamePlayer.buttons.LoadButton;
 import gamePlayer.buttons.SaveButton;
+import gamePlayer.buttons.ToggleVolumeButton;
 import gamePlayer.buttons.NewGameButton;
 import gamePlayer.buttons.ReplayButton;
 import javafx.scene.Group;
@@ -41,6 +42,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 	private Button newGameButton;
 	private Button clearHighScoresButton;
 	private Button keyboardBindingButton;
+	private Button toggleVolumeButton;
 	private ConcreteButtonData buttonData;
 
 	private HUD hud;
@@ -100,10 +102,10 @@ public class ConcreteGamePlayer implements GamePlayer {
 		root.getChildren().add(saveButton);
 		replayButton = new ReplayButton(buttonXLocation, 470, buttonWidth, buttonHeight, buttonData);
 		root.getChildren().add(replayButton);
-		keyboardBindingButton = new KeyboardBindingButton(970, 510, buttonWidth, buttonHeight, buttonData);
+		keyboardBindingButton = new KeyboardBindingButton(buttonXLocation, 510, buttonWidth, buttonHeight, buttonData);
 		root.getChildren().add(keyboardBindingButton);
-		// toggleGameSoundButton = new toggleButton(buttonLocation, 500, buttonWidth, buttonHeight, buttonData);
-
+		toggleVolumeButton = new ToggleVolumeButton(buttonXLocation, 550, buttonWidth, buttonHeight, buttonData);
+		root.getChildren().add(toggleVolumeButton);
 	}
 
 	@Override
@@ -111,6 +113,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 		root.getChildren().remove(gameDisplay);
 		root.getChildren().remove((Node) hud);
 		root.getChildren().remove(highScores.getScores());
+		//engine.close();
 		engine = new Engine(file);
 		keyInputDictionary.setGame(engine);
 		currentGameName = gameDescriptionProvider.getGameName(file);
@@ -143,10 +146,22 @@ public class ConcreteGamePlayer implements GamePlayer {
 		return myScene;
 	}
 
-	//@Override
-	public void DummyPlayGame(String file) {
-		// TODO Auto-generated method stub
+	@Override
+	public void toggleMusic() {
+		musicOn = !musicOn;
+
+	}
+
+	@Override
+	public Boolean getMusicOn() {
+		return musicOn;
+	}
+
+	public void closeEngine() {
+		//engine.close();
 		
 	}
+	
+	
 
 }

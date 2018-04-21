@@ -28,6 +28,11 @@ public class GameElement {
 		returnedGameEvents = new ArrayList<>();
 	}
 	
+	public GameElement(String name) {
+		this();
+		behaviors.add(new MandatoryBehavior(this, name));
+	}
+	
 	public Set<Behavior> getAllBehaviors() {
 		return behaviors;
 	}

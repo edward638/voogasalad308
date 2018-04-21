@@ -6,7 +6,6 @@ import java.util.List;
 
 import engine.GameElement;
 import engine.behaviors.MandatoryBehavior;
-import engine.behaviors.Movable;
 import javafx.scene.shape.Shape;
 
 public class CollisionEvent extends ElementEvent {

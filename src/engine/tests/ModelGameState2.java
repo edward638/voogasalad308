@@ -6,15 +6,18 @@ import java.util.List;
 
 import engine.GameElement;
 import engine.GameState;
+import engine.actions.CollisionDamageAllSides;
 import engine.actions.CollisionKillable;
 import engine.actions.CollisionStopXMotion;
 import engine.actions.CollisionStopYMotion;
 import engine.behaviors.Gravity;
 import engine.behaviors.Killable;
+import engine.behaviors.Killer;
 import engine.behaviors.MainCharacter;
 import engine.behaviors.MandatoryBehavior;
 import engine.behaviors.Movable;
 import engine.behaviors.MovableCharacter;
+import engine.behaviors.Shooter;
 import engine.behaviors.TimeRoutine2;
 import engine.behaviors.TimeTracker;
 import engine.behaviors.shapes.EllipseShape;
@@ -75,9 +78,15 @@ public class ModelGameState2 {
 		mario.addBehavior(new Gravity(mario));
 		mario.addBehavior(new TimeTracker(mario));
 		TimeRoutine2 marioRoutines = new TimeRoutine2(mario);
+		
 		marioRoutines.addRoutine(5.0, (e, ge) -> {
 			MovableCharacter mc = (MovableCharacter) mario.getBehavior(MovableCharacter.class);
 			mc.jump();
+		});
+		mario.addBehavior(new Shooter(mario));
+		marioRoutines.addRoutine(2.0,  (e, ge) -> {
+			Shooter s = (Shooter) mario.getBehavior(Shooter.class);
+			s.shootRight();
 		});
 		
 		marioRoutines.addRoutine(7.0, (e, ge) -> {
@@ -134,10 +143,26 @@ public class ModelGameState2 {
 		return block;
 	}
 	
+	public GameElement getBullet(Double xpos, Double ypos, Double v, List<Double> direction) {
+		GameElement bullet = new GameElement();
+		bullet.addBehavior(new MandatoryBehavior(bullet, "Bullet", xpos, ypos, new RectangleShape(20.0, 20.0), "bullet.png"));
+		bullet.addBehavior(new Movable(bullet, v, direction));
+		bullet.addBehavior(new Killer(bullet, 10.0));
+		bullet.addEventResponse(
+				new CollisionEvent(
+						bullet, 
+						CollisionEvent.ALL_SIDES,
+						new GameElement(MandatoryBehavior.REFER_ALL_ELEMENTS),
+						CollisionEvent.ALL_SIDES),
+				new CollisionDamageAllSides());
+		return bullet;
+	}
+	
 	public GameElement getBullet(Double xpos, Double ypos, Double v) {
 		GameElement bullet = new GameElement();
 		bullet.addBehavior(new MandatoryBehavior(bullet, "Bullet", xpos, ypos, new RectangleShape(20.0, 20.0), "bullet.png"));
 		bullet.addBehavior(new Movable(bullet, v, Arrays.asList(1.0, 0.0)));
+		bullet.addBehavior(new Killer(bullet, 10.0));
 		return bullet;
 	}
 }

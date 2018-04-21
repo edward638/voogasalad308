@@ -166,10 +166,10 @@ public class ConcreteHighScores implements HighScores {
 //		chs.addScore("asfasdfasdfasdfasdfasdfasfasdfsd", 9);
 //		chs.addScore("hi6", 10);
 //		chs.addScore("fadsfs", 11);
-//		chs.addScore("h6", 12);
+//		chs.addScore("JEFF", 12);
 //		chs.printQ();
 //		ScoreSaver hss = new ScoreSaver("TestGame");
-//		//hss.saveScores(chs.getScoreList());
+//		hss.saveScores(chs.getScoreList());
 //		chs.clear();
 //		List<Score> l = hss.loadSavedScores();
 //		System.out.println(l);

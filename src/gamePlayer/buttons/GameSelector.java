@@ -58,7 +58,7 @@ public class GameSelector extends ScrollPane {
 
 			Pane gameDescriptionPane = setupNewGamePane(gameName, gameString, gameDescription, gameImage);
 
-			Button playButton = new Button("ASDFASDFAS Game");
+			Button playButton = new Button("Select Game");
 			playButton.setLayoutX(750);
 			playButton.setLayoutY(90);
 			playButton.setOnAction((event) -> {

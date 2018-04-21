@@ -25,7 +25,7 @@ public class ScoreSaver {
 
 	/**
 	 * @param name
-	 *            is the name of the game
+	 *            is the name of the folder of the game
 	 */
 	public ScoreSaver(String name) {
 		this.gameName = name;
@@ -82,7 +82,7 @@ public class ScoreSaver {
 		} catch (Exception e) {
 			System.out.println("The score file has not been intialized or could not be found");
 			System.out.println("maybe it's a new game, and no high scores have been saved?");
-			throw new NullPointerException();
+			return new ArrayList<>();
 		}
 		return loadedScores;
 	}

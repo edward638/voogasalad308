@@ -22,7 +22,6 @@ import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
@@ -51,7 +50,6 @@ public class ConcreteGamePlayer implements GamePlayer {
 	private ConcreteButtonData buttonData;
 
 	private HUD hud;
-	// private Pane gameDisplay;
 	private ConcreteHighScores highScores;
 
 	private Engine engine;
@@ -88,7 +86,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 		myStage = stage;
 		myStage.setScene(myScene);
 
-		highScores = new ConcreteHighScores("hi"); // we should make a blank constructor for this
+		highScores = new ConcreteHighScores();
 		root.getChildren().add(highScores.getScores());
 		keyInputDictionary = new KeyInputDictionary(engine);
 
@@ -108,7 +106,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 			public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
 				System.out.println(new_val.doubleValue());
 				soundLevel = new_val.doubleValue();
-				engine.setVolume(soundLevel);
+				//engine.setVolume(soundLevel);
 			}
 		});
 		root.getChildren().add(slider);
@@ -164,7 +162,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 		myScene.setOnKeyPressed(e -> keyInputDictionary.handleAction(e.getCode()));
 
 		hud = new ConcreteHUD(currentGameName);
-		highScores = new ConcreteHighScores(currentGameName);
+		highScores = new ConcreteHighScores(file);
 
 		root.getChildren().add(gameDisplay);
 		root.getChildren().add((Node) hud);

@@ -1,31 +1,31 @@
 <authoring.GameObject>
-  <myName>a</myName>
+  <myName>hi</myName>
   <myBehaviors>
     <authoring.Behavior>
       <myProperties>
         <authoring.Property>
-          <myValue class="double">10.0</myValue>
+          <myName>shapeDef</myName>
+          <myValueType>engine.behaviors.shapes.ShapeDefinition</myValueType>
+        </authoring.Property>
+        <authoring.Property>
+          <myValue class="string">hi</myValue>
+          <myName>elementName</myName>
+          <myValueType>java.lang.String</myValueType>
+        </authoring.Property>
+        <authoring.Property>
+          <myValue class="double">30.0</myValue>
           <myName>xPos</myName>
           <myValueType>java.lang.Double</myValueType>
         </authoring.Property>
         <authoring.Property>
-          <myValue class="double">10.0</myValue>
+          <myValue class="double">30.0</myValue>
           <myName>yPos</myName>
           <myValueType>java.lang.Double</myValueType>
         </authoring.Property>
         <authoring.Property>
           <myValue class="string">a</myValue>
-          <myName>elementName</myName>
-          <myValueType>java.lang.String</myValueType>
-        </authoring.Property>
-        <authoring.Property>
-          <myValue class="string">a</myValue>
           <myName>imagePath</myName>
           <myValueType>java.lang.String</myValueType>
-        </authoring.Property>
-        <authoring.Property>
-          <myName>shapeDef</myName>
-          <myValueType>engine.behaviors.shapes.ShapeDefinition</myValueType>
         </authoring.Property>
       </myProperties>
       <myName>MandatoryBehavior</myName>

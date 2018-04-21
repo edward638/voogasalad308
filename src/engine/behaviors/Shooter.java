@@ -20,15 +20,27 @@ public class Shooter extends Behavior {
 		distAway = dist;
 	}
 	
+	public Shooter(GameElement ge) {
+		this(ge, 30.0, 10.0);
+		MandatoryBehavior mand = (MandatoryBehavior) ge.getBehavior(MandatoryBehavior.class);
+		distAway = Math.sqrt(Math.pow(mand.getShape().getBoundsInLocal().getHeight(), 2.0) + Math.pow(mand.getShape().getBoundsInLocal().getWidth(), 2.0));
+	}
+	
 	public void shoot(Double v, List<Double> direction) {
 		MandatoryBehavior mand = (MandatoryBehavior) getParent().getBehavior(MandatoryBehavior.class);
-		Double magDirection = Math.pow(direction.get(0), 2) + Math.pow(direction.get(1), 2);
-		GameElement bullet = new ModelGameState2().getBullet(mand.getX() + distAway * direction.get(0)/magDirection, mand.getY() * direction.get(1)/magDirection, v);
+		Double magDirection = Math.sqrt(Math.pow(direction.get(0), 2) + Math.pow(direction.get(1), 2));
+		Double startx = mand.getX() + distAway * direction.get(0)/magDirection + mand.getShape().getBoundsInLocal().getWidth()/2;
+		Double starty = mand.getY() + distAway * direction.get(1)/magDirection + mand.getShape().getBoundsInLocal().getHeight()/2;
+		GameElement bullet = new ModelGameState2().getBullet(startx, starty, v, direction);
 		getParent().addGameEvent(new AddElementEvent(bullet));
 	}
 	
+	public void shoot(List<Double> direction) {
+		shoot(defaultVelocity, direction);
+	}
+	
 	public void shootRight() {
-		shoot(defaultVelocity, Arrays.asList(1.0, 0.0));
+		shoot(defaultVelocity, Arrays.asList(-1.0, 0.0));
 	}
 	
 	public void shootLeft() {

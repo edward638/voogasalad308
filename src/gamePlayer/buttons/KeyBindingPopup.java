@@ -4,6 +4,8 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 import gamePlayer.KeyInputDictionary;
+import javafx.animation.FadeTransition;
+import javafx.animation.Timeline;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,6 +14,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 public class KeyBindingPopup extends Pane {
 
@@ -63,7 +66,7 @@ public class KeyBindingPopup extends Pane {
 	private void makeKeyChangeButton(int yVal, KeyCode keyCode, String action) {
 
 		KeyCode currentBinding = keyMap.getKeyForValue(keyCode);
-		
+
 		ArrayList<Node> nodeList = new ArrayList<>();
 		Button change = new Button("Change");
 		Label actionText = new Label(action + ":");
@@ -73,14 +76,23 @@ public class KeyBindingPopup extends Pane {
 		keyText.setStyle("-fx-font: 20 Euphemia;");
 		keyText.setTextFill(Color.ALICEBLUE);
 
+		FadeTransition ft = new FadeTransition(Duration.millis(500), keyText);
+		ft.setFromValue(1.0);
+		ft.setToValue(0.1);
+		ft.setCycleCount(Timeline.INDEFINITE);
+		ft.setAutoReverse(true);
+
 		nodeList.add(actionText);
 		nodeList.add(keyText);
 		nodeList.add(change);
 
 		change.setOnAction(pushButtonEvent -> {
+			ft.play();
 			this.setOnKeyPressed(keyPressInput -> {
 				keyMap.replaceKey(keyPressInput.getCode(), keyCode, currentBinding);
 				keyText.setText(keyPressInput.getCode().toString());
+				ft.stop();
+				keyText.setOpacity(1);
 			});
 		});
 		int xVal = 80;
@@ -92,18 +104,20 @@ public class KeyBindingPopup extends Pane {
 
 		this.getChildren().addAll(nodeList);
 
-//		Button changeA = new Button("Key for " + action + " is: " + currentBinding.toString());
-//		changeA.setLayoutY(yVal);
-//		changeA.setLayoutX(200);
-//		
-//		changeA.setOnAction(pushButtonEvent -> {
-//			this.setOnKeyPressed(keyPressInput -> {
-//				keyMap.replaceKey(keyPressInput.getCode(), keyCode, currentBinding);
-//				changeA.setText("Key for " + action + " is: " + keyPressInput.getCode().toString());
-//			});
-//		});
-//
-//		this.getChildren().add(changeA);
+		// Button changeA = new Button("Key for " + action + " is: " +
+		// currentBinding.toString());
+		// changeA.setLayoutY(yVal);
+		// changeA.setLayoutX(200);
+		//
+		// changeA.setOnAction(pushButtonEvent -> {
+		// this.setOnKeyPressed(keyPressInput -> {
+		// keyMap.replaceKey(keyPressInput.getCode(), keyCode, currentBinding);
+		// changeA.setText("Key for " + action + " is: " +
+		// keyPressInput.getCode().toString());
+		// });
+		// });
+		//
+		// this.getChildren().add(changeA);
 	}
 
 	private void setupCloseButton() {

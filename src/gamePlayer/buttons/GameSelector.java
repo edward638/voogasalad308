@@ -32,7 +32,6 @@ public class GameSelector extends ScrollPane {
 		this.setHbarPolicy(ScrollBarPolicy.NEVER);
 		initializeGameSelections();
 		Button b = new Button("FADSFASDFASD");
-		
 
 	}
 
@@ -51,7 +50,9 @@ public class GameSelector extends ScrollPane {
 		File[] fList = directory.listFiles();
 		for (File file : fList) {
 			String gameName = file.getName();
-			if (gameName.contains("DS_Store")) {continue;}
+			if (gameName.contains("DS_Store")) {
+				continue;
+			}
 			String gameString = gameDescriptionProvider.getGameName(gameName);
 			String gameDescription = gameDescriptionProvider.getGameDescription(gameName);
 			Image gameImage = gameDescriptionProvider.getDescriptionImage(gameName);
@@ -70,7 +71,6 @@ public class GameSelector extends ScrollPane {
 
 			gameDescriptionPane.getChildren().add(playButton);
 			gameSelectorBox.getChildren().add(gameDescriptionPane);
-
 
 		}
 

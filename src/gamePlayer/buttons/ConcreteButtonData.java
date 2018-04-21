@@ -105,13 +105,13 @@ public class ConcreteButtonData implements ButtonData {
 
 	@Override
 	public void resumeGame() {
-		engine.resume();
+		//engine.resume();
 		
 	}
 
 	@Override
 	public void pauseGame() {
-		engine.pause();
+		//engine.pause();
 		
 	}
 

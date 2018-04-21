@@ -4,11 +4,13 @@ package engine.authouringconversion;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import authoring.Behavior;
 import authoring.GameObject;
 import authoring.GameScene;
+import authoring.Property;
 import engine.GameElement;
 import engine.GameState;
 
@@ -60,5 +62,24 @@ public class Converter {
 		gs.getMyObjects().stream()
 		.forEach(gameObj -> state.addGameElement(gameObject2GameElement(gameObj)));
 		return state;
+	}
+	
+	public GameObject gameElement2GameObject(GameElement ge) {
+		GameObject go = new GameObject();
+		for (engine.behaviors.Behavior b: ge.getAllBehaviors()) {
+			Behavior authB = new Behavior();
+			Map<String, Object> engBehaviorProperties = b.reportProperties();
+			for (String key: b.reportProperties().keySet()) {
+				Property prop = new Property(key, engBehaviorProperties.getClass());
+				prop.setValue(engBehaviorProperties.get(key));
+				authB.addProperty(prop);
+			}
+			go.addBehavior(authB);
+		}
+		return go;
+	}
+	
+	public GameScene gameState2GameElement(GameState state) {
+		GameScene scene = new GameScene();
 	}
 }

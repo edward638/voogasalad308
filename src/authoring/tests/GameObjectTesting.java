@@ -2,7 +2,7 @@ package authoring.tests;
 
 import java.util.HashSet;
 
-import authoring.Behavior;
+import authoring.AuthBehavior;
 import authoring.GameObject;
 import authoring.Property;
 
@@ -13,7 +13,7 @@ public class GameObjectTesting {
 	}
 	
 	public static void main(String[] args) {
-		Behavior b = new Behavior("Behavior!", new HashSet<Property>());
+		AuthBehavior b = new AuthBehavior("Behavior!", new HashSet<Property>());
 
 //		Property prop0 = new Property("awesomeness", new Double(1000000));
 //		Property prop1 = new Property("coolness", new Double(10));

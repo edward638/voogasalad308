@@ -61,7 +61,7 @@ public class Game extends Observable implements GameViewObservable, ObjectInfoOb
 	}
 	
 	//makes a game object with the given property
-	public GameObject makeGameObject(Behavior basic) { 
+	public GameObject makeGameObject(AuthBehavior basic) { 
 		GameObject gameObject = new GameObject(basic);
 		return gameObject;
 	}

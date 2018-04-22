@@ -5,7 +5,7 @@ import java.util.Map;
 import data.GameDescriptionProvider;
 import data.Serializer;
 import engine.GameState;
-import gamePlayer.KeyInputDictionary;
+import gamePlayer.keyBindings.KeyInputDictionary;
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;

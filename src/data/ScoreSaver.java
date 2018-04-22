@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import gamePlayer.Score;
+import gamePlayer.highScores.Score;
 
 /**
  * @author August Ning and Edward Zhuang

@@ -1,4 +1,4 @@
-package gamePlayer;
+package gamePlayer.highScores;
 
 import java.util.ArrayList;
 import java.util.Collections;

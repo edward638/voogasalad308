@@ -4,19 +4,14 @@ import java.io.File;
 import java.nio.file.Paths;
 
 import data.GameDescriptionProvider;
-import data.GameLoader;
-//
-import javafx.geometry.Insets;
+
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
@@ -31,8 +26,6 @@ public class GameSelector extends ScrollPane {
 		this.setPrefSize(900, 590);
 		this.setHbarPolicy(ScrollBarPolicy.NEVER);
 		initializeGameSelections();
-		Button b = new Button("FADSFASDFASD");
-
 	}
 
 	private void initializeGameSelections() {

@@ -6,12 +6,14 @@ import java.util.ResourceBundle;
 import data.GameDescriptionProvider;
 import engine.Engine;
 import engine.GameState;
-import gamePlayer.buttons.ClearHighScoresButton;
 import gamePlayer.buttons.ConcreteButtonData;
-import gamePlayer.buttons.KeyboardBindingButton;
 import gamePlayer.buttons.LoadButton;
 import gamePlayer.buttons.SaveButton;
 import gamePlayer.buttons.ToggleVolumeButton;
+import gamePlayer.highScores.ClearHighScoresButton;
+import gamePlayer.highScores.ConcreteHighScores;
+import gamePlayer.keyBindings.KeyInputDictionary;
+import gamePlayer.keyBindings.KeyboardBindingButton;
 import gamePlayer.buttons.NewGameButton;
 import gamePlayer.buttons.ReplayButton;
 import javafx.beans.value.ChangeListener;
@@ -37,8 +39,6 @@ public class ConcreteGamePlayer implements GamePlayer {
 	private Stage myStage;
 	private Group root;
 	private SubScene gameDisplay;
-
-	private GameState gameState;
 
 	private Button saveButton;
 	private Button loadButton;

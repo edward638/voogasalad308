@@ -95,6 +95,7 @@ public class NewGameObjectPopupRefactored extends PopupRefactored{
 		});
 		
 		saveButton.setOnAction(e->{
+//			System.out.println("ADDING TO GAMEOBJECT NAME: " + nameText.getText());
 			controller.addGameObject(nameText.getText(), Double.parseDouble(xText.getText()), Double.parseDouble(yText.getText()), imageText.getText(), image);
 			close();
 		});

@@ -132,6 +132,12 @@ public class Game extends Observable implements GameViewObservable, ObjectInfoOb
 		return getSceneManager().getCurrentScene().getSceneBackground().getPane();
 	}
 	
+	@Override
+	public GameObject getCurrentGameObject() {
+		// TODO Auto-generated method stub
+		return getSceneManager().getCurrentScene().getCurrentGameObject();
+	}
+	
 	public void notifyMyObservers() {
 		setChanged();
 		notifyObservers();

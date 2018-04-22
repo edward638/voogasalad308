@@ -39,7 +39,7 @@ public class ModelGameState {
 	
 	public ModelGameState() {
 		state = new GameState();
-		display = new DisplayState("enginetestmario", state);
+		display = new DisplayState(state);
 		
 		addMainCharacter();
 		ArrayList<GameElement> elements = new ArrayList<GameElement>();
@@ -62,7 +62,7 @@ public class ModelGameState {
 			state.addGameElement(el);
 			//display.addNewElement(el);
 		}
-		display = new DisplayState("enginetestmario", state);
+		display = new DisplayState(state);
 		//display.update(state);
 	}
 	

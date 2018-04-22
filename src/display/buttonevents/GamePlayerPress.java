@@ -29,7 +29,7 @@ public class GamePlayerPress implements ButtonEvent {
 	gamePlayerStage.setResizable(false);
 	
 	gamePlayerStage.setOnCloseRequest(event -> {
-		//gamePlayer.closeEngine();
+		gamePlayer.closeEngine();
 	    // Save file
 	});
 

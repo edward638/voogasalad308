@@ -113,7 +113,9 @@ public class ConcreteGamePlayer implements GamePlayer {
 		root.getChildren().remove(gameDisplay);
 		root.getChildren().remove((Node) hud);
 		root.getChildren().remove(highScores.getScores());
-		//engine.close();
+		if (engine != null) {
+			engine.close();
+		}
 		engine = new Engine(file);
 		keyInputDictionary.setGame(engine);
 		currentGameName = gameDescriptionProvider.getGameName(file);
@@ -158,8 +160,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 	}
 
 	public void closeEngine() {
-		//engine.close();
-		
+		engine.close();
 	}
 	
 	

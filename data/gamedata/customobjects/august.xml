@@ -9,9 +9,8 @@
           <myValueType>java.lang.String</myValueType>
         </authoring.Property>
         <authoring.Property>
-          <myValue class="string">august</myValue>
-          <myName>imagePath</myName>
-          <myValueType>java.lang.String</myValueType>
+          <myName>shapeDef</myName>
+          <myValueType>engine.behaviors.shapes.ShapeDefinition</myValueType>
         </authoring.Property>
         <authoring.Property>
           <myName>shapeDef</myName>

@@ -45,8 +45,8 @@ public class LevelPanel extends MainWindowComponent {
 		myGameViewWindow = gameViewWindow;
 		myPropertyPanel = propertyPanel;
 
-		myVBox = new VBox(DEFAULT_SPACING);
-		myHBox = new HBox(DEFAULT_SPACING);
+		myVBox = new VBox();
+		myHBox = new HBox();
 		myHBox.getChildren().addAll(makeAddGameObjectButton(), makeAddSceneBackgroundImageButton());
 		myVBox.getChildren().addAll(makeLevelChooser(), makeObjectList(), myHBox);
 	}

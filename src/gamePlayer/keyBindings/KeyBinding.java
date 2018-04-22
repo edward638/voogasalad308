@@ -68,12 +68,18 @@ public class KeyBinding {
 			fadeTransition.play();
 			keyIsChanged = false;
 			popUp.setOnKeyPressed(keyPressInput -> {
+				KeyCode keyPressInputCode = keyPressInput.getCode();
 				if (keyIsChanged == false) {
-					keyMap.replaceKey(keyPressInput.getCode(), defaultKeyCode, currentBinding);
-					keyText.setText(keyPressInput.getCode().toString());
-					fadeTransition.stop();
-					keyText.setOpacity(1);
-					keyIsChanged = true;
+					if (!keyMap.containsKey(keyPressInputCode)) {
+						keyMap.replaceKey(keyPressInputCode, defaultKeyCode, currentBinding);
+						keyText.setText(keyPressInputCode.toString());
+						fadeTransition.stop();
+						keyText.setOpacity(1);
+						keyIsChanged = true;
+					} else if (keyMap.containsKey(keyPressInputCode)) {
+						// add code here to show something that the key is already set to a command
+					}
+
 				}
 			});
 		});

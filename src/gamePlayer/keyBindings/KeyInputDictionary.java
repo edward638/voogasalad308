@@ -25,6 +25,10 @@ public class KeyInputDictionary {
 		dictionary.remove(oldInput);
 		dictionary.put(input, mapTo);
 	}
+	
+	public boolean containsKey(KeyCode input) {
+		return dictionary.containsKey(input);
+	}
 
 	public void handleAction(KeyCode input) {
 		if (dictionary.containsKey(input)) {

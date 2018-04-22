@@ -157,7 +157,6 @@ public class ConcreteGamePlayer implements GamePlayer {
 		gameDisplay.setLayoutX(Integer.parseInt(resources.getString("gameDisplayX")));
 		gameDisplay.setLayoutY(Integer.parseInt(resources.getString("gameDisplayY")));
 
-		// myScene.setOnKeyPressed(e -> engine.handleKeyInput(e.getCode()));
 		myScene.setOnKeyPressed(e -> keyInputDictionary.handleAction(e.getCode()));
 
 		hud = new ConcreteHUD(currentGameName);

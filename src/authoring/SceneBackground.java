@@ -31,8 +31,6 @@ public class SceneBackground {
 	}
 	
 	public Pane getPane() {
-		System.out.println("SceneBackground getPane()");
-		System.out.println(pane.getChildren().size());
 		return pane;
 	}
 	
@@ -43,7 +41,6 @@ public class SceneBackground {
 //		imagePane.setLayoutX(myXSize/2);
 //		imagePane.setLayoutY(myYSize/2);
 		pane.getChildren().add(imagePane);
-		System.out.println(pane.getChildren().size());
 	}
 	
 	public void clearPane() {

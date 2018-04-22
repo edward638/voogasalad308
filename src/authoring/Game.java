@@ -2,6 +2,13 @@ package authoring;
 
 import data.GameInitializer;
 import data.ImageManager;
+import javafx.beans.InvalidationListener;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
 
 /** 
  * Game keeps track of an entire game 
@@ -9,7 +16,7 @@ import data.ImageManager;
  * 
  * @author: Summer
  **/
-public class Game {
+public class Game extends Observable implements GameViewObservable, ObjectInfoObservable, LevelsObservable{
 
 	private String gameName;
 	private String gameDescription;
@@ -54,7 +61,7 @@ public class Game {
 	}
 	
 	//makes a game object with the given property
-	public GameObject makeGameObject(Behavior basic) { 
+	public GameObject makeGameObject(AuthBehavior basic) { 
 		GameObject gameObject = new GameObject(basic);
 		return gameObject;
 	}
@@ -81,4 +88,53 @@ public class Game {
 	public void setSceneManager(SceneManager sceneManager) {
 		mySceneManager = sceneManager;
 	}
+
+	@Override
+	public List<GameObject> getGameObjects() {
+		// TODO Auto-generated method stub
+		return getSceneManager().getCurrentScene().getMyObjects();
+	}
+
+	@Override
+	public List<GameScene> getScenes() {
+		// TODO Auto-generated method stub
+		return getSceneManager().getScenes();
+	}
+
+	@Override
+	public List<ImageView> getImageViews() {
+		// TODO Auto-generated method stub
+		List<ImageView> list = new ArrayList<>();
+		
+		
+		for (GameObject go: getSceneManager().getCurrentScene().getMyObjects()) {
+			Behavior mandatoryBehavior = go.getBehavior("MandatoryBehavior");
+			Property xPositionProperty = mandatoryBehavior.getProperty("xPos");
+			Property yPositionProperty = mandatoryBehavior.getProperty("yPos");
+			Property imagePathProperty = mandatoryBehavior.getProperty("imagePath");
+			Double xPosition = (Double) xPositionProperty.getValue();
+			Double yPosition = (Double) yPositionProperty.getValue();
+			String imagePath = (String) imagePathProperty.getValue();
+			ImageView imageView =new ImageView(myImageManager.getImage(imagePath + ".png"));
+			imageView.setLayoutX(xPosition);
+			imageView.setLayoutY(yPosition);
+			imageView.setPreserveRatio(true);
+			imageView.setFitHeight(200);
+			list.add(imageView);
+		}
+		
+		return list;
+	}
+
+	@Override
+	public Pane getSceneBackgroundPane() {
+		// TODO Auto-generated method stub
+		return getSceneManager().getCurrentScene().getSceneBackground().getPane();
+	}
+	
+	public void notifyMyObservers() {
+		setChanged();
+		notifyObservers();
+	}
+	
 }

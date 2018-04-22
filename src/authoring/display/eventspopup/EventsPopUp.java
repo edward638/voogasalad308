@@ -5,9 +5,12 @@ import java.util.ResourceBundle;
 import authoring.Game;
 import authoring.GameObject;
 import authoring.display.AuthoringUIComponent;
+import javafx.geometry.Insets;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 /**
  * 
@@ -19,8 +22,8 @@ import javafx.scene.layout.HBox;
  */
 public class EventsPopUp extends AuthoringUIComponent {
 
-	private final int SCREEN_WIDTH = 50;
-	private final int SCREEN_HEIGHT = 50;
+//	private final int SCREEN_WIDTH = 50;
+	private final int SCREEN_HEIGHT = 400;
 
 	private Scene eventsPUScene;
 	private HBox eventsPUBox;
@@ -30,6 +33,16 @@ public class EventsPopUp extends AuthoringUIComponent {
 		super(resources, game, root);
 		eventsPUBox = new HBox();
 		epuc = new EventsPopUpController(game, go);
+		eventsPUBox.setPrefHeight(SCREEN_HEIGHT);
+		eventsPUBox.setPadding(new Insets(10));
+	    eventsPUBox.setSpacing(8);
+		eventsPUBox.getChildren().addAll(epuc.getWindows());
+		eventsPUScene = new Scene((Group) root, (int) eventsPUBox.getWidth(), SCREEN_HEIGHT, Color.GRAY);
+		((Group) root).getChildren().add(eventsPUBox);
+	}
+	
+	public Scene getScene() {
+		return eventsPUScene;
 	}
 
 }

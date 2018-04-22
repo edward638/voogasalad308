@@ -35,6 +35,7 @@ public class EventsWindow extends VBox {
 		go = currObject;
 		classRetriever = new EngineClassRetriever();
 		epuc = myEPUC;
+		myEvents = new ListView<>();
 		currentEvent = null;
 		createVBox();
 	}
@@ -42,6 +43,7 @@ public class EventsWindow extends VBox {
 	private void createVBox() {
 		this.setPadding(new Insets(10));
 	    this.setSpacing(8);
+	    this.setPrefWidth(200);
 	    Text title = new Text("Events");
 	    this.getChildren().add(title);
 	    this.getChildren().addAll(makeEventDropdown(), makeEventList());
@@ -53,7 +55,8 @@ public class EventsWindow extends VBox {
 		Set<?> retrieved = new TreeSet<>();
 		retrieved = classRetriever.getClasses(EVENTS_SUPERCLASS, EVENTS_PACKAGE);
 		retrieved.forEach(c -> {
-							String[] name = c.toString().split(".");
+							String[] holder = c.toString().split(" ");
+							String[] name = holder[holder.length - 1].split("\\.");
 							String use = name[name.length-1];
 							possibleEvents.getItems().add(use);
 		});
@@ -65,15 +68,25 @@ public class EventsWindow extends VBox {
 		currentEvent = new Event();
 		currentEvent.setEventType(eventName);
 		go.addEvent(currentEvent);
+		epuc.updateFromEvent(currentEvent);
 	}
 
 	private ListView<Event> makeEventList(){
-		myEvents = new ListView<>();
+		myEvents.getItems().clear();
 		myEvents.getItems().setAll(go.getEvents());
 		return myEvents;
 	}
 	
+	public void updateEventList() {
+		this.getChildren().remove(myEvents);
+		this.getChildren().add(makeEventList());
+	}
+	
 	public Event getCurrEvent() {
 		return currentEvent;
+	}
+	
+	public boolean validEvent() {
+		return currentEvent != null;
 	}
 }

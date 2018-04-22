@@ -1,17 +1,11 @@
 package data;
 
 import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
-
-import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.SnapshotParameters;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
-import javafx.scene.layout.Pane;
 
 public class DataDemo {
 
@@ -66,36 +60,41 @@ public class DataDemo {
 //		String saved = x.toXML(sb);
 //		System.out.println(saved);
 		
-		Pane pane = new Pane();
-		pane.setPrefSize(2000, 2000);
-		ImageView image1 = new ImageView(im.getImage("bowser.png"));
-		ImageView image2 = new ImageView(im.getImage("brick1.png"));
-		ImageView image3 = new ImageView(im.getImage("brick2.png"));
+//		Pane pane = new Pane();
+//		pane.setPrefSize(2000, 2000);
+//		ImageView image1 = new ImageView(im.getImage("bowser.png"));
+//		ImageView image2 = new ImageView(im.getImage("brick1.png"));
+//		ImageView image3 = new ImageView(im.getImage("brick2.png"));
+//
+//		image1.setLayoutX(100);
+//		image1.setLayoutY(1000);
+//
+//		image2.setLayoutX(500);
+//		image2.setLayoutY(700);
+//		
+//		image3.setLayoutX(1300);
+//		image3.setLayoutY(600);
+//		
+//		pane.getChildren().add(image1);
+//		pane.getChildren().add(image2);
+//		pane.getChildren().add(image3);
+//			System.out.println(pane.getPrefHeight());
+//		 WritableImage wi = new WritableImage((int) pane.getPrefWidth(), (int) pane.getPrefHeight());
+//		 pane.snapshot(new SnapshotParameters(), wi);
+//
+//		    try {
+//		    	File f = new File("./data/gamedata/games/Demo308/background.png");
+//		    	RenderedImage ri = SwingFXUtils.fromFXImage(wi, null);
+//		        ImageIO.write(ri, "png", f);
+//		    } catch (Exception e) {
+//		    	e.printStackTrace();
+//		    }
 
-		image1.setLayoutX(100);
-		image1.setLayoutY(1000);
-
-		image2.setLayoutX(500);
-		image2.setLayoutY(700);
 		
-		image3.setLayoutX(1300);
-		image3.setLayoutY(600);
+		HashMap<Integer, String> map = new HashMap<>();
+		map.put(1, "hello");
+		map.put(2, "bye");
 		
-		pane.getChildren().add(image1);
-		pane.getChildren().add(image2);
-		pane.getChildren().add(image3);
-			System.out.println(pane.getPrefHeight());
-		 WritableImage wi = new WritableImage((int) pane.getPrefWidth(), (int) pane.getPrefHeight());
-		 pane.snapshot(new SnapshotParameters(), wi);
-
-		    try {
-		    	File f = new File("./data/gamedata/games/Demo308/background.png");
-		    	RenderedImage ri = SwingFXUtils.fromFXImage(wi, null);
-		        ImageIO.write(ri, "png", f);
-		    } catch (Exception e) {
-		    	e.printStackTrace();
-		    }
-
-		
+		System.out.println(map.containsKey(null));
 	}
 }

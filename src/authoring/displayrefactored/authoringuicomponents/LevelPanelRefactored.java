@@ -127,6 +127,7 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 		for (GameObject GO : list) {
 			System.out.println(GO.getName());
 		}
+		myLevelObjects.getItems().clear();
 		myLevelObjects.getItems().addAll(FXCollections.observableArrayList(list));
 	}
 	

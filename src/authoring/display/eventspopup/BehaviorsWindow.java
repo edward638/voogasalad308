@@ -1,6 +1,6 @@
 package authoring.display.eventspopup;
 
-import authoring.Behavior;
+import authoring.AuthBehavior;
 import authoring.Game;
 import authoring.GameObject;
 import javafx.geometry.Insets;
@@ -14,8 +14,8 @@ public class BehaviorsWindow extends VBox {
 	private Game game;
 	private GameObject go;
 	private EventsPopUpController epuc;
-	private Behavior currentBehavior;
-	private ListView<Behavior> behaviors;
+	private AuthBehavior currentBehavior;
+	private ListView<AuthBehavior> behaviors;
 	
 	public BehaviorsWindow(EventsPopUpController myEPUC, Game myGame, GameObject myGo) {
 		epuc = myEPUC;
@@ -48,11 +48,11 @@ public class BehaviorsWindow extends VBox {
 		this.getChildren().add(behaviors);
 	}
 	
-	private void mouseClicked(Behavior selectedBehavior) {
+	private void mouseClicked(AuthBehavior selectedBehavior) {
 		currentBehavior = selectedBehavior;
 	}
 	
-	public Behavior getCurrBehavior() {
+	public AuthBehavior getCurrBehavior() {
 		return currentBehavior;
 	}
 }

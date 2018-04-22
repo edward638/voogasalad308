@@ -2,7 +2,7 @@ package authoring.display;
 
 import java.util.ResourceBundle;
 
-import authoring.Behavior;
+import authoring.AuthBehavior;
 import authoring.Game;
 import authoring.Property;
 import javafx.scene.Node;
@@ -19,10 +19,10 @@ import javafx.scene.layout.VBox;
 public class EditPropertiesWindow extends PopupWindow {
 
 	private VBox myVBox;
-	private Behavior myBehavior;
+	private AuthBehavior myBehavior;
 	//don't think you need the GameObject as an instance var
 	
-	public EditPropertiesWindow(ResourceBundle resources, Game game, Node root, Behavior behavior) {
+	public EditPropertiesWindow(ResourceBundle resources, Game game, Node root, AuthBehavior behavior) {
 		super(resources, game, root);
 		myBehavior = behavior;
 		myVBox = new VBox(DEFAULT_SPACING);

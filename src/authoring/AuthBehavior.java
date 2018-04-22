@@ -9,7 +9,7 @@ import java.util.Set;
  * 
  * @author: Summer
  **/
-public class Behavior {
+public class AuthBehavior {
 	
 	private Set<Property> myProperties;
 	private String myName;
@@ -19,7 +19,7 @@ public class Behavior {
 //		myProperties = new HashSet<>();
 //	}
 
-	public Behavior (String name, Set<Property> properties) {
+	public AuthBehavior(String name, Set<Property> properties) {
 		myName = name;
 		myProperties = properties;
 	}

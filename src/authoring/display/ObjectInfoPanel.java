@@ -2,16 +2,19 @@ package authoring.display;
 
 import java.util.ResourceBundle;
 
-import authoring.Behavior;
+import authoring.AuthBehavior;
 import authoring.Game;
 import authoring.GameObject;
+import data.ImageManager;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -21,67 +24,65 @@ import javafx.scene.layout.VBox;
  */
 public class ObjectInfoPanel extends MainWindowComponent {
 	private static final String IMAGES_FILEPATH = "./";
-	private static final double PANE_MIN_WIDTH = 300;
+	private static final double PANEL_MIN_WIDTH = 300;
 
-	private ScrollPane myScrollPane;
 	private VBox myVBox;
 
 	public ObjectInfoPanel(ResourceBundle resources, Game game, Node root) {
 		super(resources, game, root);
-		myScrollPane = new ScrollPane();
 		myVBox = new VBox(DEFAULT_SPACING);
-		initializeVBox();
-		myScrollPane.setMinWidth(PANE_MIN_WIDTH);
-//		myScrollPane.setContent(myVBox);
-		myScrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
+		myVBox.setMinWidth(PANEL_MIN_WIDTH);
+		initialize();
 	}
 
-	private void initializeVBox() {
+	private void initialize() {
 		myVBox.getChildren().add(makeBehaviorBar());
 	}
 
 	private Node makeBehaviorBar() {
 		HBox hBox = new HBox(DEFAULT_SPACING);
 		hBox.getChildren().add(new Label("Object Properties"));
-		//make a new ButtonEvent that adds new Behaviors to the GameObject
-		hBox.getChildren().add(makeButton("+", event -> doNothing()));
 		return hBox;
 	}
 
-	private void makeBehaviorList() {
+	private void makeObjectInfo() {
 		GameObject currObject = getGame().getSceneManager().getCurrentScene().getCurrentGameObject();
 		if(currObject != null) {
-			for(Behavior b : currObject.getBehaviors()) {
-				BehaviorView view = new BehaviorView(getResources(), getGame(), getRoot(), b);
-				myVBox.getChildren().add(view.asNode());
-			}
+			myVBox.getChildren().add(makeBasicInfo(currObject));
 		}
-		
-//		myBehaviors = new ListView<Behavior>();
-//		myBehaviors.setOnMouseClicked(event -> {
-//			if(event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
-//		        System.out.println("You double clicked!!!");
-//		    }
-//		});
-//		myBehaviors.getSelectionModel().selectedItemProperty().addListener((o, old, neww) -> {
-//			getGame().getSceneManager().getCurrentScene().setCurrentGameObject(neww);
-//			myPropertyPanel.updatePanel();
-//		});
-//		return myLevelObjects;
+	}
+	
+	private Node makeBasicInfo(GameObject currObject) {
+		FlowPane flowPane = new FlowPane();
+		if(currObject != null) {
+			String imagePath = (String) currObject.getMandatoryBehavior().getProperty("imagePath").getValue();
+			ImageView imageView = new ImageView(getGame().getImageManager().getImage(imagePath + ".png"));
+			imageView.setPreserveRatio(true);
+			imageView.setFitHeight(75);
+			flowPane.getChildren().add(imageView);
+		}
+		return flowPane;
+	}
+	
+	private Node makeInstance(GameObject currObject) {
+		if(currObject != null) {
+			
+		}
+		return null;
 	}
 
 	public void updatePanel() {
 		myVBox.getChildren().clear();
-		initializeVBox();
-		makeBehaviorList();
+		initialize();
+		makeObjectInfo();
 	}
 
-	public ScrollPane asScrollPane() {
-		return myScrollPane;
+	public VBox asVBox() {
+		return myVBox;
 	}
 
 	@Override
 	protected Node asNode() {
-		return myScrollPane;
+		return myVBox;
 	}
 }

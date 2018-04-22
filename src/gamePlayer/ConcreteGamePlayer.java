@@ -92,7 +92,6 @@ public class ConcreteGamePlayer implements GamePlayer {
 
 		buttonData = new ConcreteButtonData(stage, this, gameDescriptionProvider, root, keyInputDictionary);
 		setupButtons();
-		buttonData.setHighScores(highScores);
 		setupVolumeSlider();
 	}
 
@@ -106,7 +105,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 			public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
 				System.out.println(new_val.doubleValue());
 				soundLevel = new_val.doubleValue();
-				//engine.setVolume(soundLevel);
+				// engine.setVolume(soundLevel);
 			}
 		});
 		root.getChildren().add(slider);
@@ -120,17 +119,17 @@ public class ConcreteGamePlayer implements GamePlayer {
 		clearHighScoresButton = new ClearHighScoresButton(BUTTONXLOCATION,
 				Integer.parseInt(resources.getString("clearHighScoresButtonY")), BUTTONWIDTH, BUTTONHEIGHT, buttonData);
 		root.getChildren().add(clearHighScoresButton);
-		newGameButton = new NewGameButton(BUTTONXLOCATION,
-				Integer.parseInt(resources.getString("newGameButtonY")), BUTTONWIDTH, BUTTONHEIGHT, buttonData);
+		newGameButton = new NewGameButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("newGameButtonY")),
+				BUTTONWIDTH, BUTTONHEIGHT, buttonData);
 		root.getChildren().add(newGameButton);
-		loadButton = new LoadButton(BUTTONXLOCATION,
-				Integer.parseInt(resources.getString("loadButtonY")), BUTTONWIDTH, BUTTONHEIGHT, buttonData);
+		loadButton = new LoadButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("loadButtonY")), BUTTONWIDTH,
+				BUTTONHEIGHT, buttonData);
 		root.getChildren().add(loadButton);
-		saveButton = new SaveButton(BUTTONXLOCATION,
-				Integer.parseInt(resources.getString("saveButtonY")), BUTTONWIDTH, BUTTONHEIGHT, buttonData);
+		saveButton = new SaveButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("saveButtonY")), BUTTONWIDTH,
+				BUTTONHEIGHT, buttonData);
 		root.getChildren().add(saveButton);
-		replayButton = new ReplayButton(BUTTONXLOCATION,
-				Integer.parseInt(resources.getString("replayButtonY")), BUTTONWIDTH, BUTTONHEIGHT, buttonData);
+		replayButton = new ReplayButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("replayButtonY")),
+				BUTTONWIDTH, BUTTONHEIGHT, buttonData);
 		root.getChildren().add(replayButton);
 		keyboardBindingButton = new KeyboardBindingButton(BUTTONXLOCATION,
 				Integer.parseInt(resources.getString("keybordBindingButtonY")), BUTTONWIDTH, BUTTONHEIGHT, buttonData);
@@ -163,6 +162,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 
 		hud = new ConcreteHUD(currentGameName);
 		highScores = new ConcreteHighScores(file);
+		buttonData.setHighScores(highScores);
 
 		root.getChildren().add(gameDisplay);
 		root.getChildren().add((Node) hud);

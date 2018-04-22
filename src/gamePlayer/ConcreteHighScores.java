@@ -160,9 +160,9 @@ public class ConcreteHighScores implements HighScores {
 
 	@Override
 	public void clear() {
-		System.out.println("Score size before clearing " + scores.size());
+		//System.out.println("Score size before clearing " + scores.size());
 		scores.clear();
-		System.out.println("Score Size After Clearing " + scores.size());
+		//System.out.println("Score Size After Clearing " + scores.size());
 		updateScoreTable();
 	}
 

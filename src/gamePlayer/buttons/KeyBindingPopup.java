@@ -21,6 +21,8 @@ public class KeyBindingPopup extends Pane {
 	private ButtonData buttonData;
 	private KeyInputDictionary keyMap;
 
+	private boolean keyIsChanged = false;
+
 	public KeyBindingPopup(ButtonData buttonData) {
 		this.setLayoutX(300);
 		this.setLayoutY(100);
@@ -88,13 +90,22 @@ public class KeyBindingPopup extends Pane {
 
 		change.setOnAction(pushButtonEvent -> {
 			ft.play();
+
+			keyIsChanged = false;
+
 			this.setOnKeyPressed(keyPressInput -> {
-				keyMap.replaceKey(keyPressInput.getCode(), keyCode, currentBinding);
-				keyText.setText(keyPressInput.getCode().toString());
-				ft.stop();
-				keyText.setOpacity(1);
+				if (keyIsChanged == false) {
+					keyMap.replaceKey(keyPressInput.getCode(), keyCode, currentBinding);
+					keyText.setText(keyPressInput.getCode().toString());
+					ft.stop();
+					keyText.setOpacity(1);
+					keyIsChanged = true;
+				}
+
 			});
+
 		});
+
 		int xVal = 80;
 		for (Node n : nodeList) {
 			n.setLayoutY(yVal);

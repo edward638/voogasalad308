@@ -1,13 +1,18 @@
 package authoring.displayrefactored.authoringuicomponents;
 
 import java.io.File;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 import authoring.GameObject;
 import authoring.GameScene;
+import authoring.LevelsObservable;
 import authoring.displayrefactored.controllers.LevelPanelController;
+import authoring.displayrefactored.popups.NewGameObjectPopupRefactored;
+import authoring.displayrefactored.popups.NewLevelPopupRefactored;
 import data.propertiesFiles.ResourceBundleManager;
+import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -33,6 +38,7 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 	private Button myAddSceneBackgroundImageButton;
 	private ListView<GameObject> myLevelObjects;
 	private LevelPanelController controller;
+	private LevelsObservable levelsObservable = null;
 	
 	public LevelPanelRefactored(LevelPanelController controller) {
 		// TODO Auto-generated constructor stub
@@ -59,10 +65,10 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 	
 	private void setActions() {
 		myAddLevelButton.setOnAction(e -> {
-			
+			NewLevelPopupRefactored popupRefactored = new NewLevelPopupRefactored(controller);
 		});
 		myAddGameObjectButton.setOnAction(e -> {
-			
+			NewGameObjectPopupRefactored popupRefactored = new NewGameObjectPopupRefactored(controller);
 		});
 		myAddSceneBackgroundImageButton.setOnAction(e -> {
 			try {
@@ -102,8 +108,17 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
+		levelsObservable = (LevelsObservable) o;
+		updateLevelObjects(levelsObservable.getGameObjects());
+		updateLevelDropdown(levelsObservable.getScenes());
+	}
+	
+	private void updateLevelObjects(List<GameObject> list) {
+		myLevelObjects.setItems(FXCollections.observableArrayList(list));
+	}
+	
+	private void updateLevelDropdown(List<GameScene> list) {
+		myLevelDropdown.getItems().addAll(list);
 	}
 	
 	

@@ -22,7 +22,7 @@ public abstract class PopupRefactored {
 		stage.show();
 	}
 	
-	protected abstract void GeneratePopup();
+	protected abstract void generatePopup();
 	
 	protected BorderPane getPane() {
 		return borderPane;

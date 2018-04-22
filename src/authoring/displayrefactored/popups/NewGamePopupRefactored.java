@@ -27,11 +27,11 @@ public class NewGamePopupRefactored extends PopupRefactored {
 		super();
 		loadAuthorer = loadAuthoringInterface;
 		open(xSize, ySize);
-		GeneratePopup();
+		generatePopup();
 		mapButtons();
 	}
 	
-	protected void GeneratePopup() {
+	protected void generatePopup() {
 		vBox = new VBox();
 		gameName = new HBox();
 		gameDescription = new HBox();

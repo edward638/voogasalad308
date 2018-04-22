@@ -45,9 +45,11 @@ public class LevelPanelController extends Controller {
 	
 	public void addLevel(String name, int level) {
 		game.getSceneManager().makeScene(name, level);
+		refreshView();
 	}
 	
-	public void addGameObject(String name, Double xPos, Double yPos, String imageName) {
+	public void addGameObject(String name, Double xPos, Double yPos, String imageName, Image image) {
+		game.getImageManager().storeImage(imageName, image);
 		GameObject gameObject = new GameObject(MANDATORY_BEHAVIOR_NAME);
 		Behavior mandatory = gameObject.getBehavior(MANDATORY_BEHAVIOR_NAME);
 		mandatory.getProperty("elementName").setValue(name);
@@ -55,14 +57,27 @@ public class LevelPanelController extends Controller {
 		mandatory.getProperty("yPos").setValue(yPos);
 		mandatory.getProperty("imagePath").setValue(imageName);
 		game.getSceneManager().getCurrentScene().getMyObjects().add(gameObject);
+		refreshView();
 	}
 	
 	public void setLevel(GameScene gameScene) {
 		game.getSceneManager().setCurrentScene(gameScene);
+		refreshView();
 	}
 	
 	public void addBackgroundImage(Image image) {
 		game.getSceneManager().getCurrentScene().getSceneBackground().addImage(image);
+		refreshView();
+	}
+	
+	public void saveImage() {
+		
+	}
+
+	@Override
+	protected void refreshView() {
+		// TODO Auto-generated method stub
+		game.notifyMyObservers();
 	}
 	
 }

@@ -36,6 +36,14 @@ public class GameViewWindowController extends Controller {
 		int y = ResourceBundleManager.getPosition("GAMEVIEWWINDOW_Y");
 		gameViewWindowRefactored.AttachToPane(pane, x, y);
 	}
+
+	@Override
+	protected void refreshView() {
+		// TODO Auto-generated method stub
+		game.notifyMyObservers();
+	}
+	
+	
 	
 
 }

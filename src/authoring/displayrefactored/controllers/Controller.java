@@ -16,6 +16,7 @@ public abstract class Controller {
 
 	protected abstract void addToGUI(Pane pane);
 	
+	protected abstract void refreshView();
 	
 }
 

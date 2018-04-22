@@ -10,6 +10,8 @@ public class GameState{
 	private double gameSpeed;
 	private double gameTime;
 	
+	protected String gameName = "enginetestmario";
+	
 	public GameState() {
 		//Talk to game data about reading info from file
 		gameSpeed = 1;

@@ -12,6 +12,7 @@ import java.util.List;
 public class Event {
 	
 	private List<EventResponse> myResponses;
+	private String eventType;
 	private String myTrigger;
 
 	public Event() {
@@ -23,6 +24,14 @@ public class Event {
 	 */
 	public List<EventResponse> getResponses() {
 		return myResponses;
+	}
+	
+	public void setEventType(String type) {
+		eventType = type;
+	}
+	
+	public String getEventType() {
+		return eventType;
 	}
 	
 	/*

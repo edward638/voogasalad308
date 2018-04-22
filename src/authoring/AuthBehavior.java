@@ -39,7 +39,7 @@ public class AuthBehavior {
 	}
 	
 	public String getDisplayName() {
-		String[] splitName = myName.split(".");
+		String[] splitName = myName.split("\\.");
 		return splitName[splitName.length-1];
 	}
 	

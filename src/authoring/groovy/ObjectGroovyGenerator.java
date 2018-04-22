@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import authoring.Behavior;
+import authoring.AuthBehavior;
 import authoring.GameObject;
 
 /** 
@@ -30,7 +30,7 @@ public class ObjectGroovyGenerator {
 //		System.out.println("hey");
 //		return objectFields;
 		List<Object> objectFields = new ArrayList<>();
-		for(Behavior curr : object.getBehaviors()) {
+		for(AuthBehavior curr : object.getBehaviors()) {
 			for(Class<?> clazz : factory.getBehaviorFields().keySet()) {
 				if(clazz.toString().contains(curr.getName())) {
 					objectFields.addAll(factory.getBehaviorFields().get(clazz));
@@ -42,7 +42,7 @@ public class ObjectGroovyGenerator {
 	
 	public List<String> generateGroovyMethods(GameObject object) {
 		List<Object> objectMethods = new ArrayList<>();
-		for(Behavior curr : object.getBehaviors()) {
+		for(AuthBehavior curr : object.getBehaviors()) {
 			for(Class<?> clazz : factory.getBehaviorMethods().keySet()) {
 				if(clazz.toString().contains(curr.getName())) {
 					objectMethods.addAll(factory.getBehaviorMethods().get(clazz));

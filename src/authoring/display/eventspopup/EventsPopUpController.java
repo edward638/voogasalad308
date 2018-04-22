@@ -55,4 +55,10 @@ public class EventsPopUpController {
 		windows.add(groovyWindow);
 		return windows;
 	}
+	public void updateFromEvent(Event e) {
+		responseWindow.createVBox();
+		behaviorsWindow.createVBox();
+		mfWindow.createVBox();
+		eventsWindow.updateEventList();
+	}
 }

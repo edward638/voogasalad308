@@ -3,7 +3,7 @@ package authoring.display;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import authoring.Behavior;
+import authoring.AuthBehavior;
 import authoring.Game;
 import authoring.GameObject;
 import authoring.GameScene;
@@ -19,6 +19,8 @@ import javafx.scene.layout.StackPane;
 
 public class GameViewWindow extends MainWindowComponent{
 
+	
+	
 	List<GameObject> gameObjects;
 	ScrollPane scrollPane;
 	StackPane stackPane;
@@ -65,7 +67,7 @@ public class GameViewWindow extends MainWindowComponent{
 	private void addObjectsToPane() {
 		if(gameObjects != null) {
 			for (GameObject object: gameObjects) {
-				Behavior mandatoryBehavior = object.getBehavior("MandatoryBehavior");
+				AuthBehavior mandatoryBehavior = object.getMandatoryBehavior();
 				Property xPositionProperty = mandatoryBehavior.getProperty("xPos");
 				Property yPositionProperty = mandatoryBehavior.getProperty("yPos");
 				Property imagePathProperty = mandatoryBehavior.getProperty("imagePath");
@@ -130,11 +132,11 @@ public class GameViewWindow extends MainWindowComponent{
 	}
 	
 	public void switchPanes(String key) {
-		if (key.equals("Background")) {
+		if (key.equals("Edit Background")) {
 			stackPane.getChildren().clear();
 			stackPane.getChildren().add(sceneBackgroundPane);
 		} 
-		if (key.equals("Foreground")) {
+		if (key.equals("Edit Objects")) {
 			stackPane.getChildren().clear();
 			stackPane.getChildren().add(sceneBackgroundPane);
 			stackPane.getChildren().add(myPane);

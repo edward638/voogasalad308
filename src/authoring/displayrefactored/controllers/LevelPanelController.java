@@ -53,7 +53,7 @@ public class LevelPanelController extends Controller {
 		game.getImageManager().storeImage(imageName, image);
 		GameObject gameObject = new GameObject(MANDATORY_BEHAVIOR_NAME);
 		Behavior mandatory = gameObject.getBehavior(MANDATORY_BEHAVIOR_NAME);
-		mandatory.getProperty("elementName").setValue(name);
+		gameObject.setName(name);
 		mandatory.getProperty("xPos").setValue(xPos);
 		mandatory.getProperty("yPos").setValue(yPos);
 		mandatory.getProperty("imagePath").setValue(imageName);

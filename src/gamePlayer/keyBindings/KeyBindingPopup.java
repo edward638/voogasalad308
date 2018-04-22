@@ -1,6 +1,5 @@
 package gamePlayer.keyBindings;
 
-
 import java.util.ArrayList;
 import gamePlayer.buttons.ButtonData;
 import javafx.scene.Node;
@@ -15,7 +14,6 @@ public class KeyBindingPopup extends Pane {
 
 	private ButtonData buttonData;
 	private KeyInputDictionary keyMap;
-	
 
 	private static final int SPACE_BETWEEN_BUTTONS = 80;
 
@@ -48,7 +46,7 @@ public class KeyBindingPopup extends Pane {
 		KeyBinding W = new KeyBinding(KeyCode.W, "Jump", keyMap, this);
 		KeyBinding A = new KeyBinding(KeyCode.A, "Left", keyMap, this);
 		KeyBinding D = new KeyBinding(KeyCode.D, "Right", keyMap, this);
-		
+
 		addNodeListToGui(90, 80, W.getNodeList());
 		addNodeListToGui(150, 80, A.getNodeList());
 		addNodeListToGui(210, 80, D.getNodeList());

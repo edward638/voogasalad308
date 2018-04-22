@@ -32,8 +32,9 @@ public class KeyBinding {
 		nodeList = new ArrayList<>();
 		addWords();
 		makeChangeButton();
+		setUpFadeTransition();
 	}
-	
+
 	/**
 	 * adds the text side of the keyBinding
 	 */
@@ -47,7 +48,9 @@ public class KeyBinding {
 		keyText.setStyle("-fx-font: 20 Euphemia;");
 		keyText.setTextFill(Color.ALICEBLUE);
 		nodeList.add(keyText);
+	}
 
+	private void setUpFadeTransition() {
 		fadeTransition = new FadeTransition(Duration.millis(500), keyText);
 		fadeTransition.setFromValue(1.0);
 		fadeTransition.setToValue(0.1);

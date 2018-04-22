@@ -13,6 +13,10 @@ public class MovableCharacter extends Movable {
 		super(ge, xVel, yVel);
 	}
 	
+	public MovableCharacter(GameElement ge) {
+		super(ge);
+	}
+	
 	@Override
 	public void move(Double time) {
 		super.move(time);

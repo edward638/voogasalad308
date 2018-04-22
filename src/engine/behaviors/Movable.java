@@ -13,15 +13,14 @@ public class Movable extends Behavior{
 	public static final int Y_LIST_POS = 1; // Position of Y in direction
 	
 	private Double xVel;
-	private Double yVel;
-	private boolean activate = true;
+	private Double yVel;	
 	
 	public Movable(GameElement ge, Double vel, List<Double> dir) {
 		super(ge);
 		xVel = 0.0;
 		yVel = 1.0;
 		setVelocity(vel);
-		if (dir.stream().reduce(0.0, (a, b) -> a + b) != 0) {
+		if (dir.stream().reduce(0.0, (a, b) -> a + Math.abs(b)) != 0) {
 			setDirection(dir);
 		} else {
 			throw new IllegalArgumentException("Invalid Direction for " + ge.getIdentifier() + ": " + dir);
@@ -42,15 +41,10 @@ public class Movable extends Behavior{
 	 * Moves the parent game element according to the time amount requested
 	 */
 	public void move(Double time) {
-		if (activate) {
-			MandatoryBehavior bge = (MandatoryBehavior) getParent().getBehavior(MandatoryBehavior.class);
-			bge.setPosition(bge.getX() + xVel * time, bge.getY() + yVel * time);
-		}
+		MandatoryBehavior bge = (MandatoryBehavior) getParent().getBehavior(MandatoryBehavior.class);
+		bge.setPosition(bge.getX() + xVel * time, bge.getY() + yVel * time);
 	}
 	
-	public void setactivity(boolean state) {
-		activate = state;
-	}
 	
 	/*
 	 * Sets the direction for this element. Checks if the direction 

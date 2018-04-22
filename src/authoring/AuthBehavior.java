@@ -1,5 +1,6 @@
 package authoring;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,7 +40,8 @@ public class AuthBehavior {
 	}
 	
 	public String getDisplayName() {
-		String[] splitName = myName.split(".");
+		System.out.println("Auth Behavior Name: " + myName);
+		String[] splitName = myName.split("\\.");
 		return splitName[splitName.length-1];
 	}
 	

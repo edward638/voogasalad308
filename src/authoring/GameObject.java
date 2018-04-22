@@ -77,7 +77,10 @@ public class GameObject {
 	
 	public AuthBehavior getBehavior(String behavior) {
 		try {
+			System.out.println(behavior);
+			System.out.println("Just before loop");
 			for(AuthBehavior curr: myBehaviors) {
+				System.out.println("In loop: " + curr);
 				if (curr.getName().equals(behavior) || curr.getDisplayName().equals(behavior)) {
 					// is the above ok? i'm not sure whether that makes it more or less confusing
 					//i think it should be fine if we allow both methods of accessing it I can't see any problems with that
@@ -86,6 +89,7 @@ public class GameObject {
 			}
 			throw new Exception();
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("Tried to access a behavior that this object does not have");
 		}
 		return null;

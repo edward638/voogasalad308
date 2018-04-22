@@ -22,11 +22,11 @@ public class Converter {
 	
 	public GameElement gameObject2GameElement (GameObject go) {
 		GameElement ge = new GameElement();
-		ge.addBehavior(getEngineBehavior(go.getBehavior(MandatoryBehavior.class.getName()), ge));
+		ge.addBehavior(getEngineBehavior(go.getBehavior(MandatoryBehavior.class.getCanonicalName()), ge));
 		for (AuthBehavior authB: go.getBehaviors()) {
 			try {
 				Constructor<?> use = getConstructor(Class.forName(authB.getName()));
-				engine.behaviors.Behavior newEngineBehavior = (engine.behaviors.Behavior) use.newInstance(ge);
+				Behavior newEngineBehavior = (Behavior) use.newInstance(ge);
 				setUpEngineBehavior(newEngineBehavior, authB);
 				ge.addBehavior(newEngineBehavior);
 				
@@ -44,7 +44,7 @@ public class Converter {
 		
 		Constructor<?> use = getConstructor(getClassName(authB));
 		try {
-			engB = (engine.behaviors.Behavior) use.newInstance(ge);
+			engB = (Behavior) use.newInstance(ge);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException e) {
 			throw new RuntimeException("Could not construct Engine Behavior from " + authB.getName());
@@ -103,9 +103,9 @@ public class Converter {
 	public GameObject gameElement2GameObject(GameElement ge) {
 		GameObject go = new GameObject();
 		
-		for (engine.behaviors.Behavior b: ge.getAllBehaviors()) {
+		for (Behavior b: ge.getAllBehaviors()) {
 //			System.out.println(b.reportProperties());
-			AuthBehavior authB = new AuthBehavior(b.getClass().getName(), new HashSet<Property>());
+			AuthBehavior authB = new AuthBehavior(b.getClass().getCanonicalName(), new HashSet<Property>());
 			Map<String, Object> engBehaviorProperties = b.reportProperties();
 			for (String key: b.reportProperties().keySet()) {
 				Property prop = new Property(key, engBehaviorProperties.getClass());

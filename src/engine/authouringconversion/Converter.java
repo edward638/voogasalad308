@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import authoring.Behavior;
+import authoring.AuthBehavior;
 import authoring.GameObject;
 import authoring.GameScene;
 import authoring.Property;
@@ -22,7 +22,7 @@ public class Converter {
 	public GameElement gameObject2GameElement (GameObject go) {
 		GameElement ge = new GameElement();
 		ge.addBehavior(getEngineBehavior(go.getBehavior(MandatoryBehavior.class.getName()), ge));
-		for (Behavior authB: go.getBehaviors()) {
+		for (AuthBehavior authB: go.getBehaviors()) {
 			try {
 				Constructor<?> use = getConstructor(Class.forName(authB.getName()));
 				engine.behaviors.Behavior newEngineBehavior = (engine.behaviors.Behavior) use.newInstance(ge);
@@ -38,7 +38,7 @@ public class Converter {
 		return ge;
 	}
 	
-	private engine.behaviors.Behavior getEngineBehavior(Behavior authB, GameElement ge) {
+	private engine.behaviors.Behavior getEngineBehavior(AuthBehavior authB, GameElement ge) {
 		engine.behaviors.Behavior engB = null;
 		
 		Constructor<?> use = getConstructor(getClassName(authB));
@@ -52,7 +52,7 @@ public class Converter {
 		return engB;
 	}
 	
-	private Class<?> getClassName(Behavior authB) {
+	private Class<?> getClassName(AuthBehavior authB) {
 		Class<?> clazz;
 		try {
 			clazz = Class.forName(authB.getName());
@@ -61,7 +61,7 @@ public class Converter {
 		}
 		return clazz;
 	}
-	private void setUpEngineBehavior(engine.behaviors.Behavior engB, Behavior authB) {
+	private void setUpEngineBehavior(engine.behaviors.Behavior engB, AuthBehavior authB) {
 		Arrays.stream(engB.getClass().getDeclaredFields())
 		.forEach(field -> {
 			System.out.println(field.getName());
@@ -103,7 +103,7 @@ public class Converter {
 		GameObject go = new GameObject(ge.getIdentifier());
 		for (engine.behaviors.Behavior b: ge.getAllBehaviors()) {
 			System.out.println(b.reportProperties());
-			Behavior authB = new Behavior(b.getClass().getName(), new HashSet<Property>());
+			AuthBehavior authB = new AuthBehavior(b.getClass().getName(), new HashSet<Property>());
 			Map<String, Object> engBehaviorProperties = b.reportProperties();
 			for (String key: b.reportProperties().keySet()) {
 				Property prop = new Property(key, engBehaviorProperties.getClass());

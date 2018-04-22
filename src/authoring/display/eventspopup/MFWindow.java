@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import authoring.Behavior;
+import authoring.AuthBehavior;
 import authoring.Game;
 import authoring.GameObject;
 import authoring.groovy.GroovyCommandFactory;
@@ -18,7 +18,7 @@ public class MFWindow extends VBox {
 	private EventsPopUpController epuc;
 	private Game game;
 	private GameObject go;
-	private Behavior currentBehavior;
+	private AuthBehavior currentBehavior;
 	private GroovyCommandFactory gcf;
 	
 	private static final String NONVALID = "No Behavior or Event selected";

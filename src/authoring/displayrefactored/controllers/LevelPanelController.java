@@ -1,7 +1,7 @@
 package authoring.displayrefactored.controllers;
 
 
-import authoring.Behavior;
+import authoring.AuthBehavior;
 import authoring.Game;
 import authoring.GameObject;
 import authoring.GameScene;
@@ -61,7 +61,7 @@ public class LevelPanelController extends Controller {
 	public void addGameObject(String name, Double xPos, Double yPos, String imageName, Image image) {
 		game.getImageManager().storeImage(imageName, image);
 		GameObject gameObject = new GameObject(MANDATORY_BEHAVIOR_NAME);
-		Behavior mandatory = gameObject.getBehavior(MANDATORY_BEHAVIOR_NAME);
+		AuthBehavior mandatory = gameObject.getBehavior(MANDATORY_BEHAVIOR_NAME);
 		mandatory.getProperty("elementName").setValue(name);
 		mandatory.getProperty("xPos").setValue(xPos);
 		mandatory.getProperty("yPos").setValue(yPos);

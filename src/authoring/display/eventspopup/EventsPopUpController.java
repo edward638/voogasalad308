@@ -3,7 +3,7 @@ package authoring.display.eventspopup;
 import java.util.ArrayList;
 import java.util.List;
 
-import authoring.Behavior;
+import authoring.AuthBehavior;
 import authoring.Event;
 import authoring.Game;
 import authoring.GameObject;
@@ -36,7 +36,7 @@ public class EventsPopUpController {
 	public Event getCurrEvent() {
 		return eventsWindow.getCurrEvent();
 	}
-	public Behavior getCurrBehavior() {
+	public AuthBehavior getCurrBehavior() {
 		return behaviorsWindow.getCurrBehavior();
 	}
 	public boolean validEvent() {

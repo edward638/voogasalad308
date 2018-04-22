@@ -6,6 +6,7 @@ import authoring.Game;
 import authoring.GameObject;
 import authoring.GameScene;
 import authoring.displayrefactored.AuthoringEnvironmentGUIRefactored;
+import authoring.displayrefactored.authoringuicomponents.GameViewWindowRefactored;
 import authoring.displayrefactored.authoringuicomponents.LevelPanelRefactored;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.image.Image;
@@ -15,6 +16,8 @@ public class LevelPanelController extends Controller {
 
 	Game game;
 	LevelPanelRefactored levelPanelRefactored;
+	GameViewWindowRefactored gameViewWindowRefactored;
+	
 	private static final String MANDATORY_BEHAVIOR_NAME = "MandatoryBehavior";
 	
 	public LevelPanelController(Game game) {
@@ -26,6 +29,11 @@ public class LevelPanelController extends Controller {
 	protected void initializeScreenComponents() {
 		// TODO Auto-generated method stub
 		levelPanelRefactored = new LevelPanelRefactored(this);
+	}
+	
+	public void setGameViewWindowRefactored(GameViewWindowRefactored gameViewWindowRefactored) {
+		this.gameViewWindowRefactored = gameViewWindowRefactored;
+		System.out.println("sup");
 	}
 
 	@Override
@@ -46,6 +54,7 @@ public class LevelPanelController extends Controller {
 	public void addLevel(String name, int level) {
 		GameScene scene = game.getSceneManager().makeScene(name, level);
 		game.getSceneManager().setCurrentScene(scene);
+		levelPanelRefactored.updateLevelDropdown(level - 1, scene);
 		refreshView();
 	}
 	
@@ -74,6 +83,12 @@ public class LevelPanelController extends Controller {
 	public void saveImage() {
 		
 	}
+	
+	public void switchPanes(String window) {
+		System.out.println(gameViewWindowRefactored == null);
+		gameViewWindowRefactored.switchPanes(window);
+	}
+	
 
 	@Override
 	protected void refreshView() {

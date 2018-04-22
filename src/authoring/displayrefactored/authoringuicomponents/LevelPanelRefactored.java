@@ -57,7 +57,15 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 		myLevelDropdown.setPromptText(ResourceBundleManager.getAuthoring("SelectSceneDropDown"));
 		myPanelSelector = new ComboBox<>();
 		myPanelSelector.setPromptText(ResourceBundleManager.getAuthoring("ChoosePanel"));
+		myPanelSelector.getItems().add("Background");
+		myPanelSelector.getItems().add("Foreground");
+		myPanelSelector.valueProperty().addListener((o, old, neww) -> {
+			System.out.println(neww);
+			controller.switchPanes(neww);
+			
+		});
 	}
+	
 	
 	private void initializeListViews() {
 		myLevelObjects = new ListView<>();
@@ -85,6 +93,7 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 			}//
 		});
 		
+		
 	}
 	
 	@Override
@@ -110,7 +119,7 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 	public void update(Observable o, Object arg) {
 		levelsObservable = (LevelsObservable) o;
 		updateLevelObjects(levelsObservable.getGameObjects());
-		updateLevelDropdown(levelsObservable.getScenes());
+//		updateLevelDropdown(levelsObservable.getScenes());
 	}
 	
 	private void updateLevelObjects(List<GameObject> list) {
@@ -121,6 +130,13 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 	private void updateLevelDropdown(List<GameScene> list) {
 		myLevelDropdown.getItems().clear();
 		myLevelDropdown.getItems().addAll(list);
+	
+	}
+
+	public void updateLevelDropdown(int i, GameScene scene) {
+		// TODO Auto-generated method stub
+		myLevelDropdown.getItems().add(i, scene);
+		
 	}
 	
 	

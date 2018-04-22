@@ -57,10 +57,23 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	}
 	
 	private void updateBackground(Pane pane) {
-		stackPane.getChildren().clear();
+//		stackPane.getChildren().clear();
 		backgroundPane = pane;
-		stackPane.getChildren().add(backgroundPane);
-		stackPane.getChildren().add(foregroundPane);
+//		stackPane.getChildren().add(backgroundPane);
+//		stackPane.getChildren().add(foregroundPane);
 	}
+	
+	public void switchPanes(String key) {
+		if (key.equals("Background")) {
+			stackPane.getChildren().clear();
+			stackPane.getChildren().add(backgroundPane);
+		} 
+		if (key.equals("Foreground")) {
+			stackPane.getChildren().clear();
+			stackPane.getChildren().add(backgroundPane);
+			stackPane.getChildren().add(foregroundPane);
+		}
+	}
+	
 
 }

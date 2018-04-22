@@ -17,7 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
 
-public class Engine {
+public class Engine implements EngineInterface{
 	public static final int FRAMES_PER_SECOND = 60;
 	public static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
@@ -44,14 +44,16 @@ public class Engine {
 		eventManager = new EventManager2(gameState);
 		audioManager = new AudioManager(1);
 		
-		audioPlayer = audioManager.newAudioPlayer(musicPath);
+		//audioPlayer = audioManager.newAudioPlayer(musicPath);
 		startAnimation();
 	}
 	
+	@Override
 	public void close() {
 		audioPlayer.stop();
 	}
 	
+	@Override
 	public SubScene getDisplay() {
 		engineSubScene = new SubScene(subSceneRoot, SUBSCENE_WIDTH, SUBSCENE_HEIGHT);
 		return engineSubScene;
@@ -66,10 +68,12 @@ public class Engine {
         animation.play();
     }
 
+	@Override
 	public void handleKeyInput(KeyCode code) {
 		eventManager.processElementEvent(new KeyInputEvent(code));
 	}
 	
+	@Override
 	public void handleMouseInput(double x, double y) {
 		eventManager.processElementEvent(new MouseInputEvent(x,y));
 	}
@@ -105,6 +109,11 @@ public class Engine {
 			}
 		}
 		return offset;
+	}
+
+	@Override
+	public void setVolume(double newVolume) {
+		audioManager.setVolume(newVolume);
 	}
 	
 	

@@ -6,6 +6,7 @@ import authoring.AuthBehavior;
 import authoring.Game;
 import authoring.GameObject;
 import data.ImageManager;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -53,15 +54,18 @@ public class ObjectInfoPanel extends MainWindowComponent {
 	}
 	
 	private Node makeBasicInfo(GameObject currObject) {
-		FlowPane flowPane = new FlowPane();
+		VBox vBox = new VBox(DEFAULT_SPACING);
+		vBox.setAlignment(Pos.CENTER);
 		if(currObject != null) {
-			String imagePath = (String) currObject.getMandatoryBehavior().getProperty("imagePath").getValue();
+			AuthBehavior mandatory = currObject.getMandatoryBehavior();
+			String imagePath = (String) mandatory.getProperty("imagePath").getValue();
 			ImageView imageView = new ImageView(getGame().getImageManager().getImage(imagePath + ".png"));
 			imageView.setPreserveRatio(true);
-			imageView.setFitHeight(75);
-			flowPane.getChildren().add(imageView);
+			imageView.setFitHeight(100);
+			
+			vBox.getChildren().addAll(imageView, new Label("Name: " + currObject.getName()), new Label("Image: " + imagePath));
 		}
-		return flowPane;
+		return vBox;
 	}
 	
 	private Node makeInstance(GameObject currObject) {

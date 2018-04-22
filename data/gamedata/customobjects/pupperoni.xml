@@ -4,28 +4,28 @@
     <authoring.AuthBehavior>
       <myProperties>
         <authoring.Property>
-          <myValue class="double">50.0</myValue>
-          <myName>xPos</myName>
-          <myValueType>java.lang.Double</myValueType>
-        </authoring.Property>
-        <authoring.Property>
           <myValue class="string">pupperoni</myValue>
           <myName>imagePath</myName>
           <myValueType>java.lang.String</myValueType>
         </authoring.Property>
         <authoring.Property>
-          <myValue class="double">50.0</myValue>
-          <myName>yPos</myName>
-          <myValueType>java.lang.Double</myValueType>
+          <myValue class="string">pup</myValue>
+          <myName>elementName</myName>
+          <myValueType>java.lang.String</myValueType>
         </authoring.Property>
         <authoring.Property>
           <myName>shapeDef</myName>
           <myValueType>engine.behaviors.shapes.ShapeDefinition</myValueType>
         </authoring.Property>
         <authoring.Property>
-          <myValue class="string">pup</myValue>
-          <myName>elementName</myName>
-          <myValueType>java.lang.String</myValueType>
+          <myValue class="double">88.0</myValue>
+          <myName>xPos</myName>
+          <myValueType>java.lang.Double</myValueType>
+        </authoring.Property>
+        <authoring.Property>
+          <myValue class="double">88.0</myValue>
+          <myName>yPos</myName>
+          <myValueType>java.lang.Double</myValueType>
         </authoring.Property>
         <authoring.Property>
           <myName>ignoreTags</myName>

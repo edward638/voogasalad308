@@ -42,6 +42,7 @@ public class EventsWindow extends VBox {
 	private void createVBox() {
 		this.setPadding(new Insets(10));
 	    this.setSpacing(8);
+	    this.setPrefWidth(200);
 	    Text title = new Text("Events");
 	    this.getChildren().add(title);
 	    this.getChildren().addAll(makeEventDropdown(), makeEventList());
@@ -53,7 +54,8 @@ public class EventsWindow extends VBox {
 		Set<?> retrieved = new TreeSet<>();
 		retrieved = classRetriever.getClasses(EVENTS_SUPERCLASS, EVENTS_PACKAGE);
 		retrieved.forEach(c -> {
-							String[] name = c.toString().split(".");
+							String[] holder = c.toString().split(" ");
+							String[] name = holder[holder.length - 1].split("\\.");
 							String use = name[name.length-1];
 							possibleEvents.getItems().add(use);
 		});
@@ -75,5 +77,9 @@ public class EventsWindow extends VBox {
 	
 	public Event getCurrEvent() {
 		return currentEvent;
+	}
+	
+	public boolean validEvent() {
+		return currentEvent != null;
 	}
 }

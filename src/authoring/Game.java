@@ -105,7 +105,8 @@ public class Game extends Observable implements GameViewObservable, ObjectInfoOb
 	public List<ImageView> getImageViews() {
 		// TODO Auto-generated method stub
 		List<ImageView> list = new ArrayList<>();
-	
+		
+		
 		for (GameObject go: getSceneManager().getCurrentScene().getMyObjects()) {
 			Behavior mandatoryBehavior = go.getBehavior("MandatoryBehavior");
 			Property xPositionProperty = mandatoryBehavior.getProperty("xPos");

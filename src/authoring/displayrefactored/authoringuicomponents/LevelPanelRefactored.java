@@ -114,10 +114,12 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 	}
 	
 	private void updateLevelObjects(List<GameObject> list) {
+		System.out.println("There should be " + list.size() + " objects in this list.");
 		myLevelObjects.setItems(FXCollections.observableArrayList(list));
 	}
 	
 	private void updateLevelDropdown(List<GameScene> list) {
+		myLevelDropdown.getItems().clear();
 		myLevelDropdown.getItems().addAll(list);
 	}
 	

@@ -23,7 +23,7 @@ public class NewGameObjectPopupRefactored extends PopupRefactored{
 
 	private static final int xSize = 400;
 	private static final int ySize = 600;
-	private static final int DEFAULT_SPACING = 20;
+	private static final int DEFAULT_SPACING = 50;
 	private LevelPanelController controller;
 	private VBox myVBox;
 	TextField nameText;
@@ -72,7 +72,7 @@ public class NewGameObjectPopupRefactored extends PopupRefactored{
 		myVBox.getChildren().addAll(nameObject, xPosValues, yPosValues, imageInfo, saveButton);
 		
 		BorderPane borderPane = getPane();
-		borderPane.setCenter(borderPane);
+		borderPane.setCenter(myVBox);
 		
 	}
 
@@ -96,6 +96,7 @@ public class NewGameObjectPopupRefactored extends PopupRefactored{
 		
 		saveButton.setOnAction(e->{
 			controller.addGameObject(nameText.getText(), Double.parseDouble(xText.getText()), Double.parseDouble(yText.getText()), imageText.getText(), image);
+			close();
 		});
 				
 		

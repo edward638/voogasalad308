@@ -9,6 +9,7 @@ import authoring.GameObject;
 import authoring.GameViewObservable;
 import authoring.SceneBackground;
 import authoring.displayrefactored.controllers.GameViewWindowController;
+import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -38,9 +39,8 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 		backgroundPane = new Pane();
 		foregroundPane = new Pane();
 		stackPane.setStyle("-fx-border-color: black");
-		stackPane.setPrefSize(800, 800);
+		stackPane.setPrefSize(ResourceBundleManager.getPosition("GAMEVIEWSIZE_X"), ResourceBundleManager.getPosition("GAMEVIEWSIZE_Y"));
 		borderPane.setCenter(stackPane);
-		
 	}
 
 	@Override

@@ -44,7 +44,8 @@ public class LevelPanelController extends Controller {
 	}
 	
 	public void addLevel(String name, int level) {
-		game.getSceneManager().makeScene(name, level);
+		GameScene scene = game.getSceneManager().makeScene(name, level);
+		game.getSceneManager().setCurrentScene(scene);
 		refreshView();
 	}
 	

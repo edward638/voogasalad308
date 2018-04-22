@@ -1,6 +1,5 @@
 package authoring.display.eventspopup;
 
-import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -8,10 +7,8 @@ import authoring.EngineClassRetriever;
 import authoring.Event;
 import authoring.Game;
 import authoring.GameObject;
-import authoring.display.MainWindowComponent;
 import engine.events.elementevents.ElementEvent;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
@@ -22,32 +19,34 @@ import javafx.scene.text.Text;
  * @author Summer
  *
  */
-public class EventWindow extends MainWindowComponent{
+public class EventsWindow extends VBox {
 
 	private final Class<?> EVENTS_SUPERCLASS = ElementEvent.class;
 	private final String EVENTS_PACKAGE = "engine.events.elementevents";
 	
-	private GameObject currentObject;
+	private GameObject go;
 	private ComboBox<String> possibleEvents;
 	private EngineClassRetriever classRetriever;
-	private VBox vBox;
 	private ListView<Event> myEvents;
+	private Event currentEvent;
+	private EventsPopUpController epuc;
 	
-	public EventWindow(ResourceBundle resources, Game game, Node root, GameObject currObject) {
-		super(resources, game, root);
-		currentObject = currObject;
+	public EventsWindow(EventsPopUpController myEPUC, Game game, GameObject currObject) {
+		go = currObject;
 		classRetriever = new EngineClassRetriever();
+		epuc = myEPUC;
+		myEvents = new ListView<>();
+		currentEvent = null;
 		createVBox();
 	}
 	
-	private VBox createVBox() {
-		vBox = new VBox();
-		vBox.setPadding(new Insets(10));
-	    vBox.setSpacing(8);
+	private void createVBox() {
+		this.setPadding(new Insets(10));
+	    this.setSpacing(8);
+	    this.setPrefWidth(200);
 	    Text title = new Text("Events");
-	    vBox.getChildren().add(title);
-	    vBox.getChildren().addAll(makeEventDropdown(), makeEventList());
-	    return vBox;
+	    this.getChildren().add(title);
+	    this.getChildren().addAll(makeEventDropdown(), makeEventList());
 	}
 	
 	private ComboBox<String> makeEventDropdown(){
@@ -56,21 +55,38 @@ public class EventWindow extends MainWindowComponent{
 		Set<?> retrieved = new TreeSet<>();
 		retrieved = classRetriever.getClasses(EVENTS_SUPERCLASS, EVENTS_PACKAGE);
 		retrieved.forEach(c -> {
-							String[] name = c.toString().split(".");
+							String[] holder = c.toString().split(" ");
+							String[] name = holder[holder.length - 1].split("\\.");
 							String use = name[name.length-1];
 							possibleEvents.getItems().add(use);
 		});
+		possibleEvents.setOnAction(e -> comboBoxAction(possibleEvents.getValue()));
 		return possibleEvents;
+	}
+	
+	private void comboBoxAction(String eventName) {
+		currentEvent = new Event();
+		currentEvent.setEventType(eventName);
+		go.addEvent(currentEvent);
+		epuc.updateFromEvent(currentEvent);
 	}
 
 	private ListView<Event> makeEventList(){
-		myEvents = new ListView<>();
-		myEvents.getItems().setAll(currentObject.getEvents());
+		myEvents.getItems().clear();
+		myEvents.getItems().setAll(go.getEvents());
 		return myEvents;
 	}
 	
-	@Override
-	protected Node asNode() {
-		return vBox;
+	public void updateEventList() {
+		this.getChildren().remove(myEvents);
+		this.getChildren().add(makeEventList());
+	}
+	
+	public Event getCurrEvent() {
+		return currentEvent;
+	}
+	
+	public boolean validEvent() {
+		return currentEvent != null;
 	}
 }

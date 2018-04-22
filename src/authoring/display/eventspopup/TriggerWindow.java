@@ -23,6 +23,7 @@ public class TriggerWindow extends VBox {
 	}
 	
 	private void createVBox() {
+		this.getChildren().clear();
 		this.setPadding(new Insets(10));
 	    this.setSpacing(8);
 	    this.setPrefWidth(200);

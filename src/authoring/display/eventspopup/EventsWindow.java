@@ -35,6 +35,7 @@ public class EventsWindow extends VBox {
 		go = currObject;
 		classRetriever = new EngineClassRetriever();
 		epuc = myEPUC;
+		myEvents = new ListView<>();
 		currentEvent = null;
 		createVBox();
 	}
@@ -67,12 +68,18 @@ public class EventsWindow extends VBox {
 		currentEvent = new Event();
 		currentEvent.setEventType(eventName);
 		go.addEvent(currentEvent);
+		epuc.updateFromEvent(currentEvent);
 	}
 
 	private ListView<Event> makeEventList(){
-		myEvents = new ListView<>();
+		myEvents.getItems().clear();
 		myEvents.getItems().setAll(go.getEvents());
 		return myEvents;
+	}
+	
+	public void updateEventList() {
+		this.getChildren().remove(myEvents);
+		this.getChildren().add(makeEventList());
 	}
 	
 	public Event getCurrEvent() {

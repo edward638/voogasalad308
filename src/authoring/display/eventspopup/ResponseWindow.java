@@ -18,7 +18,7 @@ public class ResponseWindow extends VBox {
 		epuc = myEPUC;
 		createVBox();
 	}
-	private void createVBox() {
+	public void createVBox() {
 		this.getChildren().clear();
 		this.setPadding(new Insets(10));
 	    this.setSpacing(8);

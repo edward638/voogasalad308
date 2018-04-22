@@ -9,12 +9,13 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import authoring.Behavior;
+import authoring.AuthBehavior;
 import authoring.GameObject;
 import authoring.GameScene;
 import authoring.Property;
 import engine.GameElement;
 import engine.GameState;
+import engine.behaviors.Behavior;
 import engine.behaviors.MandatoryBehavior;
 
 public class Converter {
@@ -22,7 +23,7 @@ public class Converter {
 	public GameElement gameObject2GameElement (GameObject go) {
 		GameElement ge = new GameElement();
 		ge.addBehavior(getEngineBehavior(go.getBehavior(MandatoryBehavior.class.getName()), ge));
-		for (Behavior authB: go.getBehaviors()) {
+		for (AuthBehavior authB: go.getBehaviors()) {
 			try {
 				Constructor<?> use = getConstructor(Class.forName(authB.getName()));
 				engine.behaviors.Behavior newEngineBehavior = (engine.behaviors.Behavior) use.newInstance(ge);
@@ -38,8 +39,8 @@ public class Converter {
 		return ge;
 	}
 	
-	private engine.behaviors.Behavior getEngineBehavior(Behavior authB, GameElement ge) {
-		engine.behaviors.Behavior engB = null;
+	private Behavior getEngineBehavior(AuthBehavior authB, GameElement ge) {
+		Behavior engB = null;
 		
 		Constructor<?> use = getConstructor(getClassName(authB));
 		try {
@@ -52,7 +53,7 @@ public class Converter {
 		return engB;
 	}
 	
-	private Class<?> getClassName(Behavior authB) {
+	private Class<?> getClassName(AuthBehavior authB) {
 		Class<?> clazz;
 		try {
 			clazz = Class.forName(authB.getName());
@@ -61,10 +62,10 @@ public class Converter {
 		}
 		return clazz;
 	}
-	private void setUpEngineBehavior(engine.behaviors.Behavior engB, Behavior authB) {
+	private void setUpEngineBehavior(Behavior engB, AuthBehavior authB) {
 		Arrays.stream(engB.getClass().getDeclaredFields())
 		.forEach(field -> {
-			System.out.println(field.getName());
+//			System.out.println(field.getName());
 			if (!Modifier.isPublic(field.getModifiers())) { 
 				field.setAccessible(true);
 				authB.getProperties().stream().forEach(prop -> {
@@ -93,17 +94,18 @@ public class Converter {
 		GameState state = new GameState();
 		gs.getMyObjects().stream()
 		.forEach(gameObj -> {
-			System.out.println(gameObj.getName());
+//			System.out.println(gameObj.getName());
 			state.addGameElement(gameObject2GameElement(gameObj));
 		});
 		return state;
 	}
 	
 	public GameObject gameElement2GameObject(GameElement ge) {
-		GameObject go = new GameObject(ge.getIdentifier());
+		GameObject go = new GameObject();
+		
 		for (engine.behaviors.Behavior b: ge.getAllBehaviors()) {
-			System.out.println(b.reportProperties());
-			Behavior authB = new Behavior(b.getClass().getName(), new HashSet<Property>());
+//			System.out.println(b.reportProperties());
+			AuthBehavior authB = new AuthBehavior(b.getClass().getName(), new HashSet<Property>());
 			Map<String, Object> engBehaviorProperties = b.reportProperties();
 			for (String key: b.reportProperties().keySet()) {
 				Property prop = new Property(key, engBehaviorProperties.getClass());

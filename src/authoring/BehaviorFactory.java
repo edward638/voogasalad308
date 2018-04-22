@@ -24,8 +24,8 @@ public class BehaviorFactory {
 			Set<Property> properties = makeProperties(clazz);
 			return new AuthBehavior(behaviorName, properties);
 		} catch (ClassNotFoundException e) {
-			new Error("Invalid Behavior: " + className);
-			System.out.println("Invalid Behavior: " + className);
+			new Error("Invalid Behavior: " + behaviorName);
+			System.out.println("Invalid Behavior: " + behaviorName);
 			e.printStackTrace();
 		}
 		return null;

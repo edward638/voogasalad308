@@ -6,7 +6,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import authoring.Behavior;
+import authoring.AuthBehavior;
 import authoring.GameObject;
 import authoring.GameScene;
 import authoring.Property;
@@ -27,7 +27,7 @@ class ConverterTester {
 	
 	@Test
 	void testMakeGameObject() {
-		Behavior behave = new Behavior(Movable.class.getCanonicalName(), new HashSet<Property>());
+		AuthBehavior behave = new AuthBehavior(Movable.class.getCanonicalName(), new HashSet<Property>());
 		Property propXvel = new Property("xVel", Double.class);
 		propXvel.setValue(10.0);
 		Property propYvel = new Property("yVel", Double.class);
@@ -41,7 +41,7 @@ class ConverterTester {
 	
 	@Test
 	void convertGameObject() {
-		Behavior behave = new Behavior(Movable.class.getCanonicalName(), new HashSet<Property>());
+		AuthBehavior behave = new AuthBehavior(Movable.class.getCanonicalName(), new HashSet<Property>());
 		Property propXvel = new Property("xVel", Double.class);
 		propXvel.setValue(10.0);
 		Property propYvel = new Property("yVel", Double.class);
@@ -53,7 +53,6 @@ class ConverterTester {
 		Converter converter = new Converter();
 	}
 	
-	@Test
 	void printTestState() {
 		testState.getElements().forEach(el -> System.out.println(el.reportProperties()));
 	}
@@ -62,7 +61,7 @@ class ConverterTester {
 	void convertStateToScene() {
 		GameScene scene = converter.gameState2GameScene(testState);
 		for (GameObject go: scene.getMyObjects()) {
-			System.out.println(go.getName());
+//			System.out.println(go.getName());
 		}
 		GameState g2 = converter.gameScene2GameState(scene);
 		System.out.println(testStateEquality(testState, g2));

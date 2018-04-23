@@ -4,18 +4,19 @@ import engine.Engine;
 import engine.GameElement;
 import engine.GameState;
 
-public class RemoveGameElementEvent extends GameEvent{
+public class GameOverEvent extends GameEvent{
 	
 	private GameElement toRemove;
 	
-	public RemoveGameElementEvent(GameElement gameElement) {
+	public GameOverEvent(GameElement gameElement) {
 		toRemove = gameElement;
 		System.out.println("Remove Event created");
 	}
 
 	@Override
 	public void execute(GameState state) {
-		state.removeGameElement(toRemove);
-		System.out.println("RemoveElement event executed");
+		state.removeAllElements();
+		state.setState(state.getGameMetaData().getLevel(0));
+		System.out.println("GameOver event executed");
 	}
 }

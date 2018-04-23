@@ -26,12 +26,12 @@ public class ObjectCoordinatesInsertion {
 
 	public void setXpos(double xPos) {
 		this.xPos = Double.toString(xPos);
-		gameObject.setX(this.xPos);
+		gameObject.getMandatoryBehavior().getProperty("xPos").setValue(this.xPos);
 	}
 	
 	public void setYpos(double yPos) {
 		this.xPos = Double.toString(yPos);
-		gameObject.setY(this.yPos);
+		gameObject.getMandatoryBehavior().getProperty("yPos").setValue(this.yPos);
 	}
 	
 	

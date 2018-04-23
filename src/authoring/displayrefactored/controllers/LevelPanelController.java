@@ -61,11 +61,14 @@ public class LevelPanelController extends Controller {
 		game.getImageManager().storeImage(imageName, image);
 		GameObject gameObject = new GameObject();
 		AuthBehavior mandatory = gameObject.getMandatoryBehavior();
-		mandatory.getProperty("elementName").setValue(name);
+		gameObject.setName(name);
 		mandatory.getProperty("xPos").setValue(xPos);
 		mandatory.getProperty("yPos").setValue(yPos);
 		mandatory.getProperty("imagePath").setValue(imageName);
 		game.getSceneManager().getCurrentScene().getMyObjects().add(gameObject);
+		game.getSceneManager().getCurrentScene().setCurrentGameObject(gameObject);
+		game.notifyObjectInfoObservers();
+		
 		refreshView();
 	}
 	

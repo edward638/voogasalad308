@@ -42,7 +42,6 @@ public class ObjectInfoPanel extends MainWindowComponent {
 	private void initializeVBox() {
 		myVBox.getChildren().add(makeBehaviorBar());
 
-
 	}
 
 	private Node makeBehaviorBar() {

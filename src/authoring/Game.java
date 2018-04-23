@@ -3,6 +3,7 @@ package authoring;
 import data.GameInitializer;
 import data.ImageManager;
 import javafx.beans.InvalidationListener;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
@@ -141,6 +142,27 @@ public class Game extends Observable implements GameViewObservable, ObjectInfoOb
 	public void notifyMyObservers() {
 		setChanged();
 		notifyObservers();
+	}
+
+	@Override
+	public List<GameObject> getInstances() {
+		// TODO Auto-generated method stub
+		List<GameObject> list = new ArrayList<>();
+		GameObject gameObject = getCurrentGameObject();
+		String name = gameObject.getName();
+		for (GameObject go: getGameObjects()) {
+			if (name.equals(go.getName())) {
+				list.add(go);
+			}		
+		}
+		return list;
+	}
+
+	@Override
+	public Image getCurrentImage() {
+		// TODO Auto-generated method stub
+//		return myImageManager.getImage((getCurrentGameObject());
+		return null;
 	}
 	
 }

@@ -40,22 +40,31 @@ public class Engine implements EngineInterface{
 	 * @param gamePath
 	 */
 	public Engine(GameMetaData metaData) {
+		gameState = new GameState();
 		gameState.setState(metaData.getCurrentLevel());
-		displayState = new DisplayState(metaData.getGameName(), gameState);
+		displayState = new DisplayState(gameState, metaData.getGameName());
 		eventManager = new EventManager2(gameState);
-		audioPlayer = new AudioPlayer(musicPath);
+		audioManager = new AudioManager(1);
 		startAnimation();
 	}
 	
+	/**
+	 * OBSOLETE--do not use. instead, use Engine(GameMetaData metaData).
+	 * @param gamePath
+	 */
 	public Engine(String gamePath) {
 		ModelGameState modelGameState = new ModelGameState(); 
 		gameState = modelGameState.getState();
 		displayState = modelGameState.getDisplay();
 		eventManager = new EventManager2(gameState);
-		audioPlayer = new AudioPlayer(musicPath);
+		audioManager = new AudioManager(1);
 		startAnimation();
 	}
 	
+	/**
+	 * OBSOLETE--do not use. instead, use Engine(GameMetaData metaData).
+	 * @param g
+	 */
 	public Engine(GameState g) {
 		gameState = g;
 		displayState = new DisplayState(g);
@@ -103,7 +112,6 @@ public class Engine implements EngineInterface{
     	displayState.updateImageElements(scrollingAroundMainCharacter(gameState));
     	displayState.update(gameState);
     	updateDisplay(displayState.newElements, displayState.removeElements);
-    	//metaData.sendMainCharacterInfo();
     }
 
 	protected void updateDisplay(List<ImageElement> newElements, List<ImageElement> removeElements) {
@@ -133,6 +141,18 @@ public class Engine implements EngineInterface{
 	@Override
 	public void setVolume(double newVolume) {
 		audioManager.setVolume(newVolume);
+	}
+
+	@Override
+	public void pause() {
+		animation.pause();
+		
+	}
+
+	@Override
+	public void play() {
+		animation.play();
+		
 	}
 	
 	

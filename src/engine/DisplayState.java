@@ -11,6 +11,16 @@ public class DisplayState {
 	protected List<ImageElement> newElements;
 	protected List<ImageElement> removeElements;
 	
+	public DisplayState (GameState gameState, String gameName) {
+		this.gameState = gameState;
+		activeElements = new ArrayList<>();
+		newElements = new ArrayList<>();
+		removeElements = new ArrayList<>();
+		for (GameElement e : gameState.getElements()) {
+			addNewElement(e);
+		}
+	}
+	
 	public DisplayState (GameState gameState) {
 		this.gameState = gameState;
 		activeElements = new ArrayList<>();

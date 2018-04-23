@@ -1,10 +1,18 @@
 package authoring.displayrefactored;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
 import authoring.Game;
 import authoring.displayrefactored.controllers.AuthoringEnvironmentRefactored;
 import authoring.displayrefactored.popups.NewGamePopupRefactored;
+import data.GameLoader;
+import data.GameSaver;
+import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -17,6 +25,7 @@ public class AuthoringDisplayRefactored implements LoadAuthoringInterface {
 	private static final String LOAD_GAME = "Load Game";
 	private static final String NEW_GAME = "New Game";
 	private static final String NAME = "Authoring Environment";
+	private static final String baseLocation = "./data/gamedata/games/";
 	private static final int WIDTH = 1500;
 	private static final int HEIGHT = 1000;
 	private Pane root;
@@ -24,6 +33,8 @@ public class AuthoringDisplayRefactored implements LoadAuthoringInterface {
 	private Button newGameButton;
 	private Button loadGameButton;
 	private Button saveGameButton;
+	private ComboBox<String> gameNames;
+	private Game currentGame;
 	private AuthoringEnvironmentRefactored authoringEnvironmentRefactored;
 	
 	public AuthoringDisplayRefactored(Stage stage) {
@@ -42,22 +53,69 @@ public class AuthoringDisplayRefactored implements LoadAuthoringInterface {
 	
 	private void initializeButtonBox() {
 		buttonBox = new HBox();
+		gameNames = new ComboBox<>();
 		newGameButton = new Button(NEW_GAME);
 		loadGameButton = new Button(LOAD_GAME);
 		saveGameButton = new Button(SAVE_GAME);
-		buttonBox.getChildren().addAll(newGameButton,loadGameButton,saveGameButton);
+		buttonBox.getChildren().addAll(newGameButton,saveGameButton,loadGameButton,gameNames);
 		setButtonActions();
+		initializeComboBoxes();
 		root.getChildren().add(buttonBox);
 	}
 
+	private void initializeComboBoxes() {
+		gameNames.getItems().clear();
+		gameNames.setPromptText(ResourceBundleManager.getAuthoring("RecentGames"));
+		File directory = new File(baseLocation);
+		File[] directoryListing = directory.listFiles();
+	        
+	        if (directoryListing != null){
+	            for (File f : directoryListing){
+	                String path = f.getName();
+	                gameNames.getItems().add(path);
+	            }
+	        }
+		
+	}
+	
 	private void setButtonActions() {
 		// TODO Auto-generated method stub
 		newGameButton.setOnAction(e -> {
 			NewGamePopupRefactored popup = new NewGamePopupRefactored(this);
 		});
+		saveGameButton.setOnAction(e -> {
+			GameSaver saver = new GameSaver(currentGame.getName());
+			try {
+				saver.gameAuthorToXML(currentGame.getScenes());
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			initializeComboBoxes();
+		});
+		loadGameButton.setOnAction(e -> {
+			String gameName = gameNames.getSelectionModel().getSelectedItem();
+			GameLoader gameLoader = new GameLoader(gameNames.getSelectionModel().getSelectedItem());
+			currentGame = new Game(gameName);
+			
+			root.getChildren().clear();
+			root.getChildren().add(buttonBox);
+			authoringEnvironmentRefactored = new AuthoringEnvironmentRefactored(currentGame);
+			currentGame.restoreGame(gameLoader.getGameScenes());
+			Pane GUIPane = authoringEnvironmentRefactored.getGUI();
+			GUIPane.setLayoutX(GUI_LAYOUT_X);
+			GUIPane.setLayoutY(GUI_LAYOUT_Y);
+			root.getChildren().add(GUIPane);
+			
+		});
+		
 	}
 	
 	public void loadAuthoringEnvironment(Game game) {
+		root.getChildren().clear();
+		root.getChildren().add(buttonBox);
+		currentGame = game;
 		authoringEnvironmentRefactored = new AuthoringEnvironmentRefactored(game);
 		Pane GUIPane = authoringEnvironmentRefactored.getGUI();
 		GUIPane.setLayoutX(GUI_LAYOUT_X);

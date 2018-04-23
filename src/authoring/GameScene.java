@@ -17,7 +17,6 @@ public class GameScene {
 	
 	//has a list of objects
 	private String myName;
-	private SceneBackground mySceneBackground;
 	private List<SceneBackgroundImageSerializable> backgroundImageSerializables;
 	private List<GameObject> myObjects;
 	private Set<String> myObjectNames;
@@ -29,7 +28,7 @@ public class GameScene {
 		myObjects = new ArrayList<>();
 		myObjectNames = new TreeSet<>();
 		backgroundImageSerializables = new ArrayList<>();
-		mySceneBackground = new SceneBackground(ResourceBundleManager.getPosition("GAMEVIEWSIZE_X"), ResourceBundleManager.getPosition("GAMEVIEWSIZE_Y"));
+		
 //		System.out.println("New GameScene made!");
 	}
 	
@@ -62,9 +61,6 @@ public class GameScene {
 		return myName;
 	}
 	
-	public SceneBackground getSceneBackground() {
-		return mySceneBackground;
-	}
 
 	public List<SceneBackgroundImageSerializable> getBackgroundImageSerializables() {
 		return backgroundImageSerializables;

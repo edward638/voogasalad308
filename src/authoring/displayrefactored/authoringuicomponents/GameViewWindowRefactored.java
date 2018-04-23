@@ -72,8 +72,6 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 		
 	}
 	
-	
-	
 	public void switchPanes(String key) {
 		if (key.equals("Background")) {
 			stackPane.getChildren().clear();

@@ -126,7 +126,7 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 	public void update(Observable o, Object arg) {
 		levelsObservable = (LevelsObservable) o;
 		updateLevelObjects(levelsObservable.getGameObjects());
-//		updateLevelDropdown(levelsObservable.getScenes());
+		updateLevelDropdown1(levelsObservable.getScenes());
 	}
 	
 	private void updateLevelObjects(List<GameObject> list) {
@@ -138,9 +138,10 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 		myLevelObjects.getItems().addAll(FXCollections.observableArrayList(list));
 	}
 	
-	private void updateLevelDropdown(List<GameScene> list) {
+	private void updateLevelDropdown1(List<GameScene> list) {
 		myLevelDropdown.getItems().clear();
 		myLevelDropdown.getItems().addAll(list);
+		System.out.println("updateLevelDropdown1: " + list);
 	
 	}
 

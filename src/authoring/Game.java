@@ -40,6 +40,11 @@ public class Game extends Observable implements GameViewObservable, ObjectInfoOb
 		gameImage = "draw-more-few-cloud.png";
 	}
 	
+	public void restoreGame(List<GameScene> list) {
+		mySceneManager.restoreScenes(list);
+		notifyMyObservers();
+	}
+	
 	public void setObjectInfoObserver(ObjectInfoObserver observer) {
 		objectInfoObserver = observer;
 	}
@@ -115,10 +120,14 @@ public class Game extends Observable implements GameViewObservable, ObjectInfoOb
 		List<ImageView> list = new ArrayList<>();
 		
 		for (GameObject go: getSceneManager().getCurrentScene().getMyObjects()) {
+
+			
 			AuthBehavior mandatoryBehavior = go.getBehavior("MandatoryBehavior");
+			
 			Property xPositionProperty = mandatoryBehavior.getProperty("xPos");
 			Property yPositionProperty = mandatoryBehavior.getProperty("yPos");
 			Property imagePathProperty = mandatoryBehavior.getProperty("imagePath");
+
 			Double xPosition = (Double) xPositionProperty.getValue();
 			Double yPosition = (Double) yPositionProperty.getValue();
 			String imagePath = (String) imagePathProperty.getValue();
@@ -134,12 +143,6 @@ public class Game extends Observable implements GameViewObservable, ObjectInfoOb
 		return list;
 	}
 	
-
-	@Override
-	public Pane getSceneBackgroundPane() {
-		// TODO Auto-generated method stub
-		return getSceneManager().getCurrentScene().getSceneBackground().getPane();
-	}
 	
 	public void addSceneBackgroundImageSerializable(SceneBackgroundImageSerializable s) {
 		getSceneManager().getCurrentScene().addBackgroundImageSerializable(s);

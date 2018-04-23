@@ -3,6 +3,7 @@ package gamePlayer;
 import data.GameDescriptionProvider;
 import engine.Engine;
 import engine.GameState;
+import engine.tests.ModelGameState2;
 import gamePlayer.buttons.ClearHighScoresButton;
 import gamePlayer.buttons.ConcreteButtonData;
 import gamePlayer.buttons.KeyboardBindingButton;
@@ -116,7 +117,8 @@ public class ConcreteGamePlayer implements GamePlayer {
 		if (engine != null) {
 			engine.close();
 		}
-		engine = new Engine(file);
+		//engine = new Engine(file);
+		engine = new Engine(new ModelGameState2().getState());
 		keyInputDictionary.setGame(engine);
 		currentGameName = gameDescriptionProvider.getGameName(file);
 		buttonData.setCurrentGameName(currentGameName);

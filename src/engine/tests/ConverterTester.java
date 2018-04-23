@@ -1,6 +1,5 @@
 package engine.tests;
 
-import java.util.HashSet;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -9,63 +8,87 @@ import org.junit.jupiter.api.Test;
 import authoring.AuthBehavior;
 import authoring.GameObject;
 import authoring.GameScene;
-import authoring.Property;
 import engine.GameElement;
 import engine.GameState;
-import engine.authouringconversion.Converter;
-import engine.behaviors.Movable;
+import engine.authouringconversion.Converter2;
+import engine.behaviors.Behavior;
+import engine.behaviors.MandatoryBehavior;
 
 class ConverterTester {
 	GameState testState;
-	Converter converter;
+	Converter2 converter;
+	ModelGameState2 stateMaker;
 	
 	@BeforeEach
 	void setup() {
-		testState = new ModelGameState2().getState();
-		converter = new Converter();
+		stateMaker = new ModelGameState2();
+		testState = stateMaker.getState();
+		converter = new Converter2();
 	}
 	
-	@Test
-	void testMakeGameObject() {
-		AuthBehavior behave = new AuthBehavior(Movable.class.getCanonicalName(), new HashSet<Property>());
-		Property propXvel = new Property("xVel", Double.class);
-		propXvel.setValue(10.0);
-		Property propYvel = new Property("yVel", Double.class);
-		propYvel.setValue(1.0);
-		behave.addProperty(propXvel);
-		behave.addProperty(propYvel);
-		GameObject go = new GameObject(behave);
-		go.addBehavior(behave);
-//		System.out.println(go);
+//	@Test
+	void testBehaviorEng2Auth () {
+		Behavior mand = stateMaker.getMario().getBehavior(MandatoryBehavior.class);
+		printAuthBehavior(converter.behavior2AuthBehavior(mand));
 	}
 	
-	@Test
-	void convertGameObject() {
-		AuthBehavior behave = new AuthBehavior(Movable.class.getCanonicalName(), new HashSet<Property>());
-		Property propXvel = new Property("xVel", Double.class);
-		propXvel.setValue(10.0);
-		Property propYvel = new Property("yVel", Double.class);
-		propYvel.setValue(1.0);
-		behave.addProperty(propXvel);
-		behave.addProperty(propYvel);
-		GameObject go = new GameObject(behave);
-		go.addBehavior(behave);
-		Converter converter = new Converter();
+	void printAuthBehavior(AuthBehavior authB) {
+		System.out.println("AuthBehavior: " + authB);
+		authB.getProperties().stream() 
+		.forEach(prop -> System.out.println(prop));
 	}
 	
-	void printTestState() {
-		testState.getElements().forEach(el -> System.out.println(el.reportProperties()));
+//	@Test
+	void testGameElement2GameObject () {
+		GameElement mario = stateMaker.getMario();
+		printGameObject(converter.gameElement2GameObject(mario));
 	}
 	
-	@Test
-	void convertStateToScene() {
-		GameScene scene = converter.gameState2GameScene(testState);
-		for (GameObject go: scene.getMyObjects()) {
-//			System.out.println(go.getName());
+	void printGameObject (GameObject go) {
+		System.out.println("--------------------------");
+		System.out.println("GameObject toString: " + go);
+		System.out.println("Game Object Behaviors: " + go.getBehaviors() + " \n");
+		for (AuthBehavior authB: go.getBehaviors()) {
+			printAuthBehavior(authB);
+			System.out.println();
 		}
-		GameState g2 = converter.gameScene2GameState(scene);
-		System.out.println(testStateEquality(testState, g2));
-		System.out.println("Converted State to Scene");
+	}
+	
+//	@Test
+	void testGameState2GameScene () {
+		printScene(converter.gameState2GameScene(testState));
+	}
+	
+	void printScene (GameScene scene) {
+		System.out.println("Printing Scene: " + scene.getName());
+		for (GameObject go: scene.getMyObjects()) {
+			printGameObject(go);
+		}
+		System.out.println("Finished printing scene");
+	}
+	
+	@Test
+	void testConvertAndBack () {
+		GameScene scene = converter.gameState2GameScene(testState);
+		GameState s2 = converter.gameScene2GameState(scene);
+		compareStates(testState, s2);
+	}
+	
+
+	void compareStates(GameState s1, GameState s2) {
+		List <GameElement> s1elems = s1.getElements();
+		List <GameElement> s2elems = s2.getElements();
+		
+		System.out.println("State s1: ");
+
+		for (GameElement s1elem: s1elems) {
+			System.out.println(s1elem);
+		}
+		
+		System.out.println("\nState s2: ");
+		for (GameElement s2elem: s2elems) {
+			System.out.println(s2elem);
+		}
 	}
 	
 	boolean testStateEquality(GameState s1, GameState s2) {

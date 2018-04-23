@@ -42,7 +42,7 @@ public class SplashScreen {
 		GUIButton gameAuthoringButton = new GUIButton(
 				Integer.parseInt(ResourceBundleManager.getSplash("AUTHBUTTONSIZEX")),
 				Integer.parseInt(ResourceBundleManager.getSplash("AUTHBUTTONSIZEY")), "",
-				new GameAuthoringPress(currStage));
+				new GameAuthoringPress());
 		gamePlayerButton.setId(ResourceBundleManager.getSplash("PLAYERBUTTONID"));
 		gameAuthoringButton.setId(ResourceBundleManager.getSplash("AUTHBUTTONID"));
 

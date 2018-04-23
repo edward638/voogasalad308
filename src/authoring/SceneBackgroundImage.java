@@ -68,11 +68,11 @@ public class SceneBackgroundImage {
 		imageHolder.getChildren().add(cornerCircle);		
 		
 		
-		System.out.println("SceneBackgroundImage()");
+//		System.out.println("SceneBackgroundImage()");
 	}
 	
 	public Pane getPane() {
-		System.out.println("SceneBackgroundImage getPane()");
+//		System.out.println("SceneBackgroundImage getPane()");
 		return imageHolder;
 	}
 	

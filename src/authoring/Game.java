@@ -4,12 +4,15 @@ import data.GameInitializer;
 import data.ImageManager;
 import engine.behaviors.Behavior;
 import javafx.beans.InvalidationListener;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+
+import authoring.displayrefactored.GameObjectImageView;
 
 /** 
  * Game keeps track of an entire game 
@@ -24,6 +27,7 @@ public class Game extends Observable implements GameViewObservable, ObjectInfoOb
 	private String gameImage;
 	private SceneManager mySceneManager;
 	private ImageManager myImageManager;
+	private ObjectInfoObserver objectInfoObserver;
 	
 	public Game() {
 		this("TestGame");
@@ -35,6 +39,10 @@ public class Game extends Observable implements GameViewObservable, ObjectInfoOb
 		myImageManager = new ImageManager(gameName);
 		new GameInitializer(gameName);
 		gameImage = "draw-more-few-cloud.png";
+	}
+	
+	public void setObjectInfoObserver(ObjectInfoObserver observer) {
+		objectInfoObserver = observer;
 	}
 	
 	public void setGameName(String name) {
@@ -107,7 +115,6 @@ public class Game extends Observable implements GameViewObservable, ObjectInfoOb
 		// TODO Auto-generated method stub
 		List<ImageView> list = new ArrayList<>();
 		
-		
 		for (GameObject go: getSceneManager().getCurrentScene().getMyObjects()) {
 			AuthBehavior mandatoryBehavior = go.getBehavior("MandatoryBehavior");
 			Property xPositionProperty = mandatoryBehavior.getProperty("xPos");
@@ -121,11 +128,13 @@ public class Game extends Observable implements GameViewObservable, ObjectInfoOb
 			imageView.setLayoutY(yPosition);
 			imageView.setPreserveRatio(true);
 			imageView.setFitHeight(200);
-			list.add(imageView);
+			GameObjectImageView draggableImageView = new GameObjectImageView(imageView, go);
+			list.add(draggableImageView.getMyImage());
 		}
 		
 		return list;
 	}
+	
 
 	@Override
 	public Pane getSceneBackgroundPane() {
@@ -133,9 +142,45 @@ public class Game extends Observable implements GameViewObservable, ObjectInfoOb
 		return getSceneManager().getCurrentScene().getSceneBackground().getPane();
 	}
 	
+	@Override
+	public GameObject getCurrentGameObject() {
+		// TODO Auto-generated method stub
+		return getSceneManager().getCurrentScene().getCurrentGameObject();
+	}
+	
 	public void notifyMyObservers() {
 		setChanged();
 		notifyObservers();
+	}
+
+	@Override
+	public List<GameObject> getInstances() {
+		// TODO Auto-generated method stub
+		List<GameObject> list = new ArrayList<>();
+		GameObject gameObject = getCurrentGameObject();
+		String name = gameObject.getName();
+//		System.out.println("Object name:" + name);
+//		System.out.println("Objectlist size: " + getGameObjects().size());
+		for (GameObject go: getGameObjects()) {
+			if (name.equals(go.getName())) {
+				list.add(go);
+			}		
+		}
+		return list;
+	}
+
+	public void notifyObjectInfoObservers() {
+		objectInfoObserver.notifyOfChanges();
+	}
+	
+	@Override
+	public Image getCurrentImage() {
+		// TODO Auto-generated method stub
+		AuthBehavior mandatoryBehavior = getCurrentGameObject().getBehavior("MandatoryBehavior");
+		Property imagePathProperty = mandatoryBehavior.getProperty("imagePath");
+		String imagePath = (String) imagePathProperty.getValue();
+//		System.out.println(imagePath);
+		return myImageManager.getImage(imagePath + ".png");
 	}
 	
 }

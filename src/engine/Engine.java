@@ -62,7 +62,7 @@ public class Engine implements EngineInterface{
 		eventManager = new EventManager2(gameState);
 		audioManager = new AudioManager(1);
 		
-		//audioPlayer = audioManager.newAudioPlayer(musicPath);
+		audioPlayer = audioManager.newAudioPlayer(musicPath);
 		startAnimation();
 	}
 	

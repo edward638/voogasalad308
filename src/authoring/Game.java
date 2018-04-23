@@ -161,8 +161,7 @@ public class Game extends Observable implements GameViewObservable, ObjectInfoOb
 	@Override
 	public Image getCurrentImage() {
 		// TODO Auto-generated method stub
-//		return myImageManager.getImage((getCurrentGameObject());
-		return null;
+		return myImageManager.getImage((String)(getCurrentGameObject().getMandatoryBehavior().getProperty("imagePath").getValue()));
 	}
 	
 }

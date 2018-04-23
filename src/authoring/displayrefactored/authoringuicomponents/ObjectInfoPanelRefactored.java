@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import authoring.Behavior;
 import authoring.GameObject;
 import authoring.ObjectInfoObservable;
 import authoring.Property;
@@ -39,6 +38,7 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 	private ImageView imageView;
 	private Label objectName;
 	private Label instances;
+	private Label properties;
 	
 	private static final double PANE_PREF_WIDTH = 250;
 	private static final double DEFAULT_SPACING = 5;
@@ -53,7 +53,7 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 		// TODO Auto-generated method stub
 		BorderPane borderPane = getBorderPane();
 		initializeButtons();
-		mapButtonActions();
+	
 		gameObjectCoordinates = new TableView<>();
 
 		objectName = new Label();
@@ -67,13 +67,16 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 		myVBox = new VBox(DEFAULT_SPACING);
 		myVBox.setAlignment(Pos.CENTER);
 		
-		initializeVBox();
+		properties = new Label("Properties");
+		properties.setStyle("-fx-border-color: black");
+//		initializeVBox();
 		
 //		myScrollPane.setPrefWidth(PANE_PREF_WIDTH);
 //		myScrollPane.setContent(myVBox);
 //		myScrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
 		
 		borderPane.setCenter(myVBox);	
+		borderPane.setTop(properties);
 	}
 	
 	
@@ -86,7 +89,7 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 		
 	}
 	
-	private void mapButtonActions() {
+	private void mapButtonActions(List<GameObject> list) {
 		
 		editBehaviorsButton.setOnAction(e->{
 			
@@ -102,7 +105,8 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 	}
 
 	private void initializeVBox() {
-		
+		myVBox.getChildren().clear();
+		mapButtonActions(gameObjects);
 		myVBox.getChildren().addAll(imageView,objectName,buttonsHBox,instances,gameObjectCoordinates);
 		
 	}
@@ -114,14 +118,19 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 		// TODO Auto-generated method stub
 		observable = (ObjectInfoObservable) o;
 		updateInfo(observable.getInstances(), observable.getCurrentGameObject(), observable.getCurrentImage());
-		
+
+		initializeVBox();
 	}
 	
 	private void updateInfo(List<GameObject> list, GameObject current, Image image) {
 		
 		gameObjects = list;
 		
-		objectName.setText("Name: " + current.getName() + "   Image: ");
+		objectName.setText("Name: " + current.getName() + "   Image: " + current.getMandatoryBehavior().getProperty("imagePath").getValue());
+		
+		imageView = new ImageView(image);
+		imageView.setPreserveRatio(true);
+		imageView.setFitWidth(100);
 		
 		for (GameObject gameObject: list) {
 			

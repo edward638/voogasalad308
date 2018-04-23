@@ -81,10 +81,11 @@ public class Engine implements EngineInterface{
 	public void timeStep (double elapsedTime) {
 		double gameSteps = elapsedTime * gameState.getGameSpeed();
 		gameState.incrementGameTime(gameSteps);
-	    	eventManager.processElementEvent(new TimeEvent(gameSteps));
-	    	displayState.updateImageElements(scrollingAroundMainCharacter(gameState));
-	    	displayState.update(gameState);
-	    	updateDisplay(displayState.newElements, displayState.removeElements);
+    	eventManager.processElementEvent(new TimeEvent(gameSteps));
+    	displayState.updateImageElements(scrollingAroundMainCharacter(gameState));
+    	displayState.update(gameState);
+    	updateDisplay(displayState.newElements, displayState.removeElements);
+    	//metaData.sendMainCharacterInfo();
     }
 
 	protected void updateDisplay(List<ImageElement> newElements, List<ImageElement> removeElements) {

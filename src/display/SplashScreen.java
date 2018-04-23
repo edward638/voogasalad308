@@ -5,18 +5,15 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import data.propertiesFiles.ResourceBundleManager;
 import display.buttonevents.GameAuthoringPress;
 import display.buttonevents.GamePlayerPress;
 import display.buttons.GUIButton;
-import display.text.SplashText;
-import javafx.animation.Animation;
 import javafx.animation.RotateTransition;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -29,14 +26,7 @@ public class SplashScreen {
 	
 	private Stage currStage; 
 	private Pane myRoot;
-	private Color BACKGROUND_COLOR = Color.LIGHTSTEELBLUE;
-	private Color TEXT_COLOR = Color.WHITE;
 	private List<GUIButton> buttons;
-	private static final int SIZE_X = 1310;
-	private static final int SIZE_Y = 700;
-	private static final String SPLASH_IMAGE = "./data/images/Logo1.png";
-	private static final String CREATE = "./data/images/createText.png";
-	private static final String PLAY = "./data/images/playText.png";
 
 	public SplashScreen(Stage stage) {
 		this.currStage = stage;
@@ -44,35 +34,33 @@ public class SplashScreen {
 	}
 	private void addButtons() {
         buttons = new ArrayList<>();
-        GUIButton gamePlayerButton = new GUIButton(900, 400, "", new GamePlayerPress(currStage));
-        GUIButton gameAuthoringButton = new GUIButton(900, 480, "", new GameAuthoringPress(currStage));
-        gamePlayerButton.setId("enginebutton");
-        gameAuthoringButton.setId("authoringbutton");
+        GUIButton gamePlayerButton = new GUIButton(Integer.parseInt(ResourceBundleManager.getSplash("PLAYERBUTTONSIZEX")), Integer.parseInt(ResourceBundleManager.getSplash("PLAYERBUTTONSIZEY")), "", new GamePlayerPress(currStage));
+        GUIButton gameAuthoringButton = new GUIButton(Integer.parseInt(ResourceBundleManager.getSplash("AUTHBUTTONSIZEX")), Integer.parseInt(ResourceBundleManager.getSplash("AUTHBUTTONSIZEY")), "", new GameAuthoringPress(currStage));
+        gamePlayerButton.setId(ResourceBundleManager.getSplash("PLAYERBUTTONID"));
+        gameAuthoringButton.setId(ResourceBundleManager.getSplash("AUTHBUTTONID"));
         
-        File playImageFile = new File("./data/images/play.png");
+        File playImageFile = new File(ResourceBundleManager.getSplash("PLAYFILE"));
 		Image imagePlay;
 		try {
 			imagePlay = new Image(playImageFile.toURI().toURL().toExternalForm());
 			ImageView im = new ImageView(imagePlay);
 			im.setPreserveRatio(true);
-			im.setFitHeight(20);
+			im.setFitHeight(Integer.parseInt(ResourceBundleManager.getSplash("FILEHEIGHT")));
 			gamePlayerButton.setGraphic(im);
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new IllegalArgumentException();
 		}
         
-		File authorImageFile = new File("./data/images/write.png");
+		File authorImageFile = new File(ResourceBundleManager.getSplash("WRITEFILE"));
 		Image imageAuthor;
 		try {
 			imageAuthor = new Image(authorImageFile.toURI().toURL().toExternalForm());
 			ImageView im = new ImageView(imageAuthor);
 			im.setPreserveRatio(true);
-			im.setFitHeight(20);
+			im.setFitHeight(Integer.parseInt(ResourceBundleManager.getSplash("FILEHEIGHT")));
 			gameAuthoringButton.setGraphic(im);    
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new IllegalArgumentException();
 		}
         buttons.add(gamePlayerButton);
         buttons.add(gameAuthoringButton);
@@ -91,9 +79,9 @@ public class SplashScreen {
 	
 	
 	
-	private ImageView makeSplashImage(String image1, double ratio, double x, double y) {
+	private ImageView makeSplashImage(String imageName, double ratio, double x, double y) {
 		try {
-		File imageFile = new File(image1);
+		File imageFile = new File(imageName);
 		Image image = new Image(imageFile.toURI().toURL().toExternalForm());
 		ImageView splashImage = new ImageView(image);
 		splashImage.setPreserveRatio(true);
@@ -113,14 +101,12 @@ public class SplashScreen {
 	public Scene getSplashScreen() {
 		myRoot = new Pane();
 		myRoot.setId("pane");
-		Scene scene = new Scene(myRoot, SIZE_X, SIZE_Y, BACKGROUND_COLOR);
+		Scene scene = new Scene(myRoot, Integer.parseInt(ResourceBundleManager.getSplash("WINDOWSIZEX")), Integer.parseInt(ResourceBundleManager.getSplash("WINDOWSIZEY")));
 		scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 		myRoot.getChildren().addAll(buttons);
-//		myRoot.getChildren().add(new SplashText("VOOGASALAD", 70, 50, TEXT_COLOR, 40));
-//		myRoot.getChildren().add(new SplashText("2dessertz", 140, 100, TEXT_COLOR, 30));
-		myRoot.getChildren().add(makeSplashImage(SPLASH_IMAGE, 100, 850, 120));
-		myRoot.getChildren().add(makeSplashImage(PLAY, 50, 885, 415));
-		myRoot.getChildren().add(makeSplashImage(CREATE, 50, 900, 495));
+		myRoot.getChildren().add(makeSplashImage(ResourceBundleManager.getSplash("LOGO"), 100, 850, 120));
+		myRoot.getChildren().add(makeSplashImage(ResourceBundleManager.getSplash("PLAY"), 50, 885, 415));
+		myRoot.getChildren().add(makeSplashImage(ResourceBundleManager.getSplash("CREATE"), 50, 900, 495));
 		return scene;
 	}
 

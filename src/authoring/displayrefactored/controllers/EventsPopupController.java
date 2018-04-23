@@ -21,7 +21,7 @@ import javafx.scene.layout.VBox;
  */
 public class EventsPopupController extends Controller {
 	
-	private GameObject go;
+	private List<GameObject> gos;
 	
 	private EventsWindow eventsWindow;
 	private TriggerWindow triggerWindow;
@@ -30,19 +30,19 @@ public class EventsPopupController extends Controller {
 	private ResponseWindow responseWindow;
 	private GroovyWindow groovyWindow;
 
-	public EventsPopupController(GameObject inGo) {
-		go = inGo;
+	public EventsPopupController(List<GameObject> inGos) {
+		gos = inGos;
 		initializeScreenComponents();
 	}
 
 	@Override
 	protected void initializeScreenComponents() {
-		eventsWindow = new EventsWindow(this, go);
-		triggerWindow = new TriggerWindow(this, go);
-		behaviorsWindow = new BehaviorsWindow(this, go);
-		mfWindow = new MFWindow(this, go);
-		responseWindow = new ResponseWindow(this, go);
-		groovyWindow = new GroovyWindow(this, go);
+		eventsWindow = new EventsWindow(this, gos);
+		triggerWindow = new TriggerWindow(this, gos);
+		behaviorsWindow = new BehaviorsWindow(this, gos);
+		mfWindow = new MFWindow(this, gos);
+		responseWindow = new ResponseWindow(this, gos);
+		groovyWindow = new GroovyWindow(this, gos);
 	}
 
 	@Override

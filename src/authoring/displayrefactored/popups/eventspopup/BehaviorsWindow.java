@@ -1,5 +1,7 @@
 package authoring.displayrefactored.popups.eventspopup;
 
+import java.util.List;
+
 import authoring.AuthBehavior;
 import authoring.GameObject;
 import authoring.displayrefactored.controllers.EventsPopupController;
@@ -8,16 +10,20 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+/**
+ * @author August Ning
+ * VBox for listing behaviors of an game object
+ */
 public class BehaviorsWindow extends VBox {
 	
-	private GameObject go;
+	private List<GameObject> gos;
 	private EventsPopupController epuc;
 	private AuthBehavior currentBehavior;
 	private ListView<AuthBehavior> behaviors;
 	
-	public BehaviorsWindow(EventsPopupController myEPUC, GameObject myGo) {
+	public BehaviorsWindow(EventsPopupController myEPUC, List<GameObject> myGos) {
 		epuc = myEPUC;
-		go = myGo;
+		gos = myGos;
 		behaviors = new ListView<>();
 		behaviors.setMinHeight(200);
 		currentBehavior = null;
@@ -41,7 +47,7 @@ public class BehaviorsWindow extends VBox {
 			return; 
 		}
 		behaviors.getItems().clear();
-		behaviors.getItems().addAll(go.getBehaviors());
+		behaviors.getItems().addAll(gos.get(0).getBehaviors());
 		behaviors.setOnMouseClicked(e -> mouseClicked(behaviors.getSelectionModel().getSelectedItem()));
 		this.getChildren().add(behaviors);
 	}

@@ -1,8 +1,9 @@
 package authoring.displayrefactored.popups.eventspopup;
 
+import java.util.List;
+
 import authoring.Event;
 import authoring.GameObject;
-import authoring.display.eventspopupold.EventsPopUpController;
 import authoring.displayrefactored.controllers.EventsPopupController;
 import javafx.geometry.Insets;
 import javafx.scene.layout.VBox;
@@ -15,12 +16,12 @@ import javafx.scene.text.Text;
  */
 public class TriggerWindow extends VBox {
 
-	private GameObject go;
+	private List<GameObject> gos;
 	private EventsPopupController epuc;
 	private Event currentEvent;
 	
-	public TriggerWindow(EventsPopupController myEPUC, GameObject myGo) {
-		go = myGo;
+	public TriggerWindow(EventsPopupController myEPUC, List<GameObject> myGos) {
+		gos = myGos;
 		epuc = myEPUC;
 		createVBox();
 		assignCurrentEvent();

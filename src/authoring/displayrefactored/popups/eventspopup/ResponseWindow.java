@@ -1,5 +1,7 @@
 package authoring.displayrefactored.popups.eventspopup;
 
+import java.util.List;
+
 import authoring.GameObject;
 import authoring.displayrefactored.controllers.EventsPopupController;
 import javafx.geometry.Insets;
@@ -9,10 +11,10 @@ import javafx.scene.text.Text;
 public class ResponseWindow extends VBox {
 	
 	private EventsPopupController epuc;
-	private GameObject go;
+	private List<GameObject> gos;
 
-	public ResponseWindow(EventsPopupController myEPUC, GameObject myGo) {
-		go = myGo;
+	public ResponseWindow(EventsPopupController myEPUC, List<GameObject> myGos) {
+		gos = myGos;
 		epuc = myEPUC;
 		createVBox();
 	}
@@ -32,7 +34,7 @@ public class ResponseWindow extends VBox {
 			this.getChildren().add(nonvalid);
 			return;
 		}
-		Text goName = new Text(go.getName());
+		Text goName = new Text(gos.get(0).getName());
 		goName.setOnMouseClicked(e -> GOClicked());
 		this.getChildren().add(goName);
 	}

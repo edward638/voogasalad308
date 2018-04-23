@@ -1,5 +1,7 @@
 package authoring.displayrefactored.popups.eventspopup;
 
+import java.util.List;
+
 import authoring.Game;
 import authoring.GameObject;
 import authoring.displayrefactored.controllers.EventsPopupController;
@@ -11,12 +13,11 @@ import javafx.scene.text.Text;
 public class GroovyWindow extends VBox {
 
 	private EventsPopupController epuc;
-	private Game game;
-	private GameObject go;
+	private List<GameObject> gos;
 	private TextArea groovyInput;
 
-	public GroovyWindow(EventsPopupController myEPUC, GameObject myGo) {
-		go = myGo;
+	public GroovyWindow(EventsPopupController myEPUC, List<GameObject> myGos) {
+		gos = myGos;
 		epuc = myEPUC;
 		createVBox();
 	}

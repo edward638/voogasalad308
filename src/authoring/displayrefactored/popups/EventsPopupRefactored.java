@@ -4,6 +4,7 @@ import authoring.GameObject;
 import authoring.displayrefactored.controllers.EventsPopupController;
 import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
+import java.util.List;
 
 /**
  * @author August Ning
@@ -11,17 +12,17 @@ import javafx.scene.layout.HBox;
  */
 public class EventsPopupRefactored extends PopupRefactored {
 	
-	GameObject go;
+	List<GameObject> gos;
 	EventsPopupController epuc;
 	HBox epuBox;
 	
 	private static final int xSize = 1260;
 	private static final int ySize = 400;
 	
-	public EventsPopupRefactored(GameObject inGo) {
+	public EventsPopupRefactored(List<GameObject> inGos) {
 		super();
-		go = inGo;
-		epuc = new EventsPopupController(go);
+		gos = inGos;
+		epuc = new EventsPopupController(gos);
 		epuBox = new HBox();
 		epuBox.setPadding(new Insets(10));
 	    epuBox.setSpacing(8);

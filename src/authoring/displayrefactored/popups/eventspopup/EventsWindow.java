@@ -1,5 +1,6 @@
 package authoring.displayrefactored.popups.eventspopup;
 
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -24,15 +25,15 @@ public class EventsWindow extends VBox {
 	private final Class<?> EVENTS_SUPERCLASS = ElementEvent.class;
 	private final String EVENTS_PACKAGE = "engine.events.elementevents";
 	
-	private GameObject go;
+	private List<GameObject> gos;
 	private ComboBox<String> possibleEvents;
 	private EngineClassRetriever classRetriever;
 	private ListView<Event> myEvents;
 	private Event currentEvent;
 	private EventsPopupController epuc;
 	
-	public EventsWindow(EventsPopupController myEPUC, GameObject currObject) {
-		go = currObject;
+	public EventsWindow(EventsPopupController myEPUC, List<GameObject> myGos) {
+		gos = myGos;
 		classRetriever = new EngineClassRetriever();
 		epuc = myEPUC;
 		myEvents = new ListView<>();
@@ -68,13 +69,15 @@ public class EventsWindow extends VBox {
 	private void comboBoxAction(String eventName) {
 		currentEvent = new Event();
 		currentEvent.setEventType(eventName);
-		go.addEvent(currentEvent);
+		for (GameObject go : gos) {
+			go.addEvent(currentEvent);
+		}
 		epuc.updateFromEvent(currentEvent);
 	}
 
 	private ListView<Event> makeEventList(){
 		myEvents.getItems().clear();
-		myEvents.getItems().setAll(go.getEvents());
+		myEvents.getItems().setAll(gos.get(0).getEvents());
 		return myEvents;
 	}
 	

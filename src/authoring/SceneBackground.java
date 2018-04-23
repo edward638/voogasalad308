@@ -35,9 +35,9 @@ public class SceneBackground {
 	}
 	
 	
-	public void addImage(Image image) {
-		SceneBackgroundImage i = new SceneBackgroundImage(image, borderRectangle);
-		Pane imagePane = i.getPane();
+	public void addImage(SceneBackgroundImage sceneBackgroundImage) {
+		sceneBackgroundImage.setRectangle(borderRectangle);
+		Pane imagePane = sceneBackgroundImage.getPane();
 //		imagePane.setLayoutX(myXSize/2);
 //		imagePane.setLayoutY(myYSize/2);
 		pane.getChildren().add(imagePane);

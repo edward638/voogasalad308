@@ -69,7 +69,11 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 	
 	private void initializeListViews() {
 		myLevelObjects = new ListView<>();
+		myLevelObjects.setOnMouseClicked(e->{
+			controller.setCurrentGameObject(myLevelObjects.getSelectionModel().getSelectedItem());
+		});
 	}
+	
 	
 	private void setActions() {
 		myAddLevelButton.setOnAction(e -> {
@@ -84,7 +88,10 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 				fileChooser.setTitle("Choose Object Image");
 				fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
 				File image = fileChooser.showOpenDialog(new Stage());
+
 				controller.addBackgroundImage(new Image(image.toURI().toString()));
+				
+				
 				//put image.getName into SceneBackground
 			} catch (Exception exception) {
 				//do nothing
@@ -123,7 +130,7 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 	}
 	
 	private void updateLevelObjects(List<GameObject> list) {
-		System.out.println("There should be " + list.size() + " objects in this list.");
+//		System.out.println("There should be " + list.size() + " objects in this list.");
 		for (GameObject GO : list) {
 			System.out.println(GO.getName());
 		}

@@ -8,6 +8,8 @@ import java.util.Observer;
 import authoring.GameObject;
 import authoring.GameViewObservable;
 import authoring.SceneBackground;
+import authoring.SceneBackgroundImage;
+import authoring.SceneBackgroundImageSerializable;
 import authoring.displayrefactored.controllers.GameViewWindowController;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.image.ImageView;
@@ -20,6 +22,8 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	private List<ImageView> objectImageViews;
 	private StackPane stackPane;
 	private Pane backgroundPane;
+	private SceneBackground sceneBackground;
+	private List<SceneBackgroundImage> list;
 	private Pane foregroundPane;
 	private GameViewWindowController controller;
 	private GameViewObservable gameViewObservable = null;
@@ -36,7 +40,9 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 		// TODO Auto-generated method stub
 		BorderPane borderPane = getBorderPane();
 		stackPane = new StackPane();
-		backgroundPane = new Pane();
+		list = new ArrayList<>();
+		sceneBackground = new SceneBackground(ResourceBundleManager.getPosition("GAMEVIEWSIZE_X"), ResourceBundleManager.getPosition("GAMEVIEWSIZE_Y"));
+		backgroundPane = sceneBackground.getPane();
 		foregroundPane = new Pane();
 		stackPane.setStyle("-fx-border-color: black");
 		stackPane.setPrefSize(ResourceBundleManager.getPosition("GAMEVIEWSIZE_X"), ResourceBundleManager.getPosition("GAMEVIEWSIZE_Y"));
@@ -48,7 +54,7 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 		// TODO Auto-generated method stub
 		gameViewObservable = (GameViewObservable) o;
 		updateForeground(gameViewObservable.getImageViews());
-		updateBackground(gameViewObservable.getSceneBackgroundPane());
+		updateBackground(gameViewObservable.getBackgroundImages());
 	}
 	
 	private void updateForeground(List<ImageView> list) {
@@ -56,12 +62,17 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 		foregroundPane.getChildren().addAll(list);
 	}
 	
-	private void updateBackground(Pane pane) {
-//		stackPane.getChildren().clear();
-		backgroundPane = pane;
-//		stackPane.getChildren().add(backgroundPane);
-//		stackPane.getChildren().add(foregroundPane);
+	private void updateBackground(List<SceneBackgroundImage> list) {
+		this.list = list;
+		sceneBackground.clearPane();
+		for (SceneBackgroundImage s: list) {
+			sceneBackground.addImage(s);
+		}
+
+		
 	}
+	
+	
 	
 	public void switchPanes(String key) {
 		if (key.equals("Background")) {

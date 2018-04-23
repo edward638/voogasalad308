@@ -49,7 +49,7 @@ public class GameObjectImageView {
 		mandatory.getProperty("yPos").setValue(translateY);
 		
 		
-		viewRefreshInterface.notifyObjectInfoObservers();
+		viewRefreshInterface.notifyObjectInfoObservers(gameObject);
 		
 	}
 

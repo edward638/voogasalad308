@@ -18,6 +18,7 @@ public class GameScene {
 	//has a list of objects
 	private String myName;
 	private SceneBackground mySceneBackground;
+	private List<SceneBackgroundImageSerializable> backgroundImageSerializables;
 	private List<GameObject> myObjects;
 	private Set<String> myObjectNames;
 	private GameObject currentGameObject;
@@ -27,8 +28,9 @@ public class GameScene {
 		myName = name;
 		myObjects = new ArrayList<>();
 		myObjectNames = new TreeSet<>();
+		backgroundImageSerializables = new ArrayList<>();
 		mySceneBackground = new SceneBackground(ResourceBundleManager.getPosition("GAMEVIEWSIZE_X"), ResourceBundleManager.getPosition("GAMEVIEWSIZE_Y"));
-		System.out.println("New GameScene made!");
+//		System.out.println("New GameScene made!");
 	}
 	
 	public void addObject(GameObject toAdd) {
@@ -45,7 +47,7 @@ public class GameScene {
 
 	public void setCurrentGameObject(GameObject selectedGameObject) {
 		currentGameObject = selectedGameObject;
-		System.out.println("Current game object is: " + currentGameObject);
+//		System.out.println("Current game object is: " + currentGameObject);
 	}
 
 	public String getName() {
@@ -63,5 +65,14 @@ public class GameScene {
 	public SceneBackground getSceneBackground() {
 		return mySceneBackground;
 	}
+
+	public List<SceneBackgroundImageSerializable> getBackgroundImageSerializables() {
+		return backgroundImageSerializables;
+	}
+	
+	public void addBackgroundImageSerializable(SceneBackgroundImageSerializable s) {
+		backgroundImageSerializables.add(s);
+	}
+	
 	
 }

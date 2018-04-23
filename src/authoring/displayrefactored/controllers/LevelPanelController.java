@@ -33,7 +33,6 @@ public class LevelPanelController extends Controller {
 	
 	public void setGameViewWindowRefactored(GameViewWindowRefactored gameViewWindowRefactored) {
 		this.gameViewWindowRefactored = gameViewWindowRefactored;
-		System.out.println("sup");
 	}
 
 	@Override

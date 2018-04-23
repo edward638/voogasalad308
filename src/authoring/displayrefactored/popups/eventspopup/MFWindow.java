@@ -1,12 +1,12 @@
-package authoring.display.eventspopup;
+package authoring.displayrefactored.popups.eventspopup;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 
 import authoring.AuthBehavior;
-import authoring.Game;
 import authoring.GameObject;
+import authoring.displayrefactored.controllers.EventsPopupController;
 import authoring.groovy.GroovyCommandFactory;
 import javafx.geometry.Insets;
 import javafx.scene.control.ListView;
@@ -15,17 +15,15 @@ import javafx.scene.text.Text;
 
 public class MFWindow extends VBox {
 
-	private EventsPopUpController epuc;
-	private Game game;
-	private GameObject go;
+	private EventsPopupController epuc;
+	private List<GameObject> gos;
 	private AuthBehavior currentBehavior;
 	private GroovyCommandFactory gcf;
 	
 	private static final String NONVALID = "No Behavior or Event selected";
 	
-	public MFWindow(EventsPopUpController myEPUC, Game myGame, GameObject myGo) {
-		game = myGame;
-		go = myGo;
+	public MFWindow(EventsPopupController myEPUC, List<GameObject> myGos) {
+		gos = myGos;
 		epuc = myEPUC;
 		currentBehavior = null;
 		gcf = new GroovyCommandFactory();
@@ -37,7 +35,7 @@ public class MFWindow extends VBox {
 		this.getChildren().clear();
 		this.setPadding(new Insets(10));
 	    this.setSpacing(8);
-	    this.setPrefWidth(200);
+	    this.setMinWidth(200);
 	    Text title = new Text("Methods and Fields");
 	    this.getChildren().add(title);
 	    createLists();
@@ -61,6 +59,7 @@ public class MFWindow extends VBox {
 			return;
 		}
 		ListView<Method> methodsList = new ListView<>();
+		methodsList.setMinHeight(100);
 		methodsList.getItems().addAll(methods);
 		methodsList.setOnMouseClicked(e -> methodsClicked(methodsList.getSelectionModel().getSelectedItem()));
 		
@@ -77,6 +76,7 @@ public class MFWindow extends VBox {
 			return;
 		}
 		ListView<Field> fieldsList = new ListView<>();
+		fieldsList.setMinHeight(100);
 		fieldsList.getItems().addAll(fields);
 		fieldsList.setOnMouseClicked(e -> fieldsClicked(fieldsList.getSelectionModel().getSelectedItem()));
 	}

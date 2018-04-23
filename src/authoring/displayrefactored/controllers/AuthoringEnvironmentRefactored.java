@@ -19,6 +19,7 @@ public class AuthoringEnvironmentRefactored {
 	private Game game;
 	private GameViewWindowController gameViewWindowController;
 	private LevelPanelController levelPanelController;
+	private ObjectInfoPanelController objectInfoPanelController;
 	Pane pane;
 	
 	public AuthoringEnvironmentRefactored(Game game) {
@@ -38,6 +39,8 @@ public class AuthoringEnvironmentRefactored {
 		gameViewWindowController = new GameViewWindowController(game);
 		controllerList.add(gameViewWindowController);
 		levelPanelController = new LevelPanelController(game);
+		objectInfoPanelController = new ObjectInfoPanelController(game);
+		controllerList.add(objectInfoPanelController);
 		levelPanelController.setGameViewWindowRefactored(gameViewWindowController.getGameViewWindowRefactored());
 		controllerList.add(levelPanelController);
 	}

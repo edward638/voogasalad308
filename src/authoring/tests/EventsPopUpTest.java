@@ -1,20 +1,31 @@
 package authoring.tests;
 
-import authoring.Game;
+import java.util.ArrayList;
+
 import authoring.GameObject;
-import authoring.display.eventspopup.EventsPopUp;
+import authoring.displayrefactored.popups.EventsPopupRefactored;
 import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.stage.Stage;
 
+/**
+ * @author August Ning
+ * 
+ * testing main class for the EventPopupRefactored
+ *
+ */
 public class EventsPopUpTest extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		EventsPopUp epu = new EventsPopUp(null, new Game(), new Group(), new GameObject());
-		stage.setScene(epu.getScene());
-		stage.show();
+		ArrayList<GameObject> gos = new ArrayList<>();
+		GameObject go = new GameObject();
+		go.setName("CalvinBoi");
+		gos.add(go);
+		
+		EventsPopupRefactored epu = new EventsPopupRefactored(gos);
 	}
+
+
 
 	public static void main(String args[]) {
 		launch(args);

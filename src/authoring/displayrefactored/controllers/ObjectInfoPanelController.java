@@ -25,7 +25,8 @@ public class ObjectInfoPanelController extends Controller {
 	@Override
 	protected void setUpConnections() {
 		// TODO Auto-generated method stub
-		game.addObserver(objectInfoPanelRefactored);
+		objectInfoPanelRefactored.setObservable(game);
+		game.setObjectInfoObserver(objectInfoPanelRefactored);
 		
 	}
 

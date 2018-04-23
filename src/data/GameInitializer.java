@@ -21,6 +21,7 @@ public class GameInitializer {
     private String gameScenesLocation;
     private String gameImagesLocation;
 	private String gameSavesLocation;
+	private String gameBackgroundImagesLocation;
     
 	public GameInitializer(String gameName) {
 		
@@ -28,6 +29,7 @@ public class GameInitializer {
         gameDescriptionLocation = gameLocation + ResourceBundleManager.getPath("DESCRIPTION");
         gameScenesLocation = gameLocation + ResourceBundleManager.getPath("SCENES");
         gameImagesLocation = gameLocation + ResourceBundleManager.getPath("IMAGES");
+        gameBackgroundImagesLocation = gameLocation + ResourceBundleManager.getPath("BACKGROUNDIMAGES");
         gameSavesLocation = gameLocation + ResourceBundleManager.getPath("SAVES");
 
         if ( new File(gameLocation).exists()){
@@ -48,6 +50,7 @@ public class GameInitializer {
         new File(gameScenesLocation).mkdirs();
         new File(gameImagesLocation).mkdirs();
         new File(gameSavesLocation).mkdirs();
+        new File( gameBackgroundImagesLocation).mkdirs();
     }
     
     private void addDefaultDescription(String gameName) {

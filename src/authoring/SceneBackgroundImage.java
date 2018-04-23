@@ -31,44 +31,51 @@ public class SceneBackgroundImage {
 	private boolean wasEdited = false;
 	private boolean selected = false;
 	private BorderPane imageHolder;
+	private SceneBackgroundImageSerializable serializable;
 	
 	
-	public SceneBackgroundImage(Image image, Rectangle rectangle) {
+	public SceneBackgroundImage(Image image, SceneBackgroundImageSerializable serializable) {
 		
-		myRectangle = rectangle;
+		this.serializable = serializable; 
 		myImage = new ImageView(image);
 		myImage.setPreserveRatio(true);
-		myImage.setFitWidth(DEFAULT_X);
+		myImage.setFitWidth(serializable.getxSize());
 			
 		
 		
 		imageHolder = new BorderPane();
+		imageHolder.setLayoutX(serializable.getxPos());
+		imageHolder.setLayoutY(serializable.getyPos());
 		
 		updateDimensions();
 		
 		
-		cornerCircle = new Circle();
+//		cornerCircle = new Circle();
 //		System.out.println(imageHolder.getBoundsInParent().getWidth() + " width height " + imageHolder.getBoundsInParent().getHeight());
-		
-		cornerCircle.setCenterX(width);
-		cornerCircle.setCenterY(height);
-		cornerCircle.setRadius(10);
-		cornerCircle.setFill(Color.TRANSPARENT);
-		cornerCircle.setStroke(Color.BLACK);
+//		
+//		cornerCircle.setCenterX(width);
+//		cornerCircle.setCenterY(height);
+//		cornerCircle.setRadius(10);
+//		cornerCircle.setFill(Color.TRANSPARENT);
+//		cornerCircle.setStroke(Color.BLACK);
 		
 		imageHolder.setOnMousePressed(t -> onMousePressed(t));
 		imageHolder.setOnMouseDragged(t -> onMouseDragged(t));
 		imageHolder.setOnMouseClicked(t -> onMouseClicked());
-		cornerCircle.setOnMouseDragged(t -> onMouseDraggedCircle(t));
+//		cornerCircle.setOnMouseDragged(t -> onMouseDraggedCircle(t));
 		
 //		imageHolder.getChildren().add(myImage);
 		imageHolder.setCenter(myImage);
 		imageHolder.setStyle("-fx-border-color: red");
 		
-		imageHolder.getChildren().add(cornerCircle);		
+//		imageHolder.getChildren().add(cornerCircle);		
 		
 		
 //		System.out.println("SceneBackgroundImage()");
+	}
+	
+	public void setRectangle(Rectangle rectangle) {
+		myRectangle = rectangle;
 	}
 	
 	public Pane getPane() {
@@ -111,16 +118,16 @@ public class SceneBackgroundImage {
 		double currentY2 = t.getSceneY();
 		
 		if (selected) {
-			if (Math.hypot(currentX2-(cornerCircle.getCenterX()+imageHolder.getTranslateX()), currentY2-(cornerCircle.getCenterY()+imageHolder.getTranslateY())) < cornerCircle.getRadius()*5) {
+//			if (Math.hypot(currentX2-(cornerCircle.getCenterX()+imageHolder.getTranslateX()), currentY2-(cornerCircle.getCenterY()+imageHolder.getTranslateY())) < cornerCircle.getRadius()*5) {
 //				resizeImage(t);	
-			} else {
+//			} else {
 				dragImage(t);
 			}
 			
-			imageHolder.setStyle("-fx-border-color: green");
-			selected = true;
-		}
+		imageHolder.setStyle("-fx-border-color: green");
+		selected = true;
 	}
+	
 	
 	private void onMouseDraggedCircle(MouseEvent t) {
 		
@@ -163,6 +170,8 @@ public class SceneBackgroundImage {
 		imageHolder.setTranslateX(translateX);
 		imageHolder.setTranslateY(translateY);
 		
+		serializable.setxPos(translateX);
+		serializable.setyPos(translateY);
 		
 		wasEdited = true;
 		

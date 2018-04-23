@@ -11,4 +11,5 @@ public interface GameViewObservable {
 	
 	Pane getSceneBackgroundPane();
 	
+	List<SceneBackgroundImage> getBackgroundImages();
 }

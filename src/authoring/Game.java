@@ -141,6 +141,19 @@ public class Game extends Observable implements GameViewObservable, ObjectInfoOb
 		return getSceneManager().getCurrentScene().getSceneBackground().getPane();
 	}
 	
+	public void addSceneBackgroundImageSerializable(SceneBackgroundImageSerializable s) {
+		getSceneManager().getCurrentScene().addBackgroundImageSerializable(s);
+	}
+	
+	public List<SceneBackgroundImage> getBackgroundImages() {
+		List<SceneBackgroundImage> list = new ArrayList<>();
+		for (SceneBackgroundImageSerializable s: getSceneManager().getCurrentScene().getBackgroundImageSerializables()) {
+			list.add(new SceneBackgroundImage(myImageManager.getBackgroundImage(s.getImagePath()), s));
+		}
+		
+		return list;
+	}
+	
 	@Override
 	public GameObject getCurrentGameObject() {
 		// TODO Auto-generated method stub
@@ -168,8 +181,10 @@ public class Game extends Observable implements GameViewObservable, ObjectInfoOb
 		return list;
 	}
 
-	public void notifyObjectInfoObservers() {
+	public void notifyObjectInfoObservers(GameObject gameObject) {
+		getSceneManager().getCurrentScene().setCurrentGameObject(gameObject);
 		objectInfoObserver.notifyOfChanges();
+		notifyObservers();
 	}
 	
 	@Override

@@ -2,6 +2,6 @@ package authoring;
 
 public interface ViewRefreshInterface {
 
-	void notifyObjectInfoObservers();
+	void notifyObjectInfoObservers(GameObject gameObject);
 	
 }

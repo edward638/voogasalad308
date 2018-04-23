@@ -9,7 +9,7 @@ public class GameMetaData {
 	GameState currentLevel;
 	String gameName;
 	
-	Player myPlayerObject;
+	//Player myPlayerObject;
 	
 	public GameMetaData(List<GameState> levels, int currentLevelNumber, GameState currentLevel, String gameName) {
 		this.levels = levels;
@@ -18,7 +18,7 @@ public class GameMetaData {
 		this.gameName = gameName;
 	}
 	
-	public void setPlayerReferences(Player p) {
+	/*public void setPlayerReferences(Player p) {
 		myPlayerObject = p;
 	}
 	
@@ -29,7 +29,7 @@ public class GameMetaData {
 	
 	public void addHighScore(int score) {
 		myPlayerObject.addHighScore(score);
-	}
+	}*/
 	
 	public String getGameName() {
 		return gameName;

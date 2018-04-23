@@ -145,13 +145,13 @@ public class Engine implements EngineInterface{
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
+		animation.pause();
 		
 	}
 
 	@Override
 	public void play() {
-		// TODO Auto-generated method stub
+		animation.play();
 		
 	}
 	

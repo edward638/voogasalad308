@@ -39,7 +39,7 @@ public class AuthBehavior {
 	}
 	
 	public String getDisplayName() {
-		String[] splitName = myName.split(".");
+		String[] splitName = myName.split("\\.");
 		return splitName[splitName.length-1];
 	}
 	
@@ -48,7 +48,7 @@ public class AuthBehavior {
 	 **/
 	public Property getProperty(String propName)  {
 		for(Property p : myProperties) {
-			if(p.getName() == propName) {
+			if(p.getName().equals(propName)) {
 				return p;
 			}
 		}

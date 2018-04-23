@@ -15,6 +15,8 @@ public class GameState{
 	private double gameTime;
 	private GameMetaData metaData;
 	
+	protected String gameName = "enginetestmario";
+	
 	public GameState() {
 		//Talk to game data about reading info from file
 		gameSpeed = 1;

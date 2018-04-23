@@ -3,7 +3,7 @@ package authoring.display;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
-import authoring.Behavior;
+import authoring.AuthBehavior;
 import authoring.Game;
 import authoring.GameObject;
 import authoring.display.buttonevents.ChooseImageEvent;
@@ -26,7 +26,7 @@ import javafx.stage.FileChooser;
 public class NewGameObjectWindow extends PopupWindow {
 	
 	private static final String INITIAL_DIRECTORY = "./data/gamedata/games/";
-	private static final String MANDATORY_BEHAVIOR_NAME = "MandatoryBehavior";
+	private static final String MANDATORY_BEHAVIOR_NAME = "engine.behaviors.MandatoryBehavior";
 	
 	private VBox myVBox;
 	private ListView<GameObject> myLevelObjects;
@@ -104,9 +104,9 @@ public class NewGameObjectWindow extends PopupWindow {
 	}
 
 	private GameObject makeGameObject(String name, Double xPos, Double yPos, String imageName) {
-		GameObject newObject = new GameObject(MANDATORY_BEHAVIOR_NAME);
+		GameObject newObject = new GameObject();
 		newObject.setName(name);
-		Behavior mandatory = newObject.getBehavior(MANDATORY_BEHAVIOR_NAME);
+		AuthBehavior mandatory = newObject.getMandatoryBehavior();
 		mandatory.getProperty("elementName").setValue(name);
 		mandatory.getProperty("xPos").setValue(xPos);
 		mandatory.getProperty("yPos").setValue(yPos);

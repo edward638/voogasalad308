@@ -38,12 +38,12 @@ public class LevelPanel extends MainWindowComponent {
 	private ListView<GameObject> myLevelObjects;
 	
 	private GameViewWindow myGameViewWindow;
-	private ObjectInfoPanel myPropertyPanel;
+	private ObjectInfoPanel myObjectInfoPanel;
 
-	public LevelPanel(ResourceBundle resources, Game game, Node root, GameViewWindow gameViewWindow, ObjectInfoPanel propertyPanel) {
+	public LevelPanel(ResourceBundle resources, Game game, Node root, GameViewWindow gameViewWindow, ObjectInfoPanel objectInfoPanel) {
 		super(resources, game, root); //pass resources to super constructor
 		myGameViewWindow = gameViewWindow;
-		myPropertyPanel = propertyPanel;
+		myObjectInfoPanel = objectInfoPanel;
 
 		myVBox = new VBox();
 		myHBox = new HBox();
@@ -115,7 +115,6 @@ public class LevelPanel extends MainWindowComponent {
 			myGameViewWindow.switchPanes(neww);
 		});
 		return myPanelSelectorComboBox; 
-		
 	}
 
 	private ListView<GameObject> makeObjectList() {
@@ -127,7 +126,7 @@ public class LevelPanel extends MainWindowComponent {
 		});
 		myLevelObjects.getSelectionModel().selectedItemProperty().addListener((o, old, neww) -> {
 			getGame().getSceneManager().getCurrentScene().setCurrentGameObject(neww);
-			myPropertyPanel.updatePanel();
+			myObjectInfoPanel.updatePanel();
 		});
 		return myLevelObjects;
 	}

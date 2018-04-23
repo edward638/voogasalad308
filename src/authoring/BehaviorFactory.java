@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * @author Maddie Wilkinson
@@ -13,20 +14,18 @@ import java.util.Set;
  */
 public class BehaviorFactory {
 
-	private static final String BEHAVIORS_LOCATION = "engine.behaviors.";
-
 	public BehaviorFactory() {
 
 	}
 
-	public Behavior makeBehavior(String className) {
+	public AuthBehavior makeBehavior(String behaviorName) {
 		try {
-			Class<?> clazz = Class.forName(BEHAVIORS_LOCATION + className);
+			Class<?> clazz = Class.forName(behaviorName);
 			Set<Property> properties = makeProperties(clazz);
-			return new Behavior(className, properties);
+			return new AuthBehavior(behaviorName, properties);
 		} catch (ClassNotFoundException e) {
-			new Error("Invalid Behavior");
-			System.out.println("Invalid Behavior");
+			new Error("Invalid Behavior: " + behaviorName);
+			System.out.println("Invalid Behavior: " + behaviorName);
 			e.printStackTrace();
 		}
 		return null;

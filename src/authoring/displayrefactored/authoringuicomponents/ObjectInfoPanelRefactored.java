@@ -148,7 +148,7 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 
 			insertions.add(new ObjectCoordinatesInsertion(gameObject,
 					(Double) gameObject.getMandatoryBehavior().getProperty("xPos").getValue(),
-					(Double) gameObject.getMandatoryBehavior().getProperty("xPos").getValue()));
+					(Double) gameObject.getMandatoryBehavior().getProperty("yPos").getValue()));
 
 		}
 

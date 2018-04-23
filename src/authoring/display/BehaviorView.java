@@ -2,7 +2,7 @@ package authoring.display;
 
 import java.util.ResourceBundle;
 
-import authoring.Behavior;
+import authoring.AuthBehavior;
 import authoring.Game;
 import authoring.Property;
 import javafx.scene.Node;
@@ -18,10 +18,10 @@ import javafx.scene.layout.VBox;
 public class BehaviorView extends MainWindowComponent {
 
 	private VBox myVBox;
-	private Behavior myBehavior;
+	private AuthBehavior myBehavior;
 	//don't think you need the GameObject as an instance var
 
-	public BehaviorView(ResourceBundle resources, Game game, Node root, Behavior behavior) {
+	public BehaviorView(ResourceBundle resources, Game game, Node root, AuthBehavior behavior) {
 		super(resources, game, root);
 		myBehavior = behavior;
 		myVBox = new VBox(DEFAULT_SPACING);
@@ -35,7 +35,6 @@ public class BehaviorView extends MainWindowComponent {
 		for(Property property : myBehavior.getProperties()) {
 			myVBox.getChildren().add(makePropertyFields(property));
 		}
-		
 	}
 	
 	private Node makePropertyFields(Property property) {

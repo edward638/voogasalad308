@@ -25,7 +25,7 @@ public class LevelSizePopupRefactored extends PopupRefactored {
 	public LevelSizePopupRefactored(LevelPanelController inControl) {
 		controller = inControl;
 		generatePopup();
-		
+		mapButtons();
 		open(popupSizeX, popupSizeY);
 	}
 	

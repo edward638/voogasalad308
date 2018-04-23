@@ -5,13 +5,12 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import authoring.GameObject;
 import authoring.GameViewObservable;
 import authoring.SceneBackground;
 import authoring.SceneBackgroundImage;
-import authoring.SceneBackgroundImageSerializable;
 import authoring.displayrefactored.controllers.GameViewWindowController;
 import data.propertiesFiles.ResourceBundleManager;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -23,6 +22,7 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	private int sizeX;
 	private int sizeY;
 	private List<ImageView> objectImageViews;
+	private ScrollPane scrollPane;
 	private StackPane stackPane;
 	private Pane backgroundPane;
 	private SceneBackground sceneBackground;
@@ -53,7 +53,10 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 		foregroundPane = new Pane();
 		stackPane.setStyle("-fx-border-color: black");
 		stackPane.setPrefSize(ResourceBundleManager.getPosition("GAMEVIEWSIZE_X"), ResourceBundleManager.getPosition("GAMEVIEWSIZE_Y"));
-		borderPane.setCenter(stackPane);
+		scrollPane = new ScrollPane(stackPane);
+
+//		borderPane.setCenter(stackPane);
+		borderPane.setCenter(scrollPane);
 	}
 
 	@Override

@@ -5,21 +5,24 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import authoring.GameObject;
 import authoring.GameViewObservable;
 import authoring.SceneBackground;
 import authoring.SceneBackgroundImage;
-import authoring.SceneBackgroundImageSerializable;
 import authoring.displayrefactored.controllers.GameViewWindowController;
 import data.propertiesFiles.ResourceBundleManager;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
 public class GameViewWindowRefactored extends AuthoringUIComponentRefactored implements Observer {
-
+	
+	
+	private int sizeX;
+	private int sizeY;
 	private List<ImageView> objectImageViews;
+	private ScrollPane scrollPane;
 	private StackPane stackPane;
 	private Pane backgroundPane;
 	private SceneBackground sceneBackground;
@@ -28,11 +31,15 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	private GameViewWindowController controller;
 	private GameViewObservable gameViewObservable = null;
 	
+	private static final int DEFAULTSIZEX = 1000;
+	private static final int DEFAULTSIZEY = 1000;
+	
+	
 	public GameViewWindowRefactored(GameViewWindowController controller) {
 		// TODO Auto-generated constructor stub
 		this.controller = controller;
 		objectImageViews = new ArrayList<>();
-		
+		updatePaneSize(DEFAULTSIZEX, DEFAULTSIZEY);
 	}
 	
 	@Override
@@ -46,7 +53,10 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 		foregroundPane = new Pane();
 		stackPane.setStyle("-fx-border-color: black");
 		stackPane.setPrefSize(ResourceBundleManager.getPosition("GAMEVIEWSIZE_X"), ResourceBundleManager.getPosition("GAMEVIEWSIZE_Y"));
-		borderPane.setCenter(stackPane);
+		scrollPane = new ScrollPane(stackPane);
+
+//		borderPane.setCenter(stackPane);
+		borderPane.setCenter(scrollPane);
 	}
 
 	@Override
@@ -84,5 +94,13 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 		}
 	}
 	
-
+	public void updatePaneSize(int x_size, int y_size) {
+		sizeX = x_size;
+		sizeY = y_size;
+		
+		backgroundPane.setMinSize(sizeX, sizeY);
+		foregroundPane.setMinSize(sizeX, sizeY);
+		
+		System.out.println("From gameviewwindow refactored: the size should have changed");
+	}
 }

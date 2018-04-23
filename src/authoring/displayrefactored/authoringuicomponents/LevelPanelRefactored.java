@@ -9,22 +9,21 @@ import authoring.GameObject;
 import authoring.GameScene;
 import authoring.LevelsObservable;
 import authoring.displayrefactored.controllers.LevelPanelController;
+import authoring.displayrefactored.popups.LevelSizePopupRefactored;
 import authoring.displayrefactored.popups.NewGameObjectPopupRefactored;
 import authoring.displayrefactored.popups.NewLevelPopupRefactored;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.collections.FXCollections;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 
 public class LevelPanelRefactored extends AuthoringUIComponentRefactored implements Observer{
 
@@ -36,6 +35,7 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 	private Button myAddLevelButton;
 	private Button myAddGameObjectButton;
 	private Button myAddSceneBackgroundImageButton;
+	private Button myLevelSizeButton;
 	private ListView<GameObject> myLevelObjects;
 	private LevelPanelController controller;
 	private LevelsObservable levelsObservable = null;
@@ -50,6 +50,7 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 		myAddLevelButton = new Button(ResourceBundleManager.getAuthoring("AddSceneButton"));
 		myAddGameObjectButton = new Button(ResourceBundleManager.getAuthoring("AddGameObjectButton"));
 		myAddSceneBackgroundImageButton = new Button(ResourceBundleManager.getAuthoring("AddSceneBackgroundImageButton"));
+		myLevelSizeButton = new Button(ResourceBundleManager.getAuthoring("EditLevelSize"));
 	}
 	
 	private void initializeComboBoxes() {
@@ -99,6 +100,9 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 		
 			}//
 		});
+		myLevelSizeButton.setOnAction(e -> {
+			new LevelSizePopupRefactored(controller);
+		});
 		
 		
 	}
@@ -117,7 +121,7 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 		myHBox = new HBox();
 		levelChooser.getChildren().addAll(myAddLevelButton, myLevelDropdown, myPanelSelector);
 		myHBox.getChildren().addAll(myAddGameObjectButton, myAddSceneBackgroundImageButton);
-		myVBox.getChildren().addAll(levelChooser, myLevelObjects, myHBox);
+		myVBox.getChildren().addAll(levelChooser, myLevelObjects, myHBox, myLevelSizeButton);
 		borderPane.setCenter(myVBox);
 		
 	}

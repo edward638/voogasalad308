@@ -6,10 +6,12 @@ public class GameMetaData {
 	List<GameState> levels;
 	int levelNumber;
 	GameState currentLevel;
-	public GameMetaData(List<GameState> levels, int levelNumber, GameState currentLevel) {
+	String gameName;
+	public GameMetaData(List<GameState> levels, int levelNumber, GameState currentLevel, String gameName) {
 		this.levels = levels;
 		this.levelNumber = levelNumber;
 		this.currentLevel = currentLevel;
+		this.gameName = gameName;
 	}
 	
 	public GameState getCurrentLevel() {
@@ -18,7 +20,7 @@ public class GameMetaData {
 	
 	
 	public String getGameName() {
-		return null;
+		return gameName;
 	}
 	
 	public GameState getLevel(int levelnum) {

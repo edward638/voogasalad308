@@ -68,9 +68,13 @@ public class GameState{
 	 * @param level
 	 */
 	public void setState(GameState newState) {
-		List<GameElement> oldMainCharacters = getMainCharacters(elements);
-		List<GameElement> newMainCharacters = updateMainCharacters(oldMainCharacters,getMainCharacters(newState.getElements()));
-		elements = replaceMainCharacters(newState.getElements(), newMainCharacters);		
+		System.out.println(newState.toString());
+		elements = newState.getElements();
+//		List<GameElement> oldMainCharacters = getMainCharacters(elements);
+//		elements.removeAll(elements);
+//		List<GameElement> newMainCharacters = updateMainCharacters(oldMainCharacters,getMainCharacters(newState.getElements()));
+//		elements.addAll(newState.getElements());
+//		elements = replaceMainCharacters(elements, newMainCharacters);		
 	}
 	
 	private List<GameElement> getMainCharacters(List<GameElement> elements) {
@@ -92,6 +96,12 @@ public class GameState{
 		List<GameElement> newState = tempNewState.stream().filter(e -> !e.hasBehavior(MainCharacter.class)).collect(Collectors.toList());
 		newState.addAll(newMainCharacters);	
 		return newState;
+	}
+
+	
+	public void removeAllElements() {
+		removeElements.addAll(elements);
+		elements.removeAll(elements);
 	}
 	
 	

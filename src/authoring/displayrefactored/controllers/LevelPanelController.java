@@ -33,7 +33,6 @@ public class LevelPanelController extends Controller {
 	
 	public void setGameViewWindowRefactored(GameViewWindowRefactored gameViewWindowRefactored) {
 		this.gameViewWindowRefactored = gameViewWindowRefactored;
-		System.out.println("sup");
 	}
 
 	@Override
@@ -60,13 +59,18 @@ public class LevelPanelController extends Controller {
 	
 	public void addGameObject(String name, Double xPos, Double yPos, String imageName, Image image) {
 		game.getImageManager().storeImage(imageName, image);
-		GameObject gameObject = new GameObject(MANDATORY_BEHAVIOR_NAME);
-		AuthBehavior mandatory = gameObject.getBehavior(MANDATORY_BEHAVIOR_NAME);
-		mandatory.getProperty("elementName").setValue(name);
+		GameObject gameObject = new GameObject();
+		AuthBehavior mandatory = gameObject.getMandatoryBehavior();
+		gameObject.setName(name);
+//		xPos = 0.0;
+//		yPos = 0.0;
 		mandatory.getProperty("xPos").setValue(xPos);
 		mandatory.getProperty("yPos").setValue(yPos);
 		mandatory.getProperty("imagePath").setValue(imageName);
 		game.getSceneManager().getCurrentScene().getMyObjects().add(gameObject);
+		game.getSceneManager().getCurrentScene().setCurrentGameObject(gameObject);
+		game.notifyObjectInfoObservers();
+		
 		refreshView();
 	}
 	

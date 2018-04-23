@@ -62,8 +62,8 @@ public class LevelPanelController extends Controller {
 		GameObject gameObject = new GameObject();
 		AuthBehavior mandatory = gameObject.getMandatoryBehavior();
 		gameObject.setName(name);
-		mandatory.getProperty("xPos").setValue(xPos);
-		mandatory.getProperty("yPos").setValue(yPos);
+		mandatory.getProperty("xPos").setValue(0); // change this shit
+		mandatory.getProperty("yPos").setValue(0);
 		mandatory.getProperty("imagePath").setValue(imageName);
 		game.getSceneManager().getCurrentScene().getMyObjects().add(gameObject);
 		game.getSceneManager().getCurrentScene().setCurrentGameObject(gameObject);

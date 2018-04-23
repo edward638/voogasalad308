@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import authoring.displayrefactored.GameObjectImageView;
+
 /** 
  * Game keeps track of an entire game 
  * This includes the name, description, image, and managers
@@ -112,7 +114,6 @@ public class Game extends Observable implements GameViewObservable, ObjectInfoOb
 		// TODO Auto-generated method stub
 		List<ImageView> list = new ArrayList<>();
 		
-		
 		for (GameObject go: getSceneManager().getCurrentScene().getMyObjects()) {
 			AuthBehavior mandatoryBehavior = go.getBehavior("MandatoryBehavior");
 			Property xPositionProperty = mandatoryBehavior.getProperty("xPos");
@@ -126,11 +127,13 @@ public class Game extends Observable implements GameViewObservable, ObjectInfoOb
 			imageView.setLayoutY(yPosition);
 			imageView.setPreserveRatio(true);
 			imageView.setFitHeight(200);
-			list.add(imageView);
+			GameObjectImageView draggableImageView = new GameObjectImageView(imageView, go);
+			list.add(draggableImageView.getMyImage());
 		}
 		
 		return list;
 	}
+	
 
 	@Override
 	public Pane getSceneBackgroundPane() {
@@ -155,8 +158,8 @@ public class Game extends Observable implements GameViewObservable, ObjectInfoOb
 		List<GameObject> list = new ArrayList<>();
 		GameObject gameObject = getCurrentGameObject();
 		String name = gameObject.getName();
-		System.out.println("Object name:" + name);
-		System.out.println("Objectlist size: " + getGameObjects().size());
+//		System.out.println("Object name:" + name);
+//		System.out.println("Objectlist size: " + getGameObjects().size());
 		for (GameObject go: getGameObjects()) {
 			if (name.equals(go.getName())) {
 				list.add(go);
@@ -175,7 +178,7 @@ public class Game extends Observable implements GameViewObservable, ObjectInfoOb
 		AuthBehavior mandatoryBehavior = getCurrentGameObject().getBehavior("MandatoryBehavior");
 		Property imagePathProperty = mandatoryBehavior.getProperty("imagePath");
 		String imagePath = (String) imagePathProperty.getValue();
-		System.out.println(imagePath);
+//		System.out.println(imagePath);
 		return myImageManager.getImage(imagePath + ".png");
 	}
 	

@@ -44,12 +44,12 @@ public class Engine implements EngineInterface{
 		gameState.setState(metaData.getCurrentLevel());
 		displayState = new DisplayState(gameState, metaData.getGameName());
 		eventManager = new EventManager2(gameState);
-		audioManager = new AudioManager(1);
+		audioPlayer = new AudioPlayer(musicPath, 0);
 		startAnimation();
 	}
 	
 	/**
-	 * OBSOLETE--do not use. instead, use Engine(GameMetaData metaData).
+	 * OBSOLETE--do not use. instead, use Engine(GameMetaData metaData)
 	 * @param gamePath
 	 */
 	public Engine(String gamePath) {
@@ -57,13 +57,13 @@ public class Engine implements EngineInterface{
 		gameState = modelGameState.getState();
 		displayState = modelGameState.getDisplay();
 		eventManager = new EventManager2(gameState);
-		audioManager = new AudioManager(1);
+		audioPlayer = new AudioPlayer(musicPath);
 		startAnimation();
 	}
 	
 	/**
-	 * OBSOLETE--do not use. instead, use Engine(GameMetaData metaData).
-	 * @param g
+	 * OBSOLETE--do not use. instead, use Engine(GameMetaData metaData)
+	 * @param gamePath
 	 */
 	public Engine(GameState g) {
 		gameState = g;
@@ -71,7 +71,7 @@ public class Engine implements EngineInterface{
 		eventManager = new EventManager2(gameState);
 		audioManager = new AudioManager(1);
 		
-		//audioPlayer = audioManager.newAudioPlayer(musicPath);
+		audioPlayer = audioManager.newAudioPlayer(musicPath);
 		startAnimation();
 	}
 	

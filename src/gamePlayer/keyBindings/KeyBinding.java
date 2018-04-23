@@ -19,9 +19,11 @@ public class KeyBinding {
 	private ArrayList<Node> nodeList;
 	private boolean keyIsChanged = false;
 	private FadeTransition fadeTransition;
+	private FadeTransition flashTransition;
 	private Pane popUp;
 	private KeyInputDictionary keyMap;
 	private Label keyText;
+	private Label repeatedKeyText;
 
 	public KeyBinding(KeyCode keyCode, String theAction, KeyInputDictionary keyMap, Pane popUp) {
 		defaultKeyCode = keyCode;
@@ -31,8 +33,29 @@ public class KeyBinding {
 		this.popUp = popUp;
 		nodeList = new ArrayList<>();
 		addWords();
-		makeChangeButton();
+		setupRepeatKeyText();
+		setupFlashTransition();
 		setUpFadeTransition();
+		makeChangeButton();
+	}
+
+	private void setupFlashTransition() {
+		flashTransition = new FadeTransition(Duration.millis(300), repeatedKeyText);
+		flashTransition.setFromValue(0);
+		flashTransition.setToValue(1);
+		flashTransition.setCycleCount(2);
+		flashTransition.setAutoReverse(true);
+		
+	}
+
+	private void setupRepeatKeyText() {
+		repeatedKeyText = new Label("KEY ALREADY BOUND");
+		repeatedKeyText.setLayoutX(110);
+		repeatedKeyText.setLayoutY(275);
+		repeatedKeyText.setStyle("-fx-font: 18 Euphemia;");
+		repeatedKeyText.setTextFill(Color.RED);
+		repeatedKeyText.setOpacity(0);
+		popUp.getChildren().add(repeatedKeyText);
 	}
 
 	/**
@@ -51,7 +74,7 @@ public class KeyBinding {
 	}
 
 	private void setUpFadeTransition() {
-		fadeTransition = new FadeTransition(Duration.millis(500), keyText);
+		fadeTransition = new FadeTransition(Duration.millis(300), keyText);
 		fadeTransition.setFromValue(1.0);
 		fadeTransition.setToValue(0.1);
 		fadeTransition.setCycleCount(Timeline.INDEFINITE);
@@ -77,7 +100,8 @@ public class KeyBinding {
 						keyText.setOpacity(1);
 						keyIsChanged = true;
 					} else if (keyMap.containsKey(keyPressInputCode)) {
-						// add code here to show something that the key is already set to a command
+						System.out.println("HI");
+						flashTransition.play();
 					}
 
 				}

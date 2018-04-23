@@ -16,7 +16,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
 public class GameViewWindowRefactored extends AuthoringUIComponentRefactored implements Observer {
-
+	
+	
+	private int sizeX;
+	private int sizeY;
 	private List<ImageView> objectImageViews;
 	private StackPane stackPane;
 	private Pane backgroundPane;
@@ -24,11 +27,15 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	private GameViewWindowController controller;
 	private GameViewObservable gameViewObservable = null;
 	
+	private static final int DEFAULTSIZEX = 1000;
+	private static final int DEFAULTSIZEY = 1000;
+	
+	
 	public GameViewWindowRefactored(GameViewWindowController controller) {
 		// TODO Auto-generated constructor stub
 		this.controller = controller;
 		objectImageViews = new ArrayList<>();
-		
+		updatePaneSize(DEFAULTSIZEX, DEFAULTSIZEY);
 	}
 	
 	@Override
@@ -75,5 +82,13 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 		}
 	}
 	
-
+	public void updatePaneSize(int x_size, int y_size) {
+		sizeX = x_size;
+		sizeY = y_size;
+		
+		backgroundPane.setMinSize(sizeX, sizeY);
+		foregroundPane.setMinSize(sizeX, sizeY);
+		
+		System.out.println("From gameviewwindow refactored: the size should have changed");
+	}
 }

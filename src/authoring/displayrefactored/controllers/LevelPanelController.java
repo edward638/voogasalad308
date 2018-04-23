@@ -100,4 +100,8 @@ public class LevelPanelController extends Controller {
 		game.notifyMyObservers();
 	}
 	
+	public void updateLevelSize(int x_size, int y_size) {
+		gameViewWindowRefactored.updatePaneSize(x_size, y_size);
+	}
+	
 }

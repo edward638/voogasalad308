@@ -6,6 +6,7 @@ import java.util.Observer;
 
 import authoring.GameObject;
 import authoring.ObjectInfoObservable;
+import authoring.ObjectInfoObserver;
 import authoring.Property;
 import authoring.displayrefactored.controllers.ObjectInfoPanelController;
 import data.propertiesFiles.ResourceBundleManager;
@@ -23,7 +24,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored implements Observer {
+public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored implements ObjectInfoObserver {
 
 	private ScrollPane myScrollPane;
 	private VBox myVBox;
@@ -48,6 +49,10 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 		this.controller = controller;
 	}
 	
+	public void setObservable(ObjectInfoObservable observable) {
+		this.observable = observable;
+	}
+	
 	@Override
 	protected void GenerateComponent() {
 		// TODO Auto-generated method stub
@@ -68,7 +73,7 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 		myVBox.setAlignment(Pos.CENTER);
 		
 		properties = new Label("Properties");
-		properties.setStyle("-fx-border-color: black");
+		
 //		initializeVBox();
 		
 //		myScrollPane.setPrefWidth(PANE_PREF_WIDTH);
@@ -76,7 +81,7 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 //		myScrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
 		
 		borderPane.setCenter(myVBox);	
-		borderPane.setTop(properties);
+		
 	}
 	
 	
@@ -107,18 +112,14 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 	private void initializeVBox() {
 		myVBox.getChildren().clear();
 		mapButtonActions(gameObjects);
-		myVBox.getChildren().addAll(imageView,objectName,buttonsHBox,instances,gameObjectCoordinates);
+		myVBox.getChildren().addAll(properties, imageView,objectName,buttonsHBox,instances,gameObjectCoordinates);
 		
 	}
 
 	
-		
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		observable = (ObjectInfoObservable) o;
+	public void notifyOfChanges() {
 		updateInfo(observable.getInstances(), observable.getCurrentGameObject(), observable.getCurrentImage());
-
+		
 		initializeVBox();
 	}
 	

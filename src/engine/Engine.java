@@ -40,31 +40,22 @@ public class Engine implements EngineInterface{
 	 * @param gamePath
 	 */
 	public Engine(GameMetaData metaData) {
-		gameState = new GameState();
 		gameState.setState(metaData.getCurrentLevel());
 		displayState = new DisplayState(gameState, metaData.getGameName());
 		eventManager = new EventManager2(gameState);
-		audioManager = new AudioManager(1);
+		audioPlayer = new AudioPlayer(musicPath, 0);
 		startAnimation();
 	}
 	
-	/**
-	 * OBSOLETE--do not use. instead, use Engine(GameMetaData metaData).
-	 * @param gamePath
-	 */
 	public Engine(String gamePath) {
 		ModelGameState modelGameState = new ModelGameState(); 
 		gameState = modelGameState.getState();
 		displayState = modelGameState.getDisplay();
 		eventManager = new EventManager2(gameState);
-		audioManager = new AudioManager(1);
+		audioPlayer = new AudioPlayer(musicPath);
 		startAnimation();
 	}
 	
-	/**
-	 * OBSOLETE--do not use. instead, use Engine(GameMetaData metaData).
-	 * @param g
-	 */
 	public Engine(GameState g) {
 		gameState = g;
 		displayState = new DisplayState(g);
@@ -108,10 +99,10 @@ public class Engine implements EngineInterface{
 	public void timeStep (double elapsedTime) {
 		double gameSteps = elapsedTime * gameState.getGameSpeed();
 		gameState.incrementGameTime(gameSteps);
-    	eventManager.processElementEvent(new TimeEvent(gameSteps));
-    	displayState.updateImageElements(scrollingAroundMainCharacter(gameState));
-    	displayState.update(gameState);
-    	updateDisplay(displayState.newElements, displayState.removeElements);
+	    	eventManager.processElementEvent(new TimeEvent(gameSteps));
+	    	displayState.updateImageElements(scrollingAroundMainCharacter(gameState));
+	    	displayState.update(gameState);
+	    	updateDisplay(displayState.newElements, displayState.removeElements);
     }
 
 	protected void updateDisplay(List<ImageElement> newElements, List<ImageElement> removeElements) {
@@ -141,18 +132,6 @@ public class Engine implements EngineInterface{
 	@Override
 	public void setVolume(double newVolume) {
 		audioManager.setVolume(newVolume);
-	}
-
-	@Override
-	public void pause() {
-		animation.pause();
-		
-	}
-
-	@Override
-	public void play() {
-		animation.play();
-		
 	}
 	
 	

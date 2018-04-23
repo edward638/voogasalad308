@@ -154,6 +154,8 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 
 		ObservableList<ObjectCoordinatesInsertion> observableInsertions = FXCollections.observableArrayList(insertions);
 
+		System.out.println(observableInsertions);
+
 		gameObjectCoordinates.setItems(observableInsertions);
 	}
 
@@ -165,13 +167,15 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 
 		TableColumn<ObjectCoordinatesInsertion, String> yposCol = new TableColumn("Y");
 		setupYposCol(yposCol);
+		
+		gameObjectCoordinates.getColumns().addAll(xposCol, yposCol);
 
 	}
 
 	private void setupXposCol(TableColumn<ObjectCoordinatesInsertion, String> xposCol) {
 		xposCol.setCellValueFactory(f -> new ReadOnlyStringWrapper(f.getValue().getXpos()));
-		xposCol.setMinWidth(50); // set this col width
-		xposCol.setMaxWidth(50); // set this col width
+		xposCol.setMinWidth(125); // set this col width
+		xposCol.setMaxWidth(125); // set this col width
 		xposCol.setResizable(false);
 		xposCol.setEditable(true);
 		xposCol.setCellFactory(TextFieldTableCell.<ObjectCoordinatesInsertion>forTableColumn());
@@ -179,12 +183,13 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 			((ObjectCoordinatesInsertion) t.getTableView().getItems().get(t.getTablePosition().getRow()))
 					.setXpos(Double.parseDouble(t.getNewValue()));
 		});
+
 	}
 
 	private void setupYposCol(TableColumn<ObjectCoordinatesInsertion, String> yposCol) {
 		yposCol.setCellValueFactory(f -> new ReadOnlyStringWrapper(f.getValue().getXpos()));
-		yposCol.setMinWidth(50); // set this col width
-		yposCol.setMaxWidth(50); // set this col width
+		yposCol.setMinWidth(125); // set this col width
+		yposCol.setMaxWidth(125); // set this col width
 		yposCol.setResizable(false);
 		yposCol.setEditable(true);
 		yposCol.setCellFactory(TextFieldTableCell.<ObjectCoordinatesInsertion>forTableColumn());

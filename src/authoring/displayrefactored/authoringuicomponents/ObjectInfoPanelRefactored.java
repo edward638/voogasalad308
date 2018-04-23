@@ -154,7 +154,7 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 
 		ObservableList<ObjectCoordinatesInsertion> observableInsertions = FXCollections.observableArrayList(insertions);
 
-		System.out.println(observableInsertions);
+//		System.out.println(observableInsertions);
 
 		gameObjectCoordinates.setItems(observableInsertions);
 	}

@@ -19,7 +19,7 @@ import authoring.displayrefactored.GameObjectImageView;
  * 
  * @author: Summer
  **/
-public class Game extends Observable implements GameViewObservable, ObjectInfoObservable, LevelsObservable{
+public class Game extends Observable implements GameViewObservable, ObjectInfoObservable, LevelsObservable, ViewRefreshInterface{
 
 	private String gameName;
 	private String gameDescription;
@@ -127,7 +127,7 @@ public class Game extends Observable implements GameViewObservable, ObjectInfoOb
 			imageView.setLayoutY(yPosition);
 			imageView.setPreserveRatio(true);
 			imageView.setFitHeight(200);
-			GameObjectImageView draggableImageView = new GameObjectImageView(imageView, go);
+			GameObjectImageView draggableImageView = new GameObjectImageView(imageView, go, this);
 			list.add(draggableImageView.getMyImage());
 		}
 		

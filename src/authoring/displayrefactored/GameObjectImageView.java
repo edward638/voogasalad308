@@ -1,6 +1,11 @@
 package authoring.displayrefactored;
 
+import com.sun.org.apache.bcel.internal.generic.GOTO;
+
+import authoring.AuthBehavior;
 import authoring.GameObject;
+import authoring.ObjectInfoObservable;
+import authoring.ViewRefreshInterface;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -12,26 +17,42 @@ public class GameObjectImageView {
 
 	private Rectangle myRectangle;
 	private ImageView myImage;
+	private GameObject gameObject;
 	private double currentX;
 	private double currentY;
 	private double positionX;
 	private double positionY;
 	private boolean wasEdited = false;
 	private boolean selected = false;
+	double translateX;
+	double translateY;
 	
-	public GameObjectImageView(ImageView imageView, GameObject go) {
+	private ViewRefreshInterface viewRefreshInterface;
+	
+	public GameObjectImageView(ImageView imageView, GameObject go, ViewRefreshInterface viewRefreshInterface) {
 		
 		myRectangle = new Rectangle(ResourceBundleManager.getPosition("GAMEVIEWSIZE_X"), ResourceBundleManager.getPosition("GAMEVIEWSIZE_Y"));
 		myImage = imageView;
-		
-		
+		gameObject = go;
 		myImage.setOnMousePressed(t -> onMousePressed(t));
 		myImage.setOnMouseDragged(t -> onMouseDragged(t));
 		myImage.setOnMouseClicked(t -> onMouseClicked());
-		
+		myImage.setOnMouseReleased(t -> onMouseReleased());
+		this.viewRefreshInterface = viewRefreshInterface;
 		
 	}
 	
+	private void onMouseReleased() {
+		
+		AuthBehavior mandatory = gameObject.getMandatoryBehavior();
+		mandatory.getProperty("xPos").setValue(translateX);
+		mandatory.getProperty("yPos").setValue(translateY);
+		
+		
+		viewRefreshInterface.notifyObjectInfoObservers();
+		
+	}
+
 	private void onMouseClicked() {
 		selected = !selected;
 		
@@ -72,12 +93,12 @@ public class GameObjectImageView {
 			selected = true;
 	}
 	
-private void dragImage(MouseEvent t) {
+	private void dragImage(MouseEvent t) {
 		
 		double newX = t.getSceneX();
 		double newY = t.getSceneY();	
-		double translateX = newX - currentX + positionX;
-		double translateY = newY - currentY + positionY;
+		translateX = newX - currentX + positionX;
+		translateY = newY - currentY + positionY;
 		
 
 //		System.out.println("translateX " + translateX);

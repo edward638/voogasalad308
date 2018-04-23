@@ -1,4 +1,4 @@
-package authoring.display.eventspopup;
+package authoring.display.eventspopupold;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,8 +7,22 @@ import authoring.AuthBehavior;
 import authoring.Event;
 import authoring.Game;
 import authoring.GameObject;
+import authoring.displayrefactored.popups.eventspopup.BehaviorsWindow;
+import authoring.displayrefactored.popups.eventspopup.EventsWindow;
+import authoring.displayrefactored.popups.eventspopup.GroovyWindow;
+import authoring.displayrefactored.popups.eventspopup.MFWindow;
+import authoring.displayrefactored.popups.eventspopup.ResponseWindow;
+import authoring.displayrefactored.popups.eventspopup.TriggerWindow;
 import javafx.scene.layout.VBox;
 
+/**
+ * @author August
+ * 
+ * Dont open dead inside 
+ * 
+ * This is an old controller, it's useless
+ *
+ */
 public class EventsPopUpController {
 
 	private Game game;

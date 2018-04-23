@@ -1,12 +1,12 @@
-package authoring.display.eventspopup;
+package authoring.displayrefactored.popups.eventspopup;
 
 import java.util.Set;
 import java.util.TreeSet;
 
 import authoring.EngineClassRetriever;
 import authoring.Event;
-import authoring.Game;
 import authoring.GameObject;
+import authoring.displayrefactored.controllers.EventsPopupController;
 import engine.events.elementevents.ElementEvent;
 import javafx.geometry.Insets;
 import javafx.scene.control.ComboBox;
@@ -16,7 +16,7 @@ import javafx.scene.text.Text;
 
 /**
  * 
- * @author Summer
+ * @author Summer and August
  *
  */
 public class EventsWindow extends VBox {
@@ -29,13 +29,14 @@ public class EventsWindow extends VBox {
 	private EngineClassRetriever classRetriever;
 	private ListView<Event> myEvents;
 	private Event currentEvent;
-	private EventsPopUpController epuc;
+	private EventsPopupController epuc;
 	
-	public EventsWindow(EventsPopUpController myEPUC, Game game, GameObject currObject) {
+	public EventsWindow(EventsPopupController myEPUC, GameObject currObject) {
 		go = currObject;
 		classRetriever = new EngineClassRetriever();
 		epuc = myEPUC;
 		myEvents = new ListView<>();
+		myEvents.setMinHeight(200);
 		currentEvent = null;
 		createVBox();
 	}
@@ -43,7 +44,7 @@ public class EventsWindow extends VBox {
 	private void createVBox() {
 		this.setPadding(new Insets(10));
 	    this.setSpacing(8);
-	    this.setPrefWidth(200);
+	    this.setMinWidth(200);
 	    Text title = new Text("Events");
 	    this.getChildren().add(title);
 	    this.getChildren().addAll(makeEventDropdown(), makeEventList());

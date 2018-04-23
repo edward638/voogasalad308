@@ -1,12 +1,12 @@
-package authoring.display.eventspopup;
+package authoring.displayrefactored.popups.eventspopup;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 
 import authoring.AuthBehavior;
-import authoring.Game;
 import authoring.GameObject;
+import authoring.displayrefactored.controllers.EventsPopupController;
 import authoring.groovy.GroovyCommandFactory;
 import javafx.geometry.Insets;
 import javafx.scene.control.ListView;
@@ -15,16 +15,14 @@ import javafx.scene.text.Text;
 
 public class MFWindow extends VBox {
 
-	private EventsPopUpController epuc;
-	private Game game;
+	private EventsPopupController epuc;
 	private GameObject go;
 	private AuthBehavior currentBehavior;
 	private GroovyCommandFactory gcf;
 	
 	private static final String NONVALID = "No Behavior or Event selected";
 	
-	public MFWindow(EventsPopUpController myEPUC, Game myGame, GameObject myGo) {
-		game = myGame;
+	public MFWindow(EventsPopupController myEPUC, GameObject myGo) {
 		go = myGo;
 		epuc = myEPUC;
 		currentBehavior = null;
@@ -37,7 +35,7 @@ public class MFWindow extends VBox {
 		this.getChildren().clear();
 		this.setPadding(new Insets(10));
 	    this.setSpacing(8);
-	    this.setPrefWidth(200);
+	    this.setMinWidth(200);
 	    Text title = new Text("Methods and Fields");
 	    this.getChildren().add(title);
 	    createLists();

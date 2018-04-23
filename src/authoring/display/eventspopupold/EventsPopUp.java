@@ -1,4 +1,4 @@
-package authoring.display.eventspopup;
+package authoring.display.eventspopupold;
 
 import java.util.ResourceBundle;
 

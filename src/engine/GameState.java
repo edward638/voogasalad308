@@ -2,6 +2,10 @@ package engine;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import engine.behaviors.MainCharacter;
+import engine.behaviors.MandatoryBehavior;
 
 public class GameState{
 	private List<GameElement> elements;
@@ -9,6 +13,7 @@ public class GameState{
 	private List<GameElement> removeElements;
 	private double gameSpeed;
 	private double gameTime;
+	private GameMetaData metaData;
 	
 	protected String gameName = "enginetestmario";
 	
@@ -54,5 +59,45 @@ public class GameState{
 	public List<GameElement> getRemoveElements() {
 		return removeElements;
 	}
+	
+	public GameMetaData getGameMetaData() {
+		return metaData;
+	}
+
+	/**
+	 * Used for level changes
+	 * set the given game state to the new game state
+	 * @param level
+	 */
+	public void setState(GameState newState) {
+		List<GameElement> oldMainCharacters = getMainCharacters(elements);
+		List<GameElement> newMainCharacters = updateMainCharacters(oldMainCharacters,getMainCharacters(newState.getElements()));
+		elements = replaceMainCharacters(newState.getElements(), newMainCharacters);		
+	}
+	
+	private List<GameElement> getMainCharacters(List<GameElement> elements) {
+		return elements.stream()
+				.filter(e -> e.hasBehavior(MainCharacter.class))
+				.collect(Collectors.toList());
+	}
+	
+	private List<GameElement> updateMainCharacters(List<GameElement> oldMainCharacters, List<GameElement> newMainCharacters) {
+		for (GameElement omc: oldMainCharacters) {
+			for (GameElement nmc: newMainCharacters) {
+				omc.setPosition(nmc.getPosition());
+			}
+		}
+		return oldMainCharacters;
+	}
+	
+	private List<GameElement> replaceMainCharacters(List<GameElement> tempNewState, List<GameElement> newMainCharacters) {
+		List<GameElement> newState = tempNewState.stream().filter(e -> !e.hasBehavior(MainCharacter.class)).collect(Collectors.toList());
+		newState.addAll(newMainCharacters);	
+		return newState;
+	}
+	
+	
+	
+	
 
 }

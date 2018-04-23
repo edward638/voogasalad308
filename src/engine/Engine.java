@@ -25,18 +25,36 @@ public class Engine implements EngineInterface{
     public static final double SUBSCENE_HEIGHT = 590;
 	
 	private Timeline animation;
-	
 	private SubScene engineSubScene;
 	private Group subSceneRoot = new Group();
 	private GameState gameState;
 	private DisplayState displayState;
 	private EventManager2 eventManager;
-	
 	private AudioManager audioManager;
 	private String musicPath = "data/music/WiiShopChannelMusic.mp3";
 	private AudioPlayer audioPlayer;
 	
 	
+	/**
+	 * NEW way to instantiate engine with a MetaData object
+	 * @param gamePath
+	 */
+	public Engine(GameMetaData metaData) {
+		gameState.setState(metaData.getCurrentLevel());
+		displayState = new DisplayState(metaData.getGameName(), gameState);
+		eventManager = new EventManager2(gameState);
+		audioPlayer = new AudioPlayer(musicPath);
+		startAnimation();
+	}
+	
+	public Engine(String gamePath) {
+		ModelGameState modelGameState = new ModelGameState(); 
+		gameState = modelGameState.getState();
+		displayState = modelGameState.getDisplay();
+		eventManager = new EventManager2(gameState);
+		audioPlayer = new AudioPlayer(musicPath);
+		startAnimation();
+	}
 	
 	public Engine(GameState g) {
 		gameState = g;

@@ -30,7 +30,7 @@ public class ModelGameState3 {
 	private GameState state;
 	
 	public ModelGameState3() {
-		state = new GameState();		
+		state = new GameState(null);		
 	}
 	
 	private void addMainCharacter() {
@@ -48,18 +48,18 @@ public class ModelGameState3 {
 		List<GameElement> elements = new ArrayList<GameElement>();
 		getCreatedMario();
 		for (double i = 0; i < 900; i+=40) {
-			elements.add(getBlock(i, 500.0));
+			elements.add(getBlock(i, 501.0));
 		}	
 		
 		for (double i = 300; i < 900; i+=40) {
-			elements.add(getBlock(i, 300.0));
+			elements.add(getBlock(i, 301.0));
 		}
 		
 		for (double i = 500; i < 3000; i+=400) {
-			elements.add(getKoopa(i, 100.0));
+			elements.add(getKoopa(i, 101.0));
 		}
 		
-		elements.add(getBullet(300.0, 400.0, 50.0));
+		elements.add(getBullet(300.0, 401.0, 50.0));
 
 		
 		for (GameElement el : elements) {
@@ -71,7 +71,7 @@ public class ModelGameState3 {
 	public GameElement getMario() {
 		GameElement mario = new GameElement();
 		//Note: Image path untested
-		mario.addBehavior(new MandatoryBehavior(mario, "Mario", 200.0, 20.0, new EllipseShape(100.0, 100.0), "MarioSMR.png"));
+		mario.addBehavior(new MandatoryBehavior(mario, "Mario", 200.0, 21.0, new EllipseShape(100.0, 100.0), "MarioSMR.png"));
 		List<Double> direction = new ArrayList<>(); direction.add(1.0); direction.add(0.0);
 		mario.addBehavior(new MovableCharacter(mario, 0.0, direction));
 		mario.addBehavior(new MainCharacter(mario, 1, true, true));

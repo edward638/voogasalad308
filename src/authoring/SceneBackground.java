@@ -42,9 +42,12 @@ public class SceneBackground {
 	public void setRectangle(int xSize, int ySize) {
 		pane.getChildren().remove(borderRectangle);
 		borderRectangle = new Rectangle(xSize, ySize);
+		borderRectangle.setFill(Color.TRANSPARENT);
+		borderRectangle.setStroke(Color.BLACK);
 		pane.getChildren().add(borderRectangle);
 		for (SceneBackgroundImage s: list) {
 			s.setRectangle(borderRectangle);
+			
 		}
 	}
 	
@@ -55,11 +58,12 @@ public class SceneBackground {
 //		imagePane.setLayoutY(myYSize/2);
 		pane.getChildren().add(imagePane);
 		list.add(sceneBackgroundImage);
+		sceneBackgroundImage.translate();
 	}
 	
 	public void clearPane() {
 		list.clear();
-		pane.getChildren().removeAll();
+		pane.getChildren().clear();
 	}
 	
 	

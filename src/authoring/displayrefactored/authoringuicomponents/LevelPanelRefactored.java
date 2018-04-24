@@ -91,7 +91,7 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 				File image = fileChooser.showOpenDialog(new Stage());
 
 				controller.addBackgroundImage(new Image(image.toURI().toString()));
-				
+//				System.out.println("setOnAction");
 				
 				//put image.getName into SceneBackground
 			} catch (Exception exception) {

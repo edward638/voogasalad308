@@ -44,8 +44,8 @@ public class SceneBackgroundImage {
 		
 		
 		imageHolder = new BorderPane();
-		imageHolder.setLayoutX(serializable.getxPos());
-		imageHolder.setLayoutY(serializable.getyPos());
+		imageHolder.setLayoutX(0);
+		imageHolder.setLayoutY(0);
 		
 		updateDimensions();
 		
@@ -72,6 +72,11 @@ public class SceneBackgroundImage {
 		
 		
 //		System.out.println("SceneBackgroundImage()");
+	}
+	
+	public void translate() {
+		imageHolder.setTranslateX(serializable.getxPos());
+		imageHolder.setTranslateY(serializable.getyPos());
 	}
 	
 	public void setRectangle(Rectangle rectangle) {

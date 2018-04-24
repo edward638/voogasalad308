@@ -54,8 +54,9 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 		stackPane.setStyle("-fx-border-color: black");
 		stackPane.setPrefSize(ResourceBundleManager.getPosition("GAMEVIEWSIZE_X"), ResourceBundleManager.getPosition("GAMEVIEWSIZE_Y"));
 		scrollPane = new ScrollPane(stackPane);
+		stackPane.getChildren().add(backgroundPane);
+		stackPane.getChildren().add(foregroundPane);
 
-//		borderPane.setCenter(stackPane);
 		borderPane.setCenter(scrollPane);
 	}
 
@@ -74,6 +75,8 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	
 	private void updateBackground(List<SceneBackgroundImage> list) {
 		this.list = list;
+		System.out.println(list);
+		System.out.println(list.size());
 		sceneBackground.clearPane();
 		for (SceneBackgroundImage s: list) {
 			sceneBackground.addImage(s);
@@ -84,15 +87,27 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	
 	public void switchPanes(String key) {
 		if (key.equals("Background")) {
-			stackPane.getChildren().clear();
-			stackPane.getChildren().add(backgroundPane);
+			for (ImageView imageView: objectImageViews) {
+				imageView.setOpacity(.1);
+				imageView.setMouseTransparent(true);
+			}
+			foregroundPane.setMouseTransparent(true);
+			
+//			stackPane.getChildren().clear();
+//			stackPane.getChildren().add(backgroundPane);
 		} 
 		if (key.equals("Foreground")) {
-			stackPane.getChildren().clear();
-			stackPane.getChildren().add(backgroundPane);
-			stackPane.getChildren().add(foregroundPane);
+//			stackPane.getChildren().clear();
+//			stackPane.getChildren().add(backgroundPane);
+//			stackPane.getChildren().add(foregroundPane);
+				for (ImageView imageView: objectImageViews) {
+					imageView.setOpacity(1);
+					imageView.setMouseTransparent(false);
+				}
+				foregroundPane.setMouseTransparent(false);
+			}
 		}
-	}
+	
 	
 	public void updatePaneSize(int x_size, int y_size) {
 		sizeX = x_size;

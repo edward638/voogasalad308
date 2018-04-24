@@ -182,12 +182,13 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 		xposCol.setOnEditCommit((CellEditEvent<ObjectCoordinatesInsertion, String> t) -> {
 			((ObjectCoordinatesInsertion) t.getTableView().getItems().get(t.getTablePosition().getRow()))
 					.setXpos(Double.parseDouble(t.getNewValue()));
+			controller.updatePositions();
 		});
 
 	}
 
 	private void setupYposCol(TableColumn<ObjectCoordinatesInsertion, String> yposCol) {
-		yposCol.setCellValueFactory(f -> new ReadOnlyStringWrapper(f.getValue().getXpos()));
+		yposCol.setCellValueFactory(f -> new ReadOnlyStringWrapper(f.getValue().getYpos()));
 		yposCol.setMinWidth(125); // set this col width
 		yposCol.setMaxWidth(125); // set this col width
 		yposCol.setResizable(false);
@@ -196,6 +197,7 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 		yposCol.setOnEditCommit((CellEditEvent<ObjectCoordinatesInsertion, String> t) -> {
 			((ObjectCoordinatesInsertion) t.getTableView().getItems().get(t.getTablePosition().getRow()))
 					.setYpos(Double.parseDouble(t.getNewValue()));
+			controller.updatePositions();
 		});
 	}
 

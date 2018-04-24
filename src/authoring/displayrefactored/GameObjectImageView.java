@@ -31,7 +31,7 @@ public class GameObjectImageView {
 	
 	public GameObjectImageView(ImageView imageView, GameObject go, ViewRefreshInterface viewRefreshInterface) {
 		
-		myRectangle = new Rectangle(ResourceBundleManager.getPosition("GAMEVIEWSIZE_X"), ResourceBundleManager.getPosition("GAMEVIEWSIZE_Y"));
+//		myRectangle = new Rectangle(ResourceBundleManager.getPosition("GAMEVIEWSIZE_X"), ResourceBundleManager.getPosition("GAMEVIEWSIZE_Y"));
 		myImage = imageView;
 		gameObject = go;
 		myImage.setOnMousePressed(t -> onMousePressed(t));
@@ -46,6 +46,8 @@ public class GameObjectImageView {
 		
 		AuthBehavior mandatory = gameObject.getMandatoryBehavior();
 		mandatory.getProperty("xPos").setValue(translateX);
+		
+		System.out.println("translateX " + translateX + "translateY " + translateY);
 		mandatory.getProperty("yPos").setValue(translateY);
 		
 		
@@ -104,23 +106,26 @@ public class GameObjectImageView {
 //		System.out.println("translateX " + translateX);
 //		System.out.println("translateY " + translateY);
 
-		if ((translateX) > (myRectangle.getBoundsInParent().getMaxX()- myImage.getBoundsInParent().getWidth())) {
-			translateX = myRectangle.getBoundsInParent().getMaxX() - myImage.getBoundsInParent().getWidth();
-//			System.out.println("A");
-		}
-		if (translateX < myRectangle.getBoundsInParent().getMinX()) {
-			translateX = myRectangle.getBoundsInParent().getMinX();
-//			System.out.println("B");
-		}
-		if ((translateY) > (myRectangle.getBoundsInParent().getMaxY()- myImage.getBoundsInParent().getHeight())) {
-			translateY = myRectangle.getBoundsInParent().getMaxY() - myImage.getBoundsInParent().getHeight();
-//			System.out.println("C");
-		}
-		if (translateY < myRectangle.getBoundsInParent().getMinX()) {
-			translateY = myRectangle.getBoundsInParent().getMinY();
-//			System.out.println("D");
-		}
+//		if ((translateX) > (myRectangle.getBoundsInParent().getMaxX()- myImage.getBoundsInParent().getWidth())) {
+//			translateX = myRectangle.getBoundsInParent().getMaxX() - myImage.getBoundsInParent().getWidth();
+////			System.out.println("A");
+//		}
+//		if (translateX < myRectangle.getBoundsInParent().getMinX()) {
+//			translateX = myRectangle.getBoundsInParent().getMinX();
+////			System.out.println("B");
+//		}
+//		if ((translateY) > (myRectangle.getBoundsInParent().getMaxY()- myImage.getBoundsInParent().getHeight())) {
+//			translateY = myRectangle.getBoundsInParent().getMaxY() - myImage.getBoundsInParent().getHeight();
+////			System.out.println("C");
+//		}
+//		if (translateY < myRectangle.getBoundsInParent().getMinX()) {
+//			translateY = myRectangle.getBoundsInParent().getMinY();
+////			System.out.println("D");
+//		}
 			
+//		if (translateX < 0) translateX = 0;
+//		if (translateY < 0) translateY = 0;
+		
 		myImage.setTranslateX(translateX);
 		myImage.setTranslateY(translateY);
 		

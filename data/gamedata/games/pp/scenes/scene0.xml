@@ -1,12 +1,26 @@
 <authoring.GameScene>
-  <myName>hello</myName>
+  <myName>l</myName>
   <backgroundImageSerializables/>
   <myObjects>
     <authoring.GameObject>
-      <myName>pleasework</myName>
+      <myName>asdf</myName>
       <myBehaviors>
         <authoring.AuthBehavior>
           <myProperties>
+            <authoring.Property>
+              <myValue class="double">0.0</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeDef</myName>
+              <myValueType>engine.behaviors.shapes.ShapeDefinition</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">i</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
             <authoring.Property>
               <myName>ignoreTags</myName>
               <myValueType>java.util.List</myValueType>
@@ -16,23 +30,9 @@
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myValue class="double">-429.0</myValue>
+              <myValue class="double">0.0</myValue>
               <myName>xPos</myName>
               <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="string">loadTestImage</myValue>
-              <myName>imagePath</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">-254.0</myValue>
-              <myName>yPos</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myName>shapeDef</myName>
-              <myValueType>engine.behaviors.shapes.ShapeDefinition</myValueType>
             </authoring.Property>
           </myProperties>
           <myName>engine.behaviors.MandatoryBehavior</myName>
@@ -42,35 +42,35 @@
       <myBehaviorFactory/>
     </authoring.GameObject>
     <authoring.GameObject>
-      <myName>p</myName>
+      <myName>l</myName>
       <myBehaviors>
         <authoring.AuthBehavior>
           <myProperties>
             <authoring.Property>
-              <myName>elementName</myName>
+              <myValue class="string">sdfa</myValue>
+              <myName>imagePath</myName>
               <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myName>ignoreTags</myName>
-              <myValueType>java.util.List</myValueType>
             </authoring.Property>
             <authoring.Property>
               <myName>shapeDef</myName>
               <myValueType>engine.behaviors.shapes.ShapeDefinition</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myValue class="string">pop</myValue>
-              <myName>imagePath</myName>
+              <myName>elementName</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myValue class="double">230.0</myValue>
-              <myName>yPos</myName>
+              <myValue class="double">0.0</myValue>
+              <myName>xPos</myName>
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myValue class="double">187.0</myValue>
-              <myName>xPos</myName>
+              <myName>ignoreTags</myName>
+              <myValueType>java.util.List</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">0.0</myValue>
+              <myName>yPos</myName>
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
           </myProperties>

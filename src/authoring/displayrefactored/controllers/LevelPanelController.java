@@ -86,6 +86,7 @@ public class LevelPanelController extends Controller {
 	public void addBackgroundImage(Image image) {
 		SceneBackgroundImageSerializable serializable = new SceneBackgroundImageSerializable(0.0, 0.0, 200.0, 200.0, game.getImageManager().storeBackgroundImage(image)+".png");
 		game.getSceneManager().getCurrentScene().addBackgroundImageSerializable(serializable);
+//		System.out.println(serializable.getImagePath());
 		refreshView();
 	}
 	

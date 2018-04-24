@@ -10,9 +10,8 @@ import javafx.scene.text.Font;
 public class ConcreteHUD extends Pane implements HUD {
 
 	String gameName;
-	int currentScore;
-	int livesRemaining;
-	Map<String, ?> otherInfo;
+	
+	Map<String, ?> info;
 	private int xLabel = 0;
 	private int yLabel = 0;
 
@@ -79,10 +78,8 @@ public class ConcreteHUD extends Pane implements HUD {
 	}
 
 	@Override
-	public void updateInfo(int score, int lives, Map<String, ?> OtherInfo) {
-		currentScore = score;
-		livesRemaining = lives;
-		otherInfo = OtherInfo;
+	public void updateInfo(Map<String, ?> info) {
+		this.info = info;
 	}
 
 }

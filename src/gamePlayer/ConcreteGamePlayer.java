@@ -6,6 +6,8 @@ import java.util.ResourceBundle;
 import data.GameDescriptionProvider;
 import engine.Engine;
 import engine.GameState;
+import engine.tests.ModelGameState2;
+import gamePlayer.buttons.ClearHighScoresButton;
 import gamePlayer.buttons.ConcreteButtonData;
 import gamePlayer.buttons.LoadButton;
 import gamePlayer.buttons.SaveButton;
@@ -145,8 +147,13 @@ public class ConcreteGamePlayer implements GamePlayer {
 		root.getChildren().remove(gameDisplay);
 		root.getChildren().remove((Node) hud);
 		root.getChildren().remove(highScores.getScores());
-		// engine.close();
 
+		if (engine != null) {
+			engine.close();
+		}
+		//engine = new Engine(file);
+		engine = new Engine(new ModelGameState2().getState());
+		keyInputDictionary.setGame(engine);
 		currentGameName = gameDescriptionProvider.getGameName(file);
 		hud = new ConcreteHUD(currentGameName);
 		highScores = new ConcreteHighScores(file);
@@ -194,8 +201,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 	}
 
 	public void closeEngine() {
-		// engine.close();
-
+		engine.close();
 	}
 
 }

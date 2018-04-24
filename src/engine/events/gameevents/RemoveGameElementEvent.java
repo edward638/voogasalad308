@@ -3,6 +3,7 @@ package engine.events.gameevents;
 import engine.Engine;
 import engine.GameElement;
 import engine.GameState;
+import engine.behaviors.MainCharacter;
 
 public class RemoveGameElementEvent extends GameEvent{
 	
@@ -15,7 +16,9 @@ public class RemoveGameElementEvent extends GameEvent{
 
 	@Override
 	public void execute(GameState state) {
-		state.removeGameElement(toRemove);
+		if (!toRemove.hasBehavior(MainCharacter.class)) {
+			state.removeGameElement(toRemove);
+		}
 		System.out.println("RemoveElement event executed");
 	}
 }

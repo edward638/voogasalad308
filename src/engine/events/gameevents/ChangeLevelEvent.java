@@ -10,15 +10,14 @@ public class ChangeLevelEvent extends GameEvent{
 	
 private Integer level;
 	
-	ChangeLevelEvent(Integer level) {
+	public ChangeLevelEvent(Integer level) {
 		this.level = level;
 	}
 
 	@Override
-	public void execute(GameState gstate) {
-		GameLoader loader = new GameLoader(displayState.getGameState().getGameName());
-		GameState gameState = loader.convertScene(loader.getGameScenes().get(level));
-		displayState.getGameState.setGameState();
+	public void execute(GameState gameState) {
+		System.out.println("CHANGE LEVEL EVENT");
+		gameState.setState(gameState.getGameMetaData().getLevel(level));
 	}
 
 	

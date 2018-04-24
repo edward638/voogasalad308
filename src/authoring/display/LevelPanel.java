@@ -6,15 +6,15 @@ import java.util.ResourceBundle;
 import authoring.Game;
 import authoring.GameObject;
 import authoring.GameScene;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -26,7 +26,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
  * @author Maddie Wilkinson
  *
  */
-public class LevelPanel extends AuthoringUIComponent {
+public class LevelPanel extends MainWindowComponent {
 
 	private VBox myVBox;
 	private HBox myHBox;
@@ -38,11 +38,12 @@ public class LevelPanel extends AuthoringUIComponent {
 	private ListView<GameObject> myLevelObjects;
 	
 	private GameViewWindow myGameViewWindow;
+	private ObjectInfoPanel myObjectInfoPanel;
 
-	public LevelPanel(ResourceBundle resources, Game game, Node root, GameViewWindow gameViewWindow) {
+	public LevelPanel(ResourceBundle resources, Game game, Node root, GameViewWindow gameViewWindow, ObjectInfoPanel objectInfoPanel) {
 		super(resources, game, root); //pass resources to super constructor
 		myGameViewWindow = gameViewWindow;
-		System.out.println(myGameViewWindow == null);
+		myObjectInfoPanel = objectInfoPanel;
 
 		myVBox = new VBox();
 		myHBox = new HBox();
@@ -50,12 +51,8 @@ public class LevelPanel extends AuthoringUIComponent {
 		myVBox.getChildren().addAll(makeLevelChooser(), makeObjectList(), myHBox);
 	}
 
-	public VBox asVBox() {
-		return myVBox;
-	}
-
 	private HBox makeLevelChooser() {
-		HBox levelChooser = new HBox();
+		HBox levelChooser = new HBox(DEFAULT_SPACING);
 		makeLevelDropdown();
 		makeAddLevelButton();
 		makePanelSelectorComboBox();
@@ -99,12 +96,10 @@ public class LevelPanel extends AuthoringUIComponent {
 	private ComboBox<GameScene> makeLevelDropdown() {
 		myLevelDropdown = new ComboBox<>();
 		myLevelDropdown.setPromptText(super.getResources().getString("SelectSceneDropDown")); //make super.getString method?
-		//below line contains dummy objects
 		myLevelDropdown.getItems().addAll(getGame().getSceneManager().getScenes());
 		myLevelDropdown.valueProperty().addListener((o, old, neww) -> {
 			getGame().getSceneManager().setCurrentScene(neww);
 			myLevelObjects.setItems(FXCollections.observableArrayList(getGame().getSceneManager().getCurrentScene().getMyObjects()));
-			
 			myGameViewWindow.updateWindow();
 			System.out.println("Level Panel tried to call updateWindow");
 		});
@@ -120,24 +115,29 @@ public class LevelPanel extends AuthoringUIComponent {
 			myGameViewWindow.switchPanes(neww);
 		});
 		return myPanelSelectorComboBox; 
-		
 	}
 
-	//you can make this a ListView of GameObjects/GameElements and make a toString method so that it displays properly
 	private ListView<GameObject> makeObjectList() {
-		//this will take GameScene selected from above ComboBox, go to ObjectManager, plug the selected GameScene into the placedObjects Map, 
-		//then display the corresponding List<GameObject> in the ListView below
-		//below line contains dummy objects
-		//		ObservableList<String> items = FXCollections.observableArrayList ("dummy object 1", "Mario", "Goomba");
 		myLevelObjects = new ListView<GameObject>();
-		myLevelObjects.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<GameObject>() {
-		    @Override
-		    public void changed(ObservableValue<? extends GameObject> observable, GameObject oldValue, GameObject newValue) {
-		       
+		myLevelObjects.setOnMouseClicked(event -> {
+			if(event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
+		        System.out.println("You double clicked!!!");
 		    }
 		});
-		
+		myLevelObjects.getSelectionModel().selectedItemProperty().addListener((o, old, neww) -> {
+			getGame().getSceneManager().getCurrentScene().setCurrentGameObject(neww);
+			myObjectInfoPanel.updatePanel();
+		});
 		return myLevelObjects;
+	}
+
+	public VBox asVBox() {
+		return myVBox;
+	}
+	
+	@Override
+	protected Node asNode() {
+		return myVBox;
 	}
 
 }

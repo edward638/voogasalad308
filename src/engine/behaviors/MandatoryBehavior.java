@@ -17,7 +17,6 @@ public class MandatoryBehavior extends Behavior{
 	private String elementName;
 	private ShapeDefinition shapeDef;
 	private String imagePath;
-	private List<String> ignoreTags;
 	
 	public static final String REFER_ALL_ELEMENTS = "ANY_ELEMENT";
 	
@@ -30,7 +29,6 @@ public class MandatoryBehavior extends Behavior{
 		elementName = name;
 		shapeDef = shp;
 		imagePath = imagepath;
-		ignoreTags = incomingTags;
 	}
 	
 	public MandatoryBehavior(GameElement ge, String name, Double startX, Double startY, ShapeDefinition shp, String imagepath) {
@@ -73,6 +71,7 @@ public class MandatoryBehavior extends Behavior{
 	}
 	
 	public Shape getShape() {
+//		System.out.println(shapeDef);
 		return shapeDef.getShape(this);
 	}
 	public String getImagePath() {
@@ -80,6 +79,14 @@ public class MandatoryBehavior extends Behavior{
 	}
 	public String getName() {
 		return elementName;
+	}
+	
+	public void setWidth(Double newWidth) {
+		shapeDef = new RectangleShape(newWidth, getShape().getBoundsInLocal().getHeight());
+	}
+	
+	public void setHeight(Double newHeight) {
+		shapeDef = new RectangleShape(getShape().getBoundsInLocal().getWidth(), newHeight);
 	}
 
 }

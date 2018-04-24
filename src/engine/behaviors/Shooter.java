@@ -18,6 +18,7 @@ public class Shooter extends Behavior {
 		super(ge);
 		defaultVelocity = defaultVel;
 		distAway = dist;
+		toShoot = new GameObject();
 	}
 	
 	public Shooter(GameElement ge) {

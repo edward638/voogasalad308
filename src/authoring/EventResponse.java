@@ -42,5 +42,9 @@ public class EventResponse {
 	public String getMyContent() {
 		return myContent;
 	}
+	
+	public String toString() {
+		return getName();
+	}
 		
 }

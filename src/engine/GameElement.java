@@ -11,9 +11,7 @@ import java.util.stream.Collectors;
 import engine.actions.Action;
 import engine.behaviors.Behavior;
 import engine.behaviors.MandatoryBehavior;
-import engine.behaviors.Movable;
 import engine.events.elementevents.ElementEvent;
-import engine.events.elementevents.KeyInputEvent;
 import engine.events.gameevents.GameEvent;
 import engine.exceptions.TooManyBehaviorsException;
 
@@ -170,9 +168,27 @@ public class GameElement {
 		}
 		return returning;
 	}
-
-
-
+	
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof GameElement)) {
+			return false;
+		}
+		GameElement other = (GameElement) o;
+		Map<String, Object> thisProperties = reportProperties();
+		Map<String, Object> otherProperties = other.reportProperties();
+		if (thisProperties.size() != otherProperties.size()) {return false;}
+		
+		for (String thisKey: thisProperties.keySet()) {
+			if ((thisProperties.get(thisKey) instanceof GameElement)) {
+				continue;
+			}
+			if (!(otherProperties.get(thisKey).equals(thisProperties.get(thisKey)))) {
+				return false;
+			}
+		}
+		return true;
+	}
 
 	
 }

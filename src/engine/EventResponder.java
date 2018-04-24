@@ -26,4 +26,8 @@ public class EventResponder {
 			}
 		}
 	}
+	
+	public Map<ElementEvent, Action> getResponses () {
+		return responses;
+	}
 }

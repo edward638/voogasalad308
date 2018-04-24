@@ -26,6 +26,7 @@ import engine.behaviors.MovableCharacter;
 import engine.behaviors.TimeRoutine;
 import engine.behaviors.TimeTracker;
 import engine.behaviors.TrackMainCharacter;
+import engine.behaviors.shapes.EllipseShape;
 import engine.behaviors.shapes.RectangleShape;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.KeyInputEvent;
@@ -37,8 +38,9 @@ public class ModelGameState {
 	private DisplayState display;
 	
 	public ModelGameState() {
-		
 		state = new GameState();
+		display = new DisplayState(state);
+		
 		addMainCharacter();
 		ArrayList<GameElement> elements = new ArrayList<GameElement>();
 		getCreatedMario();
@@ -60,7 +62,7 @@ public class ModelGameState {
 			state.addGameElement(el);
 			//display.addNewElement(el);
 		}
-		display = new DisplayState("enginetestmario", state);
+		display = new DisplayState(state);
 		//display.update(state);
 	}
 	

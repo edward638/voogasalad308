@@ -8,16 +8,9 @@ import org.junit.jupiter.api.Test;
 
 class AuthoringTest {
 
-	
-	@Test
-	void testGameObjectAddBehavior() {
-		GameObject go = new GameObject(new Behavior());
-		assertEquals(1, go.getBehaviors().size());
-	}
-	
 	@Test
 	void testGameObjectCopy() {
-		Behavior behave = new Behavior("Moveable", new HashSet<Property>());
+		AuthBehavior behave = new AuthBehavior("Moveable", new HashSet<Property>());
 		GameObject go = new GameObject(behave);
 		GameObject goCopy = new GameObject(go);
 		assertEquals("Moveable", goCopy.getBehavior("Moveable").getName());

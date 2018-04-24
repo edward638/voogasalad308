@@ -100,7 +100,6 @@ public class KeyBinding {
 						keyText.setOpacity(1);
 						keyIsChanged = true;
 					} else if (keyMap.containsKey(keyPressInputCode)) {
-						System.out.println("HI");
 						flashTransition.play();
 					}
 

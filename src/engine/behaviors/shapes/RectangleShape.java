@@ -27,7 +27,7 @@ public class RectangleShape extends ShapeDefinition{
 	
 	@Override
 	public Shape getShape(MandatoryBehavior mandatory) {
-		return new Rectangle(mandatory.getX(), mandatory.getY(), hitBoxWidth, hitBoxHeight);
+		return new Rectangle(mandatory.getX() + (width - hitBoxWidth)/2, mandatory.getY() + (width - hitBoxWidth)/2, hitBoxWidth, hitBoxHeight);
 		//return new Ellipse(mandatory.getX(), mandatory.getY(), width/2, height/2);
 	}
 	

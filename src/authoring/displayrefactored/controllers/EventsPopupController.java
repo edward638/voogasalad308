@@ -95,5 +95,10 @@ public class EventsPopupController extends Controller {
 		mfWindow.createVBox();
 		eventsWindow.updateEventList();
 	}
+	
+	public void updateFromBehavior() {
+		mfWindow.createVBox();
+	}
+	
 
 }

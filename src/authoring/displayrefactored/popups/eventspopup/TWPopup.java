@@ -17,7 +17,8 @@ public class TWPopup extends PopupRefactored {
 	private static final String SAVE = "Save";
 
 	public TWPopup(TriggerWindow intw) {
-		intw = tw;
+		kc = "";
+		tw = intw;
 		tf = new TextField();
 		save = new Button(SAVE);
 		generatePopup();
@@ -38,10 +39,12 @@ public class TWPopup extends PopupRefactored {
 	private void getKey(String inkc) {
 		kc = inkc;
 		tf.clear();
+
 	}
 	@Override
 	protected void mapButtons() {
 		save.setOnAction(e -> {
+			System.out.println(kc);
 			tw.setKeyCode(kc);
 			close();
 		});

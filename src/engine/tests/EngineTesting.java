@@ -39,6 +39,7 @@ public class EngineTesting extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		List<GameState> levels = new ArrayList<GameState>();
+		levels.add(new ModelGameState3().getState());
 		levels.add(new ModelGameState2().getState());
 		modelGameMetaData = new GameMetaData(levels , 0, new ModelGameState3().getState(), "enginetestmario");
 		gameEngine = new Engine(modelGameMetaData);

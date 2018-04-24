@@ -10,6 +10,7 @@ import engine.actions.CollisionDamageAllSides;
 import engine.actions.CollisionKillable;
 import engine.actions.CollisionStopXMotion;
 import engine.actions.CollisionStopYMotion;
+import engine.actions.TimeKillable;
 import engine.behaviors.Gravity;
 import engine.behaviors.Killable;
 import engine.behaviors.Killer;
@@ -24,13 +25,14 @@ import engine.behaviors.shapes.EllipseShape;
 import engine.behaviors.shapes.RectangleShape;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.KeyInputEvent;
+import engine.events.elementevents.TimeEvent;
 import javafx.scene.input.KeyCode;
 
 public class ModelGameState2 {
 	private GameState state;
 	
 	public ModelGameState2() {
-		state = new GameState();		
+		state = new GameState(null);		
 	}
 	
 	private void addMainCharacter() {

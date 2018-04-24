@@ -12,6 +12,8 @@ public class MandatoryBehavior extends Behavior{
 	
 	private Double xPos;
 	private Double yPos;
+	private Double DEFAULTxPos;
+	private Double DEFAULTyPos;
 	private String elementName;
 	private ShapeDefinition shapeDef;
 	private String imagePath;
@@ -23,6 +25,8 @@ public class MandatoryBehavior extends Behavior{
 		super(ge);
 		xPos = startX;
 		yPos = startY;
+		DEFAULTxPos = startX;
+		DEFAULTyPos = startY;
 		elementName = name;
 		shapeDef = shp;
 		imagePath = imagepath;
@@ -54,6 +58,10 @@ public class MandatoryBehavior extends Behavior{
 		List<Double> ret = new ArrayList<>();
 		ret.add(xPos); ret.add(yPos);
 		return ret;
+	}
+	
+	public void resetPosition() {
+		this.setPosition(DEFAULTxPos, DEFAULTyPos);
 	}
 	
 	public Double getX() {

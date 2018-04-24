@@ -40,7 +40,7 @@ public class Engine implements EngineInterface{
 	 * @param gamePath
 	 */
 	public Engine(GameMetaData metaData) {
-		gameState = new GameState();
+		gameState = new GameState(metaData);
 		gameState.setState(metaData.getCurrentLevel());
 		displayState = new DisplayState(gameState, metaData.getGameName());
 		eventManager = new EventManager2(gameState);
@@ -57,7 +57,7 @@ public class Engine implements EngineInterface{
 		gameState = modelGameState.getState();
 		displayState = modelGameState.getDisplay();
 		eventManager = new EventManager2(gameState);
-		audioPlayer = new AudioPlayer(musicPath);
+		audioPlayer = new AudioPlayer(musicPath, 0);
 		startAnimation();
 	}
 	

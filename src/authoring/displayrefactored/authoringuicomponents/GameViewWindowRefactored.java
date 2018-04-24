@@ -22,6 +22,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
+
+/**
+ * 
+ * @author Edward Zhuang
+ * GameViewWindow which provides main visual representation for created game objects and scene background.
+ */
 public class GameViewWindowRefactored extends AuthoringUIComponentRefactored implements Observer {
 	
 	
@@ -44,7 +50,6 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	
 	
 	public GameViewWindowRefactored(GameViewWindowController controller) {
-		// TODO Auto-generated constructor stub
 		this.controller = controller;
 		objectImageViews = new ArrayList<>();
 		updatePaneSize(DEFAULTSIZEX, DEFAULTSIZEY);
@@ -52,7 +57,6 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	
 	@Override
 	protected void GenerateComponent() {
-		// TODO Auto-generated method stub
 		BorderPane borderPane = getBorderPane();
 		stackPane = new StackPane();
 		list = new ArrayList<>();
@@ -76,14 +80,12 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	}
 
 	private void initializeButtons() {
-		// TODO Auto-generated method stub
 		myLevelSizeButton.setOnAction(e-> {
 			LevelSizePopupRefactored popup = new LevelSizePopupRefactored(this);
 		});
 	}
 
 	private void initializeComboBoxes() {
-		// TODO Auto-generated method stub
 		myPanelSelector.setPromptText(ResourceBundleManager.getAuthoring("ChoosePanel"));
 		myPanelSelector.getItems().add("Background");
 		myPanelSelector.getItems().add("Foreground");
@@ -92,9 +94,11 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 		});
 	}
 
+	/**
+	 * Called by Game when model is updated, updates the game window view
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
 		gameViewObservable = (GameViewObservable) o;
 		updateForeground(gameViewObservable.getImageViews());
 		updateBackground(gameViewObservable.getBackgroundImages());
@@ -108,55 +112,44 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	
 	private void updateBackground(List<SceneBackgroundImage> list) {
 		this.list = list;
-		System.out.println(list);
-		System.out.println(list.size());
 		sceneBackground.clearPane();
 		for (SceneBackgroundImage s: list) {
 			sceneBackground.addImage(s);
 		}
-
-		
 	}
 	
+	/**
+	 * Switches between foreground and background editing, based on which option is selected in Combobox
+	 * @param key
+	 */
 	public void switchPanes(String key) {
 		if (key.equals("Background")) {
 			for (ImageView imageView: objectImageViews) {
-				
 				imageView.setOpacity(0.25);
-		
 				imageView.setMouseTransparent(true);
 			}
 			foregroundPane.setMouseTransparent(true);
-			
-//			stackPane.getChildren().clear();
-//			stackPane.getChildren().add(backgroundPane);
 		}
 		
 		if (key.equals("Foreground")) {
-//			stackPane.getChildren().clear();
-//			stackPane.getChildren().add(backgroundPane);
-//			stackPane.getChildren().add(foregroundPane);
 				for (ImageView imageView: objectImageViews) {
-			
 					imageView.setOpacity(1);
-
 					imageView.setMouseTransparent(false);
 				}
 				foregroundPane.setMouseTransparent(false);
 			}
 		}
 	
-	
+	/**
+	 * Resizes the panes of the gameviewwindow, called by level size popup
+	 * @param x_size new window size x
+	 * @param y_size new window size y
+	 */
 	public void updatePaneSize(int x_size, int y_size) {
 		sizeX = x_size;
 		sizeY = y_size;
-		
 		backgroundPane.setMinSize(sizeX, sizeY);
 		foregroundPane.setMinSize(sizeX, sizeY);
 		sceneBackground.setRectangle(sizeX, sizeY);
-		
-		System.out.println("From gameviewwindow refactored: the size should have changed");
 	}
-	
-	
 }

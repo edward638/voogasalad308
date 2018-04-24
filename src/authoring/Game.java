@@ -131,7 +131,6 @@ public class Game extends Observable implements GameViewObservable, ObjectInfoOb
 			Double xPosition = (Double) xPositionProperty.getValue();
 			Double yPosition = (Double) yPositionProperty.getValue();
 			
-			System.out.println("getImageViews() " + xPosition + " " + yPosition);
 			
 			
 			String imagePath = (String) imagePathProperty.getValue();

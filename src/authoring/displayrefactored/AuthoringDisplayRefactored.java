@@ -27,9 +27,6 @@ public class AuthoringDisplayRefactored implements LoadAuthoringInterface {
 	private static final String NEW_GAME = "New Game";
 	private static final String NAME = "Authoring Environment";
 	private static final String baseLocation = "./data/gamedata/games/";
-	private static final String NEW_GAME_IMAGE = "./data/images/newGame.png";
-	private static final String SAVE_GAME_IMAGE = "./data/images/saveGame.png";
-	private static final String LOAD_GAME_IMAGE = "./data/images/loadGame.png";
 	
 	private static final int WIDTH = 1500;
 	private static final int HEIGHT = 1000;
@@ -61,9 +58,9 @@ public class AuthoringDisplayRefactored implements LoadAuthoringInterface {
 		buttonBox = new HBox();
 		buttonBox.setSpacing(30);
 		gameNames = new ComboBox<>();
-		AnimatedButton newGame = new AnimatedButton(NEW_GAME_IMAGE, NEW_GAME);
-		AnimatedButton loadGame = new AnimatedButton(LOAD_GAME_IMAGE, LOAD_GAME);
-		AnimatedButton saveGame = new AnimatedButton(SAVE_GAME_IMAGE, SAVE_GAME);
+		AnimatedButton newGame = new AnimatedButton(ResourceBundleManager.getButton("NewGame"), NEW_GAME);
+		AnimatedButton loadGame = new AnimatedButton(ResourceBundleManager.getButton("SaveGame"), LOAD_GAME);
+		AnimatedButton saveGame = new AnimatedButton(ResourceBundleManager.getButton("LoadGame"), SAVE_GAME);
 		
 		
 		newGameButton = newGame.getButton();

@@ -35,6 +35,7 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 	private Button myAddLevelButton;
 	private Button myAddGameObjectButton;
 	private Button myAddSceneBackgroundImageButton;
+	private Button myDeleteObjectButton;
 	private ListView<GameObject> myLevelObjects;
 	private LevelPanelController controller;
 	private LevelsObservable levelsObservable = null;
@@ -49,7 +50,7 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 		myAddLevelButton = new Button(ResourceBundleManager.getAuthoring("AddSceneButton"));
 		myAddGameObjectButton = new Button(ResourceBundleManager.getAuthoring("AddGameObjectButton"));
 		myAddSceneBackgroundImageButton = new Button(ResourceBundleManager.getAuthoring("AddSceneBackgroundImageButton"));
-		
+		myDeleteObjectButton = new Button(ResourceBundleManager.getAuthoring("AddDeleteObjectButton"));
 	}
 	
 	private void initializeComboBoxes() {
@@ -91,6 +92,10 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 		
 			}//
 		});
+		myDeleteObjectButton.setOnAction(e -> {
+			int index = myLevelObjects.getSelectionModel().getSelectedIndex();
+			controller.deleteGameObject(index);
+		});
 		
 		
 		
@@ -110,7 +115,7 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 		myHBox = new HBox();
 		levelChooser.getChildren().addAll(myAddLevelButton, myLevelDropdown);
 		myHBox.getChildren().addAll(myAddGameObjectButton, myAddSceneBackgroundImageButton);
-		myVBox.getChildren().addAll(levelChooser, myLevelObjects, myHBox);
+		myVBox.getChildren().addAll(levelChooser, myLevelObjects, myHBox, myDeleteObjectButton);
 		borderPane.setCenter(myVBox);
 		
 	}

@@ -91,7 +91,10 @@ public class LevelPanelController extends Controller {
 		
 	}
 	
-	
+	public void deleteGameObject(int index) {
+		game.getGameObjects().remove(index);
+		refreshView();
+	}
 
 	@Override
 	protected void refreshView() {

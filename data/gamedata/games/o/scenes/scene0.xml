@@ -44,13 +44,21 @@
         <authoring.AuthBehavior>
           <myProperties>
             <authoring.Property>
-              <myValue class="double">59.0</myValue>
-              <myName>xPos</myName>
-              <myValueType>java.lang.Double</myValueType>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myValue class="double">30.0</myValue>
-              <myName>yPos</myName>
+              <myValue class="string">f</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeDef</myName>
+              <myValueType>engine.behaviors.shapes.ShapeDefinition</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">-14.0</myValue>
+              <myName>xPos</myName>
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
@@ -58,13 +66,44 @@
               <myValueType>java.util.List</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myName>shapeDef</myName>
-              <myValueType>engine.behaviors.shapes.ShapeDefinition</myValueType>
+              <myValue class="double">59.0</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+      </myBehaviors>
+      <myEvents/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>yuh</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myName>ignoreTags</myName>
+              <myValueType>java.util.List</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myValue class="string">f</myValue>
+              <myValue class="double">60.0</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">40.0</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">yuhimage</myValue>
               <myName>imagePath</myName>
               <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeDef</myName>
+              <myValueType>engine.behaviors.shapes.ShapeDefinition</myValueType>
             </authoring.Property>
             <authoring.Property>
               <myName>elementName</myName>

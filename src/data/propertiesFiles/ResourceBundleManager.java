@@ -14,6 +14,7 @@ public final class ResourceBundleManager {
 	private static final String PATHS = "Paths";
 	private static final String UI_POSITIONS = "UIPositions";
 	private static final String AUTHORING = "Authoring";
+	private static final String BUTTON = "ButtonImages";
 	
 	/**
 	 * retrieves string from Paths.properties
@@ -32,6 +33,11 @@ public final class ResourceBundleManager {
 	
 	public static String getAuthoring(String s) {
 		resources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PATH + AUTHORING);
+		return resources.getString(s);
+	}
+	
+	public static String getButton(String s) {
+		resources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PATH + BUTTON);
 		return resources.getString(s);
 	}
 	

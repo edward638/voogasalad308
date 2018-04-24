@@ -72,7 +72,7 @@ public class EventsWindow extends VBox {
 		for (GameObject go : gos) {
 			go.addEvent(currentEvent);
 		}
-		epuc.updateFromEvent(currentEvent);
+		epuc.updateFromEvent();
 	}
 
 	private ListView<Event> makeEventList(){

@@ -19,7 +19,7 @@ import authoring.displayrefactored.GameObjectImageView;
  * 
  * @author: Summer
  **/
-public class Game extends Observable implements GameViewObservable, ObjectInfoObservable, LevelsObservable{
+public class Game extends Observable implements GameViewObservable, ObjectInfoObservable, LevelsObservable {
 
 	private String gameName;
 	private String gameDescription;

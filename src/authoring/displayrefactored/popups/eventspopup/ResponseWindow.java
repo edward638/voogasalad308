@@ -34,8 +34,10 @@ public class ResponseWindow extends VBox {
 			this.getChildren().add(nonvalid);
 			return;
 		}
+		Text currGO = new Text("Current Game Object");
 		Text goName = new Text(gos.get(0).getName());
 		goName.setOnMouseClicked(e -> GOClicked());
+		this.getChildren().add(currGO);
 		this.getChildren().add(goName);
 	}
 	

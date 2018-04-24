@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import authoring.GameObject;
 import authoring.displayrefactored.popups.EventsPopupRefactored;
+import authoring.displayrefactored.popups.eventspopup.TWPopup;
+import authoring.displayrefactored.popups.eventspopup.TriggerWindow;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -22,7 +24,7 @@ public class EventsPopUpTest extends Application {
 		go.setName("CalvinBoi");
 		gos.add(go);
 		
-		EventsPopupRefactored epu = new EventsPopupRefactored(gos);
+		EventsPopupRefactored epu = new EventsPopupRefactored(gos, gos);
 	}
 
 

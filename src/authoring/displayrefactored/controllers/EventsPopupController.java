@@ -22,7 +22,7 @@ import javafx.scene.layout.VBox;
 public class EventsPopupController extends Controller {
 	
 	private List<GameObject> gos;
-	
+	private List<GameObject> allGos;   
 	private EventsWindow eventsWindow;
 	private TriggerWindow triggerWindow;
 	private BehaviorsWindow behaviorsWindow;
@@ -30,15 +30,16 @@ public class EventsPopupController extends Controller {
 	private ResponseWindow responseWindow;
 	private GroovyWindow groovyWindow;
 
-	public EventsPopupController(List<GameObject> inGos) {
-		gos = inGos;
+	public EventsPopupController(List<GameObject> currentGos, List<GameObject> allGO) {
+		gos = currentGos;
+		allGos = allGO;
 		initializeScreenComponents();
 	}
 
 	@Override
 	protected void initializeScreenComponents() {
 		eventsWindow = new EventsWindow(this, gos);
-		triggerWindow = new TriggerWindow(this, gos);
+		triggerWindow = new TriggerWindow(this, gos, allGos);
 		behaviorsWindow = new BehaviorsWindow(this, gos);
 		mfWindow = new MFWindow(this, gos);
 		responseWindow = new ResponseWindow(this, gos);
@@ -87,7 +88,8 @@ public class EventsPopupController extends Controller {
 		windows.add(groovyWindow);
 		return windows;
 	}
-	public void updateFromEvent(Event e) {
+	public void updateFromEvent() {
+		triggerWindow.createVBox();
 		responseWindow.createVBox();
 		behaviorsWindow.createVBox();
 		mfWindow.createVBox();

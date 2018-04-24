@@ -48,6 +48,7 @@ public class AuthBehavior {
 	 **/
 	public Property getProperty(String propName)  {
 		for(Property p : myProperties) {
+
 			if(p.getName().equals(propName)) {
 				return p;
 			}

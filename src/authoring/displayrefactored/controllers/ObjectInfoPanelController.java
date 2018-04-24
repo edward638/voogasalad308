@@ -38,10 +38,14 @@ public class ObjectInfoPanelController extends Controller {
 		objectInfoPanelRefactored.AttachToPane(pane, x, y);
 	}
 
+	public void updatePositions() {
+		refreshView();
+	}
+	
 	@Override
 	protected void refreshView() {
 		// TODO Auto-generated method stub
-		
+		game.notifyMyObservers();
 	}
 
 }

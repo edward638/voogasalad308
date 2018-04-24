@@ -5,10 +5,12 @@ import authoring.AuthBehavior;
 import authoring.Game;
 import authoring.GameObject;
 import authoring.GameScene;
+import authoring.SceneBackgroundImageSerializable;
 import authoring.displayrefactored.AuthoringEnvironmentGUIRefactored;
 import authoring.displayrefactored.authoringuicomponents.GameViewWindowRefactored;
 import authoring.displayrefactored.authoringuicomponents.LevelPanelRefactored;
 import data.propertiesFiles.ResourceBundleManager;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
@@ -16,7 +18,6 @@ public class LevelPanelController extends Controller {
 
 	Game game;
 	LevelPanelRefactored levelPanelRefactored;
-	GameViewWindowRefactored gameViewWindowRefactored;
 	
 	private static final String MANDATORY_BEHAVIOR_NAME = "MandatoryBehavior";
 	
@@ -31,9 +32,6 @@ public class LevelPanelController extends Controller {
 		levelPanelRefactored = new LevelPanelRefactored(this);
 	}
 	
-	public void setGameViewWindowRefactored(GameViewWindowRefactored gameViewWindowRefactored) {
-		this.gameViewWindowRefactored = gameViewWindowRefactored;
-	}
 
 	@Override
 	protected void setUpConnections() {
@@ -68,10 +66,13 @@ public class LevelPanelController extends Controller {
 		mandatory.getProperty("yPos").setValue(yPos);
 		mandatory.getProperty("imagePath").setValue(imageName);
 		game.getSceneManager().getCurrentScene().getMyObjects().add(gameObject);
-		game.getSceneManager().getCurrentScene().setCurrentGameObject(gameObject);
-		game.notifyObjectInfoObservers();
-		
+		setCurrentGameObject(gameObject);
+	
 		refreshView();
+	}
+	
+	public void setCurrentGameObject(GameObject gameObject) {
+		game.notifyObjectInfoObservers(gameObject);
 	}
 	
 	public void setLevel(GameScene gameScene) {
@@ -80,7 +81,9 @@ public class LevelPanelController extends Controller {
 	}
 	
 	public void addBackgroundImage(Image image) {
-		game.getSceneManager().getCurrentScene().getSceneBackground().addImage(image);
+		SceneBackgroundImageSerializable serializable = new SceneBackgroundImageSerializable(0.0, 0.0, 200.0, 200.0, game.getImageManager().storeBackgroundImage(image)+".png");
+		game.getSceneManager().getCurrentScene().addBackgroundImageSerializable(serializable);
+//		System.out.println(serializable.getImagePath());
 		refreshView();
 	}
 	
@@ -88,16 +91,17 @@ public class LevelPanelController extends Controller {
 		
 	}
 	
-	public void switchPanes(String window) {
-		System.out.println(gameViewWindowRefactored == null);
-		gameViewWindowRefactored.switchPanes(window);
-	}
 	
 
 	@Override
 	protected void refreshView() {
 		// TODO Auto-generated method stub
 		game.notifyMyObservers();
+	}
+
+	public boolean checkUniqueName(String nameText) {
+		boolean isUniqueName = game.checkUniqueObjectNames(nameText);
+		return isUniqueName;
 	}
 	
 }

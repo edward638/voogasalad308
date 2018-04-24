@@ -41,4 +41,10 @@ public class SceneManager {
 		return myLevels;
 	}
 	
+	public void restoreScenes(List<GameScene> list) {
+		myLevels = list;
+		setCurrentScene(myLevels.get(0));
+		System.out.println("Restore scenes" + list);
+	}
+	
 }

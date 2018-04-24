@@ -43,11 +43,6 @@ public class GameViewWindowController extends Controller {
 		game.notifyMyObservers();
 	}
 	
-	public GameViewWindowRefactored getGameViewWindowRefactored() {
-		return gameViewWindowRefactored;
-	}
-	
-	
 	
 
 }

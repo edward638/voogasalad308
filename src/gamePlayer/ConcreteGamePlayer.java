@@ -60,6 +60,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 	private GameDescriptionProvider gameDescriptionProvider;
 	private String mostRecentFile;
 	private KeyInputDictionary keyInputDictionary;
+	private PlayerUpdater concretePlayerUpdater;
 
 	private ResourceBundle resources;
 
@@ -147,6 +148,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 		root.getChildren().remove(gameDisplay);
 		root.getChildren().remove((Node) hud);
 		root.getChildren().remove(highScores.getScores());
+
 		if (engine != null) {
 			engine.close();
 		}
@@ -155,6 +157,17 @@ public class ConcreteGamePlayer implements GamePlayer {
 		engine = new Engine(new ModelGameState2().getState());
 		keyInputDictionary.setGame(engine);
 		currentGameName = gameDescriptionProvider.getGameName(file);
+		hud = new ConcreteHUD(currentGameName);
+		highScores = new ConcreteHighScores(file);
+		buttonData.setHighScores(highScores);
+
+		// set everything into gamemetadata and then pass only metadata into engine
+
+		concretePlayerUpdater = new ConcretePlayerUpdater(hud, highScores, userName);
+
+		engine = new Engine(file, concretePlayerUpdater);
+		keyInputDictionary.setGame(engine);
+
 		buttonData.setCurrentGameName(currentGameName);
 		mostRecentFile = file;
 		buttonData.setMostRecentFile(mostRecentFile);
@@ -165,10 +178,6 @@ public class ConcreteGamePlayer implements GamePlayer {
 		gameDisplay.setLayoutY(Integer.parseInt(resources.getString("gameDisplayY")));
 
 		myScene.setOnKeyPressed(e -> keyInputDictionary.handleAction(e.getCode()));
-
-		hud = new ConcreteHUD(currentGameName);
-		highScores = new ConcreteHighScores(file);
-		buttonData.setHighScores(highScores);
 
 		root.getChildren().add(gameDisplay);
 		root.getChildren().add((Node) hud);

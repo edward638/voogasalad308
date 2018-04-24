@@ -77,13 +77,11 @@ public class GameObject {
 	
 	public AuthBehavior getBehavior(String behavior) {
 		try {
-			System.out.println(behavior);
-			System.out.println("Just before loop");
 			for(AuthBehavior curr: myBehaviors) {
-				System.out.println("In loop: " + curr);
 				if (curr.getName().equals(behavior) || curr.getDisplayName().equals(behavior)) {
 					// is the above ok? i'm not sure whether that makes it more or less confusing
 					//i think it should be fine if we allow both methods of accessing it I can't see any problems with that
+//					System.out.println("RETURNED BEHAVIOR: " + curr);
 					return curr;
 				}
 			}

@@ -40,7 +40,6 @@ public class AuthBehavior {
 	}
 	
 	public String getDisplayName() {
-		System.out.println("Auth Behavior Name: " + myName);
 		String[] splitName = myName.split("\\.");
 		return splitName[splitName.length-1];
 	}

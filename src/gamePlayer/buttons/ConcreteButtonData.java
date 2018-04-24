@@ -1,6 +1,7 @@
 package gamePlayer.buttons;
 
 import data.GameDescriptionProvider;
+import engine.EngineInterface;
 import engine.GameState;
 import gamePlayer.GamePlayer;
 import gamePlayer.highScores.HighScores;
@@ -12,7 +13,6 @@ import javafx.stage.Stage;
 public class ConcreteButtonData implements ButtonData {
 	private Stage stage;
 	private GamePlayer gamePlayer;
-//	private GameDescriptionProvider gameDescriptionProvider;
 	private Group root;
 
 	private HighScores highScores;
@@ -20,12 +20,12 @@ public class ConcreteButtonData implements ButtonData {
 	private GameState gameState;
 	private String mostRecentFile;
 	private KeyInputDictionary keyBindingMap;
+	private EngineInterface engine;
 
 	public ConcreteButtonData(Stage stage, GamePlayer gamePlayer, GameDescriptionProvider gameDescriptionProvider,
 			Group root, KeyInputDictionary keyInputDictionary) {
 		this.stage = stage;
 		this.gamePlayer = gamePlayer;
-//		this.gameDescriptionProvider = gameDescriptionProvider;
 		this.root = root;
 		keyBindingMap = keyInputDictionary;
 	}
@@ -103,16 +103,19 @@ public class ConcreteButtonData implements ButtonData {
 		return gamePlayer.getMusicOn();
 	}
 
+	
+	public void addEngine(EngineInterface engine) {
+		this.engine = engine;
+	}
+	
 	@Override
 	public void resumeGame() {
-		//engine.resume();
-		
+		 engine.play();
 	}
 
 	@Override
 	public void pauseGame() {
-		//engine.pause();
-		
+		 engine.pause();
 	}
 
 }

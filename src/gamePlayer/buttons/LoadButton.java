@@ -7,7 +7,11 @@ import gamePlayer.ConcreteGamePlayer;
 import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
+/**
+ * button user presses to launch the game loader
+ * @author jeffreyli, calvinma
+ *
+ */
 public class LoadButton extends PlayerButtons {
 
 	public LoadButton(double x, double y, double width, double height, ButtonData buttonData) {
@@ -32,6 +36,5 @@ public class LoadButton extends PlayerButtons {
 		});
 
 	}
-
 
 }

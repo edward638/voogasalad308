@@ -9,7 +9,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-
+/**
+ * The pop up pane that appears for the user to change keybindings
+ * @author jeffreyli, calvinma
+ *
+ */
 public class KeyBindingPopup extends Pane {
 
 	private ButtonData buttonData;
@@ -28,7 +32,6 @@ public class KeyBindingPopup extends Pane {
 		setupChangeButtons();
 		setupCloseButton();
 		setUpTitle();
-
 	}
 
 	private void setUpTitle() {

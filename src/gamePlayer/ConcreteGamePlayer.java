@@ -5,9 +5,10 @@ import java.util.ResourceBundle;
 
 import data.GameDescriptionProvider;
 import engine.Engine;
+import engine.EngineInterface;
 import engine.GameState;
 import engine.tests.ModelGameState2;
-import gamePlayer.buttons.ClearHighScoresButton;
+//import engine.tests.ModelGameState2;
 import gamePlayer.buttons.ConcreteButtonData;
 import gamePlayer.buttons.LoadButton;
 import gamePlayer.buttons.SaveButton;
@@ -54,7 +55,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 	private HUD hud;
 	private ConcreteHighScores highScores;
 
-	private Engine engine;
+	private EngineInterface engine;
 	private String currentGameName;
 	private GameDescriptionProvider gameDescriptionProvider;
 	private String mostRecentFile;
@@ -149,7 +150,8 @@ public class ConcreteGamePlayer implements GamePlayer {
 		if (engine != null) {
 			engine.close();
 		}
-		//engine = new Engine(file);
+		// engine = new Engine(file);
+
 		engine = new Engine(new ModelGameState2().getState());
 		keyInputDictionary.setGame(engine);
 		currentGameName = gameDescriptionProvider.getGameName(file);

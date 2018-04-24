@@ -23,6 +23,7 @@ public class GroovyExecutor {
 		try {
 			return engine.eval(script);
 		} catch (ScriptException e) {
+			e.printStackTrace();
 			throw new GroovyException("cannot evaluate groovy expression");
 		}
 	}

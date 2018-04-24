@@ -2,7 +2,7 @@ package authoring.tests;
 
 import java.util.HashSet;
 
-import authoring.Behavior;
+import authoring.AuthBehavior;
 import authoring.GameObject;
 import authoring.Property;
 import authoring.SceneBackground;

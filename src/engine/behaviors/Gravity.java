@@ -1,4 +1,5 @@
 package engine.behaviors;
+import authoring.groovy.GroovyMethod;
 import engine.GameElement;
 import engine.actions.TimeGravity;
 import engine.events.elementevents.TimeEvent;
@@ -17,6 +18,7 @@ public class Gravity extends Behavior{
 		b = (Movable) ge.getBehavior(Movable.class);
 	}
 	
+	@GroovyMethod
 	public void experienceGravity(Double time) {
 		b.setYVelocity(b.getYVelocity()+(GRAVITATIONAL_FORCE*time));
 	}

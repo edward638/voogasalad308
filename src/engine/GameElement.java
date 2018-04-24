@@ -11,9 +11,7 @@ import java.util.stream.Collectors;
 import engine.actions.Action;
 import engine.behaviors.Behavior;
 import engine.behaviors.MandatoryBehavior;
-import engine.behaviors.Movable;
 import engine.events.elementevents.ElementEvent;
-import engine.events.elementevents.KeyInputEvent;
 import engine.events.gameevents.GameEvent;
 import engine.exceptions.TooManyBehaviorsException;
 
@@ -26,6 +24,11 @@ public class GameElement {
 		behaviors = new HashSet<>();
 		responder = new EventResponder(this);
 		returnedGameEvents = new ArrayList<>();
+	}
+	
+	public GameElement(String name) {
+		this();
+		behaviors.add(new MandatoryBehavior(this, name));
 	}
 	
 	public Set<Behavior> getAllBehaviors() {
@@ -117,6 +120,26 @@ public class GameElement {
 		return el.getName();
 	}
 	
+	
+	/*
+	 * Defines the method we will use to retrieve the position of a game element. Should be done according the 
+	 * MandatoryBehavior since every element in the game will implement that
+	 */
+	public List<Double> getPosition() {
+		List<Double> position = new ArrayList<Double>();
+		position.add(((MandatoryBehavior)(getBehavior(MandatoryBehavior.class))).getX());
+		position.add(((MandatoryBehavior)(getBehavior(MandatoryBehavior.class))).getY());
+		return position;
+	}
+	
+	public void setPosition(List<Double> position) {
+		((MandatoryBehavior)(getBehavior(MandatoryBehavior.class))).setPosition(position.get(0), position.get(1));
+	}
+	
+	public void resetPosition() {
+		((MandatoryBehavior)(getBehavior(MandatoryBehavior.class))).resetPosition();
+	}
+	
 	/*
 	 * Easy Printing
 	 * (non-Javadoc)
@@ -145,9 +168,27 @@ public class GameElement {
 		}
 		return returning;
 	}
-
-
-
+	
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof GameElement)) {
+			return false;
+		}
+		GameElement other = (GameElement) o;
+		Map<String, Object> thisProperties = reportProperties();
+		Map<String, Object> otherProperties = other.reportProperties();
+		if (thisProperties.size() != otherProperties.size()) {return false;}
+		
+		for (String thisKey: thisProperties.keySet()) {
+			if ((thisProperties.get(thisKey) instanceof GameElement)) {
+				continue;
+			}
+			if (!(otherProperties.get(thisKey).equals(thisProperties.get(thisKey)))) {
+				return false;
+			}
+		}
+		return true;
+	}
 
 	
 }

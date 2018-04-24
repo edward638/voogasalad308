@@ -11,17 +11,18 @@ public class DisplayState {
 	protected List<ImageElement> newElements;
 	protected List<ImageElement> removeElements;
 	
-	private String gameName;
+	public DisplayState (GameState gameState, String gameName) {
+		this.gameState = gameState;
+		activeElements = new ArrayList<>();
+		newElements = new ArrayList<>();
+		removeElements = new ArrayList<>();
+		for (GameElement e : gameState.getElements()) {
+			addNewElement(e);
+		}
+	}
 	
-//	public DisplayState(String gameName) {
-//		this.gameName = gameName;
-//		activeElements = new ArrayList<>();
-//		newElements = new ArrayList<>();
-//		removeElements = new ArrayList<>();
-//	}
-	
-	public DisplayState (String gameName, GameState gameState) {
-		this.gameName = gameName;
+	public DisplayState (GameState gameState) {
+		this.gameState = gameState;
 		activeElements = new ArrayList<>();
 		newElements = new ArrayList<>();
 		removeElements = new ArrayList<>();
@@ -43,9 +44,9 @@ public class DisplayState {
 	
 	public void addNewElement(GameElement element) {
 		if (!activeElements.stream().anyMatch(c -> c.getReference() == element)) {
-			ImageElement imageElement = new ImageElement(element, new ImageManager(gameName));
+			ImageElement imageElement = new ImageElement(element, new ImageManager(gameState.gameName));
 			newElements.add(imageElement);
-			System.out.println("DisplayState addNewElement");
+//			System.out.println("DisplayState addNewElement");
 			activeElements.add(imageElement);
 		}
 	}

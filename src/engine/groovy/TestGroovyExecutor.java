@@ -1,10 +1,7 @@
 package engine.groovy;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import engine.GameElement;
-import engine.behaviors.Gravity;
+import engine.behaviors.MandatoryBehavior;
 
 public class TestGroovyExecutor {
 
@@ -14,6 +11,7 @@ public class TestGroovyExecutor {
 //    		doubles.add(4.1);
 //    		doubles.add(2.5);
 //    		Gravity g = new Gravity(ge, 3.2, doubles);
+    		ge.addBehavior(new MandatoryBehavior(ge, "bl", 0.0, 0.0));
     		GroovyExecutor executor = new GroovyExecutor();
     		executor.addToMap("myObject", ge);
     		executor.execute("import engine.GameElement");

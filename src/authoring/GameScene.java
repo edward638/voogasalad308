@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.image.Image;
 
 /** 
@@ -21,15 +22,13 @@ public class GameScene {
 	private Set<String> myObjectNames;
 	private GameObject currentGameObject;
 	
-	private static final int SCENE_SIZE_X = 1000;
-	private static final int SCENE_SIZE_Y = 1000;
 
 	public GameScene(String name) {
 		myName = name;
 		myObjects = new ArrayList<>();
 		myObjectNames = new TreeSet<>();
-		mySceneBackground = new SceneBackground(SCENE_SIZE_X, SCENE_SIZE_Y);
-		System.out.println("This shit is being made again isn't it.");
+		mySceneBackground = new SceneBackground(ResourceBundleManager.getPosition("GAMEVIEWSIZE_X"), ResourceBundleManager.getPosition("GAMEVIEWSIZE_Y"));
+		System.out.println("New GameScene made!");
 	}
 	
 	public void addObject(GameObject toAdd) {

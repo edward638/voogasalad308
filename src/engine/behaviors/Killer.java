@@ -10,6 +10,10 @@ public class Killer extends Behavior{
 		this.damagePower = damagePower;
 	}
 	
+	public Killer (GameElement ge) {
+		this(ge, 10.0);
+	}
+	
 	public Double getDamagePower() {
 		return damagePower;
 	}

@@ -1,6 +1,7 @@
 package authoring.groovy;
 
 import authoring.GameObject;
+import engine.behaviors.Gravity;
 
 public class TestGroovyMethods {
 
@@ -10,7 +11,7 @@ public class TestGroovyMethods {
 	    System.out.println(factory.getBehaviorFields());
 	    System.out.println(factory.getBehaviorMethods());
 	    GameObject go = new GameObject();
-	    go.addBehavior("Gravity");
+	    go.addBehavior(Gravity.class.getCanonicalName());
 	    ObjectGroovyGenerator gen = new ObjectGroovyGenerator();
 	    System.out.println(gen.generateGroovyFields(go));
 	    System.out.println(gen.generateGroovyMethods(go));

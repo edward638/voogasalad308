@@ -8,4 +8,6 @@ public interface LevelsObservable {
 	
 	List<GameScene> getScenes();
 	
+	String getCurrentSceneName();
+	
 }

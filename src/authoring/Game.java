@@ -212,5 +212,10 @@ public class Game extends Observable implements GameViewObservable, ObjectInfoOb
 		}
 		return isUniqueName;
 	}
+
+	@Override
+	public String getCurrentSceneName() {
+		return mySceneManager.getCurrentScene().getName();
+	}
 	
 }

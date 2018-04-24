@@ -10,6 +10,7 @@ import authoring.displayrefactored.popups.NewGamePopupRefactored;
 import data.GameLoader;
 import data.GameSaver;
 import data.propertiesFiles.ResourceBundleManager;
+import display.AnimatedButton;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -26,6 +27,10 @@ public class AuthoringDisplayRefactored implements LoadAuthoringInterface {
 	private static final String NEW_GAME = "New Game";
 	private static final String NAME = "Authoring Environment";
 	private static final String baseLocation = "./data/gamedata/games/";
+	private static final String NEW_GAME_IMAGE = "./data/images/newGame.png";
+	private static final String SAVE_GAME_IMAGE = "./data/images/saveGame.png";
+	private static final String LOAD_GAME_IMAGE = "./data/images/loadGame.png";
+	
 	private static final int WIDTH = 1500;
 	private static final int HEIGHT = 1000;
 	private Pane root;
@@ -46,6 +51,7 @@ public class AuthoringDisplayRefactored implements LoadAuthoringInterface {
 		// TODO Auto-generated method stub
 		root = new Pane();
 		Scene scene = new Scene(root, WIDTH, HEIGHT);
+//		scene.getStylesheets().add(this.getClass().getResource("teststyle.css").toExternalForm());
 		stage.setScene(scene);
 		stage.setTitle(NAME);
 		stage.show();
@@ -53,11 +59,17 @@ public class AuthoringDisplayRefactored implements LoadAuthoringInterface {
 	
 	private void initializeButtonBox() {
 		buttonBox = new HBox();
+		buttonBox.setSpacing(30);
 		gameNames = new ComboBox<>();
-		newGameButton = new Button(NEW_GAME);
-		loadGameButton = new Button(LOAD_GAME);
-		saveGameButton = new Button(SAVE_GAME);
-		buttonBox.getChildren().addAll(newGameButton,saveGameButton,loadGameButton,gameNames);
+		AnimatedButton newGame = new AnimatedButton(NEW_GAME_IMAGE, NEW_GAME);
+		AnimatedButton loadGame = new AnimatedButton(LOAD_GAME_IMAGE, LOAD_GAME);
+		AnimatedButton saveGame = new AnimatedButton(SAVE_GAME_IMAGE, SAVE_GAME);
+		
+		
+		newGameButton = newGame.getButton();
+		loadGameButton = loadGame.getButton();
+		saveGameButton = saveGame.getButton();
+		buttonBox.getChildren().addAll(newGame.getHBox(),saveGame.getHBox(),loadGame.getHBox(),gameNames);
 		setButtonActions();
 		initializeComboBoxes();
 		root.getChildren().add(buttonBox);

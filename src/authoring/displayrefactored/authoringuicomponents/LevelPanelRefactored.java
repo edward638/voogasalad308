@@ -61,7 +61,7 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 		myPanelSelector.getItems().add("Background");
 		myPanelSelector.getItems().add("Foreground");
 		myPanelSelector.valueProperty().addListener((o, old, neww) -> {
-			System.out.println(neww);
+
 			controller.switchPanes(neww);
 			
 		});
@@ -135,9 +135,7 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 	
 	private void updateLevelObjects(List<GameObject> list) {
 //		System.out.println("There should be " + list.size() + " objects in this list.");
-		for (GameObject GO : list) {
-			System.out.println(GO.getName());
-		}
+		
 		myLevelObjects.getItems().clear();
 		myLevelObjects.getItems().addAll(FXCollections.observableArrayList(list));
 	}
@@ -145,7 +143,6 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 	private void updateLevelDropdown1(List<GameScene> list) {
 		myLevelDropdown.getItems().clear();
 		myLevelDropdown.getItems().addAll(list);
-		System.out.println("updateLevelDropdown1: " + list);
 	
 	}
 

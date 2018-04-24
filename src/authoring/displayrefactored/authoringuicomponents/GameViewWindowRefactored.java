@@ -100,7 +100,10 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 		
 		backgroundPane.setMinSize(sizeX, sizeY);
 		foregroundPane.setMinSize(sizeX, sizeY);
+		sceneBackground.setRectangle(sizeX, sizeY);
 		
 		System.out.println("From gameviewwindow refactored: the size should have changed");
 	}
+	
+	
 }

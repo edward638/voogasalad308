@@ -49,5 +49,9 @@ public class ObjectInfoPanelController extends Controller {
 		game.notifyMyObservers();
 //		game.notifyObjectInfoObservers(game.getCurrentGameObject());
 	}
+	
+	public void duplicateGameObject() {
+//		game.duplicateGameObject();
+	}
 
 }

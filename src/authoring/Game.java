@@ -218,4 +218,8 @@ public class Game extends Observable implements GameViewObservable, ObjectInfoOb
 		return mySceneManager.getCurrentScene().getName();
 	}
 	
+	public void duplicateGameObject() {
+		
+	}
+	
 }

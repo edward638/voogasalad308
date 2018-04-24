@@ -104,7 +104,7 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 		});
 
 		duplicateButton.setOnAction(e -> {
-
+			controller.duplicateGameObject();
 		});
 	}
 

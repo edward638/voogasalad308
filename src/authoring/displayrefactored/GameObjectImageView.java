@@ -129,7 +129,6 @@ public class GameObjectImageView {
 		myImage.setTranslateX(translateX);
 		myImage.setTranslateY(translateY);
 		
-		
 		wasEdited = true;
 		
 	}

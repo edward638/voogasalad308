@@ -1,5 +1,6 @@
 package authoring.displayrefactored.popups;
 
+import authoring.displayrefactored.authoringuicomponents.GameViewWindowRefactored;
 import authoring.displayrefactored.controllers.LevelPanelController;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.control.Button;
@@ -14,7 +15,7 @@ import javafx.scene.layout.VBox;
  */
 public class LevelSizePopupRefactored extends PopupRefactored {
 	
-	private LevelPanelController controller;
+	private GameViewWindowRefactored window;
 	private TextField sizeX;
 	private TextField sizeY;
 	private Button save;
@@ -22,8 +23,8 @@ public class LevelSizePopupRefactored extends PopupRefactored {
 	private static final int popupSizeX = 300;
 	private static final int popupSizeY = 200;
 
-	public LevelSizePopupRefactored(LevelPanelController inControl) {
-		controller = inControl;
+	public LevelSizePopupRefactored(GameViewWindowRefactored window) {
+		this.window = window;
 		generatePopup();
 		mapButtons();
 		open(popupSizeX, popupSizeY);
@@ -50,7 +51,7 @@ public class LevelSizePopupRefactored extends PopupRefactored {
 	@Override
 	protected void mapButtons() {
 		save.setOnAction(e -> {
-			controller.updateLevelSize(Integer.parseInt(sizeX.getText()), Integer.parseInt(sizeY.getText()));
+			window.updatePaneSize(Integer.parseInt(sizeX.getText()), Integer.parseInt(sizeY.getText()));
 			super.close();
 		});
 	}

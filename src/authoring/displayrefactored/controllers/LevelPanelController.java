@@ -18,7 +18,6 @@ public class LevelPanelController extends Controller {
 
 	Game game;
 	LevelPanelRefactored levelPanelRefactored;
-	GameViewWindowRefactored gameViewWindowRefactored;
 	
 	private static final String MANDATORY_BEHAVIOR_NAME = "MandatoryBehavior";
 	
@@ -33,9 +32,6 @@ public class LevelPanelController extends Controller {
 		levelPanelRefactored = new LevelPanelRefactored(this);
 	}
 	
-	public void setGameViewWindowRefactored(GameViewWindowRefactored gameViewWindowRefactored) {
-		this.gameViewWindowRefactored = gameViewWindowRefactored;
-	}
 
 	@Override
 	protected void setUpConnections() {
@@ -95,20 +91,12 @@ public class LevelPanelController extends Controller {
 		
 	}
 	
-	public void switchPanes(String window) {
-//		System.out.println(gameViewWindowRefactored == null);
-		gameViewWindowRefactored.switchPanes(window);
-	}
 	
 
 	@Override
 	protected void refreshView() {
 		// TODO Auto-generated method stub
 		game.notifyMyObservers();
-	}
-	
-	public void updateLevelSize(int x_size, int y_size) {
-		gameViewWindowRefactored.updatePaneSize(x_size, y_size);
 	}
 
 	public boolean checkUniqueName(String nameText) {

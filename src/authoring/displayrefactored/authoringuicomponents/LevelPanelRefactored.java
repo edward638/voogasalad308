@@ -31,11 +31,10 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 	private HBox myHBox;
 	private HBox levelChooser;
 	private ComboBox<GameScene> myLevelDropdown;
-	private ComboBox<String> myPanelSelector; 
+	
 	private Button myAddLevelButton;
 	private Button myAddGameObjectButton;
 	private Button myAddSceneBackgroundImageButton;
-	private Button myLevelSizeButton;
 	private ListView<GameObject> myLevelObjects;
 	private LevelPanelController controller;
 	private LevelsObservable levelsObservable = null;
@@ -50,21 +49,13 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 		myAddLevelButton = new Button(ResourceBundleManager.getAuthoring("AddSceneButton"));
 		myAddGameObjectButton = new Button(ResourceBundleManager.getAuthoring("AddGameObjectButton"));
 		myAddSceneBackgroundImageButton = new Button(ResourceBundleManager.getAuthoring("AddSceneBackgroundImageButton"));
-		myLevelSizeButton = new Button(ResourceBundleManager.getAuthoring("EditLevelSize"));
+		
 	}
 	
 	private void initializeComboBoxes() {
 		myLevelDropdown = new ComboBox<>();
 		myLevelDropdown.setPromptText(ResourceBundleManager.getAuthoring("SelectSceneDropDown"));
-		myPanelSelector = new ComboBox<>();
-		myPanelSelector.setPromptText(ResourceBundleManager.getAuthoring("ChoosePanel"));
-		myPanelSelector.getItems().add("Background");
-		myPanelSelector.getItems().add("Foreground");
-		myPanelSelector.valueProperty().addListener((o, old, neww) -> {
-
-			controller.switchPanes(neww);
-			
-		});
+		
 	}
 	
 	
@@ -100,9 +91,7 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 		
 			}//
 		});
-		myLevelSizeButton.setOnAction(e -> {
-			new LevelSizePopupRefactored(controller);
-		});
+		
 		
 		
 	}
@@ -119,9 +108,9 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 		levelChooser = new HBox();
 		myVBox = new VBox();
 		myHBox = new HBox();
-		levelChooser.getChildren().addAll(myAddLevelButton, myLevelDropdown, myPanelSelector);
+		levelChooser.getChildren().addAll(myAddLevelButton, myLevelDropdown);
 		myHBox.getChildren().addAll(myAddGameObjectButton, myAddSceneBackgroundImageButton);
-		myVBox.getChildren().addAll(levelChooser, myLevelObjects, myHBox, myLevelSizeButton);
+		myVBox.getChildren().addAll(levelChooser, myLevelObjects, myHBox);
 		borderPane.setCenter(myVBox);
 		
 	}

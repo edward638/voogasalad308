@@ -1,5 +1,6 @@
 package authoring.displayrefactored.authoringuicomponents;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -9,10 +10,15 @@ import authoring.GameViewObservable;
 import authoring.SceneBackground;
 import authoring.SceneBackgroundImage;
 import authoring.displayrefactored.controllers.GameViewWindowController;
+import authoring.displayrefactored.popups.LevelSizePopupRefactored;
 import data.propertiesFiles.ResourceBundleManager;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ComboBoxBase;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
@@ -27,8 +33,10 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	private Pane backgroundPane;
 	private SceneBackground sceneBackground;
 	private List<SceneBackgroundImage> list;
+	private ComboBox<String> myPanelSelector; 
 	private Pane foregroundPane;
 	private GameViewWindowController controller;
+	private Button myLevelSizeButton;
 	private GameViewObservable gameViewObservable = null;
 	
 	private static final int DEFAULTSIZEX = 1000;
@@ -48,6 +56,12 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 		BorderPane borderPane = getBorderPane();
 		stackPane = new StackPane();
 		list = new ArrayList<>();
+		HBox hBox = new HBox();
+		myPanelSelector = new ComboBox<>();
+		myLevelSizeButton = new Button(ResourceBundleManager.getAuthoring("EditLevelSize"));
+		initializeComboBoxes();
+		initializeButtons();
+		hBox.getChildren().addAll(myPanelSelector, myLevelSizeButton);
 		sceneBackground = new SceneBackground(ResourceBundleManager.getPosition("GAMEVIEWSIZE_X"), ResourceBundleManager.getPosition("GAMEVIEWSIZE_Y"));
 		backgroundPane = sceneBackground.getPane();
 		foregroundPane = new Pane();
@@ -58,6 +72,24 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 		stackPane.getChildren().add(foregroundPane);
 
 		borderPane.setCenter(scrollPane);
+		borderPane.setTop(hBox);
+	}
+
+	private void initializeButtons() {
+		// TODO Auto-generated method stub
+		myLevelSizeButton.setOnAction(e-> {
+			LevelSizePopupRefactored popup = new LevelSizePopupRefactored(this);
+		});
+	}
+
+	private void initializeComboBoxes() {
+		// TODO Auto-generated method stub
+		myPanelSelector.setPromptText(ResourceBundleManager.getAuthoring("ChoosePanel"));
+		myPanelSelector.getItems().add("Background");
+		myPanelSelector.getItems().add("Foreground");
+		myPanelSelector.valueProperty().addListener((o, old, key) -> {
+			switchPanes(key);
+		});
 	}
 
 	@Override

@@ -30,18 +30,16 @@ public class AuthoringEnvironmentRefactored {
 		pane.setStyle("-fx-border-color: black");
 		createControllers();
 		setUpControllers();
-		connectControllers();
 	}
 	
 	private void createControllers() {
 		controllerList = new ArrayList<>();
 		//TODO:
 		gameViewWindowController = new GameViewWindowController(game);
-		controllerList.add(gameViewWindowController);
 		levelPanelController = new LevelPanelController(game);
 		objectInfoPanelController = new ObjectInfoPanelController(game);
+		controllerList.add(gameViewWindowController);
 		controllerList.add(objectInfoPanelController);
-		levelPanelController.setGameViewWindowRefactored(gameViewWindowController.getGameViewWindowRefactored());
 		controllerList.add(levelPanelController);
 	}
 	
@@ -53,9 +51,7 @@ public class AuthoringEnvironmentRefactored {
 		}
 	}
 	
-	private void connectControllers() {
-		levelPanelController.setGameViewWindowRefactored(gameViewWindowController.getGameViewWindowRefactored());
-	}
+
 	
 	public Pane getGUI() {
 		return pane;	

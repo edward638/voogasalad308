@@ -200,4 +200,14 @@ public class Game extends Observable implements GameViewObservable, ObjectInfoOb
 		return myImageManager.getImage(imagePath + ".png");
 	}
 	
+	public boolean checkUniqueObjectNames(String name) {
+		boolean isUniqueName = true;
+		for (GameObject go : getGameObjects()){
+			if (go.getName().equals(name)) {
+				isUniqueName = false;
+			}
+		}
+		return isUniqueName;
+	}
+	
 }

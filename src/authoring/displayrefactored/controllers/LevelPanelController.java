@@ -10,6 +10,7 @@ import authoring.displayrefactored.AuthoringEnvironmentGUIRefactored;
 import authoring.displayrefactored.authoringuicomponents.GameViewWindowRefactored;
 import authoring.displayrefactored.authoringuicomponents.LevelPanelRefactored;
 import data.propertiesFiles.ResourceBundleManager;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
@@ -108,6 +109,11 @@ public class LevelPanelController extends Controller {
 	
 	public void updateLevelSize(int x_size, int y_size) {
 		gameViewWindowRefactored.updatePaneSize(x_size, y_size);
+	}
+
+	public boolean checkUniqueName(String nameText) {
+		boolean isUniqueName = game.checkUniqueObjectNames(nameText);
+		return isUniqueName;
 	}
 	
 }

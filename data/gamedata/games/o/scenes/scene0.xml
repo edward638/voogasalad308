@@ -2,8 +2,8 @@
   <myName>l</myName>
   <backgroundImageSerializables>
     <authoring.SceneBackgroundImageSerializable>
-      <xPos>299.5</xPos>
-      <yPos>-0.5</yPos>
+      <xPos>154.5</xPos>
+      <yPos>47.5</yPos>
       <xSize>200.0</xSize>
       <ySize>200.0</ySize>
       <imagePath>background0.png</imagePath>
@@ -39,67 +39,28 @@
   </backgroundImageSerializables>
   <myObjects>
     <authoring.GameObject>
-      <myName>af</myName>
-      <myBehaviors>
-        <authoring.AuthBehavior>
-          <myProperties>
-            <authoring.Property>
-              <myName>elementName</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="string">f</myValue>
-              <myName>imagePath</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myName>shapeDef</myName>
-              <myValueType>engine.behaviors.shapes.ShapeDefinition</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">-14.0</myValue>
-              <myName>xPos</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myName>ignoreTags</myName>
-              <myValueType>java.util.List</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">59.0</myValue>
-              <myName>yPos</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-          </myProperties>
-          <myName>engine.behaviors.MandatoryBehavior</myName>
-        </authoring.AuthBehavior>
-      </myBehaviors>
-      <myEvents/>
-      <myBehaviorFactory/>
-    </authoring.GameObject>
-    <authoring.GameObject>
       <myName>yuh</myName>
       <myBehaviors>
         <authoring.AuthBehavior>
           <myProperties>
             <authoring.Property>
-              <myName>ignoreTags</myName>
-              <myValueType>java.util.List</myValueType>
+              <myValue class="string">yuhimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myValue class="double">60.0</myValue>
-              <myName>yPos</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">40.0</myValue>
+              <myValue class="double">90.0</myValue>
               <myName>xPos</myName>
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myValue class="string">yuhimage</myValue>
-              <myName>imagePath</myName>
-              <myValueType>java.lang.String</myValueType>
+              <myValue class="double">500.0</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>ignoreTags</myName>
+              <myValueType>java.util.List</myValueType>
             </authoring.Property>
             <authoring.Property>
               <myName>shapeDef</myName>
@@ -118,5 +79,43 @@
     </authoring.GameObject>
   </myObjects>
   <myObjectNames class="sorted-set"/>
-  <currentGameObject reference="../myObjects/authoring.GameObject"/>
+  <currentGameObject>
+    <myName>af</myName>
+    <myBehaviors>
+      <authoring.AuthBehavior>
+        <myProperties>
+          <authoring.Property>
+            <myName>shapeDef</myName>
+            <myValueType>engine.behaviors.shapes.ShapeDefinition</myValueType>
+          </authoring.Property>
+          <authoring.Property>
+            <myValue class="string">f</myValue>
+            <myName>imagePath</myName>
+            <myValueType>java.lang.String</myValueType>
+          </authoring.Property>
+          <authoring.Property>
+            <myName>elementName</myName>
+            <myValueType>java.lang.String</myValueType>
+          </authoring.Property>
+          <authoring.Property>
+            <myName>ignoreTags</myName>
+            <myValueType>java.util.List</myValueType>
+          </authoring.Property>
+          <authoring.Property>
+            <myValue class="double">59.0</myValue>
+            <myName>yPos</myName>
+            <myValueType>java.lang.Double</myValueType>
+          </authoring.Property>
+          <authoring.Property>
+            <myValue class="double">-14.0</myValue>
+            <myName>xPos</myName>
+            <myValueType>java.lang.Double</myValueType>
+          </authoring.Property>
+        </myProperties>
+        <myName>engine.behaviors.MandatoryBehavior</myName>
+      </authoring.AuthBehavior>
+    </myBehaviors>
+    <myEvents/>
+    <myBehaviorFactory/>
+  </currentGameObject>
 </authoring.GameScene>

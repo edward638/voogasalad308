@@ -128,6 +128,9 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 				imageView.setOpacity(0.25);
 				imageView.setMouseTransparent(true);
 			}
+			for (SceneBackgroundImage image: list) {
+				image.setOpacity(1.0);
+			}
 			foregroundPane.setMouseTransparent(true);
 		}
 		
@@ -135,6 +138,9 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 				for (ImageView imageView: objectImageViews) {
 					imageView.setOpacity(1);
 					imageView.setMouseTransparent(false);
+				}
+				for (SceneBackgroundImage image: list) {
+					image.setOpacity(0.25);
 				}
 				foregroundPane.setMouseTransparent(false);
 			}

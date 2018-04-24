@@ -71,6 +71,7 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 	private void setActions() {
 		myAddLevelButton.setOnAction(e -> {
 			NewLevelPopupRefactored popupRefactored = new NewLevelPopupRefactored(controller);
+			
 		});
 		myAddGameObjectButton.setOnAction(e -> {
 			NewGameObjectPopupRefactored popupRefactored = new NewGameObjectPopupRefactored(controller);
@@ -125,8 +126,15 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 		levelsObservable = (LevelsObservable) o;
 		updateLevelObjects(levelsObservable.getGameObjects());
 		updateLevelDropdown1(levelsObservable.getScenes());
+		updateLevelComboBox(levelsObservable.getCurrentSceneName());
+		
 	}
 	
+	private void updateLevelComboBox(String currentSceneName) {
+		myLevelDropdown.setPromptText(currentSceneName);
+		
+	}
+
 	private void updateLevelObjects(List<GameObject> list) {
 //		System.out.println("There should be " + list.size() + " objects in this list.");
 		

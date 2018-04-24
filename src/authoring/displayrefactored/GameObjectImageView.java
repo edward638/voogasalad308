@@ -1,6 +1,5 @@
 package authoring.displayrefactored;
 
-import com.sun.org.apache.bcel.internal.generic.GOTO;
 
 import authoring.AuthBehavior;
 import authoring.GameObject;
@@ -45,11 +44,12 @@ public class GameObjectImageView {
 	private void onMouseReleased() {
 		
 		AuthBehavior mandatory = gameObject.getMandatoryBehavior();
-		mandatory.getProperty("xPos").setValue(translateX);
+		mandatory.getProperty("xPos").setValue(myImage.localToParent(myImage.getBoundsInLocal()).getMinX());
 		
-		System.out.println("translateX " + translateX + "translateY " + translateY);
-		mandatory.getProperty("yPos").setValue(translateY);
+		mandatory.getProperty("yPos").setValue(myImage.localToParent(myImage.getBoundsInLocal()).getMinY());
 		
+		System.out.println("Onmousereleased " + mandatory.getProperty("xPos"));
+		System.out.println("Onmousereleased " + mandatory.getProperty("yPos"));
 		
 		viewRefreshInterface.notifyObjectInfoObservers(gameObject);
 		

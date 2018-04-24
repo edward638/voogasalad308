@@ -181,6 +181,7 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 		xposCol.setOnEditCommit((CellEditEvent<ObjectCoordinatesInsertion, String> t) -> {
 			((ObjectCoordinatesInsertion) t.getTableView().getItems().get(t.getTablePosition().getRow()))
 					.setXpos(Double.parseDouble(t.getNewValue()));
+			System.out.println("setupXposCol() " + Double.parseDouble(t.getNewValue()));
 			controller.updatePositions();
 		});
 
@@ -196,6 +197,7 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 		yposCol.setOnEditCommit((CellEditEvent<ObjectCoordinatesInsertion, String> t) -> {
 			((ObjectCoordinatesInsertion) t.getTableView().getItems().get(t.getTablePosition().getRow()))
 					.setYpos(Double.parseDouble(t.getNewValue()));
+			System.out.println("setupYposCol() " + Double.parseDouble(t.getNewValue()));
 			controller.updatePositions();
 		});
 	}

@@ -5,7 +5,6 @@ import java.util.List;
 
 import data.GameLoader;
 import engine.behaviors.MainCharacter;
-import engine.events.elementevents.ElementEvent;
 import engine.events.elementevents.KeyInputEvent;
 import engine.events.elementevents.MouseInputEvent;
 import engine.events.elementevents.TimeEvent;
@@ -13,14 +12,12 @@ import engine.tests.ModelGameState;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
-import javafx.scene.ParallelCamera;
 import javafx.scene.SubScene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
-public class Engine {
+public class Engine implements EngineInterface{
 	public static final int FRAMES_PER_SECOND = 60;
 	public static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
@@ -28,21 +25,34 @@ public class Engine {
     public static final double SUBSCENE_HEIGHT = 590;
 	
 	private Timeline animation;
-	
 	private SubScene engineSubScene;
 	private Group subSceneRoot = new Group();
 	private GameState gameState;
 	private DisplayState displayState;
 	private EventManager2 eventManager;
-	
+	private AudioManager audioManager;
 	private String musicPath = "data/music/WiiShopChannelMusic.mp3";
-	
 	private AudioPlayer audioPlayer;
 	
+	
+	/**
+	 * NEW way to instantiate engine with a MetaData object
+	 * @param gamePath
+	 */
+	public Engine(GameMetaData metaData) {
+		gameState = new GameState();
+		gameState.setState(metaData.getCurrentLevel());
+		displayState = new DisplayState(gameState, metaData.getGameName());
+		eventManager = new EventManager2(gameState);
+		audioPlayer = new AudioPlayer(musicPath, 0);
+		startAnimation();
+	}
+	
+	/**
+	 * OBSOLETE--do not use. instead, use Engine(GameMetaData metaData)
+	 * @param gamePath
+	 */
 	public Engine(String gamePath) {
-		//EngineRunner engineRunner = new EngineRunner(gamePath);
-		GameLoader loader = new GameLoader(gamePath);
-		
 		ModelGameState modelGameState = new ModelGameState(); 
 		gameState = modelGameState.getState();
 		displayState = modelGameState.getDisplay();
@@ -51,18 +61,26 @@ public class Engine {
 		startAnimation();
 	}
 	
+	/**
+	 * OBSOLETE--do not use. instead, use Engine(GameMetaData metaData)
+	 * @param gamePath
+	 */
 	public Engine(GameState g) {
 		gameState = g;
-		displayState = new DisplayState("enginetestmario", g);
+		displayState = new DisplayState(g);
 		eventManager = new EventManager2(gameState);
-		audioPlayer = new AudioPlayer(musicPath);
+		audioManager = new AudioManager(1);
+		
+		audioPlayer = audioManager.newAudioPlayer(musicPath);
 		startAnimation();
 	}
 	
+	@Override
 	public void close() {
 		audioPlayer.stop();
 	}
 	
+	@Override
 	public SubScene getDisplay() {
 		engineSubScene = new SubScene(subSceneRoot, SUBSCENE_WIDTH, SUBSCENE_HEIGHT);
 		return engineSubScene;
@@ -77,10 +95,12 @@ public class Engine {
         animation.play();
     }
 
+	@Override
 	public void handleKeyInput(KeyCode code) {
 		eventManager.processElementEvent(new KeyInputEvent(code));
 	}
 	
+	@Override
 	public void handleMouseInput(double x, double y) {
 		eventManager.processElementEvent(new MouseInputEvent(x,y));
 	}
@@ -88,10 +108,10 @@ public class Engine {
 	public void timeStep (double elapsedTime) {
 		double gameSteps = elapsedTime * gameState.getGameSpeed();
 		gameState.incrementGameTime(gameSteps);
-	    	eventManager.processElementEvent(new TimeEvent(gameSteps));
-	    	displayState.updateImageElements(scrollingAroundMainCharacter(gameState));
-	    	displayState.update(gameState);
-	    	updateDisplay(displayState.newElements, displayState.removeElements);
+    	eventManager.processElementEvent(new TimeEvent(gameSteps));
+    	displayState.updateImageElements(scrollingAroundMainCharacter(gameState));
+    	displayState.update(gameState);
+    	updateDisplay(displayState.newElements, displayState.removeElements);
     }
 
 	protected void updateDisplay(List<ImageElement> newElements, List<ImageElement> removeElements) {
@@ -116,6 +136,23 @@ public class Engine {
 			}
 		}
 		return offset;
+	}
+
+	@Override
+	public void setVolume(double newVolume) {
+		audioManager.setVolume(newVolume);
+	}
+
+	@Override
+	public void pause() {
+		animation.pause();
+		
+	}
+
+	@Override
+	public void play() {
+		animation.play();
+		
 	}
 	
 	

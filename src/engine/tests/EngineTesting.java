@@ -1,6 +1,11 @@
 package engine.tests;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import engine.Engine;
+import engine.GameMetaData;
+import engine.GameState;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -25,6 +30,7 @@ public class EngineTesting extends Application {
 	//private Timeline animation;
 	
 	private Engine gameEngine;
+	private GameMetaData modelGameMetaData;
 
 	public static void main(String[] args) {
 		Application.launch(args);
@@ -32,7 +38,10 @@ public class EngineTesting extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		gameEngine = new Engine(new ModelGameState2().getState());
+		List<GameState> levels = new ArrayList<GameState>();
+		levels.add(new ModelGameState2().getState());
+		modelGameMetaData = new GameMetaData(levels , 0, new ModelGameState3().getState(), "enginetestmario");
+		gameEngine = new Engine(modelGameMetaData);
 		stage.setScene(setupLevel(900, 590, BACKGROUND));
 		stage.show();
 		startAnimation();

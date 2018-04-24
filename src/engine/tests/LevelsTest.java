@@ -33,11 +33,12 @@ import engine.events.elementevents.KeyInputEvent;
 import engine.events.elementevents.TimeEvent;
 import javafx.scene.input.KeyCode;
 
-public class ModelGameState {
+public class LevelsTest {
 	private GameState state;
 	private DisplayState display;
 	
-	public ModelGameState() {
+	public LevelsTest() {
+		GameMetaData metaData = new GameMetaData();
 		state = new GameState();
 		display = new DisplayState(state);
 		

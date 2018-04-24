@@ -120,6 +120,22 @@ public class GameElement {
 		return el.getName();
 	}
 	
+	
+	/*
+	 * Defines the method we will use to retrieve the position of a game element. Should be done according the 
+	 * MandatoryBehavior since every element in the game will implement that
+	 */
+	public List<Double> getPosition() {
+		List<Double> position = new ArrayList<Double>();
+		position.add(((MandatoryBehavior)(getBehavior(MandatoryBehavior.class))).getX());
+		position.add(((MandatoryBehavior)(getBehavior(MandatoryBehavior.class))).getY());
+		return position;
+	}
+	
+	public void setPosition(List<Double> position) {
+		((MandatoryBehavior)(getBehavior(MandatoryBehavior.class))).setPosition(position.get(0), position.get(1));
+	}
+	
 	/*
 	 * Easy Printing
 	 * (non-Javadoc)

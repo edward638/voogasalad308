@@ -8,13 +8,26 @@ import javafx.scene.shape.Shape;
 public class RectangleShape extends ShapeDefinition{
 	private Double width;
 	private Double height;
-	public RectangleShape(Double w, Double h) {
-		width = w;
-		height = h;
+	private Double hitBoxWidth;
+	private Double hitBoxHeight;
+	public RectangleShape(Double width, Double height) {
+		this.width = width;
+		this.height = height;
+		hitBoxWidth = width;
+		hitBoxHeight = height;
 	}
+	
+	public RectangleShape(Double width, Double height, Double hitBoxWidth, Double hitBoxHeight) {
+		this.width = width;
+		this.height = height;
+		this.hitBoxWidth = hitBoxWidth;
+		this.hitBoxHeight = hitBoxHeight;
+	}
+	
+	
 	@Override
 	public Shape getShape(MandatoryBehavior mandatory) {
-		return new Rectangle(mandatory.getX(), mandatory.getY(), width, height);
+		return new Rectangle(mandatory.getX(), mandatory.getY(), hitBoxWidth, hitBoxHeight);
 		//return new Ellipse(mandatory.getX(), mandatory.getY(), width/2, height/2);
 	}
 	

@@ -1,7 +1,9 @@
 package engine.behaviors;
 
 import engine.GameElement;
+import engine.events.gameevents.GameOverEvent;
 import engine.events.gameevents.RemoveGameElementEvent;
+import javafx.scene.control.Alert;
 
 public class Killable extends Behavior{
 	private Double health;
@@ -34,6 +36,10 @@ public class Killable extends Behavior{
 		if (health < 0) {
 			System.out.println("health less than 0");
 			getParent().addGameEvent(new RemoveGameElementEvent(getParent()));
+			if (getParent().hasBehavior(MainCharacter.class)) {
+				System.out.println("The Game has ended");
+				getParent().addGameEvent(new GameOverEvent(getParent()));
+			}
 		}
 	}
 	

@@ -131,12 +131,11 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 
 		gameObjects = list;
 
-		objectName.setText("Name: " + current.getName() + "   Image: "
-				+ current.getMandatoryBehavior().getProperty("imagePath").getValue());
+		objectName.setText("Name: " + current.getName());
 
 		imageView = new ImageView(image);
 		imageView.setPreserveRatio(true);
-		imageView.setFitWidth(100);
+		imageView.setFitWidth(200);
 
 		gameObjectCoordinates = new TableView<>();
 

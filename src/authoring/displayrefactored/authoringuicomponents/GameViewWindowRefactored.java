@@ -71,6 +71,7 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	private void updateForeground(List<ImageView> list) {
 		foregroundPane.getChildren().clear();
 		foregroundPane.getChildren().addAll(list);
+		objectImageViews = list;
 	}
 	
 	private void updateBackground(List<SceneBackgroundImage> list) {
@@ -88,20 +89,25 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	public void switchPanes(String key) {
 		if (key.equals("Background")) {
 			for (ImageView imageView: objectImageViews) {
-				imageView.setOpacity(.1);
+				
+				imageView.setOpacity(0.25);
+		
 				imageView.setMouseTransparent(true);
 			}
 			foregroundPane.setMouseTransparent(true);
 			
 //			stackPane.getChildren().clear();
 //			stackPane.getChildren().add(backgroundPane);
-		} 
+		}
+		
 		if (key.equals("Foreground")) {
 //			stackPane.getChildren().clear();
 //			stackPane.getChildren().add(backgroundPane);
 //			stackPane.getChildren().add(foregroundPane);
 				for (ImageView imageView: objectImageViews) {
+			
 					imageView.setOpacity(1);
+
 					imageView.setMouseTransparent(false);
 				}
 				foregroundPane.setMouseTransparent(false);

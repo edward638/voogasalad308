@@ -2,7 +2,6 @@ package authoring.displayrefactored.popups;
 
 import java.io.File;
 
-import GUIBoxes.ErrorBox;
 import authoring.display.buttonevents.ChooseImageEvent;
 import authoring.displayrefactored.controllers.LevelPanelController;
 import data.propertiesFiles.ResourceBundleManager;
@@ -60,16 +59,12 @@ public class NewGameObjectPopupRefactored extends PopupRefactored {
 		yText = new TextField();
 		yPosValues.getChildren().addAll(new Label("Y Position: "), yText);
 
-		HBox imageInfo = new HBox(DEFAULT_SPACING);
-		imageText = new TextField();
-
 		chooseImageButton = new Button(ResourceBundleManager.getAuthoring("ChooseImageButton"));
 
-		imageInfo.getChildren().addAll(chooseImageButton, new Label("Image name: "), imageText);
 
 		saveButton = new Button(ResourceBundleManager.getAuthoring("Save"));
 
-		myVBox.getChildren().addAll(nameObject, xPosValues, yPosValues, imageInfo, saveButton);
+		myVBox.getChildren().addAll(nameObject, xPosValues, yPosValues, chooseImageButton, saveButton);
 
 		BorderPane borderPane = getPane();
 		borderPane.setCenter(myVBox);
@@ -98,10 +93,11 @@ public class NewGameObjectPopupRefactored extends PopupRefactored {
 			// System.out.println("ADDING TO GAMEOBJECT NAME: " + nameText.getText());
 			if (controller.checkUniqueName(nameText.getText())) {
 				controller.addGameObject(nameText.getText(), Double.parseDouble(xText.getText()),
-						Double.parseDouble(yText.getText()), imageText.getText(), image);
+						Double.parseDouble(yText.getText()), (nameText.getText() + "image"), image);
 				close();
 
 			} else {
+				
 				new ErrorBox("Duplicate Object Name", "Please Change the Name of Your Object");
 
 			}

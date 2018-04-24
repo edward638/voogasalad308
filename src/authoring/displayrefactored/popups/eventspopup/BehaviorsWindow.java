@@ -1,27 +1,31 @@
-package authoring.display.eventspopup;
+package authoring.displayrefactored.popups.eventspopup;
+
+import java.util.List;
 
 import authoring.AuthBehavior;
-import authoring.Game;
 import authoring.GameObject;
+import authoring.displayrefactored.controllers.EventsPopupController;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+/**
+ * @author August Ning
+ * VBox for listing behaviors of an game object
+ */
 public class BehaviorsWindow extends VBox {
 	
-	private Game game;
-	private GameObject go;
-	private EventsPopUpController epuc;
+	private List<GameObject> gos;
+	private EventsPopupController epuc;
 	private AuthBehavior currentBehavior;
 	private ListView<AuthBehavior> behaviors;
 	
-	public BehaviorsWindow(EventsPopUpController myEPUC, Game myGame, GameObject myGo) {
+	public BehaviorsWindow(EventsPopupController myEPUC, List<GameObject> myGos) {
 		epuc = myEPUC;
-		game = myGame;
-		go = myGo;
+		gos = myGos;
 		behaviors = new ListView<>();
+		behaviors.setMinHeight(200);
 		currentBehavior = null;
 		createVBox();
 	}
@@ -29,8 +33,8 @@ public class BehaviorsWindow extends VBox {
 	public void createVBox() {
 		this.getChildren().clear();
 		this.setPadding(new Insets(10));
-	    this.setSpacing(8);
-	    this.setPrefWidth(200);
+	    this.setSpacing(10);
+	    this.setMinWidth(200);
 	    Text title = new Text("Behaviors");
 	    this.getChildren().add(title);
 	    createListView();
@@ -43,7 +47,7 @@ public class BehaviorsWindow extends VBox {
 			return; 
 		}
 		behaviors.getItems().clear();
-		behaviors.getItems().addAll(go.getBehaviors());
+		behaviors.getItems().addAll(gos.get(0).getBehaviors());
 		behaviors.setOnMouseClicked(e -> mouseClicked(behaviors.getSelectionModel().getSelectedItem()));
 		this.getChildren().add(behaviors);
 	}

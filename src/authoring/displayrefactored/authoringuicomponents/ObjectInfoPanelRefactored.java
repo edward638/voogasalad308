@@ -2,28 +2,23 @@ package authoring.displayrefactored.authoringuicomponents;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
 import authoring.GameObject;
 import authoring.ObjectInfoObservable;
 import authoring.ObjectInfoObserver;
-import authoring.Property;
 import authoring.displayrefactored.controllers.ObjectInfoPanelController;
+import authoring.displayrefactored.popups.EventsPopupRefactored;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TableColumn.CellEditEvent;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -105,7 +100,7 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 		});
 
 		editEventsButton.setOnAction(e -> {
-
+			EventsPopupRefactored epu = new EventsPopupRefactored(list);
 		});
 
 		duplicateButton.setOnAction(e -> {

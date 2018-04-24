@@ -1,12 +1,13 @@
-package authoring.display.eventspopup;
+package authoring.displayrefactored.popups.eventspopup;
 
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
 import authoring.EngineClassRetriever;
 import authoring.Event;
-import authoring.Game;
 import authoring.GameObject;
+import authoring.displayrefactored.controllers.EventsPopupController;
 import engine.events.elementevents.ElementEvent;
 import javafx.geometry.Insets;
 import javafx.scene.control.ComboBox;
@@ -16,7 +17,7 @@ import javafx.scene.text.Text;
 
 /**
  * 
- * @author Summer
+ * @author Summer and August
  *
  */
 public class EventsWindow extends VBox {
@@ -24,18 +25,19 @@ public class EventsWindow extends VBox {
 	private final Class<?> EVENTS_SUPERCLASS = ElementEvent.class;
 	private final String EVENTS_PACKAGE = "engine.events.elementevents";
 	
-	private GameObject go;
+	private List<GameObject> gos;
 	private ComboBox<String> possibleEvents;
 	private EngineClassRetriever classRetriever;
 	private ListView<Event> myEvents;
 	private Event currentEvent;
-	private EventsPopUpController epuc;
+	private EventsPopupController epuc;
 	
-	public EventsWindow(EventsPopUpController myEPUC, Game game, GameObject currObject) {
-		go = currObject;
+	public EventsWindow(EventsPopupController myEPUC, List<GameObject> myGos) {
+		gos = myGos;
 		classRetriever = new EngineClassRetriever();
 		epuc = myEPUC;
 		myEvents = new ListView<>();
+		myEvents.setMinHeight(200);
 		currentEvent = null;
 		createVBox();
 	}
@@ -43,7 +45,7 @@ public class EventsWindow extends VBox {
 	private void createVBox() {
 		this.setPadding(new Insets(10));
 	    this.setSpacing(8);
-	    this.setPrefWidth(200);
+	    this.setMinWidth(200);
 	    Text title = new Text("Events");
 	    this.getChildren().add(title);
 	    this.getChildren().addAll(makeEventDropdown(), makeEventList());
@@ -67,13 +69,15 @@ public class EventsWindow extends VBox {
 	private void comboBoxAction(String eventName) {
 		currentEvent = new Event();
 		currentEvent.setEventType(eventName);
-		go.addEvent(currentEvent);
+		for (GameObject go : gos) {
+			go.addEvent(currentEvent);
+		}
 		epuc.updateFromEvent(currentEvent);
 	}
 
 	private ListView<Event> makeEventList(){
 		myEvents.getItems().clear();
-		myEvents.getItems().setAll(go.getEvents());
+		myEvents.getItems().setAll(gos.get(0).getEvents());
 		return myEvents;
 	}
 	

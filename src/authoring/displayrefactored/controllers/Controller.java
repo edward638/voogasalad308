@@ -1,7 +1,5 @@
 package authoring.displayrefactored.controllers;
 
-import authoring.displayrefactored.AuthoringEnvironmentGUIRefactored;
-import display.buttons.GUIButton;
 import javafx.scene.layout.Pane;
 
 public abstract class Controller {

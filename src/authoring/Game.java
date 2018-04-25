@@ -2,6 +2,7 @@ package authoring;
 
 import data.GameInitializer;
 import data.ImageManager;
+import engine.behaviors.Behavior;
 import javafx.beans.InvalidationListener;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

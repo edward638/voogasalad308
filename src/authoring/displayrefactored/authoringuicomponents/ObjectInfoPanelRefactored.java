@@ -103,7 +103,7 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 		});
 
 		editEventsButton.setOnAction(e -> {
-			EventsPopupRefactored epu = new EventsPopupRefactored(list);
+			new EventsPopupRefactored(list, controller.getAllGameObjects());
 		});
 
 		duplicateButton.setOnAction(e -> {

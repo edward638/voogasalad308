@@ -96,5 +96,8 @@ public class ObjectInfoPanelController extends Controller {
 	public void duplicateGameObject() {
 //		game.duplicateGameObject();
 	}
+	public List<GameObject> getAllGameObjects() {
+		return game.getGameObjects();
+	}
 
 }

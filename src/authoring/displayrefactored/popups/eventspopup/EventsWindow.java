@@ -58,9 +58,10 @@ public class EventsWindow extends VBox {
 		retrieved = classRetriever.getClasses(EVENTS_SUPERCLASS, EVENTS_PACKAGE);
 		retrieved.forEach(c -> {
 							String[] holder = c.toString().split(" ");
-							String[] name = holder[holder.length - 1].split("\\.");
-							String use = name[name.length-1];
-							possibleEvents.getItems().add(use);
+							String fullName = holder[holder.length-1];
+//							String[] name = holder[holder.length - 1].split("\\.");
+//							String use = name[name.length-1];
+							possibleEvents.getItems().add(fullName);
 		});
 		possibleEvents.setOnAction(e -> comboBoxAction(possibleEvents.getValue()));
 		return possibleEvents;
@@ -72,7 +73,7 @@ public class EventsWindow extends VBox {
 		for (GameObject go : gos) {
 			go.addEvent(currentEvent);
 		}
-		epuc.updateFromEvent(currentEvent);
+		epuc.updateFromEvent();
 	}
 
 	private ListView<Event> makeEventList(){

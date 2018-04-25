@@ -3,13 +3,13 @@ package engine;
 import java.util.List;
 import java.util.Map;
 
-public class GameMetaData {
+public class GameMetaData implements GameMetaDataInterface {
 	List<GameState> levels;
 	int currentLevelNumber;
 	GameState currentLevel;
 	String gameName;
 	
-	//Player myPlayerObject;
+	//PlayerUpdater playerUpdater;
 	
 	public GameMetaData(List<GameState> levels, int currentLevelNumber, GameState currentLevel, String gameName) {
 		this.levels = levels;
@@ -18,10 +18,10 @@ public class GameMetaData {
 		this.gameName = gameName;
 	}
 	
-	/*public void setPlayerReferences(Player p) {
-		myPlayerObject = p;
+	public void setPlayerUpdater(PlayerUpdater playerUpdater) {
+		this.playerUpdater = playerUpdater;
 	}
-	
+	/*
 	public void updateMainCharacterInfo(Map<String, Object> properties) {
 		properties.put("Level", currentLevelNumber);
 		myPlayerObject.updateHUD(properties);
@@ -41,5 +41,9 @@ public class GameMetaData {
 	
 	public GameState getCurrentLevel() {
 		return currentLevel;
+	}
+	
+	public int getCurrentLevelNumber() {
+		return currentLevelNumber;
 	}
 }

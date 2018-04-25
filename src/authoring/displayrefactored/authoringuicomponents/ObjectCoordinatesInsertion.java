@@ -28,7 +28,7 @@ public class ObjectCoordinatesInsertion {
 		
 		this.xPos = Double.toString(xPos);
 		gameObject.getMandatoryBehavior().getProperty("xPos").setValue(xPos);
-		System.out.println("setXPos " + gameObject.getMandatoryBehavior().getProperty("xPos"));
+	
 	}
 	
 	public void setYpos(double yPos) {

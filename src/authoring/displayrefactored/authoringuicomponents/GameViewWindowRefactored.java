@@ -6,9 +6,14 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import authoring.AuthBehavior;
+import authoring.GameObject;
 import authoring.GameViewObservable;
+import authoring.Property;
 import authoring.SceneBackground;
 import authoring.SceneBackgroundImage;
+import authoring.SceneBackgroundImageSerializable;
+import authoring.displayrefactored.GameObjectImageView;
 import authoring.displayrefactored.controllers.GameViewWindowController;
 import authoring.displayrefactored.popups.LevelSizePopupRefactored;
 import data.propertiesFiles.ResourceBundleManager;
@@ -22,8 +27,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
+
+/**
+ * 
+ * @author Edward Zhuang
+ * GameViewWindow which provides main visual representation for created game objects and scene background.
+ */
 public class GameViewWindowRefactored extends AuthoringUIComponentRefactored implements Observer {
-	
 	
 	private int sizeX;
 	private int sizeY;
@@ -37,22 +47,21 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	private Pane foregroundPane;
 	private GameViewWindowController controller;
 	private Button myLevelSizeButton;
-	private GameViewObservable gameViewObservable = null;
+	private GameViewObservable gameViewObservable;
 	
 	private static final int DEFAULTSIZEX = 1000;
 	private static final int DEFAULTSIZEY = 1000;
 	
 	
 	public GameViewWindowRefactored(GameViewWindowController controller) {
-		// TODO Auto-generated constructor stub
 		this.controller = controller;
 		objectImageViews = new ArrayList<>();
 		updatePaneSize(DEFAULTSIZEX, DEFAULTSIZEY);
+		System.out.println("constructor");
 	}
 	
 	@Override
 	protected void GenerateComponent() {
-		// TODO Auto-generated method stub
 		BorderPane borderPane = getBorderPane();
 		stackPane = new StackPane();
 		list = new ArrayList<>();
@@ -76,14 +85,12 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	}
 
 	private void initializeButtons() {
-		// TODO Auto-generated method stub
 		myLevelSizeButton.setOnAction(e-> {
 			LevelSizePopupRefactored popup = new LevelSizePopupRefactored(this);
 		});
 	}
 
 	private void initializeComboBoxes() {
-		// TODO Auto-generated method stub
 		myPanelSelector.setPromptText(ResourceBundleManager.getAuthoring("ChoosePanel"));
 		myPanelSelector.getItems().add("Background");
 		myPanelSelector.getItems().add("Foreground");
@@ -92,71 +99,100 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 		});
 	}
 
+	/**
+	 * Called by Game when model is updated, updates the game window view
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
 		gameViewObservable = (GameViewObservable) o;
-		updateForeground(gameViewObservable.getImageViews());
-		updateBackground(gameViewObservable.getBackgroundImages());
+		updateForeground(gameViewObservable.getMyObjects());
+		updateBackground(gameViewObservable.getBackgroundImageSerializables());
 	}
 	
-	private void updateForeground(List<ImageView> list) {
+	private void updateForeground(List<GameObject> gameObjects) {
 		foregroundPane.getChildren().clear();
+		
+		List<ImageView> list = new ArrayList<>();
+		
+		for (GameObject go: gameObjects) {
+			ImageView imageView = toImageView(go);
+			GameObjectImageView draggableImageView = new GameObjectImageView(imageView, go, controller);
+			list.add(draggableImageView.getMyImage());
+		}
+		
 		foregroundPane.getChildren().addAll(list);
 		objectImageViews = list;
 	}
 	
-	private void updateBackground(List<SceneBackgroundImage> list) {
-		this.list = list;
-		System.out.println(list);
-		System.out.println(list.size());
+	private ImageView toImageView(GameObject go) {
+		AuthBehavior mandatoryBehavior = go.getBehavior("MandatoryBehavior");	
+		Property xPositionProperty = mandatoryBehavior.getProperty("xPos");
+		Property yPositionProperty = mandatoryBehavior.getProperty("yPos");
+		Property imagePathProperty = mandatoryBehavior.getProperty("imagePath");
+		Double xPosition = (Double) xPositionProperty.getValue();
+		Double yPosition = (Double) yPositionProperty.getValue();			
+		String imagePath = (String) imagePathProperty.getValue();
+		ImageView imageView =new ImageView(controller.getImage(imagePath + ".png"));
+		imageView.setLayoutX(xPosition);
+		imageView.setLayoutY(yPosition);
+		imageView.setPreserveRatio(true);
+		imageView.setFitHeight(200);
+		
+		return imageView;
+	}
+	
+	private void updateBackground(List<SceneBackgroundImageSerializable> serializables) {
+		
+		list = new ArrayList<>();
+		
+		for (SceneBackgroundImageSerializable s: serializables) {
+			list.add( controller.getBackgroundImage(s));
+		}
+		
 		sceneBackground.clearPane();
 		for (SceneBackgroundImage s: list) {
 			sceneBackground.addImage(s);
 		}
-
-		
 	}
 	
+	/**
+	 * Switches between foreground and background editing, based on which option is selected in Combobox
+	 * @param key
+	 */
 	public void switchPanes(String key) {
 		if (key.equals("Background")) {
 			for (ImageView imageView: objectImageViews) {
-				
 				imageView.setOpacity(0.25);
-		
 				imageView.setMouseTransparent(true);
 			}
+			for (SceneBackgroundImage image: list) {
+				image.setOpacity(1.0);
+			}
 			foregroundPane.setMouseTransparent(true);
-			
-//			stackPane.getChildren().clear();
-//			stackPane.getChildren().add(backgroundPane);
 		}
 		
 		if (key.equals("Foreground")) {
-//			stackPane.getChildren().clear();
-//			stackPane.getChildren().add(backgroundPane);
-//			stackPane.getChildren().add(foregroundPane);
 				for (ImageView imageView: objectImageViews) {
-			
 					imageView.setOpacity(1);
-
 					imageView.setMouseTransparent(false);
+				}
+				for (SceneBackgroundImage image: list) {
+					image.setOpacity(0.25);
 				}
 				foregroundPane.setMouseTransparent(false);
 			}
 		}
 	
-	
+	/**
+	 * Resizes the panes of the gameviewwindow, called by level size popup
+	 * @param x_size new window size x
+	 * @param y_size new window size y
+	 */
 	public void updatePaneSize(int x_size, int y_size) {
 		sizeX = x_size;
 		sizeY = y_size;
-		
 		backgroundPane.setMinSize(sizeX, sizeY);
 		foregroundPane.setMinSize(sizeX, sizeY);
 		sceneBackground.setRectangle(sizeX, sizeY);
-		
-		System.out.println("From gameviewwindow refactored: the size should have changed");
 	}
-	
-	
 }

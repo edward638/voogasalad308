@@ -48,8 +48,8 @@ public class GameObjectImageView {
 		
 		mandatory.getProperty("yPos").setValue(myImage.localToParent(myImage.getBoundsInLocal()).getMinY());
 		
-		System.out.println("Onmousereleased " + mandatory.getProperty("xPos"));
-		System.out.println("Onmousereleased " + mandatory.getProperty("yPos"));
+//		System.out.println("Onmousereleased " + mandatory.getProperty("xPos"));
+//		System.out.println("Onmousereleased " + mandatory.getProperty("yPos"));
 		
 		viewRefreshInterface.notifyObjectInfoObservers(gameObject);
 		

@@ -2,18 +2,16 @@ package authoring;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 import java.util.Set;
 import java.util.TreeSet;
-
-import data.propertiesFiles.ResourceBundleManager;
-import javafx.scene.image.Image;
 
 /** 
  * GameScene is the background image of each level
  * 
  * @author: Summer
  **/
-public class GameScene {
+public class GameScene extends Observable implements GameViewObservable, ObjectInfoObservable, GameSceneSerializableCreator {
 	
 	//has a list of objects
 	private String myName;
@@ -29,11 +27,25 @@ public class GameScene {
 		myObjectNames = new TreeSet<>();
 		backgroundImageSerializables = new ArrayList<>();
 		
-//		System.out.println("New GameScene made!");
+		System.out.println("New GameScene made!");
+	}
+	
+	public GameScene(GameSceneSerializable scene) {
+		myName = scene.getName();
+		myObjects = scene.getMyObjects();
+		backgroundImageSerializables = scene.getBackgroundImageSerializables();
+		currentGameObject = scene.getCurrentGameObject();
+		myObjectNames = scene.getMyObjectNames();
+		
+	}
+	
+	public Set<String> getMyObjectNames(){
+		return myObjectNames;
 	}
 	
 	public void addObject(GameObject toAdd) {
 		myObjects.add(toAdd);
+		notifyMyObservers();
 	}
 	
 	public List<GameObject> getMyObjects(){
@@ -47,6 +59,7 @@ public class GameScene {
 	public void setCurrentGameObject(GameObject selectedGameObject) {
 		currentGameObject = selectedGameObject;
 //		System.out.println("Current game object is: " + currentGameObject);
+		notifyMyObservers();
 	}
 
 	public String getName() {
@@ -61,13 +74,55 @@ public class GameScene {
 		return myName;
 	}
 	
-
-	public List<SceneBackgroundImageSerializable> getBackgroundImageSerializables() {
-		return backgroundImageSerializables;
-	}
-	
 	public void addBackgroundImageSerializable(SceneBackgroundImageSerializable s) {
 		backgroundImageSerializables.add(s);
+		notifyMyObservers();
+	}
+	
+	public boolean checkUniqueObjectNames(String name) {
+		boolean isUniqueName = true;
+		for (GameObject go : myObjects){
+			if (go.getName().equals(name)) {
+				isUniqueName = false;
+			}
+		}
+		return isUniqueName;
+	}
+	
+	@Override
+	public List<GameObject> getInstances() {
+		// TODO Auto-generated method stub
+		List<GameObject> list = new ArrayList<>();
+		GameObject gameObject = getCurrentGameObject();
+		String name = gameObject.getName();
+		for (GameObject go: myObjects) {
+			if (name.equals(go.getName())) {
+				list.add(go);
+			}		
+		}
+		return list;
+	}
+
+	
+	public void notifyMyObservers() {
+		setChanged();
+		notifyObservers();
+	}
+
+	@Override
+	public String getCurrentImageName() {
+		// TODO Auto-generated method stub
+		AuthBehavior mandatoryBehavior = getCurrentGameObject().getBehavior("MandatoryBehavior");
+		Property imagePathProperty = mandatoryBehavior.getProperty("imagePath");
+		String imagePath = (String) imagePathProperty.getValue();
+//		System.out.println(imagePath);
+		return (imagePath + ".png");
+	}
+
+
+	@Override
+	public List<SceneBackgroundImageSerializable> getBackgroundImageSerializables() {
+		return backgroundImageSerializables;
 	}
 	
 	

@@ -27,15 +27,10 @@ import javafx.stage.Stage;
 
 public class LevelPanelRefactored extends AuthoringUIComponentRefactored implements Observer{
 
-	private VBox myVBox;
-	private HBox myHBox;
 	private HBox levelChooser;
 	private ComboBox<GameScene> myLevelDropdown;
 	
 	private Button myAddLevelButton;
-	private Button myAddGameObjectButton;
-	private Button myAddSceneBackgroundImageButton;
-	private ListView<GameObject> myLevelObjects;
 	private LevelPanelController controller;
 	private LevelsObservable levelsObservable = null;
 	
@@ -47,9 +42,6 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 	
 	private void initializeButtons() {
 		myAddLevelButton = new Button(ResourceBundleManager.getAuthoring("AddSceneButton"));
-		myAddGameObjectButton = new Button(ResourceBundleManager.getAuthoring("AddGameObjectButton"));
-		myAddSceneBackgroundImageButton = new Button(ResourceBundleManager.getAuthoring("AddSceneBackgroundImageButton"));
-		
 	}
 	
 	private void initializeComboBoxes() {
@@ -58,42 +50,10 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 		
 	}
 	
-	
-	private void initializeListViews() {
-		myLevelObjects = new ListView<>();
-		myLevelObjects.setOnMouseClicked(e->{
-			controller.setCurrentGameObject(myLevelObjects.getSelectionModel().getSelectedItem());
-		});
-	}
-	
-	
 	private void setActions() {
 		myAddLevelButton.setOnAction(e -> {
 			NewLevelPopupRefactored popupRefactored = new NewLevelPopupRefactored(controller);
 		});
-		myAddGameObjectButton.setOnAction(e -> {
-			NewGameObjectPopupRefactored popupRefactored = new NewGameObjectPopupRefactored(controller);
-		});
-		myAddSceneBackgroundImageButton.setOnAction(e -> {
-			try {
-				FileChooser fileChooser = new FileChooser();
-				fileChooser.setTitle("Choose Object Image");
-				fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
-				File image = fileChooser.showOpenDialog(new Stage());
-
-				controller.addBackgroundImage(new Image(image.toURI().toString()));
-//				System.out.println("setOnAction");
-				
-				//put image.getName into SceneBackground
-			} catch (Exception exception) {
-				//do nothing
-				//this just means the user didn't choose an image
-		
-			}//
-		});
-		
-		
-		
 	}
 	
 	@Override
@@ -102,37 +62,27 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 		BorderPane borderPane = getBorderPane();
 		initializeButtons();
 		initializeComboBoxes();
-		initializeListViews();
 		setActions();
-		
 		levelChooser = new HBox();
-		myVBox = new VBox();
-		myHBox = new HBox();
 		levelChooser.getChildren().addAll(myAddLevelButton, myLevelDropdown);
-		myHBox.getChildren().addAll(myAddGameObjectButton, myAddSceneBackgroundImageButton);
-		myVBox.getChildren().addAll(levelChooser, myLevelObjects, myHBox);
-		borderPane.setCenter(myVBox);
-		
+		borderPane.setCenter(levelChooser);
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		levelsObservable = (LevelsObservable) o;
-		updateLevelObjects(levelsObservable.getGameObjects());
 		updateLevelDropdown1(levelsObservable.getScenes());
+		updateLevelComboBox(levelsObservable.getCurrentSceneName());
 	}
 	
-	private void updateLevelObjects(List<GameObject> list) {
-//		System.out.println("There should be " + list.size() + " objects in this list.");
+	private void updateLevelComboBox(String currentSceneName) {
+		myLevelDropdown.setPromptText(currentSceneName);
 		
-		myLevelObjects.getItems().clear();
-		myLevelObjects.getItems().addAll(FXCollections.observableArrayList(list));
 	}
 	
 	private void updateLevelDropdown1(List<GameScene> list) {
 		myLevelDropdown.getItems().clear();
 		myLevelDropdown.getItems().addAll(list);
-	
 	}
 
 	public void updateLevelDropdown(int i, GameScene scene) {

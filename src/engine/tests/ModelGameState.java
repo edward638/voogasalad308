@@ -38,7 +38,6 @@ public class ModelGameState {
 	private DisplayState display;
 	
 	public ModelGameState() {
-		state = new GameState();
 		display = new DisplayState(state);
 		
 		addMainCharacter();

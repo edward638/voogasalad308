@@ -16,7 +16,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 /**
- * @author August Ning
+ * @author August Ning 
  *
  */
 public class EventsPopupController extends PopupController {

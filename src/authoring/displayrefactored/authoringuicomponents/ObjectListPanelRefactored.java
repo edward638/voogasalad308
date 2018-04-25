@@ -105,6 +105,7 @@ public class ObjectListPanelRefactored extends AuthoringUIComponentRefactored im
 		
 		myLevelObjects.getItems().clear();
 		myLevelObjects.getItems().addAll(FXCollections.observableArrayList(list));
+		myLevelObjects.getSelectionModel().select(observable.getCurrentGameObject());
 	}
 
 }

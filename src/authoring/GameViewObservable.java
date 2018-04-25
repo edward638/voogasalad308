@@ -9,6 +9,5 @@ public interface GameViewObservable {
 
 	List<ImageView> getImageViews();
 	
-	Pane getSceneBackgroundPane();
-	
+	List<SceneBackgroundImage> getBackgroundImages();
 }

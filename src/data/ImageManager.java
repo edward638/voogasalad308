@@ -110,6 +110,7 @@ public class ImageManager {
      * @param image to be stored
      */
     public void storeImage(String imageName, Image image){
+    	System.out.println("storeImage " + imageName);
         storeBufferedImage(imageName, javaFXToBufferedImage(image), gameImagesLocation);
     }
 

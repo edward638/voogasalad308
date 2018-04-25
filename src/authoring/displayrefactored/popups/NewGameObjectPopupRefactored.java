@@ -4,6 +4,7 @@ import java.io.File;
 
 import authoring.display.buttonevents.ChooseImageEvent;
 import authoring.displayrefactored.controllers.LevelPanelController;
+import authoring.displayrefactored.controllers.ObjectInfoPanelController;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -23,7 +24,7 @@ public class NewGameObjectPopupRefactored extends PopupRefactored {
 	private static final int xSize = 400;
 	private static final int ySize = 600;
 	private static final int DEFAULT_SPACING = 50;
-	private LevelPanelController controller;
+	private ObjectInfoPanelController controller;
 	private VBox myVBox;
 	TextField nameText;
 	TextField xText;
@@ -33,7 +34,7 @@ public class NewGameObjectPopupRefactored extends PopupRefactored {
 	Button saveButton;
 	Image image;
 
-	public NewGameObjectPopupRefactored(LevelPanelController controller) {
+	public NewGameObjectPopupRefactored(ObjectInfoPanelController controller) {
 		// TODO Auto-generated constructor stub
 		super();
 		this.controller = controller;

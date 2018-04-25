@@ -2,6 +2,8 @@ package authoring.displayrefactored.authoringuicomponents;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import authoring.GameObject;
 import authoring.ObjectInfoObservable;
@@ -26,7 +28,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored implements ObjectInfoObserver {
+public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored implements Observer {
 
 	private ScrollPane myScrollPane;
 	private VBox myVBox;
@@ -60,7 +62,7 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 		// TODO Auto-generated method stub
 		BorderPane borderPane = getBorderPane();
 		initializeButtons();
-
+	
 		gameObjectCoordinates = new TableView<>();
 
 		objectName = new Label();
@@ -80,7 +82,8 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 		// myScrollPane.setPrefWidth(PANE_PREF_WIDTH);
 		// myScrollPane.setContent(myVBox);
 		// myScrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
-
+		System.out.println("generate component");
+		
 		borderPane.setCenter(myVBox);
 
 	}
@@ -104,7 +107,7 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 		});
 
 		duplicateButton.setOnAction(e -> {
-
+			controller.duplicateGameObject();
 		});
 	}
 
@@ -116,19 +119,14 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 
 	}
 
-	public void notifyOfChanges() {
-		updateInfo(observable.getInstances(), observable.getCurrentGameObject(), observable.getCurrentImage());
 
-		initializeVBox();
-	}
-
-	private void updateInfo(List<GameObject> list, GameObject current, Image image) {
+	private void updateInfo(List<GameObject> list, GameObject current, String imageName) {
 
 		gameObjects = list;
 
 		objectName.setText("Name: " + current.getName());
 
-		imageView = new ImageView(image);
+		imageView = new ImageView(controller.getImage(imageName));
 		imageView.setPreserveRatio(true);
 		imageView.setFitWidth(200);
 
@@ -195,6 +193,14 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 			System.out.println("setupYposCol() " + Double.parseDouble(t.getNewValue()));
 			controller.updatePositions();
 		});
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		// TODO Auto-generated method stub
+		observable = (ObjectInfoObservable) arg0;
+		updateInfo(observable.getInstances(), observable.getCurrentGameObject(), observable.getCurrentImageName());
+		initializeVBox();
 	}
 
 }

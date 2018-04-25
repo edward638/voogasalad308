@@ -208,6 +208,10 @@ public class SceneBackgroundImage {
 		
 	}
 	
+	public void setOpacity(Double value) {
+		myImage.setOpacity(value);
+	}
+	
 	private void updateDimensions() {
 		height = myImage.getBoundsInLocal().getHeight();
 		width = myImage.getBoundsInLocal().getWidth();

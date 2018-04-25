@@ -6,8 +6,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 public class RectangleShape extends ShapeDefinition{
-	private Double width;
-	private Double height;
+	
 	private Double hitBoxWidth;
 	private Double hitBoxHeight;
 	public RectangleShape(Double width, Double height) {
@@ -27,7 +26,7 @@ public class RectangleShape extends ShapeDefinition{
 	
 	@Override
 	public Shape getShape(MandatoryBehavior mandatory) {
-		return new Rectangle(mandatory.getX() + (width - hitBoxWidth)/2, mandatory.getY() + (width - hitBoxWidth)/2, hitBoxWidth, hitBoxHeight);
+		return new Rectangle(mandatory.getX() + (width - hitBoxWidth)/2, mandatory.getY() + (height - hitBoxHeight)/2, hitBoxWidth, hitBoxHeight);
 		//return new Ellipse(mandatory.getX(), mandatory.getY(), width/2, height/2);
 	}
 	

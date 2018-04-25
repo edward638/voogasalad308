@@ -1,4 +1,4 @@
-package engine;
+package engine.audio;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +22,12 @@ public class AudioManager {
 		this.volume = newVolume;
 		for (AudioPlayer a : audioPlayers) {
 			a.setVolume(newVolume);
+		}
+	}
+	
+	public void stop() {
+		for (AudioPlayer a : audioPlayers) {
+			a.stop();
 		}
 	}
 }

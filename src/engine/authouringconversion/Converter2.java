@@ -16,7 +16,7 @@ import authoring.GameObject;
 import authoring.GameScene;
 import authoring.Property;
 import engine.GameElement;
-import engine.GameState;
+import engine.GamePart;
 import engine.actions.Action;
 import engine.behaviors.Behavior;
 import engine.behaviors.MandatoryBehavior;
@@ -65,19 +65,19 @@ public class Converter2 {
 		return go;
 	}
 
-	public GameState gameScene2GameState(GameScene scene) {
-		GameState state = new GameState();
+	public GamePart gameScene2GamePart(GameScene scene) {
+		GamePart part = new GamePart();
 		for (GameObject go: scene.getMyObjects()) {
-			state.addGameElement(gameObject2GameElement(go));
+			part.addGameElement(gameObject2GameElement(go));
 		}
-		printState(state);
-		return state;
+		printPart(part);
+		return part;
 	}
 	
-	public GameScene gameState2GameScene(GameState state) {
+	public GameScene gamePart2GameScene(GamePart part) {
 //		printState(state);
 		GameScene scene = new GameScene("Default Name");
-		for (GameElement element: state.getElements()) {
+		for (GameElement element: part.getElements()) {
 			scene.addObject(gameElement2GameObject(element));
 		}
 		return scene;
@@ -132,9 +132,9 @@ public class Converter2 {
 		return authB;
 	}
 	
-	private void printState(GameState state ) {
-		System.out.println("GameState: " + state);
-		state.getElements().stream().forEach(el -> {printGameElement(el); System.out.println();});
+	private void printPart(GamePart part ) {
+		System.out.println("GameState: " + part);
+		part.getElements().stream().forEach(el -> {printGameElement(el); System.out.println();});
 	}
 	
 	private void printScene (GameScene scene) {

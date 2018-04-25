@@ -40,7 +40,7 @@ public class EngineTesting extends Application {
 	public void start(Stage stage) throws Exception {
 		List<GameState> levels = new ArrayList<GameState>();
 		levels.add(new ModelGameState2().getState());
-		modelGameMetaData = new GameMetaData(levels , 0, new ModelGameState().getState(), "enginetestmario");
+		modelGameMetaData = new GameMetaData(levels, 0, new ModelGameState().getState(), "enginetestmario");
 		gameEngine = new Engine(modelGameMetaData);
 		stage.setScene(setupLevel(900, 590, BACKGROUND));
 		stage.show();

@@ -6,6 +6,7 @@ import java.util.List;
 import authoring.GameObject;
 import engine.GameElement;
 import engine.events.gameevents.AddElementEvent;
+import engine.tests.ModelGamePart2;
 import engine.tests.ModelGameState2;
 
 public class Shooter extends Behavior {
@@ -32,7 +33,7 @@ public class Shooter extends Behavior {
 		Double magDirection = Math.sqrt(Math.pow(direction.get(0), 2) + Math.pow(direction.get(1), 2));
 		Double startx = mand.getX() + distAway * direction.get(0)/magDirection + mand.getShape().getBoundsInLocal().getWidth()/2;
 		Double starty = mand.getY() + distAway * direction.get(1)/magDirection + mand.getShape().getBoundsInLocal().getHeight()/2;
-		GameElement bullet = new ModelGameState2().getBullet(startx, starty, v, direction);
+		GameElement bullet = new ModelGamePart2().getBullet(startx, starty, v, direction);
 		getParent().addGameEvent(new AddElementEvent(bullet));
 	}
 	

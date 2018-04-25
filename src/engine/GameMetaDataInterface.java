@@ -2,6 +2,6 @@ package engine;
 
 public interface GameMetaDataInterface {
 	public void setPlayerUpdater(PlayerUpdater playerUpdater);
-	public GameState getCurrentLevel();
+	public GamePart getCurrentLevel();
 	public int getCurrentLevelNumber();
 }

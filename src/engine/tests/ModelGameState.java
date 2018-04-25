@@ -5,7 +5,7 @@ import java.util.List;
 
 import engine.DisplayState;
 import engine.GameElement;
-import engine.GameState;
+import engine.GamePart;
 import engine.actions.CollisionKillable;
 import engine.actions.CollisionStopXMotion;
 import engine.actions.CollisionStopYMotion;
@@ -32,11 +32,11 @@ import engine.events.elementevents.TimeEvent;
 import javafx.scene.input.KeyCode;
 
 public class ModelGameState {
-	private GameState state;
+	private GamePart part;
 	private DisplayState display;
 	
 	public ModelGameState() {
-		display = new DisplayState(state);
+		display = new DisplayState(part);
 		
 		addMainCharacter();
 		ArrayList<GameElement> elements = new ArrayList<GameElement>();
@@ -56,16 +56,16 @@ public class ModelGameState {
 
 		
 		for (GameElement el : elements) {
-			state.addGameElement(el);
+			part.addGameElement(el);
 			//display.addNewElement(el);
 		}
-		display = new DisplayState(state);
+		display = new DisplayState(part);
 		//display.update(state);
 	}
 	
 	private void addMainCharacter() {
 		GameElement mainCharacter = getMario();
-		state.addGameElement(mainCharacter);
+		part.addGameElement(mainCharacter);
 		//display.addNewElement(mainCharacter);
 	}
 	
@@ -87,15 +87,15 @@ public class ModelGameState {
 	}
 
 	private GameElement getCreatedMario() {
-		return state.getElements().get(0);
+		return part.getElements().get(0);
 	}
 	
 	public DisplayState getDisplay() {
 		return display;
 	}
 	
-	public GameState getState() {
-		return state;
+	public GamePart getPart() {
+		return part;
 	}
 	
 	public GameElement getMario() {

@@ -6,11 +6,11 @@ import java.util.List;
 
 import engine.GameElement;
 import engine.GamePart;
+import engine.actions.ChangeLevel;
 import engine.actions.CollisionDamageAllSides;
 import engine.actions.CollisionKillable;
 import engine.actions.CollisionStopXMotion;
 import engine.actions.CollisionStopYMotion;
-import engine.actions.TimeKillable;
 import engine.behaviors.Gravity;
 import engine.behaviors.Killable;
 import engine.behaviors.Killer;
@@ -18,60 +18,52 @@ import engine.behaviors.MainCharacter;
 import engine.behaviors.MandatoryBehavior;
 import engine.behaviors.Movable;
 import engine.behaviors.MovableCharacter;
+import engine.behaviors.Portal;
 import engine.behaviors.Shooter;
 import engine.behaviors.TimeRoutine2;
 import engine.behaviors.TimeTracker;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.KeyInputEvent;
-import engine.events.elementevents.TimeEvent;
 import javafx.scene.input.KeyCode;
 
-public class ModelGameState2 {
-	private GamePart part;
+public class ModelGamePart1 {
+	GamePart modelGamePart1;
 	
-	public ModelGameState2() {
-		part = new GamePart(null);		
+	public ModelGamePart1() {
+		modelGamePart1 = new GamePart("modelGamePart1", "level 1");
+		
+		addMainCharacter();
+		List<GameElement> elements = new ArrayList<GameElement>();
+		for (double i = 0; i < 900; i+=40) {
+			elements.add(getBlock(i, 501.0));
+		}	
+		
+		for (double i = 300; i < 900; i+=40) {
+			elements.add(getBlock(i, 301.0));
+		}
+		
+		for (double i = 500; i < 3000; i+=400) {
+			elements.add(getKoopa(i, 101.0));
+		}
+		
+		elements.add(getPortal(900.0, 101.0));
+		
+		for (GameElement el : elements) {
+			modelGamePart1.addGameElement(el);
+		}
 	}
 	
 	private void addMainCharacter() {
 		GameElement mainCharacter = getMario();
-		part.addGameElement(mainCharacter);
-		//display.addNewElement(mainCharacter);
-	}
-
-	private GameElement getCreatedMario() {
-		return part.getElements().get(0);
+		modelGamePart1.addGameElement(mainCharacter);
 	}
 	
-	public GamePart getPart() {
-		addMainCharacter();
-		List<GameElement> elements = new ArrayList<GameElement>();
-		getCreatedMario();
-		for (double i = 0; i < 900; i+=40) {
-			elements.add(getBlock(i, 500.0));
-		}	
-		
-		for (double i = 300; i < 900; i+=40) {
-			elements.add(getBlock(i, 300.0));
-		}
-		
-		for (double i = 500; i < 3000; i+=400) {
-			elements.add(getKoopa(i, 100.0));
-		}
-		
-		elements.add(getBullet(300.0, 400.0, 50.0));
-
-		
-		for (GameElement el : elements) {
-			part.addGameElement(el);
-		}
-		return part;
-	}
+	
 	
 	public GameElement getMario() {
 		GameElement mario = new GameElement();
 		//Note: Image path untested
-		mario.addBehavior(new MandatoryBehavior(mario, "Mario", 200.0, 20.0, "rectangle", 100.0, 100.0, 20.0, 20.0, "MarioSMR.png"));
+		mario.addBehavior(new MandatoryBehavior(mario, "Mario", 200.0, 20.0, "rectangle", 100.0, 100.0, 100.0, 100.0, "MarioSMR.png"));
 		List<Double> direction = new ArrayList<>(); direction.add(1.0); direction.add(0.0);
 		mario.addBehavior(new MovableCharacter(mario, 0.0, direction));
 		mario.addBehavior(new MainCharacter(mario, 1, true, true));
@@ -126,6 +118,16 @@ public class ModelGameState2 {
 		return block;
 	}
 	
+	public GameElement getPortal(Double xpos, Double ypos) {
+		GameElement block = new GameElement();
+		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "mario_block.png"));
+		List<Integer> x = new ArrayList<Integer>();
+		block.addBehavior(new Portal(block, true, "modelGamePart2", x));
+		block.addEventResponse(new CollisionEvent(block, CollisionEvent.ALL_SIDES, getMario(), CollisionEvent.ALL_SIDES), new ChangeLevel());
+		
+		return block;
+	}
+	
 	public GameElement getBack(Double xpos, Double ypos) {
 		GameElement block = new GameElement();
 		block.addBehavior(new MandatoryBehavior(block, "Back", xpos, ypos, "rectangle", 900.0, 590.0, 900.0, 590.0, "prairie.jpg"));
@@ -164,5 +166,9 @@ public class ModelGameState2 {
 		bullet.addBehavior(new Movable(bullet, v, Arrays.asList(1.0, 0.0)));
 		bullet.addBehavior(new Killer(bullet, 10.0));
 		return bullet;
+	}
+	
+	public GamePart getGamePart() {
+		return modelGamePart1;
 	}
 }

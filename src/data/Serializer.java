@@ -2,7 +2,7 @@ package data;
 
 import authoring.GameObject;
 import authoring.GameScene;
-import engine.GameState;
+import engine.GamePart;
 
 import com.thoughtworks.xstream.XStream;
 //
@@ -78,12 +78,12 @@ public class Serializer {
     /**
      * 
      * @param fileName
-     * @param gameState
+     * @param gamePart
      */
-    public void saveStateToXML(String fileName, GameState gameState) throws IOException {
+    public void savePartToXML(String fileName, GamePart gamePart) throws IOException {
     	int x = 1;
     	String topLevelGameDestination = fileName;
-    	String xmlString = xstream.toXML(gameState);
+    	String xmlString = xstream.toXML(gamePart);
     	String levelGameDestination = topLevelGameDestination + "/" + SAVE;
         stringToDom(xmlString, levelGameDestination + ".xml");
     }

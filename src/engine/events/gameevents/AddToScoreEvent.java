@@ -1,6 +1,8 @@
 package engine.events.gameevents;
 
+import engine.GamePart;
 import engine.GameState;
+import engine.behaviors.MainCharacter;
 
 public class AddToScoreEvent extends GameEvent {
 	public int score;
@@ -13,7 +15,7 @@ public class AddToScoreEvent extends GameEvent {
 
 	@Override
 	public void execute(GameState gameState) {
-		gameState.getMainCharacter().getMainCharacterBehavior.addToScore(score);
+		((MainCharacter)gameState.getCurrentGamePart().getMainCharacter().getBehavior(MainCharacter.class)).addToScore(score);
 	}
 
 }

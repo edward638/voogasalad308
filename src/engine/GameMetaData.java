@@ -3,7 +3,8 @@ package engine;
 import java.util.List;
 import java.util.Map;
 
-public class GameMetaData implements GameMetaDataInterface {
+public class GameMetaData
+{
 	List<GameState> levels;
 	int currentLevelNumber;
 	GameState currentLevel;

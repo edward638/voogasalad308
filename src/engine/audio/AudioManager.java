@@ -24,4 +24,10 @@ public class AudioManager {
 			a.setVolume(newVolume);
 		}
 	}
+	
+	public void stop() {
+		for (AudioPlayer a : audioPlayers) {
+			a.stop();
+		}
+	}
 }

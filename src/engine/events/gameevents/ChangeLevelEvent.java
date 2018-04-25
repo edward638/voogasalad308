@@ -19,6 +19,4 @@ private Integer level;
 		System.out.println("CHANGE LEVEL EVENT");
 		gameState.setState(gameState.getGameMetaData().getLevel(level));
 	}
-
-	
 }

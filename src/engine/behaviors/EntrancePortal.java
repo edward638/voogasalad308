@@ -1,20 +1,23 @@
 package engine.behaviors;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import engine.GameElement;
 import engine.events.gameevents.ChangePartEvent;
 import engine.events.gameevents.ResetLevelEvent;
 
-public class Portal extends Behavior{
+public class EntrancePortal extends Behavior{
 	private boolean active;
 	private String partToChange;
 	private List<Integer> resetLevels;
-	public Portal (GameElement ge, boolean active, String partToChange, List<Integer> resetLevels) {
+	private int portalID;
+	public EntrancePortal (GameElement ge, boolean active, String partToChange, List<Integer> resetLevels, int portalID) {
 		super(ge);
 		this.active = active;
 		this.partToChange = partToChange;
 		this.resetLevels = resetLevels;
+		this.portalID = portalID;
 	}
 	
 	public void runPortal() {
@@ -25,7 +28,7 @@ public class Portal extends Behavior{
 	}
 	
 	public void changeLevel() {
-		getParent().addGameEvent(new ChangePartEvent(partToChange));
+		getParent().addGameEvent(new ChangePartEvent(partToChange, portalID));
 	}
 	
 	public void resetLevels() {

@@ -18,7 +18,8 @@ import engine.behaviors.MainCharacter;
 import engine.behaviors.MandatoryBehavior;
 import engine.behaviors.Movable;
 import engine.behaviors.MovableCharacter;
-import engine.behaviors.Portal;
+import engine.behaviors.EntrancePortal;
+import engine.behaviors.ExitPortal;
 import engine.behaviors.Shooter;
 import engine.behaviors.TimeRoutine2;
 import engine.behaviors.TimeTracker;
@@ -46,7 +47,8 @@ public class ModelGamePart1 {
 			elements.add(getKoopa(i, 101.0));
 		}
 		
-		elements.add(getPortal(900.0, 101.0));
+		elements.add(getPortal1(900.0, 101.0));
+		elements.add(getPortal2(600.0, 101.0));
 		
 		for (GameElement el : elements) {
 			modelGamePart1.addGameElement(el);
@@ -58,7 +60,24 @@ public class ModelGamePart1 {
 		modelGamePart1.addGameElement(mainCharacter);
 	}
 	
+	public GameElement getPortal1(Double xpos, Double ypos) {
+		GameElement block = new GameElement();
+		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "mario_block.png"));
+		block.addBehavior(new ExitPortal(block, 2));
+		
+		return block;
+	}
 	
+	public GameElement getPortal2(Double xpos, Double ypos) {
+		GameElement block = new GameElement();
+		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "mario_block.png"));
+		List<Integer> x = new ArrayList<Integer>();
+		block.addBehavior(new EntrancePortal(block, true, "modelGamePart2", x, 1));
+		
+		block.addEventResponse(new CollisionEvent(block, CollisionEvent.ALL_SIDES, getMario(), CollisionEvent.ALL_SIDES), new ChangeLevel());
+		
+		return block;
+	}
 	
 	public GameElement getMario() {
 		GameElement mario = new GameElement();
@@ -117,16 +136,7 @@ public class ModelGamePart1 {
 		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "mario_block.png"));
 		return block;
 	}
-	
-	public GameElement getPortal(Double xpos, Double ypos) {
-		GameElement block = new GameElement();
-		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "mario_block.png"));
-		List<Integer> x = new ArrayList<Integer>();
-		block.addBehavior(new Portal(block, true, "modelGamePart2", x));
-		block.addEventResponse(new CollisionEvent(block, CollisionEvent.ALL_SIDES, getMario(), CollisionEvent.ALL_SIDES), new ChangeLevel());
-		
-		return block;
-	}
+
 	
 	public GameElement getBack(Double xpos, Double ypos) {
 		GameElement block = new GameElement();

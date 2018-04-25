@@ -1,14 +1,14 @@
 package engine.actions;
 
 import engine.GameElement;
-import engine.behaviors.Portal;
+import engine.behaviors.EntrancePortal;
 import engine.events.elementevents.ElementEvent;
 
 public class ChangeLevel implements Action{
 
 	@Override
 	public void act(ElementEvent e, GameElement ge) {
-		Portal p = (Portal) ge.getBehavior(Portal.class);
+		EntrancePortal p = (EntrancePortal) ge.getBehavior(EntrancePortal.class);
 		p.changeLevel();
 		
 	}

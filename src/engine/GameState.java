@@ -3,6 +3,8 @@ package engine;
 import java.util.ArrayList;
 import java.util.List;
 
+import engine.behaviors.ExitPortal;
+import engine.behaviors.MandatoryBehavior;
 import engine.audio.AudioManager;
 
 public class GameState {
@@ -62,7 +64,7 @@ public class GameState {
 		return currentGameLevel.getCurrentGamePart();
 	}
 	
-	public void changeCurrentGamePart(String newPartID) {
+	public void changeCurrentGamePart(String newPartID, int portalID) {
 		for (GameLevel gl : gameLevels) {
 			for (GamePart newGamePart : gl.getGameParts()) {
 				if(newGamePart.getGamePartID().equals(newPartID)) {
@@ -75,11 +77,23 @@ public class GameState {
 					
 					setCurrentGameLevel(gl);
 					gl.setCurrentGamePart(newGamePart);
-					
+					for (GameElement element : this.getCurrentGamePart().getElements()) {
+						if (element.hasBehavior(ExitPortal.class)) {
+							ExitPortal exitP = (ExitPortal) element.getBehavior(ExitPortal.class);
+							if (exitP.getPortalID() == portalID) {
+								System.out.println("exit portal matches entrance portal id: " + portalID);
+								mainCharacter.setPosition(element.getPosition());
+								MandatoryBehavior mb = (MandatoryBehavior) element.getBehavior(MandatoryBehavior.class);
+								mb.setPosition(mb.getX()-30, mb.getY());
+								break;
+							}
+						}
+					}
 					this.getCurrentGamePart().addGameElement(mainCharacter);
 					for (GameElement element : this.getCurrentGamePart().getElements()) {
 						addToDisplay(element);
 					}
+					
 				}
 			}
 		}

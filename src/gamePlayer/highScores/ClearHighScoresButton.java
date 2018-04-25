@@ -1,9 +1,7 @@
-package gamePlayer.buttons;
+package gamePlayer.highScores;
 
-import java.text.SimpleDateFormat;
-
-import gamePlayer.ConcreteGamePlayer;
-import javafx.scene.control.Button;
+import gamePlayer.buttons.ButtonData;
+import gamePlayer.buttons.PlayerButtons;
 
 public class ClearHighScoresButton extends PlayerButtons {
 

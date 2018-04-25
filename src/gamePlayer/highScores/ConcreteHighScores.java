@@ -1,17 +1,13 @@
-package gamePlayer;
+package gamePlayer.highScores;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.PriorityQueue;
-import java.util.Queue;
 
+import data.ScoreSaver;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -25,8 +21,20 @@ public class ConcreteHighScores implements HighScores {
 
 	List<Score> scores;
 	String gameName;
+	ScoreSaver scoreSaver;
+
+	private static final String NAMELABEL = "Name";
+	private static final String PLAYERNAME = "playerName";
+	private static final String SCORELABEL = "Score";
+	private static final String SCORENAME = "score";
 
 	private TableView<Score> table;
+
+	public ConcreteHighScores() {
+		scores = new ArrayList<Score>();
+		table = new TableView<Score>();
+		setupTableProperties(970, 30, 235, 265);
+	}
 
 	/**
 	 * initializes a "ConcreteHighScore" by creating a new priorityqueue for the
@@ -40,20 +48,24 @@ public class ConcreteHighScores implements HighScores {
 		scores = new ArrayList<Score>();
 		gameName = game;
 		table = new TableView<Score>();
+		scoreSaver = new ScoreSaver(game);
+
+		for (Score score : scoreSaver.loadSavedScores()) {
+			this.addScore(score.getPlayerName(), score.getScore());
+		}
 		setupTableProperties(970, 30, 235, 265);
 
 		// this.addDummyScores();
 	}
 
-//	private void addDummyScores() {
-//		addScore("Calvin", 400);
-//		addScore("Maddy", 450);
-//		addScore("August", 473);
-//		addScore("Jeffrey", 324);
-//		addScore("Gouttham", 934);
-//		addScore("Summer", 234);
-//
-//	}
+	// private void addDummyScores() {
+	// addScore("Calvin", 400);
+	// addScore("Maddy", 450);
+	// addScore("August", 473);
+	// addScore("Jeffrey", 324);
+	// addScore("Gouttham", 934);
+	// addScore("Summer", 234);
+	// }
 
 	private void setupTableProperties(double xPos, double yPos, double width, double height) {
 		table.setEditable(false);
@@ -65,16 +77,15 @@ public class ConcreteHighScores implements HighScores {
 	}
 
 	private void setupTableColumns() {
-				
 		table.setEditable(true);
-				
-		TableColumn<Score, String> nameCol = new TableColumn("Name");
-		nameCol.setCellValueFactory(new PropertyValueFactory<Score, String>("playerName"));
+
+		TableColumn<Score, String> nameCol = new TableColumn(NAMELABEL);
+		nameCol.setCellValueFactory(new PropertyValueFactory<Score, String>(PLAYERNAME));
 		nameCol.setMaxWidth(150);
 		nameCol.setResizable(false);
 
-		TableColumn<Score, Integer> scoreCol = new TableColumn("Score");
-		scoreCol.setCellValueFactory(new PropertyValueFactory<Score, Integer>("score"));
+		TableColumn<Score, Integer> scoreCol = new TableColumn(SCORELABEL);
+		scoreCol.setCellValueFactory(new PropertyValueFactory<Score, Integer>(SCORENAME));
 		scoreCol.setMinWidth(150);
 		scoreCol.setResizable(false);
 
@@ -100,13 +111,26 @@ public class ConcreteHighScores implements HighScores {
 		}
 		Collections.sort(scores, new Score.ScoreComparator());
 		updateScoreTable();
-	}
-	
-	private void updateScoreTable() {
 
+	}
+
+	/**
+	 * Called by gameEngine when player dies
+	 * 
+	 * @param name
+	 * @param score
+	 */
+	public void addScoreWhenGameOver(String name, int score) {
+		this.addScore(name, score);
+		scoreSaver.saveScores(this.scores);
+	}
+
+	private void updateScoreTable() {
+		
 		ObservableList<Score> observableScoreList = FXCollections.observableArrayList(scores);
 		Collections.reverse(observableScoreList);
 		table.setItems(observableScoreList);
+
 	}
 
 	/**
@@ -124,7 +148,7 @@ public class ConcreteHighScores implements HighScores {
 	 * (non-Javadoc)
 	 * 
 	 * @see GamePlayer.HighScores#loadScores(java.util.Map)
-	 */ 
+	 */
 	@Override
 	public void loadScores(Map<?, ?> scores) {
 		// TODO Auto-generated method stub
@@ -136,25 +160,36 @@ public class ConcreteHighScores implements HighScores {
 
 	@Override
 	public void clear() {
+		//System.out.println("Score size before clearing " + scores.size());
 		scores.clear();
+		//System.out.println("Score Size After Clearing " + scores.size());
 		updateScoreTable();
 	}
-//	
-//	public static void main(String[] args) {
-//		ConcreteHighScores chs = new ConcreteHighScores("test");
-//		chs.addScore("hi2", 1);
-//		chs.addScore("hi3", 2);
-//		chs.addScore("hi4", 3);
-//		chs.addScore("hi5", 4);
-//		chs.addScore("hi6", 5);
-//		chs.addScore("hi2", 6);
-//		chs.addScore("hi3", 7);
-//		chs.addScore("hi4", 8);
-//		chs.addScore("hi5", 9);
-//		chs.addScore("hi6", 10);
-//		chs.addScore("hi5", 11);
-//		chs.addScore("h6", 12);
-//		chs.printQ();
-//	}
 
+	public List<Score> getScoreList() {
+		return scores;
+	}
+	//
+	// public static void main(String[] args) {
+	// ConcreteHighScores chs = new ConcreteHighScores("test");
+	// chs.addScore("asdfasdf", 1);
+	// chs.addScore("asfasdfa", 2);
+	// chs.addScore("hi4", 3);
+	// chs.addScore("hi5", 4);
+	// chs.addScore("fasdf", 5);
+	// chs.addScore("hi2", 6);
+	// chs.addScore("hi3", 7);
+	// chs.addScore("fdasfs", 8);
+	// chs.addScore("asfasdfasdfasdfasdfasdfasfasdfsd", 9);
+	// chs.addScore("hi6", 10);
+	// chs.addScore("fadsfs", 11);
+	// chs.addScore("JEFF", 12);
+	// chs.printQ();
+	// ScoreSaver hss = new ScoreSaver("TestGame");
+	// hss.saveScores(chs.getScoreList());
+	// chs.clear();
+	// List<Score> l = hss.loadSavedScores();
+	// System.out.println(l);
+	//
+	// }
 }

@@ -29,8 +29,6 @@ public class CollisionManager {
 						GameElement g1 = gameState.getElements().get(i);
 						GameElement g2 = gameState.getElements().get(j);
 						CollisionEvent collision = new CollisionEvent(g1, g2);
-						System.out.println(g1);
-						System.out.println(g2);
 						returnEvents.addAll(g1.processEvent(collision));
 						returnEvents.addAll(g2.processEvent(collision));
 					}

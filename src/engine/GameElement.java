@@ -136,6 +136,10 @@ public class GameElement {
 		((MandatoryBehavior)(getBehavior(MandatoryBehavior.class))).setPosition(position.get(0), position.get(1));
 	}
 	
+	public void resetPosition() {
+		((MandatoryBehavior)(getBehavior(MandatoryBehavior.class))).resetPosition();
+	}
+	
 	/*
 	 * Easy Printing
 	 * (non-Javadoc)

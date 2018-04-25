@@ -30,7 +30,7 @@ public class ModelGameState3 {
 	private GameState state;
 	
 	public ModelGameState3() {
-		state = new GameState();		
+		state = new GameState(null);		
 	}
 	
 	private void addMainCharacter() {
@@ -48,18 +48,18 @@ public class ModelGameState3 {
 		List<GameElement> elements = new ArrayList<GameElement>();
 		getCreatedMario();
 		for (double i = 0; i < 900; i+=40) {
-			elements.add(getBlock(i, 500.0));
+			elements.add(getBlock(i, 501.0));
 		}	
 		
 		for (double i = 300; i < 900; i+=40) {
-			elements.add(getBlock(i, 300.0));
+			elements.add(getBlock(i, 301.0));
 		}
 		
 		for (double i = 500; i < 3000; i+=400) {
-			elements.add(getKoopa(i, 100.0));
+			elements.add(getKoopa(i, 101.0));
 		}
 		
-		elements.add(getBullet(300.0, 400.0, 50.0));
+		elements.add(getBullet(300.0, 401.0, 50.0));
 
 		
 		for (GameElement el : elements) {

@@ -26,6 +26,7 @@ public class Engine implements EngineInterface{
 	private GameState currentGameState;
 	private DisplayState displayState;
 	private EventManager2 eventManager;
+	private GameMetaData gameMetaData;
 	
 	public Engine(String gameName) {
 		//currentGameState = CONSTRUCTED FROM BLACK BOX
@@ -49,6 +50,7 @@ public class Engine implements EngineInterface{
 		
 		displayState = new DisplayState(currentGameState, gameName);
 		eventManager = new EventManager2(currentGameState);
+		gameMetaData = new GameMetaData(currentGameState);
 		startAnimation();
 	}
 	
@@ -101,5 +103,10 @@ public class Engine implements EngineInterface{
 	@Override
 	public void play() {
 		animation.play();
+	}
+
+	@Override
+	public GameMetaData getGameMetaData() {
+		return gameMetaData;
 	}
 }

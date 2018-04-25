@@ -29,24 +29,7 @@ public class Engine implements EngineInterface{
 	private GameMetaData gameMetaData;
 	
 	public Engine(String gameName) {
-		//currentGameState = CONSTRUCTED FROM BLACK BOX
 		currentGameState = new GameState(gameName);
-		GamePart modelGamePart1 = new ModelGamePart1().getGamePart();
-		GamePart modelGamePart2 = new ModelGamePart2().getGamePart();
-		List<GamePart> gameDataParts = new ArrayList<>();
-		gameDataParts.add(modelGamePart1);
-		gameDataParts.add(modelGamePart2);
-		for (GamePart gp : gameDataParts) {
-			if (!currentGameState.containsLevel(gp.getMyLevelID())) {
-				currentGameState.addLevel(gp.getMyLevelID());
-			}
-			currentGameState.getLevel(gp.getMyLevelID()).addGamePart(gp);
-			
-			if (gp.hasMainCharacter()) {
-				currentGameState.setCurrentGameLevel(currentGameState.getLevel(gp.getMyLevelID()));
-				currentGameState.getCurrentGameLevel().setCurrentGamePart(gp);
-			}
-		}
 		
 		displayState = new DisplayState(currentGameState, gameName);
 		eventManager = new EventManager2(currentGameState);

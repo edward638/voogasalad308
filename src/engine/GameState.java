@@ -5,6 +5,8 @@ import java.util.List;
 
 import engine.behaviors.ExitPortal;
 import engine.behaviors.MandatoryBehavior;
+import engine.tests.ModelGamePart1;
+import engine.tests.ModelGamePart2;
 import engine.audio.AudioManager;
 
 public class GameState {
@@ -26,6 +28,33 @@ public class GameState {
 		removeFromDisplay = new ArrayList<>();
 		audioManager = new AudioManager(1);
 		audioManager.newAudioPlayer(musicPath);
+		
+		constructGameState(loadGame(this.gameName));
+	}
+	
+	/* ***************************To Be Replaced With Load From Game Data*************************** */
+	private List<GamePart> loadGame(String gameName) {
+		GamePart modelGamePart1 = new ModelGamePart1().getGamePart();
+		GamePart modelGamePart2 = new ModelGamePart2().getGamePart();
+		List<GamePart> gameDataParts = new ArrayList<>();
+		gameDataParts.add(modelGamePart1);
+		gameDataParts.add(modelGamePart2);
+		return gameDataParts;
+	}
+	/* ***************************To Be Replaced With Load From Game Data*************************** */
+	
+	private void constructGameState(List<GamePart> gameDataParts) {
+		for (GamePart gp : gameDataParts) {
+			if (!this.containsLevel(gp.getMyLevelID())) {
+				this.addLevel(gp.getMyLevelID());
+			}
+			this.getLevel(gp.getMyLevelID()).addGamePart(gp);
+			
+			if (gp.hasMainCharacter()) {
+				this.setCurrentGameLevel(this.getLevel(gp.getMyLevelID()));
+				this.getCurrentGameLevel().setCurrentGamePart(gp);
+			}
+		}
 	}
 	
 	public AudioManager getAudioManager() {
@@ -81,7 +110,6 @@ public class GameState {
 						if (element.hasBehavior(ExitPortal.class)) {
 							ExitPortal exitP = (ExitPortal) element.getBehavior(ExitPortal.class);
 							if (exitP.getPortalID() == portalID) {
-								System.out.println("exit portal matches entrance portal id: " + portalID);
 								mainCharacter.setPosition(element.getPosition());
 								MandatoryBehavior mb = (MandatoryBehavior) element.getBehavior(MandatoryBehavior.class);
 								mb.setPosition(mb.getX()-30, mb.getY());
@@ -95,6 +123,33 @@ public class GameState {
 					}
 					
 				}
+			}
+		}
+	}
+	
+	public void resetLevel(String levelID) {
+		if(this.getCurrentGameLevel().getGameLevelID().equals(levelID)) {
+			for (GameElement element : this.getCurrentGamePart().getElements()) {
+				removeFromDisplay(element);
+			}
+		}
+		
+		GameLevel toReset = this.getLevel(levelID);
+		List<GamePart> gameDataParts = loadGame(this.gameName);
+		for(GamePart gamePart : toReset.getGameParts()) {
+			for (GamePart initialGamePart : gameDataParts) {
+				if (initialGamePart.getGamePartID().equals(gamePart.getGamePartID())) {
+					gamePart = initialGamePart;
+				}				
+				if (gamePart.hasMainCharacter()) {
+					toReset.setCurrentGamePart(gamePart);
+				}
+			}
+		}
+		
+		if(this.getCurrentGameLevel().getGameLevelID().equals(levelID)) {
+			for (GameElement element : this.getCurrentGamePart().getElements()) {
+				addToDisplay(element);
 			}
 		}
 	}

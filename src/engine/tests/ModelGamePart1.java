@@ -71,7 +71,7 @@ public class ModelGamePart1 {
 	public GameElement getPortal2(Double xpos, Double ypos) {
 		GameElement block = new GameElement();
 		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "mario_block.png"));
-		List<Integer> x = new ArrayList<Integer>();
+		List<String> x = new ArrayList<String>();
 		block.addBehavior(new EntrancePortal(block, true, "modelGamePart2", x, 1));
 		
 		block.addEventResponse(new CollisionEvent(block, CollisionEvent.ALL_SIDES, getMario(), CollisionEvent.ALL_SIDES), new ChangeLevel());

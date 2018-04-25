@@ -10,7 +10,7 @@ public class ChangeLevel implements Action{
 	public void act(ElementEvent e, GameElement ge) {
 		EntrancePortal p = (EntrancePortal) ge.getBehavior(EntrancePortal.class);
 		p.changeLevel();
-		
+		//p.runPortal();
 	}
 	
 }

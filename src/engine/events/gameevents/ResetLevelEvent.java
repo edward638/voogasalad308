@@ -3,14 +3,13 @@ package engine.events.gameevents;
 import engine.GameState;
 
 public class ResetLevelEvent extends GameEvent{
-	private Integer levelToReset;
-	public ResetLevelEvent(int levelReset) {
-		levelToReset = levelReset;
+	private String levelToResetID;
+	public ResetLevelEvent(String levelToResetID) {
+		this.levelToResetID = levelToResetID;
 	}
 	
 	@Override
 	public void execute(GameState gameState) {
-		// TODO Auto-generated method stub
-		
+		gameState.resetLevel(levelToResetID);
 	}
 }

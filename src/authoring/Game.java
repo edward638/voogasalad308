@@ -20,7 +20,8 @@ import authoring.displayrefactored.GameObjectImageView;
  * 
  * @author: Summer
  **/
-public class Game extends Observable implements GameViewObservable, ObjectInfoObservable, LevelsObservable{
+
+public class Game extends Observable implements GameViewObservable, ObjectInfoObservable, LevelsObservable, ViewRefreshInterface{
 
 	private String gameName;
 	private String gameDescription;
@@ -39,6 +40,11 @@ public class Game extends Observable implements GameViewObservable, ObjectInfoOb
 		myImageManager = new ImageManager(gameName);
 		new GameInitializer(gameName);
 		gameImage = "draw-more-few-cloud.png";
+	}
+	
+	public void restoreGame(List<GameScene> list) {
+		mySceneManager.restoreScenes(list);
+		notifyMyObservers();
 	}
 	
 	public void setObjectInfoObserver(ObjectInfoObserver observer) {
@@ -116,30 +122,45 @@ public class Game extends Observable implements GameViewObservable, ObjectInfoOb
 		List<ImageView> list = new ArrayList<>();
 		
 		for (GameObject go: getSceneManager().getCurrentScene().getMyObjects()) {
+
+			
 			AuthBehavior mandatoryBehavior = go.getBehavior("MandatoryBehavior");
+			
 			Property xPositionProperty = mandatoryBehavior.getProperty("xPos");
 			Property yPositionProperty = mandatoryBehavior.getProperty("yPos");
 			Property imagePathProperty = mandatoryBehavior.getProperty("imagePath");
+
 			Double xPosition = (Double) xPositionProperty.getValue();
 			Double yPosition = (Double) yPositionProperty.getValue();
+			
+			System.out.println("getImageViews() " + xPosition + " " + yPosition);
+			
+			
 			String imagePath = (String) imagePathProperty.getValue();
 			ImageView imageView =new ImageView(myImageManager.getImage(imagePath + ".png"));
 			imageView.setLayoutX(xPosition);
 			imageView.setLayoutY(yPosition);
 			imageView.setPreserveRatio(true);
 			imageView.setFitHeight(200);
-			GameObjectImageView draggableImageView = new GameObjectImageView(imageView, go);
+			GameObjectImageView draggableImageView = new GameObjectImageView(imageView, go, this);
 			list.add(draggableImageView.getMyImage());
 		}
 		
 		return list;
 	}
 	
-
-	@Override
-	public Pane getSceneBackgroundPane() {
-		// TODO Auto-generated method stub
-		return getSceneManager().getCurrentScene().getSceneBackground().getPane();
+	
+	public void addSceneBackgroundImageSerializable(SceneBackgroundImageSerializable s) {
+		getSceneManager().getCurrentScene().addBackgroundImageSerializable(s);
+	}
+	
+	public List<SceneBackgroundImage> getBackgroundImages() {
+		List<SceneBackgroundImage> list = new ArrayList<>();
+		for (SceneBackgroundImageSerializable s: getSceneManager().getCurrentScene().getBackgroundImageSerializables()) {
+			list.add(new SceneBackgroundImage(myImageManager.getBackgroundImage(s.getImagePath()), s));
+		}
+		
+		return list;
 	}
 	
 	@Override
@@ -169,8 +190,10 @@ public class Game extends Observable implements GameViewObservable, ObjectInfoOb
 		return list;
 	}
 
-	public void notifyObjectInfoObservers() {
+	public void notifyObjectInfoObservers(GameObject gameObject) {
+		getSceneManager().getCurrentScene().setCurrentGameObject(gameObject);
 		objectInfoObserver.notifyOfChanges();
+		notifyObservers();
 	}
 	
 	@Override
@@ -181,6 +204,16 @@ public class Game extends Observable implements GameViewObservable, ObjectInfoOb
 		String imagePath = (String) imagePathProperty.getValue();
 //		System.out.println(imagePath);
 		return myImageManager.getImage(imagePath + ".png");
+	}
+	
+	public boolean checkUniqueObjectNames(String name) {
+		boolean isUniqueName = true;
+		for (GameObject go : getGameObjects()){
+			if (go.getName().equals(name)) {
+				isUniqueName = false;
+			}
+		}
+		return isUniqueName;
 	}
 	
 }

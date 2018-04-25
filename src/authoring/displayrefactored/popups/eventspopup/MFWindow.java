@@ -27,7 +27,6 @@ public class MFWindow extends VBox {
 		epuc = myEPUC;
 		currentBehavior = null;
 		gcf = new GroovyCommandFactory();
-		assignCurrentBehavior();
 		createVBox();
 	}
 	
@@ -42,6 +41,7 @@ public class MFWindow extends VBox {
 	}
 	
 	private void createLists() {
+		assignCurrentBehavior();
 		if (currentBehavior == null || !epuc.validEvent()) {
 			Text nonvalid = new Text(NONVALID);
 			this.getChildren().add(nonvalid);

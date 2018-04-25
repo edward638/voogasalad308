@@ -66,8 +66,7 @@ public class Event {
 		myResponses.remove(toDelete);
 	}
 	
-	//FIX THIS! DON'T HARD CODE IT
-	public String getFullEventType() {
+	public String toString() {
 		return eventType;
 	}
 	

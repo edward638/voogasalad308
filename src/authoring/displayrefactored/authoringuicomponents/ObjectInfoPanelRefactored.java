@@ -100,7 +100,7 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 		});
 
 		editEventsButton.setOnAction(e -> {
-			EventsPopupRefactored epu = new EventsPopupRefactored(list);
+			new EventsPopupRefactored(list, controller.getAllGameObjects());
 		});
 
 		duplicateButton.setOnAction(e -> {
@@ -126,12 +126,11 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 
 		gameObjects = list;
 
-		objectName.setText("Name: " + current.getName() + "   Image: "
-				+ current.getMandatoryBehavior().getProperty("imagePath").getValue());
+		objectName.setText("Name: " + current.getName());
 
 		imageView = new ImageView(image);
 		imageView.setPreserveRatio(true);
-		imageView.setFitWidth(100);
+		imageView.setFitWidth(200);
 
 		gameObjectCoordinates = new TableView<>();
 
@@ -149,7 +148,7 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 
 		ObservableList<ObjectCoordinatesInsertion> observableInsertions = FXCollections.observableArrayList(insertions);
 
-		System.out.println(observableInsertions);
+//		System.out.println(observableInsertions);
 
 		gameObjectCoordinates.setItems(observableInsertions);
 	}
@@ -177,12 +176,14 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 		xposCol.setOnEditCommit((CellEditEvent<ObjectCoordinatesInsertion, String> t) -> {
 			((ObjectCoordinatesInsertion) t.getTableView().getItems().get(t.getTablePosition().getRow()))
 					.setXpos(Double.parseDouble(t.getNewValue()));
+			System.out.println("setupXposCol() " + Double.parseDouble(t.getNewValue()));
+			controller.updatePositions();
 		});
 
 	}
 
 	private void setupYposCol(TableColumn<ObjectCoordinatesInsertion, String> yposCol) {
-		yposCol.setCellValueFactory(f -> new ReadOnlyStringWrapper(f.getValue().getXpos()));
+		yposCol.setCellValueFactory(f -> new ReadOnlyStringWrapper(f.getValue().getYpos()));
 		yposCol.setMinWidth(125); // set this col width
 		yposCol.setMaxWidth(125); // set this col width
 		yposCol.setResizable(false);
@@ -191,6 +192,8 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 		yposCol.setOnEditCommit((CellEditEvent<ObjectCoordinatesInsertion, String> t) -> {
 			((ObjectCoordinatesInsertion) t.getTableView().getItems().get(t.getTablePosition().getRow()))
 					.setYpos(Double.parseDouble(t.getNewValue()));
+			System.out.println("setupYposCol() " + Double.parseDouble(t.getNewValue()));
+			controller.updatePositions();
 		});
 	}
 

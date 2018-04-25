@@ -1,6 +1,9 @@
 package authoring.displayrefactored.controllers;
 
+import java.util.List;
+
 import authoring.Game;
+import authoring.GameObject;
 import authoring.displayrefactored.authoringuicomponents.ObjectInfoPanelRefactored;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.layout.Pane;
@@ -38,10 +41,17 @@ public class ObjectInfoPanelController extends Controller {
 		objectInfoPanelRefactored.AttachToPane(pane, x, y);
 	}
 
+	public void updatePositions() {
+		refreshView();
+	}
+	
 	@Override
 	protected void refreshView() {
 		// TODO Auto-generated method stub
-		
+		game.notifyMyObservers();
+	}
+	public List<GameObject> getAllGameObjects() {
+		return game.getGameObjects();
 	}
 
 }

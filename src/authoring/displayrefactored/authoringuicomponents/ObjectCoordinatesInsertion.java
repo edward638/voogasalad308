@@ -25,13 +25,15 @@ public class ObjectCoordinatesInsertion {
 	}
 
 	public void setXpos(double xPos) {
+		
 		this.xPos = Double.toString(xPos);
-		gameObject.getMandatoryBehavior().getProperty("xPos").setValue(this.xPos);
+		gameObject.getMandatoryBehavior().getProperty("xPos").setValue(xPos);
+		System.out.println("setXPos " + gameObject.getMandatoryBehavior().getProperty("xPos"));
 	}
 	
 	public void setYpos(double yPos) {
 		this.xPos = Double.toString(yPos);
-		gameObject.getMandatoryBehavior().getProperty("yPos").setValue(this.yPos);
+		gameObject.getMandatoryBehavior().getProperty("yPos").setValue(yPos);
 	}
 	
 	

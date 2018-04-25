@@ -5,6 +5,8 @@ package display;
 import java.io.File;
 import java.net.MalformedURLException;
 
+import javafx.animation.Animation;
+import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -47,8 +49,10 @@ public class AnimatedButton {
 	private void setRotate(Button button) {
 		RotateTransition rotation = new RotateTransition(Duration.seconds(0.25), button);
 		rotation.setCycleCount(1);
+		rotation.setInterpolator(Interpolator.LINEAR);
 		rotation.setByAngle(360);
 		button.setOnMouseEntered(e -> rotation.play());
+//		button.setOnMouseExited(e -> rotation.stop());
 	}
 	
 	private void stylizeButton(Button button) {

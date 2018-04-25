@@ -8,5 +8,6 @@ import javafx.scene.image.Image;
 public interface ObjectInfoObservable {
 	GameObject getCurrentGameObject();
 	List<GameObject> getInstances();
-	Image getCurrentImage();
+	String getCurrentImageName();
+	List<GameObject> getMyObjects();
 }

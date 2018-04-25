@@ -1,14 +1,11 @@
 package gamePlayer;
 
-import java.io.File;
 import java.util.ResourceBundle;
 
 import data.GameDescriptionProvider;
 import engine.Engine;
 import engine.EngineInterface;
-import engine.GameState;
 import engine.tests.ModelGameState2;
-//import engine.tests.ModelGameState2;
 import gamePlayer.buttons.ConcreteButtonData;
 import gamePlayer.buttons.LoadButton;
 import gamePlayer.buttons.SaveButton;
@@ -125,33 +122,33 @@ public class ConcreteGamePlayer implements GamePlayer {
 		clearHighScoresButton = new ClearHighScoresButton(BUTTONXLOCATION,
 				Integer.parseInt(resources.getString("clearHighScoresButtonY")), BUTTONWIDTH, BUTTONHEIGHT, buttonData);
 		root.getChildren().add(clearHighScoresButton);
-		
+
 		newGameButton = new NewGameButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("newGameButtonY")),
 				BUTTONWIDTH, BUTTONHEIGHT, buttonData);
 		root.getChildren().add(newGameButton);
-		
+
 		loadButton = new LoadButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("loadButtonY")), BUTTONWIDTH,
 				BUTTONHEIGHT, buttonData);
 		root.getChildren().add(loadButton);
-		
+
 		saveButton = new SaveButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("saveButtonY")), BUTTONWIDTH,
 				BUTTONHEIGHT, buttonData);
 		root.getChildren().add(saveButton);
-		
+
 		replayButton = new ReplayButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("replayButtonY")),
 				BUTTONWIDTH, BUTTONHEIGHT, buttonData);
 		root.getChildren().add(replayButton);
-		
+
 		keyboardBindingButton = new KeyboardBindingButton(BUTTONXLOCATION,
 				Integer.parseInt(resources.getString("keybordBindingButtonY")), BUTTONWIDTH, BUTTONHEIGHT, buttonData);
 		root.getChildren().add(keyboardBindingButton);
-		
+
 		toggleVolumeButton = new ToggleVolumeButton(BUTTONXLOCATION,
 				Integer.parseInt(resources.getString("toggleVolumeButtonY")), BUTTONWIDTH, BUTTONHEIGHT, buttonData);
 		root.getChildren().add(toggleVolumeButton);
-		
-		pauseButton = new PauseButton(BUTTONXLOCATION,
-				Integer.parseInt(resources.getString("pauseButtonY")), BUTTONWIDTH, BUTTONHEIGHT, buttonData);
+
+		pauseButton = new PauseButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("pauseButtonY")),
+				BUTTONWIDTH, BUTTONHEIGHT, buttonData);
 		root.getChildren().add(pauseButton);
 	}
 
@@ -176,9 +173,9 @@ public class ConcreteGamePlayer implements GamePlayer {
 
 		// set everything into gamemetadata and then pass only metadata into engine
 
-//		concretePlayerUpdater = new ConcretePlayerUpdater(hud, highScores, userName);
-//
-//		engine = new Engine(file, concretePlayerUpdater);
+		// concretePlayerUpdater = new ConcretePlayerUpdater(hud, highScores, userName);
+		//
+		// engine = new Engine(file, concretePlayerUpdater);
 		keyInputDictionary.setGame(engine);
 
 		buttonData.setCurrentGameName(currentGameName);
@@ -195,12 +192,11 @@ public class ConcreteGamePlayer implements GamePlayer {
 		root.getChildren().add(gameDisplay);
 		root.getChildren().add((Node) hud);
 		root.getChildren().add(highScores.getScores());
-		
-		
-//		setupButtons();
+
+		// setupButtons();
 		root.getChildren().remove(pauseButton);
-		pauseButton = new PauseButton(BUTTONXLOCATION,
-				Integer.parseInt(resources.getString("pauseButtonY")), BUTTONWIDTH, BUTTONHEIGHT, buttonData);
+		pauseButton = new PauseButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("pauseButtonY")),
+				BUTTONWIDTH, BUTTONHEIGHT, buttonData);
 		root.getChildren().add(pauseButton);
 
 	}

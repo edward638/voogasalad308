@@ -3,7 +3,6 @@ package engine;
 import java.util.List;
 
 import data.ImageManager;
-import engine.behaviors.shapes.ShapeDefinition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 

@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import engine.GameElement;
-import engine.behaviors.shapes.RectangleShape;
-import engine.behaviors.shapes.ShapeDefinition;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;

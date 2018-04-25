@@ -26,8 +26,6 @@ import engine.behaviors.MovableCharacter;
 import engine.behaviors.TimeRoutine;
 import engine.behaviors.TimeTracker;
 import engine.behaviors.TrackMainCharacter;
-import engine.behaviors.shapes.EllipseShape;
-import engine.behaviors.shapes.RectangleShape;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.KeyInputEvent;
 import engine.events.elementevents.TimeEvent;

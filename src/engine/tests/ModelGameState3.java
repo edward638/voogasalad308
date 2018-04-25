@@ -20,8 +20,6 @@ import engine.behaviors.MovableCharacter;
 import engine.behaviors.Shooter;
 import engine.behaviors.TimeRoutine2;
 import engine.behaviors.TimeTracker;
-import engine.behaviors.shapes.EllipseShape;
-import engine.behaviors.shapes.RectangleShape;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.KeyInputEvent;
 import javafx.scene.input.KeyCode;

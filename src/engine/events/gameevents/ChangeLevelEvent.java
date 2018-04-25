@@ -16,6 +16,7 @@ private Integer level;
 
 	@Override
 	public void execute(GameState gameState) {
+		System.out.println("CHANGE LEVEL EVENT");
 		gameState.setState(gameState.getGameMetaData().getLevel(level));
 	}
 

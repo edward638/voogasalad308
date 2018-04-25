@@ -3,6 +3,7 @@ package engine.events.gameevents;
 import engine.Engine;
 import engine.GameElement;
 import engine.GameState;
+import engine.behaviors.Killable;
 
 public class GameOverEvent extends GameEvent{
 	
@@ -10,13 +11,12 @@ public class GameOverEvent extends GameEvent{
 	
 	public GameOverEvent(GameElement gameElement) {
 		toRemove = gameElement;
-		System.out.println("Remove Event created");
+		//System.out.println("Remove Event created");
 	}
 
 	@Override
 	public void execute(GameState state) {
-		state.removeAllElements();
-		state.setState(state.getGameMetaData().getLevel(0));
-		System.out.println("GameOver event executed");
+		System.out.println("GAME OVER EVENT");
+		state.resetGame(state.getGameMetaData().getLevel(0));
 	}
 }

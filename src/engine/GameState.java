@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import engine.behaviors.Killable;
 import engine.behaviors.MainCharacter;
 import engine.behaviors.MandatoryBehavior;
 
@@ -17,13 +18,14 @@ public class GameState{
 	
 	protected String gameName = "enginetestmario";
 	
-	public GameState() {
+	public GameState(GameMetaData metaData) {
 		//Talk to game data about reading info from file
 		gameSpeed = 1;
 		gameTime = 0;
 		elements = new ArrayList<>();
 		newElements = new ArrayList<>();
 		removeElements = new ArrayList<>();
+		this.metaData = metaData;
 	}
 
 	public void incrementGameTime(double timeElapsed) {
@@ -39,8 +41,13 @@ public class GameState{
 	}
 
 	public void addGameElement(GameElement gameElement) {
-		elements.add(gameElement);
-		newElements.add(gameElement);
+		if (!elements.contains(gameElement)) {
+			elements.add(gameElement);
+		}
+		if (!newElements.contains(gameElement)) {
+			newElements.add(gameElement);
+		}
+		
 	}
 	
 	public void removeGameElement(GameElement gameElement) {
@@ -70,16 +77,71 @@ public class GameState{
 	 * @param level
 	 */
 	public void setState(GameState newState) {
-		System.out.println(newState.toString());
-		elements = newState.getElements();
-//		List<GameElement> oldMainCharacters = getMainCharacters(elements);
-//		elements.removeAll(elements);
-//		List<GameElement> newMainCharacters = updateMainCharacters(oldMainCharacters,getMainCharacters(newState.getElements()));
-//		elements.addAll(newState.getElements());
-//		elements = replaceMainCharacters(elements, newMainCharacters);		
+		if (elements.size()==0) {
+			elements.addAll(newState.getElements());
+			return;
+		}
+		List<GameElement> oldMainCharacters = new ArrayList<GameElement>();
+		oldMainCharacters.addAll(updateMainCharacters(getMainCharacters(), newState.getMainCharacters()));
+		ArrayList<GameElement> toRemove = new ArrayList<GameElement>();
+		for (GameElement e: elements) {
+			if (newState.getElements().contains(e) || e.hasBehavior(MainCharacter.class)) {
+				if (e.hasBehavior(MainCharacter.class)) {
+					for (GameElement mc: newState.getMainCharacters()) {
+						if (mc.getIdentifier().equals(e.getIdentifier())) {
+							e.setPosition(mc.getPosition());
+						}
+					}
+				}
+			}
+			else {
+				toRemove.add(e);
+			}
+		}
+		elements.removeAll(toRemove);
+		removeElements.addAll(toRemove);
+		for (GameElement e: newState.getElements()) {
+			if (!elements.contains(e) && !e.hasBehavior(MainCharacter.class)) {
+				addGameElement(e);
+			}
+		}
 	}
 	
-	private List<GameElement> getMainCharacters(List<GameElement> elements) {
+	public void resetGame(GameState newState) {
+//		ArrayList<GameElement> toRemove = new ArrayList<GameElement>();
+//		toRemove.addAll(elements);
+//		for (GameElement e: toRemove) {
+//			removeGameElement(e);
+//		}
+//		for (GameElement e: newState.getElements()) {
+//			addGameElement(e);
+//		}
+		ArrayList<GameElement> toRemove = new ArrayList<GameElement>();
+		for (GameElement e: elements) {
+			if (newState.getElements().contains(e) || e.hasBehavior(MainCharacter.class)) {
+				if (e.hasBehavior(MainCharacter.class)) {
+					for (GameElement mc: newState.getMainCharacters()) {
+						if (mc.getIdentifier().equals(e.getIdentifier())) {	
+							e.setPosition(mc.getPosition());
+						}
+					}
+				}
+			}
+			else {
+				toRemove.add(e);
+			}
+		}
+		elements.removeAll(toRemove);
+		removeElements.addAll(toRemove);
+		for (GameElement e: newState.getElements()) {
+			if (!elements.contains(e) && !e.hasBehavior(MainCharacter.class)) {
+				addGameElement(e);
+			}
+		}
+	}
+	
+	public List<GameElement> getMainCharacters() {
+		System.out.println("Total amt of elements: "  + elements.size());
 		return elements.stream()
 				.filter(e -> e.hasBehavior(MainCharacter.class))
 				.collect(Collectors.toList());
@@ -94,16 +156,25 @@ public class GameState{
 		return oldMainCharacters;
 	}
 	
-	private List<GameElement> replaceMainCharacters(List<GameElement> tempNewState, List<GameElement> newMainCharacters) {
-		List<GameElement> newState = tempNewState.stream().filter(e -> !e.hasBehavior(MainCharacter.class)).collect(Collectors.toList());
-		newState.addAll(newMainCharacters);	
-		return newState;
+	private void replaceMainCharacters(List<GameElement> newMainCharacters) {
+		removeElements.addAll(getMainCharacters());
+		elements.removeAll(getMainCharacters());
+		elements.addAll(newMainCharacters);
+		newElements.addAll(newMainCharacters);
 	}
 
 	
 	public void removeAllElements() {
 		removeElements.addAll(elements);
-		elements.removeAll(elements);
+		elements.removeAll(elements);	
+	}
+	
+	public void addAllElements(List<GameElement> elementsToAdd) {
+		for (GameElement e: elementsToAdd) {
+			newElements.add(e);
+			elements.add(e);
+			
+		}
 	}
 	
 	

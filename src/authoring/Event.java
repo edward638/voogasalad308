@@ -62,4 +62,8 @@ public class Event {
 		myResponses.remove(toDelete);
 	}
 	
+	public String toString() {
+		return eventType;
+	}
+	
 }

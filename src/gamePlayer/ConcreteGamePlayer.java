@@ -1,5 +1,6 @@
 package gamePlayer;
 
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import data.GameDescriptionProvider;
@@ -24,9 +25,12 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
@@ -61,6 +65,8 @@ public class ConcreteGamePlayer implements GamePlayer {
 	private KeyInputDictionary keyInputDictionary;
 	private PlayerUpdater concretePlayerUpdater;
 
+	private String userName;
+
 	private ResourceBundle resources;
 
 	private static final double SCREEN_HEIGHT = 650;
@@ -94,8 +100,28 @@ public class ConcreteGamePlayer implements GamePlayer {
 		keyInputDictionary = new KeyInputDictionary(engine);
 
 		buttonData = new ConcreteButtonData(stage, this, gameDescriptionProvider, root, keyInputDictionary);
-		setupButtons();
-		setupVolumeSlider();
+		setupGUIElements();
+		setupUserNameInput();
+		setupUsernameText();
+
+	}
+
+	private void setupUsernameText() {
+		Label nameText = new Label("User: " + userName);
+		nameText.setLayoutX(970);
+		nameText.setLayoutY(20);
+		nameText.setFont(Font.font("Verdana", 20));
+		root.getChildren().add(nameText);
+
+	}
+
+	private void setupUserNameInput() {
+		TextInputDialog dialog = new TextInputDialog();
+		dialog.setTitle("Username");
+		dialog.setHeaderText("Welcome to VoogaSalad!");
+		dialog.setContentText("Please enter your username:");
+		Optional<String> result = dialog.showAndWait();
+		result.ifPresent(name -> userName = result.get());
 	}
 
 	/*
@@ -104,6 +130,9 @@ public class ConcreteGamePlayer implements GamePlayer {
 	 */
 	private void setupVolumeSlider() {
 		Slider slider = new Slider(0, 1, INITIALSOUNDLEVEL);
+		slider.setLayoutX(1080);
+		slider.setLayoutY(417);
+		slider.setMaxWidth(130);
 		slider.valueProperty().addListener(new ChangeListener<Number>() {
 			public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
 				System.out.println(new_val.doubleValue());
@@ -118,18 +147,25 @@ public class ConcreteGamePlayer implements GamePlayer {
 	/**
 	 * initialises buttons on screen
 	 */
-	private void setupButtons() {
+	private void setupGUIElements() {
 		clearHighScoresButton = new ClearHighScoresButton(BUTTONXLOCATION,
 				Integer.parseInt(resources.getString("clearHighScoresButtonY")), BUTTONWIDTH, BUTTONHEIGHT, buttonData);
 		root.getChildren().add(clearHighScoresButton);
 
-		newGameButton = new NewGameButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("newGameButtonY")),
-				BUTTONWIDTH, BUTTONHEIGHT, buttonData);
+		newGameButton = new NewGameButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("newGameButtonY")), 110,
+				BUTTONHEIGHT, buttonData);
 		root.getChildren().add(newGameButton);
 
-		loadButton = new LoadButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("loadButtonY")), BUTTONWIDTH,
-				BUTTONHEIGHT, buttonData);
+		loadButton = new LoadButton(1095, Integer.parseInt(resources.getString("loadButtonY")), 110, BUTTONHEIGHT,
+				buttonData);
 		root.getChildren().add(loadButton);
+
+		toggleVolumeButton = new ToggleVolumeButton(BUTTONXLOCATION,
+				Integer.parseInt(resources.getString("toggleVolumeButtonY")), BUTTONWIDTH, BUTTONHEIGHT, buttonData);
+		root.getChildren().add(toggleVolumeButton);
+
+		setupVolumeText();
+		setupVolumeSlider();
 
 		saveButton = new SaveButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("saveButtonY")), BUTTONWIDTH,
 				BUTTONHEIGHT, buttonData);
@@ -143,13 +179,18 @@ public class ConcreteGamePlayer implements GamePlayer {
 				Integer.parseInt(resources.getString("keybordBindingButtonY")), BUTTONWIDTH, BUTTONHEIGHT, buttonData);
 		root.getChildren().add(keyboardBindingButton);
 
-		toggleVolumeButton = new ToggleVolumeButton(BUTTONXLOCATION,
-				Integer.parseInt(resources.getString("toggleVolumeButtonY")), BUTTONWIDTH, BUTTONHEIGHT, buttonData);
-		root.getChildren().add(toggleVolumeButton);
-
 		pauseButton = new PauseButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("pauseButtonY")),
 				BUTTONWIDTH, BUTTONHEIGHT, buttonData);
 		root.getChildren().add(pauseButton);
+	}
+
+	private void setupVolumeText() {
+		Label volumeText = new Label("Volume: ");
+		volumeText.setLayoutX(970);
+		volumeText.setLayoutY(410);
+		volumeText.setFont(Font.font("Verdana", 20));
+		root.getChildren().add(volumeText);
+		
 	}
 
 	@Override
@@ -218,7 +259,11 @@ public class ConcreteGamePlayer implements GamePlayer {
 	}
 
 	public void closeEngine() {
-		engine.close();
+		if (engine == null) {
+			myStage.close();
+		} else {
+			engine.close();
+		}
 	}
 
 }

@@ -23,7 +23,7 @@ public class ConcretePlayerUpdater implements PlayerUpdater {
 	}
 
 	@Override
-	public void updateHUD(Map<String, ?> info) {
+	public void updateHUD(Map<String, Object> info) {
 		hud.updateInfo(info);
 
 	}

@@ -33,7 +33,7 @@ public class ConcreteHighScores implements HighScores {
 	public ConcreteHighScores() {
 		scores = new ArrayList<Score>();
 		table = new TableView<Score>();
-		setupTableProperties(970, 30, 235, 265);
+		setupTableProperties(970, 50, 235, 265);
 	}
 
 	/**

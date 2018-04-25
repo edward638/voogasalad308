@@ -3,6 +3,8 @@ package engine;
 import java.util.ArrayList;
 import java.util.List;
 
+import engine.audio.AudioManager;
+
 public class GameState {
 	private List<GameLevel> gameLevels;
 	private GameLevel currentGameLevel;
@@ -11,12 +13,21 @@ public class GameState {
 	
 	private List<GameElement> addToDisplay;
 	private List<GameElement> removeFromDisplay;
+	
+	private AudioManager audioManager;
+	private String musicPath = "data/music/WiiShopChannelMusic.mp3";
 
 	public GameState(String gameName) {
 		this.gameName = gameName;
 		gameLevels = new ArrayList<>();
 		addToDisplay = new ArrayList<>();
 		removeFromDisplay = new ArrayList<>();
+		audioManager = new AudioManager(1);
+		audioManager.newAudioPlayer(musicPath);
+	}
+	
+	public AudioManager getAudioManager() {
+		return audioManager;
 	}
 	
 	public void addToDisplay (GameElement ge) {

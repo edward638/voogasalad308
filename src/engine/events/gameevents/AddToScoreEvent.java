@@ -15,7 +15,7 @@ public class AddToScoreEvent extends GameEvent {
 
 	@Override
 	public void execute(GameState gameState) {
-		((MainCharacter)gameState.getCurrentGamePart().getMainCharacter().getBehavior(MainCharacter.class)).addToScore(score);
+		//((MainCharacter)gameState.getCurrentGamePart().getMainCharacter().getBehavior(MainCharacter.class)).addToScore(score);
 	}
 
 }

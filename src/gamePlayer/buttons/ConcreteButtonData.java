@@ -3,8 +3,8 @@ package gamePlayer.buttons;
 import data.GameDescriptionProvider;
 import engine.GameState;
 import gamePlayer.GamePlayer;
-import gamePlayer.HighScores;
-import gamePlayer.KeyInputDictionary;
+import gamePlayer.highScores.HighScores;
+import gamePlayer.keyBindings.KeyInputDictionary;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.stage.Stage;
@@ -101,6 +101,18 @@ public class ConcreteButtonData implements ButtonData {
 	public Boolean getVolumeStatus() {
 		// TODO Auto-generated method stub
 		return gamePlayer.getMusicOn();
+	}
+
+	@Override
+	public void resumeGame() {
+		//engine.resume();
+		
+	}
+
+	@Override
+	public void pauseGame() {
+		//engine.pause();
+		
 	}
 
 }

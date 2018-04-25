@@ -19,12 +19,12 @@ public class ConcreteHUD extends Pane implements HUD {
 	public ConcreteHUD(String name) {
 		gameName = name;
 		setupPane();
-
 	}
 
 	/**
 	 * setting up front end JavaFX of the pane
 	 */
+	//
 	private void setupPane() {
 		this.setLayoutX(30);
 		this.setLayoutY(30);
@@ -36,9 +36,9 @@ public class ConcreteHUD extends Pane implements HUD {
 	}
 
 	private void setupHUDText() {
-		
+
 		setUpName();
-		
+
 		Label scoreText = new Label("Score: " + currentScore);
 		scoreText.setTextFill(Color.WHITE);
 		scoreText.setLayoutX(xLabel);
@@ -68,7 +68,7 @@ public class ConcreteHUD extends Pane implements HUD {
 			this.getChildren().add(otherText);
 		}
 	}
-	
+
 	private void setUpName() {
 		Label nameText = new Label(gameName);
 		nameText.setTextFill(Color.BLACK);

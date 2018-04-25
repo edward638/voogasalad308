@@ -1,6 +1,8 @@
 package authoring.displayrefactored.controllers;
 
 
+import org.codehaus.groovy.runtime.metaclass.MethodMetaProperty.GetBeanMethodMetaProperty;
+
 import authoring.AuthBehavior;
 import authoring.Game;
 import authoring.GameObject;
@@ -9,6 +11,7 @@ import authoring.SceneBackgroundImageSerializable;
 import authoring.SceneManager;
 import authoring.displayrefactored.authoringuicomponents.GameViewWindowRefactored;
 import authoring.displayrefactored.authoringuicomponents.LevelPanelRefactored;
+import data.ImageManager;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -23,8 +26,20 @@ public class LevelPanelController extends Controller {
 	
 	private static final String MANDATORY_BEHAVIOR_NAME = "MandatoryBehavior";
 	
-	public LevelPanelController(SceneManager sceneManager) {
+	public LevelPanelController(SceneManager sceneManager, ImageManager imageManager) {
+		super(imageManager);
 		this.sceneManager = sceneManager;
+		objectInfoPanelController = new ObjectInfoPanelController(this.sceneManager.getCurrentScene(),getImageManager());
+		System.out.println("this is current scene: " + this.sceneManager.getCurrentScene());
+		gameViewWindowController = new GameViewWindowController(this.sceneManager.getCurrentScene(),getImageManager());
+	}
+	
+	public ObjectInfoPanelController getObjectInfoPanelController() {
+		return objectInfoPanelController;
+	}
+	
+	public GameViewWindowController getGameViewWindowController() {
+		return gameViewWindowController;
 	}
 	
 	@Override
@@ -35,6 +50,7 @@ public class LevelPanelController extends Controller {
 	@Override
 	protected void setUpConnections() {
 		sceneManager.addObserver(levelPanelRefactored);
+		System.out.println("setupconnections");
 	}
 
 	@Override
@@ -43,6 +59,8 @@ public class LevelPanelController extends Controller {
 		int y = ResourceBundleManager.getPosition("LEVELPANEL_Y");
 		levelPanelRefactored.AttachToPane(pane, x, y);	
 	}
+	
+	
 	
 	@Override
 	protected void refreshView() {

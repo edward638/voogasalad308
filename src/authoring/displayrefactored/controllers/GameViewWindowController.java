@@ -1,18 +1,24 @@
 package authoring.displayrefactored.controllers;
 
 import authoring.Game;
+import authoring.GameObject;
 import authoring.GameScene;
+import authoring.SceneBackgroundImage;
+import authoring.SceneBackgroundImageSerializable;
+import authoring.ViewRefreshInterface;
 import authoring.displayrefactored.authoringuicomponents.GameViewWindowRefactored;
+import data.ImageManager;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.layout.Pane;
 
-public class GameViewWindowController extends Controller {
+public class GameViewWindowController extends Controller implements ViewRefreshInterface {
 	
-	GameScene gameScene;
-	GameViewWindowRefactored gameViewWindowRefactored;
+	private GameScene gameScene;
+	private GameViewWindowRefactored gameViewWindowRefactored;
 	
-	public GameViewWindowController(GameScene gameScene) {
+	public GameViewWindowController(GameScene gameScene, ImageManager imageManager) {
 		// TODO Auto-generated constructor stub
+		super(imageManager);
 		this.gameScene = gameScene;
 	}
 
@@ -24,18 +30,21 @@ public class GameViewWindowController extends Controller {
 
 	@Override
 	protected void setUpConnections() {
-		// TODO Auto-generated method stub
 		gameScene.addObserver(gameViewWindowRefactored);
 	}
 
 	@Override
 	protected void addToGUI(Pane pane) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub 
 		int x = ResourceBundleManager.getPosition("GAMEVIEWWINDOW_X");
 		int y = ResourceBundleManager.getPosition("GAMEVIEWWINDOW_Y");
 		gameViewWindowRefactored.AttachToPane(pane, x, y);
 	}
 
+	public SceneBackgroundImage getBackgroundImage(SceneBackgroundImageSerializable s) {
+		return new SceneBackgroundImage(getImageManager().getBackgroundImage(s.getImagePath()), s);
+	}
+	
 	@Override
 	protected void refreshView() {
 	}
@@ -43,6 +52,14 @@ public class GameViewWindowController extends Controller {
 	public void setGameScene(GameScene gameScene) {
 		this.gameScene = gameScene;
 		setUpConnections();
+	}
+
+	@Override
+	public void notifyObjectInfoObservers(GameObject gameObject) {
+		// TODO Auto-generated method stub
+		gameScene.setCurrentGameObject(gameObject);
+		gameScene.notifyMyObservers();
+	
 	}
 	
 	

@@ -6,9 +6,14 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import authoring.AuthBehavior;
+import authoring.GameObject;
 import authoring.GameViewObservable;
+import authoring.Property;
 import authoring.SceneBackground;
 import authoring.SceneBackgroundImage;
+import authoring.SceneBackgroundImageSerializable;
+import authoring.displayrefactored.GameObjectImageView;
 import authoring.displayrefactored.controllers.GameViewWindowController;
 import authoring.displayrefactored.popups.LevelSizePopupRefactored;
 import data.propertiesFiles.ResourceBundleManager;
@@ -30,7 +35,6 @@ import javafx.scene.layout.StackPane;
  */
 public class GameViewWindowRefactored extends AuthoringUIComponentRefactored implements Observer {
 	
-	
 	private int sizeX;
 	private int sizeY;
 	private List<ImageView> objectImageViews;
@@ -43,7 +47,7 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	private Pane foregroundPane;
 	private GameViewWindowController controller;
 	private Button myLevelSizeButton;
-	private GameViewObservable gameViewObservable = null;
+	private GameViewObservable gameViewObservable;
 	
 	private static final int DEFAULTSIZEX = 1000;
 	private static final int DEFAULTSIZEY = 1000;
@@ -53,6 +57,7 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 		this.controller = controller;
 		objectImageViews = new ArrayList<>();
 		updatePaneSize(DEFAULTSIZEX, DEFAULTSIZEY);
+		System.out.println("constructor");
 	}
 	
 	@Override
@@ -100,18 +105,50 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	@Override
 	public void update(Observable o, Object arg) {
 		gameViewObservable = (GameViewObservable) o;
-		updateForeground(gameViewObservable.getImageViews());
-		updateBackground(gameViewObservable.getBackgroundImages());
+		updateForeground(gameViewObservable.getMyObjects());
+		updateBackground(gameViewObservable.getBackgroundImageSerializables());
 	}
 	
-	private void updateForeground(List<ImageView> list) {
+	private void updateForeground(List<GameObject> gameObjects) {
 		foregroundPane.getChildren().clear();
+		
+		List<ImageView> list = new ArrayList<>();
+		
+		for (GameObject go: gameObjects) {
+			ImageView imageView = toImageView(go);
+			GameObjectImageView draggableImageView = new GameObjectImageView(imageView, go, controller);
+			list.add(draggableImageView.getMyImage());
+		}
+		
 		foregroundPane.getChildren().addAll(list);
 		objectImageViews = list;
 	}
 	
-	private void updateBackground(List<SceneBackgroundImage> list) {
-		this.list = list;
+	private ImageView toImageView(GameObject go) {
+		AuthBehavior mandatoryBehavior = go.getBehavior("MandatoryBehavior");	
+		Property xPositionProperty = mandatoryBehavior.getProperty("xPos");
+		Property yPositionProperty = mandatoryBehavior.getProperty("yPos");
+		Property imagePathProperty = mandatoryBehavior.getProperty("imagePath");
+		Double xPosition = (Double) xPositionProperty.getValue();
+		Double yPosition = (Double) yPositionProperty.getValue();			
+		String imagePath = (String) imagePathProperty.getValue();
+		ImageView imageView =new ImageView(controller.getImage(imagePath + ".png"));
+		imageView.setLayoutX(xPosition);
+		imageView.setLayoutY(yPosition);
+		imageView.setPreserveRatio(true);
+		imageView.setFitHeight(200);
+		
+		return imageView;
+	}
+	
+	private void updateBackground(List<SceneBackgroundImageSerializable> serializables) {
+		
+		list = new ArrayList<>();
+		
+		for (SceneBackgroundImageSerializable s: serializables) {
+			list.add( controller.getBackgroundImage(s));
+		}
+		
 		sceneBackground.clearPane();
 		for (SceneBackgroundImage s: list) {
 			sceneBackground.addImage(s);

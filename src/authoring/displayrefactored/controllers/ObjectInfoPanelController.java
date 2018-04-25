@@ -7,8 +7,10 @@ import authoring.GameScene;
 import authoring.SceneBackgroundImageSerializable;
 import authoring.displayrefactored.authoringuicomponents.ObjectInfoPanelRefactored;
 import authoring.displayrefactored.authoringuicomponents.ObjectListPanelRefactored;
+import data.ImageManager;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 public class ObjectInfoPanelController extends Controller {
@@ -17,9 +19,16 @@ public class ObjectInfoPanelController extends Controller {
 	ObjectInfoPanelRefactored objectInfoPanelRefactored;
 	ObjectListPanelRefactored objectListPanelRefactored;
 	
-	public ObjectInfoPanelController(GameScene gameScene) {
+	public ObjectInfoPanelController(GameScene gameScene, ImageManager imageManager) {
 		// TODO Auto-generated constructor stub
+		super(imageManager);
 		this.gameScene = gameScene;
+	}
+	
+	public void setGameScene(GameScene gameScene) {
+		this.gameScene.deleteObservers();
+		this.gameScene = gameScene;
+		setUpConnections();
 	}
 	
 	@Override
@@ -46,6 +55,7 @@ public class ObjectInfoPanelController extends Controller {
 	
 	@Override
 	protected void refreshView() {
+		gameScene.notifyMyObservers();
 	}
 
 	public void updatePositions() {
@@ -53,36 +63,33 @@ public class ObjectInfoPanelController extends Controller {
 	}
 	
 	public void addGameObject(String name, Double xPos, Double yPos, String imageName, Image image) {
-		game.getImageManager().storeImage(imageName, image);
+		getImageManager().storeImage(imageName, image);
 		GameObject gameObject = new GameObject();
 		AuthBehavior mandatory = gameObject.getMandatoryBehavior();
 		gameObject.setName(name);
 		mandatory.getProperty("xPos").setValue(xPos);
 		mandatory.getProperty("yPos").setValue(yPos);
 		mandatory.getProperty("imagePath").setValue(imageName);
-		game.getSceneManager().getCurrentScene().getMyObjects().add(gameObject);
+		gameScene.getMyObjects().add(gameObject);
 		setCurrentGameObject(gameObject);
-		refreshView();
 	}
 	
 	public void setCurrentGameObject(GameObject gameObject) {
-		game.notifyObjectInfoObservers(gameObject);
+		gameScene.setCurrentGameObject(gameObject);
 	}
 	
 	public void addBackgroundImage(Image image) {
-		SceneBackgroundImageSerializable serializable = new SceneBackgroundImageSerializable(0.0, 0.0, 200.0, 200.0, game.getImageManager().storeBackgroundImage(image)+".png");
-		game.getSceneManager().getCurrentScene().addBackgroundImageSerializable(serializable);
-//		System.out.println(serializable.getImagePath());
-		refreshView();
+		SceneBackgroundImageSerializable serializable = new SceneBackgroundImageSerializable(0.0, 0.0, 200.0, 200.0, getImageManager().storeBackgroundImage(image)+".png");
+		gameScene.addBackgroundImageSerializable(serializable);
 	}
+
 	
 	public void deleteGameObject(int index) {
-		game.getGameObjects().remove(index);
-		refreshView();
+		gameScene.getMyObjects().remove(index);
 	}
 	
 	public boolean checkUniqueName(String nameText) {
-		boolean isUniqueName = game.checkUniqueObjectNames(nameText);
+		boolean isUniqueName = gameScene.checkUniqueObjectNames(nameText);
 		return isUniqueName;
 	}
 	

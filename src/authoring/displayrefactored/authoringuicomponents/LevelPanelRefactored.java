@@ -27,16 +27,10 @@ import javafx.stage.Stage;
 
 public class LevelPanelRefactored extends AuthoringUIComponentRefactored implements Observer{
 
-	private VBox myVBox;
-	private HBox myHBox;
 	private HBox levelChooser;
 	private ComboBox<GameScene> myLevelDropdown;
 	
 	private Button myAddLevelButton;
-	private Button myAddGameObjectButton;
-	private Button myAddSceneBackgroundImageButton;
-	private Button myDeleteObjectButton;
-	private ListView<GameObject> myLevelObjects;
 	private LevelPanelController controller;
 	private LevelsObservable levelsObservable = null;
 	
@@ -48,9 +42,6 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 	
 	private void initializeButtons() {
 		myAddLevelButton = new Button(ResourceBundleManager.getAuthoring("AddSceneButton"));
-		myAddGameObjectButton = new Button(ResourceBundleManager.getAuthoring("AddGameObjectButton"));
-		myAddSceneBackgroundImageButton = new Button(ResourceBundleManager.getAuthoring("AddSceneBackgroundImageButton"));
-		myDeleteObjectButton = new Button(ResourceBundleManager.getAuthoring("AddDeleteObjectButton"));
 	}
 	
 	private void initializeComboBoxes() {
@@ -58,15 +49,6 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 		myLevelDropdown.setPromptText(ResourceBundleManager.getAuthoring("SelectSceneDropDown"));
 		
 	}
-	
-	
-	private void initializeListViews() {
-		myLevelObjects = new ListView<>();
-		myLevelObjects.setOnMouseClicked(e->{
-			controller.setCurrentGameObject(myLevelObjects.getSelectionModel().getSelectedItem());
-		});
-	}
-	
 	
 	private void setActions() {
 		myAddLevelButton.setOnAction(e -> {
@@ -80,37 +62,27 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 		BorderPane borderPane = getBorderPane();
 		initializeButtons();
 		initializeComboBoxes();
+		setActions();
 		levelChooser = new HBox();
 		levelChooser.getChildren().addAll(myAddLevelButton, myLevelDropdown);
 		borderPane.setCenter(levelChooser);
-		
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		levelsObservable = (LevelsObservable) o;
-		updateLevelObjects(levelsObservable.getGameObjects());
 		updateLevelDropdown1(levelsObservable.getScenes());
 		updateLevelComboBox(levelsObservable.getCurrentSceneName());
-		
 	}
 	
 	private void updateLevelComboBox(String currentSceneName) {
 		myLevelDropdown.setPromptText(currentSceneName);
 		
 	}
-
-	private void updateLevelObjects(List<GameObject> list) {
-//		System.out.println("There should be " + list.size() + " objects in this list.");
-		
-		myLevelObjects.getItems().clear();
-		myLevelObjects.getItems().addAll(FXCollections.observableArrayList(list));
-	}
 	
 	private void updateLevelDropdown1(List<GameScene> list) {
 		myLevelDropdown.getItems().clear();
 		myLevelDropdown.getItems().addAll(list);
-	
 	}
 
 	public void updateLevelDropdown(int i, GameScene scene) {

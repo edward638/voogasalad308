@@ -1,13 +1,16 @@
 package authoring.displayrefactored.authoringuicomponents;
 
 import java.io.File;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 import authoring.GameObject;
+import authoring.ObjectInfoObservable;
 import authoring.displayrefactored.controllers.ObjectInfoPanelController;
 import authoring.displayrefactored.popups.NewGameObjectPopupRefactored;
 import data.propertiesFiles.ResourceBundleManager;
+import javafx.collections.FXCollections;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -28,6 +31,7 @@ public class ObjectListPanelRefactored extends AuthoringUIComponentRefactored im
 	private ListView<GameObject> myLevelObjects;
 	private Button myDeleteObjectButton;
 	private ObjectInfoPanelController controller;
+	private ObjectInfoObservable observable = null;
 	
 	public ObjectListPanelRefactored(ObjectInfoPanelController controller) {
 		// TODO Auto-generated constructor stub
@@ -92,9 +96,15 @@ public class ObjectListPanelRefactored extends AuthoringUIComponentRefactored im
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub
-		
+		observable = (ObjectInfoObservable) arg0;
+		updateLevelObjects(observable.getMyObjects());
 	}
 	
-	
+	private void updateLevelObjects(List<GameObject> list) {
+//		System.out.println("There should be " + list.size() + " objects in this list.");
+		
+		myLevelObjects.getItems().clear();
+		myLevelObjects.getItems().addAll(FXCollections.observableArrayList(list));
+	}
 
 }

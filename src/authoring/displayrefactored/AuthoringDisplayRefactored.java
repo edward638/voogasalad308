@@ -110,8 +110,8 @@ public class AuthoringDisplayRefactored implements LoadAuthoringInterface {
 			
 			root.getChildren().clear();
 			root.getChildren().add(buttonBox);
-			authoringEnvironmentRefactored = new AuthoringEnvironmentRefactored(currentGame);
 			currentGame.restoreGame(gameLoader.getGameScenes());
+			authoringEnvironmentRefactored = new AuthoringEnvironmentRefactored(currentGame);
 			Pane GUIPane = authoringEnvironmentRefactored.getGUI();
 			GUIPane.setLayoutX(GUI_LAYOUT_X);
 			GUIPane.setLayoutY(GUI_LAYOUT_Y);

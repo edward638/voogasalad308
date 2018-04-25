@@ -6,7 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class TWPopup extends PopupRefactored {
+public class TWKPopup extends PopupRefactored {
 	
 	private TriggerWindow tw;
 	private TextField tf;
@@ -16,7 +16,7 @@ public class TWPopup extends PopupRefactored {
 	private static final int ySize = 200;
 	private static final String SAVE = "Save";
 
-	public TWPopup(TriggerWindow intw) {
+	public TWKPopup(TriggerWindow intw) {
 		kc = "";
 		tw = intw;
 		tf = new TextField();
@@ -44,7 +44,6 @@ public class TWPopup extends PopupRefactored {
 	@Override
 	protected void mapButtons() {
 		save.setOnAction(e -> {
-			System.out.println(kc);
 			tw.setKeyCode(kc);
 			close();
 		});

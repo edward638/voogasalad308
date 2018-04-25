@@ -5,6 +5,7 @@ import java.util.List;
 import authoring.Event;
 import authoring.GameObject;
 import authoring.displayrefactored.controllers.EventsPopupController;
+import display.buttonevents.TriggerCollisionPress;
 import display.buttonevents.TriggerKeyboardPress;
 import display.buttons.GUIButton;
 import javafx.geometry.Insets;
@@ -26,7 +27,7 @@ public class TriggerWindow extends VBox {
 	private String kc;
 
 	private static final String KEYBOARD = "KeyInputEvent";
-	private static final String COLLISION = "";
+	private static final String COLLISION = "CollisionEvent";
 	private static final String NOEVENT = "No event selected";
 	private static final String NOTRIGGER = "No trigger required";
 
@@ -54,7 +55,7 @@ public class TriggerWindow extends VBox {
 			if (currentEvent.getEventType().equals(KEYBOARD)) {
 				this.getChildren().add(new GUIButton(0, 0, "Edit Keybind", new TriggerKeyboardPress(this)));
 			} else if (currentEvent.getEventType().equals(COLLISION)) {
-				
+				this.getChildren().add(new GUIButton(0, 0, "Edit Collision", new TriggerCollisionPress(this, allGos)));
 			} else {
 				this.getChildren().add(new Text(NOTRIGGER));
 			}
@@ -69,5 +70,9 @@ public class TriggerWindow extends VBox {
 	
 	public String getKeyCode() {
 		return kc;
+	}
+	
+	public String currentObjectName() {
+		return gos.get(0).getName();
 	}
 }

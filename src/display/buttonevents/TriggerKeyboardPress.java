@@ -1,6 +1,6 @@
 package display.buttonevents;
 
-import authoring.displayrefactored.popups.eventspopup.TWPopup;
+import authoring.displayrefactored.popups.eventspopup.TWKPopup;
 import authoring.displayrefactored.popups.eventspopup.TriggerWindow;
 
 public class TriggerKeyboardPress implements ButtonEvent {
@@ -13,7 +13,7 @@ public class TriggerKeyboardPress implements ButtonEvent {
 
 	@Override
 	public void pressed() {
-		new TWPopup(tw);
+		new TWKPopup(tw);
 	}
 
 }

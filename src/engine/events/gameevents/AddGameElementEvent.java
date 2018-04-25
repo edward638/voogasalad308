@@ -1,7 +1,7 @@
 package engine.events.gameevents;
 
 import engine.GameElement;
-import engine.GamePart;
+import engine.GameState;
 
 public class AddGameElementEvent extends GameEvent{
 	
@@ -12,7 +12,8 @@ public class AddGameElementEvent extends GameEvent{
 	}
 
 	@Override
-	public void execute(GamePart part) {
-		part.addGameElement(toAdd);
+	public void execute(GameState gameState) {
+		gameState.getCurrentGamePart().addGameElement(toAdd);
+		gameState.addToDisplay(toAdd);
 	}
 }

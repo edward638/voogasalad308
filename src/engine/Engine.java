@@ -53,9 +53,9 @@ public class Engine implements EngineInterface{
 			}
 		}
 		
-		displayState = new DisplayState(currentGameState.getCurrentGamePart(), gameName);
+		displayState = new DisplayState(currentGameState, gameName);
 		
-		eventManager = new EventManager2(currentGameState.getCurrentGamePart());
+		eventManager = new EventManager2(currentGameState);
 		audioManager = new AudioManager(1);
 		audioPlayer = audioManager.newAudioPlayer(musicPath);
 		startAnimation();
@@ -73,7 +73,7 @@ public class Engine implements EngineInterface{
 	private void timeStep (double elapsedTime) {
 		double gameSteps = elapsedTime * currentGameState.getGameSpeed();
     	eventManager.processElementEvent(new TimeEvent(gameSteps));
-    	displayState.update(currentGameState.getCurrentGamePart());
+    	displayState.update(currentGameState);
     }
 	
 	@Override

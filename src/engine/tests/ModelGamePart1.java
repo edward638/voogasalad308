@@ -6,6 +6,7 @@ import java.util.List;
 
 import engine.GameElement;
 import engine.GamePart;
+import engine.actions.ChangeLevel;
 import engine.actions.CollisionDamageAllSides;
 import engine.actions.CollisionKillable;
 import engine.actions.CollisionStopXMotion;
@@ -17,6 +18,7 @@ import engine.behaviors.MainCharacter;
 import engine.behaviors.MandatoryBehavior;
 import engine.behaviors.Movable;
 import engine.behaviors.MovableCharacter;
+import engine.behaviors.Portal;
 import engine.behaviors.Shooter;
 import engine.behaviors.TimeRoutine2;
 import engine.behaviors.TimeTracker;
@@ -44,6 +46,8 @@ public class ModelGamePart1 {
 			elements.add(getKoopa(i, 101.0));
 		}
 		
+		elements.add(getPortal(900.0, 101.0));
+		
 		for (GameElement el : elements) {
 			modelGamePart1.addGameElement(el);
 		}
@@ -53,6 +57,8 @@ public class ModelGamePart1 {
 		GameElement mainCharacter = getMario();
 		modelGamePart1.addGameElement(mainCharacter);
 	}
+	
+	
 	
 	public GameElement getMario() {
 		GameElement mario = new GameElement();
@@ -109,6 +115,16 @@ public class ModelGamePart1 {
 	public GameElement getBlock(Double xpos, Double ypos) {
 		GameElement block = new GameElement();
 		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "mario_block.png"));
+		return block;
+	}
+	
+	public GameElement getPortal(Double xpos, Double ypos) {
+		GameElement block = new GameElement();
+		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "mario_block.png"));
+		List<Integer> x = new ArrayList<Integer>();
+		block.addBehavior(new Portal(block, true, "modelGamePart2", x));
+		block.addEventResponse(new CollisionEvent(block, CollisionEvent.ALL_SIDES, getMario(), CollisionEvent.ALL_SIDES), new ChangeLevel());
+		
 		return block;
 	}
 	

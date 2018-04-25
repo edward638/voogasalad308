@@ -16,14 +16,14 @@ public class DisplayState {
 	private Group subSceneRoot = new Group();
 	private ImageManager imageManager;
 	
-	public DisplayState (GamePart gamePart, String gameName) {
+	public DisplayState (GameState gameState, String gameName) {
 		imageManager = new ImageManager(gameName);
 		imageElements = new ArrayList<>();
 		
-		for(GameElement e : gamePart.getElements()) {
+		for(GameElement e : gameState.getCurrentGamePart().getElements()) {
 			addElementToDisplay(e);
 		}
-		gamePart.clearToAdd();
+		gameState.clearAddToDisplay();
 	}
 	
 	private void addElementToDisplay(GameElement element) {
@@ -49,17 +49,17 @@ public class DisplayState {
 		return subSceneRoot;
 	}
 	
-	public void update(GamePart updatedGamePart) {
-		updateImageElements(scrollingAroundMainCharacter(updatedGamePart));
+	public void update(GameState updatedGameState) {
+		updateImageElements(scrollingAroundMainCharacter(updatedGameState.getCurrentGamePart()));
 		
-		for (GameElement e : updatedGamePart.getToAdd()) {
+		for (GameElement e : updatedGameState.getAddToDisplay()) {
 			addElementToDisplay(e);
 		}
-		updatedGamePart.clearToAdd();
-		for (GameElement e : updatedGamePart.getToRemove()) {
+		updatedGameState.clearAddToDisplay();
+		for (GameElement e : updatedGameState.getRemoveFromDisplay()) {
 			removeElementFromDisplay(e);
 		}
-		updatedGamePart.clearToRemove();
+		updatedGameState.clearRemoveFromDisplay();
 	}
 
 	private void updateImageElements(List<Double> mainCharacterLocation) {

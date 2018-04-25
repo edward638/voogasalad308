@@ -22,6 +22,10 @@ public class GameLevel {
 		currentGamePart = gp;
 	}
 	
+	protected List<GamePart> getGameParts() {
+		return gameParts;
+	}
+	
 	protected void addGamePart(GamePart toAdd) {
 		gameParts.add(toAdd);
 	}

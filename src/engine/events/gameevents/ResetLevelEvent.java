@@ -1,13 +1,16 @@
 package engine.events.gameevents;
 
-import engine.GamePart;
+import engine.GameState;
 
-public class ResetLevelEvent {
+public class ResetLevelEvent extends GameEvent{
 	private Integer levelToReset;
 	public ResetLevelEvent(int levelReset) {
 		levelToReset = levelReset;
 	}
-	public void execute(GamePart gamePart) {
-		System.out.println("IMPLEMENT CODE TO RESET LEVEL IN METADATA");
+	
+	@Override
+	public void execute(GameState gameState) {
+		// TODO Auto-generated method stub
+		
 	}
 }

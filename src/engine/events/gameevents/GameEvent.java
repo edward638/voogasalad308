@@ -1,11 +1,9 @@
 package engine.events.gameevents;
 
-import engine.DisplayState;
-import engine.Engine;
-import engine.GamePart;
+import engine.GameState;
 
 public abstract class GameEvent {
 	
-	public abstract void execute(GamePart gamePart);
+	public abstract void execute(GameState gameState);
 	
 }

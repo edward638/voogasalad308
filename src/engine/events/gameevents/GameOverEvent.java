@@ -17,6 +17,12 @@ public class GameOverEvent extends GameEvent{
 	@Override
 	public void execute(GameState state) {
 		System.out.println("GAME OVER EVENT");
-		state.resetGame(state.getGameMetaData().getLevel(0));
+		//state.setState(state.getGameMetaData().getLevel(0));
+//		if (state.getGameMetaData().getCurrentLevel() == state.getGameMetaData().getLevel(0)) {
+//			state.changeState(state.getGameMetaData().getCurrentLevel(), state.getGameMetaData().getLevel(1));
+//		} else {
+//			state.changeState(state.getGameMetaData().getCurrentLevel(), state.getGameMetaData().getLevel(0));
+//		}
+		//state.resetGame(state.getGameMetaData().getLevel(0));
 	}
 }

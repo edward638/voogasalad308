@@ -27,7 +27,7 @@ public class Engine implements EngineInterface{
 	private Timeline animation;
 	private SubScene engineSubScene;
 	private Group subSceneRoot = new Group();
-	private GameState gameState;
+	private GameState currentGameState;
 	private DisplayState displayState;
 	private EventManager2 eventManager;
 	private AudioManager audioManager;
@@ -40,10 +40,10 @@ public class Engine implements EngineInterface{
 	 * @param gamePath
 	 */
 	public Engine(GameMetaData metaData) {
-		gameState = new GameState(metaData);
-		gameState.setState(metaData.getCurrentLevel());
-		displayState = new DisplayState(gameState, metaData.getGameName());
-		eventManager = new EventManager2(gameState);
+		currentGameState = new GameState(metaData);
+		currentGameState.setState(metaData.getCurrentLevel());
+		displayState = new DisplayState(currentGameState, metaData.getGameName());
+		eventManager = new EventManager2(currentGameState);
 		audioPlayer = new AudioPlayer(musicPath, 0);
 		startAnimation();
 	}
@@ -54,9 +54,9 @@ public class Engine implements EngineInterface{
 	 */
 	public Engine(String gamePath) {
 		ModelGameState modelGameState = new ModelGameState(); 
-		gameState = modelGameState.getState();
+		currentGameState = modelGameState.getState();
 		displayState = modelGameState.getDisplay();
-		eventManager = new EventManager2(gameState);
+		eventManager = new EventManager2(currentGameState);
 		audioPlayer = new AudioPlayer(musicPath, 0);
 		startAnimation();
 	}
@@ -66,9 +66,9 @@ public class Engine implements EngineInterface{
 	 * @param gamePath
 	 */
 	public Engine(GameState g) {
-		gameState = g;
+		currentGameState = g;
 		displayState = new DisplayState(g);
-		eventManager = new EventManager2(gameState);
+		eventManager = new EventManager2(currentGameState);
 		audioManager = new AudioManager(1);
 		
 		audioPlayer = audioManager.newAudioPlayer(musicPath);
@@ -106,11 +106,11 @@ public class Engine implements EngineInterface{
 	}
 	
 	public void timeStep (double elapsedTime) {
-		double gameSteps = elapsedTime * gameState.getGameSpeed();
-		gameState.incrementGameTime(gameSteps);
+		double gameSteps = elapsedTime * currentGameState.getGameSpeed();
+		currentGameState.incrementGameTime(gameSteps);
     	eventManager.processElementEvent(new TimeEvent(gameSteps));
-    	displayState.updateImageElements(scrollingAroundMainCharacter(gameState));
-    	displayState.update(gameState);
+    	displayState.updateImageElements(scrollingAroundMainCharacter(currentGameState));
+    	displayState.update(currentGameState);
     	updateDisplay(displayState.newElements, displayState.removeElements);
     }
 

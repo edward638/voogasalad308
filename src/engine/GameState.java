@@ -47,7 +47,6 @@ public class GameState{
 		if (!newElements.contains(gameElement)) {
 			newElements.add(gameElement);
 		}
-		
 	}
 	
 	public void removeGameElement(GameElement gameElement) {
@@ -77,33 +76,52 @@ public class GameState{
 	 * @param level
 	 */
 	public void setState(GameState newState) {
-		if (elements.size()==0) {
-			elements.addAll(newState.getElements());
-			return;
-		}
-		List<GameElement> oldMainCharacters = new ArrayList<GameElement>();
-		oldMainCharacters.addAll(updateMainCharacters(getMainCharacters(), newState.getMainCharacters()));
-		ArrayList<GameElement> toRemove = new ArrayList<GameElement>();
-		for (GameElement e: elements) {
-			if (newState.getElements().contains(e) || e.hasBehavior(MainCharacter.class)) {
-				if (e.hasBehavior(MainCharacter.class)) {
-					for (GameElement mc: newState.getMainCharacters()) {
-						if (mc.getIdentifier().equals(e.getIdentifier())) {
-							e.setPosition(mc.getPosition());
-						}
-					}
-				}
-			}
-			else {
-				toRemove.add(e);
-			}
-		}
-		elements.removeAll(toRemove);
-		removeElements.addAll(toRemove);
-		for (GameElement e: newState.getElements()) {
-			if (!elements.contains(e) && !e.hasBehavior(MainCharacter.class)) {
-				addGameElement(e);
-			}
+		removeElements.addAll(elements);
+		elements = newState.getElements();
+		newElements.addAll(elements);
+//		if (elements.size()==0) {
+//			elements.addAll(newState.getElements());
+//			return;
+//		}
+//		List<GameElement> oldMainCharacters = new ArrayList<GameElement>();
+//		oldMainCharacters.addAll(updateMainCharacters(getMainCharacters(), newState.getMainCharacters()));
+//		ArrayList<GameElement> toRemove = new ArrayList<GameElement>();
+//		for (GameElement e: elements) {
+//			if (newState.getElements().contains(e) || e.hasBehavior(MainCharacter.class)) {
+//				if (e.hasBehavior(MainCharacter.class)) {
+//					for (GameElement mc: newState.getMainCharacters()) {
+//						if (mc.getIdentifier().equals(e.getIdentifier())) {
+//							e.setPosition(mc.getPosition());
+//						}
+//					}
+//				}
+//			}
+//			else {
+//				toRemove.add(e);
+//			}
+//		}
+//		elements.removeAll(toRemove);
+//		removeElements.addAll(toRemove);
+//		for (GameElement e: newState.getElements()) {
+//			if (!elements.contains(e) && !e.hasBehavior(MainCharacter.class)) {
+//				addGameElement(e);
+//			}
+//		}
+	}
+	
+	public void changeState(GameState oldState, GameState newState) {
+		if (oldState != newState) {
+			oldState.elements = this.elements;
+			oldState.newElements = this.newElements;
+			oldState.removeElements = this.removeElements;
+			oldState.gameSpeed = this.gameSpeed;
+			oldState.gameTime = this.gameTime;
+			this.elements = newState.getElements();
+			this.newElements = newState.getNewElements();
+			this.removeElements = oldState.getElements();
+			this.gameSpeed = newState.gameSpeed;
+			this.gameTime = newState.gameTime;
+			this.metaData.currentLevel = newState;
 		}
 	}
 	

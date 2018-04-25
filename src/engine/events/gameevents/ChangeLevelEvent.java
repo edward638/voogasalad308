@@ -4,7 +4,7 @@ import data.GameLoader;
 import engine.DisplayState;
 import engine.Engine;
 import engine.GameElement;
-import engine.GameState;
+import engine.GamePart;
 
 public class ChangeLevelEvent extends GameEvent{
 	
@@ -15,8 +15,8 @@ private Integer level;
 	}
 
 	@Override
-	public void execute(GameState gameState) {
+	public void execute(GamePart gamePart) {
 		System.out.println("CHANGE LEVEL EVENT");
-		gameState.setState(gameState.getGameMetaData().getLevel(level));
+		gamePart.setPart(gamePart.getGameMetaData().getLevel(level));
 	}
 }

@@ -10,7 +10,6 @@ import engine.actions.CollisionDamageAllSides;
 import engine.actions.CollisionKillable;
 import engine.actions.CollisionStopXMotion;
 import engine.actions.CollisionStopYMotion;
-import engine.actions.TimeKillable;
 import engine.behaviors.Gravity;
 import engine.behaviors.Killable;
 import engine.behaviors.Killer;
@@ -23,55 +22,42 @@ import engine.behaviors.TimeRoutine2;
 import engine.behaviors.TimeTracker;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.KeyInputEvent;
-import engine.events.elementevents.TimeEvent;
 import javafx.scene.input.KeyCode;
 
-public class ModelGameState2 {
-	private GamePart part;
+public class ModelGamePart2 {
+	GamePart modelGamePart2;
 	
-	public ModelGameState2() {
-		part = new GamePart(null);		
+	public ModelGamePart2() {
+		modelGamePart2 = new GamePart("modelGamePart2", "level 1");
+		
+		//addMainCharacter();
+		List<GameElement> elements = new ArrayList<GameElement>();
+		for (double i = 0; i < 900; i+=40) {
+			elements.add(getBlock(i, 501.0));
+		}	
+		
+		for (double i = 300; i < 900; i+=40) {
+			elements.add(getBlock(i, 301.0));
+		}
+		
+		for (double i = 500; i < 3000; i+=400) {
+			elements.add(getKoopa(i, 102.0));
+		}
+		
+		for (GameElement el : elements) {
+			modelGamePart2.addGameElement(el);
+		}
 	}
 	
 	private void addMainCharacter() {
 		GameElement mainCharacter = getMario();
-		part.addGameElement(mainCharacter);
-		//display.addNewElement(mainCharacter);
-	}
-
-	private GameElement getCreatedMario() {
-		return part.getElements().get(0);
-	}
-	
-	public GamePart getPart() {
-		addMainCharacter();
-		List<GameElement> elements = new ArrayList<GameElement>();
-		getCreatedMario();
-		for (double i = 0; i < 900; i+=40) {
-			elements.add(getBlock(i, 500.0));
-		}	
-		
-		for (double i = 300; i < 900; i+=40) {
-			elements.add(getBlock(i, 300.0));
-		}
-		
-		for (double i = 500; i < 3000; i+=400) {
-			elements.add(getKoopa(i, 100.0));
-		}
-		
-		elements.add(getBullet(300.0, 400.0, 50.0));
-
-		
-		for (GameElement el : elements) {
-			part.addGameElement(el);
-		}
-		return part;
+		modelGamePart2.addGameElement(mainCharacter);
 	}
 	
 	public GameElement getMario() {
 		GameElement mario = new GameElement();
 		//Note: Image path untested
-		mario.addBehavior(new MandatoryBehavior(mario, "Mario", 200.0, 20.0, "rectangle", 100.0, 100.0, 20.0, 20.0, "MarioSMR.png"));
+		mario.addBehavior(new MandatoryBehavior(mario, "Mario", 200.0, 20.0, "rectangle", 100.0, 100.0, 100.0, 100.0, "MarioSMR.png"));
 		List<Double> direction = new ArrayList<>(); direction.add(1.0); direction.add(0.0);
 		mario.addBehavior(new MovableCharacter(mario, 0.0, direction));
 		mario.addBehavior(new MainCharacter(mario, 1, true, true));
@@ -164,5 +150,9 @@ public class ModelGameState2 {
 		bullet.addBehavior(new Movable(bullet, v, Arrays.asList(1.0, 0.0)));
 		bullet.addBehavior(new Killer(bullet, 10.0));
 		return bullet;
+	}
+	
+	public GamePart getGamePart() {
+		return modelGamePart2;
 	}
 }

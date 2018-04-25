@@ -4,7 +4,7 @@ import java.util.Map;
 
 import data.GameDescriptionProvider;
 import data.Serializer;
-import engine.GameState;
+import engine.GamePart;
 import gamePlayer.keyBindings.KeyInputDictionary;
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
@@ -15,7 +15,7 @@ public interface ButtonData {
 	public Stage getStage();
 	public String getMostRecentFile();
 	public String getCurrentGameName();
-	public GameState getGameState();
+	public GamePart getGamePart();
 	public void clearHighScores();
 	public void addToRoot(Node node);
 	public KeyInputDictionary getKeyBindings();

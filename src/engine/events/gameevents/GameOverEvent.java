@@ -2,7 +2,7 @@ package engine.events.gameevents;
 
 import engine.Engine;
 import engine.GameElement;
-import engine.GameState;
+import engine.GamePart;
 import engine.behaviors.Killable;
 
 public class GameOverEvent extends GameEvent{
@@ -15,7 +15,7 @@ public class GameOverEvent extends GameEvent{
 	}
 
 	@Override
-	public void execute(GameState state) {
+	public void execute(GamePart part) {
 		System.out.println("GAME OVER EVENT");
 		//state.setState(state.getGameMetaData().getLevel(0));
 //		if (state.getGameMetaData().getCurrentLevel() == state.getGameMetaData().getLevel(0)) {

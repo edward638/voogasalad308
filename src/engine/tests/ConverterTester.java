@@ -9,20 +9,20 @@ import authoring.AuthBehavior;
 import authoring.GameObject;
 import authoring.GameScene;
 import engine.GameElement;
-import engine.GameState;
+import engine.GamePart;
 import engine.authouringconversion.Converter2;
 import engine.behaviors.Behavior;
 import engine.behaviors.MandatoryBehavior;
 
 class ConverterTester {
-	GameState testState;
+	GamePart testPart;
 	Converter2 converter;
 	ModelGameState2 stateMaker;
 	
 	@BeforeEach
 	void setup() {
 		stateMaker = new ModelGameState2();
-		testState = stateMaker.getState();
+		testPart = stateMaker.getPart();
 		converter = new Converter2();
 	}
 	
@@ -56,7 +56,7 @@ class ConverterTester {
 	
 //	@Test
 	void testGameState2GameScene () {
-		printScene(converter.gameState2GameScene(testState));
+		printScene(converter.gamePart2GameScene(testPart));
 	}
 	
 	void printScene (GameScene scene) {
@@ -69,13 +69,13 @@ class ConverterTester {
 	
 	@Test
 	void testConvertAndBack () {
-		GameScene scene = converter.gameState2GameScene(testState);
-		GameState s2 = converter.gameScene2GameState(scene);
-		compareStates(testState, s2);
+		GameScene scene = converter.gamePart2GameScene(testPart);
+		GamePart s2 = converter.gameScene2GamePart(scene);
+		compareParts(testPart, s2);
 	}
 	
 
-	void compareStates(GameState s1, GameState s2) {
+	void compareParts(GamePart s1, GamePart s2) {
 		List <GameElement> s1elems = s1.getElements();
 		List <GameElement> s2elems = s2.getElements();
 		
@@ -91,7 +91,7 @@ class ConverterTester {
 		}
 	}
 	
-	boolean testStateEquality(GameState s1, GameState s2) {
+	boolean testPartEquality(GamePart s1, GamePart s2) {
 		List <GameElement> s1elems = s1.getElements();
 		List <GameElement> s2elems = s2.getElements();
 		if (s1elems.size() != s2elems.size()) {return false;}

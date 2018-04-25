@@ -2,7 +2,7 @@ package engine.events.gameevents;
 
 import java.util.Map;
 
-import engine.GameState;
+import engine.GamePart;
 
 public class MainCharacterInfoEvent extends GameEvent {
 	private Map<String, Object> properties;
@@ -12,8 +12,8 @@ public class MainCharacterInfoEvent extends GameEvent {
 	}
 
 	@Override
-	public void execute(GameState gameState) {
-		gameState.getMetaData().updateMainCharacterInfo(properties);
+	public void execute(GamePart gamePart) {
+		gamePart.getMetaData().updateMainCharacterInfo(properties);
 
 	}
 

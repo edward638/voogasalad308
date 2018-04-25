@@ -1,20 +1,19 @@
 
 package engine;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
-import data.GameLoader;
-import engine.behaviors.MainCharacter;
+import engine.audio.AudioManager;
+import engine.audio.AudioPlayer;
 import engine.events.elementevents.KeyInputEvent;
 import engine.events.elementevents.MouseInputEvent;
 import engine.events.elementevents.TimeEvent;
-import engine.tests.ModelGameState;
+import engine.tests.ModelGamePart1;
+import engine.tests.ModelGamePart2;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.scene.Group;
 import javafx.scene.SubScene;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
 
@@ -26,65 +25,40 @@ public class Engine implements EngineInterface{
     public static final double SUBSCENE_HEIGHT = 590;
 	
 	private Timeline animation;
-	private SubScene engineSubScene;
-	private Group subSceneRoot = new Group();
 	private GameState currentGameState;
 	private DisplayState displayState;
 	private EventManager2 eventManager;
+	
 	private AudioManager audioManager;
 	private String musicPath = "data/music/WiiShopChannelMusic.mp3";
 	private AudioPlayer audioPlayer;
 	
-	
-	/**
-	 * NEW way to instantiate engine with a MetaData object
-	 * @param gamePath
-	 */
-	public Engine(GameMetaData metaData) {
-		currentGameState = new GameState(metaData);
-		currentGameState.setState(metaData.getCurrentLevel());
-		displayState = new DisplayState(currentGameState, metaData.getGameName());
-		eventManager = new EventManager2(currentGameState);
-		audioPlayer = new AudioPlayer(musicPath, 0);
-		startAnimation();
-	}
-	
-	/**
-	 * OBSOLETE--do not use. instead, use Engine(GameMetaData metaData)
-	 * @param gamePath
-	 */
-	public Engine(String gamePath) {
-		ModelGameState modelGameState = new ModelGameState(); 
-		currentGameState = modelGameState.getState();
-		displayState = modelGameState.getDisplay();
-		eventManager = new EventManager2(currentGameState);
-		audioPlayer = new AudioPlayer(musicPath, 0);
-		startAnimation();
-	}
-	
-	/**
-	 * OBSOLETE--do not use. instead, use Engine(GameMetaData metaData)
-	 * @param gamePath
-	 */
-	public Engine(GameState g) {
-		currentGameState = g;
-		displayState = new DisplayState(g);
-		eventManager = new EventManager2(currentGameState);
-		audioManager = new AudioManager(1);
+	public Engine(String gameName) {
+		//currentGameState = CONSTRUCTED FROM BLACK BOX
+		currentGameState = new GameState(gameName);
+		GamePart modelGamePart1 = new ModelGamePart1().getGamePart();
+		GamePart modelGamePart2 = new ModelGamePart2().getGamePart();
+		List<GamePart> gameDataParts = new ArrayList<>();
+		gameDataParts.add(modelGamePart1);
+		gameDataParts.add(modelGamePart2);
+		for (GamePart gp : gameDataParts) {
+			if (!currentGameState.containsLevel(gp.getMyLevelID())) {
+				currentGameState.addLevel(gp.getMyLevelID());
+			}
+			currentGameState.getLevel(gp.getMyLevelID()).addGamePart(gp);
+			
+			if (gp.hasMainCharacter()) {
+				currentGameState.setCurrentGameLevel(currentGameState.getLevel(gp.getMyLevelID()));
+				currentGameState.getCurrentGameLevel().setCurrentGamePart(gp);
+			}
+		}
 		
+		displayState = new DisplayState(currentGameState.getCurrentGamePart(), gameName);
+		
+		eventManager = new EventManager2(currentGameState.getCurrentGamePart());
+		audioManager = new AudioManager(1);
 		audioPlayer = audioManager.newAudioPlayer(musicPath);
 		startAnimation();
-	}
-	
-	@Override
-	public void close() {
-		audioPlayer.stop();
-	}
-	
-	@Override
-	public SubScene getDisplay() {
-		engineSubScene = new SubScene(subSceneRoot, SUBSCENE_WIDTH, SUBSCENE_HEIGHT);
-		return engineSubScene;
 	}
 	
 	private void startAnimation() {
@@ -95,6 +69,23 @@ public class Engine implements EngineInterface{
         animation.getKeyFrames().add(frame);
         animation.play();
     }
+	
+	private void timeStep (double elapsedTime) {
+		double gameSteps = elapsedTime * currentGameState.getGameSpeed();
+    	eventManager.processElementEvent(new TimeEvent(gameSteps));
+    	displayState.update(currentGameState.getCurrentGamePart());
+    }
+	
+	@Override
+	public void close() {
+		audioPlayer.stop();
+	}
+	
+	@Override
+	public SubScene getDisplay() {
+		SubScene engineSubScene = new SubScene(displayState.getSubSceneRoot(), SUBSCENE_WIDTH, SUBSCENE_HEIGHT);
+		return engineSubScene;
+	}
 
 	@Override
 	public void handleKeyInput(KeyCode code) {
@@ -106,39 +97,6 @@ public class Engine implements EngineInterface{
 		eventManager.processElementEvent(new MouseInputEvent(x,y));
 	}
 	
-	public void timeStep (double elapsedTime) {
-		double gameSteps = elapsedTime * currentGameState.getGameSpeed();
-		currentGameState.incrementGameTime(gameSteps);
-    	eventManager.processElementEvent(new TimeEvent(gameSteps));
-    	displayState.updateImageElements(scrollingAroundMainCharacter(currentGameState));
-    	displayState.update(currentGameState);
-    	updateDisplay(displayState.newElements, displayState.removeElements);
-    }
-
-	protected void updateDisplay(List<ImageElement> newElements, List<ImageElement> removeElements) {
-		for (ImageView e:newElements) {
-			subSceneRoot.getChildren().add(e);
-		}
-		newElements.clear();
-		
-		for (ImageView e:removeElements) {
-			subSceneRoot.getChildren().remove(e);
-		}
-		removeElements.clear();
-	}
-	
-	private List<Double> scrollingAroundMainCharacter(GameState gameState) {
-		List<Double> offset = Arrays.asList(0.0,0.0);
-		for (GameElement e: gameState.getElements()) {
-			if (e.hasBehavior(MainCharacter.class)) {
-			
-				MainCharacter mc_props = (MainCharacter) e.getBehavior(MainCharacter.class);
-				offset = mc_props.getImageViewOffset(SUBSCENE_WIDTH, SUBSCENE_HEIGHT);
-			}
-		}
-		return offset;
-	}
-
 	@Override
 	public void setVolume(double newVolume) {
 		audioManager.setVolume(newVolume);
@@ -147,14 +105,10 @@ public class Engine implements EngineInterface{
 	@Override
 	public void pause() {
 		animation.pause();
-		
 	}
 
 	@Override
 	public void play() {
 		animation.play();
-		
 	}
-	
-	
 }

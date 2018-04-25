@@ -76,6 +76,7 @@ public class ModelGameState {
 		List<Double> direction = new ArrayList<>(); direction.add(1.0); direction.add(1.0);
 		GameElement block = new GameElement();
 		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, new RectangleShape(40.0, 40.0), "mario_block.png"));
+		//block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "mario_block.png"));
 		block.addBehavior(new TimeTracker(block));
 		block.addBehavior(new TimeRoutine(block, 5, true));
 		block.addBehavior(new TrackMainCharacter(block, getCreatedMario()));

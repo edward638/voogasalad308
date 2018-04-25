@@ -25,6 +25,7 @@ public class TriggerWindow extends VBox {
 	private Event currentEvent;
 	
 	private String kc;
+	private String collideObject;
 
 	private static final String KEYBOARD = "KeyInputEvent";
 	private static final String COLLISION = "CollisionEvent";
@@ -36,6 +37,7 @@ public class TriggerWindow extends VBox {
 		allGos = allGO;
 		epuc = myEPUC;
 		kc = "";
+		collideObject = "";
 		createVBox();
 	}
 
@@ -74,5 +76,13 @@ public class TriggerWindow extends VBox {
 	
 	public String currentObjectName() {
 		return gos.get(0).getName();
+	}
+	
+	public void setCollideObject(String goName) {
+		collideObject = goName;
+	}
+	
+	public String getCollideObject() {
+		return collideObject;
 	}
 }

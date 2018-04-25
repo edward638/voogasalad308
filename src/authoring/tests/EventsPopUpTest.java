@@ -19,12 +19,27 @@ public class EventsPopUpTest extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		ArrayList<GameObject> gos = new ArrayList<>();
-		GameObject go = new GameObject();
-		go.setName("CalvinBoi");
-		gos.add(go);
+		ArrayList<GameObject> gos1 = new ArrayList<>();
+		ArrayList<GameObject> gos2 = new ArrayList<>();
+		GameObject go1 = new GameObject();
+		go1.setName("CalvinBoi");
+		gos1.add(go1);
 		
-		EventsPopupRefactored epu = new EventsPopupRefactored(gos, gos);
+		GameObject go2 = new GameObject();
+		go2.setName("JeffreyBoi");
+		GameObject go3 = new GameObject();
+		go3.setName("EddieBoi");
+		GameObject go4 = new GameObject();
+		go4.setName("AugustoBoi");
+		GameObject go5 = new GameObject();
+		go5.setName("Mar10Boi");
+		gos2.add(go1);
+		gos2.add(go2);
+		gos2.add(go3);
+		gos2.add(go4);
+		gos2.add(go5);
+		
+		new EventsPopupRefactored(gos1, gos2);
 	}
 
 

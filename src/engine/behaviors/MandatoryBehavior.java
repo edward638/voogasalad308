@@ -17,9 +17,6 @@ public class MandatoryBehavior extends Behavior{
 	private String elementName;
 	private String imagePath;
 	
-	// Obsolete, use instance variables shapeType, displayWidth, displayHeight, hitBoxWidth, hitBoxHeight
-	private ShapeDefinition shapeDef;
-	
 	private String shapeType;
 	private Double displayWidth;
 	private Double displayHeight;
@@ -46,29 +43,12 @@ public class MandatoryBehavior extends Behavior{
 		imagePath = imagepath;
 	}
 	
-	/**
-	 * Obsolete, DO NOT USE in the future
-	 * 
-	 */
-	public MandatoryBehavior(GameElement ge, String name, Double startX, Double startY, ShapeDefinition shp, String imagepath, List<String> incomingTags) {
-		super(ge);
-		xPos = startX;
-		yPos = startY;
-		elementName = name;
-		shapeDef = shp;
-		imagePath = imagepath;
-	}
-	
-	public MandatoryBehavior(GameElement ge, String name, Double startX, Double startY, ShapeDefinition shp, String imagepath) {
-		this(ge, name, startX, startY, shp, imagepath, new ArrayList<String>());
-	}
-
 	public MandatoryBehavior(GameElement ge, String name, Double startX, Double startY) {
-		this(ge, name, startX, startY, new RectangleShape(100.0, 100.0), "data/images/mario_1.jpg");
+		this(ge, name, startX, startY, "rectangle", 100.0, 100.0, 100.0, 100.0, "data/images/mario_1.jpg");
 	}
 	
 	public MandatoryBehavior(GameElement ge, String name) {
-		this(ge, name, 0.0, 0.0, new RectangleShape(1.0, 1.0), "");
+		this(ge, name, 0.0, 0.0, "rectangle", 1.0, 1.0, 1.0, 1.0, "");
 	}
 	
 	public MandatoryBehavior(GameElement ge) {
@@ -93,46 +73,20 @@ public class MandatoryBehavior extends Behavior{
 	public Double getY() {
 		return yPos;
 	}
-	
-	
-	public String getImagePath() {
-		return imagePath;
-	}
+
 	public String getName() {
 		return elementName;
 	}
 	
-	// DO NOT USE THESE METHODS, USE METHODS BELOW
 	public void setWidth(Double newWidth) {
-		shapeDef = new RectangleShape(newWidth, getShape().getBoundsInLocal().getHeight());
-	}
-	
-	public void setHeight(Double newHeight) {
-		shapeDef = new RectangleShape(getShape().getBoundsInLocal().getWidth(), newHeight);
-	}
-	
-	public Shape getShape() {
-		return shapeDef.getShape(this);
-	}
-	
-	// NEW METHODS TO USE
-	public void newSetWidth(Double newWidth) {
 		displayWidth = newWidth;
 	}
 	
-	public void newSetHeight(Double newHeight) {
+	public void setHeight(Double newHeight) {
 		displayHeight = newHeight;
 	}
 	
-	public Double getDisplayWidth() {
-		return displayWidth;
-	}
-	
-	public Double getDisplayHeight() {
-		return displayHeight;
-	}
-	
-	public Shape newGetShape() {
+	public Shape getShape() {
 		if (shapeType.equals("rectangle")) {
 			return new Rectangle(xPos + (displayWidth - hitBoxWidth)/2, yPos + (displayHeight - hitBoxHeight)/2, hitBoxWidth, hitBoxHeight);
 		}

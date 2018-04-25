@@ -1,14 +1,9 @@
 
 package engine;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import engine.events.elementevents.KeyInputEvent;
 import engine.events.elementevents.MouseInputEvent;
 import engine.events.elementevents.TimeEvent;
-import engine.tests.ModelGamePart1;
-import engine.tests.ModelGamePart2;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.SubScene;

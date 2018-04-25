@@ -19,7 +19,7 @@ import javafx.scene.layout.VBox;
  * @author August Ning
  *
  */
-public class EventsPopupController extends Controller {
+public class EventsPopupController extends PopupController {
 	
 	private List<GameObject> gos;
 	private List<GameObject> allGos;   
@@ -30,7 +30,7 @@ public class EventsPopupController extends Controller {
 	private ResponseWindow responseWindow;
 	private GroovyWindow groovyWindow;
 
-	public EventsPopupController(List<GameObject> currentGos, List<GameObject> allGO) {
+	public EventsPopupController(List<GameObject> currentGos, List<GameObject> allGO){
 		gos = currentGos;
 		allGos = allGO;
 		initializeScreenComponents();

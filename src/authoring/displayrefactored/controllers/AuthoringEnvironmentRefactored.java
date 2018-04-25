@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import authoring.Game;
-import authoring.displayrefactored.AuthoringEnvironmentGUIRefactored;
 import authoring.displayrefactored.controllers.Controller;
 import authoring.displayrefactored.controllers.GameViewWindowController;
 import authoring.displayrefactored.controllers.LevelPanelController;
@@ -14,7 +13,6 @@ import javafx.scene.layout.Pane;
 
 public class AuthoringEnvironmentRefactored {
 
-	private AuthoringEnvironmentGUIRefactored authoringEnvironmentGUIRefactored;
 	private List<Controller> controllerList;
 	private Game game;
 	private GameViewWindowController gameViewWindowController;
@@ -24,7 +22,6 @@ public class AuthoringEnvironmentRefactored {
 	
 	public AuthoringEnvironmentRefactored(Game game) {
 		this.game = game;
-//		authoringEnvironmentGUIRefactored = new AuthoringEnvironmentGUIRefactored();
 		pane = new Pane();
 		pane.setPrefSize(ResourceBundleManager.getPosition("ENVIRONMENTSIZE_X"), ResourceBundleManager.getPosition("ENVIRONMENTSIZE_Y"));
 		pane.setStyle("-fx-border-color: black");
@@ -34,12 +31,12 @@ public class AuthoringEnvironmentRefactored {
 	
 	private void createControllers() {
 		controllerList = new ArrayList<>();
-		//TODO:
-		gameViewWindowController = new GameViewWindowController(game);
+//		//TODO:
+//		gameViewWindowController = new GameViewWindowController(game);
 		levelPanelController = new LevelPanelController(game);
-		objectInfoPanelController = new ObjectInfoPanelController(game);
-		controllerList.add(gameViewWindowController);
-		controllerList.add(objectInfoPanelController);
+//		objectInfoPanelController = new ObjectInfoPanelController(game);
+//		controllerList.add(gameViewWindowController);
+//		controllerList.add(objectInfoPanelController);
 		controllerList.add(levelPanelController);
 	}
 	

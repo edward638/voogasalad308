@@ -71,35 +71,7 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 	private void setActions() {
 		myAddLevelButton.setOnAction(e -> {
 			NewLevelPopupRefactored popupRefactored = new NewLevelPopupRefactored(controller);
-			
 		});
-		myAddGameObjectButton.setOnAction(e -> {
-			NewGameObjectPopupRefactored popupRefactored = new NewGameObjectPopupRefactored(controller);
-		});
-		myAddSceneBackgroundImageButton.setOnAction(e -> {
-			try {
-				FileChooser fileChooser = new FileChooser();
-				fileChooser.setTitle("Choose Object Image");
-				fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
-				File image = fileChooser.showOpenDialog(new Stage());
-
-				controller.addBackgroundImage(new Image(image.toURI().toString()));
-//				System.out.println("setOnAction");
-				
-				//put image.getName into SceneBackground
-			} catch (Exception exception) {
-				//do nothing
-				//this just means the user didn't choose an image
-		
-			}//
-		});
-		myDeleteObjectButton.setOnAction(e -> {
-			int index = myLevelObjects.getSelectionModel().getSelectedIndex();
-			controller.deleteGameObject(index);
-		});
-		
-		
-		
 	}
 	
 	@Override
@@ -108,16 +80,9 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 		BorderPane borderPane = getBorderPane();
 		initializeButtons();
 		initializeComboBoxes();
-		initializeListViews();
-		setActions();
-		
 		levelChooser = new HBox();
-		myVBox = new VBox();
-		myHBox = new HBox();
 		levelChooser.getChildren().addAll(myAddLevelButton, myLevelDropdown);
-		myHBox.getChildren().addAll(myAddGameObjectButton, myAddSceneBackgroundImageButton);
-		myVBox.getChildren().addAll(levelChooser, myLevelObjects, myHBox, myDeleteObjectButton);
-		borderPane.setCenter(myVBox);
+		borderPane.setCenter(levelChooser);
 		
 	}
 

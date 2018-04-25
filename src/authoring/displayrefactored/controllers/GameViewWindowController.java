@@ -1,32 +1,31 @@
 package authoring.displayrefactored.controllers;
 
 import authoring.Game;
-import authoring.displayrefactored.AuthoringEnvironmentGUIRefactored;
+import authoring.GameScene;
 import authoring.displayrefactored.authoringuicomponents.GameViewWindowRefactored;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.layout.Pane;
 
 public class GameViewWindowController extends Controller {
 	
-	Game game;
+	GameScene gameScene;
 	GameViewWindowRefactored gameViewWindowRefactored;
 	
-	public GameViewWindowController(Game game) {
+	public GameViewWindowController(GameScene gameScene) {
 		// TODO Auto-generated constructor stub
-		this.game = game;
+		this.gameScene = gameScene;
 	}
 
 	@Override
 	protected void initializeScreenComponents() {
 		// TODO Auto-generated method stub
 		gameViewWindowRefactored = new GameViewWindowRefactored(this);
-		
 	}
 
 	@Override
 	protected void setUpConnections() {
 		// TODO Auto-generated method stub
-		game.addObserver(gameViewWindowRefactored);
+		gameScene.addObserver(gameViewWindowRefactored);
 	}
 
 	@Override
@@ -39,8 +38,11 @@ public class GameViewWindowController extends Controller {
 
 	@Override
 	protected void refreshView() {
-		// TODO Auto-generated method stub
-		game.notifyMyObservers();
+	}
+	
+	public void setGameScene(GameScene gameScene) {
+		this.gameScene = gameScene;
+		setUpConnections();
 	}
 	
 	

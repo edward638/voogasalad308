@@ -1,7 +1,2 @@
-<<<<<<< HEAD
-
 Demo308
 
-=======
-Demo308Game
->>>>>>> b759ed6e2926dda3e068eea3e722ba5d0f5f6994

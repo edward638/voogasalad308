@@ -1,73 +1,81 @@
 package engine;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import data.ImageManager;
+import engine.behaviors.MainCharacter;
+import javafx.scene.Group;
 
 public class DisplayState {
-	private GameState gameState;
-	protected List<ImageElement> activeElements;
-	protected List<ImageElement> newElements;
-	protected List<ImageElement> removeElements;
+	public static final double SUBSCENE_WIDTH =  900;
+    public static final double SUBSCENE_HEIGHT = 590;
+	
+	private List<ImageElement> imageElements;
+	private Group subSceneRoot = new Group();
+	private ImageManager imageManager;
 	
 	public DisplayState (GameState gameState, String gameName) {
-		this.gameState = gameState;
-		activeElements = new ArrayList<>();
-		newElements = new ArrayList<>();
-		removeElements = new ArrayList<>();
-		for (GameElement e : gameState.getElements()) {
-			addNewElement(e);
+		imageManager = new ImageManager(gameName);
+		imageElements = new ArrayList<>();
+		
+		for(GameElement e : gameState.getCurrentGamePart().getElements()) {
+			addElementToDisplay(e);
+		}
+		gameState.clearAddToDisplay();
+	}
+	
+	private void addElementToDisplay(GameElement element) {
+		ImageElement imageElement = new ImageElement(element, imageManager);
+		imageElements.add(imageElement);
+		subSceneRoot.getChildren().add(imageElement);
+	}
+	
+	private void removeElementFromDisplay(GameElement element) {
+		List<ImageElement> toRemove = new ArrayList<>();
+		for (ImageElement i : imageElements) {
+			if (i.getReference() == element) {
+				toRemove.add(i);
+			}
+		}
+		for (ImageElement i : toRemove) {
+			imageElements.remove(i);
+			subSceneRoot.getChildren().remove(i);
 		}
 	}
 	
-	public DisplayState (GameState gameState) {
-		this.gameState = gameState;
-		activeElements = new ArrayList<>();
-		newElements = new ArrayList<>();
-		removeElements = new ArrayList<>();
-		for (GameElement e : gameState.getElements()) {
-			addNewElement(e);
-		}
+	public Group getSubSceneRoot() {
+		return subSceneRoot;
 	}
 	
 	public void update(GameState updatedGameState) {
-		for (GameElement e : updatedGameState.getNewElements()) {
-			addNewElement(e);
-		}
-		updatedGameState.getNewElements().clear();
-		for (GameElement e : updatedGameState.getRemoveElements()) {
-			removeElement(e);
-		}
-		updatedGameState.getRemoveElements().clear();
-	}
-	
-	public void addNewElement(GameElement element) {
-		if (!activeElements.stream().anyMatch(c -> c.getReference() == element)) {
-			ImageElement imageElement = new ImageElement(element, new ImageManager(gameState.gameName));
-			newElements.add(imageElement);
-			System.out.println("DisplayState addNewElement");
-			activeElements.add(imageElement);
-		}
-	}
-	
-	protected void removeElement(GameElement element) {
-		for (ImageElement i : activeElements) {
-			if (i.getReference() == element) {
-				removeElements.add(i);
-			}
-		}
-		for (ImageElement i : removeElements) {
-			activeElements.remove(i);
-		}
+		updateImageElements(scrollingAroundMainCharacter(updatedGameState.getCurrentGamePart()));
 		
-		//activeElements.stream().filter(c -> c.getReference() == element).map(c -> activeElements.remove(c));
-		//activeElements.stream().filter(c -> c.getReference() == element).map(c -> removeElements.add(c));
+		for (GameElement e : updatedGameState.getAddToDisplay()) {
+			addElementToDisplay(e);
+		}
+		updatedGameState.clearAddToDisplay();
+		for (GameElement e : updatedGameState.getRemoveFromDisplay()) {
+			removeElementFromDisplay(e);
+		}
+		updatedGameState.clearRemoveFromDisplay();
 	}
 
-	protected void updateImageElements(List<Double> mainCharacterLocation) {
-		for (ImageElement imageElement : activeElements) {
+	private void updateImageElements(List<Double> mainCharacterLocation) {
+		for (ImageElement imageElement : imageElements) {
 			imageElement.updateStateWithOffSet(mainCharacterLocation);
 		}
+	}
+	
+	private List<Double> scrollingAroundMainCharacter(GamePart gamePart) {
+		List<Double> offset = Arrays.asList(0.0,0.0);
+		for (GameElement e: gamePart.getElements()) {
+			if (e.hasBehavior(MainCharacter.class)) {
+				MainCharacter mc_props = (MainCharacter) e.getBehavior(MainCharacter.class);
+				offset = mc_props.getImageViewOffset(SUBSCENE_WIDTH, SUBSCENE_HEIGHT);
+			}
+		}
+		return offset;
 	}
 }

@@ -1,4 +1,4 @@
-package gamePlayer;
+package gamePlayer.keyBindings;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,7 +6,11 @@ import java.util.Set;
 
 import engine.Engine;
 import javafx.scene.input.KeyCode;
-
+/**
+ * Keeps track of what keys are matched to which other keys
+ * @author jeffreyli
+ *
+ */
 public class KeyInputDictionary {
 	Map<KeyCode, KeyCode> dictionary;
 	Engine engine;
@@ -20,6 +24,10 @@ public class KeyInputDictionary {
 
 		dictionary.remove(oldInput);
 		dictionary.put(input, mapTo);
+	}
+	
+	public boolean containsKey(KeyCode input) {
+		return dictionary.containsKey(input);
 	}
 
 	public void handleAction(KeyCode input) {

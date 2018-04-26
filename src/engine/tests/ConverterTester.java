@@ -8,27 +8,31 @@ import org.junit.jupiter.api.Test;
 import authoring.AuthBehavior;
 import authoring.GameObject;
 import authoring.GameScene;
+import authoring.tests.EventTranslationTest;
 import engine.GameElement;
 import engine.GamePart;
 import engine.authouringconversion.Converter2;
+import engine.authouringconversion.Printer;
 import engine.behaviors.Behavior;
 import engine.behaviors.MandatoryBehavior;
 
 class ConverterTester {
 	GamePart testPart;
 	Converter2 converter;
-	ModelGameState2 stateMaker;
+	ModelGamePart2 partMaker;
+	Printer printer;
 	
 	@BeforeEach
 	void setup() {
-		stateMaker = new ModelGameState2();
-		testPart = stateMaker.getPart();
+		partMaker = new ModelGamePart2();
+		testPart = partMaker.getGamePart();
 		converter = new Converter2();
+		printer = new Printer();
 	}
 	
 //	@Test
 	void testBehaviorEng2Auth () {
-		Behavior mand = stateMaker.getMario().getBehavior(MandatoryBehavior.class);
+		Behavior mand = partMaker.getMario().getBehavior(MandatoryBehavior.class);
 		printAuthBehavior(converter.behavior2AuthBehavior(mand));
 	}
 	
@@ -40,8 +44,15 @@ class ConverterTester {
 	
 //	@Test
 	void testGameElement2GameObject () {
-		GameElement mario = stateMaker.getMario();
+		GameElement mario = partMaker.getMario();
 		printGameObject(converter.gameElement2GameObject(mario));
+	}
+	
+	@Test
+	void testGameObject2GameElement() {
+		GameObject obj =  new EventTranslationTest().getCharacter();
+		GameElement ge = converter.gameObject2GameElement(obj);
+		printer.printGameElement(ge);
 	}
 	
 	void printGameObject (GameObject go) {
@@ -67,7 +78,7 @@ class ConverterTester {
 		System.out.println("Finished printing scene");
 	}
 	
-	@Test
+//	@Test
 	void testConvertAndBack () {
 		GameScene scene = converter.gamePart2GameScene(testPart);
 		GamePart s2 = converter.gameScene2GamePart(scene);

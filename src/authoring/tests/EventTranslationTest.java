@@ -10,9 +10,8 @@ import authoring.GameObject;
 import authoring.Property;
 
 public class EventTranslationTest {
-
-	public static void main(String args[]) {
-		
+	
+	public GameObject getCharacter() {
 		//moveable character that will jump on the w key
 		GameObject go = new GameObject();
 		go.setName("myObject");
@@ -40,12 +39,12 @@ public class EventTranslationTest {
 		Event keyInput = new Event();
 		keyInput.setEventType("engine.events.elementevents.KeyInputEvent");
 		keyInput.setTrigger("w");
+		
 		//this will be changed to GroovyAction 
 		EventResponse response = new EventResponse();
 		response.setMyContent("myObject.getBehaviors('MovableCharacter').jump()");
 		keyInput.addResponse(response);
 		go.addEvent(keyInput);
-		
+		return go;
 	}
-	
 }

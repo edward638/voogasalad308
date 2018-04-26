@@ -7,16 +7,16 @@ import authoring.Event;
 import authoring.GameObject;
 import authoring.GameScene;
 import engine.GameElement;
-import engine.GameState;
+import engine.GamePart;
 import engine.actions.Action;
 import engine.behaviors.Behavior;
 import engine.events.elementevents.ElementEvent;
 
 public class Printer {
 	
-	public void printState(GameState state ) {
-		System.out.println("GameState: " + state);
-		state.getElements().stream().forEach(el -> {printGameElement(el); System.out.println();});
+	public void printState(GamePart part ) {
+		System.out.println("GameState: " + part);
+		part.getElements().stream().forEach(el -> {printGameElement(el); System.out.println();});
 	}
 	
 	public void printScene (GameScene scene) {

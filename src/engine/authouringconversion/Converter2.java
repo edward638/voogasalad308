@@ -72,21 +72,17 @@ public class Converter2 {
 	}
 
 	public GamePart gameScene2GamePart(GameScene scene) {
-		GamePart part = new GamePart();
+		GamePart part = new GamePart(scene.getName(), "0");
 		for (GameObject go: scene.getMyObjects()) {
 			part.addGameElement(gameObject2GameElement(go));
 		}
-		printer.printState(state);
-		return state;
+		printer.printState(part);
+		return part;
 	}
 	
 	/*
 	 * Convert from game state to game scene
 	 */
-	public GameScene gameState2GameScene(GameState state) {
-		printPart(part);
-		return part;
-	}
 	
 	public GameScene gamePart2GameScene(GamePart part) {
 //		printState(state);
@@ -165,7 +161,9 @@ public class Converter2 {
 			authEvent.setEventType(response.getKey().getClass().getCanonicalName());
 			EventResponse authResp = new EventResponse();
 			authResp.setMyContent(groovyAction.getContent());
-			authEvent.addResponse(toAdd);
+			authEvent.addResponse(authResp);
+		}
+	}
 
 	private void printPart(GamePart part ) {
 		System.out.println("GameState: " + part);

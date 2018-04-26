@@ -18,6 +18,7 @@ import authoring.GameScene;
 import authoring.Property;
 import engine.EventResponder;
 import engine.GameElement;
+import engine.GamePart;
 import engine.GameState;
 import engine.actions.Action;
 import engine.actions.GroovyAction;
@@ -70,10 +71,10 @@ public class Converter2 {
 		return go;
 	}
 
-	public GameState gameScene2GameState(GameScene scene) {
-		GameState state = new GameState();
+	public GamePart gameScene2GamePart(GameScene scene) {
+		GamePart part = new GamePart();
 		for (GameObject go: scene.getMyObjects()) {
-			state.addGameElement(gameObject2GameElement(go));
+			part.addGameElement(gameObject2GameElement(go));
 		}
 		printer.printState(state);
 		return state;
@@ -83,8 +84,14 @@ public class Converter2 {
 	 * Convert from game state to game scene
 	 */
 	public GameScene gameState2GameScene(GameState state) {
+		printPart(part);
+		return part;
+	}
+	
+	public GameScene gamePart2GameScene(GamePart part) {
+//		printState(state);
 		GameScene scene = new GameScene("Default Name");
-		for (GameElement element: state.getElements()) {
+		for (GameElement element: part.getElements()) {
 			scene.addObject(gameElement2GameObject(element));
 		}
 		return scene;
@@ -146,6 +153,7 @@ public class Converter2 {
 		return authB;
 	}
 	
+
 	public void addResponsesEngine2Auth(GameElement ge, GameObject go) {
 		Map<ElementEvent, Action> responses = ge.getResponder().getResponses();
 		for (Entry<ElementEvent, Action> response: responses.entrySet()) {
@@ -158,6 +166,16 @@ public class Converter2 {
 			EventResponse authResp = new EventResponse();
 			authResp.setMyContent(groovyAction);
 			authEvent.addResponse(toAdd);
+
+	private void printPart(GamePart part ) {
+		System.out.println("GameState: " + part);
+		part.getElements().stream().forEach(el -> {printer.printGameElement(el); System.out.println();});
+	}
+	
+	private void printScene (GameScene scene) {
+		System.out.println("Printing Scene: " + scene.getName());
+		for (GameObject go: scene.getMyObjects()) {
+			printer.printGameObject(go);
 		}
 	}
 	

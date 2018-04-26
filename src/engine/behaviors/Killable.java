@@ -9,12 +9,14 @@ public class Killable extends Behavior{
 	private Double health;
 	private Double decayRate;
 	private Double lifeHealth;
+	private Double default_health;
 	
 	public Killable(GameElement ge, Double health, Double decayRate, Double lifeHealth) {
 		super(ge);
 		this.health = health;
 		this.decayRate = decayRate;
 		this.lifeHealth = lifeHealth;
+		default_health = lifeHealth;
 	}
 	
 	public Killable(GameElement ge, Double health, Double decayRate) {
@@ -31,20 +33,17 @@ public class Killable extends Behavior{
 	
 	public void reduceHealth(Double h) {
 		this.health -= h;
-		System.out.println("health less than 0 1");
-
 		if (health < 0) {
-			System.out.println("health less than 0");
+		//	System.out.println("health less than 0");
 			getParent().addGameEvent(new RemoveGameElementEvent(getParent()));
 			if (getParent().hasBehavior(MainCharacter.class)) {
-				System.out.println("The Game has ended");
 				getParent().addGameEvent(new GameOverEvent(getParent()));
 			}
 		}
 	}
 	
 	public void loseLife() {
-		System.out.println("Losing life: " + health);
+	//	System.out.println("Losing life: " + health);
 		reduceHealth(lifeHealth);
 	}
 	
@@ -58,6 +57,10 @@ public class Killable extends Behavior{
 	
 	public boolean isAlive() {
 		return (this.health>=0);
+	}
+	
+	public void revive() {
+		health = default_health;
 	}
 	
 }

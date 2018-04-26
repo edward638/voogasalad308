@@ -3,7 +3,7 @@ package data;
 import authoring.GameObject;
 import authoring.GameScene;
 import data.propertiesFiles.ResourceBundleManager;
-import engine.GameState;
+import engine.GamePart;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -46,8 +46,8 @@ public class GameLoader {
         return deserializer.getGameScenes(gameScenesLocation);
     }
 
-    public GameState getGameState(){
-    	return deserializer.getSaveState(gameSavesLocation);
+    public GamePart getGamePart(){
+    	return deserializer.getSavePart(gameSavesLocation);
     }
 
 }

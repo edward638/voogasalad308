@@ -2,112 +2,180 @@ package engine;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import engine.behaviors.MainCharacter;
+import engine.behaviors.ExitPortal;
 import engine.behaviors.MandatoryBehavior;
+import engine.tests.ModelGamePart1;
+import engine.tests.ModelGamePart2;
+import engine.audio.AudioManager;
 
-public class GameState{
-	private List<GameElement> elements;
-	private List<GameElement> newElements;
-	private List<GameElement> removeElements;
-	private double gameSpeed;
-	private double gameTime;
-	private GameMetaData metaData;
+public class GameState {
+	private List<GameLevel> gameLevels;
+	private GameLevel currentGameLevel;
+	private final double gameSpeed = 2;
+	private String gameName;
 	
-	protected String gameName = "enginetestmario";
+	private List<GameElement> addToDisplay;
+	private List<GameElement> removeFromDisplay;
 	
-	public GameState() {
-		//Talk to game data about reading info from file
-		gameSpeed = 1;
-		gameTime = 0;
-		elements = new ArrayList<>();
-		newElements = new ArrayList<>();
-		removeElements = new ArrayList<>();
-	}
+	private AudioManager audioManager;
+	private String musicPath = "data/music/WiiShopChannelMusic.mp3";
 
-	public void incrementGameTime(double timeElapsed) {
-		gameTime+=timeElapsed;
+	public GameState(String gameName) {
+		this.gameName = gameName;
+		gameLevels = new ArrayList<>();
+		addToDisplay = new ArrayList<>();
+		removeFromDisplay = new ArrayList<>();
+		audioManager = new AudioManager(1);
+		audioManager.newAudioPlayer(musicPath);
+		
+		constructGameState(loadGame(this.gameName));
 	}
 	
-	public double getGameTime() {
-		return gameTime;
+	/* ***************************To Be Replaced With Load From Game Data*************************** */
+	private List<GamePart> loadGame(String gameName) {
+		GamePart modelGamePart1 = new ModelGamePart1().getGamePart();
+		GamePart modelGamePart2 = new ModelGamePart2().getGamePart();
+		List<GamePart> gameDataParts = new ArrayList<>();
+		gameDataParts.add(modelGamePart1);
+		gameDataParts.add(modelGamePart2);
+		return gameDataParts;
+	}
+	/* ***************************To Be Replaced With Load From Game Data*************************** */
+	
+	private void constructGameState(List<GamePart> gameDataParts) {
+		for (GamePart gp : gameDataParts) {
+			if (!this.containsLevel(gp.getMyLevelID())) {
+				this.addLevel(gp.getMyLevelID());
+			}
+			this.getLevel(gp.getMyLevelID()).addGamePart(gp);
+			
+			if (gp.hasMainCharacter()) {
+				this.setCurrentGameLevel(this.getLevel(gp.getMyLevelID()));
+				this.getCurrentGameLevel().setCurrentGamePart(gp);
+			}
+		}
+	}
+	
+	public AudioManager getAudioManager() {
+		return audioManager;
+	}
+	
+	public void addToDisplay (GameElement ge) {
+		addToDisplay.add(ge);
+	}
+	
+	protected List<GameElement> getAddToDisplay() {
+		return addToDisplay;
+	}
+	
+	protected void clearAddToDisplay() {
+		addToDisplay.clear();
+	}
+	
+	public void removeFromDisplay (GameElement ge) {
+		removeFromDisplay.add(ge);
+	}
+	
+	protected List<GameElement> getRemoveFromDisplay() {
+		return removeFromDisplay;
+	}
+	
+	protected void clearRemoveFromDisplay() {
+		removeFromDisplay.clear();
 	}
 	
 	protected double getGameSpeed() {
 		return gameSpeed;
 	}
-
-	public void addGameElement(GameElement gameElement) {
-		elements.add(gameElement);
-		newElements.add(gameElement);
+	
+	public GamePart getCurrentGamePart() {
+		return currentGameLevel.getCurrentGamePart();
 	}
 	
-	public void removeGameElement(GameElement gameElement) {
-		elements.remove(gameElement);
-		removeElements.add(gameElement);
-	}
-	
-	public List<GameElement> getElements() {
-		return elements;
-	}
-	
-	public List<GameElement> getNewElements() {
-		return newElements;
-	}
-	
-	public List<GameElement> getRemoveElements() {
-		return removeElements;
-	}
-	
-	public GameMetaData getGameMetaData() {
-		return metaData;
-	}
-
-	/**
-	 * Used for level changes
-	 * set the given game state to the new game state
-	 * @param level
-	 */
-	public void setState(GameState newState) {
-//		System.out.println(newState.toString());
-		elements = newState.getElements();
-//		List<GameElement> oldMainCharacters = getMainCharacters(elements);
-//		elements.removeAll(elements);
-//		List<GameElement> newMainCharacters = updateMainCharacters(oldMainCharacters,getMainCharacters(newState.getElements()));
-//		elements.addAll(newState.getElements());
-//		elements = replaceMainCharacters(elements, newMainCharacters);		
-	}
-	
-	private List<GameElement> getMainCharacters(List<GameElement> elements) {
-		return elements.stream()
-				.filter(e -> e.hasBehavior(MainCharacter.class))
-				.collect(Collectors.toList());
-	}
-	
-	private List<GameElement> updateMainCharacters(List<GameElement> oldMainCharacters, List<GameElement> newMainCharacters) {
-		for (GameElement omc: oldMainCharacters) {
-			for (GameElement nmc: newMainCharacters) {
-				omc.setPosition(nmc.getPosition());
+	public void changeCurrentGamePart(String newPartID, int portalID) {
+		for (GameLevel gl : gameLevels) {
+			for (GamePart newGamePart : gl.getGameParts()) {
+				if(newGamePart.getGamePartID().equals(newPartID)) {
+					GameElement mainCharacter = this.getCurrentGamePart().getMainCharacter();
+					this.getCurrentGamePart().removeGameElement(mainCharacter);
+					
+					for (GameElement element : this.getCurrentGamePart().getElements()) {
+						removeFromDisplay(element);
+					}
+					
+					setCurrentGameLevel(gl);
+					gl.setCurrentGamePart(newGamePart);
+					for (GameElement element : this.getCurrentGamePart().getElements()) {
+						if (element.hasBehavior(ExitPortal.class)) {
+							ExitPortal exitP = (ExitPortal) element.getBehavior(ExitPortal.class);
+							if (exitP.getPortalID() == portalID) {
+								mainCharacter.setPosition(element.getPosition());
+								MandatoryBehavior mb = (MandatoryBehavior) element.getBehavior(MandatoryBehavior.class);
+								mb.setPosition(mb.getX()-30, mb.getY());
+								break;
+							}
+						}
+					}
+					this.getCurrentGamePart().addGameElement(mainCharacter);
+					for (GameElement element : this.getCurrentGamePart().getElements()) {
+						addToDisplay(element);
+					}
+					
+				}
 			}
 		}
-		return oldMainCharacters;
 	}
 	
-	private List<GameElement> replaceMainCharacters(List<GameElement> tempNewState, List<GameElement> newMainCharacters) {
-		List<GameElement> newState = tempNewState.stream().filter(e -> !e.hasBehavior(MainCharacter.class)).collect(Collectors.toList());
-		newState.addAll(newMainCharacters);	
-		return newState;
+	public void resetLevel(String levelID) {
+		if(this.getCurrentGameLevel().getGameLevelID().equals(levelID)) {
+			for (GameElement element : this.getCurrentGamePart().getElements()) {
+				removeFromDisplay(element);
+			}
+		}
+		
+		GameLevel toReset = this.getLevel(levelID);
+		List<GamePart> gameDataParts = loadGame(this.gameName);
+		for(GamePart gamePart : toReset.getGameParts()) {
+			for (GamePart initialGamePart : gameDataParts) {
+				if (initialGamePart.getGamePartID().equals(gamePart.getGamePartID())) {
+					gamePart = initialGamePart;
+				}				
+				if (gamePart.hasMainCharacter()) {
+					toReset.setCurrentGamePart(gamePart);
+				}
+			}
+		}
+		
+		if(this.getCurrentGameLevel().getGameLevelID().equals(levelID)) {
+			for (GameElement element : this.getCurrentGamePart().getElements()) {
+				addToDisplay(element);
+			}
+		}
 	}
-
 	
-	public void removeAllElements() {
-		removeElements.addAll(elements);
-		elements.removeAll(elements);
+	protected void setCurrentGameLevel(GameLevel gl) {
+		currentGameLevel = gl;
 	}
 	
+	protected GameLevel getCurrentGameLevel() {
+		return currentGameLevel;
+	}
 	
+	protected boolean containsLevel(String levelID) {
+		return gameLevels.stream().anyMatch(gl -> gl.getGameLevelID().equals(levelID));
+	}
 	
+	protected GameLevel getLevel(String levelID) {
+		for (GameLevel gl : gameLevels) {
+			if (gl.getGameLevelID().equals(levelID))
+				return gl;
+		}
+		System.out.println("ERROR: Game Level Not Found");
+		return null;
+	}
 	
-
+	protected void addLevel(String levelID) {
+		gameLevels.add(new GameLevel(levelID));
+	}
 }

@@ -70,7 +70,7 @@ public class TimeRoutine extends Behavior{
 			if (timetracker.isMultipleOf(routineTime)) {
 				System.out.println("Adding game element");
 				age.addGameElement();
-				System.out.println("Added game element");
+				//System.out.println("Added game element");
 			}
 		}
 	}

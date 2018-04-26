@@ -20,7 +20,6 @@ public class TimeMovable implements Action{
 		b.move(te.getTime());
 		if (element.getIdentifier().equals("Block")) {
 			MandatoryBehavior mb = (MandatoryBehavior) element.getBehavior(MandatoryBehavior.class);
-			System.out.println("Position: " + mb.getPosition());
 		}
 	}
 }

@@ -164,7 +164,7 @@ public class Converter2 {
 			Event authEvent = new Event();
 			authEvent.setEventType(response.getKey().getClass().getCanonicalName());
 			EventResponse authResp = new EventResponse();
-			authResp.setMyContent(groovyAction);
+			authResp.setMyContent(groovyAction.getContent());
 			authEvent.addResponse(toAdd);
 
 	private void printPart(GamePart part ) {

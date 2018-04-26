@@ -107,5 +107,8 @@ public class ObjectInfoPanelController extends Controller {
 	public List<GameObject> getAllGameObjects() {
 		return gameScene.getMyObjects();
 	}
+	public void restorePreviousGameScene() {
+		gameScene.restorePreviousGameScene();
+	}
 
 }

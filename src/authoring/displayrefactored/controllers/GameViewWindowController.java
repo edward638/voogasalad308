@@ -60,6 +60,11 @@ public class GameViewWindowController extends Controller implements ViewRefreshI
 	}
 
 	@Override
+	public void backupGameScene() {
+		gameScene.backupGameScene();
+	}
+	
+	@Override
 	public void notifyObjectInfoObservers(GameObject gameObject) {
 		// TODO Auto-generated method stub
 		gameScene.setCurrentGameObject(gameObject);

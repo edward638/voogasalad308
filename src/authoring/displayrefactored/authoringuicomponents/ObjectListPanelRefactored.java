@@ -30,12 +30,14 @@ import javafx.stage.FileChooser.ExtensionFilter;
  */
 public class ObjectListPanelRefactored extends AuthoringUIComponentRefactored implements Observer {
 
-	private HBox myHBox;
+	private HBox upperHBox;
+	private HBox lowerHBox;
 	private VBox myVBox;
 	private Button myAddGameObjectButton;
 	private Button myAddSceneBackgroundImageButton;
 	private ListView<GameObject> myLevelObjects;
 	private Button myDeleteObjectButton;
+	private Button undoActionButton;
 	private ObjectInfoPanelController controller;
 	private ObjectInfoObservable observable = null;
 	
@@ -52,10 +54,11 @@ public class ObjectListPanelRefactored extends AuthoringUIComponentRefactored im
 		initializeListViews();
 		setActions();
 		myVBox = new VBox();
-		myHBox = new HBox();
-
-		myHBox.getChildren().addAll(myAddGameObjectButton, myAddSceneBackgroundImageButton);
-		myVBox.getChildren().addAll(myLevelObjects, myHBox, myDeleteObjectButton);
+		upperHBox = new HBox();
+		lowerHBox = new HBox();
+		upperHBox.getChildren().addAll(myAddGameObjectButton, myAddSceneBackgroundImageButton);
+		lowerHBox.getChildren().addAll(myDeleteObjectButton,undoActionButton);
+		myVBox.getChildren().addAll(myLevelObjects, upperHBox, lowerHBox);
 		borderPane.setCenter(myVBox);
 	}
 	
@@ -63,6 +66,7 @@ public class ObjectListPanelRefactored extends AuthoringUIComponentRefactored im
 		myAddGameObjectButton = new Button(ResourceBundleManager.getAuthoring("AddGameObjectButton"));
 		myAddSceneBackgroundImageButton = new Button(ResourceBundleManager.getAuthoring("AddSceneBackgroundImageButton"));
 		myDeleteObjectButton = new Button(ResourceBundleManager.getAuthoring("AddDeleteObjectButton"));
+		undoActionButton = new Button(ResourceBundleManager.getAuthoring("AddUndoActionButton"));
 	}
 	
 	private void initializeListViews() {
@@ -96,6 +100,9 @@ public class ObjectListPanelRefactored extends AuthoringUIComponentRefactored im
 		});
 		myLevelObjects.setOnMouseClicked(e->{
 			controller.setCurrentGameObject(myLevelObjects.getSelectionModel().getSelectedItem());
+		});
+		undoActionButton.setOnMouseClicked(e->{
+			controller.restorePreviousGameScene();
 		});
 	}
 

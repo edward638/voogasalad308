@@ -201,11 +201,13 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub
 		observable = (ObjectInfoObservable) arg0;
+		if (observable.getCurrentGameObject() != null) {
 		updateInfo(observable.getInstances(), observable.getCurrentGameObject(), observable.getCurrentImageName());
 		initializeVBox();
 		editEventsButton.setOnAction(e->{
 			new EventsPopupRefactored(gameObjects, observable.getMyObjects());
 		});
+		}
 	}
 
 }

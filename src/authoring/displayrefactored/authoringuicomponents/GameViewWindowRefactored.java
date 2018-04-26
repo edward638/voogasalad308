@@ -149,7 +149,7 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 		list = new ArrayList<>();
 		
 		for (SceneBackgroundImageSerializable s: serializables) {
-			list.add( controller.getBackgroundImage(s));
+			list.add(controller.getBackgroundImage(s));
 		}
 		
 		sceneBackground.clearPane();

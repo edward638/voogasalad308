@@ -16,10 +16,14 @@ public class NewGamePopupRefactored extends PopupRefactored {
 	private static final int ySize = 200;
 	HBox gameName;
 	HBox gameDescription;
+//	HBox gameSizeX;
+//	HBox gameSizeY;
 	VBox vBox;
 	Button newGameButton;
 	TextField gameNameText;
 	TextField gameDescriptionText;
+//	TextField gameSizeXText;
+//	TextField gameSizeYText;
 	Game game;
 	LoadAuthoringInterface loadAuthorer;
 	
@@ -35,6 +39,8 @@ public class NewGamePopupRefactored extends PopupRefactored {
 		vBox = new VBox();
 		gameName = new HBox();
 		gameDescription = new HBox();
+//		gameSizeX = new HBox();
+//		gameSizeY = new HBox();
 		newGameButton = new Button("Create game!");
 		
 		gameNameText = new TextField();
@@ -42,7 +48,13 @@ public class NewGamePopupRefactored extends PopupRefactored {
 		gameDescriptionText = new TextField();
 		gameDescription.getChildren().addAll(new Label("Description: "), gameDescriptionText);
 		
-		vBox.getChildren().addAll(gameName, gameDescription, newGameButton);
+//		gameSizeXText = new TextField();
+//		gameSizeX.getChildren().addAll(new Label("Game Size X: "), gameSizeXText);
+//		gameSizeYText = new TextField();
+//		gameSizeY.getChildren().addAll(new Label("Game Size Y: "), gameSizeYText);
+
+		
+		vBox.getChildren().addAll(gameName, gameDescription, /*gameSizeX, gameSizeY,*/ newGameButton);
 		
 		BorderPane borderPane = getPane();
 		borderPane.setCenter(vBox);

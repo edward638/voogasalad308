@@ -24,7 +24,6 @@ public class Main extends Application {
 		splash = new SplashScreen(stage);
 		stage.setTitle("VOOGA");
 		stage.setScene(splash.getSplashScreen());
-//		stage.setResizable(false);
 		stage.getIcons().add(createIcon());
 		stage.show();
 	}

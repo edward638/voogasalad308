@@ -2,6 +2,7 @@ package data;
 
 import authoring.GameObject;
 import authoring.GameScene;
+import authoring.GameSceneSerializable;
 import data.propertiesFiles.ResourceBundleManager;
 import engine.GamePart;
 
@@ -11,6 +12,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -75,7 +77,11 @@ public class GameSaver {
      * @param objectMap map of gamescenes (levels) to game objects in that level
      */
     public void gameAuthorToXML(List<GameScene> gameSceneList) throws IOException {
-        serializer.gameAuthorToXML(gameScenesLocation, gameSceneList);
+    	List<GameSceneSerializable> serializables = new ArrayList<>();
+    	for (GameScene scene: gameSceneList) {
+    		serializables.add(new GameSceneSerializable(scene));
+    	}
+        serializer.gameAuthorToXML(gameScenesLocation, serializables);
     }
 
 	/**

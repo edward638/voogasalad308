@@ -2,7 +2,12 @@ package data;
 
 import authoring.GameObject;
 import authoring.GameScene;
+<<<<<<< HEAD
 import engine.GamePart;
+=======
+import authoring.GameSceneSerializable;
+import engine.GameState;
+>>>>>>> AUTHORING
 
 import com.thoughtworks.xstream.XStream;
 //
@@ -43,11 +48,11 @@ public class Serializer {
 //        }
 //    }
 
-    public void gameAuthorToXML(String fileName, List<GameScene> gameSceneList) throws IOException {
+    public void gameAuthorToXML(String fileName, List<GameSceneSerializable> gameSceneList) throws IOException {
         String topLevelGameDestination = fileName;
         new File(topLevelGameDestination).mkdirs();
 
-        for (GameScene aGameSceneList : gameSceneList) {
+        for (GameSceneSerializable aGameSceneList : gameSceneList) {
             String levelGameDestination = topLevelGameDestination + "/" + SCENE + gameSceneList.indexOf(aGameSceneList);
             String xmlString = xstream.toXML(aGameSceneList);
             stringToDom(xmlString, levelGameDestination + ".xml");

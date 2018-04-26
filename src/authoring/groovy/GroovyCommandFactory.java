@@ -13,7 +13,7 @@ import org.reflections.scanners.FieldAnnotationsScanner;
 import org.reflections.scanners.MethodAnnotationsScanner;
 import org.reflections.scanners.Scanner;
 
-import authoring.Behavior;
+import authoring.AuthBehavior;
 
 /** 
  * 
@@ -55,7 +55,7 @@ public class GroovyCommandFactory {
     		return behaviorFields;
     }
     
-    public List<Field> getFields(Behavior behavior) {
+    public List<Field> getFields(AuthBehavior behavior) {
     		for (Class<?> c : behaviorFields.keySet()) {
     			if (navigateMap(behavior.getName(), c)) {
     				return behaviorFields.get(c);
@@ -64,7 +64,7 @@ public class GroovyCommandFactory {
     		return null;
     }
     
-    public List<Method> getMethods(Behavior behavior) {
+    public List<Method> getMethods(AuthBehavior behavior) {
 		for (Class<?> c : behaviorMethods.keySet()) {
 			if (navigateMap(behavior.getName(), c)) {
 				return behaviorMethods.get(c);

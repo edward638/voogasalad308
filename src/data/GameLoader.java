@@ -2,6 +2,7 @@ package data;
 
 import authoring.GameObject;
 import authoring.GameScene;
+import authoring.GameSceneSerializable;
 import data.propertiesFiles.ResourceBundleManager;
 import engine.GamePart;
 
@@ -10,6 +11,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -43,7 +45,11 @@ public class GameLoader {
      * @return map
      */
     public List<GameScene> getGameScenes(){
-        return deserializer.getGameScenes(gameScenesLocation);
+    	List<GameScene> list = new ArrayList<>();
+        for (GameSceneSerializable s : deserializer.getGameSceneSerializables(gameScenesLocation)) {
+        	list.add(new GameScene(s));
+        }
+        return list;
     }
 
     public GamePart getGamePart(){

@@ -2,7 +2,12 @@ package data;
 
 import authoring.GameObject;
 import authoring.GameScene;
+<<<<<<< HEAD
 import engine.GamePart;
+=======
+import authoring.GameSceneSerializable;
+import engine.GameState;
+>>>>>>> AUTHORING
 
 import com.thoughtworks.xstream.XStream;
 
@@ -51,16 +56,16 @@ public class Deserializer {
 //        return objectMap;
 //    }
 
-    public List<GameScene> getGameScenes(String filename){
+    public List<GameSceneSerializable> getGameSceneSerializables(String filename){
         File directory = new File(filename);
         File[] directoryListing = directory.listFiles();
-        ArrayList<GameScene> list = new ArrayList<>();
+        List<GameSceneSerializable> list = new ArrayList<>();
         
         if (directoryListing != null){
             for (File level : directoryListing){
                 String path = level.getAbsolutePath();
 //                System.out.println(path);
-                list.add(retrieveGameScene(path));
+                list.add(retrieveGameSceneSerializable(path));
             }
         }
         return list;
@@ -95,9 +100,9 @@ public class Deserializer {
      * @param fileName name of gamescene file;
      * @return GameScene
      */
-    private GameScene retrieveGameScene(String fileName) {
+    private GameSceneSerializable retrieveGameSceneSerializable(String fileName) {
         File file = new File(fileName);
-        return (GameScene) xstream.fromXML(convertXMLFileToString(file));
+        return (GameSceneSerializable) xstream.fromXML(convertXMLFileToString(file));
     }
     
     public GamePart getSavePart(String fileName) {

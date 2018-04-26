@@ -17,6 +17,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
+/**
+ * 
+ * @author Edward Zhuang
+ *
+ */
 public class LevelPanelController extends Controller {
 
 	SceneManager sceneManager;
@@ -60,8 +65,6 @@ public class LevelPanelController extends Controller {
 		levelPanelRefactored.AttachToPane(pane, x, y);	
 	}
 	
-	
-	
 	@Override
 	protected void refreshView() {
 		
@@ -69,8 +72,8 @@ public class LevelPanelController extends Controller {
 	
 	public void addLevel(String name, int level) {
 		GameScene scene = sceneManager.makeScene(name, level);
-		sceneManager.setCurrentScene(scene);
-		levelPanelRefactored.updateLevelDropdown(level - 1, scene);
+		setLevel(scene);
+//		levelPanelRefactored.updateLevelDropdown(level - 1, scene);
 	}
 	
 	public void setLevel(GameScene gameScene) {

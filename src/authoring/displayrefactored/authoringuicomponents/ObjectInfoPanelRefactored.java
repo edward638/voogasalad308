@@ -28,6 +28,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * 
+ * @author Edward Zhuang
+ *
+ */
 public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored implements Observer {
 
 	private ScrollPane myScrollPane;
@@ -103,7 +108,7 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 		});
 
 		editEventsButton.setOnAction(e -> {
-			new EventsPopupRefactored(list, controller.getAllGameObjects());
+//			new EventsPopupRefactored(list, controller.getAllGameObjects());
 		});
 
 		duplicateButton.setOnAction(e -> {
@@ -125,7 +130,6 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 		gameObjects = list;
 
 		objectName.setText("Name: " + current.getName());
-
 		imageView = new ImageView(controller.getImage(imageName));
 		imageView.setPreserveRatio(true);
 		imageView.setFitWidth(200);
@@ -137,18 +141,16 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 		List<ObjectCoordinatesInsertion> insertions = new ArrayList<>();
 
 		for (GameObject gameObject : list) {
-
 			insertions.add(new ObjectCoordinatesInsertion(gameObject,
 					(Double) gameObject.getMandatoryBehavior().getProperty("xPos").getValue(),
 					(Double) gameObject.getMandatoryBehavior().getProperty("yPos").getValue()));
-
 		}
 
 		ObservableList<ObjectCoordinatesInsertion> observableInsertions = FXCollections.observableArrayList(insertions);
 
-//		System.out.println(observableInsertions);
-
 		gameObjectCoordinates.setItems(observableInsertions);
+
+		
 	}
 
 	private void setupTableColumns() {
@@ -199,8 +201,13 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub
 		observable = (ObjectInfoObservable) arg0;
+		if (observable.getCurrentGameObject() != null) {
 		updateInfo(observable.getInstances(), observable.getCurrentGameObject(), observable.getCurrentImageName());
 		initializeVBox();
+		editEventsButton.setOnAction(e->{
+			new EventsPopupRefactored(gameObjects, observable.getMyObjects());
+		});
+		}
 	}
 
 }

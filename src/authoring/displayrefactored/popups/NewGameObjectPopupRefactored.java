@@ -19,6 +19,11 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 
+/**
+ * 
+ * @author Edward Zhuang
+ *
+ */
 public class NewGameObjectPopupRefactored extends PopupRefactored {
 
 	private static final int xSize = 400;

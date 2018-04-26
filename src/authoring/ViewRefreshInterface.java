@@ -4,4 +4,5 @@ public interface ViewRefreshInterface {
 
 	void notifyObjectInfoObservers(GameObject gameObject);
 	
+	void backupGameScene();
 }

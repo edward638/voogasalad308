@@ -1,5 +1,7 @@
 package authoring.displayrefactored.controllers;
 
+import java.util.List;
+
 import authoring.AuthBehavior;
 import authoring.Game;
 import authoring.GameObject;
@@ -13,6 +15,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
+
+/**
+ * 
+ * @author Edward Zhuang
+ *
+ */
 public class ObjectInfoPanelController extends Controller {
 
 	GameScene gameScene;
@@ -97,7 +105,10 @@ public class ObjectInfoPanelController extends Controller {
 //		game.duplicateGameObject();
 	}
 	public List<GameObject> getAllGameObjects() {
-		return game.getGameObjects();
+		return gameScene.getMyObjects();
+	}
+	public void restorePreviousGameScene() {
+		gameScene.restorePreviousGameScene();
 	}
 
 }

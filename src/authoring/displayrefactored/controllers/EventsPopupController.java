@@ -31,6 +31,7 @@ public class EventsPopupController extends Controller {
 	private GroovyWindow groovyWindow;
 
 	public EventsPopupController(List<GameObject> currentGos, List<GameObject> allGO) {
+		super();
 		gos = currentGos;
 		allGos = allGO;
 		initializeScreenComponents();

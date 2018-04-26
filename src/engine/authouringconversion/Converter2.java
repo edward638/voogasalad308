@@ -4,11 +4,16 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.stream.Collectors;
+
+import org.reflections.Reflections;
 
 import authoring.AuthBehavior;
 import authoring.Event;
@@ -19,12 +24,12 @@ import authoring.Property;
 import engine.EventResponder;
 import engine.GameElement;
 import engine.GamePart;
-import engine.GameState;
 import engine.actions.Action;
 import engine.actions.GroovyAction;
 import engine.behaviors.Behavior;
 import engine.behaviors.MandatoryBehavior;
 import engine.events.elementevents.ElementEvent;
+import engine.events.elementevents.TimeEvent;
 
 
 /** 
@@ -68,7 +73,33 @@ public class Converter2 {
 			if (engB.getClass().equals(MandatoryBehavior.class)) { continue;}
 			go.addBehavior(behavior2AuthBehavior(engB));
 		}
+		
+		Reflections reflections = new Reflections(ElementEvent.class.getPackage().getName());
+		Set<Class<? extends ElementEvent>> elementEventSubTypes = reflections.getSubTypesOf(ElementEvent.class);
+		for (Class<? extends ElementEvent> clazz: elementEventSubTypes) {
+			go.addEvent(getListOfSameEventResponses(clazz, ge));
+		}
 		return go;
+	}
+	
+	private Event getListOfSameEventResponses(Class<?> eventClass, GameElement ge) {
+		Map<ElementEvent, Action> responses = ge.getResponder().getResponses();
+		List<Event> authEvents = new ArrayList<>();
+		List<Entry<ElementEvent, Action>> relevantResponses = responses.entrySet().stream()
+				.filter(entry -> entry.getKey().getClass() == eventClass)
+				.filter(entry -> entry.getValue() instanceof GroovyAction)
+				.collect(Collectors.toList());
+		
+		Event authEvent = new Event();
+		authEvent.setEventType(eventClass.getCanonicalName());
+		relevantResponses.stream()
+			.forEach(entry -> {
+				EventResponse toAdd = new EventResponse();
+				toAdd.setMyContent(((GroovyAction)(entry.getValue())).getContent());
+				authEvent.addResponse(toAdd);
+			});
+		return authEvent;
+		
 	}
 
 	public GamePart gameScene2GamePart(GameScene scene) {
@@ -111,7 +142,9 @@ public class Converter2 {
 
 			if (Modifier.isPublic(f.getModifiers())) {continue;}
 			f.setAccessible(true);
+			System.out.println("f: " + f);
 			try {
+				System.out.println("authB.getProperty(f.getName()).getValue(): " + authB.getProperty(f.getName()));
 				f.set(newEngBehavior, authB.getProperty(f.getName()).getValue());
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 				// TODO Auto-generated catch block
@@ -165,17 +198,6 @@ public class Converter2 {
 		}
 	}
 
-	private void printPart(GamePart part ) {
-		System.out.println("GameState: " + part);
-		part.getElements().stream().forEach(el -> {printer.printGameElement(el); System.out.println();});
-	}
-	
-	private void printScene (GameScene scene) {
-		System.out.println("Printing Scene: " + scene.getName());
-		for (GameObject go: scene.getMyObjects()) {
-			printer.printGameObject(go);
-		}
-	}
 	
 	/*
 	 * Convert an authoring EventResponse object, defining how an object responds 

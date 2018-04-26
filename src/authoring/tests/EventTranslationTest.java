@@ -8,6 +8,7 @@ import authoring.Event;
 import authoring.EventResponse;
 import authoring.GameObject;
 import authoring.Property;
+import engine.behaviors.MovableCharacter;
 
 public class EventTranslationTest {
 	
@@ -22,7 +23,7 @@ public class EventTranslationTest {
 		Set<Property> moveProps = new HashSet<>();
 		moveProps.add(y);
 		moveProps.add(x);
- 		AuthBehavior movableCharacter = new AuthBehavior("MovableCharacter", moveProps);
+ 		AuthBehavior movableCharacter = new AuthBehavior(MovableCharacter.class.getCanonicalName(), moveProps);
 		go.addBehavior(movableCharacter);
 		Property xPos = new Property("xPos", Double.class);
 		xPos.setValue(5.0);

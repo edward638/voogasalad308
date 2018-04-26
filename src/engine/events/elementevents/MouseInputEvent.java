@@ -40,5 +40,10 @@ public class MouseInputEvent extends ElementEvent {
 		return false;
 	}
 	
+	@Override
+	public String getTriggerString() {
+		return "";
+	}
+	
 	
 }

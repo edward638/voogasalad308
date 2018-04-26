@@ -70,4 +70,10 @@ public class Printer {
 	public void printEvent(Event ev) {
 		System.out.println(ev);
 	}
+	
+	public void printPart(GamePart part ) {
+		System.out.println("GameState: " + part);
+		part.getElements().stream().forEach(el -> {printGameElement(el); System.out.println();});
+	}
+	
 }

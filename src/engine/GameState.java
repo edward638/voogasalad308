@@ -70,7 +70,7 @@ public class GameState{
 	 * @param level
 	 */
 	public void setState(GameState newState) {
-		System.out.println(newState.toString());
+//		System.out.println(newState.toString());
 		elements = newState.getElements();
 //		List<GameElement> oldMainCharacters = getMainCharacters(elements);
 //		elements.removeAll(elements);

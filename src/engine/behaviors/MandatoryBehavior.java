@@ -63,12 +63,13 @@ public class MandatoryBehavior extends Behavior{
 	}
 	
 	public Shape getShape() {
-//		System.out.println(shapeDef);
 		return shapeDef.getShape(this);
 	}
+	
 	public String getImagePath() {
 		return imagePath;
 	}
+	
 	public String getName() {
 		return elementName;
 	}

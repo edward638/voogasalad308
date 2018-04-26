@@ -19,7 +19,7 @@ public class GameScene extends Observable implements GameViewObservable, ObjectI
 	private List<GameObject> myObjects;
 	private Set<String> myObjectNames;
 	private GameObject currentGameObject;
-	
+	private GameSceneToCareTaker memento;
 
 	public GameScene(String name) {
 		myName = name;
@@ -123,6 +123,15 @@ public class GameScene extends Observable implements GameViewObservable, ObjectI
 	@Override
 	public List<SceneBackgroundImageSerializable> getBackgroundImageSerializables() {
 		return backgroundImageSerializables;
+	}
+	
+	public void backupGameScene() {
+		memento = new GameSceneMemento(myObjects, backgroundImageSerializables);
+	}
+	
+	public void restorePreviousGameScene() {
+		myObjects = ((GameSceneToOriginator)memento).getGameObjects();
+		backgroundImageSerializables = ((GameSceneToOriginator)memento).getSerializables();
 	}
 	
 	

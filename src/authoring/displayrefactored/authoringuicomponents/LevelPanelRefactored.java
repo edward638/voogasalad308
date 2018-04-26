@@ -25,6 +25,11 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
+/**
+ * 
+ * @author Edward Zhuang
+ *
+ */
 public class LevelPanelRefactored extends AuthoringUIComponentRefactored implements Observer{
 
 	private HBox levelChooser;
@@ -47,7 +52,9 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 	private void initializeComboBoxes() {
 		myLevelDropdown = new ComboBox<>();
 		myLevelDropdown.setPromptText(ResourceBundleManager.getAuthoring("SelectSceneDropDown"));
-		
+		myLevelDropdown.valueProperty().addListener((o,old,neww) -> {
+			controller.setLevel(neww);
+		});
 	}
 	
 	private void setActions() {
@@ -71,25 +78,26 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 	@Override
 	public void update(Observable o, Object arg) {
 		levelsObservable = (LevelsObservable) o;
-		updateLevelDropdown1(levelsObservable.getScenes());
-		updateLevelComboBox(levelsObservable.getCurrentSceneName());
+		updateLevelDropdown(levelsObservable.getScenes());
+		updateLevelName(levelsObservable.getCurrentSceneName());
+
 	}
 	
-	private void updateLevelComboBox(String currentSceneName) {
+	private void updateLevelName(String currentSceneName) {
 		myLevelDropdown.setPromptText(currentSceneName);
 		
 	}
 	
-	private void updateLevelDropdown1(List<GameScene> list) {
+	private void updateLevelDropdown(List<GameScene> list) {
 		myLevelDropdown.getItems().clear();
 		myLevelDropdown.getItems().addAll(list);
 	}
 
-	public void updateLevelDropdown(int i, GameScene scene) {
-		// TODO Auto-generated method stub
-		myLevelDropdown.getItems().add(i, scene);
-		
-	}
+//	public void updateLevelDropdown(int i, GameScene scene) {
+//		// TODO Auto-generated method stub
+//		myLevelDropdown.getItems().add(i, scene);
+//		
+//	}
 	
 	
 

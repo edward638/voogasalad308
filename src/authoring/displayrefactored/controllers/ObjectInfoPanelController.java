@@ -15,6 +15,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
+
+/**
+ * 
+ * @author Edward Zhuang
+ *
+ */
 public class ObjectInfoPanelController extends Controller {
 
 	GameScene gameScene;

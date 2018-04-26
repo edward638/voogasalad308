@@ -22,6 +22,12 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 
+
+/**
+ * 
+ * @author Edward Zhuang
+ *
+ */
 public class ObjectListPanelRefactored extends AuthoringUIComponentRefactored implements Observer {
 
 	private HBox myHBox;

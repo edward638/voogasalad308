@@ -11,6 +11,11 @@ import data.ImageManager;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.layout.Pane;
 
+/**
+ * 
+ * @author Edward Zhuang
+ *
+ */
 public class GameViewWindowController extends Controller implements ViewRefreshInterface {
 	
 	private GameScene gameScene;

@@ -12,6 +12,11 @@ import data.ImageManager;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.layout.Pane;
 
+/**
+ * 
+ * @author Edward Zhuang
+ *
+ */
 public class AuthoringEnvironmentRefactored {
 
 	private List<Controller> controllerList;

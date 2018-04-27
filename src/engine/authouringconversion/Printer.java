@@ -46,8 +46,10 @@ public class Printer {
 			System.out.println();
 			printEngineBehavior(b);
 		}
+		System.out.println ("Action Map:");
 		for (Entry<ElementEvent, Action> entry: ge.getResponder().getResponses().entrySet()) {
-			System.out.println("Action Map: " + entry.getKey());
+			System.out.println("  " + entry.getKey());
+			System.out.println("\t" + entry.getValue());
 		}
 	}
 	

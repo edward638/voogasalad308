@@ -4,10 +4,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import authoring.GameObject;
+import authoring.groovy.GroovyMethod;
 import engine.GameElement;
 import engine.events.gameevents.AddElementEvent;
 import engine.tests.ModelGamePart2;
-import engine.tests.ModelGameState2;
 
 public class Shooter extends Behavior {
 	
@@ -41,8 +41,9 @@ public class Shooter extends Behavior {
 		shoot(defaultVelocity, direction);
 	}
 	
+	@GroovyMethod
 	public void shootRight() {
-		shoot(defaultVelocity, Arrays.asList(-1.0, 0.0));
+		shoot(defaultVelocity, Arrays.asList(1.0, 0.0));
 	}
 	
 	public void shootLeft() {

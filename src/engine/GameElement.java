@@ -69,6 +69,18 @@ public class GameElement {
 		}
 	}
 	
+	public Behavior getBehavior (String className) {
+		String qualifiedName = Behavior.class.getPackageName() + "." + className;
+		try {
+			Class<?> clazz = Class.forName(qualifiedName);
+			return getBehavior(clazz);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new RuntimeException("Could not convert " + qualifiedName + " to a behavior type");
+		}
+	}
+	
 	
 	/*
 	 * Checks if this GameElement has a Behavior object of the requested type

@@ -4,6 +4,7 @@ import java.util.Map.Entry;
 
 import authoring.AuthBehavior;
 import authoring.Event;
+import authoring.EventResponse;
 import authoring.GameObject;
 import authoring.GameScene;
 import engine.GameElement;
@@ -53,6 +54,7 @@ public class Printer {
 	
 	
 	public void printGameObject (GameObject go) {
+		if (!(go.getName().contains("Mario"))) {return;}
 		System.out.println("--------------------------");
 		System.out.println("GameObject toString: " + go);
 		System.out.println("Game Object Behaviors: " + go.getBehaviors() + " \n");
@@ -62,17 +64,19 @@ public class Printer {
 		}
 		
 		for (Event ev: go.getEvents()) {
-			printEvent(ev);
-			System.out.println();
-		}
+			printEvent(ev);		}
 	}
 	
 	public void printEvent(Event ev) {
-		System.out.println(ev);
+		System.out.print(ev);
+		for (EventResponse resp: ev.getResponses()) {
+			System.out.println(resp.getMyContent() + ", ");
+		}
+		System.out.println();
 	}
 	
 	public void printPart(GamePart part ) {
-		System.out.println("GameState: " + part);
+		System.out.println("GamePart: " + part);
 		part.getElements().stream().forEach(el -> {printGameElement(el); System.out.println();});
 	}
 	

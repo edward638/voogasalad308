@@ -10,10 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.stream.Collectors;
-
-import org.reflections.Reflections;
 
 import authoring.AuthBehavior;
 import authoring.Event;
@@ -28,14 +25,17 @@ import engine.actions.Action;
 import engine.actions.GroovyAction;
 import engine.behaviors.Behavior;
 import engine.behaviors.MandatoryBehavior;
+import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.ElementEvent;
+import engine.events.elementevents.KeyInputEvent;
+import engine.events.elementevents.MouseInputEvent;
 import engine.events.elementevents.TimeEvent;
 
 
 /** 
  * Converts between authoring environment objects and engine objects
  * including 2 way between
- * GameScene <-> GameState
+ * GameScene <-> GamePart
  * GameObject <-> GameElement
  * AuthBehavior <-> Behavior
  * 
@@ -45,7 +45,7 @@ import engine.events.elementevents.TimeEvent;
 public class Converter2 {
 	
 	/*
-	 * converts an authoring environemnt GameObject to an
+	 * converts an authoring environment GameObject to an
 	 * engine environment GameElement
 	 */
 	Printer printer = new Printer();
@@ -68,15 +68,15 @@ public class Converter2 {
 		// Remove the default Authoring MandatoryBehavior
 		go.removeBehavior(go.getBehavior(MandatoryBehavior.class.getCanonicalName()));
 		// Translate MandatoryBehavior to AuthoringBehavior and add it
+		go.setName(ge.getIdentifier());
 		go.addBehavior(behavior2AuthBehavior(ge.getBehavior(MandatoryBehavior.class))); 
 		for (Behavior engB: ge.getAllBehaviors()) {
 			if (engB.getClass().equals(MandatoryBehavior.class)) { continue;}
 			go.addBehavior(behavior2AuthBehavior(engB));
 		}
 		
-		Reflections reflections = new Reflections(ElementEvent.class.getPackage().getName());
-		Set<Class<? extends ElementEvent>> elementEventSubTypes = reflections.getSubTypesOf(ElementEvent.class);
-		for (Class<? extends ElementEvent> clazz: elementEventSubTypes) {
+		List<Class<? extends Object>> elementEventClasses = Arrays.asList(TimeEvent.class, CollisionEvent.class, KeyInputEvent.class, MouseInputEvent.class);
+		for (Class<? extends Object> clazz: elementEventClasses ) {
 			go.addEvent(getListOfSameEventResponses(clazz, ge));
 		}
 		return go;
@@ -84,7 +84,6 @@ public class Converter2 {
 	
 	private Event getListOfSameEventResponses(Class<?> eventClass, GameElement ge) {
 		Map<ElementEvent, Action> responses = ge.getResponder().getResponses();
-		List<Event> authEvents = new ArrayList<>();
 		List<Entry<ElementEvent, Action>> relevantResponses = responses.entrySet().stream()
 				.filter(entry -> entry.getKey().getClass() == eventClass)
 				.filter(entry -> entry.getValue() instanceof GroovyAction)
@@ -96,6 +95,7 @@ public class Converter2 {
 			.forEach(entry -> {
 				EventResponse toAdd = new EventResponse();
 				toAdd.setMyContent(((GroovyAction)(entry.getValue())).getContent());
+				authEvent.setTrigger(entry.getKey().getTriggerString());
 				authEvent.addResponse(toAdd);
 			});
 		return authEvent;
@@ -116,8 +116,7 @@ public class Converter2 {
 	 */
 	
 	public GameScene gamePart2GameScene(GamePart part) {
-//		printState(state);
-		GameScene scene = new GameScene("Default Name");
+		GameScene scene = new GameScene(part.getGamePartID());
 		for (GameElement element: part.getElements()) {
 			scene.addObject(gameElement2GameObject(element));
 		}
@@ -185,6 +184,7 @@ public class Converter2 {
 
 	public void addResponsesEngine2Auth(GameElement ge, GameObject go) {
 		Map<ElementEvent, Action> responses = ge.getResponder().getResponses();
+		System.out.println("Responsess length: " + responses.keySet().size());
 		for (Entry<ElementEvent, Action> response: responses.entrySet()) {
 			if (!(response.getValue() instanceof GroovyAction)) {
 				continue;

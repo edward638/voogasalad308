@@ -25,7 +25,6 @@ public class Engine implements EngineInterface{
 	
 	public Engine(String gameName) {
 		currentGameState = new GameState(gameName);
-		
 		displayState = new DisplayState(currentGameState, gameName);
 		eventManager = new EventManager2(currentGameState);
 		gameMetaData = new GameMetaData(currentGameState);

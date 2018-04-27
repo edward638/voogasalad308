@@ -34,11 +34,11 @@ public class GamePart {
 		gameElements.remove(ge);
 	}
 	
-	protected String getGamePartID () {
+	public String getGamePartID () {
 		return gamePartID;
 	}
 	
-	protected String getMyLevelID() {
+	public String getMyLevelID() {
 		return myLevelID;
 	}
 	
@@ -50,5 +50,9 @@ public class GamePart {
 		return gameElements.stream()
 				.filter(e -> e.hasBehavior(MainCharacter.class))
 				.collect(Collectors.toList()).get(0);
+	}
+	
+	public String toString() {
+		return "GamePart ID: " + gamePartID + ", Level ID: " + myLevelID;
 	}
 }

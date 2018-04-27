@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.reflections.Reflections;
 
 import authoring.AuthBehavior;
 import authoring.GameObject;
@@ -15,16 +16,17 @@ import engine.authouringconversion.Converter2;
 import engine.authouringconversion.Printer;
 import engine.behaviors.Behavior;
 import engine.behaviors.MandatoryBehavior;
+import engine.events.elementevents.ElementEvent;
 
 class ConverterTester {
 	GamePart testPart;
 	Converter2 converter;
-	ModelGamePart2 partMaker;
+	ModelGamePart1 partMaker;
 	Printer printer;
 	
 	@BeforeEach
 	void setup() {
-		partMaker = new ModelGamePart2();
+		partMaker = new ModelGamePart1();
 		testPart = partMaker.getGamePart();
 		converter = new Converter2();
 		printer = new Printer();
@@ -42,13 +44,17 @@ class ConverterTester {
 		.forEach(prop -> System.out.println(prop));
 	}
 	
+	@Test
+	void testGettingClasses() {
+		
+	}
 //	@Test
 	void testGameElement2GameObject () {
 		GameElement mario = partMaker.getMario();
 		printGameObject(converter.gameElement2GameObject(mario));
 	}
 	
-	@Test
+//	@Test
 	void testGameObject2GameElement() {
 		GameObject obj =  new EventTranslationTest().getCharacter();
 		GameElement ge = converter.gameObject2GameElement(obj);
@@ -65,18 +71,12 @@ class ConverterTester {
 		}
 	}
 	
-//	@Test
-	void testGameState2GameScene () {
-		printScene(converter.gamePart2GameScene(testPart));
+	@Test
+	void testGamePart2GameScene () {
+		printer.printPart(testPart);
+		printer.printScene(converter.gamePart2GameScene(testPart));
 	}
 	
-	void printScene (GameScene scene) {
-		System.out.println("Printing Scene: " + scene.getName());
-		for (GameObject go: scene.getMyObjects()) {
-			printGameObject(go);
-		}
-		System.out.println("Finished printing scene");
-	}
 	
 //	@Test
 	void testConvertAndBack () {
@@ -91,7 +91,6 @@ class ConverterTester {
 		List <GameElement> s2elems = s2.getElements();
 		
 		System.out.println("State s1: ");
-
 		for (GameElement s1elem: s1elems) {
 			System.out.println(s1elem);
 		}

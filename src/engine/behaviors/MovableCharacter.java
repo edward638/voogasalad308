@@ -31,9 +31,9 @@ public class MovableCharacter extends Movable {
 	
 	public void jump() {
 		setYVelocity(getYVelocity() - 100);
-		if (!jumpAudioFilePath.equals("")) {
-			getParent().addGameEvent(new PlayAudioEvent(jumpAudioFilePath));
-		}
+//		if (!jumpAudioFilePath.equals("")) {
+//			getParent().addGameEvent(new PlayAudioEvent(jumpAudioFilePath));
+//		}
 	}
 
 }

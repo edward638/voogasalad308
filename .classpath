@@ -7,14 +7,14 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
-	<classpathentry kind="lib" path="lib/xmlpull-1.1.3.1.jar"/>
-	<classpathentry kind="lib" path="lib/xpp3_min-1.1.4c.jar"/>
-	<classpathentry kind="lib" path="lib/xstream-1.4.10.jar"/>
 	<classpathentry kind="lib" path="lib/reflection/annotations-2.0.1.jar"/>
-	<classpathentry kind="lib" path="lib/reflection/javassist-3.19.0-GA.jar"/>
 	<classpathentry kind="lib" path="lib/reflection/reflections-0.9.10.jar"/>
 	<classpathentry kind="lib" path="lib/groovy-all-2.4.12-indy.jar"/>
 	<classpathentry kind="lib" path="lib/groovy-doc.jar"/>
 	<classpathentry kind="lib" path="lib/groovy-src.jar"/>
+	<classpathentry kind="lib" path="C:/Users/calma/Downloads/slf4j-simple-1.7.25.jar"/>
+	<classpathentry kind="lib" path="C:/Users/calma/Downloads/dropbox-core-sdk-3.0.7/dropbox-core-sdk-3.0.7/dropbox-core-sdk-3.0.7.jar" sourcepath="C:/Users/calma/.m2/repository/com/dropbox/core/dropbox-core-sdk/3.0.7/dropbox-core-sdk-3.0.7-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/calma/Downloads/dropbox-core-sdk-3.0.7/dropbox-core-sdk-3.0.7/dropbox-core-sdk-3.0.7-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/calma/Downloads/dropbox-core-sdk-3.0.7/dropbox-core-sdk-3.0.7/lib/jackson-core-2.7.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

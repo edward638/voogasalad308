@@ -36,13 +36,14 @@ public class ResponseWindow extends VBox {
 		}
 		Text currGO = new Text("Current Game Object");
 		Text goName = new Text(gos.get(0).getName());
-		goName.setOnMouseClicked(e -> GOClicked());
+		goName.setOnMouseClicked(e -> GOClicked(goName.getText()));
 		this.getChildren().add(currGO);
 		this.getChildren().add(goName);
 	}
 	
-	private void GOClicked() {
+	private void GOClicked(String name) {
 		// implement in epuc, like add the name to the groovy window
+		epuc.concatenateString(name + ".", "ResponseWindow");
 	}
 
 }

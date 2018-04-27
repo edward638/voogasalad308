@@ -18,15 +18,12 @@ import gamePlayer.keyBindings.KeyboardBindingButton;
 import gamePlayer.buttons.NewGameButton;
 import gamePlayer.buttons.PauseButton;
 import gamePlayer.buttons.ReplayButton;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -57,6 +54,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 
 	private HUD hud;
 	private ConcreteHighScores highScores;
+	private VolumeSlider volumeSlider;
 
 	private EngineInterface engine;
 	private String currentGameName;
@@ -76,19 +74,11 @@ public class ConcreteGamePlayer implements GamePlayer {
 	private static final int BUTTONWIDTH = 235;
 	private static final int BUTTONHEIGHT = 60;
 
-	private static final double INITIALSOUNDLEVEL = 0.5;
-
-	private boolean musicOn;
-	private double soundLevel;
-
 	public ConcreteGamePlayer(Stage stage) {
 
 		resources = ResourceBundle.getBundle("gamePlayer.resources/ConcreteGP");
 
 		gameDescriptionProvider = new GameDescriptionProvider();
-
-		musicOn = true;
-		soundLevel = INITIALSOUNDLEVEL;
 
 		root = new Group();
 		myScene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND);
@@ -99,11 +89,103 @@ public class ConcreteGamePlayer implements GamePlayer {
 		root.getChildren().add(highScores.getScores());
 		keyInputDictionary = new KeyInputDictionary(engine);
 
-		buttonData = new ConcreteButtonData(stage, this, gameDescriptionProvider, root, keyInputDictionary);
-		setupGUIElements();
+		volumeSlider = new VolumeSlider(buttonData, engine);
+		buttonData = new ConcreteButtonData(stage, this, volumeSlider, root, keyInputDictionary);
+
+		initialiseGUIElements();
+		addGuiElementsToRoot();
 		setupUserNameInput();
 		setupUsernameText();
 
+	}
+
+	/**
+	 * initialises buttons on screen
+	 */
+	private void initialiseGUIElements() {
+		clearHighScoresButton = new ClearHighScoresButton(BUTTONXLOCATION,
+				Integer.parseInt(resources.getString("clearHighScoresButtonY")), BUTTONWIDTH, BUTTONHEIGHT, buttonData);
+
+		newGameButton = new NewGameButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("newGameButtonY")), 110,
+				BUTTONHEIGHT, buttonData);
+
+		loadButton = new LoadButton(1095, Integer.parseInt(resources.getString("loadButtonY")), 110, BUTTONHEIGHT,
+				buttonData);
+
+		toggleVolumeButton = new ToggleVolumeButton(BUTTONXLOCATION,
+				Integer.parseInt(resources.getString("toggleVolumeButtonY")), BUTTONWIDTH, BUTTONHEIGHT, buttonData);
+
+		saveButton = new SaveButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("saveButtonY")), BUTTONWIDTH,
+				BUTTONHEIGHT, buttonData);
+
+		replayButton = new ReplayButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("replayButtonY")),
+				BUTTONWIDTH, BUTTONHEIGHT, buttonData);
+
+		keyboardBindingButton = new KeyboardBindingButton(BUTTONXLOCATION,
+				Integer.parseInt(resources.getString("keybordBindingButtonY")), BUTTONWIDTH, BUTTONHEIGHT, buttonData);
+
+		pauseButton = new PauseButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("pauseButtonY")),
+				BUTTONWIDTH, BUTTONHEIGHT, buttonData);
+
+	}
+
+	private void addGuiElementsToRoot() {
+		root.getChildren().add(clearHighScoresButton);
+		root.getChildren().add(newGameButton);
+		root.getChildren().add(loadButton);
+		root.getChildren().add(toggleVolumeButton);
+		root.getChildren().add(saveButton);
+		root.getChildren().add(replayButton);
+		root.getChildren().add(keyboardBindingButton);
+		root.getChildren().add(pauseButton);
+		root.getChildren().add(volumeSlider.getVolumeText());
+		root.getChildren().add(volumeSlider.getSlider());
+	}
+
+	@Override
+	public void playGame(String file) {
+		root.getChildren().remove(gameDisplay);
+		root.getChildren().remove((Node) hud);
+		root.getChildren().remove(highScores.getScores());
+
+		if (engine != null) {
+			engine.close();
+		}
+		engine = new Engine(new ModelGameState2().getState());
+		buttonData.addEngine(engine);
+		keyInputDictionary.setGame(engine);
+		volumeSlider.setEngine(engine);
+		currentGameName = gameDescriptionProvider.getGameName(file);
+		hud = new ConcreteHUD(currentGameName);
+		highScores = new ConcreteHighScores(file);
+		buttonData.setHighScores(highScores);
+
+		// set everything into gamemetadata and then pass only metadata into engine
+
+		// concretePlayerUpdater = new ConcretePlayerUpdater(hud, highScores, userName);
+		//
+		// engine = new Engine(file, concretePlayerUpdater);
+		keyInputDictionary.setGame(engine);
+
+		buttonData.setCurrentGameName(currentGameName);
+		mostRecentFile = file;
+		buttonData.setMostRecentFile(mostRecentFile);
+		gameDisplay = engine.getDisplay();
+		gameDisplay.setWidth(Integer.parseInt(resources.getString("gameDisplayWidth")));
+		gameDisplay.setHeight(Integer.parseInt(resources.getString("gameDisplayHeight")));
+		gameDisplay.setLayoutX(Integer.parseInt(resources.getString("gameDisplayX")));
+		gameDisplay.setLayoutY(Integer.parseInt(resources.getString("gameDisplayY")));
+
+		myScene.setOnKeyPressed(e -> keyInputDictionary.handleAction(e.getCode()));
+
+		root.getChildren().add(gameDisplay);
+		root.getChildren().add((Node) hud);
+		root.getChildren().add(highScores.getScores());
+
+		root.getChildren().remove(pauseButton);
+		pauseButton = new PauseButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("pauseButtonY")),
+				BUTTONWIDTH, BUTTONHEIGHT, buttonData);
+		root.getChildren().add(pauseButton);
 	}
 
 	private void setupUsernameText() {
@@ -124,138 +206,9 @@ public class ConcreteGamePlayer implements GamePlayer {
 		result.ifPresent(name -> userName = result.get());
 	}
 
-	/*
-	 * DO WE NEED OUR OWN CLASS FOR THIS??? I STARTED A CLASS BUT IDK IF WE REALLY
-	 * NEED IT. NOTE: I DID NOT DO THE RESOURCE BUNDLE FOR THIS SHIT YET
-	 */
-	private void setupVolumeSlider() {
-		Slider slider = new Slider(0, 1, INITIALSOUNDLEVEL);
-		slider.setLayoutX(1080);
-		slider.setLayoutY(417);
-		slider.setMaxWidth(130);
-		slider.valueProperty().addListener(new ChangeListener<Number>() {
-			public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
-				System.out.println(new_val.doubleValue());
-				soundLevel = new_val.doubleValue();
-				// engine.setVolume(soundLevel);
-			}
-		});
-		root.getChildren().add(slider);
-
-	}
-
-	/**
-	 * initialises buttons on screen
-	 */
-	private void setupGUIElements() {
-		clearHighScoresButton = new ClearHighScoresButton(BUTTONXLOCATION,
-				Integer.parseInt(resources.getString("clearHighScoresButtonY")), BUTTONWIDTH, BUTTONHEIGHT, buttonData);
-		root.getChildren().add(clearHighScoresButton);
-
-		newGameButton = new NewGameButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("newGameButtonY")), 110,
-				BUTTONHEIGHT, buttonData);
-		root.getChildren().add(newGameButton);
-
-		loadButton = new LoadButton(1095, Integer.parseInt(resources.getString("loadButtonY")), 110, BUTTONHEIGHT,
-				buttonData);
-		root.getChildren().add(loadButton);
-
-		toggleVolumeButton = new ToggleVolumeButton(BUTTONXLOCATION,
-				Integer.parseInt(resources.getString("toggleVolumeButtonY")), BUTTONWIDTH, BUTTONHEIGHT, buttonData);
-		root.getChildren().add(toggleVolumeButton);
-
-		setupVolumeText();
-		setupVolumeSlider();
-
-		saveButton = new SaveButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("saveButtonY")), BUTTONWIDTH,
-				BUTTONHEIGHT, buttonData);
-		root.getChildren().add(saveButton);
-
-		replayButton = new ReplayButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("replayButtonY")),
-				BUTTONWIDTH, BUTTONHEIGHT, buttonData);
-		root.getChildren().add(replayButton);
-
-		keyboardBindingButton = new KeyboardBindingButton(BUTTONXLOCATION,
-				Integer.parseInt(resources.getString("keybordBindingButtonY")), BUTTONWIDTH, BUTTONHEIGHT, buttonData);
-		root.getChildren().add(keyboardBindingButton);
-
-		pauseButton = new PauseButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("pauseButtonY")),
-				BUTTONWIDTH, BUTTONHEIGHT, buttonData);
-		root.getChildren().add(pauseButton);
-	}
-
-	private void setupVolumeText() {
-		Label volumeText = new Label("Volume: ");
-		volumeText.setLayoutX(970);
-		volumeText.setLayoutY(410);
-		volumeText.setFont(Font.font("Verdana", 20));
-		root.getChildren().add(volumeText);
-
-	}
-
-	@Override
-	public void playGame(String file) {
-		root.getChildren().remove(gameDisplay);
-		root.getChildren().remove((Node) hud);
-		root.getChildren().remove(highScores.getScores());
-
-		if (engine != null) {
-			engine.close();
-		}
-		// engine = new Engine(file);
-
-		engine = new Engine(new ModelGameState2().getState());
-		buttonData.addEngine(engine);
-		keyInputDictionary.setGame(engine);
-		currentGameName = gameDescriptionProvider.getGameName(file);
-		hud = new ConcreteHUD(currentGameName);
-		highScores = new ConcreteHighScores(file);
-		buttonData.setHighScores(highScores);
-
-		// set everything into gamemetadata and then pass only metadata into engine
-
-		concretePlayerUpdater = new ConcretePlayerUpdater(hud, highScores, userName);
-		//
-		// engine = new Engine(file, concretePlayerUpdater);
-		keyInputDictionary.setGame(engine);
-
-		buttonData.setCurrentGameName(currentGameName);
-		mostRecentFile = file;
-		buttonData.setMostRecentFile(mostRecentFile);
-		gameDisplay = engine.getDisplay();
-		gameDisplay.setWidth(Integer.parseInt(resources.getString("gameDisplayWidth")));
-		gameDisplay.setHeight(Integer.parseInt(resources.getString("gameDisplayHeight")));
-		gameDisplay.setLayoutX(Integer.parseInt(resources.getString("gameDisplayX")));
-		gameDisplay.setLayoutY(Integer.parseInt(resources.getString("gameDisplayY")));
-
-		myScene.setOnKeyPressed(e -> keyInputDictionary.handleAction(e.getCode()));
-
-		root.getChildren().add(gameDisplay);
-		root.getChildren().add((Node) hud);
-		root.getChildren().add(highScores.getScores());
-
-		// setupButtons();
-		root.getChildren().remove(pauseButton);
-		pauseButton = new PauseButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("pauseButtonY")),
-				BUTTONWIDTH, BUTTONHEIGHT, buttonData);
-		root.getChildren().add(pauseButton);
-
-	}
-
 	@Override
 	public Scene getScene() {
 		return myScene;
-	}
-
-	@Override
-	public void toggleMusic() {
-		musicOn = !musicOn;
-
-	}
-
-	@Override
-	public Boolean getMusicOn() {
-		return musicOn;
 	}
 
 	public void closeEngine() {

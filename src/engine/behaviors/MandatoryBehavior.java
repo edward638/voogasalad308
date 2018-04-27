@@ -71,7 +71,7 @@ public class MandatoryBehavior extends Behavior{
 	public Double getY() {
 		return yPos;
 	}
-
+	
 	public String getName() {
 		return elementName;
 	}

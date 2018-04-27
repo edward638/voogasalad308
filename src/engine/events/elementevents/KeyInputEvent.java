@@ -27,5 +27,10 @@ public class KeyInputEvent extends ElementEvent {
 		return false;
 	}
 	
+	@Override
+	public String getTriggerString() {
+		return code.getName();
+	}
+	
 	
 }

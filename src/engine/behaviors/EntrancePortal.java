@@ -19,6 +19,10 @@ public class EntrancePortal extends Behavior{
 		this.portalID = portalID;
 	}
 	
+	public EntrancePortal(GameElement ge) {
+		super(ge);
+	}
+	
 	public void runPortal() {
 		if (active) {
 			changeLevel();

@@ -9,6 +9,9 @@ public class ExitPortal extends Behavior{
 		this.portalID = portalID;
 	}
 	
+	public ExitPortal(GameElement ge) {
+		this(ge, 1);
+	}
 	public int getPortalID() {
 		return portalID; 
 	}

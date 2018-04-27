@@ -79,10 +79,11 @@ class ConverterTester {
 	
 	
 	@Test
-	void testConvertAndBack () {
+	GamePart testConvertAndBack () {
 		GameScene scene = converter.gamePart2GameScene(testPart);
 		GamePart s2 = converter.gameScene2GamePart(scene);
 		compareParts(testPart, s2);
+		return s2;
 	}
 	
 

@@ -17,13 +17,17 @@ public class Printer {
 	
 	public void printState(GamePart part ) {
 		System.out.println("GameState: " + part);
-		part.getElements().stream().forEach(el -> {printGameElement(el); System.out.println();});
+		part.getElements().stream()
+		.filter(el -> el.getIdentifier().contains("Mario"))
+		.forEach(el -> {printGameElement(el); System.out.println();});
 	}
 	
 	public void printScene (GameScene scene) {
 		System.out.println("Printing Scene: " + scene.getName());
 		for (GameObject go: scene.getMyObjects()) {
-			printGameObject(go);
+			if (go.getName().contains("Mario")) {
+				printGameObject(go);
+			}
 		}
 		System.out.println("Finished printing scene");
 	}
@@ -70,7 +74,7 @@ public class Printer {
 	}
 	
 	public void printEvent(Event ev) {
-		System.out.print(ev);
+		System.out.println(ev);
 		for (EventResponse resp: ev.getResponses()) {
 			System.out.println(resp.getMyContent() + ", ");
 		}

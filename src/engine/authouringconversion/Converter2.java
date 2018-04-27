@@ -4,13 +4,12 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import authoring.AuthBehavior;
@@ -25,6 +24,7 @@ import engine.GamePart;
 import engine.actions.Action;
 import engine.actions.GroovyAction;
 import engine.behaviors.Behavior;
+import engine.behaviors.MainCharacter;
 import engine.behaviors.MandatoryBehavior;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.ElementEvent;
@@ -56,16 +56,23 @@ public class Converter2 {
 		// Must add MandatoryBehavior first
 		Behavior mandEngB = authBehavior2Behavior(go.getBehavior(MandatoryBehavior.class.getCanonicalName()), ge);
 		ge.addBehavior(mandEngB);
-		// Add remaining Behaviors
-		System.out.println("Before Loop: " + ge.getAllBehaviors());
-
+		// Add remaining Behaviors besides MainCharacter
+		
 		for (AuthBehavior authB: go.getBehaviors()) {
-			System.out.println("Part 1: Inside GO to GE Method: " + ge.getAllBehaviors());
-			if (authB.getName().contains("Mandatory")) {continue;}
-			System.out.println("Inside GO to GE Method: " + ge.getAllBehaviors());
-			System.out.println(authB.getName());
+			if (authB.getName().contains("Mandatory") || authB.getName().contains("MainCharacter")) {continue;}
 			ge.addBehavior(authBehavior2Behavior(authB, ge));
 		}
+		
+		// Add MainCharacter Behavior
+		Integer size = go.getBehaviors()
+				.stream()
+				.filter(authB -> authB.getName().contains("MainCharacter"))
+				.collect(Collectors.toList())
+				.size();
+		if (size > 0) {
+			ge.addBehavior(authBehavior2Behavior(go.getBehavior(MainCharacter.class.getCanonicalName()), ge));
+		}
+			
 		addResponsesAuth2Engine(ge, go);	
 		return ge;
 	}
@@ -83,10 +90,7 @@ public class Converter2 {
 			go.addBehavior(behavior2AuthBehavior(engB));
 		}
 		
-		List<Class<? extends Object>> elementEventClasses = Arrays.asList(TimeEvent.class, CollisionEvent.class, KeyInputEvent.class, MouseInputEvent.class);
-		for (Class<? extends Object> clazz: elementEventClasses ) {
-			go.addEvent(getListOfSameEventResponses(clazz, ge));
-		}
+		addResponsesEngine2Auth(ge, go);
 		return go;
 	}
 	
@@ -115,7 +119,6 @@ public class Converter2 {
 		for (GameObject go: scene.getMyObjects()) {
 			part.addGameElement(gameObject2GameElement(go));
 		}
-		printer.printState(part);
 		return part;
 	}
 	
@@ -136,7 +139,6 @@ public class Converter2 {
 	 */
 	public Behavior authBehavior2Behavior (AuthBehavior authB, GameElement ge) {
 		Behavior newEngBehavior;
-		System.out.println("auth2Engine behaviors: " + ge.getAllBehaviors());
 		try {
 			Constructor<?> use = getConstructor(Class.forName(authB.getName()));
 			newEngBehavior = (Behavior) use.newInstance(ge);
@@ -144,9 +146,7 @@ public class Converter2 {
 			e1.printStackTrace();
 			throw (new RuntimeException("Failed to instantiate newEngBehavior from " + authB.getName()));
 		}
-		System.out.println("auth2Engine behaviors: " + ge.getAllBehaviors());
 		Class<?> newEngBehaviorClass = newEngBehavior.getClass();
-		System.out.println("Instantiated: " + newEngBehaviorClass );
 		for (Field f: newEngBehaviorClass.getDeclaredFields()) {
 			if (Modifier.isPublic(f.getModifiers())) {continue;}
 			f.setAccessible(true);
@@ -159,7 +159,6 @@ public class Converter2 {
 				throw(new RuntimeException("Failed to set " + authB.getProperty(newEngBehaviorClass.getCanonicalName()).getValue() + " for " + f.getName() + " of " + newEngBehaviorClass));
 			}
 		}
-		System.out.println("auth2Engine behaviors: " + ge.getAllBehaviors() + "\n");
 		return newEngBehavior;
 		
 	}
@@ -168,7 +167,6 @@ public class Converter2 {
 	 * Gets the single GameElement constructor for a BehaviorConstructor
 	 */
 	private Constructor<?> getConstructor(Class<?> clazz) {
-		System.out.println(clazz);
 		Constructor<?>[] constructors = clazz.getConstructors();
 		return Arrays.stream(constructors)
 		.filter(cons -> cons.getParameterCount() == 1)
@@ -193,8 +191,8 @@ public class Converter2 {
 	
 
 	public void addResponsesEngine2Auth(GameElement ge, GameObject go) {
-		Map<ElementEvent, Action> responses = ge.getResponder().getResponses();
-		System.out.println("Responsess length: " + responses.keySet().size());
+		Map<ElementEvent, Action> responses = new HashMap<>();
+		responses.putAll(ge.getResponder().getResponses());
 		for (Entry<ElementEvent, Action> response: responses.entrySet()) {
 			if (!(response.getValue() instanceof GroovyAction)) {
 				continue;
@@ -202,9 +200,11 @@ public class Converter2 {
 			GroovyAction groovyAction = (GroovyAction) response.getValue();
 			Event authEvent = new Event();
 			authEvent.setEventType(response.getKey().getClass().getCanonicalName());
+			authEvent.setTrigger(response.getKey().getTriggerString());
 			EventResponse authResp = new EventResponse();
 			authResp.setMyContent(groovyAction.getContent());
 			authEvent.addResponse(authResp);
+			go.addEvent(authEvent);
 		}
 	}
 

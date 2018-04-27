@@ -9,9 +9,8 @@ import engine.GamePart;
 import engine.actions.ChangeLevel;
 import engine.actions.CollisionDamageAllSides;
 import engine.actions.CollisionKillable;
-import engine.actions.CollisionStopXMotion;
-import engine.actions.CollisionStopYMotion;
 import engine.actions.GroovyAction;
+import engine.behaviors.BlockLike;
 import engine.behaviors.EntrancePortal;
 import engine.behaviors.ExitPortal;
 import engine.behaviors.Gravity;
@@ -96,45 +95,23 @@ public class ModelGamePart1 {
 			mc.jump();
 		});
 		mario.addBehavior(new Shooter(mario));
-//		marioRoutines.addRoutine(2.0,  (e, ge) -> {
-//			Shooter s = (Shooter) mario.getBehavior(Shooter.class);
-//			s.shootRight();
-//		});
 		marioRoutines.addRoutine(2.0, new GroovyAction(
 				"Mario.getBehavior('Shooter').shootRight()"));
 		
-//		marioRoutines.addRoutine(7.0, (e, ge) -> {
-//			MovableCharacter mc = (MovableCharacter) mario.getBehavior(MovableCharacter.class);
-//			mc.setXVelocity(100.0);
-//		});
 		mario.addBehavior(new TimeRoutine2(mario));
 		
-//		mario.addEventResponse(new KeyInputEvent(KeyCode.W), (event, element) -> {
-//			MovableCharacter mov = (MovableCharacter) element.getBehavior(MovableCharacter.class);
-//			mov.jump();
-//		});
 		mario.addEventResponse(new KeyInputEvent(KeyCode.W), new GroovyAction(
 				"Mario.getBehavior('MovableCharacter').jump()"));
 		
 		
 		// Response to Right arrow key is to move right
-//		mario.addEventResponse(new KeyInputEvent(KeyCode.D), (event, element) -> {
-//			Movable mov = (Movable) element.getBehavior(Movable.class);
-//			mov.setXVelocity(200.0);
-//		});
 		mario.addEventResponse(new KeyInputEvent(KeyCode.D), new GroovyAction(
-				"Mario.getBehavior('Movable').setXVelocity(200.0)"));
+				"Mario.getBehavior('MovableCharacter').setXVelocity(200.0)"));
 		
 		// Response to Left arrow key is to move left
-//		mario.addEventResponse(new KeyInputEvent(KeyCode.A), (event, element) -> {
-//			Movable mov = (Movable) element.getBehavior(Movable.class);
-//			mov.setXVelocity(-200.0);
-//		});
 		mario.addEventResponse(new KeyInputEvent(KeyCode.A), new GroovyAction(
-				"Mario.getBehavior('Movable').setXVelocity(-200.0)"));
+				"Mario.getBehavior('MovableCharacter').setXVelocity(-200.0)"));
 		
-		mario.addEventResponse(new CollisionEvent(mario, CollisionEvent.VERTICALS, getBlock(0.0, 0.0), CollisionEvent.VERTICALS), new CollisionStopYMotion());
-		mario.addEventResponse(new CollisionEvent(mario, CollisionEvent.SIDES, getBlock(0.0, 0.0), CollisionEvent.SIDES), new CollisionStopXMotion());
 		mario.addEventResponse(new KeyInputEvent(KeyCode.P), new GroovyAction("Mario.getBehavior('MovableCharacter').jump()"));
 
 		return mario;
@@ -143,6 +120,7 @@ public class ModelGamePart1 {
 	public GameElement getBlock(Double xpos, Double ypos) {
 		GameElement block = new GameElement();
 		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "mario_block.png"));
+		block.addBehavior(new BlockLike(block));
 		return block;
 	}
 

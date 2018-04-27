@@ -49,8 +49,8 @@ public class GameElement {
 				.filter(b -> b.getClass() == behave.getClass())
 				.collect(Collectors.toList());
 		if (existing.size() > 0) {
-			behaviors.remove(existing.get(0));
-//			throw new TooManyBehaviorsException("Trying to add " + behave.getClass() + " to a GameElement that already has this behavior");
+//			behaviors.remove(existing.get(0));
+			throw new TooManyBehaviorsException("Trying to add " + behave.getClass() + " to a GameElement that already has this behavior");
 		}
 		behaviors.add(behave);
 	}

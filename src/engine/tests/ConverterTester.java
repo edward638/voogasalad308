@@ -78,7 +78,7 @@ class ConverterTester {
 	}
 	
 	
-//	@Test
+	@Test
 	void testConvertAndBack () {
 		GameScene scene = converter.gamePart2GameScene(testPart);
 		GamePart s2 = converter.gameScene2GamePart(scene);

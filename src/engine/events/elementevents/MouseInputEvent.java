@@ -11,6 +11,7 @@ public class MouseInputEvent extends ElementEvent {
 	}
 	
 	public MouseInputEvent(double x, double y) {
+		mouseLocation = new Point();
 		this.mouseLocation.setLocation(x, y);
 	}
 	

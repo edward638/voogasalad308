@@ -23,6 +23,7 @@ public class EventConverter {
 		} else if (eventTypeClass.contains("MouseInputEvent")) {
 			return toMouseInputEvent(authEvent);
 		}
+		return null;
 	}
 	
 	private TimeEvent toTimeEvent(Event authEvent) {

@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import authoring.AuthBehavior;
@@ -53,15 +54,22 @@ public class Converter2 {
 	public GameElement gameObject2GameElement(GameObject go) {
 		GameElement ge = new GameElement();
 		// Must add MandatoryBehavior first
-		Behavior engB = authBehavior2Behavior(go.getBehavior(MandatoryBehavior.class.getCanonicalName()), ge);
-		ge.addBehavior(engB);
+		Behavior mandEngB = authBehavior2Behavior(go.getBehavior(MandatoryBehavior.class.getCanonicalName()), ge);
+		ge.addBehavior(mandEngB);
 		// Add remaining Behaviors
+		System.out.println("Before Loop: " + ge.getAllBehaviors());
+
 		for (AuthBehavior authB: go.getBehaviors()) {
+			System.out.println("Part 1: Inside GO to GE Method: " + ge.getAllBehaviors());
 			if (authB.getName().contains("Mandatory")) {continue;}
+			System.out.println("Inside GO to GE Method: " + ge.getAllBehaviors());
+			System.out.println(authB.getName());
 			ge.addBehavior(authBehavior2Behavior(authB, ge));
 		}
+		addResponsesAuth2Engine(ge, go);	
 		return ge;
 	}
+	
 	
 	public GameObject gameElement2GameObject(GameElement ge) {
 		GameObject go = new GameObject();
@@ -128,6 +136,7 @@ public class Converter2 {
 	 */
 	public Behavior authBehavior2Behavior (AuthBehavior authB, GameElement ge) {
 		Behavior newEngBehavior;
+		System.out.println("auth2Engine behaviors: " + ge.getAllBehaviors());
 		try {
 			Constructor<?> use = getConstructor(Class.forName(authB.getName()));
 			newEngBehavior = (Behavior) use.newInstance(ge);
@@ -135,22 +144,22 @@ public class Converter2 {
 			e1.printStackTrace();
 			throw (new RuntimeException("Failed to instantiate newEngBehavior from " + authB.getName()));
 		}
-
+		System.out.println("auth2Engine behaviors: " + ge.getAllBehaviors());
 		Class<?> newEngBehaviorClass = newEngBehavior.getClass();
+		System.out.println("Instantiated: " + newEngBehaviorClass );
 		for (Field f: newEngBehaviorClass.getDeclaredFields()) {
-
 			if (Modifier.isPublic(f.getModifiers())) {continue;}
 			f.setAccessible(true);
-			System.out.println("f: " + f);
+//			System.out.println("f: " + f);
 			try {
-				System.out.println("authB.getProperty(f.getName()).getValue(): " + authB.getProperty(f.getName()));
+//				System.out.println("authB.getProperty(f.getName()).getValue(): " + authB.getProperty(f.getName()));
 				f.set(newEngBehavior, authB.getProperty(f.getName()).getValue());
 			} catch (IllegalArgumentException | IllegalAccessException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				throw(new RuntimeException("Failed to set " + authB.getProperty(newEngBehaviorClass.getCanonicalName()).getValue() + " for " + f.getName() + " of " + newEngBehaviorClass));
 			}
 		}
+		System.out.println("auth2Engine behaviors: " + ge.getAllBehaviors() + "\n");
 		return newEngBehavior;
 		
 	}
@@ -159,6 +168,7 @@ public class Converter2 {
 	 * Gets the single GameElement constructor for a BehaviorConstructor
 	 */
 	private Constructor<?> getConstructor(Class<?> clazz) {
+		System.out.println(clazz);
 		Constructor<?>[] constructors = clazz.getConstructors();
 		return Arrays.stream(constructors)
 		.filter(cons -> cons.getParameterCount() == 1)

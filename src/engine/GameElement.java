@@ -92,6 +92,16 @@ public class GameElement {
 			.collect(Collectors.toList()).size() > 0;
 	}
 	
+	public boolean hasBehavior(String className) {
+		String qualifiedName = MandatoryBehavior.class.getPackageName() + className;
+		try {
+			return hasBehavior(Class.forName(qualifiedName));
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			throw new RuntimeException("Could not find" + qualifiedName + " class");
+		}
+	}
+	
 	/*
 	 * Adds the ability for this game element to respond to an ElementEvent in a certain way
 	 */

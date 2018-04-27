@@ -25,9 +25,7 @@ public class Printer {
 	public void printScene (GameScene scene) {
 		System.out.println("Printing Scene: " + scene.getName());
 		for (GameObject go: scene.getMyObjects()) {
-			if (go.getName().contains("Mario")) {
-				printGameObject(go);
-			}
+			printGameObject(go);
 		}
 		System.out.println("Finished printing scene");
 	}
@@ -60,7 +58,7 @@ public class Printer {
 	
 	
 	public void printGameObject (GameObject go) {
-		if (!(go.getName().contains("Mario"))) {return;}
+//		if (!(go.getName().contains("Mario"))) {return;}
 		System.out.println("--------------------------");
 		System.out.println("GameObject toString: " + go);
 		System.out.println("Game Object Behaviors: " + go.getBehaviors() + " \n");

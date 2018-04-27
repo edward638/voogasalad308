@@ -73,8 +73,7 @@ public class ModelGamePart1 {
 		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "mario_block.png"));
 		List<String> x = new ArrayList<String>();
 		block.addBehavior(new EntrancePortal(block, true, "modelGamePart2", x, 1));
-		
-		block.addEventResponse(new CollisionEvent(block, CollisionEvent.ALL_SIDES, getMario(), CollisionEvent.ALL_SIDES), new ChangeLevel());
+		block.addEventResponse(new CollisionEvent(block, CollisionEvent.ALL_SIDES, new GameElement("Mario"), CollisionEvent.ALL_SIDES), new ChangeLevel());
 		
 		return block;
 	}
@@ -88,8 +87,9 @@ public class ModelGamePart1 {
 		mario.addBehavior(new MainCharacter(mario, 1, true, true));
 		mario.addBehavior(new Gravity(mario));
 		mario.addBehavior(new TimeTracker(mario));
-		TimeRoutine2 marioRoutines = new TimeRoutine2(mario);
-		
+		mario.addBehavior(new TimeRoutine2(mario));
+		TimeRoutine2 marioRoutines = (TimeRoutine2) mario.getBehavior(TimeRoutine2.class);
+
 		marioRoutines.addRoutine(5.0, (e, ge) -> {
 			MovableCharacter mc = (MovableCharacter) mario.getBehavior(MovableCharacter.class);
 			mc.jump();
@@ -97,9 +97,7 @@ public class ModelGamePart1 {
 		mario.addBehavior(new Shooter(mario));
 		marioRoutines.addRoutine(2.0, new GroovyAction(
 				"Mario.getBehavior('Shooter').shootRight()"));
-		
-		mario.addBehavior(new TimeRoutine2(mario));
-		
+				
 		mario.addEventResponse(new KeyInputEvent(KeyCode.W), new GroovyAction(
 				"Mario.getBehavior('MovableCharacter').jump()"));
 		
@@ -138,7 +136,7 @@ public class ModelGamePart1 {
 		List<Double> direction = new ArrayList<>(); direction.add(-1.0); direction.add(0.0);
 		block.addBehavior(new Movable(block, 20.0, direction));
 		block.addBehavior(new Killable(block, 100.0));
-		block.addEventResponse(new CollisionEvent(block, CollisionEvent.ALL_SIDES, getMario(), CollisionEvent.ALL_SIDES), new CollisionKillable());
+		block.addEventResponse(new CollisionEvent(block, CollisionEvent.ALL_SIDES, new GameElement("Mario"), CollisionEvent.ALL_SIDES), new CollisionKillable());
 		return block;
 	}
 	
@@ -154,6 +152,14 @@ public class ModelGamePart1 {
 						new GameElement(MandatoryBehavior.REFER_ALL_ELEMENTS),
 						CollisionEvent.ALL_SIDES),
 				new CollisionDamageAllSides());
+//		bullet.addEventResponse(
+//				new CollisionEvent(
+//						bullet, 
+//						CollisionEvent.ALL_SIDES,
+//						new GameElement(MandatoryBehavior.REFER_ALL_ELEMENTS),
+//						CollisionEvent.ALL_SIDES),
+//				new GroovyAction(" otherElement = event.getOtherElement(Bullet) if (otherElement.hasBehavior('Killable')) {otherElement.getBehavior('Killable').damage(Bullet.getDamage())"
+//						));
 		return bullet;
 	}
 	

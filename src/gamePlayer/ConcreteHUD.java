@@ -18,15 +18,15 @@ public class ConcreteHUD extends Pane implements HUD {
 	public ConcreteHUD(String name) {
 		gameName = name;
 		info = new TreeMap<>();
-		// info.put("hi", new Integer(90));
-		// info.put("hi1", new Integer(90));
-		// info.put("hi2", new Integer(90));
-		// info.put("hi3", new Integer(90));
-		// info.put("hi4", new Integer(90));
-		// info.put("hi5", new Integer(90));
-		// info.put("hi6", new Integer(90));
-		// info.put("hi6", new Integer(90));
-		// info.put("hi8", new Integer(90));
+		info.put("hi", new Integer(90));
+		info.put("hi1", new Integer(90));
+		info.put("hi2", new Integer(90));
+		 info.put("hi3", new Integer(90));
+		 info.put("hi4", new Integer(90));
+		 info.put("hi5", new Integer(90));
+		 info.put("hi6", new Integer(90));
+		 info.put("hi6", new Integer(90));
+		 info.put("hi8", new Integer(90));
 
 		setupPane();
 	}

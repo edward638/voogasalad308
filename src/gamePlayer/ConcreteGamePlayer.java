@@ -190,7 +190,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 		volumeText.setLayoutY(410);
 		volumeText.setFont(Font.font("Verdana", 20));
 		root.getChildren().add(volumeText);
-		
+
 	}
 
 	@Override
@@ -214,7 +214,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 
 		// set everything into gamemetadata and then pass only metadata into engine
 
-		// concretePlayerUpdater = new ConcretePlayerUpdater(hud, highScores, userName);
+		concretePlayerUpdater = new ConcretePlayerUpdater(hud, highScores, userName);
 		//
 		// engine = new Engine(file, concretePlayerUpdater);
 		keyInputDictionary.setGame(engine);

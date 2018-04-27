@@ -53,7 +53,7 @@ public class ConcreteHighScores implements HighScores {
 		for (Score score : scoreSaver.loadSavedScores()) {
 			this.addScore(score.getPlayerName(), score.getScore());
 		}
-		setupTableProperties(970, 30, 235, 265);
+		setupTableProperties(970, 50, 235, 265);
 
 		// this.addDummyScores();
 	}

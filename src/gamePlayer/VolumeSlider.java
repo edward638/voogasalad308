@@ -46,8 +46,9 @@ public class VolumeSlider extends Slider {
 				volume = new_val.doubleValue();
 				volumeBeforeMuting = volume;
 				if (musicOn) {
-					if (engine != null)
+					if (engine != null) {
 						engine.setVolume(volume);
+					}
 				}
 			}
 		});

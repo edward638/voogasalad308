@@ -44,8 +44,11 @@ public class VolumeSlider extends Slider {
 		slider.valueProperty().addListener(new ChangeListener<Number>() {
 			public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
 				volume = new_val.doubleValue();
-				if (engine != null)
-					engine.setVolume(volume);
+				volumeBeforeMuting = volume;
+				if (musicOn) {
+					if (engine != null)
+						engine.setVolume(volume);
+				}
 			}
 		});
 	}
@@ -59,7 +62,6 @@ public class VolumeSlider extends Slider {
 
 	public void toggleMusic() {
 		if (musicOn) {
-			volumeBeforeMuting = volume;
 			if (engine != null)
 				engine.setVolume(0);
 		} else {

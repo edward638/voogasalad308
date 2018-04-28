@@ -102,7 +102,7 @@ public class ObjectInfoPanelController extends Controller {
 	}
 	
 	public void duplicateGameObject() {
-//		game.duplicateGameObject();
+		gameScene.duplicateGameObject();
 	}
 	public List<GameObject> getAllGameObjects() {
 		return gameScene.getMyObjects();

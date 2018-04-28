@@ -50,7 +50,9 @@ public class LibraryObjectInfoBox extends ObjectInfoBox {
 		editEventsButton.setOnAction(e -> {
 			new EventsPopupRefactored(dummyList, libraryObjects);
 		});
-		
+		saveEditsButton.setOnAction(e->{
+			saver.saveUpdatedLibraryObject(gameObject);
+		});
 	}
 
 	@Override

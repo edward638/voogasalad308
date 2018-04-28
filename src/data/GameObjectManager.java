@@ -102,7 +102,7 @@ public class GameObjectManager implements LibraryObjectSaver {
 	}
 	
 	public void addToGUI(Pane pane) {
-		library.AttachToPane(pane, ResourceBundleManager.getPosition("LIBRARY_X"), ResourceBundleManager.getPosition("LIBRARY_Y"));
+		library.attachToPane(pane, ResourceBundleManager.getPosition("LIBRARY_X"), ResourceBundleManager.getPosition("LIBRARY_Y"));
 		System.out.println("attached");
 	}
 

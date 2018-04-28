@@ -64,7 +64,7 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 	}
 
 	@Override
-	protected void GenerateComponent() {
+	protected void generateComponent() {
 		// TODO Auto-generated method stub
 		BorderPane borderPane = getBorderPane();
 		initializeButtons();

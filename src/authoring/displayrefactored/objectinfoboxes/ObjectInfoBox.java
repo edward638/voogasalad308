@@ -7,6 +7,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 public abstract class ObjectInfoBox {
@@ -31,5 +32,9 @@ public abstract class ObjectInfoBox {
 	public abstract void mapFXActions();
 	
 	public abstract void initializeVBox();
+	
+	public void addToBorderPane(BorderPane pane) {
+		pane.setCenter(vBox);
+	}
 	
 }

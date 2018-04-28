@@ -63,7 +63,7 @@ public class LevelPanelController extends Controller implements GameObjectAdder 
 	protected void addToGUI(Pane pane) {
 		int x = ResourceBundleManager.getPosition("LEVELPANEL_X");
 		int y = ResourceBundleManager.getPosition("LEVELPANEL_Y");
-		levelPanelRefactored.AttachToPane(pane, x, y);	
+		levelPanelRefactored.attachToPane(pane, x, y);	
 	}
 	
 	@Override

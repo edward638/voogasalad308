@@ -64,7 +64,7 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	}
 	
 	@Override
-	protected void GenerateComponent() {
+	protected void generateComponent() {
 		BorderPane borderPane = getBorderPane();
 		stackPane = new StackPane();
 		list = new ArrayList<>();

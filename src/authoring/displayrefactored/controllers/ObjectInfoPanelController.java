@@ -57,8 +57,8 @@ public class ObjectInfoPanelController extends Controller {
 		int infoY = ResourceBundleManager.getPosition("OBJECTINFO_Y");
 		int listX = ResourceBundleManager.getPosition("OBJECTLIST_X");
 		int listY = ResourceBundleManager.getPosition("OBJECTLIST_Y");
-		objectInfoPanelRefactored.AttachToPane(pane, infoX, infoY);
-		objectListPanelRefactored.AttachToPane(pane, listX, listY);
+		objectInfoPanelRefactored.attachToPane(pane, infoX, infoY);
+		objectListPanelRefactored.attachToPane(pane, listX, listY);
 	}
 	
 	@Override

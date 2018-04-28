@@ -34,7 +34,7 @@ public class ObjectLibrary extends AuthoringUIComponentRefactored {
 	
 	public ObjectLibrary(GameObjectManager manager) {
 		this.manager = manager;
-		GenerateComponent();
+		generateComponent();
 	}
 	
 	public void initializeFXComponents() {
@@ -50,7 +50,7 @@ public class ObjectLibrary extends AuthoringUIComponentRefactored {
 	}
 
 	@Override
-	protected void GenerateComponent() {
+	protected void generateComponent() {
 		BorderPane borderPane = getBorderPane();
 		initializeFXComponents();
 		mapFXActions();

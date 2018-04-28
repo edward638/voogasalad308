@@ -46,6 +46,7 @@ public class VolumeSlider extends Slider {
 				volume = new_val.doubleValue();
 				volumeBeforeMuting = volume;
 				if (musicOn) {
+					System.out.println(musicOn);
 					if (engine != null) {
 						engine.setVolume(volume);
 					}

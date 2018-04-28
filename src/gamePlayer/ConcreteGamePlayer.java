@@ -63,13 +63,13 @@ public class ConcreteGamePlayer implements GamePlayer {
 	private KeyInputDictionary keyInputDictionary;
 	private PlayerUpdater concretePlayerUpdater;
 
-	private String userName;
+	private Username username;
 
 	private ResourceBundle resources;
 
 	private static final double SCREEN_HEIGHT = 650;
 	private static final double SCREEN_WIDTH = 1250;
-	private static final Paint BACKGROUND = Color.ANTIQUEWHITE;
+	private static final Paint BACKGROUND = Color.GRAY;
 	private static final int BUTTONXLOCATION = 970;
 	private static final int BUTTONWIDTH = 235;
 	private static final int BUTTONHEIGHT = 60;
@@ -77,7 +77,6 @@ public class ConcreteGamePlayer implements GamePlayer {
 	public ConcreteGamePlayer(Stage stage) {
 
 		resources = ResourceBundle.getBundle("gamePlayer.resources/ConcreteGP");
-
 		gameDescriptionProvider = new GameDescriptionProvider();
 
 		root = new Group();
@@ -93,10 +92,8 @@ public class ConcreteGamePlayer implements GamePlayer {
 		buttonData = new ConcreteButtonData(stage, this, volumeSlider, root, keyInputDictionary);
 
 		initialiseGUIElements();
+		username = new Username();
 		addGuiElementsToRoot();
-		setupUserNameInput();
-		setupUsernameText();
-
 	}
 
 	/**
@@ -140,6 +137,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 		root.getChildren().add(pauseButton);
 		root.getChildren().add(volumeSlider.getVolumeText());
 		root.getChildren().add(volumeSlider.getSlider());
+		root.getChildren().add(username.getNameText());
 	}
 
 	@Override
@@ -161,9 +159,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 		buttonData.setHighScores(highScores);
 
 		// set everything into gamemetadata and then pass only metadata into engine
-
 		// concretePlayerUpdater = new ConcretePlayerUpdater(hud, highScores, userName);
-		//
 		// engine = new Engine(file, concretePlayerUpdater);
 		keyInputDictionary.setGame(engine);
 
@@ -188,24 +184,6 @@ public class ConcreteGamePlayer implements GamePlayer {
 		root.getChildren().add(pauseButton);
 	}
 
-	private void setupUsernameText() {
-		Label nameText = new Label("User: " + userName);
-		nameText.setLayoutX(970);
-		nameText.setLayoutY(20);
-		nameText.setFont(Font.font("Verdana", 20));
-		root.getChildren().add(nameText);
-
-	}
-
-	private void setupUserNameInput() {
-		TextInputDialog dialog = new TextInputDialog();
-		dialog.setTitle("Username");
-		dialog.setHeaderText("Welcome to VoogaSalad!");
-		dialog.setContentText("Please enter your username:");
-		Optional<String> result = dialog.showAndWait();
-		result.ifPresent(name -> userName = result.get());
-	}
-
 	@Override
 	public Scene getScene() {
 		return myScene;
@@ -218,5 +196,4 @@ public class ConcreteGamePlayer implements GamePlayer {
 			engine.close();
 		}
 	}
-
 }

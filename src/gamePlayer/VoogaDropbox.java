@@ -25,7 +25,6 @@ public class VoogaDropbox {
 	public VoogaDropbox(String gameFolderPath) {
 
 		BASELOCATION = gameFolderPath;
-
 		DbxRequestConfig config = new DbxRequestConfig("dropbox/java-tutorial", "en_US");
 		client = new DbxClientV2(config, ACCESS_TOKEN);
 
@@ -37,7 +36,7 @@ public class VoogaDropbox {
 		File[] demo308FileList = demo308Folder.listFiles();
 		// write recursive function using loops below. base case is if isFile() is true.
 		// harder part will be to get the proper pathname to the file, i think we will
-		// need to be adding to some string as we go deeper into the recursive loop. 
+		// need to be adding to some string as we go deeper into the recursive loop.
 		for (File f : demo308FileList) {
 			if (f.isFile()) {
 				uploadFile(gameName, f);

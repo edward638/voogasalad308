@@ -100,4 +100,25 @@ public class EventsPopupController extends PopupController {
 	public void updateFromBehavior() {
 		mfWindow.createVBox();
 	}
+	
+	public void updateResponseWindow() {
+		responseWindow.createVBox();
+	}
+	
+	public GameObject getCurrCollisionObject() {
+		return triggerWindow.getCollideObject();
+	}
+	
+	public void setCurrObject(String name) {
+		for (GameObject go : allGos) {
+			if (go.getName().equals(name)) {
+				behaviorsWindow.setCurrObject(go);
+				return;
+			}
+		}
+	}
+	
+	public String getGroovyString() {
+		return groovyWindow.getGroovyString();
+	}
 }

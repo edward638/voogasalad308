@@ -2,6 +2,7 @@ package engine.behaviors;
 
 import java.util.List;
 
+import authoring.groovy.GroovyMethod;
 import engine.GameElement;
 import engine.events.gameevents.ChangePartEvent;
 import engine.events.gameevents.ResetLevelEvent;
@@ -23,12 +24,14 @@ public class EntrancePortal extends Behavior{
 		super(ge);
 	}
 	
+	@GroovyMethod
 	public void runPortal() {
 		if (active) {
 			changeLevel();
 			resetLevels();
 		}
 	}
+	
 	
 	public void changeLevel() {
 		getParent().addGameEvent(new ChangePartEvent(partToChange, portalID));

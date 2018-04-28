@@ -26,9 +26,9 @@ import javafx.stage.FileChooser.ExtensionFilter;
  */
 public class NewGameObjectPopupRefactored extends PopupRefactored {
 
-	private static final int xSize = 400;
-	private static final int ySize = 600;
-	private static final int DEFAULT_SPACING = 50;
+	private static final int xSize = 300;
+	private static final int ySize = 200;
+	private static final int DEFAULT_SPACING = 10;
 	private ObjectInfoPanelController controller;
 	private VBox myVBox;
 	TextField nameText;

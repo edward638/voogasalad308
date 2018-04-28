@@ -42,5 +42,15 @@ public class EventResponse {
 	public String getMyContent() {
 		return myContent;
 	}
+	
+	public String toString() {
+		return getName();
+	}
+	public EventResponse clone() {
+		EventResponse er = new EventResponse();
+		er.setName(this.getName());
+		er.setMyContent(this.getMyContent());
+		return er;
+	}
 		
 }

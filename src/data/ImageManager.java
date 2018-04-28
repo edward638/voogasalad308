@@ -64,7 +64,7 @@ public class ImageManager {
         try {	
 //        	System.out.println(gameImagesLocation + imageName);
 //        	System.out.println(location+imageName);
-        	System.out.println("getBufferedImage"  + location+imageName);
+        		System.out.println(location + imageName);
             img = ImageIO.read(new File(location + imageName));
         } catch (IOException e) {
             e.printStackTrace(); //TODO: remove this print stacktrace!

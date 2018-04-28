@@ -4,7 +4,7 @@ import authoring.GameObject;
 import authoring.GameScene;
 import authoring.GameSceneSerializable;
 import data.propertiesFiles.ResourceBundleManager;
-import engine.GameState;
+import engine.GamePart;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -89,8 +89,8 @@ public class GameSaver {
 	 * 
 	 * @throws IOException
 	 */
-    public void saveGameState(GameState gameState) throws IOException {
-    	serializer.saveStateToXML(gameSavesLocation, gameState);
+    public void saveGamePart(GamePart gamePart) throws IOException {
+    	serializer.savePartToXML(gameSavesLocation, gamePart);
     }
 
 }

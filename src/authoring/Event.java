@@ -70,4 +70,14 @@ public class Event {
 		return use;
 	}
 	
+	public Event clone() {
+		Event event = new Event();
+		event.setEventType(this.getEventType());
+		event.setTrigger(this.getTrigger());
+		for (EventResponse er : this.myResponses) {
+			event.addResponse(er.clone());
+		}
+		
+		return event;
+	}
 }

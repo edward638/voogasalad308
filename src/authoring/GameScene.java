@@ -138,5 +138,10 @@ public class GameScene extends Observable implements GameViewObservable, ObjectI
 		notifyMyObservers();
 	}
 	
+	public void duplicateGameObject() {
+		GameObject newGo = new GameObject(currentGameObject);
+		myObjects.add(newGo);
+	}
+	
 	
 }

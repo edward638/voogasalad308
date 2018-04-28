@@ -49,6 +49,7 @@ public class GameElement {
 				.filter(b -> b.getClass() == behave.getClass())
 				.collect(Collectors.toList());
 		if (existing.size() > 0) {
+//			behaviors.remove(existing.get(0));
 			throw new TooManyBehaviorsException("Trying to add " + behave.getClass() + " to a GameElement that already has this behavior");
 		}
 		behaviors.add(behave);
@@ -69,6 +70,22 @@ public class GameElement {
 		}
 	}
 	
+	public Behavior getBehavior (String className) {
+		String qualifiedName = Behavior.class.getPackageName() + "." + className;
+		try {
+			Class<?> clazz = Class.forName(qualifiedName);
+			return getBehavior(clazz);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new RuntimeException("Could not convert " + qualifiedName + " to a behavior type");
+		}
+	}
+	
+	public MandatoryBehavior getMandatoryBehavior() {
+		return (MandatoryBehavior) getBehavior(MandatoryBehavior.class);
+	}
+	
 	
 	/*
 	 * Checks if this GameElement has a Behavior object of the requested type
@@ -77,6 +94,16 @@ public class GameElement {
 		return behaviors.stream()
 			.filter(behavior -> behavior_type.isAssignableFrom(behavior.getClass()))
 			.collect(Collectors.toList()).size() > 0;
+	}
+	
+	public boolean hasBehavior(String className) {
+		String qualifiedName = MandatoryBehavior.class.getPackageName() + className;
+		try {
+			return hasBehavior(Class.forName(qualifiedName));
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			throw new RuntimeException("Could not find" + qualifiedName + " class");
+		}
 	}
 	
 	/*
@@ -118,6 +145,22 @@ public class GameElement {
 				.filter(b -> b.getClass() == MandatoryBehavior.class)
 				.collect(Collectors.toList()).get(0);
 		return el.getName();
+	}
+	
+	
+	/*
+	 * Defines the method we will use to retrieve the position of a game element. Should be done according the 
+	 * MandatoryBehavior since every element in the game will implement that
+	 */
+	public List<Double> getPosition() {
+		List<Double> position = new ArrayList<Double>();
+		position.add(((MandatoryBehavior)(getBehavior(MandatoryBehavior.class))).getX());
+		position.add(((MandatoryBehavior)(getBehavior(MandatoryBehavior.class))).getY());
+		return position;
+	}
+	
+	public void setPosition(List<Double> position) {
+		((MandatoryBehavior)(getBehavior(MandatoryBehavior.class))).setPosition(position.get(0), position.get(1));
 	}
 	
 	/*

@@ -7,15 +7,14 @@ import java.util.List;
 import engine.GameElement;
 import engine.GamePart;
 import engine.actions.ChangeLevel;
-import engine.actions.CollisionDamageAllSides;
-import engine.actions.CollisionKillable;
 import engine.actions.GroovyAction;
 import engine.behaviors.BlockLike;
+import engine.behaviors.BulletLike;
 import engine.behaviors.EntrancePortal;
 import engine.behaviors.ExitPortal;
 import engine.behaviors.Gravity;
+import engine.behaviors.IgnoresBlocks;
 import engine.behaviors.Killable;
-import engine.behaviors.Killer;
 import engine.behaviors.MainCharacter;
 import engine.behaviors.MandatoryBehavior;
 import engine.behaviors.Movable;
@@ -23,6 +22,7 @@ import engine.behaviors.MovableCharacter;
 import engine.behaviors.Shooter;
 import engine.behaviors.TimeRoutine2;
 import engine.behaviors.TimeTracker;
+import engine.behaviors.TrackMainCharacter;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.KeyInputEvent;
 import javafx.scene.input.KeyCode;
@@ -88,19 +88,14 @@ public class ModelGamePart1 {
 		mario.addBehavior(new Gravity(mario));
 		mario.addBehavior(new TimeTracker(mario));
 		mario.addBehavior(new TimeRoutine2(mario));
-		TimeRoutine2 marioRoutines = (TimeRoutine2) mario.getBehavior(TimeRoutine2.class);
-
-		marioRoutines.addRoutine(5.0, (e, ge) -> {
-			MovableCharacter mc = (MovableCharacter) mario.getBehavior(MovableCharacter.class);
-			mc.jump();
-		});
 		mario.addBehavior(new Shooter(mario));
+		
+		TimeRoutine2 marioRoutines = (TimeRoutine2) mario.getBehavior(TimeRoutine2.class);
 		marioRoutines.addRoutine(2.0, new GroovyAction(
 				"Mario.getBehavior('Shooter').shootRight()"));
 				
 		mario.addEventResponse(new KeyInputEvent(KeyCode.W), new GroovyAction(
 				"Mario.getBehavior('MovableCharacter').jump()"));
-		
 		
 		// Response to Right arrow key is to move right
 		mario.addEventResponse(new KeyInputEvent(KeyCode.D), new GroovyAction(
@@ -130,36 +125,30 @@ public class ModelGamePart1 {
 	}
 	
 	public GameElement getKoopa(Double xpos, Double ypos) {
-		GameElement block = new GameElement();
+		GameElement koopa = new GameElement();
 		
-		block.addBehavior(new MandatoryBehavior(block, "Koopa", xpos, ypos, "rectangle", 60.0, 80.0, 60.0, 80.0, "koopa.png"));
+		koopa.addBehavior(new MandatoryBehavior(koopa, "Koopa", xpos, ypos, "rectangle", 60.0, 80.0, 60.0, 80.0, "koopa.png"));
 		List<Double> direction = new ArrayList<>(); direction.add(-1.0); direction.add(0.0);
-		block.addBehavior(new Movable(block, 20.0, direction));
-		block.addBehavior(new Killable(block, 100.0));
-		block.addEventResponse(new CollisionEvent(block, CollisionEvent.ALL_SIDES, new GameElement("Mario"), CollisionEvent.ALL_SIDES), new CollisionKillable());
-		return block;
+		koopa.addBehavior(new Movable(koopa, 20.0, direction));
+		koopa.addBehavior(new Killable(koopa, 100.0));
+		koopa.addBehavior(new IgnoresBlocks(koopa));
+//		koopa.addBehavior(new TrackMainCharacter(koopa, modelGamePart1.getMainCharacter()));
+//		koopa.addBehavior(new TimeRoutine2(koopa));
+//		koopa.addBehavior(new Shooter(koopa));
+//		TimeRoutine2 tr2 = (TimeRoutine2) koopa.getBehavior(TimeRoutine2.class);
+//		tr2.addRoutine(0.5, new GroovyAction(
+//				"shooter = Koopa.getBehavior('Shooter')\n"
+//				+ "shooter.shootDown()"));
+
+		return koopa;
 	}
 	
 	public GameElement getBullet(Double xpos, Double ypos, Double v, List<Double> direction) {
 		GameElement bullet = new GameElement();
 		bullet.addBehavior(new MandatoryBehavior(bullet, "Bullet", xpos, ypos, "rectangle", 20.0, 20.0, 20.0, 20.0, "bullet.png"));
 		bullet.addBehavior(new Movable(bullet, v, direction));
-		bullet.addBehavior(new Killer(bullet, 10.0));
-		bullet.addEventResponse(
-				new CollisionEvent(
-						bullet, 
-						CollisionEvent.ALL_SIDES,
-						new GameElement(MandatoryBehavior.REFER_ALL_ELEMENTS),
-						CollisionEvent.ALL_SIDES),
-				new CollisionDamageAllSides());
-//		bullet.addEventResponse(
-//				new CollisionEvent(
-//						bullet, 
-//						CollisionEvent.ALL_SIDES,
-//						new GameElement(MandatoryBehavior.REFER_ALL_ELEMENTS),
-//						CollisionEvent.ALL_SIDES),
-//				new GroovyAction(" otherElement = event.getOtherElement(Bullet) if (otherElement.hasBehavior('Killable')) {otherElement.getBehavior('Killable').damage(Bullet.getDamage())"
-//						));
+		bullet.addBehavior(new BulletLike(bullet, 10.0));
+		bullet.addBehavior(new IgnoresBlocks(bullet));
 		return bullet;
 	}
 	
@@ -167,7 +156,7 @@ public class ModelGamePart1 {
 		GameElement bullet = new GameElement();
 		bullet.addBehavior(new MandatoryBehavior(bullet, "Bullet", xpos, ypos, "rectangle", 20.0, 20.0, 20.0, 20.0, "bullet.png"));
 		bullet.addBehavior(new Movable(bullet, v, Arrays.asList(1.0, 0.0)));
-		bullet.addBehavior(new Killer(bullet, 10.0));
+		bullet.addBehavior(new BulletLike(bullet, 10.0));
 		return bullet;
 	}
 	

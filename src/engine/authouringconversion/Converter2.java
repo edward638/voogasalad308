@@ -4,6 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -26,11 +27,7 @@ import engine.actions.GroovyAction;
 import engine.behaviors.Behavior;
 import engine.behaviors.MainCharacter;
 import engine.behaviors.MandatoryBehavior;
-import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.ElementEvent;
-import engine.events.elementevents.KeyInputEvent;
-import engine.events.elementevents.MouseInputEvent;
-import engine.events.elementevents.TimeEvent;
 
 
 /** 
@@ -104,8 +101,21 @@ public class Converter2 {
 	}
 	
 	/*
-	 * Convert from game state to game scene
+	 * Method reviews game objects stored as parts
 	 */
+//	private GamePart fillGameObjects(GamePart part, GameScene scene) {
+//		List<Property> properties2fix = new ArrayList<>();
+//		for (GameObject go: scene.getMyObjects()) {
+//			go.getBehaviors().stream().forEach(beh -> {
+//				beh.getProperties().stream().forEach(prop -> {
+//					if (prop.getValue() instanceof GameElement) {
+//						properties2fix.add(prop);
+//					}
+//				});
+//			});
+//		}
+//		properties2fix.stream().forEach(prop -> fixProperty(prop, part));
+//	}
 	
 	public GameScene gamePart2GameScene(GamePart part) {
 		GameScene scene = new GameScene(part.getGamePartID());
@@ -121,6 +131,7 @@ public class Converter2 {
 	public Behavior authBehavior2Behavior (AuthBehavior authB, GameElement ge) {
 		Behavior newEngBehavior;
 		try {
+			System.out.println(authB.getName());
 			Constructor<?> use = getConstructor(Class.forName(authB.getName()));
 			newEngBehavior = (Behavior) use.newInstance(ge);
 		} catch (ClassNotFoundException|InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e1) {

@@ -20,7 +20,6 @@ import engine.behaviors.MandatoryBehavior;
 import engine.behaviors.Movable;
 import engine.behaviors.MovableCharacter;
 import engine.behaviors.Shooter;
-import engine.behaviors.TimeRoutine;
 import engine.behaviors.TimeRoutine2;
 import engine.behaviors.TimeTracker;
 import engine.behaviors.TrackMainCharacter;
@@ -133,14 +132,13 @@ public class ModelGamePart1 {
 		koopa.addBehavior(new Movable(koopa, 20.0, direction));
 		koopa.addBehavior(new Killable(koopa, 100.0));
 		koopa.addBehavior(new IgnoresBlocks(koopa));
-		koopa.addBehavior(new TrackMainCharacter(koopa, modelGamePart1.getMainCharacter()));
-		koopa.addBehavior(new TimeRoutine2(koopa));
-		koopa.addBehavior(new Shooter(koopa));
-		TimeRoutine2 tr2 = (TimeRoutine2) koopa.getBehavior(TimeRoutine2.class);
-		tr2.addRoutine(0.5, new GroovyAction(
-				"shooter = Koopa.getBehavior('Shooter')\n"
-				+ "tracker = Koopa.getBehavior('TrackMainCharacter')"
-				+ "shooter.shoot([tracker.getX(), tracker.getY()]"));
+//		koopa.addBehavior(new TrackMainCharacter(koopa, modelGamePart1.getMainCharacter()));
+//		koopa.addBehavior(new TimeRoutine2(koopa));
+//		koopa.addBehavior(new Shooter(koopa));
+//		TimeRoutine2 tr2 = (TimeRoutine2) koopa.getBehavior(TimeRoutine2.class);
+//		tr2.addRoutine(0.5, new GroovyAction(
+//				"shooter = Koopa.getBehavior('Shooter')\n"
+//				+ "shooter.shootDown()"));
 
 		return koopa;
 	}

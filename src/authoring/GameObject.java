@@ -91,10 +91,9 @@ public class GameObject {
 					return curr;
 				}
 			}
-			throw new Exception();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Tried to access a behavior that this object does not have");
+			throw new RuntimeException("Tried to access a behavior that this object does not have");
 		}
 		return null;
 	}

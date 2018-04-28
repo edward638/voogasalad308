@@ -55,7 +55,6 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	private static final int DEFAULTSIZEX = 1000;
 	private static final int DEFAULTSIZEY = 1000;
 	
-	
 	public GameViewWindowRefactored(GameViewWindowController controller) {
 		this.controller = controller;
 		objectImageViews = new ArrayList<>();
@@ -135,7 +134,7 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 		Double xPosition = (Double) xPositionProperty.getValue();
 		Double yPosition = (Double) yPositionProperty.getValue();			
 		String imagePath = (String) imagePathProperty.getValue();
-		ImageView imageView =new ImageView(controller.getImage(imagePath + ".png"));
+		ImageView imageView =new ImageView(controller.getImage(imagePath)); //+ ".png"
 		imageView.setLayoutX(xPosition);
 		imageView.setLayoutY(yPosition);
 		imageView.setPreserveRatio(true);

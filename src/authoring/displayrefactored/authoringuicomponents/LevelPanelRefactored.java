@@ -34,7 +34,6 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 
 	private HBox levelChooser;
 	private ComboBox<GameScene> myLevelDropdown;
-	
 	private Button myAddLevelButton;
 	private LevelPanelController controller;
 	private LevelsObservable levelsObservable = null;
@@ -75,6 +74,9 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 		borderPane.setCenter(levelChooser);
 	}
 
+	/**
+	 * Called by Game when model is updated, updates the level panel
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		levelsObservable = (LevelsObservable) o;

@@ -44,7 +44,7 @@ private Label properties;
 		instances = new Label("Instances");
 		properties = new Label("Game Object Properties");
 		objectName = new Label("Name: " + gameObject.getName());
-		imageView = new ImageView(saver.getImage(gameObject.getName()+"image.png"));
+		imageView = new ImageView(saver.getImage(gameObject.getName())); //"image.png"
 		initializeFXComponents();
 		mapFXActions();
 	}

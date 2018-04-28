@@ -88,7 +88,7 @@ public class ModelGamePart1 {
 		mario.addBehavior(new Gravity(mario));
 		mario.addBehavior(new TimeTracker(mario));
 		mario.addBehavior(new TimeRoutine2(mario));
-		mario.addBehavior(new Shooter(mario));
+		mario.addBehavior(new Shooter(mario, 100.0, 5.0));
 		
 		TimeRoutine2 marioRoutines = (TimeRoutine2) mario.getBehavior(TimeRoutine2.class);
 		marioRoutines.addRoutine(2.0, new GroovyAction(
@@ -106,7 +106,9 @@ public class ModelGamePart1 {
 				"Mario.getBehavior('MovableCharacter').setXVelocity(-200.0)"));
 		
 		mario.addEventResponse(new KeyInputEvent(KeyCode.P), new GroovyAction("Mario.getBehavior('MovableCharacter').jump()"));
-
+		
+		mario.addEventResponse(new KeyInputEvent(KeyCode.F), new GroovyAction(
+				"Mario.getBehavior('Shooter').shootRight()"));
 		return mario;
 	}
 	
@@ -147,7 +149,7 @@ public class ModelGamePart1 {
 		GameElement bullet = new GameElement();
 		bullet.addBehavior(new MandatoryBehavior(bullet, "Bullet", xpos, ypos, "rectangle", 20.0, 20.0, 20.0, 20.0, "bullet.png"));
 		bullet.addBehavior(new Movable(bullet, v, direction));
-		bullet.addBehavior(new BulletLike(bullet, 10.0));
+		bullet.addBehavior(new BulletLike(bullet, 100.0));
 		bullet.addBehavior(new IgnoresBlocks(bullet));
 		return bullet;
 	}

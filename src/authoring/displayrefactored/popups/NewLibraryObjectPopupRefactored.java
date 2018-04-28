@@ -1,13 +1,11 @@
 package authoring.displayrefactored.popups;
 
 import java.io.File;
+import java.io.IOException;
 
-import authoring.display.buttonevents.ChooseImageEvent;
-import authoring.displayrefactored.controllers.LevelPanelController;
 import authoring.displayrefactored.controllers.ObjectInfoPanelController;
+import data.GameObjectManager;
 import data.propertiesFiles.ResourceBundleManager;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -19,35 +17,29 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 
-/**
- * 
- * @author Edward Zhuang
- *
- */
-public class NewGameObjectPopupRefactored extends PopupRefactored {
+public class NewLibraryObjectPopupRefactored extends PopupRefactored {
 
-	private static final int xSize = 300;
-	private static final int ySize = 200;
-	private static final int DEFAULT_SPACING = 10;
-	private ObjectInfoPanelController controller;
+	private static final int xSize = 400;
+	private static final int ySize = 600;
+	private static final int DEFAULT_SPACING = 50;
+	private GameObjectManager manager;
 	private VBox myVBox;
 	TextField nameText;
-	TextField xText;
-	TextField yText;
 	TextField imageText;
 	Button chooseImageButton;
 	Button saveButton;
 	Image image;
-
-	public NewGameObjectPopupRefactored(ObjectInfoPanelController controller) {
+	
+	//TODO: make interface
+	public NewLibraryObjectPopupRefactored(GameObjectManager manager) {
 		// TODO Auto-generated constructor stub
 		super();
-		this.controller = controller;
+		this.manager = manager;
 		open(xSize, ySize);
 		generatePopup();
 		mapButtons();
 	}
-
+	
 	@Override
 	protected void generatePopup() {
 		// TODO Auto-generated method stub
@@ -56,24 +48,14 @@ public class NewGameObjectPopupRefactored extends PopupRefactored {
 		HBox nameObject = new HBox(DEFAULT_SPACING);
 		nameText = new TextField();
 		nameObject.getChildren().addAll(new Label("Name: "), nameText);
-
-		HBox xPosValues = new HBox(DEFAULT_SPACING);
-		xText = new TextField();
-		xPosValues.getChildren().addAll(new Label("X Position: "), xText);
-
-		HBox yPosValues = new HBox(DEFAULT_SPACING);
-		yText = new TextField();
-		yPosValues.getChildren().addAll(new Label("Y Position: "), yText);
-
 		chooseImageButton = new Button(ResourceBundleManager.getAuthoring("ChooseImageButton"));
 
 		saveButton = new Button(ResourceBundleManager.getAuthoring("Save"));
 
-		myVBox.getChildren().addAll(nameObject, xPosValues, yPosValues, chooseImageButton, saveButton);
+		myVBox.getChildren().addAll(nameObject, chooseImageButton, saveButton);
 
 		BorderPane borderPane = getPane();
 		borderPane.setCenter(myVBox);
-
 	}
 
 	@Override
@@ -96,9 +78,13 @@ public class NewGameObjectPopupRefactored extends PopupRefactored {
 
 		saveButton.setOnAction(e -> {
 			// System.out.println("ADDING TO GAMEOBJECT NAME: " + nameText.getText());
-			if (controller.checkUniqueName(nameText.getText())) {
-				controller.addGameObject(nameText.getText(), Double.parseDouble(xText.getText()),
-						Double.parseDouble(yText.getText()), (nameText.getText() + "image"), image);
+			if (manager.checkUniqueName(nameText.getText())) {
+				try {
+					manager.saveCustomGameObject(nameText.getText(), image);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				close();
 
 			} else {
@@ -107,7 +93,6 @@ public class NewGameObjectPopupRefactored extends PopupRefactored {
 
 			}
 		});
-
 	}
-
+	
 }

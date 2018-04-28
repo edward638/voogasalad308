@@ -6,6 +6,7 @@ import org.codehaus.groovy.runtime.metaclass.MethodMetaProperty.GetBeanMethodMet
 import authoring.AuthBehavior;
 import authoring.Game;
 import authoring.GameObject;
+import authoring.GameObjectAdder;
 import authoring.GameScene;
 import authoring.SceneBackgroundImageSerializable;
 import authoring.SceneManager;
@@ -22,7 +23,7 @@ import javafx.scene.layout.Pane;
  * @author Edward Zhuang
  *
  */
-public class LevelPanelController extends Controller {
+public class LevelPanelController extends Controller implements GameObjectAdder {
 
 	SceneManager sceneManager;
 	LevelPanelRefactored levelPanelRefactored;
@@ -84,5 +85,11 @@ public class LevelPanelController extends Controller {
 	private void updateMyControllers(GameScene gameScene) {
 		objectInfoPanelController.setGameScene(gameScene);
 		gameViewWindowController.setGameScene(gameScene);
+	}
+
+	@Override
+	public void addToCurrentScene(GameObject gameObject) {
+		// TODO Auto-generated method stub
+		sceneManager.getCurrentScene().addObject(gameObject);
 	}
 }

@@ -147,9 +147,8 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	private void updateBackground(List<SceneBackgroundImageSerializable> serializables) {
 		
 		list = new ArrayList<>();
-		
 		for (SceneBackgroundImageSerializable s: serializables) {
-			list.add( controller.getBackgroundImage(s));
+			list.add(controller.getBackgroundImage(s));
 		}
 		
 		sceneBackground.clearPane();
@@ -180,7 +179,7 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 					imageView.setMouseTransparent(false);
 				}
 				for (SceneBackgroundImage image: list) {
-					image.setOpacity(TRANSPARENT);
+//					image.setOpacity(TRANSPARENT);
 				}
 				foregroundPane.setMouseTransparent(false);
 			}

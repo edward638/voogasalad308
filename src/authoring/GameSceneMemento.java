@@ -1,5 +1,10 @@
 package authoring;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameSceneMemento implements GameSceneToCareTaker, GameSceneToOriginator {
@@ -8,7 +13,13 @@ public class GameSceneMemento implements GameSceneToCareTaker, GameSceneToOrigin
 	private List<SceneBackgroundImageSerializable> serializables;
 	
 	public GameSceneMemento(List<GameObject> gameObjects, List<SceneBackgroundImageSerializable> serializables) {
-		this.gameObjects = gameObjects;
+//		gameObjects = new ArrayList<>();
+//		for (GameObject go: gameObjects) {
+//			System.out.println(go);
+//			GameObject copy = new GameObject(go);
+//			this.gameObjects.add(copy);
+//		}
+		
 		this.serializables = serializables;
 	}
 	

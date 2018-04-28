@@ -17,7 +17,7 @@ import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
-public class GameObjectManager {
+public class GameObjectManager implements LibraryObjectSaver {
 	
 	private static final String defaultObjectLocation = "./data/gamedata/customobjects/";
 	private String key = "block";
@@ -104,6 +104,18 @@ public class GameObjectManager {
 	public void addToGUI(Pane pane) {
 		library.AttachToPane(pane, ResourceBundleManager.getPosition("LIBRARY_X"), ResourceBundleManager.getPosition("LIBRARY_Y"));
 		System.out.println("attached");
+	}
+
+	@Override
+	public void saveUpdatedLibraryObject(GameObject gameObject) {
+		// TODO Auto-generated method stub
+		try {
+			serializer.saveGameObject(defaultObjectLocation + key + "/", gameObject, gameObject.getName());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		library.updateObjectList(getSavedGameObjects());
 	}
 	
 	

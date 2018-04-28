@@ -67,7 +67,6 @@ public class NewGameObjectPopupRefactored extends PopupRefactored {
 
 		chooseImageButton = new Button(ResourceBundleManager.getAuthoring("ChooseImageButton"));
 
-
 		saveButton = new Button(ResourceBundleManager.getAuthoring("Save"));
 
 		myVBox.getChildren().addAll(nameObject, xPosValues, yPosValues, chooseImageButton, saveButton);

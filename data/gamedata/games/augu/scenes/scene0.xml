@@ -1,0 +1,14 @@
+<authoring.GameSceneSerializable>
+  <myName>Level 1</myName>
+  <backgroundImageSerializables>
+    <authoring.SceneBackgroundImageSerializable>
+      <xPos>19.5</xPos>
+      <yPos>19.5</yPos>
+      <xSize>99.94298553466797</xSize>
+      <ySize>99.8860092163086</ySize>
+      <imagePath>background1.png</imagePath>
+    </authoring.SceneBackgroundImageSerializable>
+  </backgroundImageSerializables>
+  <myObjects/>
+  <myObjectNames class="sorted-set"/>
+</authoring.GameSceneSerializable>

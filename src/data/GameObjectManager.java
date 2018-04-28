@@ -7,41 +7,104 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import authoring.AuthBehavior;
 import authoring.GameObject;
+import authoring.GameObjectAdder;
 import authoring.GameScene;
+import authoring.Property;
+import authoring.displayrefactored.authoringuicomponents.ObjectLibrary;
+import data.propertiesFiles.ResourceBundleManager;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 
 public class GameObjectManager {
 	
 	private static final String defaultObjectLocation = "./data/gamedata/customobjects/";
+	private String key = "block";
 	private Deserializer deserializer;
 	private Serializer serializer;
+	private ImageManager defaultManager;
+	private ImageManager gameImageManager;
+	private GameObjectAdder levelPanelController;
+	private ObjectLibrary library;
 	
-	public GameObjectManager() {
+	public GameObjectManager(GameObjectAdder adder, ImageManager imageManager) {
 		deserializer = new Deserializer();
 		serializer = new Serializer();
+		levelPanelController = adder;
+		gameImageManager = imageManager;
+		defaultManager = new ImageManager("default");
+		library = new ObjectLibrary(this);
 	}
 	
-	public Map<String,GameObject> getSavedGameObjects(){
-		TreeMap<String,GameObject> map = new TreeMap<>();
+	public List<GameObject> getSavedGameObjects(){
 		
-		File directory = new File(defaultObjectLocation);
-	
+		List<GameObject> list = new ArrayList<>();
+		File directory = new File(defaultObjectLocation + key);
         File[] directoryListing = directory.listFiles();
         
         if (directoryListing != null){
             for (File level : directoryListing){
                 String path = level.getAbsolutePath();
-               map.put(deserializer.getGameObject(path).getName(), deserializer.getGameObject(path));
+                list.add(deserializer.getGameObject(path));
             }
         }
-        return map;
+        return list;
+	}
+	
+	public void changeObjectType(String key) {
+		this.key = key;
+		library.updateObjectList(getSavedGameObjects());
+	}
+	
+	public void saveCustomGameObject(String name, Image image) throws IOException {
+		defaultManager.storeImage(name+"image",image);
+		GameObject gameObject = new GameObject();
+		AuthBehavior mandatory = gameObject.getMandatoryBehavior();
+		gameObject.setName(name);
+		mandatory.getProperty("xPos").setValue(0.0);
+		mandatory.getProperty("yPos").setValue(0.0);
+		mandatory.getProperty("imagePath").setValue(name+"image");
+		System.out.println(defaultObjectLocation+key);
+		serializer.saveGameObject(defaultObjectLocation + key + "/", gameObject, name);
+		library.updateObjectList(getSavedGameObjects());
+	}
+	
+	private void transferImageToGame(String imageName) {
+		Image libraryImage = defaultManager.getImage(imageName + ".png");
+		gameImageManager.storeImage(imageName, libraryImage);
+	}
+	
+	public void addObjectToGame(GameObject gameObject) {
+		GameObject go = new GameObject(gameObject);
+		Property imagePathProperty = gameObject.getMandatoryBehavior().getProperty("imagePath");
+		String string = ((String) imagePathProperty.getValue());
+		System.out.println("AddObjectToGame " + string);
+		transferImageToGame(string);
+		levelPanelController.addToCurrentScene(go);
+	}
+	
+	public boolean checkUniqueName(String name) {
+		boolean isUnique = true;
+		String originalKey = key;
 		
+		String[] keys = {"player","block","npc"};
+		for (int x = 0; x < keys.length; x++) {
+			key = keys[x];
+			for (GameObject go: getSavedGameObjects()) {
+				if (name.equals(go.getName())) {
+					isUnique = false;
+				}
+			}
+		}
+		key = originalKey;
+		return isUnique;
 	}
 	
-	public void saveCustomGameObject(GameObject object, String name) throws IOException {
-		serializer.saveGameObject(defaultObjectLocation, object, name);
+	public void addToGUI(Pane pane) {
+		library.AttachToPane(pane, ResourceBundleManager.getPosition("LIBRARY_X"), ResourceBundleManager.getPosition("LIBRARY_Y"));
+		System.out.println("attached");
 	}
-	
 	
 	
 }

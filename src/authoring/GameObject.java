@@ -64,19 +64,16 @@ public class GameObject {
 		Set<AuthBehavior> newBehaviors = new HashSet<>();
 		for (AuthBehavior ab : toCopy.getBehaviors()) {
 			if (!ab.equals(this.getMandatoryBehavior())) {
-				newBehaviors.add(ab.clone());
+				newBehaviors.add(ab);
 			}
 		}
 		myBehaviors = newBehaviors;
-		
-		System.out.println("The size of copied behavior: " + toCopy.getBehaviors().size());
-		System.out.println("From GameObject: The size of myBehaviors: " + myBehaviors.size());
 
-		Set<Event> newEvents = new HashSet<>();
-		for (Event e : toCopy.getEvents()) {
-			newEvents.add(e.clone());
-		}
-		myEvents = newEvents;
+//		Set<Event> newEvents = new HashSet<>();
+//		for (Event e : toCopy.getEvents()) {
+//			newEvents.add(e.clone());
+//		}
+		myEvents = toCopy.getEvents();
 		
 		myName = toCopy.getName();
 		

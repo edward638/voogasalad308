@@ -83,7 +83,15 @@ public class TriggerWindow extends VBox {
 		collideObject = goName;
 	}
 	
-	public String getCollideObject() {
-		return collideObject;
+	public GameObject getCollideObject() {
+		for (GameObject go : allGos) {
+			if (go.getName().equals(collideObject)) {
+				return go;
+			}
+		}
+		return null;
+	}
+	public void updateCollideObject() {
+		epuc.updateResponseWindow();
 	}
 }

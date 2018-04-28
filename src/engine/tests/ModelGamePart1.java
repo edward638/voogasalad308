@@ -25,6 +25,7 @@ import engine.behaviors.TimeTracker;
 import engine.behaviors.TrackMainCharacter;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.KeyInputEvent;
+import engine.events.elementevents.TimeEvent;
 import javafx.scene.input.KeyCode;
 
 public class ModelGamePart1 {
@@ -48,7 +49,6 @@ public class ModelGamePart1 {
 		}
 		
 		elements.add(getPortal1(900.0, 101.0));
-		elements.add(getPortal2(600.0, 101.0));
 		
 		for (GameElement el : elements) {
 			modelGamePart1.addGameElement(el);

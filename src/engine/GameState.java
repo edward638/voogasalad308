@@ -123,13 +123,13 @@ public class GameState {
 							ExitPortal exitP = (ExitPortal) element.getBehavior(ExitPortal.class);
 							if (exitP.getPortalID() == portalID) {
 								mainCharacter.setPosition(element.getPosition());
-								MandatoryBehavior mb = (MandatoryBehavior) element.getBehavior(MandatoryBehavior.class);
-								mb.setPosition(mb.getX()-30, mb.getY());
-								break;
+								this.getCurrentGamePart().addGameElement(mainCharacter);
+								break;	
 							}
 						}
+						
 					}
-					this.getCurrentGamePart().addGameElement(mainCharacter);
+					
 					for (GameElement element : this.getCurrentGamePart().getElements()) {
 						addToDisplay(element);
 					}
@@ -137,6 +137,7 @@ public class GameState {
 				}
 			}
 		}
+		
 	}
 	
 	public void resetLevel(String levelID) {

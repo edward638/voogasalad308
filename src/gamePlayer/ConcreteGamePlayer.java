@@ -158,7 +158,6 @@ public class ConcreteGamePlayer implements GamePlayer {
 		// engine = new Engine(file, concretePlayerUpdater);
 
 		buttonData.setMostRecentFile(file);
-
 		addEngineGUIToRoot();
 	}
 

@@ -19,7 +19,7 @@ public class GameScene extends Observable implements GameViewObservable, ObjectI
 	private List<GameObject> myObjects;
 	private Set<String> myObjectNames;
 	private GameObject currentGameObject;
-	
+	private GameSceneToCareTaker memento;
 
 	public GameScene(String name) {
 		myName = name;
@@ -39,19 +39,23 @@ public class GameScene extends Observable implements GameViewObservable, ObjectI
 		
 	}
 	
+	@Override
 	public Set<String> getMyObjectNames(){
 		return myObjectNames;
 	}
 	
 	public void addObject(GameObject toAdd) {
+		backupGameScene();
 		myObjects.add(toAdd);
 		notifyMyObservers();
 	}
 	
+	@Override
 	public List<GameObject> getMyObjects(){
 		return myObjects;
 	}
 
+	@Override
 	public GameObject getCurrentGameObject() {
 		return currentGameObject;
 	}
@@ -62,6 +66,7 @@ public class GameScene extends Observable implements GameViewObservable, ObjectI
 		notifyMyObservers();
 	}
 
+	@Override
 	public String getName() {
 		return myName;
 	}
@@ -70,6 +75,7 @@ public class GameScene extends Observable implements GameViewObservable, ObjectI
 		myName = name;
 	}
 	
+	@Override
 	public String toString() {
 		return myName;
 	}
@@ -124,6 +130,24 @@ public class GameScene extends Observable implements GameViewObservable, ObjectI
 	public List<SceneBackgroundImageSerializable> getBackgroundImageSerializables() {
 		return backgroundImageSerializables;
 	}
+	
+	public void backupGameScene() {
+		memento = new GameSceneMemento(myObjects, backgroundImageSerializables);
+		System.out.println("backupGameScene()" + ((GameSceneToOriginator)memento).getGameObjects());
+	}
+	
+	public void restorePreviousGameScene() {
+		System.out.println(((GameSceneToOriginator)memento).getGameObjects());
+		myObjects = ((GameSceneToOriginator)memento).getGameObjects();
+		backgroundImageSerializables = ((GameSceneToOriginator)memento).getSerializables();
+		notifyMyObservers();
+	}
+	
+	public void duplicateGameObject() {
+		GameObject newGo = new GameObject(currentGameObject);
+		myObjects.add(newGo);
+	}
+
 	
 	
 }

@@ -79,7 +79,13 @@ public class EventsWindow extends VBox {
 	private ListView<Event> makeEventList(){
 		myEvents.getItems().clear();
 		myEvents.getItems().setAll(gos.get(0).getEvents());
+		myEvents.setOnMouseClicked(e -> eventListAction(myEvents.getSelectionModel().getSelectedItem()));
 		return myEvents;
+	}
+	
+	private void eventListAction(Event e) {
+		currentEvent = e;
+		epuc.updateFromEvent();
 	}
 	
 	public void updateEventList() {

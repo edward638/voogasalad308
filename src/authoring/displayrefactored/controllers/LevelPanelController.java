@@ -6,6 +6,7 @@ import org.codehaus.groovy.runtime.metaclass.MethodMetaProperty.GetBeanMethodMet
 import authoring.AuthBehavior;
 import authoring.Game;
 import authoring.GameObject;
+import authoring.GameObjectAdder;
 import authoring.GameScene;
 import authoring.SceneBackgroundImageSerializable;
 import authoring.SceneManager;
@@ -17,7 +18,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
-public class LevelPanelController extends Controller {
+/**
+ * 
+ * @author Edward Zhuang
+ *
+ */
+public class LevelPanelController extends Controller implements GameObjectAdder {
 
 	SceneManager sceneManager;
 	LevelPanelRefactored levelPanelRefactored;
@@ -57,10 +63,8 @@ public class LevelPanelController extends Controller {
 	protected void addToGUI(Pane pane) {
 		int x = ResourceBundleManager.getPosition("LEVELPANEL_X");
 		int y = ResourceBundleManager.getPosition("LEVELPANEL_Y");
-		levelPanelRefactored.AttachToPane(pane, x, y);	
+		levelPanelRefactored.attachToPane(pane, x, y);	
 	}
-	
-	
 	
 	@Override
 	protected void refreshView() {
@@ -69,8 +73,8 @@ public class LevelPanelController extends Controller {
 	
 	public void addLevel(String name, int level) {
 		GameScene scene = sceneManager.makeScene(name, level);
-		sceneManager.setCurrentScene(scene);
-		levelPanelRefactored.updateLevelDropdown(level - 1, scene);
+		setLevel(scene);
+//		levelPanelRefactored.updateLevelDropdown(level - 1, scene);
 	}
 	
 	public void setLevel(GameScene gameScene) {
@@ -81,5 +85,11 @@ public class LevelPanelController extends Controller {
 	private void updateMyControllers(GameScene gameScene) {
 		objectInfoPanelController.setGameScene(gameScene);
 		gameViewWindowController.setGameScene(gameScene);
+	}
+
+	@Override
+	public void addToCurrentScene(GameObject gameObject) {
+		// TODO Auto-generated method stub
+		sceneManager.getCurrentScene().addObject(gameObject);
 	}
 }

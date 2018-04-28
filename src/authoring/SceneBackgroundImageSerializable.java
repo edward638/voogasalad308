@@ -68,5 +68,4 @@ public class SceneBackgroundImageSerializable {
 		this.imagePath = imagePath;
 	}
 
-	
 }

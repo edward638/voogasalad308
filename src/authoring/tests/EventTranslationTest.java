@@ -25,6 +25,18 @@ public class EventTranslationTest {
 		moveProps.add(x);
  		AuthBehavior movableCharacter = new AuthBehavior("MovableCharacter", moveProps);
 		go.addBehavior(movableCharacter);
+		Property xPos = new Property("xPos", Double.class);
+		xPos.setValue(5.0);
+		Property yPos = new Property("yPos", Double.class);
+		yPos.setValue(5.0);
+		Property name = new Property("name", String.class);
+		name.setValue("myObject");
+		Set<Property> mandatoryProps = new HashSet<>();
+		mandatoryProps.add(xPos);
+		mandatoryProps.add(yPos);
+		mandatoryProps.add(name);
+		AuthBehavior mandatory = new AuthBehavior("MandatoryBehavior", mandatoryProps);
+		go.addBehavior(mandatory);
 		Event keyInput = new Event();
 		keyInput.setEventType("engine.events.elementevents.KeyInputEvent");
 		keyInput.setTrigger("w");

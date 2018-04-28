@@ -1,0 +1,56 @@
+<authoring.GameSceneSerializable>
+  <myName>Level 1</myName>
+  <backgroundImageSerializables/>
+  <myObjects>
+    <authoring.GameObject>
+      <myName>eddie</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">397.0</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeDef</myName>
+              <myValueType>engine.behaviors.shapes.ShapeDefinition</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>ignoreTags</myName>
+              <myValueType>java.util.List</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">eddieimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">369.0</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+      </myBehaviors>
+      <myEvents>
+        <authoring.Event>
+          <myResponses/>
+          <eventType>engine.events.elementevents.TimeEvent</eventType>
+        </authoring.Event>
+        <authoring.Event>
+          <myResponses/>
+          <eventType>engine.events.elementevents.KeyInputEvent</eventType>
+        </authoring.Event>
+      </myEvents>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+  </myObjects>
+  <myObjectNames class="sorted-set"/>
+  <currentGameObject reference="../myObjects/authoring.GameObject"/>
+</authoring.GameSceneSerializable>

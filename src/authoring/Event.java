@@ -13,7 +13,7 @@ import engine.events.elementevents.ElementEvent;
  */
 public class Event {
 	
-	private List<EventResponse> myResponses;
+	private List<GroovyAction> myResponses;
 	private String eventType;
 	private String myTrigger;
 
@@ -24,7 +24,7 @@ public class Event {
 	/**
 	 * returns the list of event responses
 	 */
-	public List<EventResponse> getResponses() {
+	public List<GroovyAction> getResponses() {
 		return myResponses;
 	}
 	
@@ -53,7 +53,7 @@ public class Event {
 	/**
 	 * adds an event response, toAdd, to the list 
 	 */
-	public void addResponse(EventResponse toAdd) {
+	public void addResponse(GroovyAction toAdd) {
 		myResponses.add(toAdd);
 	}
 	

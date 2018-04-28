@@ -2,6 +2,7 @@ package authoring;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import engine.behaviors.MandatoryBehavior;
 
@@ -63,6 +64,11 @@ public class GameObject {
 		myBehaviors.add(behaviorToAdd);
 	}
 	
+	public boolean hasBehavior(String s) {
+		return !myBehaviors.stream().filter(beh -> beh.getName().contains(s))
+				.collect(Collectors.toList()).isEmpty();
+	}
+	
 	public void removeBehavior(AuthBehavior behaviorToRemove) {
 		myBehaviors.remove(behaviorToRemove);
 	}
@@ -81,12 +87,13 @@ public class GameObject {
 				if (curr.getName().equals(behavior) || curr.getDisplayName().equals(behavior)) {
 					// is the above ok? i'm not sure whether that makes it more or less confusing
 					//i think it should be fine if we allow both methods of accessing it I can't see any problems with that
+//					System.out.println("RETURNED BEHAVIOR: " + curr);
 					return curr;
 				}
 			}
-			throw new Exception();
 		} catch (Exception e) {
-			System.out.println("Tried to access a behavior that this object does not have");
+			e.printStackTrace();
+			throw new RuntimeException("Tried to access a behavior that this object does not have");
 		}
 		return null;
 	}

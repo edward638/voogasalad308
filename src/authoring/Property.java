@@ -17,11 +17,11 @@ public class Property {
 	
 	//sets the value of the property
 	public void setValue(Object value) {
-		if (value.getClass().equals(myValueType)) {
+		try {
 			myValue = value;
 		}
-		else { 
-			new Error("value entered is not the correct type");
+		catch(Exception e) { 
+			throw(new RuntimeException("value entered is not the correct type"));
 		}
 	}
 	

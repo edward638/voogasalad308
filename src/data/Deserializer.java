@@ -2,8 +2,12 @@ package data;
 
 import authoring.GameObject;
 import authoring.GameScene;
+<<<<<<< HEAD
+import engine.GamePart;
+=======
 import authoring.GameSceneSerializable;
 import engine.GameState;
+>>>>>>> AUTHORING
 
 import com.thoughtworks.xstream.XStream;
 
@@ -101,10 +105,10 @@ public class Deserializer {
         return (GameSceneSerializable) xstream.fromXML(convertXMLFileToString(file));
     }
     
-    public GameState getSaveState(String fileName) {
+    public GamePart getSavePart(String fileName) {
     	String saveState = fileName + "/" + SAVE + ".xml";
     	File file = new File(saveState);
-        return (GameState) xstream.fromXML(convertXMLFileToString(file));
+        return (GamePart) xstream.fromXML(convertXMLFileToString(file));
     }
    
 

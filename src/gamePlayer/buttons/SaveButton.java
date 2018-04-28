@@ -18,7 +18,7 @@ public class SaveButton extends PlayerButtons {
 			String rootFolder = "CALVIN FILL IN HOW TO MAKE THIS STRING = ROOTFOLDER";
 			GameSaver gameSaver = new GameSaver(rootFolder);
 			try {
-				gameSaver.saveGameState(buttonData.getGameState());
+				gameSaver.saveGamePart(buttonData.getGamePart());
 			} catch (IOException e) {
 				System.out.println("e dot print stack trace");
 			}

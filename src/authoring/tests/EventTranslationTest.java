@@ -8,11 +8,11 @@ import authoring.Event;
 import authoring.EventResponse;
 import authoring.GameObject;
 import authoring.Property;
+import engine.behaviors.MovableCharacter;
 
 public class EventTranslationTest {
-
-	public static void main(String args[]) {
-		
+	
+	public GameObject getCharacter() {
 		//moveable character that will jump on the w key
 		GameObject go = new GameObject();
 		go.setName("myObject");
@@ -23,7 +23,7 @@ public class EventTranslationTest {
 		Set<Property> moveProps = new HashSet<>();
 		moveProps.add(y);
 		moveProps.add(x);
- 		AuthBehavior movableCharacter = new AuthBehavior("MovableCharacter", moveProps);
+ 		AuthBehavior movableCharacter = new AuthBehavior(MovableCharacter.class.getCanonicalName(), moveProps);
 		go.addBehavior(movableCharacter);
 		Property xPos = new Property("xPos", Double.class);
 		xPos.setValue(5.0);
@@ -40,12 +40,12 @@ public class EventTranslationTest {
 		Event keyInput = new Event();
 		keyInput.setEventType("engine.events.elementevents.KeyInputEvent");
 		keyInput.setTrigger("w");
+		
 		//this will be changed to GroovyAction 
 		EventResponse response = new EventResponse();
 		response.setMyContent("myObject.getBehaviors('MovableCharacter').jump()");
 		keyInput.addResponse(response);
 		go.addEvent(keyInput);
-		
+		return go;
 	}
-	
 }

@@ -1,6 +1,5 @@
 package gamePlayer;
 
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 import data.GameDescriptionProvider;
@@ -23,11 +22,8 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
@@ -57,11 +53,8 @@ public class ConcreteGamePlayer implements GamePlayer {
 	private VolumeSlider volumeSlider;
 
 	private EngineInterface engine;
-	private String currentGameName;
 	private GameDescriptionProvider gameDescriptionProvider;
-	private String mostRecentFile;
 	private KeyInputDictionary keyInputDictionary;
-	private PlayerUpdater concretePlayerUpdater;
 
 	private Username username;
 
@@ -85,8 +78,9 @@ public class ConcreteGamePlayer implements GamePlayer {
 		myStage.setScene(myScene);
 
 		highScores = new ConcreteHighScores();
-		root.getChildren().add(highScores.getScores());
+
 		keyInputDictionary = new KeyInputDictionary(engine);
+		myScene.setOnKeyPressed(e -> keyInputDictionary.handleAction(e.getCode()));
 
 		volumeSlider = new VolumeSlider(buttonData, engine);
 		buttonData = new ConcreteButtonData(stage, this, volumeSlider, root, keyInputDictionary);
@@ -100,6 +94,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 	 * initialises buttons on screen
 	 */
 	private void initialiseGUIElements() {
+
 		clearHighScoresButton = new ClearHighScoresButton(BUTTONXLOCATION,
 				Integer.parseInt(resources.getString("clearHighScoresButtonY")), BUTTONWIDTH, BUTTONHEIGHT, buttonData);
 
@@ -138,49 +133,69 @@ public class ConcreteGamePlayer implements GamePlayer {
 		root.getChildren().add(volumeSlider.getVolumeText());
 		root.getChildren().add(volumeSlider.getSlider());
 		root.getChildren().add(username.getNameText());
+		root.getChildren().add(highScores.getScores());
 	}
 
 	@Override
 	public void playGame(String file) {
-		root.getChildren().remove(gameDisplay);
-		root.getChildren().remove((Node) hud);
-		root.getChildren().remove(highScores.getScores());
-
+		cleanOldEngineGuiElements();
 		if (engine != null) {
 			engine.close();
 		}
 		engine = new Engine(new ModelGameState2().getState());
-		buttonData.addEngine(engine);
-		keyInputDictionary.setGame(engine);
-		volumeSlider.setEngine(engine);
-		currentGameName = gameDescriptionProvider.getGameName(file);
-		hud = new ConcreteHUD(currentGameName);
+		updateEngines(engine);
+
+		hud = new ConcreteHUD(gameDescriptionProvider.getGameName(file));
 		highScores = new ConcreteHighScores(file);
 		buttonData.setHighScores(highScores);
+		pauseButton = new PauseButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("pauseButtonY")),
+				BUTTONWIDTH, BUTTONHEIGHT, buttonData);
+		setUpEngineGameDisplay();
 
 		// set everything into gamemetadata and then pass only metadata into engine
 		// concretePlayerUpdater = new ConcretePlayerUpdater(hud, highScores, userName);
 		// engine = new Engine(file, concretePlayerUpdater);
-		keyInputDictionary.setGame(engine);
 
-		buttonData.setCurrentGameName(currentGameName);
-		mostRecentFile = file;
-		buttonData.setMostRecentFile(mostRecentFile);
+		buttonData.setMostRecentFile(file);
+
+		addEngineGUIToRoot();
+	}
+
+	/**
+	 * removes all the old engine elements from the root, cleaning it before a new
+	 * engine is made.
+	 */
+	private void cleanOldEngineGuiElements() {
+		root.getChildren().remove(gameDisplay);
+		root.getChildren().remove((Node) hud);
+		root.getChildren().remove(highScores.getScores());
+	}
+
+	/**
+	 * updates all the engine of all the different components that use engine.
+	 * 
+	 * @param newEngine
+	 */
+	private void updateEngines(EngineInterface newEngine) {
+		buttonData.addEngine(newEngine);
+		keyInputDictionary.setGame(newEngine);
+		volumeSlider.setEngine(newEngine);
+		keyInputDictionary.setGame(newEngine);
+	}
+
+	private void setUpEngineGameDisplay() {
 		gameDisplay = engine.getDisplay();
 		gameDisplay.setWidth(Integer.parseInt(resources.getString("gameDisplayWidth")));
 		gameDisplay.setHeight(Integer.parseInt(resources.getString("gameDisplayHeight")));
 		gameDisplay.setLayoutX(Integer.parseInt(resources.getString("gameDisplayX")));
 		gameDisplay.setLayoutY(Integer.parseInt(resources.getString("gameDisplayY")));
+	}
 
-		myScene.setOnKeyPressed(e -> keyInputDictionary.handleAction(e.getCode()));
-
+	private void addEngineGUIToRoot() {
 		root.getChildren().add(gameDisplay);
 		root.getChildren().add((Node) hud);
 		root.getChildren().add(highScores.getScores());
-
 		root.getChildren().remove(pauseButton);
-		pauseButton = new PauseButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("pauseButtonY")),
-				BUTTONWIDTH, BUTTONHEIGHT, buttonData);
 		root.getChildren().add(pauseButton);
 	}
 

@@ -44,7 +44,7 @@ public class BehaviorsWindow extends VBox {
 		if (!epuc.validEvent()) {
 			Text nonvalid = new Text("No event selected");
 			this.getChildren().add(nonvalid);
-			return; 
+			return;
 		}
 		behaviors.getItems().clear();
 		behaviors.getItems().addAll(gos.get(0).getBehaviors());

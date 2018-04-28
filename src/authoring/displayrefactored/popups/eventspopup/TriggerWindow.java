@@ -14,7 +14,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 /**
- * @author August Panel that takes care of trigger of events from game objects
+ * @author August 
+ * Panel that takes care of trigger of events from game objects
  *
  */
 public class TriggerWindow extends VBox {

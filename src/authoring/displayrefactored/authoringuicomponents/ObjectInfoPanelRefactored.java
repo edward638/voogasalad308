@@ -9,6 +9,7 @@ import authoring.GameObject;
 import authoring.ObjectInfoObservable;
 import authoring.ObjectInfoObserver;
 import authoring.displayrefactored.controllers.ObjectInfoPanelController;
+import authoring.displayrefactored.popups.BehaviorPopup;
 import authoring.displayrefactored.popups.EventsPopupRefactored;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -104,11 +105,11 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 	private void mapButtonActions(List<GameObject> list) {
 
 		editBehaviorsButton.setOnAction(e -> {
-
+			new BehaviorPopup(list);
 		});
 
 		editEventsButton.setOnAction(e -> {
-//			new EventsPopupRefactored(list, controller.getAllGameObjects());
+			new EventsPopupRefactored(list, controller.getAllGameObjects());
 		});
 
 		duplicateButton.setOnAction(e -> {
@@ -149,8 +150,6 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 		ObservableList<ObjectCoordinatesInsertion> observableInsertions = FXCollections.observableArrayList(insertions);
 
 		gameObjectCoordinates.setItems(observableInsertions);
-
-		
 	}
 
 	private void setupTableColumns() {

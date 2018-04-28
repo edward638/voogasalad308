@@ -55,6 +55,7 @@ public class BehaviorsWindow extends VBox {
 	private void mouseClicked(AuthBehavior selectedBehavior) {
 		currentBehavior = selectedBehavior;
 		epuc.updateFromBehavior();
+		epuc.concatenateString(currentBehavior.getDisplayName(), "BehaviorsWindow");
 	}
 	
 	public AuthBehavior getCurrBehavior() {

@@ -75,8 +75,8 @@ public class EventsPopupController extends PopupController {
 	public boolean validEvent() {
 		return eventsWindow.validEvent();
 	}
-	public void concatenateString(String stringToAdd) {
-		groovyWindow.concatenateString(stringToAdd);
+	public void concatenateString(String stringToAdd, String caller) {
+		groovyWindow.concatenateString(stringToAdd, caller);
 	}
 	public List<VBox> getWindows() {
 		List<VBox> windows = new ArrayList<>();

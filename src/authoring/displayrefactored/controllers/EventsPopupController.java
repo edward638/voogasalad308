@@ -88,6 +88,7 @@ public class EventsPopupController extends PopupController {
 		windows.add(groovyWindow);
 		return windows;
 	}
+	
 	public void updateFromEvent() {
 		triggerWindow.createVBox();
 		responseWindow.createVBox();
@@ -99,6 +100,4 @@ public class EventsPopupController extends PopupController {
 	public void updateFromBehavior() {
 		mfWindow.createVBox();
 	}
-	
-
 }

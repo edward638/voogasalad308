@@ -9,32 +9,32 @@ import engine.events.gameevents.GameEvent;
 
 public class EventManager2 {
 	
-	private GameState gameState;
+	private GameState gameSate;
 	private CollisionManager collisionManager;
 	
 	public EventManager2 (GameState state) {
-		gameState = state;
+		gameSate = state;
 		collisionManager = new CollisionManager();
 	}
 	
 	public void processElementEvent(ElementEvent ee) {
 	
 		List<GameEvent> gameEvents = new ArrayList<>();
-		for (GameElement ge: gameState.getElements()) {
+		for (GameElement ge: gameSate.getCurrentGamePart().getElements()) {
 			gameEvents.addAll(ge.processEvent(ee));
 		}
-		gameEvents.addAll(collisionManager.handleCollisions(gameState));
+		gameEvents.addAll(collisionManager.handleCollisions(gameSate.getCurrentGamePart()));
 		gameEvents.stream().forEach(event -> processGameEvent(event));
 		
 	}
 	
 	private void processGameEvent(GameEvent gameEvent) {
-		System.out.println("GameEvent processed");
-		gameEvent.execute(gameState);
+		//System.out.println("GameEvent processed");
+		gameEvent.execute(gameSate);
 	}
 
 	
-	public GameState getCurrentState() {
-		return gameState;
+	public GamePart getCurrentPart() {
+		return gameSate.getCurrentGamePart();
 	}
 }

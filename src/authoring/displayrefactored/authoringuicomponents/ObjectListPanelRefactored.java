@@ -1,9 +1,11 @@
 package authoring.displayrefactored.authoringuicomponents;
 
 import java.io.File;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Set;
 
 import authoring.GameObject;
 import authoring.ObjectInfoObservable;
@@ -11,7 +13,6 @@ import authoring.displayrefactored.controllers.ObjectInfoPanelController;
 import authoring.displayrefactored.popups.NewGameObjectPopupRefactored;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.collections.FXCollections;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
@@ -19,8 +20,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 
 
 /**
@@ -116,8 +117,13 @@ public class ObjectListPanelRefactored extends AuthoringUIComponentRefactored im
 	private void updateLevelObjects(List<GameObject> list) {
 //		System.out.println("There should be " + list.size() + " objects in this list.");
 		
+		Set<GameObject> set = new HashSet<>(list);
+		System.out.println("From ObjectListPanel: number of total objects" + list.size());
+		System.out.println("From ObjectListPanel: number of unique objects" + set.size());
+		
 		myLevelObjects.getItems().clear();
-		myLevelObjects.getItems().addAll(FXCollections.observableArrayList(list));
+//		myLevelObjects.getItems().addAll(FXCollections.observableArrayList(list));
+		myLevelObjects.getItems().addAll(set);
 		myLevelObjects.getSelectionModel().select(observable.getCurrentGameObject());
 	}
 

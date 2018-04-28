@@ -1,26 +1,16 @@
+
 package engine;
 
-import java.util.Arrays;
-import java.util.List;
-
-import data.GameLoader;
-import engine.behaviors.MainCharacter;
-import engine.events.elementevents.ElementEvent;
 import engine.events.elementevents.KeyInputEvent;
 import engine.events.elementevents.MouseInputEvent;
 import engine.events.elementevents.TimeEvent;
-import engine.tests.ModelGameState;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.scene.Group;
-import javafx.scene.ParallelCamera;
 import javafx.scene.SubScene;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
-public class Engine {
+public class Engine implements EngineInterface{
 	public static final int FRAMES_PER_SECOND = 60;
 	public static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
@@ -28,44 +18,17 @@ public class Engine {
     public static final double SUBSCENE_HEIGHT = 590;
 	
 	private Timeline animation;
-	
-	private SubScene engineSubScene;
-	private Group subSceneRoot = new Group();
-	private GameState gameState;
+	private GameState currentGameState;
 	private DisplayState displayState;
 	private EventManager2 eventManager;
+	private GameMetaData gameMetaData;
 	
-	private String musicPath = "data/music/WiiShopChannelMusic.mp3";
-	
-	private AudioPlayer audioPlayer;
-	
-	public Engine(String gamePath) {
-		//EngineRunner engineRunner = new EngineRunner(gamePath);
-		GameLoader loader = new GameLoader(gamePath);
-		
-		ModelGameState modelGameState = new ModelGameState(); 
-		gameState = modelGameState.getState();
-		displayState = modelGameState.getDisplay();
-		eventManager = new EventManager2(gameState);
-		audioPlayer = new AudioPlayer(musicPath);
+	public Engine(String gameName) {
+		currentGameState = new GameState(gameName);
+		displayState = new DisplayState(currentGameState, gameName);
+		eventManager = new EventManager2(currentGameState);
+		gameMetaData = new GameMetaData(currentGameState);
 		startAnimation();
-	}
-	
-	public Engine(GameState g) {
-		gameState = g;
-		displayState = new DisplayState("enginetestmario", g);
-		eventManager = new EventManager2(gameState);
-		audioPlayer = new AudioPlayer(musicPath);
-		startAnimation();
-	}
-	
-	public void close() {
-		audioPlayer.stop();
-	}
-	
-	public SubScene getDisplay() {
-		engineSubScene = new SubScene(subSceneRoot, SUBSCENE_WIDTH, SUBSCENE_HEIGHT);
-		return engineSubScene;
 	}
 	
 	private void startAnimation() {
@@ -76,47 +39,51 @@ public class Engine {
         animation.getKeyFrames().add(frame);
         animation.play();
     }
+	
+	private void timeStep (double elapsedTime) {
+		double gameSteps = elapsedTime * currentGameState.getGameSpeed();
+    	eventManager.processElementEvent(new TimeEvent(gameSteps));
+    	displayState.update(currentGameState);
+    }
+	
+	@Override
+	public void close() {
+		currentGameState.getAudioManager().stop();
+	}
+	
+	@Override
+	public SubScene getDisplay() {
+		SubScene engineSubScene = new SubScene(displayState.getSubSceneRoot(), SUBSCENE_WIDTH, SUBSCENE_HEIGHT);
+		return engineSubScene;
+	}
 
+	@Override
 	public void handleKeyInput(KeyCode code) {
 		eventManager.processElementEvent(new KeyInputEvent(code));
 	}
 	
+	@Override
 	public void handleMouseInput(double x, double y) {
 		eventManager.processElementEvent(new MouseInputEvent(x,y));
 	}
 	
-	public void timeStep (double elapsedTime) {
-		double gameSteps = elapsedTime * gameState.getGameSpeed();
-		gameState.incrementGameTime(gameSteps);
-	    	eventManager.processElementEvent(new TimeEvent(gameSteps));
-	    	displayState.updateImageElements(scrollingAroundMainCharacter(gameState));
-	    	displayState.update(gameState);
-	    	updateDisplay(displayState.newElements, displayState.removeElements);
-    }
+	@Override
+	public void setVolume(double newVolume) {
+		currentGameState.getAudioManager().setVolume(newVolume);
+	}
 
-	protected void updateDisplay(List<ImageElement> newElements, List<ImageElement> removeElements) {
-		for (ImageView e:newElements) {
-			subSceneRoot.getChildren().add(e);
-		}
-		newElements.clear();
-		
-		for (ImageView e:removeElements) {
-			subSceneRoot.getChildren().remove(e);
-		}
-		removeElements.clear();
+	@Override
+	public void pause() {
+		animation.pause();
 	}
-	
-	private List<Double> scrollingAroundMainCharacter(GameState gameState) {
-		List<Double> offset = Arrays.asList(0.0,0.0);
-		for (GameElement e: gameState.getElements()) {
-			if (e.hasBehavior(MainCharacter.class)) {
-			
-				MainCharacter mc_props = (MainCharacter) e.getBehavior(MainCharacter.class);
-				offset = mc_props.getImageViewOffset(SUBSCENE_WIDTH, SUBSCENE_HEIGHT);
-			}
-		}
-		return offset;
+
+	@Override
+	public void play() {
+		animation.play();
 	}
-	
-	
+
+	@Override
+	public GameMetaData getGameMetaData() {
+		return gameMetaData;
+	}
 }

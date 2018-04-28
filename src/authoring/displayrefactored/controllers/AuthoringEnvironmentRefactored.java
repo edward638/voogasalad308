@@ -8,6 +8,7 @@ import authoring.displayrefactored.controllers.Controller;
 import authoring.displayrefactored.controllers.GameViewWindowController;
 import authoring.displayrefactored.controllers.LevelPanelController;
 import authoring.displayrefactored.popups.NewGameObjectPopupRefactored;
+import data.GameObjectManager;
 import data.ImageManager;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.layout.Pane;
@@ -24,6 +25,7 @@ public class AuthoringEnvironmentRefactored {
 	private GameViewWindowController gameViewWindowController;
 	private LevelPanelController levelPanelController;
 	private ObjectInfoPanelController objectInfoPanelController;
+	private GameObjectManager gameObjectManager;
 	private ImageManager imageManager;
 	private Pane pane;
 	
@@ -35,6 +37,7 @@ public class AuthoringEnvironmentRefactored {
 		pane.setStyle("-fx-border-color: black");
 		createControllers();
 		setUpControllers();
+		addLibrary();
 	}
 	
 	private void createControllers() {
@@ -52,6 +55,7 @@ public class AuthoringEnvironmentRefactored {
 		controllerList.add(objectInfoPanelController);
 	}
 	
+	
 	private void setUpControllers() {
 		for (Controller controller: controllerList) {
 			controller.initializeScreenComponents();
@@ -62,6 +66,10 @@ public class AuthoringEnvironmentRefactored {
 		game.getSceneManager().getCurrentScene().notifyMyObservers();
 	}
 	
+	private void addLibrary() {
+		gameObjectManager = new GameObjectManager(levelPanelController, imageManager);
+		gameObjectManager.addToGUI(pane);
+	}
 
 	
 	public Pane getGUI() {

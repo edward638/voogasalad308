@@ -1,11 +1,12 @@
 package authoring;
 
+import authoring.displayrefactored.popups.BackgroundSizePopupRefactored;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
@@ -61,7 +62,7 @@ public class SceneBackgroundImage {
 		
 		imageHolder.setOnMousePressed(t -> onMousePressed(t));
 		imageHolder.setOnMouseDragged(t -> onMouseDragged(t));
-		imageHolder.setOnMouseClicked(t -> onMouseClicked());
+		imageHolder.setOnMouseClicked(t -> onMouseClicked(t));
 //		cornerCircle.setOnMouseDragged(t -> onMouseDraggedCircle(t));
 		
 //		imageHolder.getChildren().add(myImage);
@@ -87,7 +88,7 @@ public class SceneBackgroundImage {
 		return imageHolder;
 	}
 	
-	private void onMouseClicked() {
+	private void onMouseClicked(MouseEvent t) {
 //		selected = !selected;
 //		
 //		
@@ -100,6 +101,10 @@ public class SceneBackgroundImage {
 //		}
 //		wasEdited = false;
 //		
+		
+		if (t.getButton().equals(MouseButton.SECONDARY)) {
+			new BackgroundSizePopupRefactored(this, serializable);
+		}
 	}
 	
 	private void onMousePressed(MouseEvent t) {
@@ -211,12 +216,16 @@ public class SceneBackgroundImage {
 		myImage.setOpacity(value);
 	}
 	
-	private void updateDimensions() {
+	public void updateDimensions() {
 		height = myImage.getBoundsInLocal().getHeight();
 		width = myImage.getBoundsInLocal().getWidth();
 		imageHolder.setMaxWidth(width + BORDER);
 		imageHolder.setMaxHeight(height + BORDER);
 		
+	}
+	
+	public ImageView getImageView() {
+		return myImage;
 	}
 	
 }

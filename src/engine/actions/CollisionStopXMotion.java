@@ -15,13 +15,14 @@ import javafx.scene.shape.Shape;
 public class CollisionStopXMotion implements Action{
 
 	@Override
-	public void act(ElementEvent e, GameElement ge) {
+	public void act(ElementEvent e, GameElement thisElem) {
 		CollisionEvent ce = (CollisionEvent) e;
+		GameElement ge = ce.getOtherElement(thisElem);
 		if (ge.hasBehavior(Movable.class)) {
 			Movable movable = (Movable) ge.getBehavior(Movable.class);
 			movable.setXVelocity(0.0);
 		}
-		separateElements(ge, ce.getOtherElement(ge));
+		separateElements(ge, thisElem);
 	}
 	
 	private void separateElements(GameElement e1, GameElement e2) {

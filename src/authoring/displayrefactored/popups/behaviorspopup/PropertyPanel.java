@@ -17,4 +17,9 @@ public class PropertyPanel {
 		return null;
 	}
 
+	public void refresh() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

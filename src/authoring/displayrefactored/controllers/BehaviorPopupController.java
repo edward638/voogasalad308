@@ -31,19 +31,17 @@ public class BehaviorPopupController extends PopupController {
 	@Override
 	protected void setUpConnections() {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	protected void addToGUI(Pane pane) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	protected void refreshView() {
-		// TODO Auto-generated method stub
-
+		myBehaviorPanel.refresh();
+		myPropertyPanel.refresh();
 	}
 	
 	public List<Node> getPanels() {

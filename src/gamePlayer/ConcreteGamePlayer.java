@@ -80,7 +80,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 		highScores = new ConcreteHighScores();
 
 		keyInputDictionary = new KeyInputDictionary(engine);
-		myScene.setOnKeyPressed(e -> keyInputDictionary.handleAction(e.getCode()));
+		myScene.setOnKeyPressed(keyPress -> keyInputDictionary.handleAction(keyPress.getCode()));
 
 		volumeSlider = new VolumeSlider(buttonData, engine);
 		buttonData = new ConcreteButtonData(stage, this, volumeSlider, root, keyInputDictionary);
@@ -153,7 +153,8 @@ public class ConcreteGamePlayer implements GamePlayer {
 		setUpEngineGameDisplay();
 
 		// set everything into gamemetadata and then pass only metadata into engine
-		// concretePlayerUpdater = new ConcretePlayerUpdater(hud, highScores, userName);
+		// concretePlayerUpdater = new ConcretePlayerUpdater(hud, highScores,
+		// username.getName());
 		// engine = new Engine(file, concretePlayerUpdater);
 
 		buttonData.setMostRecentFile(file);

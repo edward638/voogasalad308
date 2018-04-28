@@ -36,4 +36,8 @@ public class Username {
 		return nameText;
 	}
 
+	public String getName() {
+		return userName;
+	}
+
 }

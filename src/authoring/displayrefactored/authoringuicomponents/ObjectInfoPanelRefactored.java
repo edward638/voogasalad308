@@ -87,7 +87,7 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 		// myScrollPane.setPrefWidth(PANE_PREF_WIDTH);
 		// myScrollPane.setContent(myVBox);
 		// myScrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
-		System.out.println("generate component");
+//		System.out.println("generate component");
 		
 		borderPane.setCenter(myVBox);
 

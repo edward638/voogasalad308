@@ -21,7 +21,7 @@ import javafx.scene.layout.Pane;
  * @author Edward Zhuang
  *
  */
-public class ObjectInfoPanelController extends Controller {
+public class ObjectInfoPanelController extends Controller implements ObjectInfoSaver {
 
 	GameScene gameScene;
 	ObjectInfoPanelRefactored objectInfoPanelRefactored;
@@ -37,6 +37,10 @@ public class ObjectInfoPanelController extends Controller {
 		this.gameScene.deleteObservers();
 		this.gameScene = gameScene;
 		setUpConnections();
+	}
+	
+	public ObjectInfoPanelRefactored getObjectInfoPanelRefactored() {
+		return objectInfoPanelRefactored;
 	}
 	
 	@Override

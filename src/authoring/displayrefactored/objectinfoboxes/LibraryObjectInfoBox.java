@@ -11,6 +11,7 @@ import data.LibraryObjectSaver;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
@@ -28,11 +29,12 @@ public class LibraryObjectInfoBox extends ObjectInfoBox {
 	private Label properties;
 	private LibraryObjectSaver saver;
 	
-	public LibraryObjectInfoBox(GameObject gameObject, List<GameObject> library, LibraryObjectSaver saver) {
+	public LibraryObjectInfoBox(GameObject gameObject, List<GameObject> library, LibraryObjectSaver saver, Image image) {
 		super();
 		this.gameObject = gameObject;
 		this.libraryObjects = library;
 		this.saver = saver;
+		this.imageView = new ImageView(image);
 		dummyList = new ArrayList<>();
 		dummyList.add(this.gameObject);
 		properties = new Label("Library Object Properties");

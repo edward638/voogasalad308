@@ -13,11 +13,12 @@ import authoring.GameObjectAdder;
 import authoring.GameScene;
 import authoring.Property;
 import authoring.displayrefactored.authoringuicomponents.ObjectLibrary;
+import authoring.displayrefactored.objectinfoboxes.LibraryObjectInfoBox;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
-public class GameObjectManager implements LibraryObjectSaver {
+public class GameObjectManager implements LibraryObjectSaver, LibraryObservable {
 	
 	private static final String defaultObjectLocation = "./data/gamedata/customobjects/";
 	private String key = "block";
@@ -26,7 +27,9 @@ public class GameObjectManager implements LibraryObjectSaver {
 	private ImageManager defaultManager;
 	private ImageManager gameImageManager;
 	private GameObjectAdder levelPanelController;
+	private GameObject currentObject;
 	private ObjectLibrary library;
+	private LibraryObserver observer;
 	
 	public GameObjectManager(GameObjectAdder adder, ImageManager imageManager) {
 		deserializer = new Deserializer();
@@ -52,9 +55,18 @@ public class GameObjectManager implements LibraryObjectSaver {
         return list;
 	}
 	
+	public void setObserver(LibraryObserver observer) {
+		this.observer = observer;
+	}
+	
 	public void changeObjectType(String key) {
 		this.key = key;
 		library.updateObjectList(getSavedGameObjects());
+	}
+	
+	public void setCurrentObject(GameObject gameObject) {
+		this.currentObject = gameObject;
+		observer.notifyObserver();
 	}
 	
 	public void saveCustomGameObject(String name, Image image) throws IOException {
@@ -75,9 +87,9 @@ public class GameObjectManager implements LibraryObjectSaver {
 		gameImageManager.storeImage(imageName, libraryImage);
 	}
 	
-	public void addObjectToGame(GameObject gameObject) {
-		GameObject go = new GameObject(gameObject);
-		Property imagePathProperty = gameObject.getMandatoryBehavior().getProperty("imagePath");
+	public void addObjectToGame() {
+		GameObject go = new GameObject(currentObject);
+		Property imagePathProperty = currentObject.getMandatoryBehavior().getProperty("imagePath");
 		String string = ((String) imagePathProperty.getValue());
 		System.out.println("AddObjectToGame " + string);
 		transferImageToGame(string);
@@ -116,6 +128,23 @@ public class GameObjectManager implements LibraryObjectSaver {
 			e.printStackTrace();
 		}
 		library.updateObjectList(getSavedGameObjects());
+	}
+
+	@Override
+	public LibraryObjectInfoBox getLibraryObjectInfoBox() {
+		// TODO Auto-generated method stub
+		List<GameObject> allObjects = new ArrayList<>();
+		
+		String[] keys = {"player","block","npc"};
+		for (int x = 0; x < keys.length; x++) {
+			key = keys[x];
+			for (GameObject go: getSavedGameObjects()) {
+				allObjects.add(go);
+			}
+		}
+		String imageName = currentObject.getName() + "image.png";
+		
+		return new LibraryObjectInfoBox(currentObject, allObjects, this, defaultManager.getImage(imageName));
 	}
 	
 	

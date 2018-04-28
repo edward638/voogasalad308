@@ -39,6 +39,7 @@ public class GameScene extends Observable implements GameViewObservable, ObjectI
 		
 	}
 	
+	@Override
 	public Set<String> getMyObjectNames(){
 		return myObjectNames;
 	}
@@ -49,10 +50,12 @@ public class GameScene extends Observable implements GameViewObservable, ObjectI
 		notifyMyObservers();
 	}
 	
+	@Override
 	public List<GameObject> getMyObjects(){
 		return myObjects;
 	}
 
+	@Override
 	public GameObject getCurrentGameObject() {
 		return currentGameObject;
 	}
@@ -63,6 +66,7 @@ public class GameScene extends Observable implements GameViewObservable, ObjectI
 		notifyMyObservers();
 	}
 
+	@Override
 	public String getName() {
 		return myName;
 	}
@@ -71,6 +75,7 @@ public class GameScene extends Observable implements GameViewObservable, ObjectI
 		myName = name;
 	}
 	
+	@Override
 	public String toString() {
 		return myName;
 	}
@@ -142,6 +147,7 @@ public class GameScene extends Observable implements GameViewObservable, ObjectI
 		GameObject newGo = new GameObject(currentGameObject);
 		myObjects.add(newGo);
 	}
+
 	
 	
 }

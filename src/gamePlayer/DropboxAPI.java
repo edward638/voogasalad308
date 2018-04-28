@@ -73,13 +73,13 @@ public class DropboxAPI {
 		// now i want to download testdownload - first, make directory locally for new
 		// game
 
-		boolean newGameFolder = (new File(BASELOCATION + "/testdownload").mkdir());
+		boolean newGameFolder = (new File(BASELOCATION + "/Demo308").mkdir());
 		// need to error check this line tho just in case game exists locally already
 		// with same name - this might overwrite the current folder idk
-		ListFolderResult files = client.files().listFolderBuilder("/games/testdownload").start();
+		ListFolderResult files = client.files().listFolderBuilder("/games/Demo308").start();
 		for (Metadata file : files.getEntries()) {
 			if (file instanceof FileMetadata) {
-				downloadFile("/games/testdownload/" + file.getName(), BASELOCATION + "/testdownload/" + file.getName());
+				downloadFile("/games/Demo308/" + file.getName(), BASELOCATION + "/Demo308/" + file.getName());
 			}
 		}
 

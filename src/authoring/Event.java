@@ -33,9 +33,7 @@ public class Event {
 	}
 	
 	public String getEventType() {
-		String[] name = eventType.split("\\.");
-		String use = name[name.length-1];
-		return use;
+		return eventType;
 	}
 	
 	/**
@@ -67,7 +65,9 @@ public class Event {
 	}
 	
 	public String toString() {
-		return eventType;
+		String[] name = eventType.split("\\.");
+		String use = name[name.length-1];
+		return use;
 	}
 	
 }

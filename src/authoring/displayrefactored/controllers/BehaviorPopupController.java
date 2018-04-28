@@ -89,6 +89,6 @@ public class BehaviorPopupController extends PopupController {
 	}
 	
 	public AuthBehavior getCurrBehavior() {
-		return myBehaviorPanel.getBehaviorToAdd();
+		return myBehaviorPanel.getCurrBehavior();
 	}
 }

@@ -1,5 +1,6 @@
 package engine.actions;
 
+import authoring.EventResponse;
 import engine.GameElement;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.ElementEvent;
@@ -33,4 +34,13 @@ public class GroovyAction implements Action {
 		executor.execute(content);
 	}
 
+	public void setContent(String newContent) {
+		content = newContent;
+	}
+	
+	public GroovyAction clone() {
+		GroovyAction er = new GroovyAction();
+		er.setContent(this.getContent());
+		return er;
+	}
 }

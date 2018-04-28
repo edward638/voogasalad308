@@ -3,9 +3,10 @@ package authoring;
 import java.util.ArrayList;
 import java.util.List;
 
+import engine.actions.GroovyAction;
 import engine.events.elementevents.ElementEvent;
 
-/*
+/**
  * Event is owned by a GameObject
  * Event class holds an event trigger and a list of responses to that trigger
  * 
@@ -60,7 +61,7 @@ public class Event {
 	/**
 	 * deletes event response, toDelete, from the list of responses
 	 */
-	public void deleteResponse(EventResponse toDelete) {
+	public void deleteResponse(GroovyAction toDelete) {
 		myResponses.remove(toDelete);
 	}
 	
@@ -74,7 +75,7 @@ public class Event {
 		Event event = new Event();
 		event.setEventType(this.getEventType());
 		event.setTrigger(this.getTrigger());
-		for (EventResponse er : this.myResponses) {
+		for (GroovyAction er : this.myResponses) {
 			event.addResponse(er.clone());
 		}
 		

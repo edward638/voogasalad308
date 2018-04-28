@@ -34,6 +34,7 @@ public class ObjectLibrary extends AuthoringUIComponentRefactored {
 	
 	public ObjectLibrary(GameObjectManager manager) {
 		this.manager = manager;
+		GenerateComponent();
 	}
 	
 	public void initializeFXComponents() {
@@ -52,6 +53,8 @@ public class ObjectLibrary extends AuthoringUIComponentRefactored {
 	protected void GenerateComponent() {
 		BorderPane borderPane = getBorderPane();
 		initializeFXComponents();
+		mapFXActions();
+		borderPane.setCenter(vBox);
 	}
 	
 	public void updateObjectList(List<GameObject> list) {
@@ -68,6 +71,9 @@ public class ObjectLibrary extends AuthoringUIComponentRefactored {
 		});
 		objectList.setOnMouseClicked(e->{
 			currentObject = objectList.getSelectionModel().getSelectedItem();
+		});
+		objectType.valueProperty().addListener((o,old,neww)->{
+			manager.changeObjectType(neww);
 		});
 	}
 	

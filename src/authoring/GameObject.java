@@ -2,6 +2,7 @@ package authoring;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import engine.behaviors.MandatoryBehavior;
 
@@ -61,6 +62,11 @@ public class GameObject {
 	
 	public void addBehavior(AuthBehavior behaviorToAdd) {
 		myBehaviors.add(behaviorToAdd);
+	}
+	
+	public boolean hasBehavior(String s) {
+		return !myBehaviors.stream().filter(beh -> beh.getName().contains(s))
+				.collect(Collectors.toList()).isEmpty();
 	}
 	
 	public void removeBehavior(AuthBehavior behaviorToRemove) {

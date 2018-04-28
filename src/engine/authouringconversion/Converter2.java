@@ -94,25 +94,6 @@ public class Converter2 {
 		return go;
 	}
 	
-	private Event getListOfSameEventResponses(Class<?> eventClass, GameElement ge) {
-		Map<ElementEvent, Action> responses = ge.getResponder().getResponses();
-		List<Entry<ElementEvent, Action>> relevantResponses = responses.entrySet().stream()
-				.filter(entry -> entry.getKey().getClass() == eventClass)
-				.filter(entry -> entry.getValue() instanceof GroovyAction)
-				.collect(Collectors.toList());
-		
-		Event authEvent = new Event();
-		authEvent.setEventType(eventClass.getCanonicalName());
-		relevantResponses.stream()
-			.forEach(entry -> {
-				EventResponse toAdd = new EventResponse();
-				toAdd.setMyContent(((GroovyAction)(entry.getValue())).getContent());
-				authEvent.setTrigger(entry.getKey().getTriggerString());
-				authEvent.addResponse(toAdd);
-			});
-		return authEvent;
-		
-	}
 
 	public GamePart gameScene2GamePart(GameScene scene) {
 		GamePart part = new GamePart(scene.getName(), "0");
@@ -150,9 +131,7 @@ public class Converter2 {
 		for (Field f: newEngBehaviorClass.getDeclaredFields()) {
 			if (Modifier.isPublic(f.getModifiers())) {continue;}
 			f.setAccessible(true);
-//			System.out.println("f: " + f);
 			try {
-//				System.out.println("authB.getProperty(f.getName()).getValue(): " + authB.getProperty(f.getName()));
 				f.set(newEngBehavior, authB.getProperty(f.getName()).getValue());
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 				e.printStackTrace();

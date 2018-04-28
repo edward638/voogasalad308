@@ -82,6 +82,10 @@ public class GameElement {
 		}
 	}
 	
+	public MandatoryBehavior getMandatoryBehavior() {
+		return (MandatoryBehavior) getBehavior(MandatoryBehavior.class);
+	}
+	
 	
 	/*
 	 * Checks if this GameElement has a Behavior object of the requested type

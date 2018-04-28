@@ -5,9 +5,9 @@ import java.util.ResourceBundle;
 
 import data.GameDescriptionProvider;
 import engine.Engine;
-import engine.GameState;
+import engine.GamePart;
 import engine.tests.ModelGameState2;
-import gamePlayer.buttons.ClearHighScoresButton;
+//import gamePlayer.buttons.ClearHighScoresButton;
 import gamePlayer.buttons.ConcreteButtonData;
 import gamePlayer.buttons.LoadButton;
 import gamePlayer.buttons.SaveButton;
@@ -150,7 +150,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 			engine.close();
 		}
 		//engine = new Engine(file);
-		engine = new Engine(new ModelGameState2().getState());
+		engine = new Engine("enginetestmario");
 		keyInputDictionary.setGame(engine);
 		currentGameName = gameDescriptionProvider.getGameName(file);
 		buttonData.setCurrentGameName(currentGameName);

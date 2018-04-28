@@ -113,11 +113,11 @@ public class GameViewWindow extends MainWindowComponent{
 //			tilePane.getChildren().add(bgImage);
 //		}
 //		tilePane = getGame().getSceneManager().getCurrentScene().getScenceBackground().getPane();
-		SceneManager sm = getGame().getSceneManager();
-		GameScene gs = sm.getCurrentScene();
-		SceneBackground sb = gs.getSceneBackground();
-		sceneBackgroundPane = sb.getPane();
-		System.out.println("scene background pane added from game view window");
+//		SceneManager sm = getGame().getSceneManager();
+//		GameScene gs = sm.getCurrentScene();
+//		SceneBackground sb = gs.getSceneBackground();
+//		sceneBackgroundPane = sb.getPane();
+//		System.out.println("scene background pane added from game view window");
 		
 		
 	}

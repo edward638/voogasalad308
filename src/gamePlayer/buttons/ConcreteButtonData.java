@@ -1,7 +1,7 @@
 package gamePlayer.buttons;
 
 import data.GameDescriptionProvider;
-import engine.GameState;
+import engine.GamePart;
 import gamePlayer.GamePlayer;
 import gamePlayer.highScores.HighScores;
 import gamePlayer.keyBindings.KeyInputDictionary;
@@ -17,7 +17,7 @@ public class ConcreteButtonData implements ButtonData {
 
 	private HighScores highScores;
 	private String currentGameName;
-	private GameState gameState;
+	private GamePart gamePart;
 	private String mostRecentFile;
 	private KeyInputDictionary keyBindingMap;
 
@@ -48,8 +48,8 @@ public class ConcreteButtonData implements ButtonData {
 		highScores.clear();
 	}
 
-	public void setGameState(GameState gameState) {
-		this.gameState = gameState;
+	public void setGamePart(GamePart gamePart) {
+		this.gamePart = gamePart;
 	}
 
 	public void setMostRecentFile(String file) {
@@ -62,8 +62,8 @@ public class ConcreteButtonData implements ButtonData {
 	}
 
 	@Override
-	public GameState getGameState() {
-		return gameState;
+	public GamePart getGamePart() {
+		return gamePart;
 	}
 
 	@Override

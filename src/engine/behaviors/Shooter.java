@@ -4,9 +4,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import authoring.GameObject;
+import authoring.groovy.GroovyMethod;
 import engine.GameElement;
 import engine.events.gameevents.AddElementEvent;
-import engine.tests.ModelGameState2;
+import engine.tests.ModelGamePart1;
 
 public class Shooter extends Behavior {
 	
@@ -32,7 +33,7 @@ public class Shooter extends Behavior {
 		Double magDirection = Math.sqrt(Math.pow(direction.get(0), 2) + Math.pow(direction.get(1), 2));
 		Double startx = mand.getX() + distAway * direction.get(0)/magDirection + mand.getShape().getBoundsInLocal().getWidth()/2;
 		Double starty = mand.getY() + distAway * direction.get(1)/magDirection + mand.getShape().getBoundsInLocal().getHeight()/2;
-		GameElement bullet = new ModelGameState2().getBullet(startx, starty, v, direction);
+		GameElement bullet = new ModelGamePart1().getBullet(startx, starty, v, direction);
 		getParent().addGameEvent(new AddElementEvent(bullet));
 	}
 	
@@ -40,8 +41,9 @@ public class Shooter extends Behavior {
 		shoot(defaultVelocity, direction);
 	}
 	
+	@GroovyMethod
 	public void shootRight() {
-		shoot(defaultVelocity, Arrays.asList(-1.0, 0.0));
+		shoot(defaultVelocity, Arrays.asList(1.0, 0.0));
 	}
 	
 	public void shootLeft() {

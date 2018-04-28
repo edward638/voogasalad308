@@ -1,99 +1,85 @@
 package authoring.displayrefactored.controllers;
 
 
-import authoring.Behavior;
+import org.codehaus.groovy.runtime.metaclass.MethodMetaProperty.GetBeanMethodMetaProperty;
+
+import authoring.AuthBehavior;
 import authoring.Game;
 import authoring.GameObject;
 import authoring.GameScene;
-import authoring.displayrefactored.AuthoringEnvironmentGUIRefactored;
+import authoring.SceneBackgroundImageSerializable;
+import authoring.SceneManager;
 import authoring.displayrefactored.authoringuicomponents.GameViewWindowRefactored;
 import authoring.displayrefactored.authoringuicomponents.LevelPanelRefactored;
+import data.ImageManager;
 import data.propertiesFiles.ResourceBundleManager;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
 public class LevelPanelController extends Controller {
 
-	Game game;
+	SceneManager sceneManager;
 	LevelPanelRefactored levelPanelRefactored;
-	GameViewWindowRefactored gameViewWindowRefactored;
+	ObjectInfoPanelController objectInfoPanelController;
+	GameViewWindowController gameViewWindowController;
 	
 	private static final String MANDATORY_BEHAVIOR_NAME = "MandatoryBehavior";
 	
-	public LevelPanelController(Game game) {
-		// TODO Auto-generated constructor stub
-		this.game = game;
+	public LevelPanelController(SceneManager sceneManager, ImageManager imageManager) {
+		super(imageManager);
+		this.sceneManager = sceneManager;
+		objectInfoPanelController = new ObjectInfoPanelController(this.sceneManager.getCurrentScene(),getImageManager());
+		System.out.println("this is current scene: " + this.sceneManager.getCurrentScene());
+		gameViewWindowController = new GameViewWindowController(this.sceneManager.getCurrentScene(),getImageManager());
+	}
+	
+	public ObjectInfoPanelController getObjectInfoPanelController() {
+		return objectInfoPanelController;
+	}
+	
+	public GameViewWindowController getGameViewWindowController() {
+		return gameViewWindowController;
 	}
 	
 	@Override
 	protected void initializeScreenComponents() {
-		// TODO Auto-generated method stub
 		levelPanelRefactored = new LevelPanelRefactored(this);
-	}
-	
-	public void setGameViewWindowRefactored(GameViewWindowRefactored gameViewWindowRefactored) {
-		this.gameViewWindowRefactored = gameViewWindowRefactored;
-		System.out.println("sup");
 	}
 
 	@Override
 	protected void setUpConnections() {
-		// TODO Auto-generated method stub
-		game.addObserver(levelPanelRefactored);
+		sceneManager.addObserver(levelPanelRefactored);
+		System.out.println("setupconnections");
 	}
 
 	@Override
 	protected void addToGUI(Pane pane) {
-		// TODO Auto-generated method stub
 		int x = ResourceBundleManager.getPosition("LEVELPANEL_X");
 		int y = ResourceBundleManager.getPosition("LEVELPANEL_Y");
-		levelPanelRefactored.AttachToPane(pane, x, y);
+		levelPanelRefactored.AttachToPane(pane, x, y);	
+	}
+	
+	
+	
+	@Override
+	protected void refreshView() {
 		
 	}
 	
 	public void addLevel(String name, int level) {
-		GameScene scene = game.getSceneManager().makeScene(name, level);
-		game.getSceneManager().setCurrentScene(scene);
+		GameScene scene = sceneManager.makeScene(name, level);
+		sceneManager.setCurrentScene(scene);
 		levelPanelRefactored.updateLevelDropdown(level - 1, scene);
-		refreshView();
-	}
-	
-	public void addGameObject(String name, Double xPos, Double yPos, String imageName, Image image) {
-		game.getImageManager().storeImage(imageName, image);
-		GameObject gameObject = new GameObject(MANDATORY_BEHAVIOR_NAME);
-		Behavior mandatory = gameObject.getBehavior(MANDATORY_BEHAVIOR_NAME);
-		mandatory.getProperty("elementName").setValue(name);
-		mandatory.getProperty("xPos").setValue(xPos);
-		mandatory.getProperty("yPos").setValue(yPos);
-		mandatory.getProperty("imagePath").setValue(imageName);
-		game.getSceneManager().getCurrentScene().getMyObjects().add(gameObject);
-		refreshView();
 	}
 	
 	public void setLevel(GameScene gameScene) {
-		game.getSceneManager().setCurrentScene(gameScene);
-		refreshView();
+		sceneManager.setCurrentScene(gameScene);
+		updateMyControllers(gameScene);
 	}
 	
-	public void addBackgroundImage(Image image) {
-		game.getSceneManager().getCurrentScene().getSceneBackground().addImage(image);
-		refreshView();
+	private void updateMyControllers(GameScene gameScene) {
+		objectInfoPanelController.setGameScene(gameScene);
+		gameViewWindowController.setGameScene(gameScene);
 	}
-	
-	public void saveImage() {
-		
-	}
-	
-	public void switchPanes(String window) {
-		System.out.println(gameViewWindowRefactored == null);
-		gameViewWindowRefactored.switchPanes(window);
-	}
-	
-
-	@Override
-	protected void refreshView() {
-		// TODO Auto-generated method stub
-		game.notifyMyObservers();
-	}
-	
 }

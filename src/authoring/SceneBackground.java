@@ -1,5 +1,8 @@
 package authoring;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -17,9 +20,11 @@ public class SceneBackground {
 	private Rectangle borderRectangle;
 	private int myXSize;
 	private int myYSize;
+	private List<SceneBackgroundImage> list;
 	
 	public SceneBackground(int xSize, int ySize) {
 		pane = new Pane();
+		list = new ArrayList<>();
 		myXSize = xSize;
 		myYSize = ySize;
 		pane.setPrefSize(xSize, ySize);
@@ -34,17 +39,31 @@ public class SceneBackground {
 		return pane;
 	}
 	
+	public void setRectangle(int xSize, int ySize) {
+		pane.getChildren().remove(borderRectangle);
+		borderRectangle = new Rectangle(xSize, ySize);
+		borderRectangle.setFill(Color.TRANSPARENT);
+		borderRectangle.setStroke(Color.BLACK);
+		pane.getChildren().add(borderRectangle);
+		for (SceneBackgroundImage s: list) {
+			s.setRectangle(borderRectangle);
+			
+		}
+	}
 	
-	public void addImage(Image image) {
-		SceneBackgroundImage i = new SceneBackgroundImage(image, borderRectangle);
-		Pane imagePane = i.getPane();
+	public void addImage(SceneBackgroundImage sceneBackgroundImage) {
+		sceneBackgroundImage.setRectangle(borderRectangle);
+		Pane imagePane = sceneBackgroundImage.getPane();
 //		imagePane.setLayoutX(myXSize/2);
 //		imagePane.setLayoutY(myYSize/2);
 		pane.getChildren().add(imagePane);
+		list.add(sceneBackgroundImage);
+		sceneBackgroundImage.translate();
 	}
 	
 	public void clearPane() {
-		pane.getChildren().removeAll();
+		list.clear();
+		pane.getChildren().clear();
 	}
 	
 	

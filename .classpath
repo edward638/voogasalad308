@@ -16,5 +16,6 @@
 	<classpathentry kind="lib" path="lib/groovy-all-2.4.12-indy.jar"/>
 	<classpathentry kind="lib" path="lib/groovy-doc.jar"/>
 	<classpathentry kind="lib" path="lib/groovy-src.jar"/>
+
 	<classpathentry kind="output" path="bin"/>
 </classpath>

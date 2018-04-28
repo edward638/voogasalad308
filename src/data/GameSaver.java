@@ -41,8 +41,6 @@ public class GameSaver {
         if (! new File(gameLocation).exists()){
             System.out.println("Please initialize game first."); // TODO: throw an error here that says game isn't initialized!
         }
-        
-//        System.out.println(gameScenesLocation);
     }
 
     /**
@@ -62,7 +60,7 @@ public class GameSaver {
 	        try {
 	            ImageIO.write(descriptionImage, "jpg", new File(gameDescriptionLocation + ResourceBundleManager.getPath("DESCRIPTIONIMAGE")));
 	        } catch (IOException e) {
-	            e.printStackTrace(); //TODO: remove this print stacktrace!
+				e.printStackTrace(); // TODO: remove this print stacktrace!
 	        }
         }
 
@@ -83,8 +81,8 @@ public class GameSaver {
 	 * 
 	 * @throws IOException
 	 */
-    public void saveGameState(GameState gameState) throws IOException {
-    	serializer.saveStateToXML(gameSavesLocation, gameState);
+    public void saveGameState(List<GameScene> gameSceneList) throws IOException {
+    	serializer.gameAuthorToXML(gameSavesLocation, gameSceneList);
     }
 
 }

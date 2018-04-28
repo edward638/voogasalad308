@@ -20,13 +20,13 @@ public class SaveButton extends PlayerButtons {
 
 	protected void setAction() {
 		this.setOnAction(event -> {
-			String rootFolder = "CALVIN FILL IN HOW TO MAKE THIS STRING = ROOTFOLDER";
+			String rootFolder = "Demo308";
 			GameSaver gameSaver = new GameSaver(rootFolder);
-			try {
-				gameSaver.saveGameState(buttonData.getGameState());
-			} catch (IOException e) {
-				System.out.println("e dot print stack trace");
-			}
+//			try {
+//				gameSaver.saveGameState(buttonData.getGameState());
+//			} catch (IOException e) {
+//				System.out.println("e dot print stack trace");
+//			}
 		});
 	}
 

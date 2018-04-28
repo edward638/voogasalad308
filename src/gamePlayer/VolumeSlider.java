@@ -26,6 +26,7 @@ public class VolumeSlider extends Slider {
 	private EngineInterface engine;
 	private Slider slider;
 	private Label volumeText;
+	private String font = "Din Alternate";
 
 	public VolumeSlider(ButtonData buttonData, EngineInterface engine) {
 		musicOn = true;
@@ -46,6 +47,7 @@ public class VolumeSlider extends Slider {
 				volume = new_val.doubleValue();
 				volumeBeforeMuting = volume;
 				if (musicOn) {
+					System.out.println(musicOn);
 					if (engine != null) {
 						engine.setVolume(volume);
 					}
@@ -56,9 +58,9 @@ public class VolumeSlider extends Slider {
 
 	private void setupVolumeText() {
 		volumeText = new Label("Volume: ");
+		volumeText.setFont(Font.font(font, 20));
 		volumeText.setLayoutX(970);
 		volumeText.setLayoutY(410);
-		volumeText.setFont(Font.font("Verdana", 20));
 	}
 
 	public void toggleMusic() {

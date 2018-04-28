@@ -22,7 +22,7 @@ public class LoadButton extends PlayerButtons {
 		this.setOnAction(event -> {
 			FileChooser fileChooser = new FileChooser();
 			fileChooser.setTitle("CHOOSE GAME");
-			String currentPath = Paths.get(".").toAbsolutePath().normalize().toString() + "/data";
+			String currentPath = Paths.get(".").toAbsolutePath().normalize().toString() + "/data/gamedata/games";
 			fileChooser.setInitialDirectory(new File(currentPath));
 
 			File fileName = fileChooser.showOpenDialog(buttonData.getStage());

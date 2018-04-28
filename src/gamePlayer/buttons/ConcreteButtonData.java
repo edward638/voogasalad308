@@ -16,7 +16,6 @@ public class ConcreteButtonData implements ButtonData {
 	private Group root;
 
 	private HighScores highScores;
-	private String currentGameName;
 	private GameState gameState;
 	private String mostRecentFile;
 	private KeyInputDictionary keyBindingMap;
@@ -35,10 +34,6 @@ public class ConcreteButtonData implements ButtonData {
 	@Override
 	public void playGame(String file) {
 		gamePlayer.playGame(file);
-	}
-
-	public void setCurrentGameName(String name) {
-		this.currentGameName = name;
 	}
 
 	public void setHighScores(HighScores highScores) {
@@ -66,11 +61,6 @@ public class ConcreteButtonData implements ButtonData {
 	@Override
 	public GameState getGameState() {
 		return gameState;
-	}
-
-	@Override
-	public String getCurrentGameName() {
-		return currentGameName;
 	}
 
 	@Override

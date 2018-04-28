@@ -101,7 +101,6 @@ public class VoogaDropbox {
 	 */
 	private void downloadAllFiles(String path) throws ListFolderErrorException, DbxException, IOException {
 		ListFolderResult files = client.files().listFolderBuilder("/games/" + path).start();
-		System.out.println(path);
 		for (Metadata file : files.getEntries()) {
 			if (file instanceof FileMetadata) {
 				downloadFile("/games/" + path + "/" + file.getName(), BASELOCATION + path + "/" + file.getName());
@@ -130,8 +129,6 @@ public class VoogaDropbox {
 	public void downloadFile(String dropBoxFilePath, String localFilePath) throws DbxException, IOException {
 
 		OutputStream downloadFile = new FileOutputStream(localFilePath);
-
-		System.out.println(dropBoxFilePath);
 
 		FileMetadata metadata = client.files().downloadBuilder(dropBoxFilePath).download(downloadFile);
 
@@ -183,9 +180,9 @@ public class VoogaDropbox {
 
 	private void uploadAllFiles(String totalPath, File folderName)
 			throws UploadErrorException, FileNotFoundException, IOException, DbxException {
-		File[] demo308FileList = folderName.listFiles();
+		File[] folderList = folderName.listFiles();
 
-		for (File f : demo308FileList) {
+		for (File f : folderList) {
 			if (f.isFile()) {
 				uploadFile(totalPath, f);
 			} else if (f.isDirectory()) {
@@ -217,6 +214,23 @@ public class VoogaDropbox {
 			FileMetadata metadata = client.files().uploadBuilder("/games/" + filePath + "/" + fileName.getName())
 					.uploadAndFinish(in);
 		}
+
+	}
+
+	/**
+	 * 
+	 * creates a new Folder within the Dropbox. Need to call this method whenever a
+	 * file needs to be uploaded
+	 * 
+	 * @param folderName
+	 *            - name of the folder for the game, should be the same as the
+	 *            gameName
+	 * @throws DbxException
+	 *             - will not run an error
+	 */
+
+	public void createFolder(String folderName) throws DbxException {
+		FolderMetadata folder = client.files().createFolder(folderName);
 
 	}
 

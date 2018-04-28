@@ -2,6 +2,7 @@ package authoring;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import engine.behaviors.MandatoryBehavior;
 
@@ -63,6 +64,11 @@ public class GameObject {
 		myBehaviors.add(behaviorToAdd);
 	}
 	
+	public boolean hasBehavior(String s) {
+		return !myBehaviors.stream().filter(beh -> beh.getName().contains(s))
+				.collect(Collectors.toList()).isEmpty();
+	}
+	
 	public void removeBehavior(AuthBehavior behaviorToRemove) {
 		myBehaviors.remove(behaviorToRemove);
 	}
@@ -85,10 +91,9 @@ public class GameObject {
 					return curr;
 				}
 			}
-			throw new Exception();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Tried to access a behavior that this object does not have");
+			throw new RuntimeException("Tried to access a behavior that this object does not have");
 		}
 		return null;
 	}

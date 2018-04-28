@@ -137,4 +137,8 @@ public class CollisionEvent extends ElementEvent {
 		return null;
 	}
 	
+	public String getTriggerString() {
+		return e2.getIdentifier();
+	}
+	
 }

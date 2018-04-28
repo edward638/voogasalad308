@@ -7,8 +7,7 @@ import javafx.scene.layout.Pane;
 
 public interface GameViewObservable {
 
-	List<ImageView> getImageViews();
+	List<GameObject> getMyObjects();
 	
-	Pane getSceneBackgroundPane();
-	
+	List<SceneBackgroundImageSerializable> getBackgroundImageSerializables();
 }

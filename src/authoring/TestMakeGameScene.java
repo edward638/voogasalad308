@@ -43,7 +43,7 @@ public class TestMakeGameScene {
 		
 		GameSaver gameSaver = new GameSaver("enginetestmario");
 		ModelGameState model = new ModelGameState();
-		gameSaver.saveGameState(model.getState());
+		gameSaver.saveGamePart(model.getPart());
 		
 		
 		

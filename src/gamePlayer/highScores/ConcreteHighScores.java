@@ -33,7 +33,7 @@ public class ConcreteHighScores implements HighScores {
 	public ConcreteHighScores() {
 		scores = new ArrayList<Score>();
 		table = new TableView<Score>();
-		setupTableProperties(970, 30, 235, 265);
+		setupTableProperties(970, 50, 235, 265);
 	}
 
 	/**
@@ -53,7 +53,7 @@ public class ConcreteHighScores implements HighScores {
 		for (Score score : scoreSaver.loadSavedScores()) {
 			this.addScore(score.getPlayerName(), score.getScore());
 		}
-		setupTableProperties(970, 30, 235, 265);
+		setupTableProperties(970, 50, 235, 265);
 
 		// this.addDummyScores();
 	}
@@ -122,14 +122,17 @@ public class ConcreteHighScores implements HighScores {
 	 */
 	public void addScoreWhenGameOver(String name, int score) {
 		this.addScore(name, score);
-		scoreSaver.saveScores(this.scores);
 	}
-
+	
+	/**
+	 * updates front end display of scores, and xml file of scores
+	 */
 	private void updateScoreTable() {
 		
 		ObservableList<Score> observableScoreList = FXCollections.observableArrayList(scores);
 		Collections.reverse(observableScoreList);
 		table.setItems(observableScoreList);
+		scoreSaver.saveScores(this.scores);
 
 	}
 
@@ -160,9 +163,7 @@ public class ConcreteHighScores implements HighScores {
 
 	@Override
 	public void clear() {
-		//System.out.println("Score size before clearing " + scores.size());
 		scores.clear();
-		//System.out.println("Score Size After Clearing " + scores.size());
 		updateScoreTable();
 	}
 

@@ -1,8 +1,9 @@
 package gamePlayer.buttons;
 
-import data.GameDescriptionProvider;
-import engine.GamePart;
+import engine.EngineInterface;
+import engine.GameState;
 import gamePlayer.GamePlayer;
+import gamePlayer.VolumeSlider;
 import gamePlayer.highScores.HighScores;
 import gamePlayer.keyBindings.KeyInputDictionary;
 import javafx.scene.Group;
@@ -12,31 +13,27 @@ import javafx.stage.Stage;
 public class ConcreteButtonData implements ButtonData {
 	private Stage stage;
 	private GamePlayer gamePlayer;
-//	private GameDescriptionProvider gameDescriptionProvider;
 	private Group root;
 
 	private HighScores highScores;
-	private String currentGameName;
-	private GamePart gamePart;
+	private GameState gameState;
 	private String mostRecentFile;
 	private KeyInputDictionary keyBindingMap;
+	private EngineInterface engine;
+	private VolumeSlider volumeSlider;
 
-	public ConcreteButtonData(Stage stage, GamePlayer gamePlayer, GameDescriptionProvider gameDescriptionProvider,
+	public ConcreteButtonData(Stage stage, GamePlayer gamePlayer, VolumeSlider volumeSlider,
 			Group root, KeyInputDictionary keyInputDictionary) {
 		this.stage = stage;
 		this.gamePlayer = gamePlayer;
-//		this.gameDescriptionProvider = gameDescriptionProvider;
 		this.root = root;
+		this.volumeSlider = volumeSlider;
 		keyBindingMap = keyInputDictionary;
 	}
 
 	@Override
 	public void playGame(String file) {
 		gamePlayer.playGame(file);
-	}
-
-	public void setCurrentGameName(String name) {
-		this.currentGameName = name;
 	}
 
 	public void setHighScores(HighScores highScores) {
@@ -67,11 +64,6 @@ public class ConcreteButtonData implements ButtonData {
 	}
 
 	@Override
-	public String getCurrentGameName() {
-		return currentGameName;
-	}
-
-	@Override
 	public String getMostRecentFile() {
 		return mostRecentFile;
 	}
@@ -94,25 +86,28 @@ public class ConcreteButtonData implements ButtonData {
 
 	@Override
 	public void toggleVolume() {
-		gamePlayer.toggleMusic();
+		volumeSlider.toggleMusic();
 	}
 
 	@Override
 	public Boolean getVolumeStatus() {
-		// TODO Auto-generated method stub
-		return gamePlayer.getMusicOn();
+		return volumeSlider.getMusicOn();
+	}
+
+	public void addEngine(EngineInterface engine) {
+		this.engine = engine;
 	}
 
 	@Override
 	public void resumeGame() {
-		//engine.resume();
-		
+		if (engine != null)
+			engine.play();
 	}
 
 	@Override
 	public void pauseGame() {
-		//engine.pause();
-		
+		if (engine != null)
+			engine.pause();
 	}
 
 }

@@ -1,4 +1,4 @@
-package gamePlayer;
+package voogasalad_2dessertz;
 
 import java.util.Map;
 
@@ -10,7 +10,6 @@ public interface HUD {
 	 * @param lives
 	 * @param OtherInfo
 	 */
-
-	public void updateInfo(Map<String, Object> info);
+	public void updateInfo(int score, int lives, Map<?, ?> OtherInfo);
 	
 }

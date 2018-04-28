@@ -11,6 +11,7 @@ import engine.actions.CollisionDamageAllSides;
 import engine.actions.CollisionKillable;
 import engine.actions.CollisionStopXMotion;
 import engine.actions.CollisionStopYMotion;
+import engine.actions.TimeDisablePortal;
 import engine.behaviors.Gravity;
 import engine.behaviors.Killable;
 import engine.behaviors.Killer;
@@ -25,6 +26,7 @@ import engine.behaviors.TimeRoutine2;
 import engine.behaviors.TimeTracker;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.KeyInputEvent;
+import engine.events.elementevents.TimeEvent;
 import javafx.scene.input.KeyCode;
 
 public class ModelGamePart2 {
@@ -52,9 +54,7 @@ public class ModelGamePart2 {
 		}
 		
 		elements.add(getPortal1(1200.0, 101.0));
-		
-		elements.add(getPortal2(600.0, 101.0));
-		
+				
 		for (GameElement el : elements) {
 			modelGamePart2.addGameElement(el);
 		}
@@ -64,24 +64,12 @@ public class ModelGamePart2 {
 		GameElement block = new GameElement();
 		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "mario_block.png"));
 		List<Integer> x = new ArrayList<Integer>();
+		block.addBehavior(new ExitPortal(block, 1));
 		block.addBehavior(new EntrancePortal(block, true, "modelGamePart1", x, 2));
 		block.addEventResponse(new CollisionEvent(block, CollisionEvent.ALL_SIDES, getMario(), CollisionEvent.ALL_SIDES), new ChangeLevel());
+		block.addEventResponse(new TimeEvent(0.0), new TimeDisablePortal());
 		
 		return block;
-	}
-	
-	public GameElement getPortal2(Double xpos, Double ypos) {
-		GameElement block = new GameElement();
-		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "mario_block.png"));
-		List<Integer> x = new ArrayList<Integer>();
-		block.addBehavior(new ExitPortal(block, 1));
-		
-		return block;
-	}
-	
-	private void addMainCharacter() {
-		GameElement mainCharacter = getMario();
-		modelGamePart2.addGameElement(mainCharacter);
 	}
 	
 	public GameElement getMario() {

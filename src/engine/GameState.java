@@ -3,6 +3,7 @@ package engine;
 import java.util.ArrayList;
 import java.util.List;
 
+import engine.behaviors.EntrancePortal;
 import engine.behaviors.ExitPortal;
 import engine.behaviors.MandatoryBehavior;
 
@@ -71,15 +72,20 @@ public class GameState {
 						if (element.hasBehavior(ExitPortal.class)) {
 							ExitPortal exitP = (ExitPortal) element.getBehavior(ExitPortal.class);
 							if (exitP.getPortalID() == portalID) {
-								System.out.println("exit portal matches entrance portal id: " + portalID);
+								System.out.println("Did this work");
+								if (element.hasBehavior(EntrancePortal.class)) {
+									System.out.println("This is also an entrance portal");
+									EntrancePortal entranceP = (EntrancePortal) element.getBehavior(EntrancePortal.class);
+									entranceP.disableTemp();
+								}
 								mainCharacter.setPosition(element.getPosition());
-								MandatoryBehavior mb = (MandatoryBehavior) element.getBehavior(MandatoryBehavior.class);
-								mb.setPosition(mb.getX()-30, mb.getY());
-								break;
+								this.getCurrentGamePart().addGameElement(mainCharacter);
+								break;	
 							}
 						}
+						
 					}
-					this.getCurrentGamePart().addGameElement(mainCharacter);
+					
 					for (GameElement element : this.getCurrentGamePart().getElements()) {
 						addToDisplay(element);
 					}
@@ -87,6 +93,7 @@ public class GameState {
 				}
 			}
 		}
+		
 	}
 	
 	protected void setCurrentGameLevel(GameLevel gl) {

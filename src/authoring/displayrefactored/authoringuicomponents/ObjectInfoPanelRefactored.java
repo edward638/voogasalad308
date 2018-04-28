@@ -112,6 +112,8 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 		});
 
 		duplicateButton.setOnAction(e -> {
+//			GameObject newGo = new GameObject(list.get(0));
+//			list.add(newGo);
 			controller.duplicateGameObject();
 		});
 	}

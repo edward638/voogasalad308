@@ -12,7 +12,8 @@ public class EntrancePortal extends Behavior{
 	private String partToChange;
 	private List<String> resetLevels;
 	private int portalID;
-	public EntrancePortal (GameElement ge, boolean active, String partToChange, List<String> resetLevels, int portalID) {
+	private Double portalTime = 0.0;
+	public EntrancePortal (GameElement ge, boolean active, String partToChange, List<Integer> resetLevels, int portalID) {
 		super(ge);
 		this.active = active;
 		this.partToChange = partToChange;
@@ -27,14 +28,30 @@ public class EntrancePortal extends Behavior{
 	@GroovyMethod
 	public void runPortal() {
 		if (active) {
+			System.out.println(1);
 			changeLevel();
 			resetLevels();
 		}
 	}
 	
+	public void disableTemp() {
+		portalTime = 5.0;
+		active = false;
+	}
+	
+	public void reduceDisableTime(Double time) {
+		portalTime-= time;
+		if (portalTime<0) {
+			active = true;
+		}
+		
+	}
 	
 	public void changeLevel() {
-		getParent().addGameEvent(new ChangePartEvent(partToChange, portalID));
+		if (active) {
+			getParent().addGameEvent(new ChangePartEvent(partToChange, portalID));
+		}
+		
 	}
 	
 	public void resetLevels() {

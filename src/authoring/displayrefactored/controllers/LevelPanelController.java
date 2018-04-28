@@ -1,21 +1,12 @@
 package authoring.displayrefactored.controllers;
 
-
-import org.codehaus.groovy.runtime.metaclass.MethodMetaProperty.GetBeanMethodMetaProperty;
-
-import authoring.AuthBehavior;
-import authoring.Game;
 import authoring.GameObject;
 import authoring.GameObjectAdder;
 import authoring.GameScene;
-import authoring.SceneBackgroundImageSerializable;
 import authoring.SceneManager;
-import authoring.displayrefactored.authoringuicomponents.GameViewWindowRefactored;
 import authoring.displayrefactored.authoringuicomponents.LevelPanelRefactored;
 import data.ImageManager;
 import data.propertiesFiles.ResourceBundleManager;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
 /**
@@ -68,11 +59,18 @@ public class LevelPanelController extends Controller implements GameObjectAdder 
 	
 	@Override
 	protected void refreshView() {
-		
 	}
 	
-	public void addLevel(String name, int level) {
-		GameScene scene = sceneManager.makeScene(name, level);
+	public void setCurrentSceneName(String name) {
+		sceneManager.setCurrentSceneName(name);
+	}
+	
+	public void setCurrentLevelId(String id) {
+		sceneManager.setCurrentLevelId(id);
+	}
+	
+	public void addLevel(String name, String id) {
+		GameScene scene = sceneManager.makeScene(name, id);
 		setLevel(scene);
 //		levelPanelRefactored.updateLevelDropdown(level - 1, scene);
 	}

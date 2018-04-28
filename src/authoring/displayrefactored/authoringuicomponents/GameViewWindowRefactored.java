@@ -19,7 +19,6 @@ import authoring.displayrefactored.popups.LevelSizePopupRefactored;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ComboBoxBase;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -134,7 +133,7 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 		Double xPosition = (Double) xPositionProperty.getValue();
 		Double yPosition = (Double) yPositionProperty.getValue();			
 		String imagePath = (String) imagePathProperty.getValue();
-		ImageView imageView =new ImageView(controller.getImage(imagePath)); //+ ".png"
+		ImageView imageView =new ImageView(controller.getImage(imagePath+".png")); //+ ".png"
 		imageView.setLayoutX(xPosition);
 		imageView.setLayoutY(yPosition);
 		imageView.setPreserveRatio(true);

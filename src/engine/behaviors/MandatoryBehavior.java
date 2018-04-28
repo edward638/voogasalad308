@@ -3,6 +3,7 @@ package engine.behaviors;
 import java.util.ArrayList;
 import java.util.List;
 
+import authoring.groovy.GroovyMethod;
 import engine.GameElement;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
@@ -53,37 +54,45 @@ public class MandatoryBehavior extends Behavior{
 		this(ge, REFER_ALL_ELEMENTS);
 	}
 	
+	@GroovyMethod
 	public void setPosition(double x, double y) {
 		xPos = x;
 		yPos = y;
 	}
 	
+	@GroovyMethod
 	public List<Double> getPosition() {
 		List<Double> ret = new ArrayList<>();
 		ret.add(xPos); ret.add(yPos);
 		return ret;
 	}
 
+	@GroovyMethod
 	public Double getX() {
 		return xPos;
 	}
 	
+	@GroovyMethod
 	public Double getY() {
 		return yPos;
 	}
 	
+	@GroovyMethod
 	public String getName() {
 		return elementName;
 	}
 	
+	@GroovyMethod
 	public void setWidth(Double newWidth) {
 		displayWidth = newWidth;
 	}
 	
+	@GroovyMethod
 	public void setHeight(Double newHeight) {
 		displayHeight = newHeight;
 	}
 	
+	@GroovyMethod
 	public Shape getShape() {
 		if (shapeType.equals("rectangle")) {
 			return new Rectangle(xPos + (displayWidth - hitBoxWidth)/2, yPos + (displayHeight - hitBoxHeight)/2, hitBoxWidth, hitBoxHeight);

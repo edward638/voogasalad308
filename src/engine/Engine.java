@@ -4,8 +4,6 @@ package engine;
 import java.util.ArrayList;
 import java.util.List;
 
-import engine.audio.AudioManager;
-import engine.audio.AudioPlayer;
 import engine.events.elementevents.KeyInputEvent;
 import engine.events.elementevents.MouseInputEvent;
 import engine.events.elementevents.TimeEvent;
@@ -28,10 +26,7 @@ public class Engine implements EngineInterface{
 	private GameState currentGameState;
 	private DisplayState displayState;
 	private EventManager2 eventManager;
-	
-	private AudioManager audioManager;
-	private String musicPath = "data/music/WiiShopChannelMusic.mp3";
-	private AudioPlayer audioPlayer;
+	private GameMetaData gameMetaData;
 	
 	public Engine(String gameName) {
 		//currentGameState = CONSTRUCTED FROM BLACK BOX
@@ -54,10 +49,8 @@ public class Engine implements EngineInterface{
 		}
 		
 		displayState = new DisplayState(currentGameState, gameName);
-		
 		eventManager = new EventManager2(currentGameState);
-		audioManager = new AudioManager(1);
-		audioPlayer = audioManager.newAudioPlayer(musicPath);
+		gameMetaData = new GameMetaData(currentGameState);
 		startAnimation();
 	}
 	
@@ -78,7 +71,7 @@ public class Engine implements EngineInterface{
 	
 	@Override
 	public void close() {
-		audioPlayer.stop();
+		currentGameState.getAudioManager().stop();
 	}
 	
 	@Override
@@ -99,7 +92,7 @@ public class Engine implements EngineInterface{
 	
 	@Override
 	public void setVolume(double newVolume) {
-		audioManager.setVolume(newVolume);
+		currentGameState.getAudioManager().setVolume(newVolume);
 	}
 
 	@Override
@@ -110,5 +103,10 @@ public class Engine implements EngineInterface{
 	@Override
 	public void play() {
 		animation.play();
+	}
+
+	@Override
+	public GameMetaData getGameMetaData() {
+		return gameMetaData;
 	}
 }

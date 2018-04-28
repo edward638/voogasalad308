@@ -8,6 +8,13 @@
       <ySize>200.0</ySize>
       <imagePath>background0.png</imagePath>
     </authoring.SceneBackgroundImageSerializable>
+    <authoring.SceneBackgroundImageSerializable>
+      <xPos>330.0</xPos>
+      <yPos>205.0</yPos>
+      <xSize>200.0</xSize>
+      <ySize>200.0</ySize>
+      <imagePath>background3.png</imagePath>
+    </authoring.SceneBackgroundImageSerializable>
   </backgroundImageSerializables>
   <myObjects>
     <authoring.GameObject>
@@ -16,17 +23,8 @@
         <authoring.AuthBehavior>
           <myProperties>
             <authoring.Property>
-              <myName>shapeDef</myName>
-              <myValueType>engine.behaviors.shapes.ShapeDefinition</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="string">saheelimage</myValue>
-              <myName>imagePath</myName>
+              <myName>elementName</myName>
               <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myName>ignoreTags</myName>
-              <myValueType>java.util.List</myValueType>
             </authoring.Property>
             <authoring.Property>
               <myValue class="double">123.0</myValue>
@@ -34,12 +32,21 @@
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
+              <myName>ignoreTags</myName>
+              <myValueType>java.util.List</myValueType>
+            </authoring.Property>
+            <authoring.Property>
               <myValue class="double">162.0</myValue>
               <myName>yPos</myName>
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myName>elementName</myName>
+              <myName>shapeDef</myName>
+              <myValueType>engine.behaviors.shapes.ShapeDefinition</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">saheelimage</myValue>
+              <myName>imagePath</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
           </myProperties>

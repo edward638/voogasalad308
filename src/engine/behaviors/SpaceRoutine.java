@@ -3,6 +3,7 @@ package engine.behaviors;
 import java.util.ArrayList;
 import java.util.List;
 
+import authoring.groovy.GroovyMethod;
 import engine.GameElement;
 
 public class SpaceRoutine extends Movable {
@@ -20,6 +21,7 @@ public class SpaceRoutine extends Movable {
 		setVelocity(v);
 	}
 	
+	@GroovyMethod
 	@Override
 	public void move(Double time) {
 		setDirection(points2Visit.get(currentIndex));

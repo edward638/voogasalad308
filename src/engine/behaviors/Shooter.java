@@ -28,6 +28,7 @@ public class Shooter extends Behavior {
 		distAway = Math.sqrt(Math.pow(mand.getShape().getBoundsInLocal().getHeight(), 2.0) + Math.pow(mand.getShape().getBoundsInLocal().getWidth(), 2.0));
 	}
 	
+	@GroovyMethod
 	public void shoot(Double v, List<Double> direction) {
 		MandatoryBehavior mand = (MandatoryBehavior) getParent().getBehavior(MandatoryBehavior.class);
 		Double magDirection = Math.sqrt(Math.pow(direction.get(0), 2) + Math.pow(direction.get(1), 2));
@@ -37,6 +38,7 @@ public class Shooter extends Behavior {
 		getParent().addGameEvent(new AddElementEvent(bullet));
 	}
 	
+	@GroovyMethod
 	public void shoot(List<Double> direction) {
 		shoot(defaultVelocity, direction);
 	}
@@ -46,14 +48,17 @@ public class Shooter extends Behavior {
 		shoot(defaultVelocity, Arrays.asList(1.0, 0.0));
 	}
 	
+	@GroovyMethod
 	public void shootLeft() {
 		shoot(defaultVelocity, Arrays.asList(-1.0, 0.0));
 	}
 	
+	@GroovyMethod
 	public void shootUp() {
 		shoot(defaultVelocity, Arrays.asList(0.0, 1.0));
 	}
 	
+	@GroovyMethod
 	public void shootDown() {
 		shoot(defaultVelocity, Arrays.asList(0.0, -1.0));
 	}

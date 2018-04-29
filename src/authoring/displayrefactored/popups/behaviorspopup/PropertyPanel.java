@@ -60,11 +60,15 @@ public class PropertyPanel {
 		hBox.getChildren().add(new Label(property.getName()));
 		TextField propField = null;
 		if(myPropTexts.containsKey(property)) {
+			System.out.println("has Key" + property);
 			propField = myPropTexts.get(property);
 			propField.setText(property.getValue().toString());
 		} else {
 			propField = new TextField();
 			myPropTexts.put(property, propField);
+			if(property.getValue() != null) {
+				propField.setText(property.getValue().toString());
+			}
 		}
 		hBox.getChildren().add(propField);
 		return hBox;
@@ -85,19 +89,19 @@ public class PropertyPanel {
 				if (value != null && prop != null) {
 					switch(prop.getValueType().getSimpleName()) {
 					case "Double":
-						System.out.println("it's a double!");
+						System.out.println("it's a double!" + value);
 						prop.setValue(Double.parseDouble(value));
 						break;
 					case "String":
-						System.out.println("it's a string!");
+						System.out.println("it's a string!" + value);
 						prop.setValue(value);
 						break;
 					case "Integer":
-						System.out.println("it's a integer!");
+						System.out.println("it's a integer!" + value);
 						prop.setValue(Integer.parseInt(value));
 						break;
 					case "Boolean":
-						System.out.println("it's a boolean!");
+						System.out.println("it's a boolean!" + value);
 						prop.setValue(Boolean.parseBoolean(value));
 						break;
 					default: 

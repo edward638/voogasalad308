@@ -9,7 +9,7 @@ import javafx.scene.layout.HBox;
 public class BehaviorPopup extends PopupRefactored {
 
 	private static final int xSize = 500;
-	private static final int ySize = 500;
+	private static final int ySize = 700;
 	private static final int DEFAULT_SPACING = 10;
 	private BehaviorPopupController myController;
 	private List<GameObject> myGameObjects;

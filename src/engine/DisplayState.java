@@ -1,59 +1,81 @@
 package engine;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import data.ImageManager;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
+import engine.behaviors.MainCharacter;
+import javafx.scene.Group;
 
 public class DisplayState {
-	protected List<ImageElement> activeElements;
-	protected List<ImageElement> newElements;
-	protected List<ImageElement> removeElements;
+	public static final double SUBSCENE_WIDTH =  900;
+    public static final double SUBSCENE_HEIGHT = 590;
 	
-	private String gameName;
+	private List<ImageElement> imageElements;
+	private Group subSceneRoot = new Group();
+	private ImageManager imageManager;
 	
-	public DisplayState(String gameName) {
-		this.gameName = gameName;
-		activeElements = new ArrayList<>();
-		newElements = new ArrayList<>();
-		removeElements = new ArrayList<>();
+	public DisplayState (GameState gameState, String gameName) {
+		imageManager = new ImageManager(gameName);
+		imageElements = new ArrayList<>();
+		
+		for(GameElement e : gameState.getCurrentGamePart().getElements()) {
+			addElementToDisplay(e);
+		}
+		gameState.clearAddToDisplay();
 	}
 	
-	public void addNewElement(GameElement element) {
-		ImageElement imageElement = new ImageElement(element, new ImageManager(gameName));
-		newElements.add(imageElement);
-		activeElements.add(imageElement);
+	private void addElementToDisplay(GameElement element) {
+		ImageElement imageElement = new ImageElement(element, imageManager);
+		imageElements.add(imageElement);
+		subSceneRoot.getChildren().add(imageElement);
 	}
 	
-	protected void removeElement(GameElement element) {
-		activeElements.stream().filter(c -> c.getReference() == element).map(c -> activeElements.remove(c));
-		activeElements.stream().filter(c -> c.getReference() == element).map(c -> removeElements.add(c));
-	}
-
-	protected void updateImageElements() {
-		for (ImageElement imageElement : activeElements) {
-			imageElement.updateState();
+	private void removeElementFromDisplay(GameElement element) {
+		List<ImageElement> toRemove = new ArrayList<>();
+		for (ImageElement i : imageElements) {
+			if (i.getReference() == element) {
+				toRemove.add(i);
+			}
+		}
+		for (ImageElement i : toRemove) {
+			imageElements.remove(i);
+			subSceneRoot.getChildren().remove(i);
 		}
 	}
 	
-	public static void main(String[] args) {
-		Rectangle r1 = new Rectangle();
-		Rectangle r2 = new Rectangle();
-		r1.setX(4);
-		r1.setY(4);
-		r1.setWidth(4);
-		r1.setHeight(4);
-		r2.setX(10);
-		r2.setY(10);
-		r2.setWidth(4);
-		r2.setHeight(5);
-		Shape intersect = Shape.intersect(r1, r2);
-		//System.out.println(intersect.getBoundsInLocal());
-		//int side = getCollisionSide(getCenter(r1), getCenter(intersect));
-		//System.out.println(side);
-		
+	public Group getSubSceneRoot() {
+		return subSceneRoot;
 	}
 	
+	public void update(GameState updatedGameState) {
+		updateImageElements(scrollingAroundMainCharacter(updatedGameState.getCurrentGamePart()));
+		
+		for (GameElement e : updatedGameState.getAddToDisplay()) {
+			addElementToDisplay(e);
+		}
+		updatedGameState.clearAddToDisplay();
+		for (GameElement e : updatedGameState.getRemoveFromDisplay()) {
+			removeElementFromDisplay(e);
+		}
+		updatedGameState.clearRemoveFromDisplay();
+	}
+
+	private void updateImageElements(List<Double> mainCharacterLocation) {
+		for (ImageElement imageElement : imageElements) {
+			imageElement.updateStateWithOffSet(mainCharacterLocation);
+		}
+	}
+	
+	private List<Double> scrollingAroundMainCharacter(GamePart gamePart) {
+		List<Double> offset = Arrays.asList(0.0,0.0);
+		for (GameElement e: gamePart.getElements()) {
+			if (e.hasBehavior(MainCharacter.class)) {
+				MainCharacter mc_props = (MainCharacter) e.getBehavior(MainCharacter.class);
+				offset = mc_props.getImageViewOffset(SUBSCENE_WIDTH, SUBSCENE_HEIGHT);
+			}
+		}
+		return offset;
+	}
 }

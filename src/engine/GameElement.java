@@ -26,6 +26,19 @@ public class GameElement {
 		returnedGameEvents = new ArrayList<>();
 	}
 	
+	public GameElement(String name) {
+		this();
+		behaviors.add(new MandatoryBehavior(this, name));
+	}
+	
+	public Set<Behavior> getAllBehaviors() {
+		return behaviors;
+	}
+	
+	public EventResponder getResponder() {
+		return responder;
+	}
+	
 	/*
 	 * Adds the Behavior object containing the fields and methods that correspond to a specific behavior.
 	 * Checks if there already exists a behavior object for this behavior and throws an exception if the 
@@ -36,6 +49,7 @@ public class GameElement {
 				.filter(b -> b.getClass() == behave.getClass())
 				.collect(Collectors.toList());
 		if (existing.size() > 0) {
+//			behaviors.remove(existing.get(0));
 			throw new TooManyBehaviorsException("Trying to add " + behave.getClass() + " to a GameElement that already has this behavior");
 		}
 		behaviors.add(behave);
@@ -47,7 +61,7 @@ public class GameElement {
 	public Behavior getBehavior (Class<?> behavior_type) {
 		try {
 			return behaviors.stream()
-					.filter(behavior -> behavior.getClass() == behavior_type)
+					.filter(behavior -> behavior_type.isAssignableFrom(behavior.getClass()))
 					.collect(Collectors.toList())
 					.get(0);
 		}
@@ -56,13 +70,40 @@ public class GameElement {
 		}
 	}
 	
+	public Behavior getBehavior (String className) {
+		String qualifiedName = Behavior.class.getPackageName() + "." + className;
+		try {
+			Class<?> clazz = Class.forName(qualifiedName);
+			return getBehavior(clazz);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new RuntimeException("Could not convert " + qualifiedName + " to a behavior type");
+		}
+	}
+	
+	public MandatoryBehavior getMandatoryBehavior() {
+		return (MandatoryBehavior) getBehavior(MandatoryBehavior.class);
+	}
+	
+	
 	/*
 	 * Checks if this GameElement has a Behavior object of the requested type
 	 */
 	public boolean hasBehavior(Class<?> behavior_type) {
 		return behaviors.stream()
-			.filter(behavior -> behavior.getClass() == behavior_type)
+			.filter(behavior -> behavior_type.isAssignableFrom(behavior.getClass()))
 			.collect(Collectors.toList()).size() > 0;
+	}
+	
+	public boolean hasBehavior(String className) {
+		String qualifiedName = MandatoryBehavior.class.getPackageName() + className;
+		try {
+			return hasBehavior(Class.forName(qualifiedName));
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			throw new RuntimeException("Could not find" + qualifiedName + " class");
+		}
 	}
 	
 	/*
@@ -77,9 +118,12 @@ public class GameElement {
 	 */
 	public List<GameEvent> processEvent(ElementEvent event) {
 		responder.respondTo(event);
-		// Save the GameEvents added on this processEvent and return it. Reset the field returnedGameEvents for the next time this 
+		
+		// Save the GameEvents added on this processEvent and return it. Reset the field 
+		// returnedGameEvents for the next time this 
 		// element processes an event
-		List<GameEvent> returnableEvents = new ArrayList<>(returnedGameEvents); 
+		List<GameEvent> returnableEvents = returnedGameEvents.stream()
+				.collect(Collectors.toList()); 
 		returnedGameEvents = new ArrayList<>();
 		return returnableEvents;
 	}
@@ -91,6 +135,7 @@ public class GameElement {
 	public void addGameEvent(GameEvent gameevent) {
 		returnedGameEvents.add(gameevent);
 	}
+	
 	/*
 	 * Defines the method we will use to identify this game element. Should be done according the 
 	 * BasicGameElement behavior since every element in the game will implement that
@@ -102,6 +147,40 @@ public class GameElement {
 		return el.getName();
 	}
 	
+	
+	/*
+	 * Defines the method we will use to retrieve the position of a game element. Should be done according the 
+	 * MandatoryBehavior since every element in the game will implement that
+	 */
+	public List<Double> getPosition() {
+		List<Double> position = new ArrayList<Double>();
+		position.add(((MandatoryBehavior)(getBehavior(MandatoryBehavior.class))).getX());
+		position.add(((MandatoryBehavior)(getBehavior(MandatoryBehavior.class))).getY());
+		return position;
+	}
+	
+	public void setPosition(List<Double> position) {
+		((MandatoryBehavior)(getBehavior(MandatoryBehavior.class))).setPosition(position.get(0), position.get(1));
+	}
+	
+	/*
+	 * Easy Printing
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		Double locX = ((MandatoryBehavior)(getBehavior(MandatoryBehavior.class))).getX();
+		Double locY = ((MandatoryBehavior)(getBehavior(MandatoryBehavior.class))).getY();
+		return getIdentifier() + " at (" + locX + ", " + locY + ")";
+	}
+	
+	public boolean matchesType(GameElement other) {
+		return other.getIdentifier().equals(getIdentifier()) || other.getIdentifier().equals(MandatoryBehavior.REFER_ALL_ELEMENTS);
+	}
+	
+	/*
+	 * Returns a map of every behavior's instance variables to their value (represented as an object)
+	 */
 	public Map<String, Object> reportProperties() {
 		List<Map<String, Object>> behaviorResponses = behaviors.stream()
 				.map(behavior -> behavior.reportProperties())
@@ -112,5 +191,27 @@ public class GameElement {
 		}
 		return returning;
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof GameElement)) {
+			return false;
+		}
+		GameElement other = (GameElement) o;
+		Map<String, Object> thisProperties = reportProperties();
+		Map<String, Object> otherProperties = other.reportProperties();
+		if (thisProperties.size() != otherProperties.size()) {return false;}
+		
+		for (String thisKey: thisProperties.keySet()) {
+			if ((thisProperties.get(thisKey) instanceof GameElement)) {
+				continue;
+			}
+			if (!(otherProperties.get(thisKey).equals(thisProperties.get(thisKey)))) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	
 }

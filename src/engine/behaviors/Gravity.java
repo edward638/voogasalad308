@@ -1,8 +1,8 @@
 package engine.behaviors;
-import java.util.Arrays;
-import java.util.List;
-
+import authoring.groovy.GroovyMethod;
 import engine.GameElement;
+import engine.actions.TimeGravity;
+import engine.events.elementevents.TimeEvent;
 
 /**
  * @author Gouttham 
@@ -10,20 +10,33 @@ import engine.GameElement;
  *
  */
 public class Gravity extends Behavior{
-	public static final double GRAVITATIONAL_FORCE = -9.8*14;
-	private Movable b;
-	
+	public static final Double GRAVITATIONAL_FORCE_DEFAULT = 9.8*10;
+	private Double gravityForce;
 	public Gravity(GameElement ge) {
 		super(ge);
-		b = (Movable) ge.getBehavior(Movable.class);
+		gravityForce = GRAVITATIONAL_FORCE_DEFAULT;
 	}
 	
+	@GroovyMethod
 	public void experienceGravity(Double time) {
-		b.setYVelocity(b.getYVelocity()-(GRAVITATIONAL_FORCE*time));
+		Movable b = (Movable) getParent().getBehavior(Movable.class);
+		b.setYVelocity(((Movable) getParent().getBehavior(Movable.class)).getYVelocity()+(gravityForce*time));
 	}
-
+	
+	@GroovyMethod
 	public void reverseGravity(Double time) {
-		b.setYVelocity(b.getYVelocity()+(GRAVITATIONAL_FORCE*time));
+		Movable b = ((Movable) getParent().getBehavior(Movable.class));
+		(b).setYVelocity(b.getYVelocity()-(gravityForce*time));
+	}
+	
+	@GroovyMethod
+	public void setGravity(Double g) {
+		
+	}
+	
+	@Override
+	protected void addDefaultBehavior() {
+		this.getParent().addEventResponse(new TimeEvent(0.0), new TimeGravity());
 	}
 
 }

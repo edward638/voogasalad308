@@ -1,50 +1,41 @@
 package engine.collision;
 
-import javafx.geometry.Bounds;
+import java.util.ArrayList;
+import java.util.List;
+
 import engine.GameElement;
-import engine.GameState;
-import javafx.geometry.Point2D;
+import engine.GamePart;
 import engine.behaviors.MandatoryBehavior;
 import engine.events.elementevents.CollisionEvent;
+import engine.events.gameevents.GameEvent;
+import javafx.geometry.Bounds;
+import javafx.geometry.Point2D;
+import javafx.scene.shape.Path;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 public class CollisionManager {
 	
-	public void handleCollisions(GameState gameState) {
-		for (int i = 0; i < gameState.getElements().size(); i++) {
-			MandatoryBehavior a = (MandatoryBehavior) gameState.getElements().get(i).getBehavior(MandatoryBehavior.class);
+	public List<GameEvent> handleCollisions(GamePart gamePart) {
+		List<GameEvent> returnEvents = new ArrayList<>();
+		for (int i = 0; i < gamePart.getElements().size(); i++) {
+			MandatoryBehavior a = (MandatoryBehavior) gamePart.getElements().get(i).getBehavior(MandatoryBehavior.class);
 			
-			for (int j = i+1; j < gameState.getElements().size(); j++) {
-				MandatoryBehavior b = (MandatoryBehavior) gameState.getElements().get(j).getBehavior(MandatoryBehavior.class);
+			for (int j = i+1; j < gamePart.getElements().size(); j++) {
+				MandatoryBehavior b = (MandatoryBehavior) gamePart.getElements().get(j).getBehavior(MandatoryBehavior.class);
 				if (a.getShape().getBoundsInLocal().intersects(b.getShape().getBoundsInLocal())) {
 					Shape intersect = Shape.intersect(a.getShape(), b.getShape());
-					//findCollisionDirection(a.getShape(), intersect);
-					//findCollisionDirection(a.getShape(), intersect);
-					GameElement g1 = gameState.getElements().get(i);
-					GameElement g2 = gameState.getElements().get(j);
-					g1.processEvent(new CollisionEvent(g1, g2));
-					g2.processEvent(new CollisionEvent(g1, g2));
+					if (((Path) intersect).getElements().size() != 0) {
+						GameElement g1 = gamePart.getElements().get(i);
+						GameElement g2 = gamePart.getElements().get(j);
+						CollisionEvent collision = new CollisionEvent(g1, g2);
+						returnEvents.addAll(g1.processEvent(collision));
+						returnEvents.addAll(g2.processEvent(collision));
+					}
 				}
 			}
 		}
+		return returnEvents;
 	}
 	
-	private int findCollisionDirection(Shape element, Shape intersect) {
-		Point2D intersectCenter = getCenter(intersect);
-		Point2D elementCenter = getCenter(element);
-		Point2D collisionVector = intersectCenter.subtract(getCenter(element));
-		Point2D boundsVector = elementCenter.subtract(-element.getBoundsInLocal().getMinX(), -element.getBoundsInLocal().getMinY());
-		Point2D referenceXVector = new Point2D(-1,0);
-		double referenceAngle = referenceXVector.angle(boundsVector);
-		double collisionAngle = collisionVector.angle(boundsVector);
-		while (collisionAngle > 0) {
-			
-		}
-		return 0;
-	}
-	
-	private Point2D getCenter(Shape s) {
-		Bounds b = s.getBoundsInLocal();
-		return new Point2D((b.getMinX() + b.getMaxX())/2, (b.getMinY() + b.getMaxY())/2);
-	}
 }

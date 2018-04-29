@@ -3,7 +3,7 @@ package authoring.display;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import authoring.Behavior;
+import authoring.AuthBehavior;
 import authoring.Game;
 import authoring.GameObject;
 import authoring.GameScene;
@@ -17,8 +17,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
-public class GameViewWindow extends AuthoringUIComponent{
+public class GameViewWindow extends MainWindowComponent{
 
+	
+	
 	List<GameObject> gameObjects;
 	ScrollPane scrollPane;
 	StackPane stackPane;
@@ -46,13 +48,6 @@ public class GameViewWindow extends AuthoringUIComponent{
 
 	private void setGameObjectList(){
 		gameObjects = getGame().getSceneManager().getCurrentScene().getMyObjects();
-		System.out.println((gameObjects == null) + "gameobjets");
-		System.out.println((getGame().getSceneManager() == null) + "sceneman");
-		System.out.println((getGame().getSceneManager().getCurrentScene() == null) + "curr");
-		System.out.println((getGame().getSceneManager().getCurrentScene().getMyObjects() == null) + "myobjs");
-		System.out.println( gameObjects.size() + "  objs size");
-
-
 	}
 
 //	public void updateWindow(List<GameObject> gameObjectsList) {
@@ -72,7 +67,7 @@ public class GameViewWindow extends AuthoringUIComponent{
 	private void addObjectsToPane() {
 		if(gameObjects != null) {
 			for (GameObject object: gameObjects) {
-				Behavior mandatoryBehavior = object.getBehavior("MandatoryBehavior");
+				AuthBehavior mandatoryBehavior = object.getMandatoryBehavior();
 				Property xPositionProperty = mandatoryBehavior.getProperty("xPos");
 				Property yPositionProperty = mandatoryBehavior.getProperty("yPos");
 				Property imagePathProperty = mandatoryBehavior.getProperty("imagePath");
@@ -86,10 +81,11 @@ public class GameViewWindow extends AuthoringUIComponent{
 	}
 
 	private void placeObject(Double x, Double y, String imagePath) {
+		//Eddie I think this is where you'll put the dragging and dropping stuff, or put those in separate methods and call them here?
 		System.out.println(imagePath);
 		ImageView imageView = new ImageView(imageManager.getImage(imagePath + ".png"));
-		imageView.setFitHeight(50);
-		imageView.setFitWidth(50);
+		imageView.setPreserveRatio(true);
+		imageView.setFitHeight(100);
 		imageView.setLayoutX(x);
 		imageView.setLayoutY(y);
 		myPane.getChildren().add(imageView);
@@ -117,11 +113,11 @@ public class GameViewWindow extends AuthoringUIComponent{
 //			tilePane.getChildren().add(bgImage);
 //		}
 //		tilePane = getGame().getSceneManager().getCurrentScene().getScenceBackground().getPane();
-		SceneManager sm = getGame().getSceneManager();
-		GameScene gs = sm.getCurrentScene();
-		SceneBackground sb = gs.getSceneBackground();
-		sceneBackgroundPane = sb.getPane();
-		System.out.println("scene background pane added from game view window");
+//		SceneManager sm = getGame().getSceneManager();
+//		GameScene gs = sm.getCurrentScene();
+//		SceneBackground sb = gs.getSceneBackground();
+//		sceneBackgroundPane = sb.getPane();
+//		System.out.println("scene background pane added from game view window");
 		
 		
 	}
@@ -136,18 +132,23 @@ public class GameViewWindow extends AuthoringUIComponent{
 	}
 	
 	public void switchPanes(String key) {
-		if (key.equals("Background")) {
+		if (key.equals("Edit Background")) {
 			stackPane.getChildren().clear();
 			stackPane.getChildren().add(sceneBackgroundPane);
 		} 
-		if (key.equals("Foreground")) {
+		if (key.equals("Edit Objects")) {
 			stackPane.getChildren().clear();
 			stackPane.getChildren().add(sceneBackgroundPane);
 			stackPane.getChildren().add(myPane);
 		}
 	}
 
-	public Node asPane() {
+	public Pane asPane() {
+		return stackPane;
+	}
+
+	@Override
+	protected Node asNode() {
 		return stackPane;
 	}
 

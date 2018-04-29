@@ -3,36 +3,45 @@ package engine.collision;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
+import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 public class SubtractiveRectangleExtrapolator implements ShapeExtrapolator {
-	int resolution = 8;
+	int resolution = 2;
 
 	@Override
-	public Shape extrapolateShape(ImageView imageview) {
-		Rectangle s = new Rectangle(imageview.getBoundsInLocal().getMinX(), imageview.getBoundsInLocal().getMinY(),
-				imageview.getBoundsInLocal().getWidth(), imageview.getBoundsInLocal().getHeight());
-		Shape result = s;
+	public Shape extrapolateShape(Image image, double x, double y, double width, double height) {
 		
-		Image image = imageview.getImage();
 		
-		int widthStep = (int) s.getX()/resolution;
-		int heightStep = (int) s.getY()/resolution;
-		Rectangle empty = new Rectangle(imageview.getBoundsInLocal().getMinX(), imageview.getBoundsInLocal().getMinY(),
-				widthStep, heightStep);
+		Rectangle s = new Rectangle(x, y, width, height);
+		Shape result = new Rectangle(x, y, width, height);
 		
+		int imageWidthStep = (int) image.getWidth()/resolution;
+		int imageHeightStep = (int) image.getHeight()/resolution;
+		
+		int shapeWidthStep = (int) s.getWidth()/resolution;
+		int shapeHeightStep = (int) s.getHeight()/resolution;
+		
+		Rectangle empty = new Rectangle(x, y, shapeWidthStep, shapeHeightStep);
+		
+		//System.out.println(s.toString() + "\n" + widthStep + "\n" + image.toString());
 		PixelReader px = image.getPixelReader();
 		
-		for (int i = widthStep/2; i < s.getX(); i += widthStep) {
-			for (int j = widthStep/2; j < s.getY(); j += widthStep) {
-				if (px.getArgb(i, j)>>24 == 0) {
-					empty.setX(i-widthStep/2);
-					empty.setY(j-heightStep/2);
+		for (int i = 0; i < resolution; i++) {
+			for (int j = 0; j < resolution; j++) {
+				//System.out.println((i*imageWidthStep + imageWidthStep/2) + " ," + (j*imageHeightStep + imageHeightStep/2) + " ," + (px.getArgb((i*imageWidthStep + imageWidthStep/2), (j*imageHeightStep + imageHeightStep/2))>>24));
+				if (px.getArgb((i*imageWidthStep + imageWidthStep/2), (j*imageHeightStep + imageHeightStep/2))>>24 == 0) {
+					empty.setX(x + i*shapeWidthStep);
+					empty.setY(y + j*shapeHeightStep);
+					
 					result = Shape.subtract(result, empty);
+					//System.out.println(result.toString());
+					
 				}
 			}
 		}
 		return result;
 	}
+	
 }

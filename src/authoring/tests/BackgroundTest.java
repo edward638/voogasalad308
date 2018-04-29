@@ -2,7 +2,7 @@ package authoring.tests;
 
 import java.util.HashSet;
 
-import authoring.Behavior;
+import authoring.AuthBehavior;
 import authoring.GameObject;
 import authoring.Property;
 import authoring.SceneBackground;
@@ -28,7 +28,7 @@ public class BackgroundTest extends Application {
 		background = new SceneBackground(500,500);
 		Scene scene = new Scene(background.getPane(), 500, 500);
 		ImageManager im = new ImageManager("default");
-		background.addImage(im.getImage("flappybird.png"));
+//		background.addImage(im.getImage("flappybird.png"));
 		stage.setTitle("Background Test");
 		stage.setScene(scene);
 

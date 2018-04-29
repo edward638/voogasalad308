@@ -1,19 +1,27 @@
 package gamePlayer;
 
+import java.util.ResourceBundle;
+
 import data.GameDescriptionProvider;
 import engine.Engine;
-import gamePlayer.buttons.ClearHighScoresButton;
+import engine.EngineInterface;
+import engine.tests.ModelGameState2;
 import gamePlayer.buttons.ConcreteButtonData;
-import gamePlayer.buttons.KeyboardBindingButton;
 import gamePlayer.buttons.LoadButton;
 import gamePlayer.buttons.SaveButton;
+import gamePlayer.buttons.ToggleVolumeButton;
+import gamePlayer.highScores.ClearHighScoresButton;
+import gamePlayer.highScores.ConcreteHighScores;
+import gamePlayer.keyBindings.KeyInputDictionary;
+import gamePlayer.keyBindings.KeyboardBindingButton;
 import gamePlayer.buttons.NewGameButton;
+import gamePlayer.buttons.PauseButton;
 import gamePlayer.buttons.ReplayButton;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.SubScene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
@@ -28,6 +36,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 	private Scene myScene;
 	private Stage myStage;
 	private Group root;
+	private SubScene gameDisplay;
 
 	private Button saveButton;
 	private Button loadButton;
@@ -35,95 +44,159 @@ public class ConcreteGamePlayer implements GamePlayer {
 	private Button newGameButton;
 	private Button clearHighScoresButton;
 	private Button keyboardBindingButton;
+	private Button toggleVolumeButton;
+	private Button pauseButton;
 	private ConcreteButtonData buttonData;
 
 	private HUD hud;
-	private Pane gameDisplay;
 	private ConcreteHighScores highScores;
+	private VolumeSlider volumeSlider;
 
-	private Engine engine;
-	private String currentGameName;
+	private EngineInterface engine;
 	private GameDescriptionProvider gameDescriptionProvider;
-	private String mostRecentFile;
 	private KeyInputDictionary keyInputDictionary;
+
+	private Username username;
+
+	private ResourceBundle resources;
 
 	private static final double SCREEN_HEIGHT = 650;
 	private static final double SCREEN_WIDTH = 1250;
-	private static final Paint BACKGROUND = Color.ANTIQUEWHITE;
-	private static final int buttonXLocation = 970;
-	private static final int buttonWidth = 235;
-	private static final int buttonHeight = 60;
-
-	private boolean gameSoundsOn;
-	private boolean musicOn;
-	private int soundLevel;
+	private static final Paint BACKGROUND = Color.GRAY;
+	private static final int BUTTONXLOCATION = 970;
+	private static final int BUTTONWIDTH = 235;
+	private static final int BUTTONHEIGHT = 60;
 
 	public ConcreteGamePlayer(Stage stage) {
 
+		resources = ResourceBundle.getBundle("gamePlayer.resources/ConcreteGP");
 		gameDescriptionProvider = new GameDescriptionProvider();
-
-		gameSoundsOn = true;
-		musicOn = true;
-		soundLevel = 0;
 
 		root = new Group();
 		myScene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND);
 		myStage = stage;
 		myStage.setScene(myScene);
 
-		highScores = new ConcreteHighScores("hi");
-		root.getChildren().add(highScores.getScores());
-		keyInputDictionary = new KeyInputDictionary(engine);
+		highScores = new ConcreteHighScores();
 
-		buttonData = new ConcreteButtonData(stage, this, gameDescriptionProvider, root, keyInputDictionary);
-		setupButtons();
-		buttonData.setHighScores(highScores);
+		keyInputDictionary = new KeyInputDictionary(engine);
+		myScene.setOnKeyPressed(keyPress -> keyInputDictionary.handleAction(keyPress.getCode()));
+
+		volumeSlider = new VolumeSlider(buttonData, engine);
+		buttonData = new ConcreteButtonData(stage, this, volumeSlider, root, keyInputDictionary);
+
+		initialiseGUIElements();
+		username = new Username();
+		addGuiElementsToRoot();
 	}
 
 	/**
 	 * initialises buttons on screen
 	 */
-	private void setupButtons() {
-		clearHighScoresButton = new ClearHighScoresButton(buttonXLocation, 310, buttonWidth, buttonHeight, buttonData);
-		root.getChildren().add(clearHighScoresButton);
-		newGameButton = new NewGameButton(buttonXLocation, 350, buttonWidth, buttonHeight, buttonData);
-		root.getChildren().add(newGameButton);
-		loadButton = new LoadButton(buttonXLocation, 390, buttonWidth, buttonHeight, buttonData);
-		root.getChildren().add(loadButton);
-		saveButton = new SaveButton(buttonXLocation, 430, buttonWidth, buttonHeight, buttonData);
-		root.getChildren().add(saveButton);
-		replayButton = new ReplayButton(buttonXLocation, 470, buttonWidth, buttonHeight, buttonData);
-		root.getChildren().add(replayButton);
-		keyboardBindingButton = new KeyboardBindingButton(970, 510, buttonWidth, buttonHeight, buttonData);
-		root.getChildren().add(keyboardBindingButton);
-		// toggleGameSoundButton = new toggleButton(buttonLocation, 500, buttonWidth, buttonHeight, buttonData);
+	private void initialiseGUIElements() {
 
+		clearHighScoresButton = new ClearHighScoresButton(BUTTONXLOCATION,
+				Integer.parseInt(resources.getString("clearHighScoresButtonY")), BUTTONWIDTH, BUTTONHEIGHT, buttonData);
+
+		newGameButton = new NewGameButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("newGameButtonY")), 110,
+				BUTTONHEIGHT, buttonData);
+
+		loadButton = new LoadButton(1095, Integer.parseInt(resources.getString("loadButtonY")), 110, BUTTONHEIGHT,
+				buttonData);
+
+		toggleVolumeButton = new ToggleVolumeButton(BUTTONXLOCATION,
+				Integer.parseInt(resources.getString("toggleVolumeButtonY")), BUTTONWIDTH, BUTTONHEIGHT, buttonData);
+
+		saveButton = new SaveButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("saveButtonY")), BUTTONWIDTH,
+				BUTTONHEIGHT, buttonData);
+
+		replayButton = new ReplayButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("replayButtonY")),
+				BUTTONWIDTH, BUTTONHEIGHT, buttonData);
+
+		keyboardBindingButton = new KeyboardBindingButton(BUTTONXLOCATION,
+				Integer.parseInt(resources.getString("keybordBindingButtonY")), BUTTONWIDTH, BUTTONHEIGHT, buttonData);
+
+		pauseButton = new PauseButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("pauseButtonY")),
+				BUTTONWIDTH, BUTTONHEIGHT, buttonData);
+
+	}
+
+	private void addGuiElementsToRoot() {
+		root.getChildren().add(clearHighScoresButton);
+		root.getChildren().add(newGameButton);
+		root.getChildren().add(loadButton);
+		root.getChildren().add(toggleVolumeButton);
+		root.getChildren().add(saveButton);
+		root.getChildren().add(replayButton);
+		root.getChildren().add(keyboardBindingButton);
+		root.getChildren().add(pauseButton);
+		root.getChildren().add(volumeSlider.getVolumeText());
+		root.getChildren().add(volumeSlider.getSlider());
+		root.getChildren().add(username.getNameText());
+		root.getChildren().add(highScores.getScores());
 	}
 
 	@Override
 	public void playGame(String file) {
+		cleanOldEngineGuiElements();
+		if (engine != null) {
+			engine.close();
+		}
+		engine = new Engine(new ModelGameState2().getState());
+		updateEngines(engine);
+
+		hud = new ConcreteHUD(gameDescriptionProvider.getGameName(file));
+		highScores = new ConcreteHighScores(file);
+		buttonData.setHighScores(highScores);
+		pauseButton = new PauseButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("pauseButtonY")),
+				BUTTONWIDTH, BUTTONHEIGHT, buttonData);
+		setUpEngineGameDisplay();
+
+		// set everything into gamemetadata and then pass only metadata into engine
+		// concretePlayerUpdater = new ConcretePlayerUpdater(hud, highScores,
+		// username.getName());
+		// engine = new Engine(file, concretePlayerUpdater);
+
+		buttonData.setMostRecentFile(file);
+		addEngineGUIToRoot();
+	}
+
+	/**
+	 * removes all the old engine elements from the root, cleaning it before a new
+	 * engine is made.
+	 */
+	private void cleanOldEngineGuiElements() {
 		root.getChildren().remove(gameDisplay);
 		root.getChildren().remove((Node) hud);
 		root.getChildren().remove(highScores.getScores());
-		engine = new Engine(file);
-		keyInputDictionary.setGame(engine);
-		currentGameName = gameDescriptionProvider.getGameName(file);
-		buttonData.setCurrentGameName(currentGameName);
-		mostRecentFile = file;
-		buttonData.setMostRecentFile(mostRecentFile);
+	}
+
+	/**
+	 * updates all the engine of all the different components that use engine.
+	 * 
+	 * @param newEngine
+	 */
+	private void updateEngines(EngineInterface newEngine) {
+		buttonData.addEngine(newEngine);
+		keyInputDictionary.setGame(newEngine);
+		volumeSlider.setEngine(newEngine);
+		keyInputDictionary.setGame(newEngine);
+	}
+
+	private void setUpEngineGameDisplay() {
 		gameDisplay = engine.getDisplay();
-		gameDisplay.setLayoutX(30);
-		gameDisplay.setLayoutY(30);
-		gameDisplay.setPrefSize(900, 590);
-		// gameDisplay.setStyle("-fx-background-color: white;");
-		hud = new ConcreteHUD(currentGameName);
-		highScores = new ConcreteHighScores(currentGameName);
-		myScene.setOnKeyPressed(e -> keyInputDictionary.handleAction(e.getCode()));
+		gameDisplay.setWidth(Integer.parseInt(resources.getString("gameDisplayWidth")));
+		gameDisplay.setHeight(Integer.parseInt(resources.getString("gameDisplayHeight")));
+		gameDisplay.setLayoutX(Integer.parseInt(resources.getString("gameDisplayX")));
+		gameDisplay.setLayoutY(Integer.parseInt(resources.getString("gameDisplayY")));
+	}
+
+	private void addEngineGUIToRoot() {
 		root.getChildren().add(gameDisplay);
 		root.getChildren().add((Node) hud);
 		root.getChildren().add(highScores.getScores());
-		setupButtons();
-
+		root.getChildren().remove(pauseButton);
+		root.getChildren().add(pauseButton);
 	}
 
 	@Override
@@ -131,4 +204,11 @@ public class ConcreteGamePlayer implements GamePlayer {
 		return myScene;
 	}
 
+	public void closeEngine() {
+		if (engine == null) {
+			myStage.close();
+		} else {
+			engine.close();
+		}
+	}
 }

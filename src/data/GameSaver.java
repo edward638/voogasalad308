@@ -2,8 +2,9 @@ package data;
 
 import authoring.GameObject;
 import authoring.GameScene;
+import authoring.GameSceneSerializable;
 import data.propertiesFiles.ResourceBundleManager;
-import engine.GameState;
+import engine.GamePart;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -11,6 +12,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -41,8 +43,6 @@ public class GameSaver {
         if (! new File(gameLocation).exists()){
             System.out.println("Please initialize game first."); // TODO: throw an error here that says game isn't initialized!
         }
-        
-//        System.out.println(gameScenesLocation);
     }
 
     /**
@@ -62,7 +62,7 @@ public class GameSaver {
 	        try {
 	            ImageIO.write(descriptionImage, "jpg", new File(gameDescriptionLocation + ResourceBundleManager.getPath("DESCRIPTIONIMAGE")));
 	        } catch (IOException e) {
-	            e.printStackTrace(); //TODO: remove this print stacktrace!
+				e.printStackTrace(); // TODO: remove this print stacktrace!
 	        }
         }
 
@@ -75,7 +75,11 @@ public class GameSaver {
      * @param objectMap map of gamescenes (levels) to game objects in that level
      */
     public void gameAuthorToXML(List<GameScene> gameSceneList) throws IOException {
-        serializer.gameAuthorToXML(gameScenesLocation, gameSceneList);
+    	List<GameSceneSerializable> serializables = new ArrayList<>();
+    	for (GameScene scene: gameSceneList) {
+    		serializables.add(new GameSceneSerializable(scene));
+    	}
+        serializer.gameAuthorToXML(gameScenesLocation, serializables);
     }
 
 	/**
@@ -83,8 +87,8 @@ public class GameSaver {
 	 * 
 	 * @throws IOException
 	 */
-    public void saveGameState(GameState gameState) throws IOException {
-    	serializer.saveStateToXML(gameSavesLocation, gameState);
+    public void saveGamePart(GamePart gamePart) throws IOException {
+    	serializer.savePartToXML(gameSavesLocation, gamePart);
     }
 
 }

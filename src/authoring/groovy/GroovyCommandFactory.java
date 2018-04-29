@@ -13,6 +13,12 @@ import org.reflections.scanners.FieldAnnotationsScanner;
 import org.reflections.scanners.MethodAnnotationsScanner;
 import org.reflections.scanners.Scanner;
 
+import authoring.AuthBehavior;
+
+/** 
+ * 
+ * @author: Summer
+ **/
 public class GroovyCommandFactory {
 
 	private final String PACKAGE_NAME = "engine.behaviors";
@@ -47,6 +53,31 @@ public class GroovyCommandFactory {
     
     public Map<Class<?>, List<Field>> getBehaviorFields(){
     		return behaviorFields;
+    }
+    
+    public List<Field> getFields(AuthBehavior behavior) {
+    		for (Class<?> c : behaviorFields.keySet()) {
+    			if (navigateMap(behavior.getName(), c)) {
+    				return behaviorFields.get(c);
+    			}
+    		}
+    		return null;
+    }
+    
+    public List<Method> getMethods(AuthBehavior behavior) {
+		for (Class<?> c : behaviorMethods.keySet()) {
+			if (navigateMap(behavior.getName(), c)) {
+				return behaviorMethods.get(c);
+			}
+		}
+		return null;
+    }
+    
+    private boolean navigateMap(String s, Class<?> c) {
+    		if (c.toString().contains(s)) {
+    			return true;
+    		}
+    		return false;
     }
     
     public Map<Class<?>, List<Method>> getBehaviorMethods(){

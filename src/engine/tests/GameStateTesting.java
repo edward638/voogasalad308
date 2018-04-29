@@ -8,28 +8,27 @@ import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
 import engine.EventManager2;
-import engine.GameState;
+import engine.GamePart;
 import engine.events.elementevents.KeyInputEvent;
 import engine.events.elementevents.TimeEvent;
 import javafx.scene.input.KeyCode;
 
 class GameStateTesting {
 	
-	private GameState state;
+	private GamePart part;
 	private EventManager2 manager;
-	
 	
 	@Before
 	public void setUp() {
-		state = new ModelGameState().getState();
-		manager = new EventManager2(state, null);
+		part = new ModelGameState().getPart();
+		manager = new EventManager2(part, null);
 	}
 	
 	@Test
 	public void testMove() {
 		List<String> propertiesToPrint = Arrays.asList("elementName", "xPos", "yPos", "xVel", "yVel");
-		state = new ModelGameState().getState();
-		manager = new EventManager2(state, null);
+		part = new ModelGameState().getPart();
+		manager = new EventManager2(part, null);
 		
 		printState(propertiesToPrint);
 		manager.processElementEvent(new TimeEvent(1.0));
@@ -50,7 +49,7 @@ class GameStateTesting {
 	}
 	
 	public void printState(List<String> propertiesToPrint) {
-		state.getElements().stream()
+		part.getElements().stream()
 			.forEach(e -> {
 				Map<String, Object> props = e.reportProperties();
 				propertiesToPrint.stream() 
@@ -63,4 +62,7 @@ class GameStateTesting {
 			});
 		System.out.println();
 	}
+	
+
+	
 }

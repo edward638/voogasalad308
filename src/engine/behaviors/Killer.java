@@ -1,5 +1,6 @@
 package engine.behaviors;
 
+import authoring.groovy.GroovyMethod;
 import engine.GameElement;
 
 public class Killer extends Behavior{
@@ -10,6 +11,11 @@ public class Killer extends Behavior{
 		this.damagePower = damagePower;
 	}
 	
+	public Killer (GameElement ge) {
+		this(ge, 10.0);
+	}
+	
+	@GroovyMethod
 	public Double getDamagePower() {
 		return damagePower;
 	}

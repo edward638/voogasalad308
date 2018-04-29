@@ -12,6 +12,11 @@ public final class ResourceBundleManager {
 	private static ResourceBundle resources;
 	private static final String DEFAULT_RESOURCE_PATH = "data/propertiesFiles/";
 	private static final String PATHS = "Paths";
+	private static final String UI_POSITIONS = "UIPositions";
+	private static final String AUTHORING = "Authoring";
+	private static final String BUTTON = "ButtonImages";
+	private static final String SPLASH = "Splash";
+
 	
 	/**
 	 * retrieves string from Paths.properties
@@ -22,4 +27,27 @@ public final class ResourceBundleManager {
 		resources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PATH + PATHS);
 		return resources.getString(s);
 	}
+	
+	public static int getPosition(String s) {
+		resources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PATH + UI_POSITIONS);
+		return Integer.parseInt(resources.getString(s));
+	}
+	
+	public static String getAuthoring(String s) {
+		resources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PATH + AUTHORING);
+		return resources.getString(s);
+	}
+	
+
+	public static String getButton(String s) {
+		resources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PATH + BUTTON);
+		return resources.getString(s);
+	}
+	
+
+	public static String getSplash(String s) {
+		resources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PATH + SPLASH);
+		return resources.getString(s);
+	}
+
 }

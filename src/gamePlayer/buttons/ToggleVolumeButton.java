@@ -17,12 +17,10 @@ public class ToggleVolumeButton extends PlayerButtons {
 			String OnorOff = "";
 			if (On) {
 				OnorOff = "Off";
-			}
-			else {
+			} else {
 				OnorOff = "On";
 			}
 			this.setText("Turn Volume " + OnorOff);
-			// engine.toggleVolume
 		});
 	}
 

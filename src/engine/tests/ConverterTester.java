@@ -39,7 +39,7 @@ class ConverterTester {
 	}
 	
 	void printAuthBehavior(AuthBehavior authB) {
-		System.out.println("AuthBehavior: " + authB);
+		//System.out.println("AuthBehavior: " + authB);
 		authB.getProperties().stream() 
 		.forEach(prop -> System.out.println(prop));
 	}
@@ -62,9 +62,9 @@ class ConverterTester {
 	}
 	
 	void printGameObject (GameObject go) {
-		System.out.println("--------------------------");
-		System.out.println("GameObject toString: " + go);
-		System.out.println("Game Object Behaviors: " + go.getBehaviors() + " \n");
+//		System.out.println("--------------------------");
+//		System.out.println("GameObject toString: " + go);
+//		System.out.println("Game Object Behaviors: " + go.getBehaviors() + " \n");
 		for (AuthBehavior authB: go.getBehaviors()) {
 			printAuthBehavior(authB);
 			System.out.println();

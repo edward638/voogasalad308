@@ -58,7 +58,7 @@ public class GameSelector extends ScrollPane {
 			playButton.setOnAction((event) -> {
 				buttonData.removeFromRoot(gameSelectorBox);
 				buttonData.removeFromRoot(this);
-				buttonData.playGame(gameName);
+				buttonData.playGame(gameName, true);
 
 			});
 

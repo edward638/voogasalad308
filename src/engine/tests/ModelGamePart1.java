@@ -25,6 +25,7 @@ import engine.behaviors.TimeTracker;
 import engine.behaviors.TrackMainCharacter;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.KeyInputEvent;
+import engine.events.elementevents.TimeEvent;
 import javafx.scene.input.KeyCode;
 
 public class ModelGamePart1 {
@@ -48,7 +49,6 @@ public class ModelGamePart1 {
 		}
 		
 		elements.add(getPortal1(900.0, 101.0));
-		elements.add(getPortal2(600.0, 101.0));
 		
 		for (GameElement el : elements) {
 			modelGamePart1.addGameElement(el);
@@ -62,7 +62,7 @@ public class ModelGamePart1 {
 	
 	public GameElement getPortal1(Double xpos, Double ypos) {
 		GameElement block = new GameElement();
-		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "mario_block.png"));
+		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "Blockimage"));
 		block.addBehavior(new ExitPortal(block, 2));
 		
 		return block;
@@ -70,10 +70,15 @@ public class ModelGamePart1 {
 	
 	public GameElement getPortal2(Double xpos, Double ypos) {
 		GameElement block = new GameElement();
+<<<<<<< HEAD
 		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "mario_block.png"));
+		List<String> x = new ArrayList<>();
+=======
+		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "Blockimage"));
 		List<String> x = new ArrayList<String>();
+>>>>>>> tn74
 		block.addBehavior(new EntrancePortal(block, true, "modelGamePart2", x, 1));
-		block.addEventResponse(new CollisionEvent(block, CollisionEvent.ALL_SIDES, new GameElement("Mario"), CollisionEvent.ALL_SIDES), new ChangeLevel());
+//		block.addEventResponse(new CollisionEvent(block, CollisionEvent.ALL_SIDES, new GameElement("Mario"), CollisionEvent.ALL_SIDES), new ChangeLevel());
 		
 		return block;
 	}
@@ -81,14 +86,14 @@ public class ModelGamePart1 {
 	public GameElement getMario() {
 		GameElement mario = new GameElement();
 		//Note: Image path untested
-		mario.addBehavior(new MandatoryBehavior(mario, "Mario", 200.0, 20.0, "rectangle", 100.0, 100.0, 100.0, 100.0, "MarioSMR.png"));
+		mario.addBehavior(new MandatoryBehavior(mario, "Mario", 200.0, 20.0, "rectangle", 100.0, 100.0, 100.0, 100.0, "Marioimage"));
 		List<Double> direction = new ArrayList<>(); direction.add(1.0); direction.add(0.0);
 		mario.addBehavior(new MovableCharacter(mario, 0.0, direction, "data/music/Mario-jump-sound.mp3"));
 		mario.addBehavior(new MainCharacter(mario, 1, true, true));
 		mario.addBehavior(new Gravity(mario));
 		mario.addBehavior(new TimeTracker(mario));
 		mario.addBehavior(new TimeRoutine2(mario));
-		mario.addBehavior(new Shooter(mario));
+		mario.addBehavior(new Shooter(mario, 100.0, 5.0));
 		
 		TimeRoutine2 marioRoutines = (TimeRoutine2) mario.getBehavior(TimeRoutine2.class);
 		marioRoutines.addRoutine(2.0, new GroovyAction(
@@ -106,13 +111,15 @@ public class ModelGamePart1 {
 				"Mario.getBehavior('MovableCharacter').setXVelocity(-200.0)"));
 		
 		mario.addEventResponse(new KeyInputEvent(KeyCode.P), new GroovyAction("Mario.getBehavior('MovableCharacter').jump()"));
-
+		
+		mario.addEventResponse(new KeyInputEvent(KeyCode.F), new GroovyAction(
+				"Mario.getBehavior('Shooter').shootRight()"));
 		return mario;
 	}
 	
 	public GameElement getBlock(Double xpos, Double ypos) {
 		GameElement block = new GameElement();
-		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "mario_block.png"));
+		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "Blockimage"));
 		block.addBehavior(new BlockLike(block));
 		return block;
 	}
@@ -127,7 +134,7 @@ public class ModelGamePart1 {
 	public GameElement getKoopa(Double xpos, Double ypos) {
 		GameElement koopa = new GameElement();
 		
-		koopa.addBehavior(new MandatoryBehavior(koopa, "Koopa", xpos, ypos, "rectangle", 60.0, 80.0, 60.0, 80.0, "koopa.png"));
+		koopa.addBehavior(new MandatoryBehavior(koopa, "Koopa", xpos, ypos, "rectangle", 60.0, 80.0, 60.0, 80.0, "Koopaimage"));
 		List<Double> direction = new ArrayList<>(); direction.add(-1.0); direction.add(0.0);
 		koopa.addBehavior(new Movable(koopa, 20.0, direction));
 		koopa.addBehavior(new Killable(koopa, 100.0));
@@ -145,16 +152,16 @@ public class ModelGamePart1 {
 	
 	public GameElement getBullet(Double xpos, Double ypos, Double v, List<Double> direction) {
 		GameElement bullet = new GameElement();
-		bullet.addBehavior(new MandatoryBehavior(bullet, "Bullet", xpos, ypos, "rectangle", 20.0, 20.0, 20.0, 20.0, "bullet.png"));
+		bullet.addBehavior(new MandatoryBehavior(bullet, "Bullet", xpos, ypos, "rectangle", 20.0, 20.0, 20.0, 20.0, "Bulletimage"));
 		bullet.addBehavior(new Movable(bullet, v, direction));
-		bullet.addBehavior(new BulletLike(bullet, 10.0));
+		bullet.addBehavior(new BulletLike(bullet, 100.0));
 		bullet.addBehavior(new IgnoresBlocks(bullet));
 		return bullet;
 	}
 	
 	public GameElement getBullet(Double xpos, Double ypos, Double v) {
 		GameElement bullet = new GameElement();
-		bullet.addBehavior(new MandatoryBehavior(bullet, "Bullet", xpos, ypos, "rectangle", 20.0, 20.0, 20.0, 20.0, "bullet.png"));
+		bullet.addBehavior(new MandatoryBehavior(bullet, "Bullet", xpos, ypos, "rectangle", 20.0, 20.0, 20.0, 20.0, "Bulletimage"));
 		bullet.addBehavior(new Movable(bullet, v, Arrays.asList(1.0, 0.0)));
 		bullet.addBehavior(new BulletLike(bullet, 10.0));
 		return bullet;

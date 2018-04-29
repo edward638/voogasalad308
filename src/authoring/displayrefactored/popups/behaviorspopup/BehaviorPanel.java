@@ -3,8 +3,6 @@ package authoring.displayrefactored.popups.behaviorspopup;
 import java.util.List;
 import java.util.Set;
 
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter.DEFAULT;
-
 import authoring.AuthBehavior;
 import authoring.GameObject;
 import authoring.displayrefactored.controllers.BehaviorPopupController;
@@ -63,6 +61,9 @@ public class BehaviorPanel {
 	private ListView<AuthBehavior> makeBehaviorList() {
 		ListView<AuthBehavior> behaviorList = new ListView<>();
 		behaviorList.getItems().addAll(myBehaviors);
+		behaviorList.getSelectionModel().selectedItemProperty().addListener((o, old, neww) -> {
+			myController.refreshProperties();
+		});
 		return behaviorList;
 	}
 	
@@ -107,11 +108,21 @@ public class BehaviorPanel {
 		AuthBehavior currBehavior = getCurrBehavior();
 		if(currBehavior != null) {
 			for(GameObject g : myGameObjects) {
-				g.removeBehavior(currBehavior);
+				if(!currBehavior.getDisplayName().equals("MandatoryBehavior")) {
+					g.removeBehavior(currBehavior);
+				}
 			}
 			System.out.println("behavior remove");
 			notMyBehaviors.add(currBehavior);
 		}
+	}
+
+	public AuthBehavior getBehaviorToAdd() {
+		return myBehaviorDropdown.getSelectionModel().getSelectedItem();
+	}	
+	
+	public AuthBehavior getCurrBehavior() {
+		return myBehaviorList.getSelectionModel().getSelectedItem();
 	}
 	
 	public void refresh() {
@@ -122,12 +133,4 @@ public class BehaviorPanel {
 	public Node asNode() {
 		return myVBox;
 	}
-
-	public AuthBehavior getBehaviorToAdd() {
-		return myBehaviorDropdown.getSelectionModel().getSelectedItem();
-	}	
-	
-	public AuthBehavior getCurrBehavior() {
-		return myBehaviorList.getSelectionModel().getSelectedItem();
-	}	
 }

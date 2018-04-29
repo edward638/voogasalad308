@@ -55,7 +55,7 @@ class GameStateTesting {
 				propertiesToPrint.stream() 
 				.forEach((String prop) -> {
 					if (props.containsKey(prop)) {
-						System.out.print(prop +" = " + props.get(prop) + ", ");
+						//System.out.print(prop +" = " + props.get(prop) + ", ");
 					}
 				});
 				System.out.println();

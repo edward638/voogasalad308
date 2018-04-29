@@ -40,7 +40,7 @@ public class GameState {
 		Printer printer = new Printer();
 		Converter2 converter = new Converter2();
 		GamePart modelGamePart1 = new ModelGamePart1().getGamePart();
-		System.out.println("PRE CONVERSION GAMEPART");
+		//System.out.println("PRE CONVERSION GAMEPART");
 		printer.printState(modelGamePart1);
 		GameScene modelGamePart1Scene = converter.gamePart2GameScene(modelGamePart1);
 		printer.printScene(modelGamePart1Scene);
@@ -123,13 +123,13 @@ public class GameState {
 							ExitPortal exitP = (ExitPortal) element.getBehavior(ExitPortal.class);
 							if (exitP.getPortalID() == portalID) {
 								mainCharacter.setPosition(element.getPosition());
-								MandatoryBehavior mb = (MandatoryBehavior) element.getBehavior(MandatoryBehavior.class);
-								mb.setPosition(mb.getX()-30, mb.getY());
-								break;
+								this.getCurrentGamePart().addGameElement(mainCharacter);
+								break;	
 							}
 						}
+						
 					}
-					this.getCurrentGamePart().addGameElement(mainCharacter);
+					
 					for (GameElement element : this.getCurrentGamePart().getElements()) {
 						addToDisplay(element);
 					}
@@ -137,6 +137,7 @@ public class GameState {
 				}
 			}
 		}
+		
 	}
 	
 	public void resetLevel(String levelID) {
@@ -189,5 +190,13 @@ public class GameState {
 	
 	protected void addLevel(String levelID) {
 		gameLevels.add(new GameLevel(levelID));
+	}
+	
+	protected List<GamePart> getAllGameParts() {
+		List<GamePart> toReturn = new ArrayList<>();
+		for (GameLevel gl : this.gameLevels) {
+			toReturn.addAll(gl.getGameParts());
+		}
+		return toReturn;
 	}
 }

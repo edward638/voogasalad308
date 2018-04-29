@@ -1,7 +1,5 @@
 package gamePlayer;
 
-import java.io.IOException;
-
 import javafx.scene.Scene;
 
 public interface GamePlayer {

@@ -3,7 +3,6 @@ package authoring.displayrefactored.controllers;
 import java.util.List;
 
 import authoring.AuthBehavior;
-import authoring.Game;
 import authoring.GameObject;
 import authoring.GameScene;
 import authoring.SceneBackgroundImageSerializable;
@@ -12,7 +11,6 @@ import authoring.displayrefactored.authoringuicomponents.ObjectListPanelRefactor
 import data.ImageManager;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 
@@ -37,6 +35,7 @@ public class ObjectInfoPanelController extends Controller implements ObjectInfoS
 		this.gameScene.deleteObservers();
 		this.gameScene = gameScene;
 		setUpConnections();
+		refreshView();
 	}
 	
 	public ObjectInfoPanelRefactored getObjectInfoPanelRefactored() {
@@ -70,6 +69,7 @@ public class ObjectInfoPanelController extends Controller implements ObjectInfoS
 		gameScene.notifyMyObservers();
 	}
 
+	@Override
 	public void updatePositions() {
 		refreshView();
 	}
@@ -105,14 +105,22 @@ public class ObjectInfoPanelController extends Controller implements ObjectInfoS
 		return isUniqueName;
 	}
 	
+	@Override
 	public void duplicateGameObject() {
 		gameScene.duplicateGameObject();
 	}
+	@Override
 	public List<GameObject> getAllGameObjects() {
 		return gameScene.getMyObjects();
 	}
 	public void restorePreviousGameScene() {
 		gameScene.restorePreviousGameScene();
+	}
+
+	@Override
+	public void setImage(Image image, String imageName) {
+		// TODO Auto-generated method stub
+		getImageManager().storeImage(imageName, image);
 	}
 
 }

@@ -1,8 +1,11 @@
 package gamePlayer.buttons;
 
-import data.GameDescriptionProvider;
+import engine.EngineInterface;
 import engine.GamePart;
+import engine.GameState;
 import gamePlayer.GamePlayer;
+import gamePlayer.Username;
+import gamePlayer.VolumeSlider;
 import gamePlayer.highScores.HighScores;
 import gamePlayer.keyBindings.KeyInputDictionary;
 import javafx.scene.Group;
@@ -12,31 +15,30 @@ import javafx.stage.Stage;
 public class ConcreteButtonData implements ButtonData {
 	private Stage stage;
 	private GamePlayer gamePlayer;
-//	private GameDescriptionProvider gameDescriptionProvider;
 	private Group root;
-
-	private HighScores highScores;
-	private String currentGameName;
+	
 	private GamePart gamePart;
+	private HighScores highScores;
+	private GameState gameState;
 	private String mostRecentFile;
 	private KeyInputDictionary keyBindingMap;
+	private EngineInterface engine;
+	private VolumeSlider volumeSlider;
+	private Username username;
 
-	public ConcreteButtonData(Stage stage, GamePlayer gamePlayer, GameDescriptionProvider gameDescriptionProvider,
-			Group root, KeyInputDictionary keyInputDictionary) {
+	public ConcreteButtonData(Stage stage, GamePlayer gamePlayer, VolumeSlider volumeSlider, Group root,
+			KeyInputDictionary keyInputDictionary, Username username) {
 		this.stage = stage;
 		this.gamePlayer = gamePlayer;
-//		this.gameDescriptionProvider = gameDescriptionProvider;
 		this.root = root;
+		this.volumeSlider = volumeSlider;
+		this.username = username;
 		keyBindingMap = keyInputDictionary;
 	}
 
 	@Override
-	public void playGame(String file) {
-		gamePlayer.playGame(file);
-	}
-
-	public void setCurrentGameName(String name) {
-		this.currentGameName = name;
+	public void playGame(String file, boolean isNewGame) {
+		gamePlayer.playGame(file, isNewGame);
 	}
 
 	public void setHighScores(HighScores highScores) {
@@ -47,7 +49,7 @@ public class ConcreteButtonData implements ButtonData {
 	public void clearHighScores() {
 		highScores.clear();
 	}
-
+	
 	public void setGamePart(GamePart gamePart) {
 		this.gamePart = gamePart;
 	}
@@ -59,16 +61,6 @@ public class ConcreteButtonData implements ButtonData {
 	@Override
 	public Stage getStage() {
 		return stage;
-	}
-
-	@Override
-	public GamePart getGamePart() {
-		return gamePart;
-	}
-
-	@Override
-	public String getCurrentGameName() {
-		return currentGameName;
 	}
 
 	@Override
@@ -94,25 +86,42 @@ public class ConcreteButtonData implements ButtonData {
 
 	@Override
 	public void toggleVolume() {
-		gamePlayer.toggleMusic();
+		volumeSlider.toggleMusic();
 	}
 
 	@Override
 	public Boolean getVolumeStatus() {
-		// TODO Auto-generated method stub
-		return gamePlayer.getMusicOn();
+		return volumeSlider.getMusicOn();
+	}
+
+	public void addEngine(EngineInterface engine) {
+		this.engine = engine;
 	}
 
 	@Override
 	public void resumeGame() {
-		//engine.resume();
-		
+		if (engine != null)
+			engine.play();
 	}
 
 	@Override
 	public void pauseGame() {
-		//engine.pause();
-		
+		if (engine != null)
+			engine.pause();
 	}
+
+	@Override
+	public void changeUsername(String newName) {
+		username.changeName(newName);
+	}
+
+	@Override
+	public GameState getGameState() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
 
 }

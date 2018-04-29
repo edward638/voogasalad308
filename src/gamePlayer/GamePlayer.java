@@ -15,7 +15,7 @@ public interface GamePlayer {
 	 * @param game
 	 *            to be played
 	 */
-	void playGame(String game);
+	void playGame(String game, boolean isNewGame);
 
 	/**
 	 * allows the display to retrieve the scene associated the game player
@@ -23,9 +23,5 @@ public interface GamePlayer {
 	 * @return scene to be displayed
 	 */
 	public Scene getScene();
-
-	void toggleMusic();
-
-	Boolean getMusicOn();
 
 }

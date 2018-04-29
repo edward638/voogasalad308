@@ -17,7 +17,7 @@ public class BehaviorTesting {
 		Behavior b = new Movable(ge);
 		Map<String, Object> bProperties = b.reportProperties();
 		for (String s: bProperties.keySet()) {
-			System.out.println(s + " -> " + bProperties.get(s));
+			//System.out.println(s + " -> " + bProperties.get(s));
 		}
 	}
 

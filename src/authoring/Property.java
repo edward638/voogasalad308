@@ -39,6 +39,10 @@ public class Property {
 		myValueType = clazz;
 	}
 	
+	public Class<?> getValueType() {
+		return myValueType;
+	}
+	
 	//returns the name of the property
 	public String toString() {
 		return myValueType + " " + myName + " = " + myValue;

@@ -133,7 +133,11 @@ public class Converter2 {
 		try {
 			//System.out.println(authB.getName());
 			Constructor<?> use = getConstructor(Class.forName(authB.getName()));
+			System.out.println("COnstructor made");
+			System.out.println(use);
 			newEngBehavior = (Behavior) use.newInstance(ge);
+			
+			System.out.println("Behaior instantiatted");
 		} catch (ClassNotFoundException|InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e1) {
 			e1.printStackTrace();
 			throw (new RuntimeException("Failed to instantiate newEngBehavior from " + authB.getName()));

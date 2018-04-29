@@ -1,5 +1,7 @@
 package authoring.displayrefactored.controllers;
 
+import java.awt.image.RenderedImage;
+
 import authoring.GameObject;
 import authoring.GameScene;
 import authoring.SceneBackgroundImage;
@@ -43,6 +45,10 @@ public class GameViewWindowController extends Controller implements ViewRefreshI
 		int x = ResourceBundleManager.getPosition("GAMEVIEWWINDOW_X");
 		int y = ResourceBundleManager.getPosition("GAMEVIEWWINDOW_Y");
 		gameViewWindowRefactored.attachToPane(pane, x, y);
+	}
+	
+	public void storeBackgroundImage(RenderedImage ri) {
+		getImageManager().storeCompositeBackgroundImage(gameScene.getName()+"backgroundimage.png", ri);
 	}
 
 	public SceneBackgroundImage getBackgroundImage(SceneBackgroundImageSerializable s) {

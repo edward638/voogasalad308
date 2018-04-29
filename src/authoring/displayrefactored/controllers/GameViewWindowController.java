@@ -11,6 +11,11 @@ import data.ImageManager;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.layout.Pane;
 
+/**
+ * 
+ * @author Edward Zhuang
+ *
+ */
 public class GameViewWindowController extends Controller implements ViewRefreshInterface {
 	
 	private GameScene gameScene;
@@ -38,7 +43,7 @@ public class GameViewWindowController extends Controller implements ViewRefreshI
 		// TODO Auto-generated method stub 
 		int x = ResourceBundleManager.getPosition("GAMEVIEWWINDOW_X");
 		int y = ResourceBundleManager.getPosition("GAMEVIEWWINDOW_Y");
-		gameViewWindowRefactored.AttachToPane(pane, x, y);
+		gameViewWindowRefactored.attachToPane(pane, x, y);
 	}
 
 	public SceneBackgroundImage getBackgroundImage(SceneBackgroundImageSerializable s) {
@@ -54,6 +59,11 @@ public class GameViewWindowController extends Controller implements ViewRefreshI
 		setUpConnections();
 	}
 
+	@Override
+	public void backupGameScene() {
+		gameScene.backupGameScene();
+	}
+	
 	@Override
 	public void notifyObjectInfoObservers(GameObject gameObject) {
 		// TODO Auto-generated method stub

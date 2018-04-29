@@ -35,6 +35,9 @@ import javafx.scene.layout.StackPane;
  */
 public class GameViewWindowRefactored extends AuthoringUIComponentRefactored implements Observer {
 	
+	private static final double TRANSPARENT = 0.25;
+	private static final String FOREGROUND = "Foreground";
+	private static final String BACKGROUND = "Background";
 	private int sizeX;
 	private int sizeY;
 	private List<ImageView> objectImageViews;
@@ -61,7 +64,7 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	}
 	
 	@Override
-	protected void GenerateComponent() {
+	protected void generateComponent() {
 		BorderPane borderPane = getBorderPane();
 		stackPane = new StackPane();
 		list = new ArrayList<>();
@@ -92,8 +95,8 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 
 	private void initializeComboBoxes() {
 		myPanelSelector.setPromptText(ResourceBundleManager.getAuthoring("ChoosePanel"));
-		myPanelSelector.getItems().add("Background");
-		myPanelSelector.getItems().add("Foreground");
+		myPanelSelector.getItems().add(BACKGROUND);
+		myPanelSelector.getItems().add(FOREGROUND);
 		myPanelSelector.valueProperty().addListener((o, old, key) -> {
 			switchPanes(key);
 		});
@@ -144,9 +147,8 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	private void updateBackground(List<SceneBackgroundImageSerializable> serializables) {
 		
 		list = new ArrayList<>();
-		
 		for (SceneBackgroundImageSerializable s: serializables) {
-			list.add( controller.getBackgroundImage(s));
+			list.add(controller.getBackgroundImage(s));
 		}
 		
 		sceneBackground.clearPane();
@@ -160,9 +162,9 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	 * @param key
 	 */
 	public void switchPanes(String key) {
-		if (key.equals("Background")) {
+		if (key.equals(BACKGROUND)) {
 			for (ImageView imageView: objectImageViews) {
-				imageView.setOpacity(0.25);
+				imageView.setOpacity(TRANSPARENT);
 				imageView.setMouseTransparent(true);
 			}
 			for (SceneBackgroundImage image: list) {
@@ -171,13 +173,13 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 			foregroundPane.setMouseTransparent(true);
 		}
 		
-		if (key.equals("Foreground")) {
+		if (key.equals(FOREGROUND)) {
 				for (ImageView imageView: objectImageViews) {
 					imageView.setOpacity(1);
 					imageView.setMouseTransparent(false);
 				}
 				for (SceneBackgroundImage image: list) {
-					image.setOpacity(0.25);
+//					image.setOpacity(TRANSPARENT);
 				}
 				foregroundPane.setMouseTransparent(false);
 			}

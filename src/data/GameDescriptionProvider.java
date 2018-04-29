@@ -23,6 +23,7 @@ public class GameDescriptionProvider {
 	public String getGameName(String gameName) {
 		String gameLocation = baseLocation + gameName + "/";
 		String gameDescriptionLocation = gameLocation + ResourceBundleManager.getPath("DESCRIPTION");
+		System.out.println(gameDescriptionLocation + ResourceBundleManager.getPath("NAME"));
 		return retrieveStringFromTextFile(gameDescriptionLocation + ResourceBundleManager.getPath("NAME"));
 	}
 
@@ -56,7 +57,8 @@ public class GameDescriptionProvider {
         try {
             scanner = new Scanner( new File(fileName));
         } catch (FileNotFoundException e) {
-            e.printStackTrace(); //TODO: fix!
+//            e.printStackTrace(); //TODO: fix!
+            
         }
         String text = scanner.useDelimiter("\\A").next();
         scanner.close();

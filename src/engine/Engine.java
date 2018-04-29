@@ -4,7 +4,7 @@ package engine;
 import java.util.HashMap;
 import java.util.Map;
 
-import engine.behaviors.Killable;
+import engine.behaviors.MainCharacter;
 import engine.behaviors.TimeTracker;
 import engine.events.elementevents.KeyInputEvent;
 import engine.events.elementevents.MouseInputEvent;
@@ -27,14 +27,14 @@ public class Engine implements EngineInterface{
 	private GameState currentGameState;
 	private DisplayState displayState;
 	private EventManager2 eventManager;
-	private GameMetaData gameMetaData;
+	//private GameMetaData gameMetaData;
 	private PlayerUpdater playerUpdater;
 	
 	public Engine(String gameName, boolean newGame, PlayerUpdater playerUpdater) {
-		currentGameState = new GameState(gameName);
+		currentGameState = new GameState(gameName, newGame);
 		displayState = new DisplayState(currentGameState, gameName);
 		eventManager = new EventManager2(currentGameState);
-		gameMetaData = new GameMetaData(currentGameState);
+		//gameMetaData = new GameMetaData(currentGameState);
 		this.playerUpdater = playerUpdater;
 		startAnimation();
 	}
@@ -53,13 +53,22 @@ public class Engine implements EngineInterface{
     	eventManager.processElementEvent(new TimeEvent(gameSteps));
     	displayState.update(currentGameState);
 
-    	Map<String, Object> info = new HashMap<>();
-    	GameElement mainCharacter = currentGameState.getCurrentGamePart().getMainCharacter();
-    	info.put("Name", mainCharacter.getIdentifier());
-    	//info.put("Health", ((Killable)mainCharacter.getBehavior(Killable.class)).getHealth());
-    	info.put("Game Time", ((TimeTracker)mainCharacter.getBehavior(TimeTracker.class)).getTimePassed());
-    	playerUpdater.updateHUD(info);
+    	playerUpdater.updateHUD(populateHUD());
     }
+	
+	private Map<String, Object> populateHUD() {
+		Map<String, Object> info = new HashMap<>();
+		if (currentGameState.getCurrentGamePart().hasMainCharacter()) {
+			GameElement mainCharacter = currentGameState.getCurrentGamePart().getMainCharacter();
+			info.put("Name", mainCharacter.getIdentifier());
+			info.put("Current Level", currentGameState.getCurrentGameLevel().getCurrentGamePart().getGamePartID());
+			info.put("Game Time", (int)((TimeTracker)mainCharacter.getBehavior(TimeTracker.class)).getTimePassed());
+			info.put("Lives", ((MainCharacter)mainCharacter.getBehavior(MainCharacter.class)).getLives());
+			//info.put("Health", value);
+			//info.put("Score", value);
+		}
+		return info;
+	}
 	
 	@Override
 	public void close() {
@@ -99,7 +108,12 @@ public class Engine implements EngineInterface{
 	}
 
 	@Override
-	public GameMetaData getGameMetaData() {
-		return gameMetaData;
+	public void save() {
+		currentGameState.saveGame();
 	}
+
+//	@Override
+//	public GameMetaData getGameMetaData() {
+//		return gameMetaData;
+//	}
 }

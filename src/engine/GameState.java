@@ -1,16 +1,15 @@
 package engine;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import authoring.GameScene;
+import data.GameLoader;
+import data.GameSaver;
 import engine.audio.AudioManager;
 import engine.authouringconversion.Converter2;
-import engine.authouringconversion.Printer;
 import engine.behaviors.ExitPortal;
-import engine.behaviors.MandatoryBehavior;
-import engine.tests.ModelGamePart1;
-import engine.tests.ModelGamePart2;
 
 public class GameState {
 	private List<GameLevel> gameLevels;
@@ -24,7 +23,7 @@ public class GameState {
 	private AudioManager audioManager;
 	private String musicPath = "data/music/WiiShopChannelMusic.mp3";
 
-	public GameState(String gameName) {
+	public GameState(String gameName, boolean newGame) {
 		this.gameName = gameName;
 		gameLevels = new ArrayList<>();
 		addToDisplay = new ArrayList<>();
@@ -32,28 +31,34 @@ public class GameState {
 		audioManager = new AudioManager(1);
 		audioManager.newAudioPlayer(musicPath);
 		
-		constructGameState(loadGame(this.gameName));
+		constructGameState(loadGame(this.gameName, newGame));
 	}
 	
-	/* ***************************To Be Replaced With Load From Game Data*************************** */
-	private List<GamePart> loadGame(String gameName) {
-		Printer printer = new Printer();
+	private List<GamePart> loadGame(String gameName, boolean newGame) {
+		GameLoader gameLoader = new GameLoader(gameName);
 		Converter2 converter = new Converter2();
-		GamePart modelGamePart1 = new ModelGamePart1().getGamePart();
-		//System.out.println("PRE CONVERSION GAMEPART");
-		printer.printState(modelGamePart1);
-		GameScene modelGamePart1Scene = converter.gamePart2GameScene(modelGamePart1);
-		printer.printScene(modelGamePart1Scene);
-		modelGamePart1 = converter.gameScene2GamePart(modelGamePart1Scene);
-		printer.printState(modelGamePart1);
-
-		GamePart modelGamePart2 = new ModelGamePart2().getGamePart();
 		List<GamePart> gameDataParts = new ArrayList<>();
-		gameDataParts.add(modelGamePart1);
-		gameDataParts.add(modelGamePart2);
+
+		for (GameScene scene : gameLoader.getGameScenes(newGame)) {
+			gameDataParts.add(converter.gameScene2GamePart(scene));
+		}
 		return gameDataParts;
 	}
-	/* ***************************To Be Replaced With Load From Game Data*************************** */
+	
+	protected void saveGame() {
+		GameSaver gameSaver = new GameSaver(gameName);
+		Converter2 converter = new Converter2();
+		List<GameScene> gameSceneList = new ArrayList<GameScene>();
+		for (GamePart part : this.getAllGameParts()) {
+			gameSceneList.add(converter.gamePart2GameScene(part));
+		}
+		try {
+			gameSaver.gameAuthorToXML(gameSceneList, false);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	private void constructGameState(List<GamePart> gameDataParts) {
 		for (GamePart gp : gameDataParts) {
@@ -105,7 +110,7 @@ public class GameState {
 		return currentGameLevel.getCurrentGamePart();
 	}
 	
-	public void changeCurrentGamePart(String newPartID, int portalID) {
+	public void changeCurrentGamePart(String newPartID, Integer portalID) {
 		for (GameLevel gl : gameLevels) {
 			for (GamePart newGamePart : gl.getGameParts()) {
 				if(newGamePart.getGamePartID().equals(newPartID)) {
@@ -121,7 +126,7 @@ public class GameState {
 					for (GameElement element : this.getCurrentGamePart().getElements()) {
 						if (element.hasBehavior(ExitPortal.class)) {
 							ExitPortal exitP = (ExitPortal) element.getBehavior(ExitPortal.class);
-							if (exitP.getPortalID() == portalID) {
+							if (exitP.getPortalID().equals(portalID)) {
 								mainCharacter.setPosition(element.getPosition());
 								this.getCurrentGamePart().addGameElement(mainCharacter);
 								break;	
@@ -148,7 +153,7 @@ public class GameState {
 		}
 		
 		GameLevel toReset = this.getLevel(levelID);
-		List<GamePart> gameDataParts = loadGame(this.gameName);
+		List<GamePart> gameDataParts = loadGame(this.gameName, true);
 		for(GamePart gamePart : toReset.getGameParts()) {
 			for (GamePart initialGamePart : gameDataParts) {
 				if (initialGamePart.getGamePartID().equals(gamePart.getGamePartID())) {

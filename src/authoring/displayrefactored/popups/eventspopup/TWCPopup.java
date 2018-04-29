@@ -68,6 +68,7 @@ public class TWCPopup extends PopupRefactored {
 	protected void mapButtons() {
 		save.setOnAction(e -> {
 			tw.setCollideObject(selectedObject);
+			tw.updateCollideObject();
 			close();
 		});
 	}

@@ -20,12 +20,14 @@ public class BehaviorsWindow extends VBox {
 	private EventsPopupController epuc;
 	private AuthBehavior currentBehavior;
 	private ListView<AuthBehavior> behaviors;
+	private GameObject currentGO;
 	
 	public BehaviorsWindow(EventsPopupController myEPUC, List<GameObject> myGos) {
 		epuc = myEPUC;
 		gos = myGos;
 		behaviors = new ListView<>();
 		behaviors.setMinHeight(200);
+		currentGO = gos.get(0);
 		currentBehavior = null;
 		createVBox();
 	}
@@ -44,10 +46,10 @@ public class BehaviorsWindow extends VBox {
 		if (!epuc.validEvent()) {
 			Text nonvalid = new Text("No event selected");
 			this.getChildren().add(nonvalid);
-			return; 
+			return;
 		}
 		behaviors.getItems().clear();
-		behaviors.getItems().addAll(gos.get(0).getBehaviors());
+		behaviors.getItems().addAll(currentGO.getBehaviors());
 		behaviors.setOnMouseClicked(e -> mouseClicked(behaviors.getSelectionModel().getSelectedItem()));
 		this.getChildren().add(behaviors);
 	}
@@ -55,9 +57,18 @@ public class BehaviorsWindow extends VBox {
 	private void mouseClicked(AuthBehavior selectedBehavior) {
 		currentBehavior = selectedBehavior;
 		epuc.updateFromBehavior();
+		epuc.concatenateString(currentBehavior.getDisplayName(), "BehaviorsWindow");
 	}
 	
 	public AuthBehavior getCurrBehavior() {
 		return currentBehavior;
+	}
+	public void setCurrObject(GameObject newGO) {
+		if (newGO == null) {
+			return;
+		}
+		currentGO = newGO;
+		System.out.println("From behaviorsWindow: current game object: " + currentGO.getName());
+		createVBox();
 	}
 }

@@ -1,7 +1,6 @@
 package authoring.displayrefactored.popups;
 
 import authoring.displayrefactored.authoringuicomponents.GameViewWindowRefactored;
-import authoring.displayrefactored.controllers.LevelPanelController;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -24,6 +23,7 @@ public class LevelSizePopupRefactored extends PopupRefactored {
 	private static final int popupSizeY = 200;
 
 	public LevelSizePopupRefactored(GameViewWindowRefactored window) {
+		super();
 		this.window = window;
 		generatePopup();
 		mapButtons();

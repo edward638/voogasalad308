@@ -95,6 +95,7 @@ public class EventsPopupController extends PopupController {
 		behaviorsWindow.createVBox();
 		mfWindow.createVBox();
 		eventsWindow.updateEventList();
+		groovyWindow.createVBox();
 	}
 	
 	public void updateFromBehavior() {
@@ -121,4 +122,5 @@ public class EventsPopupController extends PopupController {
 	public String getGroovyString() {
 		return groovyWindow.getGroovyString();
 	}
+	
 }

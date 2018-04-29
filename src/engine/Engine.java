@@ -107,6 +107,11 @@ public class Engine implements EngineInterface{
 		animation.play();
 	}
 
+	@Override
+	public void save() {
+		currentGameState.saveGame();
+	}
+
 //	@Override
 //	public GameMetaData getGameMetaData() {
 //		return gameMetaData;

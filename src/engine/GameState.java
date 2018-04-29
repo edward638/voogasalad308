@@ -1,10 +1,12 @@
 package engine;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import authoring.GameScene;
 import data.GameLoader;
+import data.GameSaver;
 import engine.audio.AudioManager;
 import engine.authouringconversion.Converter2;
 import engine.behaviors.ExitPortal;
@@ -33,14 +35,29 @@ public class GameState {
 	}
 	
 	private List<GamePart> loadGame(String gameName, boolean newGame) {
-		GameLoader gameLoader = new GameLoader(gameName, newGame);
+		GameLoader gameLoader = new GameLoader(gameName);
 		Converter2 converter = new Converter2();
 		List<GamePart> gameDataParts = new ArrayList<>();
 
-		for (GameScene scene : gameLoader.getGameScenes()) {
+		for (GameScene scene : gameLoader.getGameScenes(newGame)) {
 			gameDataParts.add(converter.gameScene2GamePart(scene));
 		}
 		return gameDataParts;
+	}
+	
+	protected void saveGame() {
+		GameSaver gameSaver = new GameSaver(gameName);
+		Converter2 converter = new Converter2();
+		List<GameScene> gameSceneList = new ArrayList<GameScene>();
+		for (GamePart part : this.getAllGameParts()) {
+			gameSceneList.add(converter.gamePart2GameScene(part));
+		}
+		try {
+			gameSaver.gameAuthorToXML(gameSceneList, false);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private void constructGameState(List<GamePart> gameDataParts) {

@@ -101,11 +101,11 @@ public class ConcreteGamePlayer implements GamePlayer {
 		clearHighScoresButton = new ClearHighScoresButton(BUTTONXLOCATION,
 				Integer.parseInt(resources.getString("clearHighScoresButtonY")), BUTTONWIDTH, BUTTONHEIGHT, buttonData);
 
-		newGameButton = new NewGameButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("newGameButtonY")), 110,
-				BUTTONHEIGHT, buttonData);
+		newGameButton = new NewGameButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("newGameButtonY")),
+				Integer.parseInt(resources.getString("newGameLoadGameButtonWidth")), BUTTONHEIGHT, buttonData);
 
-		loadButton = new LoadButton(1095, Integer.parseInt(resources.getString("loadButtonY")), 110, BUTTONHEIGHT,
-				buttonData);
+		loadButton = new LoadButton(1095, Integer.parseInt(resources.getString("loadButtonY")),
+				Integer.parseInt(resources.getString("newGameLoadGameButtonWidth")), BUTTONHEIGHT, buttonData);
 
 		toggleVolumeButton = new ToggleVolumeButton(BUTTONXLOCATION,
 				Integer.parseInt(resources.getString("toggleVolumeButtonY")), BUTTONWIDTH, BUTTONHEIGHT, buttonData);
@@ -121,9 +121,9 @@ public class ConcreteGamePlayer implements GamePlayer {
 
 		pauseButton = new PauseButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("pauseButtonY")),
 				BUTTONWIDTH, BUTTONHEIGHT, buttonData);
-		
-		changeNameButton = new ChangeNameButton(Integer.parseInt(resources.getString("changeButtonX")), Integer.parseInt(resources.getString("changeButtonY")),
-				BUTTONWIDTH / 4, BUTTONHEIGHT, buttonData);
+
+		changeNameButton = new ChangeNameButton(Integer.parseInt(resources.getString("changeButtonX")),
+				Integer.parseInt(resources.getString("changeButtonY")), Integer.parseInt(resources.getString("changeNameWidth")), BUTTONHEIGHT, buttonData);
 
 	}
 

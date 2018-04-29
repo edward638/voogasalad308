@@ -65,7 +65,7 @@ public class GroovyWindow extends VBox {
 			newInput = stringToAdd;
 		}
 		else if(caller.contains("BehaviorsWindow")) {
-			newInput = pieces[0] + "." + "getBehavior(" + stringToAdd + ").";
+			newInput = pieces[0] + "." + "getBehavior('" + stringToAdd + "').";
 		}
 		else if(caller.contains("MFWindow")){
 			newInput = pieces[0] + "." + pieces [1] + "." + stringToAdd;

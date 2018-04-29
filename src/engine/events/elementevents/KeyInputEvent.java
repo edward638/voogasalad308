@@ -4,15 +4,15 @@ import java.io.Serializable;
 
 import javafx.scene.input.KeyCode;
 
-public class KeyInputEvent extends ElementEvent implements Serializable{
-	KeyCode code;
+public class KeyInputEvent extends ElementEvent {
+	String code;
 	
-	public KeyInputEvent(KeyCode code) {
-		this.code = code;
+	public KeyInputEvent(KeyCode co) {
+		this.code = co.getChar();
 	}
 	
 	public KeyCode getKeyCode() {
-		return code;
+		return KeyCode.getKeyCode(code);
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class KeyInputEvent extends ElementEvent implements Serializable{
 	
 	@Override
 	public String getTriggerString() {
-		return code.getName();
+		return code;
 	}
 	
 	

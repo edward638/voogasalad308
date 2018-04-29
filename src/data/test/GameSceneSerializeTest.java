@@ -6,6 +6,7 @@ import com.thoughtworks.xstream.XStream;
 
 import authoring.GameObject;
 import authoring.GameScene;
+import engine.actions.GroovyAction;
 import engine.authouringconversion.Converter2;
 import engine.authouringconversion.Printer;
 import engine.events.elementevents.KeyInputEvent;
@@ -27,8 +28,9 @@ public class GameSceneSerializeTest {
 		printer.printScene(modelGamePart1Scene);
 		
 		GameObject block = converter.gameElement2GameObject(mp1.getMario());
-		String inputEvent = xstream.toXML(new KeyInputEvent(KeyCode.P));
-		String blockString = xstream.toXML(block);
+//		String inputEvent = xstream.toXML(new KeyInputEvent(KeyCode.P));
+//		String blockString = xstream.toXML(block);
+		String respString = xstream.toXML(new GroovyAction("EXECUTIONER"));
 //		String xmlString = xstream.toXML(modelGamePart1Scene);
 		java.io.FileWriter fw = new java.io.FileWriter(levelGameDestination + ".xml");
 //        fw.write(xmlString);

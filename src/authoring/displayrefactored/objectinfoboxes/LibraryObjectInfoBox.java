@@ -61,7 +61,7 @@ public class LibraryObjectInfoBox extends ObjectInfoBox {
 	public void initializeVBox() {
 		// TODO Auto-generated method stub
 		getVBox().getChildren().clear();
-		getVBox().getChildren().addAll(properties, imageView, objectName, buttonsHBox);
+		getVBox().getChildren().addAll(buttonsHBox, properties, imageView, objectName);
 	}
 
 	@Override

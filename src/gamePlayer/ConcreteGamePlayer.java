@@ -8,6 +8,7 @@ import engine.EngineInterface;
 import engine.tests.ModelGameState2;
 import gamePlayer.buttons.ConcreteButtonData;
 import gamePlayer.buttons.LoadButton;
+import gamePlayer.buttons.LoadOnlineButton;
 import gamePlayer.buttons.SaveButton;
 import gamePlayer.buttons.ToggleVolumeButton;
 import gamePlayer.highScores.ClearHighScoresButton;
@@ -46,6 +47,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 	private Button keyboardBindingButton;
 	private Button toggleVolumeButton;
 	private Button pauseButton;
+	private Button loadOnlineButton;
 	private ConcreteButtonData buttonData;
 
 	private HUD hud;
@@ -81,7 +83,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 
 		keyInputDictionary = new KeyInputDictionary(engine);
 		myScene.setOnKeyPressed(keyPress -> keyInputDictionary.handleAction(keyPress.getCode()));
-		
+
 		volumeSlider = new VolumeSlider(buttonData, engine);
 		buttonData = new ConcreteButtonData(stage, this, volumeSlider, root, keyInputDictionary);
 
@@ -119,6 +121,9 @@ public class ConcreteGamePlayer implements GamePlayer {
 		pauseButton = new PauseButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("pauseButtonY")),
 				BUTTONWIDTH, BUTTONHEIGHT, buttonData);
 
+		loadOnlineButton = new LoadOnlineButton(BUTTONXLOCATION,
+				Integer.parseInt(resources.getString("loadOnlineButtonY")), BUTTONWIDTH, BUTTONHEIGHT, buttonData);
+
 	}
 
 	private void addGuiElementsToRoot() {
@@ -129,6 +134,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 		root.getChildren().add(saveButton);
 		root.getChildren().add(replayButton);
 		root.getChildren().add(keyboardBindingButton);
+		root.getChildren().add(loadOnlineButton);
 		root.getChildren().add(pauseButton);
 		root.getChildren().add(volumeSlider.getVolumeText());
 		root.getChildren().add(volumeSlider.getSlider());
@@ -147,12 +153,9 @@ public class ConcreteGamePlayer implements GamePlayer {
 		buttonData.setHighScores(highScores);
 		PlayerUpdater concretePlayerUpdater = new ConcretePlayerUpdater(hud, highScores, username.getName());
 
-
-		//engine = new Engine(gameName, isNewGame, concretePlayerUpdater);
+		// engine = new Engine(gameName, isNewGame, concretePlayerUpdater);
 		engine = new Engine("enginetestmario", isNewGame, concretePlayerUpdater);
 		updateEngines(engine);
-
-		
 
 		pauseButton = new PauseButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("pauseButtonY")),
 				BUTTONWIDTH, BUTTONHEIGHT, buttonData);

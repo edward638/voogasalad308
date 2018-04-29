@@ -73,7 +73,7 @@ public class MFWindow extends VBox {
 		String[] holder = m.toString().split(" ");
 		String methodName = holder[holder.length - 1];
 		String[] name = holder[holder.length - 1].split("\\.");
-		String prefix = name[0] + "." + name[1] + "." + name[2];
+		String prefix = name[0] + "." + name[1] + "." + name[2] + ".";
 		methodName = methodName.replace(prefix, "");
 		list.add(methodName);
 	}
@@ -102,7 +102,7 @@ public class MFWindow extends VBox {
 		String[] holder = f.toString().split(" ");
 		String fieldName = holder[holder.length - 1];
 		String[] name = holder[holder.length - 1].split("\\.");
-		String prefix = name[0] + "." + name[1] + "." + name[2];
+		String prefix = name[0] + "." + name[1] + "." + name[2] + ".";
 		fieldName = fieldName.replace(prefix, "");
 		list.add(fieldName);
 	}

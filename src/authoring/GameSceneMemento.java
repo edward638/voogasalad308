@@ -13,12 +13,12 @@ public class GameSceneMemento implements GameSceneToCareTaker, GameSceneToOrigin
 	private List<SceneBackgroundImageSerializable> serializables;
 	
 	public GameSceneMemento(List<GameObject> gameObjects, List<SceneBackgroundImageSerializable> serializables) {
-//		gameObjects = new ArrayList<>();
-//		for (GameObject go: gameObjects) {
-//			System.out.println(go);
-//			GameObject copy = new GameObject(go);
-//			this.gameObjects.add(copy);
-//		}
+		gameObjects = new ArrayList<>();
+		for (GameObject go: gameObjects) {
+			System.out.println(go);
+			GameObject copy = new GameObject(go);
+			this.gameObjects.add(copy);
+		}
 		
 		this.serializables = serializables;
 	}

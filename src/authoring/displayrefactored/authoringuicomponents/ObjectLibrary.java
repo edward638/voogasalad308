@@ -27,14 +27,13 @@ public class ObjectLibrary extends AuthoringUIComponentRefactored {
 	private ListView<GameObject> objectList;
 	private ComboBox<String> objectType;
 	private GameObjectManager manager;
-	private HBox topHBox;
 	private HBox bottomHBox;
 	private VBox vBox;
 	private GameObject currentObject;
 	
 	public ObjectLibrary(GameObjectManager manager) {
 		this.manager = manager;
-		GenerateComponent();
+		generateComponent();
 	}
 	
 	public void initializeFXComponents() {
@@ -50,7 +49,7 @@ public class ObjectLibrary extends AuthoringUIComponentRefactored {
 	}
 
 	@Override
-	protected void GenerateComponent() {
+	protected void generateComponent() {
 		BorderPane borderPane = getBorderPane();
 		initializeFXComponents();
 		mapFXActions();
@@ -64,13 +63,14 @@ public class ObjectLibrary extends AuthoringUIComponentRefactored {
 	
 	private void mapFXActions() {
 		addToGameButton.setOnAction(e->{
-			manager.addObjectToGame(currentObject);
+			manager.addObjectToGame();
 		});
 		addToLibrary.setOnAction(e->{
 			NewLibraryObjectPopupRefactored popupRefactored = new NewLibraryObjectPopupRefactored(manager);
 		});
 		objectList.setOnMouseClicked(e->{
-			currentObject = objectList.getSelectionModel().getSelectedItem();
+			manager.setCurrentObject(objectList.getSelectionModel().getSelectedItem());
+			
 		});
 		objectType.valueProperty().addListener((o,old,neww)->{
 			manager.changeObjectType(neww);

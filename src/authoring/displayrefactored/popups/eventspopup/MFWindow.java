@@ -54,7 +54,7 @@ public class MFWindow extends VBox {
 	private void addMethods() {
 		List<Method> methods = gcf.getMethods(currentBehavior);
 		if (methods == null) {
-			Text noMethods = new Text("No available methods for this behavior");
+			Text noMethods = new Text("No available methods\nfor this behavior");
 			this.getChildren().add(noMethods);
 			return;
 		}
@@ -72,7 +72,7 @@ public class MFWindow extends VBox {
 	private void addFields() {
 		List<Field> fields = gcf.getFields(currentBehavior);
 		if (fields == null) {
-			Text noFields = new Text("No available fields for this behavior");
+			Text noFields = new Text("No available fields\nfor this behavior");
 			this.getChildren().add(noFields);
 			return;
 		}

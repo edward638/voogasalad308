@@ -34,15 +34,33 @@ public class ResponseWindow extends VBox {
 			this.getChildren().add(nonvalid);
 			return;
 		}
-		Text currGO = new Text("Current Game Object");
+		Text currGO = new Text("Current Game Object:");
 		Text goName = new Text(gos.get(0).getName());
 		goName.setOnMouseClicked(e -> GOClicked(goName.getText()));
 		this.getChildren().add(currGO);
 		this.getChildren().add(goName);
+		
+		if (epuc.getCurrEvent().getEventType().contains("CollisionEvent")) {
+			Text collisionGO = new Text("Current Collision Object:");
+			if (epuc.getCurrCollisionObject() != null) {
+			Text collisionName = new Text(epuc.getCurrCollisionObject().getName());
+			collisionName.setOnMouseClicked(e -> GOClicked(collisionName.getText()));
+			this.getChildren().add(collisionGO);
+			this.getChildren().add(collisionName);
+			}
+		}
+		
+		this.getChildren().add(new Text("Current Groovy Response:"));
+		Text groovyText = new Text(epuc.getGroovyString());
+		groovyText.setWrappingWidth(180);
+		this.getChildren().add(groovyText);
+		
+		
 	}
 	
 	private void GOClicked(String name) {
 		// implement in epuc, like add the name to the groovy window
+		epuc.setCurrObject(name);
 		epuc.concatenateString(name + ".", "ResponseWindow");
 	}
 

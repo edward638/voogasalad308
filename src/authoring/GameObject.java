@@ -38,6 +38,10 @@ public class GameObject {
 		this();
 		myBehaviors.add(initBehavior);
 	}
+	
+	public String getImagePath() {
+		return (String) this.getMandatoryBehavior().getProperty("imagePath").getValue();
+	}
 
 	/**
 	 * Constructs a default {@code GameObject} that contains the MandatoryBehavior
@@ -64,19 +68,16 @@ public class GameObject {
 		Set<AuthBehavior> newBehaviors = new HashSet<>();
 		for (AuthBehavior ab : toCopy.getBehaviors()) {
 			if (!ab.equals(this.getMandatoryBehavior())) {
-				newBehaviors.add(ab.clone());
+				newBehaviors.add(ab);
 			}
 		}
 		myBehaviors = newBehaviors;
-		
-		System.out.println("The size of copied behavior: " + toCopy.getBehaviors().size());
-		System.out.println("From GameObject: The size of myBehaviors: " + myBehaviors.size());
 
-		Set<Event> newEvents = new HashSet<>();
-		for (Event e : toCopy.getEvents()) {
-			newEvents.add(e.clone());
-		}
-		myEvents = newEvents;
+//		Set<Event> newEvents = new HashSet<>();
+//		for (Event e : toCopy.getEvents()) {
+//			newEvents.add(e.clone());
+//		}
+		myEvents = toCopy.getEvents();
 		
 		myName = toCopy.getName();
 		
@@ -84,8 +85,11 @@ public class GameObject {
 				
 		this.getMandatoryBehavior().getProperty("xPos").setValue(toCopy.getMandatoryBehavior().getProperty("xPos").getValue());
 		this.getMandatoryBehavior().getProperty("yPos").setValue(toCopy.getMandatoryBehavior().getProperty("yPos").getValue());
-		this.getMandatoryBehavior().getProperty("imagePath").setValue(toCopy.getMandatoryBehavior().getProperty("imagePath").getValue());
+		this.getMandatoryBehavior().getProperty("displayWidth").setValue(toCopy.getMandatoryBehavior().getProperty("displayWidth").getValue());
+		this.getMandatoryBehavior().getProperty("displayHeight").setValue(toCopy.getMandatoryBehavior().getProperty("displayHeight").getValue());
 
+		this.getMandatoryBehavior().getProperty("imagePath").setValue(toCopy.getMandatoryBehavior().getProperty("imagePath").getValue());
+		
 	}
 
 	public void addBehavior(String behaviorToAdd) {

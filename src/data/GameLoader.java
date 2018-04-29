@@ -46,6 +46,8 @@ public class GameLoader {
      */
     public List<GameScene> getGameScenes(){
     	List<GameScene> list = new ArrayList<>();
+    		System.out.println("getGameScenes: " + gameScenesLocation);
+    		System.out.println(deserializer.getGameSceneSerializables(gameScenesLocation));
         for (GameSceneSerializable s : deserializer.getGameSceneSerializables(gameScenesLocation)) {
         	list.add(new GameScene(s));
         }

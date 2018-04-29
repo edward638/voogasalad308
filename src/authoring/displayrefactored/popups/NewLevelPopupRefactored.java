@@ -1,7 +1,5 @@
 package authoring.displayrefactored.popups;
 
-import authoring.GameScene;
-import authoring.displayrefactored.controllers.Controller;
 import authoring.displayrefactored.controllers.LevelPanelController;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.control.Button;
@@ -42,11 +40,11 @@ public class NewLevelPopupRefactored extends PopupRefactored{
 
 		HBox nameLevel = new HBox();
 		levelText = new TextField();
-		nameLevel.getChildren().addAll(new Label("Level name: "), levelText);
+		nameLevel.getChildren().addAll(new Label("Scene ID: "), levelText);
 
 		HBox levelIndex = new HBox();
 		indexText = new TextField();
-		levelIndex.getChildren().addAll(new Label("Level number: "), indexText);
+		levelIndex.getChildren().addAll(new Label("Level ID: "), indexText);
 
 		saveButton = new Button(ResourceBundleManager.getAuthoring("Save"));
 		root.getChildren().addAll(nameLevel, levelIndex, saveButton);
@@ -63,8 +61,8 @@ public class NewLevelPopupRefactored extends PopupRefactored{
 			if(!levelText.getText().isEmpty() && !indexText.getText().isEmpty()) {
 				try {
 					String levelName = levelText.getText();
-					Integer levelIndex = Integer.parseInt(indexText.getText());
-					controller.addLevel(levelName, levelIndex);
+					String levelId = indexText.getText();
+					controller.addLevel(levelName, levelId);
 					close();
 					//after slider is implemented, only catch general exception
 				} catch(NumberFormatException e) {

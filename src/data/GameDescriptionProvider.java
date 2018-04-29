@@ -23,6 +23,7 @@ public class GameDescriptionProvider {
 	public String getGameName(String gameName) {
 		String gameLocation = baseLocation + gameName + "/";
 		String gameDescriptionLocation = gameLocation + ResourceBundleManager.getPath("DESCRIPTION");
+		System.out.println(gameDescriptionLocation + ResourceBundleManager.getPath("NAME"));
 		return retrieveStringFromTextFile(gameDescriptionLocation + ResourceBundleManager.getPath("NAME"));
 	}
 

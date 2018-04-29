@@ -70,6 +70,7 @@ public class BehaviorPanel {
 	private ComboBox<AuthBehavior> makeBehaviorDropdown() {
 		ComboBox<AuthBehavior> behaviorDropdown = new ComboBox<>();
 		behaviorDropdown.getItems().addAll(notMyBehaviors);
+		System.out.println("dropdown content (BehaviorPanel line 73): "+ behaviorDropdown.getItems());
 		return behaviorDropdown;
 	}
 	

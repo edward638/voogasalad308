@@ -55,4 +55,8 @@ public class GroovyAction implements Action {
 		er.setContent(this.getContent());
 		return er;
 	}
+	
+	public String toString() {
+		return content;
+	}
 }

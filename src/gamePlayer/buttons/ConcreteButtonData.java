@@ -1,8 +1,6 @@
 package gamePlayer.buttons;
 
 import engine.EngineInterface;
-import engine.GamePart;
-import engine.GameState;
 import gamePlayer.GamePlayer;
 import gamePlayer.Username;
 import gamePlayer.VolumeSlider;
@@ -16,10 +14,8 @@ public class ConcreteButtonData implements ButtonData {
 	private Stage stage;
 	private GamePlayer gamePlayer;
 	private Group root;
-	
-	private GamePart gamePart;
+
 	private HighScores highScores;
-	private GameState gameState;
 	private String mostRecentFile;
 	private KeyInputDictionary keyBindingMap;
 	private EngineInterface engine;
@@ -48,10 +44,6 @@ public class ConcreteButtonData implements ButtonData {
 	@Override
 	public void clearHighScores() {
 		highScores.clear();
-	}
-	
-	public void setGamePart(GamePart gamePart) {
-		this.gamePart = gamePart;
 	}
 
 	public void setMostRecentFile(String file) {
@@ -116,12 +108,8 @@ public class ConcreteButtonData implements ButtonData {
 	}
 
 	@Override
-	public GameState getGameState() {
-		// TODO Auto-generated method stub
-		return null;
+	public void saveGame() {
+		engine.save();
 	}
-
-
-
 
 }

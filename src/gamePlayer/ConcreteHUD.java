@@ -56,8 +56,7 @@ public class ConcreteHUD extends Pane implements HUD {
 			text.setFont(new Font(20));
 			this.getChildren().add(text);
 			labelList.add(text);
-			xLabel = (int) (xLabel + text.getText().length()*12);
-			
+			xLabel = (int) (xLabel + text.getText().length() * 12);
 
 			if ((xLabel + 100) > 900) {
 				xLabel = 0;

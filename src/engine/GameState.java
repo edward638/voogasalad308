@@ -191,4 +191,12 @@ public class GameState {
 	protected void addLevel(String levelID) {
 		gameLevels.add(new GameLevel(levelID));
 	}
+	
+	protected List<GamePart> getAllGameParts() {
+		List<GamePart> toReturn = new ArrayList<>();
+		for (GameLevel gl : this.gameLevels) {
+			toReturn.addAll(gl.getGameParts());
+		}
+		return toReturn;
+	}
 }

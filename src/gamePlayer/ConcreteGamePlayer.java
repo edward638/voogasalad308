@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 import data.GameDescriptionProvider;
 import engine.Engine;
 import engine.EngineInterface;
+import gamePlayer.buttons.ChangeNameButton;
 //import engine.tests.ModelGameState2;
 import gamePlayer.buttons.ConcreteButtonData;
 import gamePlayer.buttons.LoadButton;
@@ -46,6 +47,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 	private Button keyboardBindingButton;
 	private Button toggleVolumeButton;
 	private Button pauseButton;
+	private Button changeNameButton;
 	private ConcreteButtonData buttonData;
 
 	private HUD hud;
@@ -81,12 +83,13 @@ public class ConcreteGamePlayer implements GamePlayer {
 
 		keyInputDictionary = new KeyInputDictionary(engine);
 		myScene.setOnKeyPressed(keyPress -> keyInputDictionary.handleAction(keyPress.getCode()));
-		
+
 		volumeSlider = new VolumeSlider(buttonData, engine);
-		buttonData = new ConcreteButtonData(stage, this, volumeSlider, root, keyInputDictionary);
+		username = new Username();
+		buttonData = new ConcreteButtonData(stage, this, volumeSlider, root, keyInputDictionary, username);
 
 		initialiseGUIElements();
-		username = new Username();
+
 		addGuiElementsToRoot();
 	}
 
@@ -118,6 +121,9 @@ public class ConcreteGamePlayer implements GamePlayer {
 
 		pauseButton = new PauseButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("pauseButtonY")),
 				BUTTONWIDTH, BUTTONHEIGHT, buttonData);
+		
+		changeNameButton = new ChangeNameButton(Integer.parseInt(resources.getString("changeButtonX")), Integer.parseInt(resources.getString("changeButtonY")),
+				BUTTONWIDTH / 4, BUTTONHEIGHT, buttonData);
 
 	}
 
@@ -130,6 +136,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 		root.getChildren().add(replayButton);
 		root.getChildren().add(keyboardBindingButton);
 		root.getChildren().add(pauseButton);
+		root.getChildren().add(changeNameButton);
 		root.getChildren().add(volumeSlider.getVolumeText());
 		root.getChildren().add(volumeSlider.getSlider());
 		root.getChildren().add(username.getNameText());
@@ -147,19 +154,13 @@ public class ConcreteGamePlayer implements GamePlayer {
 		buttonData.setHighScores(highScores);
 		PlayerUpdater concretePlayerUpdater = new ConcretePlayerUpdater(hud, highScores, username.getName());
 
-
-		//engine = new Engine(gameName, isNewGame, concretePlayerUpdater);
+		// engine = new Engine(gameName, isNewGame, concretePlayerUpdater);
 		engine = new Engine("enginetestmario", isNewGame, concretePlayerUpdater);
 		updateEngines(engine);
-
-		
 
 		pauseButton = new PauseButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("pauseButtonY")),
 				BUTTONWIDTH, BUTTONHEIGHT, buttonData);
 		setUpEngineGameDisplay();
-
-		// username.getName());
-		// engine = new Engine(file, concretePlayerUpdater);
 
 		buttonData.setMostRecentFile(gameName);
 		addEngineGUIToRoot();

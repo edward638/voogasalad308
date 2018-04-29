@@ -9,6 +9,7 @@ import gamePlayer.buttons.ChangeNameButton;
 //import engine.tests.ModelGameState2;
 import gamePlayer.buttons.ConcreteButtonData;
 import gamePlayer.buttons.LoadButton;
+import gamePlayer.buttons.LoadOnlineButton;
 import gamePlayer.buttons.SaveButton;
 import gamePlayer.buttons.ToggleVolumeButton;
 import gamePlayer.highScores.ClearHighScoresButton;
@@ -47,6 +48,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 	private Button keyboardBindingButton;
 	private Button toggleVolumeButton;
 	private Button pauseButton;
+	private Button loadOnlineButton;
 	private Button changeNameButton;
 	private ConcreteButtonData buttonData;
 
@@ -122,6 +124,8 @@ public class ConcreteGamePlayer implements GamePlayer {
 		pauseButton = new PauseButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("pauseButtonY")),
 				BUTTONWIDTH, BUTTONHEIGHT, buttonData);
 
+		loadOnlineButton = new LoadOnlineButton(BUTTONXLOCATION,
+				Integer.parseInt(resources.getString("loadOnlineButtonY")), BUTTONWIDTH, BUTTONHEIGHT, buttonData);
 		changeNameButton = new ChangeNameButton(Integer.parseInt(resources.getString("changeButtonX")),
 				Integer.parseInt(resources.getString("changeButtonY")), Integer.parseInt(resources.getString("changeNameWidth")), BUTTONHEIGHT, buttonData);
 
@@ -135,6 +139,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 		root.getChildren().add(saveButton);
 		root.getChildren().add(replayButton);
 		root.getChildren().add(keyboardBindingButton);
+		root.getChildren().add(loadOnlineButton);
 		root.getChildren().add(pauseButton);
 		root.getChildren().add(changeNameButton);
 		root.getChildren().add(volumeSlider.getVolumeText());

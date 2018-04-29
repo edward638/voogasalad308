@@ -46,22 +46,23 @@ public class ConcreteHUD extends Pane implements HUD {
 		setUpName();
 
 		for (String label : info.keySet()) {
-			if ((xLabel + 100) > 900) {
-				xLabel = 0;
-				yLabel = yLabel + 25;
-			}
+
 			Label text = new Label(label + ": " + info.get(label).toString());
-			//text = new Label("hi");
+			// text = new Label("hi");
 
 			text.setTextFill(Color.WHITE);
 			text.setLayoutX(xLabel);
-			xLabel = xLabel + 150;
 			text.setLayoutY(yLabel);
 			text.setFont(new Font(20));
 			this.getChildren().add(text);
 			labelList.add(text);
-			System.out.println(labelList);
-			
+			xLabel = (int) (xLabel + text.getText().length() * 12);
+
+			if ((xLabel + 100) > 900) {
+				xLabel = 0;
+				yLabel = yLabel + 25;
+			}
+
 		}
 	}
 

@@ -31,7 +31,7 @@ public class LoadButton extends PlayerButtons {
 				fileString = fileName.getPath();
 			}
 
-			buttonData.playGame(fileString);
+			buttonData.playGame(fileString, false);
 
 		});
 

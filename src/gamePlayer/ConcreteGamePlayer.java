@@ -81,7 +81,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 
 		keyInputDictionary = new KeyInputDictionary(engine);
 		myScene.setOnKeyPressed(keyPress -> keyInputDictionary.handleAction(keyPress.getCode()));
-
+		
 		volumeSlider = new VolumeSlider(buttonData, engine);
 		buttonData = new ConcreteButtonData(stage, this, volumeSlider, root, keyInputDictionary);
 
@@ -137,19 +137,23 @@ public class ConcreteGamePlayer implements GamePlayer {
 	}
 
 	@Override
-	public void playGame(String gameName) {
+	public void playGame(String gameName, boolean isNewGame) {
 		cleanOldEngineGuiElements();
 		if (engine != null) {
 			engine.close();
 		}
-		PlayerUpdater concretePlayerUpdater = new ConcretePlayerUpdater(hud, highScores, username.getName());
-
-		engine = new Engine(gameName, concretePlayerUpdater, "Load or save");
-//		updateEngines(engine);
-
 		hud = new ConcreteHUD(gameDescriptionProvider.getGameName(gameName));
 		highScores = new ConcreteHighScores(gameName);
 		buttonData.setHighScores(highScores);
+		PlayerUpdater concretePlayerUpdater = new ConcretePlayerUpdater(hud, highScores, username.getName());
+
+
+		//engine = new Engine(gameName, isNewGame, concretePlayerUpdater);
+		engine = new Engine("enginetestmario", isNewGame, concretePlayerUpdater);
+		updateEngines(engine);
+
+		
+
 		pauseButton = new PauseButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("pauseButtonY")),
 				BUTTONWIDTH, BUTTONHEIGHT, buttonData);
 		setUpEngineGameDisplay();

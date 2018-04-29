@@ -53,17 +53,17 @@ public class Engine implements EngineInterface{
     	eventManager.processElementEvent(new TimeEvent(gameSteps));
     	displayState.update(currentGameState);
 
-    	Map<String, Object> info = new HashMap<>();
+    	/*Map<String, Object> info = new HashMap<>();
     	GameElement mainCharacter = currentGameState.getCurrentGamePart().getMainCharacter();
     	info.put("Name", mainCharacter.getIdentifier());
     	info.put("Health", ((Killable)mainCharacter.getBehavior(Killable.class)).getHealth());
     	info.put("Game Time", ((TimeTracker)mainCharacter.getBehavior(TimeTracker.class)).getTimePassed());
-    	playerUpdater.updateHUD(info);
+    	playerUpdater.updateHUD(info);*/
     }
 	
 	@Override
 	public void close() {
-		playerUpdater.addHighScore((int) ((TimeTracker)currentGameState.getCurrentGamePart().getMainCharacter().getBehavior(TimeTracker.class)).getTimePassed());
+		//playerUpdater.addHighScore((int) ((TimeTracker)currentGameState.getCurrentGamePart().getMainCharacter().getBehavior(TimeTracker.class)).getTimePassed());
 		currentGameState.getAudioManager().stop();
 	}
 	

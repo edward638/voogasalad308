@@ -42,6 +42,7 @@ public class EngineTesting extends Application {
 		//levels.add(new ModelGameState2().getPart());
 		//modelGameState = new GameState(levels , 0, levels.get(1), "enginetestmario");
 		//gameEngine = new Engine(modelGameState);
+		PlayerUpdater concretePlayerUpdater = new ConcretePlayerUpdater(hud, highScores, username.getName());
 		gameEngine = new Engine("enginetestmario", true, new ConcretePlayerUpdater());
 		stage.setScene(setupLevel(900, 590, BACKGROUND));
 		stage.show();

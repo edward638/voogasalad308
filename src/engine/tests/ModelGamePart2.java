@@ -6,18 +6,13 @@ import java.util.List;
 
 import engine.GameElement;
 import engine.GamePart;
-import engine.actions.ChangeLevel;
-import engine.actions.CollisionDamageAllSides;
-import engine.actions.CollisionStopXMotion;
-import engine.actions.CollisionStopYMotion;
 import engine.actions.GroovyAction;
-import engine.actions.TimeDisablePortal;
+import engine.behaviors.BlockLike;
 import engine.behaviors.BulletLike;
 import engine.behaviors.EntrancePortal;
 import engine.behaviors.ExitPortal;
 import engine.behaviors.Gravity;
 import engine.behaviors.Killable;
-import engine.behaviors.Killer;
 import engine.behaviors.MainCharacter;
 import engine.behaviors.MandatoryBehavior;
 import engine.behaviors.Movable;
@@ -25,9 +20,7 @@ import engine.behaviors.MovableCharacter;
 import engine.behaviors.Shooter;
 import engine.behaviors.TimeRoutine2;
 import engine.behaviors.TimeTracker;
-import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.KeyInputEvent;
-import engine.events.elementevents.TimeEvent;
 import javafx.scene.input.KeyCode;
 
 public class ModelGamePart2 {
@@ -128,7 +121,8 @@ public class ModelGamePart2 {
 	
 	public GameElement getBlock(Double xpos, Double ypos) {
 		GameElement block = new GameElement();
-		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "Marioimage"));
+		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "Blockimage"));
+		block.addBehavior(new BlockLike(block));
 		return block;
 	}
 	

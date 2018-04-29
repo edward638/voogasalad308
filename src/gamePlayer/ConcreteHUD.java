@@ -51,7 +51,7 @@ public class ConcreteHUD extends Pane implements HUD {
 				yLabel = yLabel + 25;
 			}
 			Label text = new Label(label + ": " + info.get(label).toString());
-			//text = new Label("hi");
+			// text = new Label("hi");
 
 			text.setTextFill(Color.WHITE);
 			text.setLayoutX(xLabel);
@@ -60,8 +60,6 @@ public class ConcreteHUD extends Pane implements HUD {
 			text.setFont(new Font(20));
 			this.getChildren().add(text);
 			labelList.add(text);
-			System.out.println(labelList);
-			
 		}
 	}
 

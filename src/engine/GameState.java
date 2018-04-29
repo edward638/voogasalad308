@@ -36,7 +36,7 @@ public class GameState {
 		GameLoader gameLoader = new GameLoader(gameName);
 		Converter2 converter = new Converter2();
 		List<GamePart> gameDataParts = new ArrayList<>();
-		
+
 		for (GameScene scene : gameLoader.getGameScenes()) {
 			gameDataParts.add(converter.gameScene2GamePart(scene));
 		}

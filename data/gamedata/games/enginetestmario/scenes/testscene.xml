@@ -8,57 +8,68 @@
         <authoring.AuthBehavior>
           <myProperties>
             <authoring.Property>
+              <myValue class="authoring.GameObject">
+                <myBehaviors>
+                  <authoring.AuthBehavior>
+                    <myProperties>
+                      <authoring.Property>
+                        <myName>shapeType</myName>
+                        <myValueType>java.lang.String</myValueType>
+                      </authoring.Property>
+                      <authoring.Property>
+                        <myName>hitBoxHeight</myName>
+                        <myValueType>java.lang.Double</myValueType>
+                      </authoring.Property>
+                      <authoring.Property>
+                        <myName>elementName</myName>
+                        <myValueType>java.lang.String</myValueType>
+                      </authoring.Property>
+                      <authoring.Property>
+                        <myName>imagePath</myName>
+                        <myValueType>java.lang.String</myValueType>
+                      </authoring.Property>
+                      <authoring.Property>
+                        <myName>displayWidth</myName>
+                        <myValueType>java.lang.Double</myValueType>
+                      </authoring.Property>
+                      <authoring.Property>
+                        <myName>hitBoxWidth</myName>
+                        <myValueType>java.lang.Double</myValueType>
+                      </authoring.Property>
+                      <authoring.Property>
+                        <myName>xPos</myName>
+                        <myValueType>java.lang.Double</myValueType>
+                      </authoring.Property>
+                      <authoring.Property>
+                        <myName>yPos</myName>
+                        <myValueType>java.lang.Double</myValueType>
+                      </authoring.Property>
+                      <authoring.Property>
+                        <myName>displayHeight</myName>
+                        <myValueType>java.lang.Double</myValueType>
+                      </authoring.Property>
+                    </myProperties>
+                    <myName>engine.behaviors.MandatoryBehavior</myName>
+                  </authoring.AuthBehavior>
+                </myBehaviors>
+                <myEvents/>
+                <myBehaviorFactory/>
+              </myValue>
+              <myName>toShoot</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">5.0</myValue>
+              <myName>distAway</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
               <myValue class="double">100.0</myValue>
-              <myName>displayWidth</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="string">ANY_ELEMENT</myValue>
-              <myName>REFER_ALL_ELEMENTS</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">100.0</myValue>
-              <myName>displayHeight</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="string">Marioimage</myValue>
-              <myName>imagePath</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="string">Mario</myValue>
-              <myName>elementName</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">100.0</myValue>
-              <myName>hitBoxHeight</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="string">rectangle</myValue>
-              <myName>shapeType</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">20.0</myValue>
-              <myName>yPos</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">200.0</myValue>
-              <myName>xPos</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">100.0</myValue>
-              <myName>hitBoxWidth</myName>
+              <myName>defaultVelocity</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
           </myProperties>
-          <myName>engine.behaviors.MandatoryBehavior</myName>
+          <myName>engine.behaviors.Shooter</myName>
         </authoring.AuthBehavior>
         <authoring.AuthBehavior>
           <myProperties>
@@ -73,12 +84,15 @@
         <authoring.AuthBehavior>
           <myProperties>
             <authoring.Property>
-              <myValue class="java.util.Arrays$ArrayList">
-                <a class="javafx.scene.input.KeyCode-array"/>
-              </myValue>
-              <myName>defaultmoves</myName>
+              <myValue class="double">0.0</myValue>
+              <myName>timePassed</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.TimeTracker</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior>
+          <myProperties>
             <authoring.Property>
               <myValue class="int">1</myValue>
               <myName>gamelives</myName>
@@ -101,26 +115,16 @@
           <myProperties>
             <authoring.Property>
               <myValue class="double">98.0</myValue>
-              <myName>GRAVITATIONAL_FORCE_DEFAULT</myName>
+              <myName>gravityForce</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
             <authoring.Property>
               <myValue class="double">98.0</myValue>
-              <myName>gravityForce</myName>
+              <myName>GRAVITATIONAL_FORCE_DEFAULT</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
           </myProperties>
           <myName>engine.behaviors.Gravity</myName>
-        </authoring.AuthBehavior>
-        <authoring.AuthBehavior>
-          <myProperties>
-            <authoring.Property>
-              <myValue class="double">0.0</myValue>
-              <myName>timePassed</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-          </myProperties>
-          <myName>engine.behaviors.TimeTracker</myName>
         </authoring.AuthBehavior>
         <authoring.AuthBehavior>
           <myProperties>
@@ -152,115 +156,104 @@
         <authoring.AuthBehavior>
           <myProperties>
             <authoring.Property>
+              <myValue class="string">ANY_ELEMENT</myValue>
+              <myName>REFER_ALL_ELEMENTS</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
               <myValue class="double">100.0</myValue>
-              <myName>defaultVelocity</myName>
+              <myName>displayHeight</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myValue class="double">5.0</myValue>
-              <myName>distAway</myName>
+              <myValue class="string">Mario</myValue>
+              <myName>elementName</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myValue class="authoring.GameObject">
-                <myBehaviors>
-                  <authoring.AuthBehavior>
-                    <myProperties>
-                      <authoring.Property>
-                        <myName>yPos</myName>
-                        <myValueType>java.lang.Double</myValueType>
-                      </authoring.Property>
-                      <authoring.Property>
-                        <myName>hitBoxHeight</myName>
-                        <myValueType>java.lang.Double</myValueType>
-                      </authoring.Property>
-                      <authoring.Property>
-                        <myName>displayHeight</myName>
-                        <myValueType>java.lang.Double</myValueType>
-                      </authoring.Property>
-                      <authoring.Property>
-                        <myName>hitBoxWidth</myName>
-                        <myValueType>java.lang.Double</myValueType>
-                      </authoring.Property>
-                      <authoring.Property>
-                        <myName>xPos</myName>
-                        <myValueType>java.lang.Double</myValueType>
-                      </authoring.Property>
-                      <authoring.Property>
-                        <myName>imagePath</myName>
-                        <myValueType>java.lang.String</myValueType>
-                      </authoring.Property>
-                      <authoring.Property>
-                        <myName>elementName</myName>
-                        <myValueType>java.lang.String</myValueType>
-                      </authoring.Property>
-                      <authoring.Property>
-                        <myName>shapeType</myName>
-                        <myValueType>java.lang.String</myValueType>
-                      </authoring.Property>
-                      <authoring.Property>
-                        <myName>displayWidth</myName>
-                        <myValueType>java.lang.Double</myValueType>
-                      </authoring.Property>
-                    </myProperties>
-                    <myName>engine.behaviors.MandatoryBehavior</myName>
-                  </authoring.AuthBehavior>
-                </myBehaviors>
-                <myEvents/>
-                <myBehaviorFactory/>
-              </myValue>
-              <myName>toShoot</myName>
+              <myValue class="double">100.0</myValue>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">rectangle</myValue>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">100.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">Marioimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">20.0</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">200.0</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">100.0</myValue>
+              <myName>hitBoxHeight</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
           </myProperties>
-          <myName>engine.behaviors.Shooter</myName>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
         </authoring.AuthBehavior>
       </myBehaviors>
       <myEvents>
         <authoring.Event>
           <myResponses>
-            <authoring.EventResponse>
-              <myContent>Mario.getBehavior(&apos;MovableCharacter&apos;).jump()</myContent>
-            </authoring.EventResponse>
+            <engine.actions.GroovyAction>
+              <content>Mario.getBehavior(&apos;MovableCharacter&apos;).jump()</content>
+            </engine.actions.GroovyAction>
           </myResponses>
           <eventType>engine.events.elementevents.KeyInputEvent</eventType>
-          <myTrigger>P</myTrigger>
+          <myTrigger>W</myTrigger>
         </authoring.Event>
         <authoring.Event>
           <myResponses>
-            <authoring.EventResponse>
-              <myContent>Mario.getBehavior(&apos;MovableCharacter&apos;).setXVelocity(200.0)</myContent>
-            </authoring.EventResponse>
-          </myResponses>
-          <eventType>engine.events.elementevents.KeyInputEvent</eventType>
-          <myTrigger>D</myTrigger>
-        </authoring.Event>
-        <authoring.Event>
-          <myResponses>
-            <authoring.EventResponse>
-              <myContent>Mario.getBehavior(&apos;Shooter&apos;).shootRight()</myContent>
-            </authoring.EventResponse>
+            <engine.actions.GroovyAction>
+              <content>Mario.getBehavior(&apos;Shooter&apos;).shootRight()</content>
+            </engine.actions.GroovyAction>
           </myResponses>
           <eventType>engine.events.elementevents.KeyInputEvent</eventType>
           <myTrigger>F</myTrigger>
         </authoring.Event>
         <authoring.Event>
           <myResponses>
-            <authoring.EventResponse>
-              <myContent>Mario.getBehavior(&apos;MovableCharacter&apos;).setXVelocity(-200.0)</myContent>
-            </authoring.EventResponse>
+            <engine.actions.GroovyAction>
+              <content>Mario.getBehavior(&apos;MovableCharacter&apos;).setXVelocity(200.0)</content>
+            </engine.actions.GroovyAction>
           </myResponses>
           <eventType>engine.events.elementevents.KeyInputEvent</eventType>
-          <myTrigger>A</myTrigger>
+          <myTrigger>D</myTrigger>
         </authoring.Event>
         <authoring.Event>
           <myResponses>
-            <authoring.EventResponse>
-              <myContent>Mario.getBehavior(&apos;MovableCharacter&apos;).jump()</myContent>
-            </authoring.EventResponse>
+            <engine.actions.GroovyAction>
+              <content>Mario.getBehavior(&apos;MovableCharacter&apos;).jump()</content>
+            </engine.actions.GroovyAction>
           </myResponses>
           <eventType>engine.events.elementevents.KeyInputEvent</eventType>
-          <myTrigger>W</myTrigger>
+          <myTrigger>P</myTrigger>
+        </authoring.Event>
+        <authoring.Event>
+          <myResponses>
+            <engine.actions.GroovyAction>
+              <content>Mario.getBehavior(&apos;MovableCharacter&apos;).setXVelocity(-200.0)</content>
+            </engine.actions.GroovyAction>
+          </myResponses>
+          <eventType>engine.events.elementevents.KeyInputEvent</eventType>
+          <myTrigger>A</myTrigger>
         </authoring.Event>
       </myEvents>
       <myBehaviorFactory/>
@@ -2779,6 +2772,36 @@
         <authoring.AuthBehavior>
           <myProperties>
             <authoring.Property>
+              <myValue class="double">10.0</myValue>
+              <myName>lifeHealth</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">100.0</myValue>
+              <myName>health</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">0.0</myValue>
+              <myName>decayRate</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">10.0</myValue>
+              <myName>default_health</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.Killable</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="int">1</myValue>
+              <myName>Y_LIST_POS</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
               <myValue class="double">0.0</myValue>
               <myName>yVel</myName>
               <myValueType>java.lang.String</myValueType>
@@ -2786,11 +2809,6 @@
             <authoring.Property>
               <myValue class="double">-20.0</myValue>
               <myName>xVel</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="int">1</myValue>
-              <myName>Y_LIST_POS</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
             <authoring.Property>
@@ -2860,31 +2878,6 @@
           </myProperties>
           <myName>engine.behaviors.MandatoryBehavior</myName>
         </authoring.AuthBehavior>
-        <authoring.AuthBehavior>
-          <myProperties>
-            <authoring.Property>
-              <myValue class="double">100.0</myValue>
-              <myName>health</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">10.0</myValue>
-              <myName>default_health</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">0.0</myValue>
-              <myName>decayRate</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">10.0</myValue>
-              <myName>lifeHealth</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-          </myProperties>
-          <myName>engine.behaviors.Killable</myName>
-        </authoring.AuthBehavior>
       </myBehaviors>
       <myEvents/>
       <myBehaviorFactory/>
@@ -2895,27 +2888,27 @@
         <authoring.AuthBehavior>
           <myProperties>
             <authoring.Property>
-              <myValue class="double">10.0</myValue>
-              <myName>lifeHealth</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">10.0</myValue>
-              <myName>default_health</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
               <myValue class="double">0.0</myValue>
-              <myName>decayRate</myName>
+              <myName>yVel</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myValue class="double">100.0</myValue>
-              <myName>health</myName>
+              <myValue class="int">0</myValue>
+              <myName>X_LIST_POS</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="int">1</myValue>
+              <myName>Y_LIST_POS</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">-20.0</myValue>
+              <myName>xVel</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
           </myProperties>
-          <myName>engine.behaviors.Killable</myName>
+          <myName>engine.behaviors.Movable</myName>
         </authoring.AuthBehavior>
         <authoring.AuthBehavior>
           <myProperties>
@@ -2979,27 +2972,27 @@
         <authoring.AuthBehavior>
           <myProperties>
             <authoring.Property>
+              <myValue class="double">10.0</myValue>
+              <myName>lifeHealth</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">10.0</myValue>
+              <myName>default_health</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">100.0</myValue>
+              <myName>health</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
               <myValue class="double">0.0</myValue>
-              <myName>yVel</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="int">0</myValue>
-              <myName>X_LIST_POS</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">-20.0</myValue>
-              <myName>xVel</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="int">1</myValue>
-              <myName>Y_LIST_POS</myName>
+              <myName>decayRate</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
           </myProperties>
-          <myName>engine.behaviors.Movable</myName>
+          <myName>engine.behaviors.Killable</myName>
         </authoring.AuthBehavior>
       </myBehaviors>
       <myEvents/>
@@ -3064,31 +3057,6 @@
           <myName>engine.behaviors.MandatoryBehavior</myName>
         </authoring.AuthBehavior>
         <authoring.AuthBehavior>
-          <myProperties>
-            <authoring.Property>
-              <myValue class="int">0</myValue>
-              <myName>X_LIST_POS</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="int">1</myValue>
-              <myName>Y_LIST_POS</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">-20.0</myValue>
-              <myName>xVel</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">0.0</myValue>
-              <myName>yVel</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-          </myProperties>
-          <myName>engine.behaviors.Movable</myName>
-        </authoring.AuthBehavior>
-        <authoring.AuthBehavior>
           <myProperties/>
           <myName>engine.behaviors.IgnoresBlocks</myName>
         </authoring.AuthBehavior>
@@ -3097,6 +3065,11 @@
             <authoring.Property>
               <myValue class="double">10.0</myValue>
               <myName>lifeHealth</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">10.0</myValue>
+              <myName>default_health</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
             <authoring.Property>
@@ -3109,13 +3082,33 @@
               <myName>decayRate</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.Killable</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior>
+          <myProperties>
             <authoring.Property>
-              <myValue class="double">10.0</myValue>
-              <myName>default_health</myName>
+              <myValue class="double">0.0</myValue>
+              <myName>yVel</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">-20.0</myValue>
+              <myName>xVel</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="int">1</myValue>
+              <myName>Y_LIST_POS</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="int">0</myValue>
+              <myName>X_LIST_POS</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
           </myProperties>
-          <myName>engine.behaviors.Killable</myName>
+          <myName>engine.behaviors.Movable</myName>
         </authoring.AuthBehavior>
       </myBehaviors>
       <myEvents/>
@@ -3127,37 +3120,13 @@
         <authoring.AuthBehavior>
           <myProperties>
             <authoring.Property>
-              <myValue class="double">-20.0</myValue>
-              <myName>xVel</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="int">0</myValue>
-              <myName>X_LIST_POS</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="int">1</myValue>
-              <myName>Y_LIST_POS</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">0.0</myValue>
-              <myName>yVel</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-          </myProperties>
-          <myName>engine.behaviors.Movable</myName>
-        </authoring.AuthBehavior>
-        <authoring.AuthBehavior>
-          <myProperties/>
-          <myName>engine.behaviors.IgnoresBlocks</myName>
-        </authoring.AuthBehavior>
-        <authoring.AuthBehavior>
-          <myProperties>
-            <authoring.Property>
               <myValue class="double">100.0</myValue>
               <myName>health</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">10.0</myValue>
+              <myName>default_health</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
             <authoring.Property>
@@ -3170,13 +3139,37 @@
               <myName>lifeHealth</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.Killable</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior>
+          <myProperties/>
+          <myName>engine.behaviors.IgnoresBlocks</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior>
+          <myProperties>
             <authoring.Property>
-              <myValue class="double">10.0</myValue>
-              <myName>default_health</myName>
+              <myValue class="double">-20.0</myValue>
+              <myName>xVel</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="int">1</myValue>
+              <myName>Y_LIST_POS</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">0.0</myValue>
+              <myName>yVel</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="int">0</myValue>
+              <myName>X_LIST_POS</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
           </myProperties>
-          <myName>engine.behaviors.Killable</myName>
+          <myName>engine.behaviors.Movable</myName>
         </authoring.AuthBehavior>
         <authoring.AuthBehavior>
           <myProperties>
@@ -3241,24 +3234,15 @@
       <myName>Koopa</myName>
       <myBehaviors>
         <authoring.AuthBehavior>
-          <myProperties/>
-          <myName>engine.behaviors.IgnoresBlocks</myName>
-        </authoring.AuthBehavior>
-        <authoring.AuthBehavior>
           <myProperties>
-            <authoring.Property>
-              <myValue class="double">-20.0</myValue>
-              <myName>xVel</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="int">1</myValue>
-              <myName>Y_LIST_POS</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
             <authoring.Property>
               <myValue class="double">0.0</myValue>
               <myName>yVel</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">-20.0</myValue>
+              <myName>xVel</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
             <authoring.Property>
@@ -3266,21 +3250,20 @@
               <myName>X_LIST_POS</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
+            <authoring.Property>
+              <myValue class="int">1</myValue>
+              <myName>Y_LIST_POS</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
           </myProperties>
           <myName>engine.behaviors.Movable</myName>
         </authoring.AuthBehavior>
         <authoring.AuthBehavior>
+          <myProperties/>
+          <myName>engine.behaviors.IgnoresBlocks</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior>
           <myProperties>
-            <authoring.Property>
-              <myValue class="double">10.0</myValue>
-              <myName>default_health</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">100.0</myValue>
-              <myName>health</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
             <authoring.Property>
               <myValue class="double">0.0</myValue>
               <myName>decayRate</myName>
@@ -3289,6 +3272,16 @@
             <authoring.Property>
               <myValue class="double">10.0</myValue>
               <myName>lifeHealth</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">100.0</myValue>
+              <myName>health</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">10.0</myValue>
+              <myName>default_health</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
           </myProperties>
@@ -3357,20 +3350,14 @@
       <myName>Koopa</myName>
       <myBehaviors>
         <authoring.AuthBehavior>
+          <myProperties/>
+          <myName>engine.behaviors.IgnoresBlocks</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior>
           <myProperties>
-            <authoring.Property>
-              <myValue class="double">-20.0</myValue>
-              <myName>xVel</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
             <authoring.Property>
               <myValue class="double">0.0</myValue>
               <myName>yVel</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="int">1</myValue>
-              <myName>Y_LIST_POS</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
             <authoring.Property>
@@ -3378,12 +3365,18 @@
               <myName>X_LIST_POS</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">-20.0</myValue>
+              <myName>xVel</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="int">1</myValue>
+              <myName>Y_LIST_POS</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
           </myProperties>
           <myName>engine.behaviors.Movable</myName>
-        </authoring.AuthBehavior>
-        <authoring.AuthBehavior>
-          <myProperties/>
-          <myName>engine.behaviors.IgnoresBlocks</myName>
         </authoring.AuthBehavior>
         <authoring.AuthBehavior>
           <myProperties>
@@ -3473,29 +3466,8 @@
       <myName>Koopa</myName>
       <myBehaviors>
         <authoring.AuthBehavior>
-          <myProperties>
-            <authoring.Property>
-              <myValue class="double">10.0</myValue>
-              <myName>default_health</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">100.0</myValue>
-              <myName>health</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">10.0</myValue>
-              <myName>lifeHealth</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">0.0</myValue>
-              <myName>decayRate</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-          </myProperties>
-          <myName>engine.behaviors.Killable</myName>
+          <myProperties/>
+          <myName>engine.behaviors.IgnoresBlocks</myName>
         </authoring.AuthBehavior>
         <authoring.AuthBehavior>
           <myProperties>
@@ -3555,15 +3527,30 @@
         <authoring.AuthBehavior>
           <myProperties>
             <authoring.Property>
-              <myValue class="int">0</myValue>
-              <myName>X_LIST_POS</myName>
+              <myValue class="double">10.0</myValue>
+              <myName>default_health</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myValue class="double">-20.0</myValue>
-              <myName>xVel</myName>
+              <myValue class="double">100.0</myValue>
+              <myName>health</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">0.0</myValue>
+              <myName>decayRate</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">10.0</myValue>
+              <myName>lifeHealth</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.Killable</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior>
+          <myProperties>
             <authoring.Property>
               <myValue class="int">1</myValue>
               <myName>Y_LIST_POS</myName>
@@ -3574,12 +3561,18 @@
               <myName>yVel</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
+            <authoring.Property>
+              <myValue class="int">0</myValue>
+              <myName>X_LIST_POS</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">-20.0</myValue>
+              <myName>xVel</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
           </myProperties>
           <myName>engine.behaviors.Movable</myName>
-        </authoring.AuthBehavior>
-        <authoring.AuthBehavior>
-          <myProperties/>
-          <myName>engine.behaviors.IgnoresBlocks</myName>
         </authoring.AuthBehavior>
       </myBehaviors>
       <myEvents/>

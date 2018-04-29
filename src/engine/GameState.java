@@ -1,10 +1,12 @@
 package engine;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import authoring.GameScene;
 import data.GameLoader;
+import data.GameSaver;
 import engine.audio.AudioManager;
 import engine.authouringconversion.Converter2;
 import engine.behaviors.ExitPortal;
@@ -21,7 +23,7 @@ public class GameState {
 	private AudioManager audioManager;
 	private String musicPath = "data/music/WiiShopChannelMusic.mp3";
 
-	public GameState(String gameName) {
+	public GameState(String gameName, boolean newGame) {
 		this.gameName = gameName;
 		gameLevels = new ArrayList<>();
 		addToDisplay = new ArrayList<>();
@@ -29,18 +31,33 @@ public class GameState {
 		audioManager = new AudioManager(1);
 		audioManager.newAudioPlayer(musicPath);
 		
-		constructGameState(loadGame(this.gameName));
+		constructGameState(loadGame(this.gameName, newGame));
 	}
 	
-	private List<GamePart> loadGame(String gameName) {
+	private List<GamePart> loadGame(String gameName, boolean newGame) {
 		GameLoader gameLoader = new GameLoader(gameName);
 		Converter2 converter = new Converter2();
 		List<GamePart> gameDataParts = new ArrayList<>();
 
-		for (GameScene scene : gameLoader.getGameScenes()) {
+		for (GameScene scene : gameLoader.getGameScenes(newGame)) {
 			gameDataParts.add(converter.gameScene2GamePart(scene));
 		}
 		return gameDataParts;
+	}
+	
+	protected void saveGame() {
+		GameSaver gameSaver = new GameSaver(gameName);
+		Converter2 converter = new Converter2();
+		List<GameScene> gameSceneList = new ArrayList<GameScene>();
+		for (GamePart part : this.getAllGameParts()) {
+			gameSceneList.add(converter.gamePart2GameScene(part));
+		}
+		try {
+			gameSaver.gameAuthorToXML(gameSceneList, false);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private void constructGameState(List<GamePart> gameDataParts) {
@@ -136,7 +153,7 @@ public class GameState {
 		}
 		
 		GameLevel toReset = this.getLevel(levelID);
-		List<GamePart> gameDataParts = loadGame(this.gameName);
+		List<GamePart> gameDataParts = loadGame(this.gameName, true);
 		for(GamePart gamePart : toReset.getGameParts()) {
 			for (GamePart initialGamePart : gameDataParts) {
 				if (initialGamePart.getGamePartID().equals(gamePart.getGamePartID())) {

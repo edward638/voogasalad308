@@ -96,7 +96,7 @@ public class AuthoringDisplayRefactored implements LoadAuthoringInterface {
 			GameSaver saver = new GameSaver(currentGame.getName());
 			try {
 				System.out.println(currentGame.getScenes());
-				saver.gameAuthorToXML(currentGame.getScenes());
+				saver.gameAuthorToXML(currentGame.getScenes(), true);
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -111,7 +111,7 @@ public class AuthoringDisplayRefactored implements LoadAuthoringInterface {
 			
 			root.getChildren().clear();
 			root.getChildren().add(buttonBox);
-			currentGame.restoreGame(gameLoader.getGameScenes());
+			currentGame.restoreGame(gameLoader.getGameScenes(true));
 			authoringEnvironmentRefactored = new AuthoringEnvironmentRefactored(currentGame);
 			Pane GUIPane = authoringEnvironmentRefactored.getGUI();
 			GUIPane.setLayoutX(GUI_LAYOUT_X);

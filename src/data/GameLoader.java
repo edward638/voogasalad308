@@ -44,15 +44,23 @@ public class GameLoader {
      * Gets map for game authoring/game engine to use to load game
      * @return map
      */
-    public List<GameScene> getGameScenes(){
+    public List<GameScene> getGameScenes(boolean isNew){
     	List<GameScene> list = new ArrayList<>();
-    		System.out.println("getGameScenes: " + gameScenesLocation);
-    		System.out.println(deserializer.getGameSceneSerializables(gameScenesLocation));
+    	
+    	if (isNew) {
         for (GameSceneSerializable s : deserializer.getGameSceneSerializables(gameScenesLocation)) {
         	list.add(new GameScene(s));
         }
+    	} else {
+    		for (GameSceneSerializable s : deserializer.getGameSceneSerializables(gameSavesLocation)) {
+            	list.add(new GameScene(s));
+            }
+    	}
+    	
         return list;
     }
+    
+    
 
     public GamePart getGamePart(){
     	return deserializer.getSavePart(gameSavesLocation);

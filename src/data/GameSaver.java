@@ -74,12 +74,17 @@ public class GameSaver {
      * along with xml files for each game object
      * @param objectMap map of gamescenes (levels) to game objects in that level
      */
-    public void gameAuthorToXML(List<GameScene> gameSceneList) throws IOException {
+    public void gameAuthorToXML(List<GameScene> gameSceneList, boolean isAuthoring) throws IOException {
     	List<GameSceneSerializable> serializables = new ArrayList<>();
     	for (GameScene scene: gameSceneList) {
     		serializables.add(new GameSceneSerializable(scene));
     	}
-        serializer.gameAuthorToXML(gameScenesLocation, serializables);
+    	if (isAuthoring) {
+    		serializer.gameAuthorToXML(gameScenesLocation, serializables);
+    	} else {
+    		serializer.gameAuthorToXML(gameSavesLocation, serializables);
+    	}
+        
     }
 
 	/**

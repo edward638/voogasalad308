@@ -3,7 +3,6 @@ package authoring.displayrefactored.controllers;
 import java.util.List;
 
 import authoring.AuthBehavior;
-import authoring.Game;
 import authoring.GameObject;
 import authoring.GameScene;
 import authoring.SceneBackgroundImageSerializable;
@@ -12,7 +11,6 @@ import authoring.displayrefactored.authoringuicomponents.ObjectListPanelRefactor
 import data.ImageManager;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 
@@ -21,7 +19,7 @@ import javafx.scene.layout.Pane;
  * @author Edward Zhuang
  *
  */
-public class ObjectInfoPanelController extends Controller {
+public class ObjectInfoPanelController extends Controller implements ObjectInfoSaver {
 
 	GameScene gameScene;
 	ObjectInfoPanelRefactored objectInfoPanelRefactored;
@@ -37,6 +35,11 @@ public class ObjectInfoPanelController extends Controller {
 		this.gameScene.deleteObservers();
 		this.gameScene = gameScene;
 		setUpConnections();
+		refreshView();
+	}
+	
+	public ObjectInfoPanelRefactored getObjectInfoPanelRefactored() {
+		return objectInfoPanelRefactored;
 	}
 	
 	@Override
@@ -57,8 +60,8 @@ public class ObjectInfoPanelController extends Controller {
 		int infoY = ResourceBundleManager.getPosition("OBJECTINFO_Y");
 		int listX = ResourceBundleManager.getPosition("OBJECTLIST_X");
 		int listY = ResourceBundleManager.getPosition("OBJECTLIST_Y");
-		objectInfoPanelRefactored.AttachToPane(pane, infoX, infoY);
-		objectListPanelRefactored.AttachToPane(pane, listX, listY);
+		objectInfoPanelRefactored.attachToPane(pane, infoX, infoY);
+		objectListPanelRefactored.attachToPane(pane, listX, listY);
 	}
 	
 	@Override
@@ -66,6 +69,7 @@ public class ObjectInfoPanelController extends Controller {
 		gameScene.notifyMyObservers();
 	}
 
+	@Override
 	public void updatePositions() {
 		refreshView();
 	}
@@ -101,9 +105,11 @@ public class ObjectInfoPanelController extends Controller {
 		return isUniqueName;
 	}
 	
+	@Override
 	public void duplicateGameObject() {
 		gameScene.duplicateGameObject();
 	}
+	@Override
 	public List<GameObject> getAllGameObjects() {
 		return gameScene.getMyObjects();
 	}

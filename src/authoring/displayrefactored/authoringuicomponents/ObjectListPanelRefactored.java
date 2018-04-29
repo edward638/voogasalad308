@@ -34,7 +34,6 @@ public class ObjectListPanelRefactored extends AuthoringUIComponentRefactored im
 	private HBox upperHBox;
 	private HBox lowerHBox;
 	private VBox myVBox;
-	private Button myAddGameObjectButton;
 	private Button myAddSceneBackgroundImageButton;
 	private ListView<GameObject> myLevelObjects;
 	private Button myDeleteObjectButton;
@@ -48,7 +47,7 @@ public class ObjectListPanelRefactored extends AuthoringUIComponentRefactored im
 	}
 	
 	@Override
-	protected void GenerateComponent() {
+	protected void generateComponent() {
 		// TODO Auto-generated method stub
 		BorderPane borderPane = getBorderPane();
 		initializeButtons();
@@ -57,14 +56,13 @@ public class ObjectListPanelRefactored extends AuthoringUIComponentRefactored im
 		myVBox = new VBox();
 		upperHBox = new HBox();
 		lowerHBox = new HBox();
-		upperHBox.getChildren().addAll(myAddGameObjectButton, myAddSceneBackgroundImageButton);
+		upperHBox.getChildren().addAll(myAddSceneBackgroundImageButton);
 		lowerHBox.getChildren().addAll(myDeleteObjectButton,undoActionButton);
 		myVBox.getChildren().addAll(myLevelObjects, upperHBox, lowerHBox);
 		borderPane.setCenter(myVBox);
 	}
 	
 	private void initializeButtons() {
-		myAddGameObjectButton = new Button(ResourceBundleManager.getAuthoring("AddGameObjectButton"));
 		myAddSceneBackgroundImageButton = new Button(ResourceBundleManager.getAuthoring("AddSceneBackgroundImageButton"));
 		myDeleteObjectButton = new Button(ResourceBundleManager.getAuthoring("AddDeleteObjectButton"));
 		undoActionButton = new Button(ResourceBundleManager.getAuthoring("AddUndoActionButton"));
@@ -75,9 +73,9 @@ public class ObjectListPanelRefactored extends AuthoringUIComponentRefactored im
 	}
 	
 	private void setActions() {
-		myAddGameObjectButton.setOnAction(e -> {
-			NewGameObjectPopupRefactored popupRefactored = new NewGameObjectPopupRefactored(controller);
-		});
+//		myAddGameObjectButton.setOnAction(e -> {
+//			NewGameObjectPopupRefactored popupRefactored = new NewGameObjectPopupRefactored(controller);
+//		});
 		myAddSceneBackgroundImageButton.setOnAction(e -> {
 			try {
 				FileChooser fileChooser = new FileChooser();
@@ -114,7 +112,8 @@ public class ObjectListPanelRefactored extends AuthoringUIComponentRefactored im
 		updateLevelObjects(observable.getMyObjects());
 	}
 	
-	private void updateLevelObjects(List<GameObject> list) {		
+	private void updateLevelObjects(List<GameObject> list) {
+		
 		Set<GameObject> set = new HashSet<>(list);
 		
 		myLevelObjects.getItems().clear();

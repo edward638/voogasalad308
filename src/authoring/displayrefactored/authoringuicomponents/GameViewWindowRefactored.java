@@ -55,7 +55,6 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	private static final int DEFAULTSIZEX = 1000;
 	private static final int DEFAULTSIZEY = 1000;
 	
-	
 	public GameViewWindowRefactored(GameViewWindowController controller) {
 		this.controller = controller;
 		objectImageViews = new ArrayList<>();
@@ -64,7 +63,7 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	}
 	
 	@Override
-	protected void GenerateComponent() {
+	protected void generateComponent() {
 		BorderPane borderPane = getBorderPane();
 		stackPane = new StackPane();
 		list = new ArrayList<>();

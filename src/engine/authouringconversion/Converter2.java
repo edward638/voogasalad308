@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 
 import authoring.AuthBehavior;
 import authoring.Event;
-import authoring.EventResponse;
 import authoring.GameObject;
 import authoring.GameScene;
 import authoring.Property;
@@ -210,6 +209,7 @@ public class Converter2 {
 		EventResponder responder = ge.getResponder();
 		for (Event event: go.getEvents()) {
 			ElementEvent ee = authEvent2ElementEvent(ge, event);
+			System.out.println("event.getResponses class: " + event.getResponses().size());
 			for (GroovyAction response: event.getResponses()) {
 				responder.addResponse(ee, response);
 			}
@@ -225,9 +225,9 @@ public class Converter2 {
 		return retEvent;
 	}
 	
-	public Action eventResponse2Action(EventResponse response) {
-		GroovyAction groovyAction = new GroovyAction(response.getMyContent());
-		return groovyAction;
-	}
+//	public Action eventResponse2Action(EventResponse response) {
+//		GroovyAction groovyAction = new GroovyAction(response.getMyContent());
+//		return groovyAction;
+//	}
 	
 }

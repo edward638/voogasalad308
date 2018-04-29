@@ -134,9 +134,10 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 		Double xPosition = (Double) xPositionProperty.getValue();
 		Double yPosition = (Double) yPositionProperty.getValue();			
 		String imagePath = (String) imagePathProperty.getValue();
-		ImageView imageView =new ImageView(controller.getImage(imagePath + ".png"));
+		ImageView imageView = new ImageView(controller.getImage(imagePath + ".png"));
 		imageView.setLayoutX(xPosition);
 		imageView.setLayoutY(yPosition);
+		
 		try {
 		imageView.setFitWidth((double) mandatoryBehavior.getProperty("displayWidth").getValue());
 		imageView.setFitHeight((double) mandatoryBehavior.getProperty("displayHeight").getValue());
@@ -146,6 +147,8 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 			
 			mandatoryBehavior.getProperty("displayWidth").setValue(imageView.getBoundsInLocal().getWidth());
 			mandatoryBehavior.getProperty("displayHeight").setValue(imageView.getBoundsInLocal().getHeight());
+			
+			imageView.setPreserveRatio(false);
 		}
 
 		return imageView;

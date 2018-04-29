@@ -23,9 +23,9 @@ public class GameSceneSerializeTest {
 		Converter2 converter = new Converter2();
 		ModelGamePart1 mp1 = new ModelGamePart1();
 		XStream xstream = new XStream();
-		GameScene modelGamePart1Scene = converter.gamePart2GameScene(new ModelGamePart2().getGamePart());
+		GameScene modelGamePart1Scene = converter.gamePart2GameScene(new ModelGamePart1().getGamePart());
 		GameSceneSerializable serializable = new GameSceneSerializable(modelGamePart1Scene);
-		String levelGameDestination = "./data/gamedata/games/enginetestmario/scenes/testscene1";
+		String levelGameDestination = "./data/gamedata/games/enginetestmario/scenes/testscene";
 		
 		Printer printer = new Printer();
 		printer.printScene(modelGamePart1Scene);

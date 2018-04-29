@@ -1,6 +1,7 @@
 package authoring.displayrefactored.authoringuicomponents;
 
 
+import java.awt.image.RenderedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -17,11 +18,14 @@ import authoring.displayrefactored.GameObjectImageView;
 import authoring.displayrefactored.controllers.GameViewWindowController;
 import authoring.displayrefactored.popups.LevelSizePopupRefactored;
 import data.propertiesFiles.ResourceBundleManager;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ComboBoxBase;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -50,6 +54,7 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	private Pane foregroundPane;
 	private GameViewWindowController controller;
 	private Button myLevelSizeButton;
+	private Button saveBackground;
 	private GameViewObservable gameViewObservable;
 	
 	private static final int DEFAULTSIZEX = 1000;
@@ -69,10 +74,9 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 		list = new ArrayList<>();
 		HBox hBox = new HBox();
 		myPanelSelector = new ComboBox<>();
-		myLevelSizeButton = new Button(ResourceBundleManager.getAuthoring("EditLevelSize"));
 		initializeComboBoxes();
 		initializeButtons();
-		hBox.getChildren().addAll(myPanelSelector, myLevelSizeButton);
+		hBox.getChildren().addAll(myPanelSelector, myLevelSizeButton,saveBackground);
 		sceneBackground = new SceneBackground(ResourceBundleManager.getPosition("GAMEVIEWSIZE_X"), ResourceBundleManager.getPosition("GAMEVIEWSIZE_Y"));
 		backgroundPane = sceneBackground.getPane();
 		foregroundPane = new Pane();
@@ -87,8 +91,21 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	}
 
 	private void initializeButtons() {
+		myLevelSizeButton = new Button(ResourceBundleManager.getAuthoring("EditLevelSize"));
 		myLevelSizeButton.setOnAction(e-> {
 			LevelSizePopupRefactored popup = new LevelSizePopupRefactored(this);
+		});
+		saveBackground = new Button(ResourceBundleManager.getAuthoring("SaveBackground"));
+		saveBackground.setOnAction(e->{
+			WritableImage wi = new WritableImage((int) backgroundPane.getPrefWidth(), (int) backgroundPane.getPrefHeight());
+			 backgroundPane.snapshot(new SnapshotParameters(), wi);
+	
+			    try {
+			    	RenderedImage ri = SwingFXUtils.fromFXImage(wi, null);
+			        controller.storeBackgroundImage(ri);
+			    } catch (Exception e1) {
+			    	e1.printStackTrace();
+			    }
 		});
 	}
 

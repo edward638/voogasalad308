@@ -4,6 +4,11 @@ import data.ImageManager;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
+/**
+ * 
+ * @author Edward Zhuang
+ *
+ */
 public abstract class Controller {
 
 	private ImageManager imageManager;

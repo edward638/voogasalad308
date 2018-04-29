@@ -2,12 +2,9 @@ package data;
 
 import authoring.GameObject;
 import authoring.GameScene;
-<<<<<<< HEAD
 import engine.GamePart;
-=======
 import authoring.GameSceneSerializable;
 import engine.GameState;
->>>>>>> AUTHORING
 
 import com.thoughtworks.xstream.XStream;
 

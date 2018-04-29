@@ -66,6 +66,7 @@ public class MFWindow extends VBox {
 	}
 	private void methodsClicked(Method m) {
 		// This is something you can implement on epuc, since you can set text to the text plane in the groovy window
+		epuc.concatenateString(m.toString(), "MFWindow");
 	}
 	
 	private void addFields() {
@@ -83,6 +84,7 @@ public class MFWindow extends VBox {
 	
 	private void fieldsClicked(Field f) {
 		// This is something you can implement on epuc, since you can set text to the text plane in the groovy window
+		epuc.concatenateString(f.toString(), "MFWindow");
 	}
 	
 	private void assignCurrentBehavior() {

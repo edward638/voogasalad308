@@ -56,7 +56,8 @@ public class GameDescriptionProvider {
         try {
             scanner = new Scanner( new File(fileName));
         } catch (FileNotFoundException e) {
-            e.printStackTrace(); //TODO: fix!
+//            e.printStackTrace(); //TODO: fix!
+            
         }
         String text = scanner.useDelimiter("\\A").next();
         scanner.close();

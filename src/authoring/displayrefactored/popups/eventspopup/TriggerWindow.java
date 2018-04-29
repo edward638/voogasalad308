@@ -27,8 +27,8 @@ public class TriggerWindow extends VBox {
 	private String kc;
 	private String collideObject;
 
-	private static final String KEYBOARD = "KeyInputEvent";
-	private static final String COLLISION = "CollisionEvent";
+	private static final String KEYBOARD = "engine.events.elementevents.KeyInputEvent";
+	private static final String COLLISION = "engine.events.elementevents.CollisionEvent";
 	private static final String NOEVENT = "No event selected";
 	private static final String NOTRIGGER = "No trigger required";
 

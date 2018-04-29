@@ -9,7 +9,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-
+/**
+ * 
+ * @author Edward Zhuang
+ *
+ */
 public class NewGamePopupRefactored extends PopupRefactored {
 
 	private static final int xSize = 300;

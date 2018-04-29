@@ -70,17 +70,14 @@ public class GameObjectImageView {
 	}
 	
 	private void onMousePressed(MouseEvent t) {
+		viewRefreshInterface.backupGameScene();
 		
 		currentX = t.getSceneX();
 		currentY = t.getSceneY();
 
 		positionX = ((ImageView)(t.getSource())).getTranslateX();
 		positionY = ((ImageView)(t.getSource())).getTranslateY();
-		
-//		System.out.println("This is the mouse scene location: " + currentX + ", " + currentY);
-//		System.out.println("This is the mouse position location: " + positionX + ", " + positionY);
-//		System.out.println("This is the pane location: " + imageHolder.getTranslateX() + ", " + imageHolder.getTranslateY());
-//		System.out.println("This is the Circle location: " + cornerCircle.getCenterX() + ", " + cornerCircle.getCenterY());
+
 	}
 	
 	private void onMouseDragged(MouseEvent t) {

@@ -1,10 +1,12 @@
 package authoring.displayrefactored.popups.eventspopup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import authoring.Game;
 import authoring.GameObject;
 import authoring.displayrefactored.controllers.EventsPopupController;
+import engine.groovy.GroovyException;
 import javafx.geometry.Insets;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
@@ -37,8 +39,18 @@ public class GroovyWindow extends VBox {
 		this.getChildren().add(groovyInput);
 	}
 	
-	public void concatenateString(String stringToAdd) {
-		String newInput = groovyInput.getText() + stringToAdd;
+	public void concatenateString(String stringToAdd, String caller) {
+		String[] pieces = groovyInput.getText().split("\\.");
+		String newInput = "";
+		if(caller.contains("ResponseWindow")) {
+			newInput = stringToAdd;
+		}
+		else if(caller.contains("BehaviorsWindow")) {
+			newInput = pieces[0] + "." + "getBehavior(" + stringToAdd + ").";
+		}
+		else if(caller.contains("MFWindow")){
+			newInput = pieces[0] + "." + pieces [1] + "." + stringToAdd;
+		}
 		groovyInput.setText(newInput);
 	}
 }

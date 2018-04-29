@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 
 import authoring.AuthBehavior;
 import authoring.Event;
-import authoring.EventResponse;
 import authoring.GameObject;
 import authoring.GameScene;
 import authoring.Property;
@@ -118,7 +117,7 @@ public class Converter2 {
 //	}
 	
 	public GameScene gamePart2GameScene(GamePart part) {
-		GameScene scene = new GameScene(part.getGamePartID());
+		GameScene scene = new GameScene(part.getGamePartID(), part.getMyLevelID());
 		for (GameElement element: part.getElements()) {
 			scene.addObject(gameElement2GameObject(element));
 		}
@@ -131,9 +130,13 @@ public class Converter2 {
 	public Behavior authBehavior2Behavior (AuthBehavior authB, GameElement ge) {
 		Behavior newEngBehavior;
 		try {
-			System.out.println(authB.getName());
+			//System.out.println(authB.getName());
 			Constructor<?> use = getConstructor(Class.forName(authB.getName()));
+			System.out.println("COnstructor made");
+			System.out.println(use);
 			newEngBehavior = (Behavior) use.newInstance(ge);
+			
+			System.out.println("Behaior instantiatted");
 		} catch (ClassNotFoundException|InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e1) {
 			e1.printStackTrace();
 			throw (new RuntimeException("Failed to instantiate newEngBehavior from " + authB.getName()));
@@ -142,6 +145,7 @@ public class Converter2 {
 		for (Field f: newEngBehaviorClass.getDeclaredFields()) {
 			if (Modifier.isPublic(f.getModifiers())) {continue;}
 			f.setAccessible(true);
+			//System.out.println("Field: " + f);
 			try {
 				f.set(newEngBehavior, authB.getProperty(f.getName()).getValue());
 			} catch (IllegalArgumentException | IllegalAccessException e) {
@@ -191,9 +195,7 @@ public class Converter2 {
 			Event authEvent = new Event();
 			authEvent.setEventType(response.getKey().getClass().getCanonicalName());
 			authEvent.setTrigger(response.getKey().getTriggerString());
-			EventResponse authResp = new EventResponse();
-			authResp.setMyContent(groovyAction.getContent());
-			authEvent.addResponse(authResp);
+			authEvent.addResponse(groovyAction);
 			go.addEvent(authEvent);
 		}
 	}
@@ -207,9 +209,9 @@ public class Converter2 {
 		EventResponder responder = ge.getResponder();
 		for (Event event: go.getEvents()) {
 			ElementEvent ee = authEvent2ElementEvent(ge, event);
-			for (EventResponse response: event.getResponses()) {
-				Action action = eventResponse2Action(response);
-				responder.addResponse(ee, action);
+			System.out.println("event.getResponses class: " + event.getResponses().size());
+			for (GroovyAction response: event.getResponses()) {
+				responder.addResponse(ee, response);
 			}
 		}
 	}
@@ -223,9 +225,9 @@ public class Converter2 {
 		return retEvent;
 	}
 	
-	public Action eventResponse2Action(EventResponse response) {
-		GroovyAction groovyAction = new GroovyAction(response.getMyContent());
-		return groovyAction;
-	}
+//	public Action eventResponse2Action(EventResponse response) {
+//		GroovyAction groovyAction = new GroovyAction(response.getMyContent());
+//		return groovyAction;
+//	}
 	
 }

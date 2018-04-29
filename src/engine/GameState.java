@@ -21,7 +21,7 @@ public class GameState {
 	private AudioManager audioManager;
 	private String musicPath = "data/music/WiiShopChannelMusic.mp3";
 
-	public GameState(String gameName) {
+	public GameState(String gameName, boolean newGame) {
 		this.gameName = gameName;
 		gameLevels = new ArrayList<>();
 		addToDisplay = new ArrayList<>();
@@ -29,11 +29,11 @@ public class GameState {
 		audioManager = new AudioManager(1);
 		audioManager.newAudioPlayer(musicPath);
 		
-		constructGameState(loadGame(this.gameName));
+		constructGameState(loadGame(this.gameName, newGame));
 	}
 	
-	private List<GamePart> loadGame(String gameName) {
-		GameLoader gameLoader = new GameLoader(gameName);
+	private List<GamePart> loadGame(String gameName, boolean newGame) {
+		GameLoader gameLoader = new GameLoader(gameName, newGame);
 		Converter2 converter = new Converter2();
 		List<GamePart> gameDataParts = new ArrayList<>();
 
@@ -136,7 +136,7 @@ public class GameState {
 		}
 		
 		GameLevel toReset = this.getLevel(levelID);
-		List<GamePart> gameDataParts = loadGame(this.gameName);
+		List<GamePart> gameDataParts = loadGame(this.gameName, true);
 		for(GamePart gamePart : toReset.getGameParts()) {
 			for (GamePart initialGamePart : gameDataParts) {
 				if (initialGamePart.getGamePartID().equals(gamePart.getGamePartID())) {

@@ -31,7 +31,7 @@ public class Engine implements EngineInterface{
 	private PlayerUpdater playerUpdater;
 	
 	public Engine(String gameName, boolean newGame, PlayerUpdater playerUpdater) {
-		currentGameState = new GameState(gameName);
+		currentGameState = new GameState(gameName, newGame);
 		displayState = new DisplayState(currentGameState, gameName);
 		eventManager = new EventManager2(currentGameState);
 		//gameMetaData = new GameMetaData(currentGameState);

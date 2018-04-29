@@ -21,12 +21,20 @@ public class ConcreteHUD extends Pane implements HUD {
 		info.put("hi", new Integer(90));
 		info.put("hi1", new Integer(90));
 		info.put("hi2", new Integer(90));
-		 info.put("hi3", new Integer(90));
-		 info.put("hi4", new Integer(90));
-		 info.put("hi5", new Integer(90));
-		 info.put("hi6", new Integer(90));
-		 info.put("hi6", new Integer(90));
-		 info.put("hi8", new Integer(90));
+		info.put("hi3", new Integer(90));
+		info.put("hi4", new Integer(90));
+		info.put("hi5", new Integer(90));
+		info.put("hi6", new Integer(90));
+		info.put("hi7", new Integer(90));
+		info.put("hi8", new Integer(90));
+		info.put("hi9", new Integer(90));
+		info.put("hi10", new Integer(90));
+		info.put("hi11", new Integer(90));
+		info.put("hi14", new Integer(90));
+		info.put("hi15", new Integer(90));
+		info.put("hi16", new Integer(90));
+		info.put("hi16", new Integer(90));
+		info.put("hi18", new Integer(90));
 
 		setupPane();
 	}

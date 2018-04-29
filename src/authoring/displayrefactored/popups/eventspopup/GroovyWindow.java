@@ -29,7 +29,7 @@ public class GroovyWindow extends VBox {
 		groovyString = "";
 		createVBox();
 	}
-	private void createVBox() {
+	public void createVBox() {
 		this.getChildren().clear();
 		this.setPadding(new Insets(10));
 	    this.setSpacing(8);
@@ -75,5 +75,9 @@ public class GroovyWindow extends VBox {
 	
 	public String getGroovyString() {
 		return groovyString;
+	}
+	
+	public void clearGroovy() {
+		groovyInput.clear();
 	}
 }

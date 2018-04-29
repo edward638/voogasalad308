@@ -94,10 +94,13 @@ public class MandatoryBehavior extends Behavior{
 	
 	@GroovyMethod
 	public Shape getShape() {
-		if (shapeType.equals("rectangle")) {
+		hitBoxWidth = displayWidth;
+		hitBoxHeight = displayHeight;
+		if ("rectangle".equals(shapeType)) {
 			return new Rectangle(xPos + (displayWidth - hitBoxWidth)/2, yPos + (displayHeight - hitBoxHeight)/2, hitBoxWidth, hitBoxHeight);
 		}
-		else {
+		else {			
+//			System.out.println(" " + xPos + " " + displayWidth + " " + yPos + " " + displayHeight + " " + hitBoxWidth + " " + hitBoxHeight + " ");
 			return new Ellipse(xPos+displayWidth/2, yPos+displayHeight/2, hitBoxWidth/2, hitBoxHeight/2);
 		}
 	}

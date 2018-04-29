@@ -1,6 +1,7 @@
 package data;
 
 import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -112,6 +113,16 @@ public class ImageManager {
         storeBufferedImage(imageName, javaFXToBufferedImage(image), gameImagesLocation);
     }
 
+    public void storeCompositeBackgroundImage(String imageName, RenderedImage ri) {
+    	try {
+    		System.out.println(gameImagesLocation);
+			ImageIO.write(ri, "png", new File(gameImagesLocation+imageName));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
     /**
      * Converts JavaFX image to BufferedImage
      * @param image

@@ -13,5 +13,4 @@ public interface EngineInterface {
 	public void handleMouseInput(double x, double y);
 	public void setVolume(double newVolume);
 	public void save();
-	//public GameMetaData getGameMetaData();
 }

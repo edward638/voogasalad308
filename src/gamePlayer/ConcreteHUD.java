@@ -1,8 +1,9 @@
 package gamePlayer;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -15,10 +16,12 @@ public class ConcreteHUD extends Pane implements HUD {
 	Map<String, Object> info;
 	private int xLabel = 0;
 	private int yLabel = 0;
+	List<Label> labelList;
 
 	public ConcreteHUD(String name) {
 		gameName = name;
 		info = new HashMap<>();
+		labelList = new ArrayList<>();
 		setupPane();
 	}
 
@@ -36,7 +39,10 @@ public class ConcreteHUD extends Pane implements HUD {
 	}
 
 	private void setupHUDText() {
-
+		yLabel = 0;
+		xLabel = 0;
+		this.getChildren().removeAll(labelList);
+		labelList.clear();
 		setUpName();
 
 		for (String label : info.keySet()) {
@@ -45,12 +51,17 @@ public class ConcreteHUD extends Pane implements HUD {
 				yLabel = yLabel + 25;
 			}
 			Label text = new Label(label + ": " + info.get(label).toString());
+			//text = new Label("hi");
+
 			text.setTextFill(Color.WHITE);
 			text.setLayoutX(xLabel);
 			xLabel = xLabel + 150;
 			text.setLayoutY(yLabel);
 			text.setFont(new Font(20));
 			this.getChildren().add(text);
+			labelList.add(text);
+			System.out.println(labelList);
+			
 		}
 	}
 
@@ -66,7 +77,6 @@ public class ConcreteHUD extends Pane implements HUD {
 	@Override
 	public void updateInfo(Map<String, Object> info) {
 		this.info = info;
-		yLabel = 0;
 		setupHUDText();
 	}
 

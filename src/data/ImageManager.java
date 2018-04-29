@@ -1,20 +1,15 @@
 package data;
 
-import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.image.Image;
-
-import javax.imageio.ImageIO;
-
-import org.codehaus.groovy.tools.shell.ParseCode;
-
-import authoring.GameScene;
-import authoring.SceneBackgroundImageSerializable;
-
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
+
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
 
 public class ImageManager {
 

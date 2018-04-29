@@ -1,5 +1,7 @@
 package authoring.displayrefactored.objectinfoboxes;
 
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,22 +19,29 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 public class GameObjectInfoBox extends ObjectInfoBox {
 
-private HBox buttonsHBox;
+private HBox buttonsHBox, nameHBox;
 private GameObject gameObject;
 private List<GameObject> objectInstances;
 private ObjectInfoSaver saver;
 private Button editBehaviorsButton;
 private Button editEventsButton;
 private Button duplicateButton;
+private Button changeNameButton;
+private Button changeImageButton;
 private TableView<ObjectCoordinatesInsertion> gameObjectCoordinates;
 private ImageView imageView;
-private Label objectName;
+private TextField objectName;
 private Label instances;
 private Label properties;
 	
@@ -43,8 +52,10 @@ private Label properties;
 		this.saver = saver;
 		instances = new Label("Instances");
 		properties = new Label("Game Object Properties");
-		objectName = new Label("Name: " + gameObject.getName());
-		imageView = new ImageView(saver.getImage(gameObject.getName()+"image.png"));
+		objectName = new TextField();
+		objectName.setPrefWidth(50);
+		objectName.setText(this.gameObject.getName());
+		imageView = new ImageView(saver.getImage(gameObject.getImagePath()+".png"));
 		initializeFXComponents();
 		mapFXActions();
 	}
@@ -55,9 +66,13 @@ private Label properties;
 		imageView.setPreserveRatio(true);
 		imageView.setFitWidth(200);
 		buttonsHBox = new HBox();
+		nameHBox = new HBox();
 		editBehaviorsButton = new Button(ResourceBundleManager.getAuthoring("EditBehaviors"));
 		editEventsButton = new Button(ResourceBundleManager.getAuthoring("EditEvents"));
 		duplicateButton = new Button(ResourceBundleManager.getAuthoring("Duplicate"));
+		changeNameButton = new Button(ResourceBundleManager.getAuthoring("ChangeName"));
+		changeImageButton = new Button(ResourceBundleManager.getAuthoring("ChangeImage"));
+		nameHBox.getChildren().addAll(changeNameButton,changeImageButton);
 		buttonsHBox.getChildren().addAll(editBehaviorsButton,editEventsButton,duplicateButton);
 		gameObjectCoordinates = new TableView<>();
 		setupTableColumns();
@@ -113,11 +128,9 @@ private Label properties;
 	
 	@Override
 	public void mapFXActions() {
-		// TODO Auto-generated method stub
 		editBehaviorsButton.setOnAction(e -> {
 			new BehaviorPopup(objectInstances);
 		});
-
 		editEventsButton.setOnAction(e -> {
 			new EventsPopupRefactored(objectInstances, saver.getAllGameObjects());
 		});
@@ -125,13 +138,37 @@ private Label properties;
 		duplicateButton.setOnAction(e -> {
 			saver.duplicateGameObject();
 		});
+		changeNameButton.setOnAction(e -> {
+			for (GameObject object: objectInstances) {
+				object.setName(objectName.getText());
+			}
+			saver.updatePositions();
+		});
+		changeImageButton.setOnAction(e->{
+			try {
+				FileChooser fileChooser = new FileChooser();
+				fileChooser.setTitle("Choose Object Image");
+				fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+				File image = fileChooser.showOpenDialog(new Stage());
+
+				saver.setImage(new Image(image.toURI().toString()),gameObject.getImagePath());
+//				System.out.println("setOnAction");
+				
+				//put image.getName into SceneBackground
+			} catch (Exception exception) {
+				//do nothing
+				//this just means the user didn't choose an image
+		
+			}//
+			saver.updatePositions();
+		});
 	}
 
 	@Override
 	public void initializeVBox() {
 		// TODO Auto-generated method stub
 		getVBox().getChildren().clear();
-		getVBox().getChildren().addAll(properties, imageView, objectName, buttonsHBox, instances, gameObjectCoordinates);
+		getVBox().getChildren().addAll(properties, imageView, objectName, nameHBox, buttonsHBox, instances, gameObjectCoordinates);
 	}
 
 }

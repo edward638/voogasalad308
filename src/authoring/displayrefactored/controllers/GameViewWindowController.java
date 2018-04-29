@@ -1,6 +1,5 @@
 package authoring.displayrefactored.controllers;
 
-import authoring.Game;
 import authoring.GameObject;
 import authoring.GameScene;
 import authoring.SceneBackgroundImage;
@@ -57,6 +56,7 @@ public class GameViewWindowController extends Controller implements ViewRefreshI
 	public void setGameScene(GameScene gameScene) {
 		this.gameScene = gameScene;
 		setUpConnections();
+		gameScene.notifyMyObservers();
 	}
 
 	@Override

@@ -1,8 +1,10 @@
 package engine.events.elementevents;
 
+import java.io.Serializable;
+
 import javafx.scene.input.KeyCode;
 
-public class KeyInputEvent extends ElementEvent {
+public class KeyInputEvent extends ElementEvent implements Serializable{
 	KeyCode code;
 	
 	public KeyInputEvent(KeyCode code) {

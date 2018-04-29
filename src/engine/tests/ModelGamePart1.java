@@ -48,8 +48,8 @@ public class ModelGamePart1 {
 			elements.add(getKoopa(i, 101.0));
 		}
 		
-		elements.add(getPortal1(900.0, 101.0));
-		elements.add(getPortal2(600.0, 101.0));
+		//elements.add(getPortal1(900.0, 101.0));
+		elements.add(getPortal2(300.0, 101.9));
 		
 		for (GameElement el : elements) {
 			modelGamePart1.addGameElement(el);
@@ -64,6 +64,7 @@ public class ModelGamePart1 {
 	public GameElement getPortal1(Double xpos, Double ypos) {
 		GameElement block = new GameElement();
 		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "Blockimage"));
+		block.addBehavior(new BlockLike(block));
 		block.addBehavior(new ExitPortal(block, 2));
 		
 		return block;

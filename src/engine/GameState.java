@@ -94,9 +94,10 @@ public class GameState {
 		return currentGameLevel.getCurrentGamePart();
 	}
 	
-	public void changeCurrentGamePart(String newPartID, int portalID) {
+	public void changeCurrentGamePart(String newPartID, Integer portalID) {
 		for (GameLevel gl : gameLevels) {
 			for (GamePart newGamePart : gl.getGameParts()) {
+				System.out.println(newGamePart);
 				if(newGamePart.getGamePartID().equals(newPartID)) {
 					GameElement mainCharacter = this.getCurrentGamePart().getMainCharacter();
 					this.getCurrentGamePart().removeGameElement(mainCharacter);

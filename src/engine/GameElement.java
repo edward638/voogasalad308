@@ -203,9 +203,12 @@ public class GameElement {
 		if (thisProperties.size() != otherProperties.size()) {return false;}
 		
 		for (String thisKey: thisProperties.keySet()) {
-			if ((thisProperties.get(thisKey) instanceof GameElement)) {
-				continue;
-			}
+//			if ((thisProperties.get(thisKey) instanceof GameElement)) {
+//				continue;
+//			}
+//			id (otherProperties.get)
+//			System.out.println("thisKey: " + thisKey + ", this object: " + thisProperties.get(thisKey) + ", other obejct: " + otherProperties.get(thisKey));
+//			System.out.println("otherKey: " + otherKey + ", " + thisProperties.get(thisKey));
 			if (!(otherProperties.get(thisKey).equals(thisProperties.get(thisKey)))) {
 				return false;
 			}

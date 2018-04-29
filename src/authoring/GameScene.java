@@ -29,7 +29,6 @@ public class GameScene extends Observable implements GameViewObservable, ObjectI
 		myObjectNames = new TreeSet<>();
 		backgroundImageSerializables = new ArrayList<>();
 		
-		System.out.println("New GameScene made! name = " + name);
 	}
 	
 	public GameScene(GameSceneSerializable scene) {
@@ -143,11 +142,11 @@ public class GameScene extends Observable implements GameViewObservable, ObjectI
 	
 	public void backupGameScene() {
 		memento = new GameSceneMemento(myObjects, backgroundImageSerializables);
-		System.out.println("backupGameScene()" + ((GameSceneToOriginator)memento).getGameObjects());
+		System.out.println("backupGameScene() memento " + ((GameSceneToOriginator)memento).getGameObjects());
 	}
 	
 	public void restorePreviousGameScene() {
-		System.out.println(((GameSceneToOriginator)memento).getGameObjects());
+		System.out.println("restorepreviousgamescene " + ((GameSceneToOriginator)memento).getGameObjects());
 		myObjects = ((GameSceneToOriginator)memento).getGameObjects();
 		backgroundImageSerializables = ((GameSceneToOriginator)memento).getSerializables();
 		notifyMyObservers();

@@ -117,4 +117,10 @@ public class ObjectInfoPanelController extends Controller implements ObjectInfoS
 		gameScene.restorePreviousGameScene();
 	}
 
+	@Override
+	public void setImage(Image image, String imageName) {
+		// TODO Auto-generated method stub
+		getImageManager().storeImage(imageName, image);
+	}
+
 }

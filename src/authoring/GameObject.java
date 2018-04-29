@@ -85,8 +85,11 @@ public class GameObject {
 				
 		this.getMandatoryBehavior().getProperty("xPos").setValue(toCopy.getMandatoryBehavior().getProperty("xPos").getValue());
 		this.getMandatoryBehavior().getProperty("yPos").setValue(toCopy.getMandatoryBehavior().getProperty("yPos").getValue());
-		this.getMandatoryBehavior().getProperty("imagePath").setValue(toCopy.getMandatoryBehavior().getProperty("imagePath").getValue());
+		this.getMandatoryBehavior().getProperty("displayWidth").setValue(toCopy.getMandatoryBehavior().getProperty("displayWidth").getValue());
+		this.getMandatoryBehavior().getProperty("displayHeight").setValue(toCopy.getMandatoryBehavior().getProperty("displayHeight").getValue());
 
+		this.getMandatoryBehavior().getProperty("imagePath").setValue(toCopy.getMandatoryBehavior().getProperty("imagePath").getValue());
+		
 	}
 
 	public void addBehavior(String behaviorToAdd) {

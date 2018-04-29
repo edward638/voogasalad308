@@ -3,13 +3,11 @@ package authoring.displayrefactored;
 
 import authoring.AuthBehavior;
 import authoring.GameObject;
-import authoring.ObjectInfoObservable;
 import authoring.ViewRefreshInterface;
-import data.propertiesFiles.ResourceBundleManager;
+import authoring.displayrefactored.popups.GameObjectSizePopup;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
 public class GameObjectImageView {
@@ -35,7 +33,7 @@ public class GameObjectImageView {
 		gameObject = go;
 		myImage.setOnMousePressed(t -> onMousePressed(t));
 		myImage.setOnMouseDragged(t -> onMouseDragged(t));
-		myImage.setOnMouseClicked(t -> onMouseClicked());
+		myImage.setOnMouseClicked(t -> onMouseClicked(t));
 		myImage.setOnMouseReleased(t -> onMouseReleased());
 		this.viewRefreshInterface = viewRefreshInterface;
 		
@@ -55,9 +53,9 @@ public class GameObjectImageView {
 		
 	}
 
-	private void onMouseClicked() {
+	private void onMouseClicked(MouseEvent t) {
+		if (t.getButton().equals(MouseButton.PRIMARY)) {
 		selected = !selected;
-		
 		if (selected) {
 //			imageHolder.setStyle("-fx-border-color: green");
 		} else if (! wasEdited){
@@ -66,10 +64,13 @@ public class GameObjectImageView {
 			selected = true;
 		}
 		wasEdited = false;
-		
+		} else {
+			new GameObjectSizePopup(this, gameObject);
+		}
 	}
 	
 	private void onMousePressed(MouseEvent t) {
+		if (t.getButton().equals(MouseButton.PRIMARY)) {
 		viewRefreshInterface.backupGameScene();
 		
 		currentX = t.getSceneX();
@@ -77,6 +78,9 @@ public class GameObjectImageView {
 
 		positionX = ((ImageView)(t.getSource())).getTranslateX();
 		positionY = ((ImageView)(t.getSource())).getTranslateY();
+		} else {
+			new GameObjectSizePopup(this, gameObject);
+		}
 
 	}
 	

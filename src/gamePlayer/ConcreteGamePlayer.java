@@ -154,8 +154,9 @@ public class ConcreteGamePlayer implements GamePlayer {
 		buttonData.setHighScores(highScores);
 		PlayerUpdater concretePlayerUpdater = new ConcretePlayerUpdater(hud, highScores, username.getName());
 
-		// engine = new Engine(gameName, isNewGame, concretePlayerUpdater);
-		engine = new Engine("enginetestmario", isNewGame, concretePlayerUpdater);
+
+		engine = new Engine(gameName, isNewGame, concretePlayerUpdater);
+		//engine = new Engine("enginetestmario", isNewGame, concretePlayerUpdater);
 		updateEngines(engine);
 
 		pauseButton = new PauseButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("pauseButtonY")),

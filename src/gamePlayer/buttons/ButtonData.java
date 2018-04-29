@@ -6,7 +6,7 @@ import javafx.scene.Node;
 import javafx.stage.Stage;
 
 public interface ButtonData {
-	public void playGame(String file);
+	public void playGame(String file, boolean isNewGame);
 	public Stage getStage();
 	public String getMostRecentFile();
 	public GameState getGameState();

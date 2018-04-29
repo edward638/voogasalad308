@@ -1,5 +1,6 @@
 package gamePlayer;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -17,17 +18,7 @@ public class ConcreteHUD extends Pane implements HUD {
 
 	public ConcreteHUD(String name) {
 		gameName = name;
-		info = new TreeMap<>();
-		info.put("hi", new Integer(90));
-		info.put("hi1", new Integer(90));
-		info.put("hi2", new Integer(90));
-		 info.put("hi3", new Integer(90));
-		 info.put("hi4", new Integer(90));
-		 info.put("hi5", new Integer(90));
-		 info.put("hi6", new Integer(90));
-		 info.put("hi6", new Integer(90));
-		 info.put("hi8", new Integer(90));
-
+		info = new HashMap<>();
 		setupPane();
 	}
 
@@ -75,6 +66,8 @@ public class ConcreteHUD extends Pane implements HUD {
 	@Override
 	public void updateInfo(Map<String, Object> info) {
 		this.info = info;
+		yLabel = 0;
+		setupHUDText();
 	}
 
 }

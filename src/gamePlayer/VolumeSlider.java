@@ -81,6 +81,7 @@ public class VolumeSlider extends Slider {
 
 	public void setEngine(EngineInterface engine) {
 		this.engine = engine;
+		engine.setVolume(volume);
 	}
 
 	public Slider getSlider() {

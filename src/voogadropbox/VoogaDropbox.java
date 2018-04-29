@@ -1,4 +1,4 @@
-package gamePlayer;
+package voogadropbox;
 
 import java.io.File;
 import java.io.FileInputStream;

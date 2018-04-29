@@ -58,7 +58,7 @@ public class Engine implements EngineInterface{
     	info.put("Name", mainCharacter.getIdentifier());
     	//info.put("Health", ((Killable)mainCharacter.getBehavior(Killable.class)).getHealth());
     	info.put("Game Time", ((TimeTracker)mainCharacter.getBehavior(TimeTracker.class)).getTimePassed());
-    	playerUpdater.updateHUD(info);
+    	//playerUpdater.updateHUD(info);
     }
 	
 	@Override

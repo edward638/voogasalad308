@@ -54,7 +54,7 @@ public class ModelGamePart2 {
 			elements.add(getKoopa(i, 102.0));
 		}
 		
-		elements.add(getPortal1(1200.0, 101.0));
+		elements.add(getPortal2(1200.0, 101.0));
 				
 		for (GameElement el : elements) {
 			modelGamePart2.addGameElement(el);

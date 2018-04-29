@@ -47,7 +47,7 @@ public class GameState {
 		modelGamePart1 = converter.gameScene2GamePart(modelGamePart1Scene);
 		printer.printState(modelGamePart1);
 
-		GamePart modelGamePart2 = new ModelGamePart2().getGamePart();
+		GamePart modelGamePart2 = new ModelGamePart1().getGamePart();
 		List<GamePart> gameDataParts = new ArrayList<>();
 		gameDataParts.add(modelGamePart1);
 		gameDataParts.add(modelGamePart2);

@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import authoring.GameObject;
 import engine.actions.Action;
 import engine.behaviors.Behavior;
 import engine.behaviors.MandatoryBehavior;
@@ -203,9 +204,9 @@ public class GameElement {
 		if (thisProperties.size() != otherProperties.size()) {return false;}
 		
 		for (String thisKey: thisProperties.keySet()) {
-//			if ((thisProperties.get(thisKey) instanceof GameElement)) {
-//				continue;
-//			}
+			if ((thisProperties.get(thisKey) instanceof GameObject)) {
+				continue;
+			}
 //			id (otherProperties.get)
 //			System.out.println("thisKey: " + thisKey + ", this object: " + thisProperties.get(thisKey) + ", other obejct: " + otherProperties.get(thisKey));
 //			System.out.println("otherKey: " + otherKey + ", " + thisProperties.get(thisKey));

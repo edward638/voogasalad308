@@ -56,10 +56,10 @@ public class TriggerWindow extends VBox {
 		try {
 			if (currentEvent.getEventType().equals(KEYBOARD)) {
 				this.getChildren().add(new GUIButton(0, 0, "Edit Keybind", new TriggerKeyboardPress(this)));
-				this.getChildren().add(new Text("Current Keybind: " + kc));
+				this.getChildren().add(new Text("Current Keybind: " + currentEvent.getTrigger()));
 			} else if (currentEvent.getEventType().equals(COLLISION)) {
 				this.getChildren().add(new GUIButton(0, 0, "Edit Collision", new TriggerCollisionPress(this, allGos)));
-				this.getChildren().add(new Text("Current Collide Object: " + collideObject));
+				this.getChildren().add(new Text("Current Collide Object: " + currentEvent.getTrigger()));
 			} else {
 				this.getChildren().add(new Text(NOTRIGGER));
 			}
@@ -70,6 +70,8 @@ public class TriggerWindow extends VBox {
 	
 	public void setKeyCode(String newkc) {
 		kc = newkc;
+		currentEvent.setTrigger(kc);
+		System.out.println("Current Trigger is: " + currentEvent.getTrigger());
 	}
 	
 	public String getKeyCode() {
@@ -82,6 +84,7 @@ public class TriggerWindow extends VBox {
 	
 	public void setCollideObject(String goName) {
 		collideObject = goName;
+		currentEvent.setTrigger(collideObject);
 	}
 	
 	public GameObject getCollideObject() {

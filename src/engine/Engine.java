@@ -27,14 +27,12 @@ public class Engine implements EngineInterface{
 	private GameState currentGameState;
 	private DisplayState displayState;
 	private EventManager2 eventManager;
-	//private GameMetaData gameMetaData;
 	private PlayerUpdater playerUpdater;
 	
 	public Engine(String gameName, boolean newGame, PlayerUpdater playerUpdater) {
 		currentGameState = new GameState(gameName, newGame);
 		displayState = new DisplayState(currentGameState, gameName);
 		eventManager = new EventManager2(currentGameState);
-		//gameMetaData = new GameMetaData(currentGameState);
 		this.playerUpdater = playerUpdater;
 		startAnimation();
 	}
@@ -111,9 +109,4 @@ public class Engine implements EngineInterface{
 	public void save() {
 		currentGameState.saveGame();
 	}
-
-//	@Override
-//	public GameMetaData getGameMetaData() {
-//		return gameMetaData;
-//	}
 }

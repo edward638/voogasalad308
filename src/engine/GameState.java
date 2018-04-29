@@ -41,10 +41,10 @@ public class GameState {
 		Converter2 converter = new Converter2();
 		GamePart modelGamePart1 = new ModelGamePart1().getGamePart();
 		//System.out.println("PRE CONVERSION GAMEPART");
-		printer.printState(modelGamePart1);
-		GameScene modelGamePart1Scene = converter.gamePart2GameScene(modelGamePart1);
-		printer.printScene(modelGamePart1Scene);
-		modelGamePart1 = converter.gameScene2GamePart(modelGamePart1Scene);
+		//printer.printState(modelGamePart1);
+		//GameScene modelGamePart1Scene = converter.gamePart2GameScene(modelGamePart1);
+		//printer.printScene(modelGamePart1Scene);
+		//modelGamePart1 = converter.gameScene2GamePart(modelGamePart1Scene);
 		printer.printState(modelGamePart1);
 
 		GamePart modelGamePart2 = new ModelGamePart2().getGamePart();
@@ -105,9 +105,10 @@ public class GameState {
 		return currentGameLevel.getCurrentGamePart();
 	}
 	
-	public void changeCurrentGamePart(String newPartID, int portalID) {
+	public void changeCurrentGamePart(String newPartID, Integer portalID) {
 		for (GameLevel gl : gameLevels) {
 			for (GamePart newGamePart : gl.getGameParts()) {
+				System.out.println(newGamePart);
 				if(newGamePart.getGamePartID().equals(newPartID)) {
 					GameElement mainCharacter = this.getCurrentGamePart().getMainCharacter();
 					this.getCurrentGamePart().removeGameElement(mainCharacter);

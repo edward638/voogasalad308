@@ -4,9 +4,9 @@ import authoring.groovy.GroovyMethod;
 import engine.GameElement;
 
 public class ExitPortal extends Behavior{
-	private int portalID;
+	private Integer portalID;
 	
-	public ExitPortal(GameElement ge, int portalID) {
+	public ExitPortal(GameElement ge, Integer portalID) {
 		super(ge);
 		this.portalID = portalID;
 	}
@@ -16,7 +16,7 @@ public class ExitPortal extends Behavior{
 	}
 	
 	@GroovyMethod
-	public int getPortalID() {
+	public Integer getPortalID() {
 		return portalID; 
 	}
 	

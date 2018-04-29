@@ -18,8 +18,6 @@ public class TimeMovable implements Action{
 		TimeEvent te = (TimeEvent) event;
 		Movable b = (Movable) element.getBehavior(Movable.class);
 		b.move(te.getTime());
-		if (element.getIdentifier().equals("Block")) {
-			MandatoryBehavior mb = (MandatoryBehavior) element.getBehavior(MandatoryBehavior.class);
-		}
+
 	}
 }

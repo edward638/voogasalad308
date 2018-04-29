@@ -118,7 +118,7 @@ public class Converter2 {
 //	}
 	
 	public GameScene gamePart2GameScene(GamePart part) {
-		GameScene scene = new GameScene(part.getGamePartID());
+		GameScene scene = new GameScene(part.getGamePartID(), part.getMyLevelID());
 		for (GameElement element: part.getElements()) {
 			scene.addObject(gameElement2GameObject(element));
 		}
@@ -192,9 +192,7 @@ public class Converter2 {
 			Event authEvent = new Event();
 			authEvent.setEventType(response.getKey().getClass().getCanonicalName());
 			authEvent.setTrigger(response.getKey().getTriggerString());
-			EventResponse authResp = new EventResponse();
-			authResp.setMyContent(groovyAction.getContent());
-			authEvent.addResponse(authResp);
+			authEvent.addResponse(groovyAction);
 			go.addEvent(authEvent);
 		}
 	}
@@ -208,9 +206,8 @@ public class Converter2 {
 		EventResponder responder = ge.getResponder();
 		for (Event event: go.getEvents()) {
 			ElementEvent ee = authEvent2ElementEvent(ge, event);
-			for (EventResponse response: event.getResponses()) {
-				Action action = eventResponse2Action(response);
-				responder.addResponse(ee, action);
+			for (GroovyAction response: event.getResponses()) {
+				responder.addResponse(ee, response);
 			}
 		}
 	}

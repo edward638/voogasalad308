@@ -10,7 +10,7 @@ import engine.events.gameevents.ChangePartEvent;
 import engine.events.gameevents.ResetLevelEvent;
 
 public class EntrancePortal extends Behavior{
-	private boolean active;
+	private Boolean active;
 	private String partToChange;
 	private List<String> resetLevels;
 	private Integer portalID;

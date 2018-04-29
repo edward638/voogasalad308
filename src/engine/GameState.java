@@ -4,13 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import authoring.GameScene;
+import data.GameLoader;
 import engine.audio.AudioManager;
 import engine.authouringconversion.Converter2;
-import engine.authouringconversion.Printer;
 import engine.behaviors.ExitPortal;
-import engine.behaviors.MandatoryBehavior;
-import engine.tests.ModelGamePart1;
-import engine.tests.ModelGamePart2;
 
 public class GameState {
 	private List<GameLevel> gameLevels;
@@ -35,25 +32,16 @@ public class GameState {
 		constructGameState(loadGame(this.gameName));
 	}
 	
-	/* ***************************To Be Replaced With Load From Game Data*************************** */
 	private List<GamePart> loadGame(String gameName) {
-		Printer printer = new Printer();
+		GameLoader gameLoader = new GameLoader(gameName);
 		Converter2 converter = new Converter2();
-		GamePart modelGamePart1 = new ModelGamePart2().getGamePart();
-		System.out.println("PRE CONVERSION GAMEPART");
-		printer.printState(modelGamePart1);
-		GameScene modelGamePart1Scene = converter.gamePart2GameScene(modelGamePart1);
-		printer.printScene(modelGamePart1Scene);
-		modelGamePart1 = converter.gameScene2GamePart(modelGamePart1Scene);
-		printer.printState(modelGamePart1);
-
-		GamePart modelGamePart2 = new ModelGamePart1().getGamePart();
 		List<GamePart> gameDataParts = new ArrayList<>();
-		gameDataParts.add(modelGamePart1);
-		gameDataParts.add(modelGamePart2);
+		
+		for (GameScene scene : gameLoader.getGameScenes()) {
+			gameDataParts.add(converter.gameScene2GamePart(scene));
+		}
 		return gameDataParts;
 	}
-	/* ***************************To Be Replaced With Load From Game Data*************************** */
 	
 	private void constructGameState(List<GamePart> gameDataParts) {
 		for (GamePart gp : gameDataParts) {
@@ -108,7 +96,6 @@ public class GameState {
 	public void changeCurrentGamePart(String newPartID, Integer portalID) {
 		for (GameLevel gl : gameLevels) {
 			for (GamePart newGamePart : gl.getGameParts()) {
-				System.out.println(newGamePart);
 				if(newGamePart.getGamePartID().equals(newPartID)) {
 					GameElement mainCharacter = this.getCurrentGamePart().getMainCharacter();
 					this.getCurrentGamePart().removeGameElement(mainCharacter);
@@ -122,7 +109,7 @@ public class GameState {
 					for (GameElement element : this.getCurrentGamePart().getElements()) {
 						if (element.hasBehavior(ExitPortal.class)) {
 							ExitPortal exitP = (ExitPortal) element.getBehavior(ExitPortal.class);
-							if (exitP.getPortalID() == portalID) {
+							if (exitP.getPortalID().equals(portalID)) {
 								mainCharacter.setPosition(element.getPosition());
 								this.getCurrentGamePart().addGameElement(mainCharacter);
 								break;	

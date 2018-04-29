@@ -5,8 +5,12 @@ import java.util.List;
 
 import engine.Engine;
 import engine.GameState;
+import gamePlayer.ConcreteHUD;
 import gamePlayer.ConcretePlayerUpdater;
+import gamePlayer.HUD;
 import gamePlayer.PlayerUpdater;
+import gamePlayer.highScores.ConcreteHighScores;
+import gamePlayer.highScores.HighScores;
 import engine.GamePart;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -42,8 +46,10 @@ public class EngineTesting extends Application {
 		//levels.add(new ModelGameState2().getPart());
 		//modelGameState = new GameState(levels , 0, levels.get(1), "enginetestmario");
 		//gameEngine = new Engine(modelGameState);
-		PlayerUpdater concretePlayerUpdater = new ConcretePlayerUpdater(hud, highScores, username.getName());
-		gameEngine = new Engine("enginetestmario", true, new ConcretePlayerUpdater());
+		HUD hud = new ConcreteHUD("enginetestmario");
+		HighScores highScores = new ConcreteHighScores("enginetestmario");
+		PlayerUpdater concretePlayerUpdater = new ConcretePlayerUpdater(hud, highScores, "hello");
+		gameEngine = new Engine("enginetestmario", true, concretePlayerUpdater);
 		stage.setScene(setupLevel(900, 590, BACKGROUND));
 		stage.show();
 	}

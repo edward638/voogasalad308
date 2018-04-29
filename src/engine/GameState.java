@@ -40,7 +40,7 @@ public class GameState {
 		Printer printer = new Printer();
 		Converter2 converter = new Converter2();
 		GamePart modelGamePart1 = new ModelGamePart1().getGamePart();
-		System.out.println("PRE CONVERSION GAMEPART");
+		//System.out.println("PRE CONVERSION GAMEPART");
 		printer.printState(modelGamePart1);
 		GameScene modelGamePart1Scene = converter.gamePart2GameScene(modelGamePart1);
 		printer.printScene(modelGamePart1Scene);

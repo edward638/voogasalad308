@@ -4,16 +4,19 @@ import java.util.List;
 
 import authoring.groovy.GroovyMethod;
 import engine.GameElement;
+import engine.actions.ChangeLevel;
+import engine.events.elementevents.CollisionEvent;
 import engine.events.gameevents.ChangePartEvent;
 import engine.events.gameevents.ResetLevelEvent;
 
 public class EntrancePortal extends Behavior{
-	private boolean active;
+	private Boolean active;
 	private String partToChange;
 	private List<String> resetLevels;
-	private int portalID;
+	private Integer portalID;
 	private Double portalTime = 0.0;
-	public EntrancePortal (GameElement ge, boolean active, String partToChange, List<Integer> resetLevels, int portalID) {
+
+	public EntrancePortal (GameElement ge, boolean active, String partToChange, List<String> resetLevels, Integer portalID) {
 		super(ge);
 		this.active = active;
 		this.partToChange = partToChange;
@@ -58,5 +61,10 @@ public class EntrancePortal extends Behavior{
 		for (String levelToReset : resetLevels) {
 			getParent().addGameEvent(new ResetLevelEvent(levelToReset));
 		}
+	}
+	
+	@Override
+	protected void addDefaultBehavior() {
+		getParent().addEventResponse(new CollisionEvent(getParent(), CollisionEvent.ALL_SIDES, new GameElement("Mario"), CollisionEvent.ALL_SIDES), new ChangeLevel());
 	}
 }

@@ -1,20 +1,16 @@
 package data;
 
-import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.image.Image;
-
-import javax.imageio.ImageIO;
-
-import org.codehaus.groovy.tools.shell.ParseCode;
-
-import authoring.GameScene;
-import authoring.SceneBackgroundImageSerializable;
-
 import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
+
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
 
 public class ImageManager {
 
@@ -64,7 +60,7 @@ public class ImageManager {
         try {	
 //        	System.out.println(gameImagesLocation + imageName);
 //        	System.out.println(location+imageName);
-        		System.out.println(location + imageName);
+//        		System.out.println(location + imageName);
             img = ImageIO.read(new File(location + imageName));
         } catch (IOException e) {
             e.printStackTrace(); //TODO: remove this print stacktrace!
@@ -85,7 +81,8 @@ public class ImageManager {
 
     private void storeBufferedImage(String imageName, BufferedImage image, String location){
         try {
-            ImageIO.write(image, "png", new File(location + imageName + ".png"));
+            System.out.println("storeBufferedImage " + location + imageName);
+        	ImageIO.write(image, "png", new File(location + imageName + ".png"));
         } catch (IOException e) {
             e.printStackTrace(); //TODO: remove this print stacktrace!
         }
@@ -99,6 +96,7 @@ public class ImageManager {
     	String background = "background" + number;
     	storeBufferedImage(background, javaFXToBufferedImage(image), gameBackgroundImagesLocation);
     	return background;
+    	
     }
     
     public Image getBackgroundImage(String imageName) {
@@ -115,6 +113,16 @@ public class ImageManager {
         storeBufferedImage(imageName, javaFXToBufferedImage(image), gameImagesLocation);
     }
 
+    public void storeCompositeBackgroundImage(String imageName, RenderedImage ri) {
+    	try {
+    		System.out.println(gameImagesLocation);
+			ImageIO.write(ri, "png", new File(gameImagesLocation+imageName));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
     /**
      * Converts JavaFX image to BufferedImage
      * @param image

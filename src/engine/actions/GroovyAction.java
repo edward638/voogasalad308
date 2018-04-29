@@ -1,17 +1,20 @@
 package engine.actions;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptException;
 import engine.GameElement;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.ElementEvent;
+import engine.groovy.GroovyEngine;
+import engine.groovy.GroovyException;
 import engine.groovy.GroovyExecutor;
 
 public class GroovyAction implements Action {
 	
-	private GroovyExecutor executor;
 	private String content;
 	
 	public GroovyAction() {
-		executor = new GroovyExecutor();
+		
 	}
 	
 	public GroovyAction(String executionContent) {
@@ -25,12 +28,35 @@ public class GroovyAction implements Action {
 	
 	@Override
 	public void act(ElementEvent e, GameElement ge) {
-		executor.addToMap(ge.getIdentifier(), ge);
+		ScriptEngine engine = GroovyEngine.returnScriptEngine();
+		engine.put(ge.getIdentifier(), ge);
 		if (e instanceof CollisionEvent) {
 			CollisionEvent ce = (CollisionEvent) e;
-			executor.addToMap(ce.getOtherElement(ge).getIdentifier(), ce.getOtherElement(ge));
+			engine.put(ce.getOtherElement(ge).getIdentifier(), ce.getOtherElement(ge));
 		}
-		executor.execute(content);
+		execute(content, engine);
+	}
+	
+	private Object execute(String script, ScriptEngine eng) {
+		try {
+			return eng.eval(script);
+		} catch (ScriptException e) {
+			e.printStackTrace();
+			throw new GroovyException("cannot evaluate groovy expression");
+		}
 	}
 
+	public void setContent(String newContent) {
+		content = newContent;
+	}
+	
+	public GroovyAction clone() {
+		GroovyAction er = new GroovyAction();
+		er.setContent(this.getContent());
+		return er;
+	}
+	
+	public String toString() {
+		return content;
+	}
 }

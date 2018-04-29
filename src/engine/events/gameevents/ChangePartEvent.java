@@ -5,9 +5,9 @@ import engine.GameState;
 public class ChangePartEvent extends GameEvent{
 
 	private String partID;
-	private int portalID;
+	private Integer portalID;
 
-	public ChangePartEvent(String partID, int portalID) {
+	public ChangePartEvent(String partID, Integer portalID) {
 		this.partID = partID;
 		this.portalID = portalID;
 	}

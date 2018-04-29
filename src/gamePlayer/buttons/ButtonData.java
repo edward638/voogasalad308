@@ -6,7 +6,7 @@ import javafx.scene.Node;
 import javafx.stage.Stage;
 
 public interface ButtonData {
-	public void playGame(String file);
+	public void playGame(String file, boolean isNewGame);
 	public Stage getStage();
 	public String getMostRecentFile();
 	public GameState getGameState();
@@ -17,5 +17,6 @@ public interface ButtonData {
 	public void removeFromRoot(Node node);
 	public void resumeGame();
 	public void pauseGame();
-	Boolean getVolumeStatus();
+	public Boolean getVolumeStatus();
+	public void changeUsername(String newName);
 }

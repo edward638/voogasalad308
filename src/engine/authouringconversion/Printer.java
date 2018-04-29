@@ -4,12 +4,12 @@ import java.util.Map.Entry;
 
 import authoring.AuthBehavior;
 import authoring.Event;
-import authoring.EventResponse;
 import authoring.GameObject;
 import authoring.GameScene;
 import engine.GameElement;
 import engine.GamePart;
 import engine.actions.Action;
+import engine.actions.GroovyAction;
 import engine.behaviors.Behavior;
 import engine.events.elementevents.ElementEvent;
 
@@ -73,8 +73,8 @@ public class Printer {
 	
 	public void printEvent(Event ev) {
 		System.out.println(ev);
-		for (EventResponse resp: ev.getResponses()) {
-			System.out.println(resp.getMyContent() + ", ");
+		for (GroovyAction resp: ev.getResponses()) {
+			System.out.println(resp.getContent() + ", ");
 		}
 		System.out.println();
 	}

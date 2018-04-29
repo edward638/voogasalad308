@@ -2,6 +2,7 @@ package authoring.displayrefactored.popups.eventspopup;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 import authoring.AuthBehavior;
@@ -50,39 +51,60 @@ public class MFWindow extends VBox {
 		addMethods();
 		addFields();
 	}
-	
+
 	private void addMethods() {
 		List<Method> methods = gcf.getMethods(currentBehavior);
 		if (methods == null) {
-			Text noMethods = new Text("No available methods for this behavior");
+			Text noMethods = new Text("No available methods\nfor this behavior");
 			this.getChildren().add(noMethods);
 			return;
 		}
-		ListView<Method> methodsList = new ListView<>();
+		this.getChildren().add(new Text("Methods"));
+		List<String> methodNames = new ArrayList<>();
+		methods.forEach(m -> parseMethod(m, methodNames));
+		ListView<String> methodsList = new ListView<>();
 		methodsList.setMinHeight(100);
-		methodsList.getItems().addAll(methods);
+		methodsList.getItems().addAll(methodNames);
 		methodsList.setOnMouseClicked(e -> methodsClicked(methodsList.getSelectionModel().getSelectedItem()));
+		this.getChildren().add(methodsList);
 		
 	}
-	private void methodsClicked(Method m) {
+	private void parseMethod(Method m, List<String> list) {
+		String[] holder = m.toString().split(" ");
+		String[] name = holder[holder.length - 1].split("\\.");
+		String use = name[name.length-1];
+		list.add(use);
+	}
+	private void methodsClicked(String method) {
 		// This is something you can implement on epuc, since you can set text to the text plane in the groovy window
+		epuc.concatenateString(method, "MFWindow");
 	}
 	
 	private void addFields() {
 		List<Field> fields = gcf.getFields(currentBehavior);
 		if (fields == null) {
-			Text noFields = new Text("No available fields for this behavior");
+			Text noFields = new Text("No available fields\nfor this behavior");
 			this.getChildren().add(noFields);
 			return;
 		}
-		ListView<Field> fieldsList = new ListView<>();
+		this.getChildren().add(new Text("Fields"));
+		List<String> fieldNames = new ArrayList<>();
+		fields.forEach(f -> parseField(f, fieldNames));
+		ListView<String> fieldsList = new ListView<>();
 		fieldsList.setMinHeight(100);
-		fieldsList.getItems().addAll(fields);
+		fieldsList.getItems().addAll(fieldNames);
 		fieldsList.setOnMouseClicked(e -> fieldsClicked(fieldsList.getSelectionModel().getSelectedItem()));
+		this.getChildren().add(fieldsList);
 	}
-	
-	private void fieldsClicked(Field f) {
+	private void parseField(Field f, List<String> list) {
+		String[] holder = f.toString().split(" ");
+		String[] name = holder[holder.length - 1].split("\\.");
+		String use = name[name.length-1];
+		list.add(use);
+	}
+	private void fieldsClicked(String field) {
 		// This is something you can implement on epuc, since you can set text to the text plane in the groovy window
+		epuc.concatenateString(field, "MFWindow");
 	}
 	
 	private void assignCurrentBehavior() {

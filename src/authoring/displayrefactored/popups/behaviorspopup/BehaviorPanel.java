@@ -3,8 +3,6 @@ package authoring.displayrefactored.popups.behaviorspopup;
 import java.util.List;
 import java.util.Set;
 
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter.DEFAULT;
-
 import authoring.AuthBehavior;
 import authoring.GameObject;
 import authoring.displayrefactored.controllers.BehaviorPopupController;

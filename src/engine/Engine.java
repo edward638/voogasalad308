@@ -1,9 +1,15 @@
 
 package engine;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import engine.behaviors.Killable;
+import engine.behaviors.TimeTracker;
 import engine.events.elementevents.KeyInputEvent;
 import engine.events.elementevents.MouseInputEvent;
 import engine.events.elementevents.TimeEvent;
+import gamePlayer.PlayerUpdater;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.SubScene;
@@ -22,12 +28,14 @@ public class Engine implements EngineInterface{
 	private DisplayState displayState;
 	private EventManager2 eventManager;
 	private GameMetaData gameMetaData;
+	private PlayerUpdater playerUpdater;
 	
-	public Engine(String gameName) {
+	public Engine(String gameName, boolean newGame, PlayerUpdater playerUpdater) {
 		currentGameState = new GameState(gameName);
 		displayState = new DisplayState(currentGameState, gameName);
 		eventManager = new EventManager2(currentGameState);
 		gameMetaData = new GameMetaData(currentGameState);
+		this.playerUpdater = playerUpdater;
 		startAnimation();
 	}
 	
@@ -44,10 +52,18 @@ public class Engine implements EngineInterface{
 		double gameSteps = elapsedTime * currentGameState.getGameSpeed();
     	eventManager.processElementEvent(new TimeEvent(gameSteps));
     	displayState.update(currentGameState);
+
+    	Map<String, Object> info = new HashMap<>();
+    	GameElement mainCharacter = currentGameState.getCurrentGamePart().getMainCharacter();
+    	info.put("Name", mainCharacter.getIdentifier());
+    	//info.put("Health", ((Killable)mainCharacter.getBehavior(Killable.class)).getHealth());
+    	info.put("Game Time", ((TimeTracker)mainCharacter.getBehavior(TimeTracker.class)).getTimePassed());
+    	playerUpdater.updateHUD(info);
     }
 	
 	@Override
 	public void close() {
+		//playerUpdater.addHighScore((int) ((TimeTracker)currentGameState.getCurrentGamePart().getMainCharacter().getBehavior(TimeTracker.class)).getTimePassed());
 		currentGameState.getAudioManager().stop();
 	}
 	

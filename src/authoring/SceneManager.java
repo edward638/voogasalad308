@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import engine.authouringconversion.Converter2;
+import engine.tests.ModelGamePart1;
+
 /** 
  * SceneManager keeps track of all the GameScenes
  * and all the levels

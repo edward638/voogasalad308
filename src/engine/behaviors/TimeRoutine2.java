@@ -3,6 +3,7 @@ package engine.behaviors;
 import java.util.HashMap;
 import java.util.Map;
 
+import authoring.groovy.GroovyMethod;
 import engine.GameElement;
 import engine.actions.Action;
 import engine.events.elementevents.TimeEvent;
@@ -24,6 +25,7 @@ public class TimeRoutine2 extends Behavior{
 		timeRemaining.put(routine, time);
 	}
 	
+	@GroovyMethod
 	@Override
 	protected void addDefaultBehavior() {
 		getParent().addEventResponse(new TimeEvent(0.0), (e, a) -> {

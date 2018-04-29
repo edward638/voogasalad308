@@ -7,7 +7,11 @@ import gamePlayer.ConcreteGamePlayer;
 import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
+/**
+ * button user presses to launch the game loader
+ * @author jeffreyli, calvinma
+ *
+ */
 public class LoadButton extends PlayerButtons {
 
 	public LoadButton(double x, double y, double width, double height, ButtonData buttonData) {
@@ -18,7 +22,7 @@ public class LoadButton extends PlayerButtons {
 		this.setOnAction(event -> {
 			FileChooser fileChooser = new FileChooser();
 			fileChooser.setTitle("CHOOSE GAME");
-			String currentPath = Paths.get(".").toAbsolutePath().normalize().toString() + "/data";
+			String currentPath = Paths.get(".").toAbsolutePath().normalize().toString() + "/data/gamedata/games";
 			fileChooser.setInitialDirectory(new File(currentPath));
 
 			File fileName = fileChooser.showOpenDialog(buttonData.getStage());
@@ -27,11 +31,10 @@ public class LoadButton extends PlayerButtons {
 				fileString = fileName.getPath();
 			}
 
-			buttonData.playGame(fileString);
+			buttonData.playGame(fileString, false);
 
 		});
 
 	}
-
 
 }

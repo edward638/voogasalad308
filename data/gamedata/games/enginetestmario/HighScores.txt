@@ -1,10 +1,4 @@
-JEFF 12
-asfasdfasdfasdfasdfasdfasfasdfsd 9
-fdasfs 8
-hi3 7
-hi2 6
-fasdf 5
-hi5 4
-hi4 3
-asfasdfa 2
-asdfasdf 1
+Dima 7
+Calvin 8
+Luigi 9
+Mario 12

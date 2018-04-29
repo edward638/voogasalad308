@@ -142,7 +142,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 		if (engine != null) {
 			engine.close();
 		}
-		engine = new Engine(new ModelGameState2().getState());
+		engine = new Engine("enginetestmario");
 		updateEngines(engine);
 
 		hud = new ConcreteHUD(gameDescriptionProvider.getGameName(file));

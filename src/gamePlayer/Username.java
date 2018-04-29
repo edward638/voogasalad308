@@ -28,12 +28,21 @@ public class Username {
 	private void setupUserNameText() {
 		nameText = new Label("User: " + userName);
 		nameText.setLayoutX(970);
-		nameText.setLayoutY(20);
+		nameText.setLayoutY(10);
 		nameText.setFont(Font.font(FONT, 20));
 	}
 
 	public Label getNameText() {
 		return nameText;
+	}
+	
+	/**
+	 * changes the username and updates the label to have the new name
+	 * @param newName
+	 */
+	public void changeName(String newName) {
+		userName = newName;
+		nameText.setText("User: " + userName);
 	}
 
 	public String getName() {

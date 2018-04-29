@@ -1,8 +1,10 @@
 package gamePlayer.buttons;
 
 import engine.EngineInterface;
+import engine.GamePart;
 import engine.GameState;
 import gamePlayer.GamePlayer;
+import gamePlayer.Username;
 import gamePlayer.VolumeSlider;
 import gamePlayer.highScores.HighScores;
 import gamePlayer.keyBindings.KeyInputDictionary;
@@ -14,20 +16,23 @@ public class ConcreteButtonData implements ButtonData {
 	private Stage stage;
 	private GamePlayer gamePlayer;
 	private Group root;
-
+	
+	private GamePart gamePart;
 	private HighScores highScores;
 	private GameState gameState;
 	private String mostRecentFile;
 	private KeyInputDictionary keyBindingMap;
 	private EngineInterface engine;
 	private VolumeSlider volumeSlider;
+	private Username username;
 
 	public ConcreteButtonData(Stage stage, GamePlayer gamePlayer, VolumeSlider volumeSlider, Group root,
-			KeyInputDictionary keyInputDictionary) {
+			KeyInputDictionary keyInputDictionary, Username username) {
 		this.stage = stage;
 		this.gamePlayer = gamePlayer;
 		this.root = root;
 		this.volumeSlider = volumeSlider;
+		this.username = username;
 		keyBindingMap = keyInputDictionary;
 	}
 
@@ -44,7 +49,7 @@ public class ConcreteButtonData implements ButtonData {
 	public void clearHighScores() {
 		highScores.clear();
 	}
-
+	
 	public void setGamePart(GamePart gamePart) {
 		this.gamePart = gamePart;
 	}
@@ -56,11 +61,6 @@ public class ConcreteButtonData implements ButtonData {
 	@Override
 	public Stage getStage() {
 		return stage;
-	}
-
-	@Override
-	public GamePart getGamePart() {
-		return gamePart;
 	}
 
 	@Override
@@ -109,5 +109,19 @@ public class ConcreteButtonData implements ButtonData {
 		if (engine != null)
 			engine.pause();
 	}
+
+	@Override
+	public void changeUsername(String newName) {
+		username.changeName(newName);
+	}
+
+	@Override
+	public GameState getGameState() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
 
 }

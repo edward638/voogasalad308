@@ -19,9 +19,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 public class ConcreteHighScores implements HighScores {
 
-	List<Score> scores;
-	String gameName;
-	ScoreSaver scoreSaver;
+	private List<Score> scores;
+	private String gameName;
+	private ScoreSaver scoreSaver;
 
 	private static final String NAMELABEL = "Name";
 	private static final String PLAYERNAME = "playerName";
@@ -54,18 +54,7 @@ public class ConcreteHighScores implements HighScores {
 			this.addScore(score.getPlayerName(), score.getScore());
 		}
 		setupTableProperties(970, 50, 235, 265);
-
-		// this.addDummyScores();
 	}
-
-	// private void addDummyScores() {
-	// addScore("Calvin", 400);
-	// addScore("Maddy", 450);
-	// addScore("August", 473);
-	// addScore("Jeffrey", 324);
-	// addScore("Gouttham", 934);
-	// addScore("Summer", 234);
-	// }
 
 	private void setupTableProperties(double xPos, double yPos, double width, double height) {
 		table.setEditable(false);
@@ -123,12 +112,12 @@ public class ConcreteHighScores implements HighScores {
 	public void addScoreWhenGameOver(String name, int score) {
 		this.addScore(name, score);
 	}
-	
+
 	/**
 	 * updates front end display of scores, and xml file of scores
 	 */
 	private void updateScoreTable() {
-		
+
 		ObservableList<Score> observableScoreList = FXCollections.observableArrayList(scores);
 		Collections.reverse(observableScoreList);
 		table.setItems(observableScoreList);
@@ -170,27 +159,5 @@ public class ConcreteHighScores implements HighScores {
 	public List<Score> getScoreList() {
 		return scores;
 	}
-	//
-	// public static void main(String[] args) {
-	// ConcreteHighScores chs = new ConcreteHighScores("test");
-	// chs.addScore("asdfasdf", 1);
-	// chs.addScore("asfasdfa", 2);
-	// chs.addScore("hi4", 3);
-	// chs.addScore("hi5", 4);
-	// chs.addScore("fasdf", 5);
-	// chs.addScore("hi2", 6);
-	// chs.addScore("hi3", 7);
-	// chs.addScore("fdasfs", 8);
-	// chs.addScore("asfasdfasdfasdfasdfasdfasfasdfsd", 9);
-	// chs.addScore("hi6", 10);
-	// chs.addScore("fadsfs", 11);
-	// chs.addScore("JEFF", 12);
-	// chs.printQ();
-	// ScoreSaver hss = new ScoreSaver("TestGame");
-	// hss.saveScores(chs.getScoreList());
-	// chs.clear();
-	// List<Score> l = hss.loadSavedScores();
-	// System.out.println(l);
-	//
-	// }
+
 }

@@ -15,19 +15,20 @@ public class GameScene extends Observable implements GameViewObservable, ObjectI
 	
 	//has a list of objects
 	private String myName;
+	private String levelId;
 	private List<SceneBackgroundImageSerializable> backgroundImageSerializables;
 	private List<GameObject> myObjects;
 	private Set<String> myObjectNames;
 	private GameObject currentGameObject;
 	private GameSceneToCareTaker memento;
 
-	public GameScene(String name) {
+	public GameScene(String name, String id) {
 		myName = name;
+		levelId = id;
 		myObjects = new ArrayList<>();
 		myObjectNames = new TreeSet<>();
 		backgroundImageSerializables = new ArrayList<>();
 		
-		System.out.println("New GameScene made!");
 	}
 	
 	public GameScene(GameSceneSerializable scene) {
@@ -73,6 +74,14 @@ public class GameScene extends Observable implements GameViewObservable, ObjectI
 
 	public void setName(String name) {
 		myName = name;
+	}
+	
+	public String getId() {
+		return levelId;
+	}
+
+	public void setId(String id) {
+		levelId = id;
 	}
 	
 	@Override
@@ -133,11 +142,12 @@ public class GameScene extends Observable implements GameViewObservable, ObjectI
 	
 	public void backupGameScene() {
 		memento = new GameSceneMemento(myObjects, backgroundImageSerializables);
-		System.out.println("backupGameScene()" + ((GameSceneToOriginator)memento).getGameObjects());
+		System.out.println("backupGameScene() memento " + ((GameSceneToOriginator)memento).getGameObjects());
+
 	}
 	
 	public void restorePreviousGameScene() {
-		System.out.println(((GameSceneToOriginator)memento).getGameObjects());
+		System.out.println("restorepreviousgamescene " + ((GameSceneToOriginator)memento).getGameObjects());
 		myObjects = ((GameSceneToOriginator)memento).getGameObjects();
 		backgroundImageSerializables = ((GameSceneToOriginator)memento).getSerializables();
 		notifyMyObservers();

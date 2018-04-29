@@ -10,5 +10,5 @@ public interface ObjectInfoSaver {
 	void duplicateGameObject();
 	Image getImage(String imageName);
 	void updatePositions();
-	
+	void setImage(Image image, String imageName);
 }

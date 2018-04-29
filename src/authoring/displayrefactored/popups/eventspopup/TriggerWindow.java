@@ -14,7 +14,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 /**
- * @author August Panel that takes care of trigger of events from game objects
+ * @author August 
+ * Panel that takes care of trigger of events from game objects
  *
  */
 public class TriggerWindow extends VBox {
@@ -82,7 +83,15 @@ public class TriggerWindow extends VBox {
 		collideObject = goName;
 	}
 	
-	public String getCollideObject() {
-		return collideObject;
+	public GameObject getCollideObject() {
+		for (GameObject go : allGos) {
+			if (go.getName().equals(collideObject)) {
+				return go;
+			}
+		}
+		return null;
+	}
+	public void updateCollideObject() {
+		epuc.updateResponseWindow();
 	}
 }

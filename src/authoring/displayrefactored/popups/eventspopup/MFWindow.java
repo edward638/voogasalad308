@@ -59,6 +59,7 @@ public class MFWindow extends VBox {
 			this.getChildren().add(noMethods);
 			return;
 		}
+		this.getChildren().add(new Text("Methods"));
 		List<String> methodNames = new ArrayList<>();
 		methods.forEach(m -> parseMethod(m, methodNames));
 		ListView<String> methodsList = new ListView<>();
@@ -86,6 +87,7 @@ public class MFWindow extends VBox {
 			this.getChildren().add(noFields);
 			return;
 		}
+		this.getChildren().add(new Text("Fields"));
 		List<String> fieldNames = new ArrayList<>();
 		fields.forEach(f -> parseField(f, fieldNames));
 		ListView<String> fieldsList = new ListView<>();

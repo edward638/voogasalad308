@@ -144,7 +144,8 @@ public class ConcreteGamePlayer implements GamePlayer {
 		}
 		PlayerUpdater concretePlayerUpdater = new ConcretePlayerUpdater(hud, highScores, username.getName());
 
-		engine = new Engine(gameName, concretePlayerUpdater, "Load or save");
+
+		engine = new Engine(gameName, true, concretePlayerUpdater);
 //		updateEngines(engine);
 
 		hud = new ConcreteHUD(gameDescriptionProvider.getGameName(gameName));

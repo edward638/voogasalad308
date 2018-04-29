@@ -18,10 +18,10 @@ public abstract class AuthoringUIComponentRefactored {
 	 */
 	public AuthoringUIComponentRefactored() {
 		borderPane = new BorderPane();
-		GenerateComponent();
+		generateComponent();
 	}
 	
-	protected abstract void GenerateComponent();
+	protected abstract void generateComponent();
 	
 	/**
 	 * Protected getter for borderPane which subclass can use to attach FX components onto
@@ -32,12 +32,12 @@ public abstract class AuthoringUIComponentRefactored {
 	}
 	
 	/**
-	 * Used by Authoring Environment to position this class' borderpane onto a larger overall GUI pane
+	 * Used by Authoring Environment to position this class' borderpane onto a larger overall GUI pane. This way, no public getter is needed.
 	 * @param pane
 	 * @param xPosition
 	 * @param yPosition
 	 */
-	public void AttachToPane(Pane pane, int xPosition, int yPosition) {
+	public void attachToPane(Pane pane, int xPosition, int yPosition) {
 		borderPane.setLayoutX(xPosition);
 		borderPane.setLayoutY(yPosition);
 		pane.getChildren().add(borderPane);

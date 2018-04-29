@@ -1,6 +1,5 @@
 package authoring.displayrefactored.controllers;
 
-import authoring.Game;
 import authoring.GameObject;
 import authoring.GameScene;
 import authoring.SceneBackgroundImage;
@@ -43,7 +42,7 @@ public class GameViewWindowController extends Controller implements ViewRefreshI
 		// TODO Auto-generated method stub 
 		int x = ResourceBundleManager.getPosition("GAMEVIEWWINDOW_X");
 		int y = ResourceBundleManager.getPosition("GAMEVIEWWINDOW_Y");
-		gameViewWindowRefactored.AttachToPane(pane, x, y);
+		gameViewWindowRefactored.attachToPane(pane, x, y);
 	}
 
 	public SceneBackgroundImage getBackgroundImage(SceneBackgroundImageSerializable s) {
@@ -57,6 +56,7 @@ public class GameViewWindowController extends Controller implements ViewRefreshI
 	public void setGameScene(GameScene gameScene) {
 		this.gameScene = gameScene;
 		setUpConnections();
+		gameScene.notifyMyObservers();
 	}
 
 	@Override

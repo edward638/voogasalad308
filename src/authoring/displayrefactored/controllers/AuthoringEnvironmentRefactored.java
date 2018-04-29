@@ -69,6 +69,8 @@ public class AuthoringEnvironmentRefactored {
 	private void addLibrary() {
 		gameObjectManager = new GameObjectManager(levelPanelController, imageManager);
 		gameObjectManager.addToGUI(pane);
+		levelPanelController.getObjectInfoPanelController().getObjectInfoPanelRefactored().setLibraryObservable(gameObjectManager);
+		gameObjectManager.setObserver(levelPanelController.getObjectInfoPanelController().getObjectInfoPanelRefactored());
 	}
 
 	

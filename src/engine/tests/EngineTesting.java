@@ -5,6 +5,8 @@ import java.util.List;
 
 import engine.Engine;
 import engine.GameState;
+import gamePlayer.ConcretePlayerUpdater;
+import gamePlayer.PlayerUpdater;
 import engine.GamePart;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -40,7 +42,7 @@ public class EngineTesting extends Application {
 		//levels.add(new ModelGameState2().getPart());
 		//modelGameState = new GameState(levels , 0, levels.get(1), "enginetestmario");
 		//gameEngine = new Engine(modelGameState);
-		gameEngine = new Engine("enginetestmario");
+		gameEngine = new Engine("enginetestmario", true, new ConcretePlayerUpdater());
 		stage.setScene(setupLevel(900, 590, BACKGROUND));
 		stage.show();
 	}

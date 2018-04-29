@@ -4,7 +4,6 @@ package engine;
 import java.util.HashMap;
 import java.util.Map;
 
-import engine.behaviors.Killable;
 import engine.behaviors.TimeTracker;
 import engine.events.elementevents.KeyInputEvent;
 import engine.events.elementevents.MouseInputEvent;

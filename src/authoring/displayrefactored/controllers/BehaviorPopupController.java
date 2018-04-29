@@ -24,6 +24,7 @@ import javafx.scene.layout.Pane;
 public class BehaviorPopupController extends PopupController {
 	private final String PACKAGE_NAME = "engine.behaviors";
 	private final String SUPERCLASS_NAME = "engine.behaviors.Behavior";
+	private final String MANDATORY_NAME = "engine.behaviors.MandatoryBehavior";
 
 	private List<GameObject> myGameObjects;
 	private BehaviorPanel myBehaviorPanel;
@@ -81,7 +82,7 @@ public class BehaviorPopupController extends PopupController {
 		Set<AuthBehavior> allBehaviors = new HashSet<>();
 		for(Class<?> c : classes) {
 			String fullName = c.getCanonicalName();
-			if(!fullName.equals(SUPERCLASS_NAME)) {
+			if(!fullName.equals(SUPERCLASS_NAME) && !fullName.equals(MANDATORY_NAME)) {
 				allBehaviors.add(behaviorFactory.makeBehavior(fullName));
 			}
 		}
@@ -90,5 +91,9 @@ public class BehaviorPopupController extends PopupController {
 	
 	public AuthBehavior getCurrBehavior() {
 		return myBehaviorPanel.getCurrBehavior();
+	}
+
+	public void refreshProperties() {
+		myPropertyPanel.refresh();
 	}
 }

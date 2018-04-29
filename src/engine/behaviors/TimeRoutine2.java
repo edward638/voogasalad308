@@ -16,6 +16,7 @@ public class TimeRoutine2 extends Behavior{
 		super(ge);
 		routineTimes = new HashMap<>();
 		timeRemaining = new HashMap<>();
+		routineTimes.entrySet().iterator().next().getValue().getClass();
 	}
 	
 	public void addRoutine(Double time, Action routine) {

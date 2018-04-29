@@ -52,7 +52,7 @@ public class ResponseWindow extends VBox {
 		
 		this.getChildren().add(new Text("Current Groovy Response:"));
 		Text groovyText = new Text(epuc.getGroovyString());
-		groovyText.setWrappingWidth(200);
+		groovyText.setWrappingWidth(180);
 		this.getChildren().add(groovyText);
 		
 		

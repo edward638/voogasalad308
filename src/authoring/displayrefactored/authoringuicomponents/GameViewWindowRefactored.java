@@ -55,7 +55,6 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	private static final int DEFAULTSIZEX = 1000;
 	private static final int DEFAULTSIZEY = 1000;
 	
-	
 	public GameViewWindowRefactored(GameViewWindowController controller) {
 		this.controller = controller;
 		objectImageViews = new ArrayList<>();
@@ -64,7 +63,7 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	}
 	
 	@Override
-	protected void GenerateComponent() {
+	protected void generateComponent() {
 		BorderPane borderPane = getBorderPane();
 		stackPane = new StackPane();
 		list = new ArrayList<>();
@@ -135,12 +134,23 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 		Double xPosition = (Double) xPositionProperty.getValue();
 		Double yPosition = (Double) yPositionProperty.getValue();			
 		String imagePath = (String) imagePathProperty.getValue();
-		ImageView imageView =new ImageView(controller.getImage(imagePath + ".png"));
+		ImageView imageView = new ImageView(controller.getImage(imagePath + ".png"));
 		imageView.setLayoutX(xPosition);
 		imageView.setLayoutY(yPosition);
-		imageView.setPreserveRatio(true);
-		imageView.setFitHeight(200);
 		
+		try {
+		imageView.setFitWidth((double) mandatoryBehavior.getProperty("displayWidth").getValue());
+		imageView.setFitHeight((double) mandatoryBehavior.getProperty("displayHeight").getValue());
+		} catch (NullPointerException e) {
+			imageView.setPreserveRatio(true);
+			imageView.setFitWidth(200);
+			
+			mandatoryBehavior.getProperty("displayWidth").setValue(imageView.getBoundsInLocal().getWidth());
+			mandatoryBehavior.getProperty("displayHeight").setValue(imageView.getBoundsInLocal().getHeight());
+			
+			imageView.setPreserveRatio(false);
+		}
+
 		return imageView;
 	}
 	

@@ -52,15 +52,12 @@ public class BackgroundSizePopupRefactored extends PopupRefactored {
 			double scale = Double.parseDouble(tf.getText());
 			double oldWidth = sbi.getImageView().getBoundsInLocal().getWidth();
 			double oldHeight = sbi.getImageView().getBoundsInLocal().getHeight();
-			System.out.println(sbi.getImageView().getBoundsInLocal().getWidth() + " " + sbi.getImageView().getBoundsInLocal().getHeight());
 			sbi.getImageView().setFitHeight(scale * oldWidth);
 			sbi.getImageView().setFitWidth(scale * oldHeight);
 			
 			sbis.setxSize(sbi.getImageView().getBoundsInLocal().getWidth());
 			sbis.setySize(sbi.getImageView().getBoundsInLocal().getHeight());
-			
-			System.out.println(sbi.getImageView().getBoundsInLocal().getWidth() + " " + sbi.getImageView().getBoundsInLocal().getHeight());
-			
+						
 			sbi.updateDimensions();
 			super.close();
 		});

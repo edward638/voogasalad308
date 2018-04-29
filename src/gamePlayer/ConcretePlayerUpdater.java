@@ -19,13 +19,15 @@ public class ConcretePlayerUpdater implements PlayerUpdater {
 	@Override
 	public void addHighScore(int score) {
 		highScores.addScore(userName, score);
-
 	}
 
 	@Override
 	public void updateHUD(Map<String, Object> info) {
 		hud.updateInfo(info);
-
+	}
+	
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 }

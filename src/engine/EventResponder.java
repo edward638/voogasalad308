@@ -16,7 +16,7 @@ public class EventResponder {
 	}
 	
 	public void addResponse(ElementEvent e, Action a) {
-		responses.put(e,  a);
+		responses.put(e, a);
 	}
 	
 	public void respondTo(ElementEvent other) {
@@ -27,7 +27,7 @@ public class EventResponder {
 		}
 	}
 	
-	public Map<ElementEvent, Action> getResponses () {
+	public Map<ElementEvent, Action> getResponses() {
 		return responses;
 	}
 }

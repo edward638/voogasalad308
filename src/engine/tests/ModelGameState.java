@@ -5,7 +5,7 @@ import java.util.List;
 
 import engine.DisplayState;
 import engine.GameElement;
-import engine.GameState;
+import engine.GamePart;
 import engine.actions.CollisionKillable;
 import engine.actions.CollisionStopXMotion;
 import engine.actions.CollisionStopYMotion;
@@ -26,20 +26,17 @@ import engine.behaviors.MovableCharacter;
 import engine.behaviors.TimeRoutine;
 import engine.behaviors.TimeTracker;
 import engine.behaviors.TrackMainCharacter;
-import engine.behaviors.shapes.EllipseShape;
-import engine.behaviors.shapes.RectangleShape;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.KeyInputEvent;
 import engine.events.elementevents.TimeEvent;
 import javafx.scene.input.KeyCode;
 
 public class ModelGameState {
-	private GameState state;
+	private GamePart part;
 	private DisplayState display;
 	
 	public ModelGameState() {
-		state = new GameState();
-		display = new DisplayState(state);
+		display = new DisplayState(part);
 		
 		addMainCharacter();
 		ArrayList<GameElement> elements = new ArrayList<GameElement>();
@@ -59,23 +56,24 @@ public class ModelGameState {
 
 		
 		for (GameElement el : elements) {
-			state.addGameElement(el);
+			part.addGameElement(el);
 			//display.addNewElement(el);
 		}
-		display = new DisplayState(state);
+		display = new DisplayState(part);
 		//display.update(state);
 	}
 	
 	private void addMainCharacter() {
 		GameElement mainCharacter = getMario();
-		state.addGameElement(mainCharacter);
+		part.addGameElement(mainCharacter);
 		//display.addNewElement(mainCharacter);
 	}
 	
 	private GameElement getMovableBlock(double xpos, double ypos) {
 		List<Double> direction = new ArrayList<>(); direction.add(1.0); direction.add(1.0);
 		GameElement block = new GameElement();
-		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, new RectangleShape(40.0, 40.0), "mario_block.png"));
+		//block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, new RectangleShape(40.0, 40.0), "mario_block.png"));
+		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "mario_block.png"));
 		block.addBehavior(new TimeTracker(block));
 		block.addBehavior(new TimeRoutine(block, 5, true));
 		block.addBehavior(new TrackMainCharacter(block, getCreatedMario()));
@@ -89,21 +87,21 @@ public class ModelGameState {
 	}
 
 	private GameElement getCreatedMario() {
-		return state.getElements().get(0);
+		return part.getElements().get(0);
 	}
 	
 	public DisplayState getDisplay() {
 		return display;
 	}
 	
-	public GameState getState() {
-		return state;
+	public GamePart getPart() {
+		return part;
 	}
 	
 	public GameElement getMario() {
 		GameElement mario = new GameElement();
 		//Note: Image path untested
-		mario.addBehavior(new MandatoryBehavior(mario, "Mario", 200.0, 20.0, new RectangleShape(100.0, 100.0), "MarioSMR.png"));
+		mario.addBehavior(new MandatoryBehavior(mario, "Mario", 200.0, 20.0, "ellipse", 100.0, 100.0, 100.0, 100.0, "MarioSMR.png"));
 		List<Double> direction = new ArrayList<>(); direction.add(1.0); direction.add(0.0);
 		mario.addBehavior(new MovableCharacter(mario, 0.0, direction));
 		mario.addBehavior(new MainCharacter(mario, 1, true, true));
@@ -147,14 +145,14 @@ public class ModelGameState {
 	
 	public GameElement getBlock(Double xpos, Double ypos) {
 		GameElement block = new GameElement();
-		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, new RectangleShape(40.0, 40.0), "mario_block.png"));
+		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "mario_block.png"));
 		return block;
 	}
 	
 	public GameElement getCreatedBlock(Double xpos, Double ypos) {
 		List<Double> direction = new ArrayList<>(); direction.add(1.0); direction.add(0.0);
 		GameElement block = new GameElement();
-		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, new RectangleShape(40.0, 40.0), "mario_block.png"));
+		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "mario_block.png"));
 		block.addBehavior(new Movable(block, 5.0, direction));
 		block.addEventResponse(new TimeEvent(0.0), new TimeMovable());
 		return block;
@@ -162,14 +160,14 @@ public class ModelGameState {
 	
 	public GameElement getBack(Double xpos, Double ypos) {
 		GameElement block = new GameElement();
-		block.addBehavior(new MandatoryBehavior(block, "Back", xpos, ypos, new RectangleShape(900.0, 590.0), "prairie.jpg"));
+		block.addBehavior(new MandatoryBehavior(block, "Back", xpos, ypos, "rectangle", 900.0, 590.0, 900.0, 590.0, "prairie.jpg"));
 		return block;
 	}
 	
 	public GameElement getKoopa(Double xpos, Double ypos) {
 		GameElement block = new GameElement();
 		
-		block.addBehavior(new MandatoryBehavior(block, "Koopa", xpos, ypos, new RectangleShape(60.0, 80.0), "koopa.png"));
+		block.addBehavior(new MandatoryBehavior(block, "Koopa", xpos, ypos, "rectangle", 60.0, 80.0, 60.0, 80.0, "koopa.png"));
 		List<Double> direction = new ArrayList<>(); direction.add(-1.0); direction.add(0.0);
 		block.addBehavior(new Movable(block, 20.0, direction));
 		block.addBehavior(new Killable(block, 100.0));

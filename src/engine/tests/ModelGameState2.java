@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import engine.GameElement;
-import engine.GameState;
+import engine.GamePart;
 import engine.actions.CollisionDamageAllSides;
 import engine.actions.CollisionKillable;
 import engine.actions.CollisionStopXMotion;
@@ -21,31 +21,29 @@ import engine.behaviors.MovableCharacter;
 import engine.behaviors.Shooter;
 import engine.behaviors.TimeRoutine2;
 import engine.behaviors.TimeTracker;
-import engine.behaviors.shapes.EllipseShape;
-import engine.behaviors.shapes.RectangleShape;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.KeyInputEvent;
 import engine.events.elementevents.TimeEvent;
 import javafx.scene.input.KeyCode;
 
 public class ModelGameState2 {
-	private GameState state;
+	private GamePart part;
 	
 	public ModelGameState2() {
-		state = new GameState(null);		
+		part = new GamePart(null);		
 	}
 	
 	private void addMainCharacter() {
 		GameElement mainCharacter = getMario();
-		state.addGameElement(mainCharacter);
+		part.addGameElement(mainCharacter);
 		//display.addNewElement(mainCharacter);
 	}
 
 	private GameElement getCreatedMario() {
-		return state.getElements().get(0);
+		return part.getElements().get(0);
 	}
 	
-	public GameState getState() {
+	public GamePart getPart() {
 		addMainCharacter();
 		List<GameElement> elements = new ArrayList<GameElement>();
 		getCreatedMario();
@@ -65,15 +63,15 @@ public class ModelGameState2 {
 
 		
 		for (GameElement el : elements) {
-			state.addGameElement(el);
+			part.addGameElement(el);
 		}
-		return state;
+		return part;
 	}
 	
 	public GameElement getMario() {
 		GameElement mario = new GameElement();
 		//Note: Image path untested
-		mario.addBehavior(new MandatoryBehavior(mario, "Mario", 200.0, 20.0, new RectangleShape(100.0, 100.0, 20.0, 20.0), "MarioSMR.png"));
+		mario.addBehavior(new MandatoryBehavior(mario, "Mario", 200.0, 20.0, "rectangle", 100.0, 100.0, 20.0, 20.0, "MarioSMR.png"));
 		List<Double> direction = new ArrayList<>(); direction.add(1.0); direction.add(0.0);
 		mario.addBehavior(new MovableCharacter(mario, 0.0, direction));
 		mario.addBehavior(new MainCharacter(mario, 1, true, true));
@@ -124,20 +122,20 @@ public class ModelGameState2 {
 	
 	public GameElement getBlock(Double xpos, Double ypos) {
 		GameElement block = new GameElement();
-		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, new RectangleShape(40.0, 40.0), "mario_block.png"));
+		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "mario_block.png"));
 		return block;
 	}
 	
 	public GameElement getBack(Double xpos, Double ypos) {
 		GameElement block = new GameElement();
-		block.addBehavior(new MandatoryBehavior(block, "Back", xpos, ypos, new RectangleShape(900.0, 590.0), "prairie.jpg"));
+		block.addBehavior(new MandatoryBehavior(block, "Back", xpos, ypos, "rectangle", 900.0, 590.0, 900.0, 590.0, "prairie.jpg"));
 		return block;
 	}
 	
 	public GameElement getKoopa(Double xpos, Double ypos) {
 		GameElement block = new GameElement();
 		
-		block.addBehavior(new MandatoryBehavior(block, "Koopa", xpos, ypos, new RectangleShape(60.0, 80.0), "koopa.png"));
+		block.addBehavior(new MandatoryBehavior(block, "Koopa", xpos, ypos, "rectangle", 60.0, 80.0, 60.0, 80.0, "koopa.png"));
 		List<Double> direction = new ArrayList<>(); direction.add(-1.0); direction.add(0.0);
 		block.addBehavior(new Movable(block, 20.0, direction));
 		block.addBehavior(new Killable(block, 100.0));
@@ -147,7 +145,7 @@ public class ModelGameState2 {
 	
 	public GameElement getBullet(Double xpos, Double ypos, Double v, List<Double> direction) {
 		GameElement bullet = new GameElement();
-		bullet.addBehavior(new MandatoryBehavior(bullet, "Bullet", xpos, ypos, new RectangleShape(20.0, 20.0), "bullet.png"));
+		bullet.addBehavior(new MandatoryBehavior(bullet, "Bullet", xpos, ypos, "rectangle", 20.0, 20.0, 20.0, 20.0, "bullet.png"));
 		bullet.addBehavior(new Movable(bullet, v, direction));
 		bullet.addBehavior(new Killer(bullet, 10.0));
 		bullet.addEventResponse(
@@ -162,7 +160,7 @@ public class ModelGameState2 {
 	
 	public GameElement getBullet(Double xpos, Double ypos, Double v) {
 		GameElement bullet = new GameElement();
-		bullet.addBehavior(new MandatoryBehavior(bullet, "Bullet", xpos, ypos, new RectangleShape(20.0, 20.0), "bullet.png"));
+		bullet.addBehavior(new MandatoryBehavior(bullet, "Bullet", xpos, ypos, "rectangle", 20.0, 20.0, 20.0, 20.0, "bullet.png"));
 		bullet.addBehavior(new Movable(bullet, v, Arrays.asList(1.0, 0.0)));
 		bullet.addBehavior(new Killer(bullet, 10.0));
 		return bullet;

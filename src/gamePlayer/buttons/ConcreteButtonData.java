@@ -45,8 +45,8 @@ public class ConcreteButtonData implements ButtonData {
 		highScores.clear();
 	}
 
-	public void setGameState(GameState gameState) {
-		this.gameState = gameState;
+	public void setGamePart(GamePart gamePart) {
+		this.gamePart = gamePart;
 	}
 
 	public void setMostRecentFile(String file) {
@@ -59,8 +59,8 @@ public class ConcreteButtonData implements ButtonData {
 	}
 
 	@Override
-	public GameState getGameState() {
-		return gameState;
+	public GamePart getGamePart() {
+		return gamePart;
 	}
 
 	@Override

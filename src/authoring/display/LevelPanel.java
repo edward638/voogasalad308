@@ -81,7 +81,7 @@ public class LevelPanel extends MainWindowComponent {
 				fileChooser.setTitle("Choose Object Image");
 				fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
 				File image = fileChooser.showOpenDialog(new Stage());
-				getGame().getSceneManager().getCurrentScene().getSceneBackground().addImage(new Image(image.toURI().toString()));
+//				getGame().getSceneManager().getCurrentScene().getSceneBackground().addImage(new Image(image.toURI().toString()));
 				//put image.getName into SceneBackground
 			} catch (Exception e) {
 				//do nothing

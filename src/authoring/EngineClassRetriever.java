@@ -25,9 +25,9 @@ public class EngineClassRetriever {
 		return classNames;
 	}
 	
-    public static void main(String[] args){
-		EngineClassRetriever events = new EngineClassRetriever();
-		System.out.println(events.getClasses(ElementEvent.class, "engine.events.elementevents"));
-    }
+//    public static void main(String[] args){
+//		EngineClassRetriever events = new EngineClassRetriever();
+//		System.out.println(events.getClasses(ElementEvent.class, "engine.events.elementevents"));
+//    }
 	
 }

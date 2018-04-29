@@ -138,9 +138,17 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 		ImageView imageView =new ImageView(controller.getImage(imagePath + ".png"));
 		imageView.setLayoutX(xPosition);
 		imageView.setLayoutY(yPosition);
-		imageView.setPreserveRatio(true);
-		imageView.setFitHeight(200);
-		
+		try {
+		imageView.setFitWidth((double) mandatoryBehavior.getProperty("displayWidth").getValue());
+		imageView.setFitHeight((double) mandatoryBehavior.getProperty("displayHeight").getValue());
+		} catch (NullPointerException e) {
+			imageView.setPreserveRatio(true);
+			imageView.setFitWidth(200);
+			
+			mandatoryBehavior.getProperty("displayWidth").setValue(imageView.getBoundsInLocal().getWidth());
+			mandatoryBehavior.getProperty("displayHeight").setValue(imageView.getBoundsInLocal().getHeight());
+		}
+
 		return imageView;
 	}
 	

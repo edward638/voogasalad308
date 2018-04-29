@@ -128,7 +128,7 @@ public class GameScene extends Observable implements GameViewObservable, ObjectI
 	
 	public void backupGameScene() {
 		memento = new GameSceneMemento(myObjects, backgroundImageSerializables);
-		System.out.println("backupGameScene()" + ((GameSceneToOriginator)memento).getGameObjects());
+//		System.out.println("backupGameScene()" + ((GameSceneToOriginator)memento).getGameObjects());
 	}
 	
 	public void restorePreviousGameScene() {

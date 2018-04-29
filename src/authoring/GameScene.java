@@ -29,7 +29,7 @@ public class GameScene extends Observable implements GameViewObservable, ObjectI
 		myObjectNames = new TreeSet<>();
 		backgroundImageSerializables = new ArrayList<>();
 		
-//		System.out.println("New GameScene made!");
+		System.out.println("New GameScene made! name = " + name);
 	}
 	
 	public GameScene(GameSceneSerializable scene) {

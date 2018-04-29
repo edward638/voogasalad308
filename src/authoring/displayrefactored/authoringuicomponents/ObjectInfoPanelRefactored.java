@@ -54,7 +54,10 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 		GameObjectInfoBox gameObjectInfoBox = new GameObjectInfoBox(observable.getCurrentGameObject(),observable.getInstances(), controller);	
 		gameObjectInfoBox.initializeVBox();
 		gameObjectInfoBox.addToBorderPane(getBorderPane());
+		} else {
+			getBorderPane().getChildren().clear();
 		}
+		
 	}
 
 	@Override

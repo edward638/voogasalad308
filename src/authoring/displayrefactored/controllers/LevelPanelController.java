@@ -47,7 +47,6 @@ public class LevelPanelController extends Controller implements GameObjectAdder 
 	@Override
 	protected void setUpConnections() {
 		sceneManager.addObserver(levelPanelRefactored);
-		System.out.println("setupconnections");
 	}
 
 	@Override
@@ -71,13 +70,14 @@ public class LevelPanelController extends Controller implements GameObjectAdder 
 	
 	public void addLevel(String name, String id) {
 		GameScene scene = sceneManager.makeScene(name, id);
-		setLevel(scene);
+		setLevel(scene.getName());
 //		levelPanelRefactored.updateLevelDropdown(level - 1, scene);
+		
 	}
 	
-	public void setLevel(GameScene gameScene) {
-		sceneManager.setCurrentScene(gameScene);
-		updateMyControllers(gameScene);
+	public void setLevel(String name) {
+		sceneManager.setCurrentScene(name);
+		updateMyControllers(sceneManager.getCurrentScene());
 	}
 	
 	private void updateMyControllers(GameScene gameScene) {

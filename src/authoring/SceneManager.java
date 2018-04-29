@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import engine.authouringconversion.Converter2;
+import engine.tests.ModelGamePart1;
+
 /** 
  * SceneManager keeps track of all the GameScenes
  * and all the levels
@@ -19,7 +22,9 @@ public class SceneManager extends Observable implements LevelsObservable {
 		myLevels = new ArrayList<>();
 		GameScene newLevel = new GameScene("Level 1");
 		myLevels.add(newLevel);
-		setCurrentScene(newLevel);
+		GameScene modelGamePart1Scene = new Converter2().gamePart2GameScene(new ModelGamePart1().getGamePart());
+		myLevels.add(modelGamePart1Scene);
+		setCurrentScene(modelGamePart1Scene);
 		setChanged();
 	}
 	

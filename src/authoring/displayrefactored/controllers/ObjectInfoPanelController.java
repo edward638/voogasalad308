@@ -1,5 +1,7 @@
 package authoring.displayrefactored.controllers;
 
+import java.util.List;
+
 import authoring.AuthBehavior;
 import authoring.Game;
 import authoring.GameObject;
@@ -13,7 +15,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-public class ObjectInfoPanelController extends Controller {
+
+/**
+ * 
+ * @author Edward Zhuang
+ *
+ */
+public class ObjectInfoPanelController extends Controller implements ObjectInfoSaver {
 
 	GameScene gameScene;
 	ObjectInfoPanelRefactored objectInfoPanelRefactored;
@@ -29,6 +37,10 @@ public class ObjectInfoPanelController extends Controller {
 		this.gameScene.deleteObservers();
 		this.gameScene = gameScene;
 		setUpConnections();
+	}
+	
+	public ObjectInfoPanelRefactored getObjectInfoPanelRefactored() {
+		return objectInfoPanelRefactored;
 	}
 	
 	@Override
@@ -49,8 +61,8 @@ public class ObjectInfoPanelController extends Controller {
 		int infoY = ResourceBundleManager.getPosition("OBJECTINFO_Y");
 		int listX = ResourceBundleManager.getPosition("OBJECTLIST_X");
 		int listY = ResourceBundleManager.getPosition("OBJECTLIST_Y");
-		objectInfoPanelRefactored.AttachToPane(pane, infoX, infoY);
-		objectListPanelRefactored.AttachToPane(pane, listX, listY);
+		objectInfoPanelRefactored.attachToPane(pane, infoX, infoY);
+		objectListPanelRefactored.attachToPane(pane, listX, listY);
 	}
 	
 	@Override
@@ -94,10 +106,13 @@ public class ObjectInfoPanelController extends Controller {
 	}
 	
 	public void duplicateGameObject() {
-//		game.duplicateGameObject();
+		gameScene.duplicateGameObject();
 	}
 	public List<GameObject> getAllGameObjects() {
-		return game.getGameObjects();
+		return gameScene.getMyObjects();
+	}
+	public void restorePreviousGameScene() {
+		gameScene.restorePreviousGameScene();
 	}
 
 }

@@ -95,6 +95,7 @@ public class AuthoringDisplayRefactored implements LoadAuthoringInterface {
 		saveGameButton.setOnAction(e -> {
 			GameSaver saver = new GameSaver(currentGame.getName());
 			try {
+				System.out.println(currentGame.getScenes());
 				saver.gameAuthorToXML(currentGame.getScenes());
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block

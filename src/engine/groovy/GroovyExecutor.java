@@ -32,6 +32,10 @@ public class GroovyExecutor {
 		engine.put(name, toAdd);
 	}
 	
+	public static ScriptEngine getScriptEngine() {
+		return engine;
+	}
+	
 	public void addMaptoEngine(Map<String, Object> toAdd) {
 		for(Entry<String, Object> e : toAdd.entrySet()) {
 			addToMap(e.getKey(), e.getValue());

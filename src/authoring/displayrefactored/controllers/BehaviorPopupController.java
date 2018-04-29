@@ -15,9 +15,11 @@ import org.reflections.util.FilterBuilder;
 
 import authoring.AuthBehavior;
 import authoring.BehaviorFactory;
+import authoring.EngineClassRetriever;
 import authoring.GameObject;
 import authoring.displayrefactored.popups.behaviorspopup.BehaviorPanel;
 import authoring.displayrefactored.popups.behaviorspopup.PropertyPanel;
+import engine.behaviors.Behavior;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 
@@ -68,16 +70,19 @@ public class BehaviorPopupController extends PopupController {
 	private Set<AuthBehavior> getAllBehaviors() {
 		BehaviorFactory behaviorFactory = new BehaviorFactory();
 		//got the below from StackOverflow
-		List<ClassLoader> classLoadersList = new LinkedList<ClassLoader>();
-		classLoadersList.add(ClasspathHelper.contextClassLoader());
-		classLoadersList.add(ClasspathHelper.staticClassLoader());
-
-		Reflections reflections = new Reflections(new ConfigurationBuilder()
-		    .setScanners(new SubTypesScanner(false), new ResourcesScanner())
-		    .setUrls(ClasspathHelper.forClassLoader(classLoadersList.toArray(new ClassLoader[0])))
-		    .filterInputsBy(new FilterBuilder().include(FilterBuilder.prefix(PACKAGE_NAME))));
+//		List<ClassLoader> classLoadersList = new LinkedList<ClassLoader>();
+//		classLoadersList.add(ClasspathHelper.contextClassLoader());
+//		classLoadersList.add(ClasspathHelper.staticClassLoader());
+//
+//		Reflections reflections = new Reflections(new ConfigurationBuilder()
+//		    .setScanners(new SubTypesScanner(false), new ResourcesScanner())
+//		    .setUrls(ClasspathHelper.forClassLoader(classLoadersList.toArray(new ClassLoader[0])))
+//		    .filterInputsBy(new FilterBuilder().include(FilterBuilder.prefix(PACKAGE_NAME))));
+//		
+//		Set<Class<?>> classes = reflections.getSubTypesOf(Object.class);
 		
-		Set<Class<?>> classes = reflections.getSubTypesOf(Object.class);
+		EngineClassRetriever retriever = new EngineClassRetriever();
+		Set<Class<?>> classes = (Set<Class<?>>) retriever.getClasses(Behavior.class, "engine.behaviors");
 		
 		Set<AuthBehavior> allBehaviors = new HashSet<>();
 		for(Class<?> c : classes) {

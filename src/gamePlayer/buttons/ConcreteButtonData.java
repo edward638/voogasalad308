@@ -8,6 +8,9 @@ import gamePlayer.highScores.HighScores;
 import gamePlayer.keyBindings.KeyInputDictionary;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class ConcreteButtonData implements ButtonData {
@@ -21,6 +24,9 @@ public class ConcreteButtonData implements ButtonData {
 	private EngineInterface engine;
 	private VolumeSlider volumeSlider;
 	private Username username;
+
+	private Text title;
+	private Rectangle background;
 
 	public ConcreteButtonData(Stage stage, GamePlayer gamePlayer, VolumeSlider volumeSlider, Group root,
 			KeyInputDictionary keyInputDictionary, Username username) {
@@ -92,14 +98,32 @@ public class ConcreteButtonData implements ButtonData {
 
 	@Override
 	public void resumeGame() {
-		if (engine != null)
+		if (engine != null) {
 			engine.play();
+			root.getChildren().remove(title);
+			root.getChildren().remove(background);
+		}
 	}
 
 	@Override
 	public void pauseGame() {
-		if (engine != null)
+		if (engine != null) {
 			engine.pause();
+			title = new Text();
+			title.setText("Paused");
+			title.setStyle("-fx-font: 24 Verdana;");
+			title.setFill(Color.LIGHTSKYBLUE);
+			title.setX(450);
+			title.setY(325);
+			
+			background = new Rectangle(440, 300, 105, 40);
+			background.setFill(Color.BLACK);
+			background.setOpacity(0.3);
+			root.getChildren().add(background);
+			root.getChildren().add(title);
+			
+			
+		}
 	}
 
 	@Override

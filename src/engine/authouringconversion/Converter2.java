@@ -131,7 +131,7 @@ public class Converter2 {
 	public Behavior authBehavior2Behavior (AuthBehavior authB, GameElement ge) {
 		Behavior newEngBehavior;
 		try {
-			System.out.println(authB.getName());
+			//System.out.println(authB.getName());
 			Constructor<?> use = getConstructor(Class.forName(authB.getName()));
 			newEngBehavior = (Behavior) use.newInstance(ge);
 		} catch (ClassNotFoundException|InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e1) {

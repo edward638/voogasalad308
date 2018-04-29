@@ -115,8 +115,6 @@ public class ObjectListPanelRefactored extends AuthoringUIComponentRefactored im
 	private void updateLevelObjects(List<GameObject> list) {
 		
 		Set<GameObject> set = new HashSet<>(list);
-		System.out.println("From ObjectListPanel: number of total objects" + list.size());
-		System.out.println("From ObjectListPanel: number of unique objects" + set.size());
 		
 		myLevelObjects.getItems().clear();
 		myLevelObjects.getItems().addAll(set);

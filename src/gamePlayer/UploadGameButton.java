@@ -16,6 +16,10 @@ public class UploadGameButton extends Button {
 		setupAction();
 		
 	}
+	
+	private void setupButtonProperties() {
+		this.setText("Save and Upload");
+	}
 
 	private void setupAction() {
 		this.setOnAction((event) -> {
@@ -27,8 +31,12 @@ public class UploadGameButton extends Button {
 		});
 
 	}
+	
+	private void saveGameLocally() {
+		
+	}
 
-	public void saveGameOnline() {
+	private void saveGameOnline() {
 		VoogaDropbox vd = new VoogaDropbox(BASELOCATION);
 		vd.downloadGame(gameName);
 	}

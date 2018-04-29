@@ -9,7 +9,6 @@ import display.buttonevents.TriggerCollisionPress;
 import display.buttonevents.TriggerKeyboardPress;
 import display.buttons.GUIButton;
 import javafx.geometry.Insets;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -57,8 +56,10 @@ public class TriggerWindow extends VBox {
 		try {
 			if (currentEvent.getEventType().equals(KEYBOARD)) {
 				this.getChildren().add(new GUIButton(0, 0, "Edit Keybind", new TriggerKeyboardPress(this)));
+				this.getChildren().add(new Text("Current Keybind: " + kc));
 			} else if (currentEvent.getEventType().equals(COLLISION)) {
 				this.getChildren().add(new GUIButton(0, 0, "Edit Collision", new TriggerCollisionPress(this, allGos)));
+				this.getChildren().add(new Text("Current Collide Object: " + collideObject));
 			} else {
 				this.getChildren().add(new Text(NOTRIGGER));
 			}

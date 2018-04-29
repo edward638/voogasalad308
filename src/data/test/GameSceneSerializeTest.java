@@ -12,6 +12,7 @@ import engine.authouringconversion.Converter2;
 import engine.authouringconversion.Printer;
 import engine.events.elementevents.KeyInputEvent;
 import engine.tests.ModelGamePart1;
+import engine.tests.ModelGamePart2;
 import javafx.scene.input.KeyCode;
 
 public class GameSceneSerializeTest {
@@ -22,9 +23,9 @@ public class GameSceneSerializeTest {
 		Converter2 converter = new Converter2();
 		ModelGamePart1 mp1 = new ModelGamePart1();
 		XStream xstream = new XStream();
-		GameScene modelGamePart1Scene = converter.gamePart2GameScene(new ModelGamePart1().getGamePart());
+		GameScene modelGamePart1Scene = converter.gamePart2GameScene(new ModelGamePart2().getGamePart());
 		GameSceneSerializable serializable = new GameSceneSerializable(modelGamePart1Scene);
-		String levelGameDestination = "./data/gamedata/games/enginetestmario/scenes/testscene";
+		String levelGameDestination = "./data/gamedata/games/enginetestmario/scenes/testscene1";
 		
 		Printer printer = new Printer();
 		printer.printScene(modelGamePart1Scene);

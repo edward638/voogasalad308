@@ -61,7 +61,8 @@ public class Deserializer {
         if (directoryListing != null){
             for (File level : directoryListing){
                 String path = level.getAbsolutePath();
-//                System.out.println(path);
+                System.out.println("getgamesceneserializable:" +path);
+                if (path.contains("DS_Store")) {continue;}
                 list.add(retrieveGameSceneSerializable(path));
             }
         }

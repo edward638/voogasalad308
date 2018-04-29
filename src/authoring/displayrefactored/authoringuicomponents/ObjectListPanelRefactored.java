@@ -70,7 +70,7 @@ public class ObjectListPanelRefactored extends AuthoringUIComponentRefactored im
 	
 	private void initializeListViews() {
 		myLevelObjects = new ListView<>();
-		myLevelObjects.setMaxHeight(200);
+		myLevelObjects.setMaxHeight(300);
 	}
 	
 	private void setActions() {

@@ -22,8 +22,8 @@ public class ConcreteButtonData implements ButtonData {
 	private EngineInterface engine;
 	private VolumeSlider volumeSlider;
 
-	public ConcreteButtonData(Stage stage, GamePlayer gamePlayer, VolumeSlider volumeSlider,
-			Group root, KeyInputDictionary keyInputDictionary) {
+	public ConcreteButtonData(Stage stage, GamePlayer gamePlayer, VolumeSlider volumeSlider, Group root,
+			KeyInputDictionary keyInputDictionary) {
 		this.stage = stage;
 		this.gamePlayer = gamePlayer;
 		this.root = root;
@@ -32,8 +32,8 @@ public class ConcreteButtonData implements ButtonData {
 	}
 
 	@Override
-	public void playGame(String file) {
-		gamePlayer.playGame(file);
+	public void playGame(String file, boolean isNewGame) {
+		gamePlayer.playGame(file, isNewGame);
 	}
 
 	public void setHighScores(HighScores highScores) {

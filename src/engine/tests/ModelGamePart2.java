@@ -12,6 +12,7 @@ import engine.actions.CollisionKillable;
 import engine.actions.CollisionStopXMotion;
 import engine.actions.CollisionStopYMotion;
 import engine.actions.GroovyAction;
+import engine.actions.TimeDisablePortal;
 import engine.behaviors.EntrancePortal;
 import engine.behaviors.ExitPortal;
 import engine.behaviors.Gravity;

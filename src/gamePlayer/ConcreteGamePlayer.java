@@ -137,27 +137,27 @@ public class ConcreteGamePlayer implements GamePlayer {
 	}
 
 	@Override
-	public void playGame(String file) {
+	public void playGame(String gameName) {
 		cleanOldEngineGuiElements();
 		if (engine != null) {
 			engine.close();
 		}
-		engine = new Engine(new ModelGameState2().getState());
-		updateEngines(engine);
+		PlayerUpdater concretePlayerUpdater = new ConcretePlayerUpdater(hud, highScores, username.getName());
 
-		hud = new ConcreteHUD(gameDescriptionProvider.getGameName(file));
-		highScores = new ConcreteHighScores(file);
+		engine = new Engine(gameName, concretePlayerUpdater, "Load or save");
+//		updateEngines(engine);
+
+		hud = new ConcreteHUD(gameDescriptionProvider.getGameName(gameName));
+		highScores = new ConcreteHighScores(gameName);
 		buttonData.setHighScores(highScores);
 		pauseButton = new PauseButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("pauseButtonY")),
 				BUTTONWIDTH, BUTTONHEIGHT, buttonData);
 		setUpEngineGameDisplay();
 
-		// set everything into gamemetadata and then pass only metadata into engine
-		// concretePlayerUpdater = new ConcretePlayerUpdater(hud, highScores,
 		// username.getName());
 		// engine = new Engine(file, concretePlayerUpdater);
 
-		buttonData.setMostRecentFile(file);
+		buttonData.setMostRecentFile(gameName);
 		addEngineGUIToRoot();
 	}
 

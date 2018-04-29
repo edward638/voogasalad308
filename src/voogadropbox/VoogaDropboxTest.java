@@ -1,4 +1,4 @@
-package gamePlayer;
+package voogadropbox;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,6 +13,7 @@ public class VoogaDropboxTest {
 	private final static String BASELOCATION = ResourceBundleManager.getPath("BASELOCATION");
 
 	public static void main(String[] args) {
+		System.out.println(BASELOCATION);
 		VoogaDropbox vd = new VoogaDropbox(BASELOCATION);
 		try {
 			// uploads a game to the dropbox and then downloads the same game. very simple

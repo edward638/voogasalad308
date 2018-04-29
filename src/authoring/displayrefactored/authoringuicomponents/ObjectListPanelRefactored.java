@@ -1,9 +1,11 @@
 package authoring.displayrefactored.authoringuicomponents;
 
 import java.io.File;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Set;
 
 import authoring.GameObject;
 import authoring.ObjectInfoObservable;
@@ -11,7 +13,6 @@ import authoring.displayrefactored.controllers.ObjectInfoPanelController;
 import authoring.displayrefactored.popups.NewGameObjectPopupRefactored;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.collections.FXCollections;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
@@ -19,17 +20,25 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 
+
+/**
+ * 
+ * @author Edward Zhuang
+ *
+ */
 public class ObjectListPanelRefactored extends AuthoringUIComponentRefactored implements Observer {
 
-	private HBox myHBox;
+	private HBox upperHBox;
+	private HBox lowerHBox;
 	private VBox myVBox;
 	private Button myAddGameObjectButton;
 	private Button myAddSceneBackgroundImageButton;
 	private ListView<GameObject> myLevelObjects;
 	private Button myDeleteObjectButton;
+	private Button undoActionButton;
 	private ObjectInfoPanelController controller;
 	private ObjectInfoObservable observable = null;
 	
@@ -39,17 +48,18 @@ public class ObjectListPanelRefactored extends AuthoringUIComponentRefactored im
 	}
 	
 	@Override
-	protected void GenerateComponent() {
+	protected void generateComponent() {
 		// TODO Auto-generated method stub
 		BorderPane borderPane = getBorderPane();
 		initializeButtons();
 		initializeListViews();
 		setActions();
 		myVBox = new VBox();
-		myHBox = new HBox();
-
-		myHBox.getChildren().addAll(myAddGameObjectButton, myAddSceneBackgroundImageButton);
-		myVBox.getChildren().addAll(myLevelObjects, myHBox, myDeleteObjectButton);
+		upperHBox = new HBox();
+		lowerHBox = new HBox();
+		upperHBox.getChildren().addAll(myAddGameObjectButton, myAddSceneBackgroundImageButton);
+		lowerHBox.getChildren().addAll(myDeleteObjectButton,undoActionButton);
+		myVBox.getChildren().addAll(myLevelObjects, upperHBox, lowerHBox);
 		borderPane.setCenter(myVBox);
 	}
 	
@@ -57,6 +67,7 @@ public class ObjectListPanelRefactored extends AuthoringUIComponentRefactored im
 		myAddGameObjectButton = new Button(ResourceBundleManager.getAuthoring("AddGameObjectButton"));
 		myAddSceneBackgroundImageButton = new Button(ResourceBundleManager.getAuthoring("AddSceneBackgroundImageButton"));
 		myDeleteObjectButton = new Button(ResourceBundleManager.getAuthoring("AddDeleteObjectButton"));
+		undoActionButton = new Button(ResourceBundleManager.getAuthoring("AddUndoActionButton"));
 	}
 	
 	private void initializeListViews() {
@@ -91,6 +102,9 @@ public class ObjectListPanelRefactored extends AuthoringUIComponentRefactored im
 		myLevelObjects.setOnMouseClicked(e->{
 			controller.setCurrentGameObject(myLevelObjects.getSelectionModel().getSelectedItem());
 		});
+		undoActionButton.setOnMouseClicked(e->{
+			controller.restorePreviousGameScene();
+		});
 	}
 
 	@Override
@@ -103,8 +117,14 @@ public class ObjectListPanelRefactored extends AuthoringUIComponentRefactored im
 	private void updateLevelObjects(List<GameObject> list) {
 //		System.out.println("There should be " + list.size() + " objects in this list.");
 		
+		Set<GameObject> set = new HashSet<>(list);
+		System.out.println("From ObjectListPanel: number of total objects" + list.size());
+		System.out.println("From ObjectListPanel: number of unique objects" + set.size());
+		
 		myLevelObjects.getItems().clear();
-		myLevelObjects.getItems().addAll(FXCollections.observableArrayList(list));
+//		myLevelObjects.getItems().addAll(FXCollections.observableArrayList(list));
+		myLevelObjects.getItems().addAll(set);
+		myLevelObjects.getSelectionModel().select(observable.getCurrentGameObject());
 	}
 
 }

@@ -85,7 +85,8 @@ public class ImageManager {
 
     private void storeBufferedImage(String imageName, BufferedImage image, String location){
         try {
-            ImageIO.write(image, "png", new File(location + imageName + ".png"));
+            System.out.println("storeBufferedImage " + location + imageName);
+        	ImageIO.write(image, "png", new File(location + imageName + ".png"));
         } catch (IOException e) {
             e.printStackTrace(); //TODO: remove this print stacktrace!
         }
@@ -99,6 +100,7 @@ public class ImageManager {
     	String background = "background" + number;
     	storeBufferedImage(background, javaFXToBufferedImage(image), gameBackgroundImagesLocation);
     	return background;
+    	
     }
     
     public Image getBackgroundImage(String imageName) {

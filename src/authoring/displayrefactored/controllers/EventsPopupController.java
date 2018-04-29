@@ -16,10 +16,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 /**
- * @author August Ning
+ * @author August Ning 
  *
  */
-public class EventsPopupController extends Controller {
+public class EventsPopupController extends PopupController {
 	
 	private List<GameObject> gos;
 	private List<GameObject> allGos;   
@@ -30,7 +30,7 @@ public class EventsPopupController extends Controller {
 	private ResponseWindow responseWindow;
 	private GroovyWindow groovyWindow;
 
-	public EventsPopupController(List<GameObject> currentGos, List<GameObject> allGO) {
+	public EventsPopupController(List<GameObject> currentGos, List<GameObject> allGO){
 		gos = currentGos;
 		allGos = allGO;
 		initializeScreenComponents();
@@ -75,8 +75,8 @@ public class EventsPopupController extends Controller {
 	public boolean validEvent() {
 		return eventsWindow.validEvent();
 	}
-	public void concatenateString(String stringToAdd) {
-		groovyWindow.concatenateString(stringToAdd);
+	public void concatenateString(String stringToAdd, String caller) {
+		groovyWindow.concatenateString(stringToAdd, caller);
 	}
 	public List<VBox> getWindows() {
 		List<VBox> windows = new ArrayList<>();
@@ -88,6 +88,7 @@ public class EventsPopupController extends Controller {
 		windows.add(groovyWindow);
 		return windows;
 	}
+	
 	public void updateFromEvent() {
 		triggerWindow.createVBox();
 		responseWindow.createVBox();
@@ -99,6 +100,4 @@ public class EventsPopupController extends Controller {
 	public void updateFromBehavior() {
 		mfWindow.createVBox();
 	}
-	
-
 }

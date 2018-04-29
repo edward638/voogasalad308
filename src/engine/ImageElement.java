@@ -17,7 +17,7 @@ public class ImageElement extends ImageView {
 		
 		this.imageManager = imageManager;
 		imageName = (String)elementReference.reportProperties().get("imagePath");
-		Image image = imageManager.getImage(imageName);
+		Image image = imageManager.getImage(imageName + ".png");
 		this.setImage(image);
 		
 		updateState();

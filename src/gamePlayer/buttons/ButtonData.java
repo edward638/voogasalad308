@@ -17,5 +17,6 @@ public interface ButtonData {
 	public void removeFromRoot(Node node);
 	public void resumeGame();
 	public void pauseGame();
-	Boolean getVolumeStatus();
+	public Boolean getVolumeStatus();
+	public void changeUsername(String newName);
 }

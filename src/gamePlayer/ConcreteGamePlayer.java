@@ -5,7 +5,8 @@ import java.util.ResourceBundle;
 import data.GameDescriptionProvider;
 import engine.Engine;
 import engine.EngineInterface;
-import engine.tests.ModelGameState2;
+import gamePlayer.buttons.ChangeNameButton;
+//import engine.tests.ModelGameState2;
 import gamePlayer.buttons.ConcreteButtonData;
 import gamePlayer.buttons.LoadButton;
 import gamePlayer.buttons.LoadOnlineButton;
@@ -48,6 +49,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 	private Button toggleVolumeButton;
 	private Button pauseButton;
 	private Button loadOnlineButton;
+	private Button changeNameButton;
 	private ConcreteButtonData buttonData;
 
 	private HUD hud;
@@ -85,10 +87,11 @@ public class ConcreteGamePlayer implements GamePlayer {
 		myScene.setOnKeyPressed(keyPress -> keyInputDictionary.handleAction(keyPress.getCode()));
 
 		volumeSlider = new VolumeSlider(buttonData, engine);
-		buttonData = new ConcreteButtonData(stage, this, volumeSlider, root, keyInputDictionary);
+		username = new Username();
+		buttonData = new ConcreteButtonData(stage, this, volumeSlider, root, keyInputDictionary, username);
 
 		initialiseGUIElements();
-		username = new Username();
+
 		addGuiElementsToRoot();
 	}
 
@@ -100,11 +103,11 @@ public class ConcreteGamePlayer implements GamePlayer {
 		clearHighScoresButton = new ClearHighScoresButton(BUTTONXLOCATION,
 				Integer.parseInt(resources.getString("clearHighScoresButtonY")), BUTTONWIDTH, BUTTONHEIGHT, buttonData);
 
-		newGameButton = new NewGameButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("newGameButtonY")), 110,
-				BUTTONHEIGHT, buttonData);
+		newGameButton = new NewGameButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("newGameButtonY")),
+				Integer.parseInt(resources.getString("newGameLoadGameButtonWidth")), BUTTONHEIGHT, buttonData);
 
-		loadButton = new LoadButton(1095, Integer.parseInt(resources.getString("loadButtonY")), 110, BUTTONHEIGHT,
-				buttonData);
+		loadButton = new LoadButton(1095, Integer.parseInt(resources.getString("loadButtonY")),
+				Integer.parseInt(resources.getString("newGameLoadGameButtonWidth")), BUTTONHEIGHT, buttonData);
 
 		toggleVolumeButton = new ToggleVolumeButton(BUTTONXLOCATION,
 				Integer.parseInt(resources.getString("toggleVolumeButtonY")), BUTTONWIDTH, BUTTONHEIGHT, buttonData);
@@ -123,6 +126,8 @@ public class ConcreteGamePlayer implements GamePlayer {
 
 		loadOnlineButton = new LoadOnlineButton(BUTTONXLOCATION,
 				Integer.parseInt(resources.getString("loadOnlineButtonY")), BUTTONWIDTH, BUTTONHEIGHT, buttonData);
+		changeNameButton = new ChangeNameButton(Integer.parseInt(resources.getString("changeButtonX")),
+				Integer.parseInt(resources.getString("changeButtonY")), Integer.parseInt(resources.getString("changeNameWidth")), BUTTONHEIGHT, buttonData);
 
 	}
 
@@ -136,6 +141,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 		root.getChildren().add(keyboardBindingButton);
 		root.getChildren().add(loadOnlineButton);
 		root.getChildren().add(pauseButton);
+		root.getChildren().add(changeNameButton);
 		root.getChildren().add(volumeSlider.getVolumeText());
 		root.getChildren().add(volumeSlider.getSlider());
 		root.getChildren().add(username.getNameText());
@@ -160,9 +166,6 @@ public class ConcreteGamePlayer implements GamePlayer {
 		pauseButton = new PauseButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("pauseButtonY")),
 				BUTTONWIDTH, BUTTONHEIGHT, buttonData);
 		setUpEngineGameDisplay();
-
-		// username.getName());
-		// engine = new Engine(file, concretePlayerUpdater);
 
 		buttonData.setMostRecentFile(gameName);
 		addEngineGUIToRoot();

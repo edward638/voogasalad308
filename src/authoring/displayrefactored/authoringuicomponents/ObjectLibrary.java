@@ -45,7 +45,7 @@ public class ObjectLibrary extends AuthoringUIComponentRefactored {
 		objectType = new ComboBox<>();
 		objectType.getItems().addAll(PLAYER,BLOCK,NPC);
 		vBox = new VBox();
-		vBox.getChildren().addAll(objectType,objectList,bottomHBox);
+		vBox.getChildren().addAll(bottomHBox, objectType,objectList);
 	}
 
 	@Override

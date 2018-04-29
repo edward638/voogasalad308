@@ -38,6 +38,10 @@ public class GameObject {
 		this();
 		myBehaviors.add(initBehavior);
 	}
+	
+	public String getImagePath() {
+		return (String) this.getMandatoryBehavior().getProperty("imagePath").getValue();
+	}
 
 	/**
 	 * Constructs a default {@code GameObject} that contains the MandatoryBehavior

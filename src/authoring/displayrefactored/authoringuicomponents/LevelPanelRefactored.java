@@ -1,29 +1,19 @@
 package authoring.displayrefactored.authoringuicomponents;
 
-import java.io.File;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import authoring.GameObject;
 import authoring.GameScene;
 import authoring.LevelsObservable;
 import authoring.displayrefactored.controllers.LevelPanelController;
-import authoring.displayrefactored.popups.LevelSizePopupRefactored;
-import authoring.displayrefactored.popups.NewGameObjectPopupRefactored;
 import authoring.displayrefactored.popups.NewLevelPopupRefactored;
 import data.propertiesFiles.ResourceBundleManager;
-import javafx.collections.FXCollections;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
-import javafx.scene.image.Image;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
-import javafx.stage.Stage;
 
 /**
  * 
@@ -33,33 +23,44 @@ import javafx.stage.Stage;
 public class LevelPanelRefactored extends AuthoringUIComponentRefactored implements Observer{
 
 	private HBox levelChooser;
-	private ComboBox<GameScene> myLevelDropdown;
-	
-	private Button myAddLevelButton;
+	private ComboBox<String> myLevelDropdown;
+	private Button myAddLevelButton, setSceneIdButton, setLevelIdButton, chooseLevelButton;
 	private LevelPanelController controller;
 	private LevelsObservable levelsObservable = null;
+	private TextField gameSceneId, levelId;
 	
 	public LevelPanelRefactored(LevelPanelController controller) {
 		// TODO Auto-generated constructor stub
-		this.controller = controller;
-		
+		super();
+		this.controller = controller;	
 	}
 	
 	private void initializeButtons() {
 		myAddLevelButton = new Button(ResourceBundleManager.getAuthoring("AddSceneButton"));
+		setSceneIdButton = new Button(ResourceBundleManager.getAuthoring("SetSceneIdButton"));
+		setLevelIdButton = new Button(ResourceBundleManager.getAuthoring("SetLevelIdButton"));
+		chooseLevelButton = new Button(ResourceBundleManager.getAuthoring("SetLevelButton"));
+		gameSceneId = new TextField();
+		levelId = new TextField();
 	}
 	
 	private void initializeComboBoxes() {
 		myLevelDropdown = new ComboBox<>();
 		myLevelDropdown.setPromptText(ResourceBundleManager.getAuthoring("SelectSceneDropDown"));
-		myLevelDropdown.valueProperty().addListener((o,old,neww) -> {
-			controller.setLevel(neww);
-		});
 	}
 	
 	private void setActions() {
 		myAddLevelButton.setOnAction(e -> {
 			NewLevelPopupRefactored popupRefactored = new NewLevelPopupRefactored(controller);
+		});
+		setSceneIdButton.setOnAction(e->{
+			controller.setCurrentSceneName(gameSceneId.getText());
+		});
+		setLevelIdButton.setOnAction(e->{
+			controller.setCurrentLevelId(levelId.getText());
+		});
+		chooseLevelButton.setOnAction(e->{
+			controller.setLevel(myLevelDropdown.getSelectionModel().getSelectedItem());
 		});
 	}
 	
@@ -71,16 +72,20 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 		initializeComboBoxes();
 		setActions();
 		levelChooser = new HBox();
-		levelChooser.getChildren().addAll(myAddLevelButton, myLevelDropdown);
+		levelChooser.getChildren().addAll(myAddLevelButton, myLevelDropdown, chooseLevelButton,gameSceneId,setSceneIdButton,levelId,setLevelIdButton);
 		borderPane.setCenter(levelChooser);
 	}
 
+	/**
+	 * Called by Game when model is updated, updates the level panel
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		levelsObservable = (LevelsObservable) o;
 		updateLevelDropdown(levelsObservable.getScenes());
 		updateLevelName(levelsObservable.getCurrentSceneName());
-
+		gameSceneId.setText(levelsObservable.getCurrentSceneName());
+		levelId.setText(levelsObservable.getCurrentSceneId());
 	}
 	
 	private void updateLevelName(String currentSceneName) {
@@ -89,8 +94,13 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 	}
 	
 	private void updateLevelDropdown(List<GameScene> list) {
+		myLevelDropdown.getItems().removeAll();
 		myLevelDropdown.getItems().clear();
-		myLevelDropdown.getItems().addAll(list);
+		for (GameScene scene: list) {
+			myLevelDropdown.getItems().add(scene.getName());
+		}
+		
+		
 	}
 
 //	public void updateLevelDropdown(int i, GameScene scene) {

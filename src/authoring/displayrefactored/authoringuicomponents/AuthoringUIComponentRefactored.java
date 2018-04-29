@@ -32,7 +32,7 @@ public abstract class AuthoringUIComponentRefactored {
 	}
 	
 	/**
-	 * Used by Authoring Environment to position this class' borderpane onto a larger overall GUI pane
+	 * Used by Authoring Environment to position this class' borderpane onto a larger overall GUI pane. This way, no public getter is needed.
 	 * @param pane
 	 * @param xPosition
 	 * @param yPosition

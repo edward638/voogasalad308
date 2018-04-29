@@ -10,18 +10,15 @@ import javafx.scene.input.KeyCode;
 
 public class MainCharacter extends Behavior{
 	
-	int gamelives;
-	List<KeyCode> defaultmoves = Arrays.asList();
-	boolean xscroll = false;
-	boolean yscroll = false;
-	
+	private Integer gamelives;
+	private Boolean xscroll = false;
+	private Boolean yscroll = false;
 	
 	public MainCharacter(GameElement ge, int gamelives, boolean xscroll, boolean yscroll) {
 		super(ge);
 		this.xscroll = xscroll;
 		this.yscroll = yscroll;
 		this.gamelives = gamelives;
-		
 	}
 	
 	public MainCharacter(GameElement ge) {
@@ -32,11 +29,6 @@ public class MainCharacter extends Behavior{
 	@GroovyMethod
 	public int getLives() {
 		return gamelives;
-	}
-	
-	@GroovyMethod
-	public List<KeyCode> getmoveKeys() {
-		return defaultmoves;
 	}
 	
 	@GroovyMethod

@@ -34,7 +34,6 @@ public class ObjectListPanelRefactored extends AuthoringUIComponentRefactored im
 	private HBox upperHBox;
 	private HBox lowerHBox;
 	private VBox myVBox;
-	private Button myAddGameObjectButton;
 	private Button myAddSceneBackgroundImageButton;
 	private ListView<GameObject> myLevelObjects;
 	private Button myDeleteObjectButton;
@@ -57,14 +56,13 @@ public class ObjectListPanelRefactored extends AuthoringUIComponentRefactored im
 		myVBox = new VBox();
 		upperHBox = new HBox();
 		lowerHBox = new HBox();
-		upperHBox.getChildren().addAll(myAddGameObjectButton, myAddSceneBackgroundImageButton);
+		upperHBox.getChildren().addAll(myAddSceneBackgroundImageButton);
 		lowerHBox.getChildren().addAll(myDeleteObjectButton,undoActionButton);
 		myVBox.getChildren().addAll(myLevelObjects, upperHBox, lowerHBox);
 		borderPane.setCenter(myVBox);
 	}
 	
 	private void initializeButtons() {
-		myAddGameObjectButton = new Button(ResourceBundleManager.getAuthoring("AddGameObjectButton"));
 		myAddSceneBackgroundImageButton = new Button(ResourceBundleManager.getAuthoring("AddSceneBackgroundImageButton"));
 		myDeleteObjectButton = new Button(ResourceBundleManager.getAuthoring("AddDeleteObjectButton"));
 		undoActionButton = new Button(ResourceBundleManager.getAuthoring("AddUndoActionButton"));
@@ -72,12 +70,13 @@ public class ObjectListPanelRefactored extends AuthoringUIComponentRefactored im
 	
 	private void initializeListViews() {
 		myLevelObjects = new ListView<>();
+		myLevelObjects.setMaxHeight(200);
 	}
 	
 	private void setActions() {
-		myAddGameObjectButton.setOnAction(e -> {
-			NewGameObjectPopupRefactored popupRefactored = new NewGameObjectPopupRefactored(controller);
-		});
+//		myAddGameObjectButton.setOnAction(e -> {
+//			NewGameObjectPopupRefactored popupRefactored = new NewGameObjectPopupRefactored(controller);
+//		});
 		myAddSceneBackgroundImageButton.setOnAction(e -> {
 			try {
 				FileChooser fileChooser = new FileChooser();
@@ -115,14 +114,10 @@ public class ObjectListPanelRefactored extends AuthoringUIComponentRefactored im
 	}
 	
 	private void updateLevelObjects(List<GameObject> list) {
-//		System.out.println("There should be " + list.size() + " objects in this list.");
 		
 		Set<GameObject> set = new HashSet<>(list);
-		System.out.println("From ObjectListPanel: number of total objects" + list.size());
-		System.out.println("From ObjectListPanel: number of unique objects" + set.size());
 		
 		myLevelObjects.getItems().clear();
-//		myLevelObjects.getItems().addAll(FXCollections.observableArrayList(list));
 		myLevelObjects.getItems().addAll(set);
 		myLevelObjects.getSelectionModel().select(observable.getCurrentGameObject());
 	}

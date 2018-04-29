@@ -2,7 +2,6 @@ package engine.actions;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptException;
-
 import engine.GameElement;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.ElementEvent;
@@ -47,4 +46,13 @@ public class GroovyAction implements Action {
 		}
 	}
 
+	public void setContent(String newContent) {
+		content = newContent;
+	}
+	
+	public GroovyAction clone() {
+		GroovyAction er = new GroovyAction();
+		er.setContent(this.getContent());
+		return er;
+	}
 }

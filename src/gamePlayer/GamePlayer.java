@@ -24,8 +24,4 @@ public interface GamePlayer {
 	 */
 	public Scene getScene();
 
-	void toggleMusic();
-
-	Boolean getMusicOn();
-
 }

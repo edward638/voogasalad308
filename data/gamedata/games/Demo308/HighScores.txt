@@ -1,4 +1,4 @@
-Mario 12
-Luigi 9
-Calvin 8
 Dima 7
+Calvin 8
+Luigi 9
+Mario 12

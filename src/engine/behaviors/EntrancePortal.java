@@ -13,7 +13,7 @@ public class EntrancePortal extends Behavior{
 	private List<String> resetLevels;
 	private int portalID;
 	private Double portalTime = 0.0;
-	public EntrancePortal (GameElement ge, boolean active, String partToChange, List<Integer> resetLevels, int portalID) {
+	public EntrancePortal (GameElement ge, boolean active, String partToChange, List<String> resetLevels, int portalID) {
 		super(ge);
 		this.active = active;
 		this.partToChange = partToChange;

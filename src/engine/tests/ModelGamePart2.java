@@ -12,6 +12,7 @@ import engine.actions.CollisionKillable;
 import engine.actions.CollisionStopXMotion;
 import engine.actions.CollisionStopYMotion;
 import engine.actions.GroovyAction;
+import engine.actions.TimeDisablePortal;
 import engine.behaviors.EntrancePortal;
 import engine.behaviors.ExitPortal;
 import engine.behaviors.Gravity;
@@ -63,7 +64,7 @@ public class ModelGamePart2 {
 	public GameElement getPortal1(Double xpos, Double ypos) {
 		GameElement block = new GameElement();
 		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "mario_block.png"));
-		List<String> x = new ArrayList<String>();
+		List<String> x = new ArrayList<>();
 		x.add("level 1");
 		block.addBehavior(new EntrancePortal(block, true, "modelGamePart1", x, 2));
 		block.addEventResponse(new CollisionEvent(block, CollisionEvent.ALL_SIDES, getMario(), CollisionEvent.ALL_SIDES), new ChangeLevel());

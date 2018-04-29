@@ -49,6 +49,7 @@ public class ModelGamePart1 {
 		}
 		
 		elements.add(getPortal1(900.0, 101.0));
+		elements.add(getPortal2(300.0, 101.9));
 		
 		for (GameElement el : elements) {
 			modelGamePart1.addGameElement(el);
@@ -63,6 +64,7 @@ public class ModelGamePart1 {
 	public GameElement getPortal1(Double xpos, Double ypos) {
 		GameElement block = new GameElement();
 		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "Blockimage"));
+		block.addBehavior(new BlockLike(block));
 		block.addBehavior(new ExitPortal(block, 2));
 		
 		return block;
@@ -70,13 +72,8 @@ public class ModelGamePart1 {
 	
 	public GameElement getPortal2(Double xpos, Double ypos) {
 		GameElement block = new GameElement();
-<<<<<<< HEAD
-		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "mario_block.png"));
-		List<String> x = new ArrayList<>();
-=======
 		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "Blockimage"));
 		List<String> x = new ArrayList<String>();
->>>>>>> tn74
 		block.addBehavior(new EntrancePortal(block, true, "modelGamePart2", x, 1));
 //		block.addEventResponse(new CollisionEvent(block, CollisionEvent.ALL_SIDES, new GameElement("Mario"), CollisionEvent.ALL_SIDES), new ChangeLevel());
 		

@@ -63,7 +63,7 @@ public class ModelGamePart2 {
 	
 	public GameElement getPortal1(Double xpos, Double ypos) {
 		GameElement block = new GameElement();
-		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "mario_block.png"));
+		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "Blockimage"));
 		List<String> x = new ArrayList<>();
 		x.add("level 1");
 		block.addBehavior(new EntrancePortal(block, true, "modelGamePart1", x, 2));
@@ -75,7 +75,7 @@ public class ModelGamePart2 {
 	
 	public GameElement getPortal2(Double xpos, Double ypos) {
 		GameElement block = new GameElement();
-		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "mario_block.png"));
+		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "Marioimage"));
 		//List<String> x = new ArrayList<String>();
 		block.addBehavior(new ExitPortal(block, 1));
 		

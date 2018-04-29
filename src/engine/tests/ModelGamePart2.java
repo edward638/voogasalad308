@@ -29,7 +29,7 @@ public class ModelGamePart2 {
 	public ModelGamePart2() {
 		modelGamePart2 = new GamePart("modelGamePart2", "level 1");
 		
-		addMainCharacter();
+		//addMainCharacter();
 		List<GameElement> elements = new ArrayList<GameElement>();
 		for (double i = 0; i < 900; i+=40) {
 			elements.add(getBlock(i, 501.0));

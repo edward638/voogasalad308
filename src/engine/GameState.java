@@ -40,7 +40,6 @@ public class GameState {
 		for (GameScene scene : gameLoader.getGameScenes()) {
 			gameDataParts.add(converter.gameScene2GamePart(scene));
 		}
-
 		return gameDataParts;
 	}
 	
@@ -97,7 +96,6 @@ public class GameState {
 	public void changeCurrentGamePart(String newPartID, Integer portalID) {
 		for (GameLevel gl : gameLevels) {
 			for (GamePart newGamePart : gl.getGameParts()) {
-				System.out.println(newGamePart);
 				if(newGamePart.getGamePartID().equals(newPartID)) {
 					GameElement mainCharacter = this.getCurrentGamePart().getMainCharacter();
 					this.getCurrentGamePart().removeGameElement(mainCharacter);
@@ -111,7 +109,7 @@ public class GameState {
 					for (GameElement element : this.getCurrentGamePart().getElements()) {
 						if (element.hasBehavior(ExitPortal.class)) {
 							ExitPortal exitP = (ExitPortal) element.getBehavior(ExitPortal.class);
-							if (exitP.getPortalID() == portalID) {
+							if (exitP.getPortalID().equals(portalID)) {
 								mainCharacter.setPosition(element.getPosition());
 								this.getCurrentGamePart().addGameElement(mainCharacter);
 								break;	

@@ -92,7 +92,7 @@ Trishul:
 
 August: Project was really hard, and learned a lot about designing good and flexible code. It does take a lot of time and lots of debugging to get external jar files to work and getting consistent classpaths. Overall a worthy endeavor that made me learn that I don't like programming. However I feel like this project is seminal to the legend of the CS308, so I would be sad if future students got it easier. 
 
-Summer:
+Summer: I liked how the project mirrored working on projects in the real world (at least this is how it felt). The large groups and large task mirrored a software-engineering on-the-job project. The most difficult part was keeping up with the changes that everyone had made and maintaining good communication throughout the project. It was easy to lose track on the progress of the parts of the project that you were not working on. I think some stronger guidlines as to where teams should be at the midway demo would be helpful, as we were unsure how much progress was a good amount. However, this unsureness could be an important part of the assignment as well.
 
 Maddie: This project was obviously very difficult, but I feel like I learned a lot not only about designing good code, but also about teamwork and project management. The open-endedness of the project was pretty intimidating, but I think that it forced us to think harder about how our design would fit together and about the many nuances of the functionality, which was a good learning experience.
 

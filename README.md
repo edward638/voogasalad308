@@ -10,11 +10,12 @@ Started: March 20th
 
 Ended: April 29th
 
-Hours worked: n * 10^2
+Hours worked: 10^2
 
 ### each person's role in developing the project
 
-Gouttham:
+Gouttham: Worked with Trishul, Martin and Yashas to create a game engine. Helped design the engine's code structure as well as implemented specific behaviors, and actions that GameElements can inherit.
+Worked on coding the game-flow allowing user to travel from one gameLevel to another. 
 
 Jeffrey:
 

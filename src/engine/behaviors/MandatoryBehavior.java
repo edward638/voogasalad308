@@ -12,8 +12,8 @@ public class MandatoryBehavior extends Behavior{
 	
 	private Double xPos;
 	private Double yPos;
-	private Double DEFAULTxPos;
-	private Double DEFAULTyPos;
+	//private Double DEFAULTxPos;
+	//private Double DEFAULTyPos;
 	private String elementName;
 	private String imagePath;
 	

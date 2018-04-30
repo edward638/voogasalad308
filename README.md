@@ -33,7 +33,7 @@ Trishul:
 
 August: Worked with Edward to make game data to save and load various authoring and frontend elements to XML using XStream. Made various Authoring GUI frontend components such as the Event pop up window, Duplicate button, GameObject resizing, etc.
 
-Summer:
+Summer: Maddie and I worked together on the authoring environment. We decided how the back-end should be set up, whether it should use the back-end engine or not, and how the GUIs should look. This would shape the user's game creating experience. In addition, I worked on integrating Groovy into the authoring environment and the engine.
 
 Maddie: Worked with Summer to design the authoring backend; designed and implemented the initial authoring frontend before major refactorings midway through the project; made various authoring frontend components and popup windows
 

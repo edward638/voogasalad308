@@ -36,7 +36,8 @@ Summer:
 
 Maddie: Worked with Summer to design the authoring backend; designed and implemented the initial authoring frontend before major refactorings midway through the project; made various authoring frontend components and popup windows
 
-Edward: 
+Edward: Works with August Ning to create the game data component of the project. Used XStream based serialization to store data files for game authoring and game engine analysis. Also worked extensively
+on authoring component of project with August, Summer, and Maddie.
 
 ### any books, papers, online, or human resources that you used in developing the project
 
@@ -94,6 +95,10 @@ Summer:
 
 Maddie: This project was obviously very difficult, but I feel like I learned a lot not only about designing good code, but also about teamwork and project management. The open-endedness of the project was pretty intimidating, but I think that it forced us to think harder about how our design would fit together and about the many nuances of the functionality, which was a good learning experience.
 
-Edward: 
+Edward: I think that this was a very fun yet extremely challenging project. After working in small groups for both Cell Society and SLogo,
+I found it much more difficult to stay organized with a larger team, especially given the magnitude of the task. For this project, good communication is incredibly valuable. 
+While I did appreciate the complete flexibility of this project, I think that having suggested goals to achieve by specific times would have been helpful 
+(ex. suggested dates by which to complete general authoring, etc.). Furthermore, it may be useful to have students give feedback about the project 
+for future students to take advantage of. Code-wise, I think the most difficult aspect was integrating the authoring and engine components. Overall, though, I really enjoyed this project.
 
 

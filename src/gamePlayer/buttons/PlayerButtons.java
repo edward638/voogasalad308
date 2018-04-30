@@ -14,7 +14,7 @@ public abstract class PlayerButtons extends Button {
 			this.setMinWidth(width);
 			this.setHeight(height);
 			this.setText(text);
-			this.setFont(Font.font(font, 14));
+			this.setFont(Font.font(font, 12));
 			this.buttonData = buttonData;
 			setAction();
 	}

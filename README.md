@@ -26,7 +26,7 @@ one of which could not be reviewed by Facebook so we can't use it. Did like a co
 
 Yashas:
 
-Martin:
+Martin: Worked on developing game engine. Developed collision logic, experimented with potential collision utility, created initial testing scenarios, integrated shape behaviors and hitboxes, worked on designing and writing code for game and element events, created old GameMetaData with Gouttham, made design decisions related to integrating game player with engine.
 
 Trishul:
 
@@ -41,7 +41,7 @@ on authoring component of project with August, Summer, and Maddie.
 
 ### any books, papers, online, or human resources that you used in developing the project
 
-Java doc resources, XStream, Dropbox API
+Java doc resources, XStream, Dropbox API, stack overflow, webpage resources
 
 ### files used to start the project (the class(es) containing main)
 
@@ -69,7 +69,7 @@ lol
 
 ### any extra features included in the project
 
-You can upload and download games to and from Dropbox to share with your friends.
+You can upload and download games to and from Dropbox to share with your friends. Possibility for shapes that trace the outside of images, given a super fast computer.
 
 ### your impressions of the assignment to help improve it in the future
 
@@ -85,7 +85,7 @@ even though I had thought we were pretty on track at the time of the demo.
 
 Yashas:
 
-Martin:
+Martin: I really enjoyed planning this project, and figuring out how each team would do its part to create a finished product. It really helped solidify my understanding of internal/external APIs, as we had 4 distinct parts of the project that needed to communicate with each other through private channels. Overall, it was fun but very tough.
 
 Trishul:
 

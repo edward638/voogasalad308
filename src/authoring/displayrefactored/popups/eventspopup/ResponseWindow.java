@@ -4,6 +4,7 @@ import java.util.List;
 
 import authoring.GameObject;
 import authoring.displayrefactored.controllers.EventsPopupController;
+import engine.actions.GroovyAction;
 import javafx.geometry.Insets;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -50,11 +51,13 @@ public class ResponseWindow extends VBox {
 			}
 		}
 		
-		this.getChildren().add(new Text("Current Groovy Response:"));
-		Text groovyText = new Text(epuc.getGroovyString());
-		groovyText.setWrappingWidth(180);
-		this.getChildren().add(groovyText);
-		
+		this.getChildren().add(new Text("Current Groovy Response(s):"));
+		for (GroovyAction ga : epuc.getCurrEvent().getResponses()) {
+			Text groovyText = new Text(ga.toString());
+			groovyText.setWrappingWidth(180);
+			this.getChildren().add(groovyText);
+		}
+	
 		
 	}
 	

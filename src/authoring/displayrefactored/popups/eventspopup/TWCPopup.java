@@ -69,6 +69,7 @@ public class TWCPopup extends PopupRefactored {
 		save.setOnAction(e -> {
 			tw.setCollideObject(selectedObject);
 			tw.updateCollideObject();
+			tw.createVBox();
 			close();
 		});
 	}

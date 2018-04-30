@@ -39,12 +39,14 @@ public class TWKPopup extends PopupRefactored {
 	private void getKey(String inkc) {
 		kc = inkc;
 		tf.clear();
+		tf.setText(kc);
 
 	}
 	@Override
 	protected void mapButtons() {
 		save.setOnAction(e -> {
 			tw.setKeyCode(kc);
+			tw.createVBox();
 			close();
 		});
 	}

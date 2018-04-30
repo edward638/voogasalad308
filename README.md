@@ -18,7 +18,11 @@ Gouttham:
 
 Jeffrey:
 
-Calvin:
+Calvin: Worked with Jeffrey on the gameplayer. The gameplayer was used in order to initialize our engine and give the user some flexibility 
+in terms of what games they want and how they wanted to interact with a game outside of the game itself such as keybindings and volume. Worked
+the backend and frontend of this part, but mostly frontend as gameplayer was mainly a frontend thing. Also created two utilities for our group, 
+one of which could not be reviewed by Facebook so we can't use it. Did like a couple things for the frontend for authoring. 
+
 
 Yashas:
 
@@ -72,7 +76,11 @@ Gouttham:
 
 Jeffrey:
 
-Calvin:
+Calvin: I think the hardest part of this project was integration, which makes a lot of sense. When we split up into our own groups, we will
+naturally have conflicts between parts of the project that we end up having to spend a lot of time fixing. This integration also speaks to
+the flexibility of the code. If the code is flexible, then integration shouldn't be a huge issue. Also, I think there could be more strict
+guideline for what each group could have accomplished by the demo. Looking back now, I feel like we were behind at the first demo point 
+even though I had thought we were pretty on track at the time of the demo. 
 
 Yashas:
 

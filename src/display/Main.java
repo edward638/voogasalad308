@@ -16,7 +16,6 @@ public class Main extends Application {
 	private static final String ICON_IMAGE = "./data/images/icon.png";
 
 	public static void main(String args[]) {
-		System.out.println(javafx.scene.text.Font.getFamilies());
 		launch(args);
 	}
 

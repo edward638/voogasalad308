@@ -10,7 +10,7 @@ Started: March 20th
 
 Ended: April 29th
 
-Hours worked: 10^2
+Hours worked: n * 10^2
 
 ### each person's role in developing the project
 

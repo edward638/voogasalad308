@@ -16,6 +16,8 @@ public class TestGroovyExecutor {
     		executor.addToMap("myObject", ge);
     		executor.execute("import engine.GameElement");
     		executor.execute("println myObject");
+    		executor.execute("println myObject.getAllBehaviors()[0]");
+    		
     		System.out.println(executor.execute("myObject.behaviors.size()"));
 //    		executor.execute()
     		

@@ -3,6 +3,7 @@ package engine.behaviors;
 import java.util.Arrays;
 import java.util.List;
 
+import authoring.groovy.GroovyMethod;
 import engine.GameElement;
 import engine.actions.TimeMovable;
 import engine.events.elementevents.TimeEvent;
@@ -27,6 +28,7 @@ public class Movable extends Behavior{
 		}
 	}
 	
+	
 	public Movable (GameElement ge, Double xv, Double yv) {
 		super(ge);
 		xVel = xv; 
@@ -40,6 +42,7 @@ public class Movable extends Behavior{
 	/*
 	 * Moves the parent game element according to the time amount requested
 	 */
+	@GroovyMethod
 	public void move(Double time) {
 		MandatoryBehavior bge = (MandatoryBehavior) getParent().getBehavior(MandatoryBehavior.class);
 		bge.setPosition(bge.getX() + xVel * time, bge.getY() + yVel * time);
@@ -50,6 +53,7 @@ public class Movable extends Behavior{
 	 * Sets the direction for this element. Checks if the direction 
 	 * is valid and normalizes it so move method works correctly
 	 */
+	@GroovyMethod
 	public void setDirection(List<Double> dir) {
 		Double v = getVelocity();
 		setXVelocity(v * dir.get(0));
@@ -59,32 +63,38 @@ public class Movable extends Behavior{
 	/*
 	 * Sets the velocity according to what the other classes want. Checks if velocity is valid for this object 
 	 */
+	@GroovyMethod
 	public void setVelocity (Double v) {
 		xVel = getDirection().get(0) * v;
 		yVel = getDirection().get(1) * v;
 	}
 	
+	@GroovyMethod
 	public void setXVelocity (Double xv) {
 		xVel = xv;
 	}
 	
+	@GroovyMethod
 	public void setYVelocity (Double yv) {
 		yVel = yv;
 	}
 	
+	@GroovyMethod
 	public Double getXVelocity () {
 		return xVel;
 	}
 	
+	@GroovyMethod
 	public Double getYVelocity () {
 		return yVel;
 	}
-	
+
+	@GroovyMethod
 	public Double getVelocity () {
 		return Math.sqrt(Math.pow(xVel, 2) + Math.pow(yVel, 2));
 	}
 	
-	
+	@GroovyMethod
 	public List<Double> getDirection() {
 		return Arrays.asList(xVel / getVelocity(), yVel /getVelocity());
 	}

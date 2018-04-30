@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import engine.GameElement;
-import engine.GameState;
+import engine.GamePart;
 import engine.actions.CollisionDamageAllSides;
 import engine.actions.CollisionKillable;
 import engine.actions.CollisionStopXMotion;
@@ -25,23 +25,23 @@ import engine.events.elementevents.KeyInputEvent;
 import javafx.scene.input.KeyCode;
 
 public class ModelGameState3 {
-	private GameState state;
+	private GamePart part;
 	
 	public ModelGameState3() {
-		state = new GameState(null);		
+		part = new GamePart(null);		
 	}
 	
 	private void addMainCharacter() {
 		GameElement mainCharacter = getMario();
-		state.addGameElement(mainCharacter);
+		part.addGameElement(mainCharacter);
 		//display.addNewElement(mainCharacter);
 	}
 
 	private GameElement getCreatedMario() {
-		return state.getElements().get(0);
+		return part.getElements().get(0);
 	}
 	
-	public GameState getState() {
+	public GamePart getPart() {
 		addMainCharacter();
 		List<GameElement> elements = new ArrayList<GameElement>();
 		getCreatedMario();
@@ -61,9 +61,9 @@ public class ModelGameState3 {
 
 		
 		for (GameElement el : elements) {
-			state.addGameElement(el);
+			part.addGameElement(el);
 		}
-		return state;
+		return part;
 	}
 	
 	public GameElement getMario() {

@@ -4,8 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import engine.Engine;
-import engine.GameMetaData;
 import engine.GameState;
+import gamePlayer.ConcreteHUD;
+import gamePlayer.ConcretePlayerUpdater;
+import gamePlayer.HUD;
+import gamePlayer.PlayerUpdater;
+import gamePlayer.highScores.ConcreteHighScores;
+import gamePlayer.highScores.HighScores;
+import engine.GamePart;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -25,12 +31,9 @@ public class EngineTesting extends Application {
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 	public static final Paint BACKGROUND = Color.WHITE;
 	private ParallelCamera vcp;
-
-	
-	//private Timeline animation;
 	
 	private Engine gameEngine;
-	private GameMetaData modelGameMetaData;
+	private GameState modelGameState;
 
 	public static void main(String[] args) {
 		Application.launch(args);
@@ -38,14 +41,17 @@ public class EngineTesting extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		List<GameState> levels = new ArrayList<GameState>();
-		levels.add(new ModelGameState3().getState());
-		levels.add(new ModelGameState2().getState());
-		modelGameMetaData = new GameMetaData(levels , 0, new ModelGameState2().getState(), "enginetestmario");
-		gameEngine = new Engine(modelGameMetaData);
+		//List<GamePart> levels = new ArrayList<GamePart>();
+		//levels.add(new ModelGameState3().getPart());
+		//levels.add(new ModelGameState2().getPart());
+		//modelGameState = new GameState(levels , 0, levels.get(1), "enginetestmario");
+		//gameEngine = new Engine(modelGameState);
+		HUD hud = new ConcreteHUD("enginetestmario");
+		HighScores highScores = new ConcreteHighScores("enginetestmario");
+		PlayerUpdater concretePlayerUpdater = new ConcretePlayerUpdater(hud, highScores, "hello");
+		gameEngine = new Engine("enginetestmario", true, concretePlayerUpdater);
 		stage.setScene(setupLevel(900, 590, BACKGROUND));
 		stage.show();
-		startAnimation();
 	}
 	
 	private Scene setupLevel (int width, int height, Paint background) {
@@ -56,14 +62,5 @@ public class EngineTesting extends Application {
 		scene.setOnKeyPressed(e -> gameEngine.handleKeyInput(e.getCode()));
         scene.setOnMouseClicked(e -> gameEngine.handleMouseInput(e.getX(), e.getY())); 
     	return scene;
-    }
-
-	private void startAnimation() {
-		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
-                e -> gameEngine.timeStep(SECOND_DELAY));
-		Timeline animation = new Timeline();
-		animation.setCycleCount(Timeline.INDEFINITE);
-        animation.getKeyFrames().add(frame);
-        animation.play();
     }
 }

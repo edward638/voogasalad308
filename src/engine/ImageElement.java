@@ -17,15 +17,14 @@ public class ImageElement extends ImageView {
 		
 		this.imageManager = imageManager;
 		imageName = (String)elementReference.reportProperties().get("imagePath");
-		Image image = imageManager.getImage(imageName);
+		Image image = imageManager.getImage(imageName + ".png");
 		this.setImage(image);
 		
 		updateState();
 		
-		//System.out.println(elementReference.reportProperties());
 	}
 
-	public void updateState() {
+	protected void updateState() {
 		if (!((String)elementReference.reportProperties().get("imagePath")).equals(imageName)){
 			imageName = (String)elementReference.reportProperties().get("imagePath");
 			Image image = imageManager.getImage(imageName);
@@ -37,7 +36,7 @@ public class ImageElement extends ImageView {
 		this.setTranslateY((double) elementReference.reportProperties().get("yPos"));
 	}
 	
-	public void updateStateWithOffSet(List<Double> mainCharacterLocation) {
+	protected void updateStateWithOffSet(List<Double> mainCharacterLocation) {
 		if (!((String)elementReference.reportProperties().get("imagePath")).equals(imageName)){
 			imageName = (String)elementReference.reportProperties().get("imagePath");
 			Image image = imageManager.getImage(imageName);
@@ -49,7 +48,7 @@ public class ImageElement extends ImageView {
 		this.setTranslateY((double) elementReference.reportProperties().get("yPos") + mainCharacterLocation.get(1));
 	}
 	
-	public GameElement getReference() {
+	protected GameElement getReference() {
 		return elementReference;
 	}
 }

@@ -1,11 +1,12 @@
 package authoring;
 
+import authoring.displayrefactored.popups.BackgroundSizePopupRefactored;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
@@ -31,64 +32,79 @@ public class SceneBackgroundImage {
 	private boolean wasEdited = false;
 	private boolean selected = false;
 	private BorderPane imageHolder;
+	private SceneBackgroundImageSerializable serializable;
 	
 	
-	public SceneBackgroundImage(Image image, Rectangle rectangle) {
+	public SceneBackgroundImage(Image image, SceneBackgroundImageSerializable serializable) {
 		
-		myRectangle = rectangle;
+		this.serializable = serializable; 
 		myImage = new ImageView(image);
 		myImage.setPreserveRatio(true);
-		myImage.setFitWidth(DEFAULT_X);
+		myImage.setFitWidth(serializable.getxSize());
 			
 		
 		
 		imageHolder = new BorderPane();
+		imageHolder.setLayoutX(0);
+		imageHolder.setLayoutY(0);
 		
 		updateDimensions();
 		
 		
-		cornerCircle = new Circle();
+//		cornerCircle = new Circle();
 //		System.out.println(imageHolder.getBoundsInParent().getWidth() + " width height " + imageHolder.getBoundsInParent().getHeight());
-		
-		cornerCircle.setCenterX(width);
-		cornerCircle.setCenterY(height);
-		cornerCircle.setRadius(10);
-		cornerCircle.setFill(Color.TRANSPARENT);
-		cornerCircle.setStroke(Color.BLACK);
+//		
+//		cornerCircle.setCenterX(width);
+//		cornerCircle.setCenterY(height);
+//		cornerCircle.setRadius(10);
+//		cornerCircle.setFill(Color.TRANSPARENT);
+//		cornerCircle.setStroke(Color.BLACK);
 		
 		imageHolder.setOnMousePressed(t -> onMousePressed(t));
 		imageHolder.setOnMouseDragged(t -> onMouseDragged(t));
-		imageHolder.setOnMouseClicked(t -> onMouseClicked());
-		cornerCircle.setOnMouseDragged(t -> onMouseDraggedCircle(t));
+		imageHolder.setOnMouseClicked(t -> onMouseClicked(t));
+//		cornerCircle.setOnMouseDragged(t -> onMouseDraggedCircle(t));
 		
 //		imageHolder.getChildren().add(myImage);
 		imageHolder.setCenter(myImage);
-		imageHolder.setStyle("-fx-border-color: red");
 		
-		imageHolder.getChildren().add(cornerCircle);		
+//		imageHolder.getChildren().add(cornerCircle);		
 		
 		
-		System.out.println("SceneBackgroundImage()");
+//		System.out.println("SceneBackgroundImage()");
+	}
+	
+	public void translate() {
+		imageHolder.setTranslateX(serializable.getxPos());
+		imageHolder.setTranslateY(serializable.getyPos());
+	}
+	
+	public void setRectangle(Rectangle rectangle) {
+		myRectangle = rectangle;
 	}
 	
 	public Pane getPane() {
-		System.out.println("SceneBackgroundImage getPane()");
+//		System.out.println("SceneBackgroundImage getPane()");
 		return imageHolder;
 	}
 	
-	private void onMouseClicked() {
-		selected = !selected;
+	private void onMouseClicked(MouseEvent t) {
+//		selected = !selected;
+//		
+//		
+//		if (selected) {
+//			imageHolder.setStyle("-fx-border-color: green");
+//		} else if (! wasEdited){
+//			imageHolder.setStyle("-fx-border-color: red");
+//		} else {
+//			selected = true;
+//		}
+//		wasEdited = false;
+//		
 		
-		
-		if (selected) {
-			imageHolder.setStyle("-fx-border-color: green");
-		} else if (! wasEdited){
-			imageHolder.setStyle("-fx-border-color: red");
-		} else {
-			selected = true;
+		if (t.getButton().equals(MouseButton.SECONDARY)) {
+			new BackgroundSizePopupRefactored(this, serializable);
 		}
-		wasEdited = false;
-		
 	}
 	
 	private void onMousePressed(MouseEvent t) {
@@ -110,23 +126,23 @@ public class SceneBackgroundImage {
 		double currentX2 = t.getSceneX();
 		double currentY2 = t.getSceneY();
 		
-		if (selected) {
-			if (Math.hypot(currentX2-(cornerCircle.getCenterX()+imageHolder.getTranslateX()), currentY2-(cornerCircle.getCenterY()+imageHolder.getTranslateY())) < cornerCircle.getRadius()*5) {
+//		if (selected) {
+//			if (Math.hypot(currentX2-(cornerCircle.getCenterX()+imageHolder.getTranslateX()), currentY2-(cornerCircle.getCenterY()+imageHolder.getTranslateY())) < cornerCircle.getRadius()*5) {
 //				resizeImage(t);	
-			} else {
+//			} else {
 				dragImage(t);
-			}
-			
-			imageHolder.setStyle("-fx-border-color: green");
-			selected = true;
-		}
+//			}
+//			
+//		imageHolder.setStyle("-fx-border-color: green");
+		selected = true;
 	}
+	
 	
 	private void onMouseDraggedCircle(MouseEvent t) {
 		
 		if (selected) {
 				resizeImage(t);	
-			imageHolder.setStyle("-fx-border-color: green");
+//			imageHolder.setStyle("-fx-border-color: green");
 			selected = true;
 		}
 		
@@ -163,6 +179,8 @@ public class SceneBackgroundImage {
 		imageHolder.setTranslateX(translateX);
 		imageHolder.setTranslateY(translateY);
 		
+		serializable.setxPos(translateX);
+		serializable.setyPos(translateY);
 		
 		wasEdited = true;
 		
@@ -194,7 +212,11 @@ public class SceneBackgroundImage {
 		
 	}
 	
-	private void updateDimensions() {
+	public void setOpacity(Double value) {
+		myImage.setOpacity(value);
+	}
+	
+	public void updateDimensions() {
 		height = myImage.getBoundsInLocal().getHeight();
 		width = myImage.getBoundsInLocal().getWidth();
 		imageHolder.setMaxWidth(width + BORDER);
@@ -202,10 +224,8 @@ public class SceneBackgroundImage {
 		
 	}
 	
-	
-	private void remove() {
-		
-		
+	public ImageView getImageView() {
+		return myImage;
 	}
 	
 }

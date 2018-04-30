@@ -1,12 +1,20 @@
 package engine.behaviors;
 import java.util.List;
+
+import authoring.groovy.GroovyMethod;
 import engine.GameElement;
+import engine.events.gameevents.PlayAudioEvent;
 
 public class MovableCharacter extends Movable {
+	private String jumpAudioFilePath = "";
 
 	public MovableCharacter(GameElement ge, Double vel, List<Double> dir) {
 		super(ge, vel, dir);
-		// TODO Auto-generated constructor stub
+	}
+	
+	public MovableCharacter(GameElement ge, Double vel, List<Double> dir, String jumpAudioFilePath) {
+		super(ge, vel, dir);
+		this.jumpAudioFilePath = jumpAudioFilePath;
 	}
 	
 	public MovableCharacter(GameElement ge, Double xVel, Double yVel) {
@@ -17,14 +25,19 @@ public class MovableCharacter extends Movable {
 		super(ge);
 	}
 	
+	@GroovyMethod
 	@Override
 	public void move(Double time) {
 		super.move(time);
 		this.setXVelocity(this.getXVelocity() * .98);
 	}
 	
+	@GroovyMethod
 	public void jump() {
 		setYVelocity(getYVelocity() - 100);
+//		if (!jumpAudioFilePath.equals("")) {
+//			getParent().addGameEvent(new PlayAudioEvent(jumpAudioFilePath));
+//		}
 	}
 
 }

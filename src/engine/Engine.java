@@ -1,20 +1,18 @@
 
 package engine;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-import data.GameLoader;
 import engine.behaviors.MainCharacter;
+import engine.behaviors.TimeTracker;
 import engine.events.elementevents.KeyInputEvent;
 import engine.events.elementevents.MouseInputEvent;
 import engine.events.elementevents.TimeEvent;
-import engine.tests.ModelGameState;
+import gamePlayer.PlayerUpdater;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.scene.Group;
 import javafx.scene.SubScene;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
 
@@ -26,65 +24,17 @@ public class Engine implements EngineInterface{
     public static final double SUBSCENE_HEIGHT = 590;
 	
 	private Timeline animation;
-	private SubScene engineSubScene;
-	private Group subSceneRoot = new Group();
-	private GameState gameState;
+	private GameState currentGameState;
 	private DisplayState displayState;
 	private EventManager2 eventManager;
-	private AudioManager audioManager;
-	private String musicPath = "data/music/WiiShopChannelMusic.mp3";
-	private AudioPlayer audioPlayer;
+	private PlayerUpdater playerUpdater;
 	
-	
-	/**
-	 * NEW way to instantiate engine with a MetaData object
-	 * @param gamePath
-	 */
-	public Engine(GameMetaData metaData) {
-		gameState = new GameState(metaData);
-		gameState.setState(metaData.getCurrentLevel());
-		displayState = new DisplayState(gameState, metaData.getGameName());
-		eventManager = new EventManager2(gameState);
-		audioPlayer = new AudioPlayer(musicPath, 0);
+	public Engine(String gameName, boolean newGame, PlayerUpdater playerUpdater) {
+		currentGameState = new GameState(gameName, newGame);
+		displayState = new DisplayState(currentGameState, gameName);
+		eventManager = new EventManager2(currentGameState);
+		this.playerUpdater = playerUpdater;
 		startAnimation();
-	}
-	
-	/**
-	 * OBSOLETE--do not use. instead, use Engine(GameMetaData metaData)
-	 * @param gamePath
-	 */
-	public Engine(String gamePath) {
-		ModelGameState modelGameState = new ModelGameState(); 
-		gameState = modelGameState.getState();
-		displayState = modelGameState.getDisplay();
-		eventManager = new EventManager2(gameState);
-		audioPlayer = new AudioPlayer(musicPath, 0);
-		startAnimation();
-	}
-	
-	/**
-	 * OBSOLETE--do not use. instead, use Engine(GameMetaData metaData)
-	 * @param gamePath
-	 */
-	public Engine(GameState g) {
-		gameState = g;
-		displayState = new DisplayState(g);
-		eventManager = new EventManager2(gameState);
-		audioManager = new AudioManager(1);
-		
-		audioPlayer = audioManager.newAudioPlayer(musicPath);
-		startAnimation();
-	}
-	
-	@Override
-	public void close() {
-		audioPlayer.stop();
-	}
-	
-	@Override
-	public SubScene getDisplay() {
-		engineSubScene = new SubScene(subSceneRoot, SUBSCENE_WIDTH, SUBSCENE_HEIGHT);
-		return engineSubScene;
 	}
 	
 	private void startAnimation() {
@@ -95,6 +45,41 @@ public class Engine implements EngineInterface{
         animation.getKeyFrames().add(frame);
         animation.play();
     }
+	
+	private void timeStep (double elapsedTime) {
+		double gameSteps = elapsedTime * currentGameState.getGameSpeed();
+    	eventManager.processElementEvent(new TimeEvent(gameSteps));
+    	displayState.update(currentGameState);
+
+    	playerUpdater.updateHUD(populateHUD());
+    }
+	
+	private Map<String, Object> populateHUD() {
+		Map<String, Object> info = new HashMap<>();
+		if (currentGameState.getCurrentGamePart().hasMainCharacter()) {
+			GameElement mainCharacter = currentGameState.getCurrentGamePart().getMainCharacter();
+			info.put("Name", mainCharacter.getIdentifier());
+			info.put("Current Level", currentGameState.getCurrentGameLevel().getCurrentGamePart().getGamePartID());
+			info.put("Game Time", (int)((TimeTracker)mainCharacter.getBehavior(TimeTracker.class)).getTimePassed());
+			info.put("Lives", ((MainCharacter)mainCharacter.getBehavior(MainCharacter.class)).getLives());
+			//info.put("Health", value);
+			//info.put("Score", value);
+		}
+		return info;
+	}
+	
+	@Override
+	public void close() {
+		//playerUpdater.addHighScore((int) ((TimeTracker)currentGameState.getCurrentGamePart().getMainCharacter().getBehavior(TimeTracker.class)).getTimePassed());
+		animation.stop();
+		currentGameState.getAudioManager().stop();
+	}
+	
+	@Override
+	public SubScene getDisplay() {
+		SubScene engineSubScene = new SubScene(displayState.getSubSceneRoot(), SUBSCENE_WIDTH, SUBSCENE_HEIGHT);
+		return engineSubScene;
+	}
 
 	@Override
 	public void handleKeyInput(KeyCode code) {
@@ -106,55 +91,23 @@ public class Engine implements EngineInterface{
 		eventManager.processElementEvent(new MouseInputEvent(x,y));
 	}
 	
-	public void timeStep (double elapsedTime) {
-		double gameSteps = elapsedTime * gameState.getGameSpeed();
-		gameState.incrementGameTime(gameSteps);
-    	eventManager.processElementEvent(new TimeEvent(gameSteps));
-    	displayState.updateImageElements(scrollingAroundMainCharacter(gameState));
-    	displayState.update(gameState);
-    	updateDisplay(displayState.newElements, displayState.removeElements);
-    }
-
-	protected void updateDisplay(List<ImageElement> newElements, List<ImageElement> removeElements) {
-		for (ImageView e:newElements) {
-			subSceneRoot.getChildren().add(e);
-		}
-		newElements.clear();
-		
-		for (ImageView e:removeElements) {
-			subSceneRoot.getChildren().remove(e);
-		}
-		removeElements.clear();
-	}
-	
-	private List<Double> scrollingAroundMainCharacter(GameState gameState) {
-		List<Double> offset = Arrays.asList(0.0,0.0);
-		for (GameElement e: gameState.getElements()) {
-			if (e.hasBehavior(MainCharacter.class)) {
-			
-				MainCharacter mc_props = (MainCharacter) e.getBehavior(MainCharacter.class);
-				offset = mc_props.getImageViewOffset(SUBSCENE_WIDTH, SUBSCENE_HEIGHT);
-			}
-		}
-		return offset;
-	}
-
 	@Override
 	public void setVolume(double newVolume) {
-		audioManager.setVolume(newVolume);
+		currentGameState.getAudioManager().setVolume(newVolume);
 	}
 
 	@Override
 	public void pause() {
 		animation.pause();
-		
 	}
 
 	@Override
 	public void play() {
 		animation.play();
-		
 	}
-	
-	
+
+	@Override
+	public void save() {
+		currentGameState.saveGame();
+	}
 }

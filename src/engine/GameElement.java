@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import authoring.GameObject;
 import engine.actions.Action;
 import engine.behaviors.Behavior;
 import engine.behaviors.MandatoryBehavior;
@@ -49,6 +50,7 @@ public class GameElement {
 				.filter(b -> b.getClass() == behave.getClass())
 				.collect(Collectors.toList());
 		if (existing.size() > 0) {
+//			behaviors.remove(existing.get(0));
 			throw new TooManyBehaviorsException("Trying to add " + behave.getClass() + " to a GameElement that already has this behavior");
 		}
 		behaviors.add(behave);
@@ -69,6 +71,22 @@ public class GameElement {
 		}
 	}
 	
+	public Behavior getBehavior (String className) {
+		String qualifiedName = Behavior.class.getPackageName() + "." + className;
+		try {
+			Class<?> clazz = Class.forName(qualifiedName);
+			return getBehavior(clazz);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new RuntimeException("Could not convert " + qualifiedName + " to a behavior type");
+		}
+	}
+	
+	public MandatoryBehavior getMandatoryBehavior() {
+		return (MandatoryBehavior) getBehavior(MandatoryBehavior.class);
+	}
+	
 	
 	/*
 	 * Checks if this GameElement has a Behavior object of the requested type
@@ -77,6 +95,16 @@ public class GameElement {
 		return behaviors.stream()
 			.filter(behavior -> behavior_type.isAssignableFrom(behavior.getClass()))
 			.collect(Collectors.toList()).size() > 0;
+	}
+	
+	public boolean hasBehavior(String className) {
+		String qualifiedName = MandatoryBehavior.class.getPackageName() + className;
+		try {
+			return hasBehavior(Class.forName(qualifiedName));
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			throw new RuntimeException("Could not find" + qualifiedName + " class");
+		}
 	}
 	
 	/*
@@ -136,10 +164,6 @@ public class GameElement {
 		((MandatoryBehavior)(getBehavior(MandatoryBehavior.class))).setPosition(position.get(0), position.get(1));
 	}
 	
-	public void resetPosition() {
-		((MandatoryBehavior)(getBehavior(MandatoryBehavior.class))).resetPosition();
-	}
-	
 	/*
 	 * Easy Printing
 	 * (non-Javadoc)
@@ -180,9 +204,12 @@ public class GameElement {
 		if (thisProperties.size() != otherProperties.size()) {return false;}
 		
 		for (String thisKey: thisProperties.keySet()) {
-			if ((thisProperties.get(thisKey) instanceof GameElement)) {
+			if ((thisProperties.get(thisKey) instanceof GameObject)) {
 				continue;
 			}
+//			id (otherProperties.get)
+//			System.out.println("thisKey: " + thisKey + ", this object: " + thisProperties.get(thisKey) + ", other obejct: " + otherProperties.get(thisKey));
+//			System.out.println("otherKey: " + otherKey + ", " + thisProperties.get(thisKey));
 			if (!(otherProperties.get(thisKey).equals(thisProperties.get(thisKey)))) {
 				return false;
 			}

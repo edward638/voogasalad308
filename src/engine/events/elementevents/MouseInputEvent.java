@@ -11,6 +11,7 @@ public class MouseInputEvent extends ElementEvent {
 	}
 	
 	public MouseInputEvent(double x, double y) {
+		mouseLocation = new Point();
 		this.mouseLocation.setLocation(x, y);
 	}
 	
@@ -38,6 +39,11 @@ public class MouseInputEvent extends ElementEvent {
 					getMouseY() == ((MouseInputEvent)(other)).getMouseY());
 		}
 		return false;
+	}
+	
+	@Override
+	public String getTriggerString() {
+		return "";
 	}
 	
 	

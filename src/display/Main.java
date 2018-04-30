@@ -16,6 +16,7 @@ public class Main extends Application {
 	private static final String ICON_IMAGE = "./data/images/icon.png";
 
 	public static void main(String args[]) {
+		System.out.println(javafx.scene.text.Font.getFamilies());
 		launch(args);
 	}
 
@@ -24,7 +25,6 @@ public class Main extends Application {
 		splash = new SplashScreen(stage);
 		stage.setTitle("VOOGA");
 		stage.setScene(splash.getSplashScreen());
-//		stage.setResizable(false);
 		stage.getIcons().add(createIcon());
 		stage.show();
 	}

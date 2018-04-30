@@ -4,19 +4,14 @@ import java.io.File;
 import java.nio.file.Paths;
 
 import data.GameDescriptionProvider;
-import data.GameLoader;
-//
-import javafx.geometry.Insets;
+
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
@@ -48,7 +43,9 @@ public class GameSelector extends ScrollPane {
 		File[] fList = directory.listFiles();
 		for (File file : fList) {
 			String gameName = file.getName();
-			if (gameName.contains("DS_Store")) {continue;}
+			if (gameName.contains("DS_Store")) {
+				continue;
+			}
 			String gameString = gameDescriptionProvider.getGameName(gameName);
 			String gameDescription = gameDescriptionProvider.getGameDescription(gameName);
 			Image gameImage = gameDescriptionProvider.getDescriptionImage(gameName);
@@ -60,7 +57,9 @@ public class GameSelector extends ScrollPane {
 			playButton.setLayoutY(90);
 			playButton.setOnAction((event) -> {
 				buttonData.removeFromRoot(gameSelectorBox);
-				buttonData.playGame(gameName);
+				buttonData.removeFromRoot(this);
+				buttonData.playGame(gameName, true);
+
 			});
 
 			gameDescriptionPane.getChildren().add(playButton);

@@ -5,6 +5,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 	
+/**
+ * 
+ * @author Edward Zhuang
+ *
+ */
 public abstract class PopupRefactored {
 		
 	private Stage stage;

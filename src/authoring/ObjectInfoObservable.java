@@ -1,5 +1,10 @@
 package authoring;
 
-public interface ObjectInfoObservable {
+import java.util.List;
 
+public interface ObjectInfoObservable {
+	GameObject getCurrentGameObject();
+	List<GameObject> getInstances();
+	String getCurrentImageName();
+	List<GameObject> getMyObjects();
 }

@@ -1,16 +1,18 @@
 package engine.events.elementevents;
 
+import java.io.Serializable;
+
 import javafx.scene.input.KeyCode;
 
 public class KeyInputEvent extends ElementEvent {
-	KeyCode code;
+	String code;
 	
-	public KeyInputEvent(KeyCode code) {
-		this.code = code;
+	public KeyInputEvent(KeyCode co) {
+		this.code = co.getChar();
 	}
 	
 	public KeyCode getKeyCode() {
-		return code;
+		return KeyCode.getKeyCode(code);
 	}
 
 	@Override
@@ -25,6 +27,11 @@ public class KeyInputEvent extends ElementEvent {
 			return getKeyCode().compareTo(oth.getKeyCode()) == 0;
 		}
 		return false;
+	}
+	
+	@Override
+	public String getTriggerString() {
+		return code;
 	}
 	
 	

@@ -1,50 +1,36 @@
 package engine;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-public class GameMetaData
-{
-	List<GameState> levels;
-	int currentLevelNumber;
-	GameState currentLevel;
-	String gameName;
-	
-	//PlayerUpdater playerUpdater;
-	
-	public GameMetaData(List<GameState> levels, int currentLevelNumber, GameState currentLevel, String gameName) {
-		this.levels = levels;
-		this.currentLevelNumber = currentLevelNumber;
-		this.currentLevel = currentLevel;
-		this.gameName = gameName;
+import authoring.GameScene;
+import engine.authouringconversion.Converter2;
+import engine.behaviors.MainCharacter;
+
+public class GameMetaData implements GameMetaDataInterface {
+	private GameState gameState;
+
+	public GameMetaData(GameState currentGameState) {
+		gameState = currentGameState;
 	}
-	
-	public void setPlayerUpdater(PlayerUpdater playerUpdater) {
-		this.playerUpdater = playerUpdater;
+
+	@Override
+	public String getCurrentLevelID() {
+		return gameState.getCurrentGameLevel().getGameLevelID();
 	}
-	/*
-	public void updateMainCharacterInfo(Map<String, Object> properties) {
-		properties.put("Level", currentLevelNumber);
-		myPlayerObject.updateHUD(properties);
+
+	@Override
+	public int getMainCharacterLives() {
+		return ((MainCharacter) gameState.getCurrentGamePart().getMainCharacter().getBehavior(MainCharacter.class)).getLives();
 	}
-	
-	public void addHighScore(int score) {
-		myPlayerObject.addHighScore(score);
-	}*/
-	
-	public String getGameName() {
-		return gameName;
-	}
-	
-	public GameState getLevel(int levelNumber) {
-		return levels.get(levelNumber);
-	}
-	
-	public GameState getCurrentLevel() {
-		return currentLevel;
-	}
-	
-	public int getCurrentLevelNumber() {
-		return currentLevelNumber;
+
+	@Override
+	public List<GameScene> getGameScenes() {
+		Converter2 converter = new Converter2();
+		List<GameScene> toReturn = new ArrayList<GameScene>();
+		for (GamePart part : gameState.getAllGameParts()) {
+			toReturn.add(converter.gamePart2GameScene(part));
+		}
+		return toReturn;
 	}
 }

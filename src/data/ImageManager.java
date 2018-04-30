@@ -1,24 +1,25 @@
 package data;
 
-import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.image.Image;
-
-import javax.imageio.ImageIO;
-
-import authoring.GameScene;
-
 import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
+
 public class ImageManager {
 
     private static final String BACKSLASH = "/";
+    private static final String BACKGROUNDIMAGES = "backgroundimages";
     private static final String IMAGES = "images";
     private String gameLocation;
     private String gameImagesLocation;
+    private String gameBackgroundImagesLocation;
     private static final String defaultImageLocation = "./data/gamedata/defaultimages/";
     private static final String baseLocation = "./data/gamedata/games/";
     private static final String GAMES = "games/";
@@ -31,6 +32,7 @@ public class ImageManager {
     	} else {
 	        gameLocation = baseLocation + gameName + BACKSLASH;
 	        gameImagesLocation = gameLocation + IMAGES + BACKSLASH;
+	        gameBackgroundImagesLocation = gameLocation + BACKGROUNDIMAGES + BACKSLASH;
     	}
     }
     
@@ -53,11 +55,13 @@ public class ImageManager {
     	return imageList;
     }
 
-    private BufferedImage getBufferedImage(String imageName) {
+    private BufferedImage getBufferedImage(String imageName, String location) {
         BufferedImage img = null;
         try {	
 //        	System.out.println(gameImagesLocation + imageName);
-            img = ImageIO.read(new File(gameImagesLocation + imageName));
+//        	System.out.println(location+imageName);
+//        		System.out.println(location + imageName);
+            img = ImageIO.read(new File(location + imageName));
         } catch (IOException e) {
             e.printStackTrace(); //TODO: remove this print stacktrace!
             throw new NullPointerException();
@@ -71,16 +75,32 @@ public class ImageManager {
      * @return BufferedImage
      */
     public Image getImage(String imageName){
-        return bufferedImagetoJavaFXImage(getBufferedImage(imageName));
+        return bufferedImagetoJavaFXImage(getBufferedImage(imageName, gameImagesLocation));
     }
 
 
-    private void storeBufferedImage(String imageName, BufferedImage image){
+    private void storeBufferedImage(String imageName, BufferedImage image, String location){
         try {
-            ImageIO.write(image, "png", new File(gameImagesLocation + imageName + ".png"));
+            System.out.println("storeBufferedImage " + location + imageName);
+        	ImageIO.write(image, "png", new File(location + imageName + ".png"));
         } catch (IOException e) {
             e.printStackTrace(); //TODO: remove this print stacktrace!
         }
+    }
+    
+    
+    public String storeBackgroundImage(Image image) {
+    	ArrayList<Image> imageList = new ArrayList<>();
+    	File directory = new File(gameBackgroundImagesLocation);
+    	int number = directory.listFiles().length;
+    	String background = "background" + number;
+    	storeBufferedImage(background, javaFXToBufferedImage(image), gameBackgroundImagesLocation);
+    	return background;
+    	
+    }
+    
+    public Image getBackgroundImage(String imageName) {
+    	return bufferedImagetoJavaFXImage(getBufferedImage(imageName, gameBackgroundImagesLocation));
     }
 
     /**
@@ -89,9 +109,20 @@ public class ImageManager {
      * @param image to be stored
      */
     public void storeImage(String imageName, Image image){
-        storeBufferedImage(imageName, javaFXToBufferedImage(image));
+    	System.out.println("storeImage " + imageName);
+        storeBufferedImage(imageName, javaFXToBufferedImage(image), gameImagesLocation);
     }
 
+    public void storeCompositeBackgroundImage(String imageName, RenderedImage ri) {
+    	try {
+    		System.out.println(gameImagesLocation);
+			ImageIO.write(ri, "png", new File(gameImagesLocation+imageName));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
     /**
      * Converts JavaFX image to BufferedImage
      * @param image

@@ -1,9 +1,9 @@
 package engine.behaviors;
 
+import authoring.groovy.GroovyMethod;
 import engine.GameElement;
 import engine.events.gameevents.GameOverEvent;
 import engine.events.gameevents.RemoveGameElementEvent;
-import javafx.scene.control.Alert;
 
 public class Killable extends Behavior{
 	private Double health;
@@ -31,10 +31,11 @@ public class Killable extends Behavior{
 		this(ge, 30.0, 0.0);
 	}
 	
+	@GroovyMethod
 	public void reduceHealth(Double h) {
 		this.health -= h;
 		if (health < 0) {
-			System.out.println("health less than 0");
+		//	System.out.println("health less than 0");
 			getParent().addGameEvent(new RemoveGameElementEvent(getParent()));
 			if (getParent().hasBehavior(MainCharacter.class)) {
 				getParent().addGameEvent(new GameOverEvent(getParent()));
@@ -42,23 +43,28 @@ public class Killable extends Behavior{
 		}
 	}
 	
+	@GroovyMethod
 	public void loseLife() {
-		System.out.println("Losing life: " + health);
+	//	System.out.println("Losing life: " + health);
 		reduceHealth(lifeHealth);
 	}
 	
+	@GroovyMethod
 	public void decayHealth(Double time) {
 		reduceHealth(time*decayRate);
 	}
 	
+	@GroovyMethod
 	public Double getHealth() {
 		return this.health;
 	}
 	
+	@GroovyMethod
 	public boolean isAlive() {
 		return (this.health>=0);
 	}
 	
+	@GroovyMethod
 	public void revive() {
 		health = default_health;
 	}

@@ -20,14 +20,14 @@ public class EngineClassRetriever {
 		return reflections.getSubTypesOf(superClass);
 	}
 
-	public Set<String> cleanClassSet(Set<?> classes) {
-		Set<String> classNames = new TreeSet<>();
-		return classNames;
-	}
+//	public Set<String> cleanClassSet(Set<?> classes) {
+//		Set<String> classNames = new TreeSet<>();
+//		return classNames;
+//	}
 	
-    public static void main(String[] args){
-		EngineClassRetriever events = new EngineClassRetriever();
-		System.out.println(events.getClasses(ElementEvent.class, "engine.events.elementevents"));
-    }
+//    public static void main(String[] args){
+//		EngineClassRetriever events = new EngineClassRetriever();
+//		System.out.println(events.getClasses(ElementEvent.class, "engine.events.elementevents"));
+//    }
 	
 }

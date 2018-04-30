@@ -1,52 +1,82 @@
 package authoring.displayrefactored.controllers;
 
-import authoring.Game;
-import authoring.displayrefactored.AuthoringEnvironmentGUIRefactored;
+import java.awt.image.RenderedImage;
+
+import authoring.GameObject;
+import authoring.GameScene;
+import authoring.SceneBackgroundImage;
+import authoring.SceneBackgroundImageSerializable;
+import authoring.ViewRefreshInterface;
 import authoring.displayrefactored.authoringuicomponents.GameViewWindowRefactored;
+import data.ImageManager;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.layout.Pane;
 
-public class GameViewWindowController extends Controller {
+/**
+ * 
+ * @author Edward Zhuang
+ *
+ */
+public class GameViewWindowController extends Controller implements ViewRefreshInterface {
 	
-	Game game;
-	GameViewWindowRefactored gameViewWindowRefactored;
+	private GameScene gameScene;
+	private GameViewWindowRefactored gameViewWindowRefactored;
 	
-	public GameViewWindowController(Game game) {
+	public GameViewWindowController(GameScene gameScene, ImageManager imageManager) {
 		// TODO Auto-generated constructor stub
-		this.game = game;
+		super(imageManager);
+		this.gameScene = gameScene;
 	}
 
 	@Override
 	protected void initializeScreenComponents() {
 		// TODO Auto-generated method stub
 		gameViewWindowRefactored = new GameViewWindowRefactored(this);
-		
 	}
 
 	@Override
 	protected void setUpConnections() {
-		// TODO Auto-generated method stub
-		game.addObserver(gameViewWindowRefactored);
+		gameScene.addObserver(gameViewWindowRefactored);
 	}
 
 	@Override
 	protected void addToGUI(Pane pane) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub 
 		int x = ResourceBundleManager.getPosition("GAMEVIEWWINDOW_X");
 		int y = ResourceBundleManager.getPosition("GAMEVIEWWINDOW_Y");
-		gameViewWindowRefactored.AttachToPane(pane, x, y);
+		gameViewWindowRefactored.attachToPane(pane, x, y);
+	}
+	
+	public void storeBackgroundImage(RenderedImage ri) {
+		getImageManager().storeCompositeBackgroundImage(gameScene.getName()+"backgroundimage.png", ri);
+	}
+
+	public SceneBackgroundImage getBackgroundImage(SceneBackgroundImageSerializable s) {
+		return new SceneBackgroundImage(getImageManager().getBackgroundImage(s.getImagePath()), s);
+	}
+	
+	@Override
+	protected void refreshView() {
+	}
+	
+	public void setGameScene(GameScene gameScene) {
+		this.gameScene = gameScene;
+		setUpConnections();
+		gameScene.notifyMyObservers();
 	}
 
 	@Override
-	protected void refreshView() {
+	public void backupGameScene() {
+		gameScene.backupGameScene();
+	}
+	
+	@Override
+	public void notifyObjectInfoObservers(GameObject gameObject) {
 		// TODO Auto-generated method stub
-		game.notifyMyObservers();
-	}
+		gameScene.setCurrentGameObject(gameObject);
+		gameScene.notifyMyObservers();
 	
-	public GameViewWindowRefactored getGameViewWindowRefactored() {
-		return gameViewWindowRefactored;
 	}
-	
 	
 	
 

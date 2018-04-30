@@ -1,10 +1,10 @@
 package authoring.displayrefactored.popups;
 
-
 import java.io.File;
 
 import authoring.display.buttonevents.ChooseImageEvent;
 import authoring.displayrefactored.controllers.LevelPanelController;
+import authoring.displayrefactored.controllers.ObjectInfoPanelController;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -19,12 +19,17 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 
-public class NewGameObjectPopupRefactored extends PopupRefactored{
+/**
+ * 
+ * @author Edward Zhuang
+ *
+ */
+public class NewGameObjectPopupRefactored extends PopupRefactored {
 
-	private static final int xSize = 400;
-	private static final int ySize = 600;
-	private static final int DEFAULT_SPACING = 50;
-	private LevelPanelController controller;
+	private static final int xSize = 300;
+	private static final int ySize = 200;
+	private static final int DEFAULT_SPACING = 10;
+	private ObjectInfoPanelController controller;
 	private VBox myVBox;
 	TextField nameText;
 	TextField xText;
@@ -33,8 +38,8 @@ public class NewGameObjectPopupRefactored extends PopupRefactored{
 	Button chooseImageButton;
 	Button saveButton;
 	Image image;
-	
-	public NewGameObjectPopupRefactored(LevelPanelController controller) {
+
+	public NewGameObjectPopupRefactored(ObjectInfoPanelController controller) {
 		// TODO Auto-generated constructor stub
 		super();
 		this.controller = controller;
@@ -42,6 +47,7 @@ public class NewGameObjectPopupRefactored extends PopupRefactored{
 		generatePopup();
 		mapButtons();
 	}
+
 	@Override
 	protected void generatePopup() {
 		// TODO Auto-generated method stub
@@ -59,47 +65,49 @@ public class NewGameObjectPopupRefactored extends PopupRefactored{
 		yText = new TextField();
 		yPosValues.getChildren().addAll(new Label("Y Position: "), yText);
 
-		HBox imageInfo = new HBox(DEFAULT_SPACING);
-		imageText = new TextField();
-		
-	
 		chooseImageButton = new Button(ResourceBundleManager.getAuthoring("ChooseImageButton"));
-		
-		imageInfo.getChildren().addAll(chooseImageButton, new Label("Image name: "), imageText);
 
 		saveButton = new Button(ResourceBundleManager.getAuthoring("Save"));
 
-		myVBox.getChildren().addAll(nameObject, xPosValues, yPosValues, imageInfo, saveButton);
-		
+		myVBox.getChildren().addAll(nameObject, xPosValues, yPosValues, chooseImageButton, saveButton);
+
 		BorderPane borderPane = getPane();
 		borderPane.setCenter(myVBox);
-		
+
 	}
 
 	@Override
 	protected void mapButtons() {
 		// TODO Auto-generated method stub
-		chooseImageButton.setOnAction(e-> {
+		chooseImageButton.setOnAction(e -> {
 			try {
 				FileChooser fileChooser = new FileChooser();
 				fileChooser.setTitle("Choose Object Image");
 				fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
 				File imageFile = fileChooser.showOpenDialog(new Stage());
 				image = new Image(imageFile.toURI().toString());
-				//put image.getName into SceneBackground
+				// put image.getName into SceneBackground
 			} catch (Exception exception) {
-				//do nothing
-				//this just means the user didn't choose an image
-		
-			}//
+				// do nothing
+				// this just means the user didn't choose an image
+
+			} //
 		});
-		
-		saveButton.setOnAction(e->{
-			controller.addGameObject(nameText.getText(), Double.parseDouble(xText.getText()), Double.parseDouble(yText.getText()), imageText.getText(), image);
-			close();
-		});
+
+		saveButton.setOnAction(e -> {
+			// System.out.println("ADDING TO GAMEOBJECT NAME: " + nameText.getText());
+			if (controller.checkUniqueName(nameText.getText())) {
+				controller.addGameObject(nameText.getText(), Double.parseDouble(xText.getText()),
+						Double.parseDouble(yText.getText()), (nameText.getText() + "image"), image);
+				close();
+
+			} else {
 				
-		
+				new ErrorBox("Duplicate Object Name", "Please Change the Name of Your Object");
+
+			}
+		});
+
 	}
 
 }

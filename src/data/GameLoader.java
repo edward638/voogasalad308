@@ -2,14 +2,16 @@ package data;
 
 import authoring.GameObject;
 import authoring.GameScene;
+import authoring.GameSceneSerializable;
 import data.propertiesFiles.ResourceBundleManager;
-import engine.GameState;
+import engine.GamePart;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -42,12 +44,26 @@ public class GameLoader {
      * Gets map for game authoring/game engine to use to load game
      * @return map
      */
-    public List<GameScene> getGameScenes(){
-        return deserializer.getGameScenes(gameScenesLocation);
+    public List<GameScene> getGameScenes(boolean isNew){
+    	List<GameScene> list = new ArrayList<>();
+    	
+    	if (isNew) {
+        for (GameSceneSerializable s : deserializer.getGameSceneSerializables(gameScenesLocation)) {
+        	list.add(new GameScene(s));
+        }
+    	} else {
+    		for (GameSceneSerializable s : deserializer.getGameSceneSerializables(gameSavesLocation)) {
+            	list.add(new GameScene(s));
+            }
+    	}
+    	
+        return list;
     }
+    
+    
 
-    public GameState getGameState(){
-    	return deserializer.getSaveState(gameSavesLocation);
+    public GamePart getGamePart(){
+    	return deserializer.getSavePart(gameSavesLocation);
     }
 
 }

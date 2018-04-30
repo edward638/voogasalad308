@@ -21,5 +21,10 @@ public class TimeEvent extends ElementEvent {
 	public boolean matchesEvent(ElementEvent other) {
 		return other instanceof TimeEvent;
 	}
+	
+	@Override
+	public String getTriggerString() {
+		return "";
+	}
 
 }

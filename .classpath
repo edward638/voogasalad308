@@ -6,12 +6,10 @@
 	<classpathentry kind="lib" path="lib/groovy-src.jar"/>
 	<classpathentry kind="lib" path="lib/javassist-3.19.0-GA.jar"/>
 	<classpathentry kind="lib" path="lib/reflections-0.9.10.jar"/>
-	<classpathentry kind="lib" path="lib/annotations-2.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/byte-buddy-1.7.9.jar"/>
 	<classpathentry kind="lib" path="lib/client-combined-3.11.0-sources.jar"/>
 	<classpathentry kind="lib" path="lib/client-combined-3.11.0.jar"/>
 	<classpathentry kind="lib" path="lib/commons-codec-1.10.jar"/>
-	<classpathentry kind="lib" path="lib/dropbox-core-sdk-3.0.7-sources.jar"/>
 	<classpathentry kind="lib" path="lib/dropbox-core-sdk-3.0.7.jar"/>
 	<classpathentry kind="lib" path="lib/httpclient-4.5.3.jar"/>
 	<classpathentry kind="lib" path="lib/httpcore-4.4.6.jar"/>
@@ -26,6 +24,7 @@
 	<classpathentry kind="lib" path="lib/xpp3_min-1.1.4c.jar"/>
 	<classpathentry kind="lib" path="lib/xstream-1.4.10.jar"/>
 	<classpathentry kind="lib" path="lib/reflection/javassist-3.19.0-GA.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-simple-1.7.25.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>

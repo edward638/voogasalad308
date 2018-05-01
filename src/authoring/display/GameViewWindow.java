@@ -124,12 +124,6 @@ public class GameViewWindow extends MainWindowComponent{
 	private void initBackground() {
 		sceneBackgroundPane.setPrefSize(1000, 1000);
 	}
-	/**
-	 * This creates the scroll pane, and should be the size of the "camera" view in authoring/player
-	 */
-	private void makeScrollPane() {
-		
-	}
 	
 	public void switchPanes(String key) {
 		if (key.equals("Edit Background")) {

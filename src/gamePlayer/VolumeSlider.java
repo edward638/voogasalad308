@@ -40,7 +40,7 @@ public class VolumeSlider extends Slider {
 	private void setupVolumeSlider() {
 		slider = new Slider(MINIMUM_VOLUME, MAXIMUM_VOLUME, INITIAL_VOLUME);
 		slider.setLayoutX(1080);
-		slider.setLayoutY(417);
+		slider.setLayoutY(427);
 		slider.setMaxWidth(130);
 		slider.valueProperty().addListener(new ChangeListener<Number>() {
 			public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
@@ -60,7 +60,7 @@ public class VolumeSlider extends Slider {
 		volumeText = new Label("Volume: ");
 		volumeText.setFont(Font.font(font, 20));
 		volumeText.setLayoutX(970);
-		volumeText.setLayoutY(410);
+		volumeText.setLayoutY(420);
 	}
 
 	public void toggleMusic() {

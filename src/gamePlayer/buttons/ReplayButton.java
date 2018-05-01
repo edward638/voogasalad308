@@ -8,7 +8,7 @@ package gamePlayer.buttons;
 public class ReplayButton extends PlayerButtons {
 
 	public ReplayButton(double x, double y, double width, double height, ButtonData buttonData) {
-		super(x, y, width, height, buttonData, "Restart Current Game");
+		super(x, y, width, height, buttonData, "Restart Game");
 	}
 
 	protected void setAction() {

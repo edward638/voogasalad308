@@ -71,9 +71,11 @@ public class MFWindow extends VBox {
 	}
 	private void parseMethod(Method m, List<String> list) {
 		String[] holder = m.toString().split(" ");
+		String methodName = holder[holder.length - 1];
 		String[] name = holder[holder.length - 1].split("\\.");
-		String use = name[name.length-1];
-		list.add(use);
+		String prefix = name[0] + "." + name[1] + "." + name[2] + ".";
+		methodName = methodName.replace(prefix, "");
+		list.add(methodName);
 	}
 	private void methodsClicked(String method) {
 		// This is something you can implement on epuc, since you can set text to the text plane in the groovy window
@@ -98,9 +100,11 @@ public class MFWindow extends VBox {
 	}
 	private void parseField(Field f, List<String> list) {
 		String[] holder = f.toString().split(" ");
+		String fieldName = holder[holder.length - 1];
 		String[] name = holder[holder.length - 1].split("\\.");
-		String use = name[name.length-1];
-		list.add(use);
+		String prefix = name[0] + "." + name[1] + "." + name[2] + ".";
+		fieldName = fieldName.replace(prefix, "");
+		list.add(fieldName);
 	}
 	private void fieldsClicked(String field) {
 		// This is something you can implement on epuc, since you can set text to the text plane in the groovy window

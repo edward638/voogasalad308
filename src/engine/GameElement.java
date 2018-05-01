@@ -72,7 +72,7 @@ public class GameElement {
 	}
 	
 	public Behavior getBehavior (String className) {
-		String qualifiedName = Behavior.class.getPackageName() + "." + className;
+		String qualifiedName = Behavior.class.getPackage().getName() + "." + className;
 		try {
 			Class<?> clazz = Class.forName(qualifiedName);
 			return getBehavior(clazz);
@@ -98,7 +98,7 @@ public class GameElement {
 	}
 	
 	public boolean hasBehavior(String className) {
-		String qualifiedName = MandatoryBehavior.class.getPackageName() + className;
+		String qualifiedName = MandatoryBehavior.class.getPackage().getName() + className;
 		try {
 			return hasBehavior(Class.forName(qualifiedName));
 		} catch (ClassNotFoundException e) {

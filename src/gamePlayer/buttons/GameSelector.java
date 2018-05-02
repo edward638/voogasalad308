@@ -15,16 +15,31 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+/**
+ * front end for selecting new games
+ * 
+ * @author jeffreyli, calvinma
+ *
+ */
 public class GameSelector extends ScrollPane {
 
-	ButtonData buttonData;
+	private ButtonData buttonData;
+	private boolean isNew;
+	private String playOrLoadGame;
 
-	public GameSelector(ButtonData buttonData) {
+	public GameSelector(ButtonData buttonData, boolean isNew) {
 		this.buttonData = buttonData;
+		buttonData.pauseGame();
 		this.setLayoutX(30);
 		this.setLayoutY(30);
 		this.setPrefSize(900, 590);
 		this.setHbarPolicy(ScrollBarPolicy.NEVER);
+		this.isNew = isNew;
+		if (isNew) {
+			playOrLoadGame = "Select Game";
+		} else {
+			playOrLoadGame = "Load Game";
+		}
 		initializeGameSelections();
 	}
 
@@ -52,13 +67,13 @@ public class GameSelector extends ScrollPane {
 
 			Pane gameDescriptionPane = setupNewGamePane(gameName, gameString, gameDescription, gameImage);
 
-			Button playButton = new Button("Select Game");
+			Button playButton = new Button(playOrLoadGame);
 			playButton.setLayoutX(750);
 			playButton.setLayoutY(90);
 			playButton.setOnAction((event) -> {
 				buttonData.removeFromRoot(gameSelectorBox);
 				buttonData.removeFromRoot(this);
-				buttonData.playGame(gameName, true);
+				buttonData.playGame(gameName, isNew);
 
 			});
 

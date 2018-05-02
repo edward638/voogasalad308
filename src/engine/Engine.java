@@ -16,6 +16,15 @@ import javafx.scene.SubScene;
 import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
 
+/**
+ * @author Yashas Manjunatha and Gouttham Chandraekar
+ * The Engine provides a set of Java classes that serve as a shared framework to be able to play
+ * scrolling platformer games. The tasks of the Engine include, but are not limited to,
+ * instantiating a Game from the the Game Data, loading both new and saved games, displaying the game and
+ * provided a singular JavaFX component to be displayed, raising and handling events when certain things
+ * happen in the game, collision management, playing audio, and providing information about the current state
+ * of the game to the Player.
+ */
 public class Engine implements EngineInterface{
 	public static final int FRAMES_PER_SECOND = 60;
 	public static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
@@ -29,6 +38,12 @@ public class Engine implements EngineInterface{
 	private EventManager2 eventManager;
 	private PlayerUpdater playerUpdater;
 	
+	/**
+	 * Instantiates a new Engine object for a Game.
+	 * @param gameName Name of the Game (Folder Name)
+	 * @param newGame True for a new game with initial settings from Authoring or False for the saved game state.
+	 * @param playerUpdater PlayerUpdater object from Player to populate and update information for the HUD.
+	 */
 	public Engine(String gameName, boolean newGame, PlayerUpdater playerUpdater) {
 		currentGameState = new GameState(gameName, newGame);
 		displayState = new DisplayState(currentGameState, gameName);
@@ -37,6 +52,9 @@ public class Engine implements EngineInterface{
 		startAnimation();
 	}
 	
+	/**
+	 * Starts the JavaFX animation.
+	 */
 	private void startAnimation() {
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
                 e -> timeStep(SECOND_DELAY));
@@ -46,6 +64,11 @@ public class Engine implements EngineInterface{
         animation.play();
     }
 	
+	/**
+	 * Time step function that fuels the JavaFX animation. Raises time passes events in the event manager,
+	 * updates the display of the game, and updated the GamePlayer's HUD.
+	 * @param elapsedTime Time Elapsed in the Animation (JavaFX Property)
+	 */
 	private void timeStep (double elapsedTime) {
 		double gameSteps = elapsedTime * currentGameState.getGameSpeed();
     	eventManager.processElementEvent(new TimeEvent(gameSteps));
@@ -54,6 +77,10 @@ public class Engine implements EngineInterface{
     	playerUpdater.updateHUD(populateHUD());
     }
 	
+	/**
+	 * Method to populate the Player HUD with information queried from the current state of the game.
+	 * @return A Map of Label to Value of the HUD Information
+	 */
 	private Map<String, Object> populateHUD() {
 		Map<String, Object> info = new HashMap<>();
 		if (currentGameState.getCurrentGamePart().hasMainCharacter()) {
@@ -68,44 +95,69 @@ public class Engine implements EngineInterface{
 		return info;
 	}
 	
+	/* (non-Javadoc)
+	 * @see engine.EngineInterface#close()
+	 */
 	@Override
 	public void close() {
-		//playerUpdater.addHighScore((int) ((TimeTracker)currentGameState.getCurrentGamePart().getMainCharacter().getBehavior(TimeTracker.class)).getTimePassed());
-		animation.stop();
+		playerUpdater.addHighScore((int) ((TimeTracker)currentGameState.getCurrentGamePart().getMainCharacter().getBehavior(TimeTracker.class)).getTimePassed());
 		currentGameState.getAudioManager().stop();
 	}
 	
+	/* (non-Javadoc)
+	 * @see engine.EngineInterface#getDisplay()
+	 */
 	@Override
 	public SubScene getDisplay() {
 		SubScene engineSubScene = new SubScene(displayState.getSubSceneRoot(), SUBSCENE_WIDTH, SUBSCENE_HEIGHT);
 		return engineSubScene;
 	}
 
+	/* (non-Javadoc)
+	 * @see engine.EngineInterface#handleKeyInput(javafx.scene.input.KeyCode)
+	 */
 	@Override
 	public void handleKeyInput(KeyCode code) {
 		eventManager.processElementEvent(new KeyInputEvent(code));
 	}
 	
+	/* (non-Javadoc)
+	 * @see engine.EngineInterface#handleMouseInput(double, double)
+	 */
 	@Override
 	public void handleMouseInput(double x, double y) {
 		eventManager.processElementEvent(new MouseInputEvent(x,y));
 	}
 	
+	/* (non-Javadoc)
+	 * @see engine.EngineInterface#setVolume(double)
+	 */
 	@Override
 	public void setVolume(double newVolume) {
 		currentGameState.getAudioManager().setVolume(newVolume);
 	}
 
+	/* (non-Javadoc)
+	 * @see engine.EngineInterface#pause()
+	 */
 	@Override
 	public void pause() {
 		animation.pause();
+		currentGameState.getAudioManager().pause();
 	}
 
+	/* (non-Javadoc)
+	 * @see engine.EngineInterface#play()
+	 */
 	@Override
 	public void play() {
 		animation.play();
+		currentGameState.getAudioManager().play();
 	}
 
+	/* (non-Javadoc)
+	 * @see engine.EngineInterface#save()
+	 */
 	@Override
 	public void save() {
 		currentGameState.saveGame();

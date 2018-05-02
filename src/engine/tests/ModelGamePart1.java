@@ -6,7 +6,6 @@ import java.util.List;
 
 import engine.GameElement;
 import engine.GamePart;
-import engine.actions.ChangeLevel;
 import engine.actions.GroovyAction;
 import engine.behaviors.BlockLike;
 import engine.behaviors.BulletLike;
@@ -22,15 +21,23 @@ import engine.behaviors.MovableCharacter;
 import engine.behaviors.Shooter;
 import engine.behaviors.TimeRoutine2;
 import engine.behaviors.TimeTracker;
-import engine.behaviors.TrackMainCharacter;
-import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.KeyInputEvent;
-import engine.events.elementevents.TimeEvent;
 import javafx.scene.input.KeyCode;
 
+/**
+ * @author Yashas Manjunatha, Gouttham Chandraekar, and Trishul Nagenalli
+ * Model GamePart object used for Engine Testing.
+ * GameElement objects and their properties are all hard coded.
+ * This GamePart contains the Main Character.
+ * Used to test the new refactored design of Engine.
+ *
+ */
 public class ModelGamePart1 {
 	GamePart modelGamePart1;
 	
+	/**
+	 * Sets up the Model GamePart object.
+	 */
 	public ModelGamePart1() {
 		modelGamePart1 = new GamePart("modelGamePart1", "level 1");
 		
@@ -56,11 +63,20 @@ public class ModelGamePart1 {
 		}
 	}
 	
+	/**
+	 * Adds the MainCharacter GameElement to the GamePart.
+	 */
 	private void addMainCharacter() {
 		GameElement mainCharacter = getMario();
 		modelGamePart1.addGameElement(mainCharacter);
 	}
 	
+	/**
+	 * Sets up a new Exit Portal GameElement object.
+	 * @param xpos X Position of the Exit Portal
+	 * @param ypos Y Position of the Exit Portal
+	 * @return Reference to a new Exit Portal GameElement Object
+	 */
 	public GameElement getPortal1(Double xpos, Double ypos) {
 		GameElement block = new GameElement();
 		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "Blockimage"));
@@ -70,6 +86,12 @@ public class ModelGamePart1 {
 		return block;
 	}
 	
+	/**
+	 * Sets up a new Entrance Portal GameElement object.
+	 * @param xpos X Position of the Entrance Portal
+	 * @param ypos Y Position of the Entrance Portal
+	 * @return Reference to a new Entrance Portal GameElement Object
+	 */
 	public GameElement getPortal2(Double xpos, Double ypos) {
 		GameElement block = new GameElement();
 		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "Blockimage"));
@@ -80,6 +102,10 @@ public class ModelGamePart1 {
 		return block;
 	}
 	
+	/**
+	 * Sets up a new MainCharacter Mario GameElement Object
+	 * @return Reference to the Mario GameElement Object
+	 */
 	public GameElement getMario() {
 		GameElement mario = new GameElement();
 		//Note: Image path untested
@@ -114,6 +140,12 @@ public class ModelGamePart1 {
 		return mario;
 	}
 	
+	/**
+	 * Sets up a new Block GameElement object.
+	 * @param xpos X Position of the Block
+	 * @param ypos Y Position of the Block
+	 * @return Reference to a new Block GameElement object
+	 */
 	public GameElement getBlock(Double xpos, Double ypos) {
 		GameElement block = new GameElement();
 		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "Blockimage"));
@@ -122,12 +154,24 @@ public class ModelGamePart1 {
 	}
 
 	
+	/**
+	 * Sets up a new Block GameElement object.
+	 * @param xpos X Position of the Block
+	 * @param ypos Y Position of the Block
+	 * @return Reference to a new Block GameElement object
+	 */
 	public GameElement getBack(Double xpos, Double ypos) {
 		GameElement block = new GameElement();
 		block.addBehavior(new MandatoryBehavior(block, "Back", xpos, ypos, "rectangle", 900.0, 590.0, 900.0, 590.0, "prairie.jpg"));
 		return block;
 	}
 	
+	/**
+	 * Sets up a new Koopa GameElement object.
+	 * @param xpos X Position of the Koopa
+	 * @param ypos Y Position of the Koopa
+	 * @return Reference to a new Koopa GameElement object
+	 */
 	public GameElement getKoopa(Double xpos, Double ypos) {
 		GameElement koopa = new GameElement();
 		
@@ -147,6 +191,14 @@ public class ModelGamePart1 {
 		return koopa;
 	}
 	
+	/**
+	 * Sets up a new Bullet GameElement object.
+	 * @param xpos X Position of the Bullet
+	 * @param ypos Y Position of the Bullet
+	 * @param v Velocity of the Bullet
+	 * @param direction Direction Vector of the Bullet
+	 * @return Reference to a new Bullet GameElement object
+	 */
 	public GameElement getBullet(Double xpos, Double ypos, Double v, List<Double> direction) {
 		GameElement bullet = new GameElement();
 		bullet.addBehavior(new MandatoryBehavior(bullet, "Bullet", xpos, ypos, "rectangle", 20.0, 20.0, 20.0, 20.0, "Bulletimage"));
@@ -156,6 +208,13 @@ public class ModelGamePart1 {
 		return bullet;
 	}
 	
+	/**
+	 * Sets up a new Bullet GameElement object.
+	 * @param xpos X Position of the Bullet
+	 * @param ypos Y Position of the Bullet
+	 * @param v Velocity of the Bullet
+	 * @return Reference to a new Bullet GameElement object
+	 */
 	public GameElement getBullet(Double xpos, Double ypos, Double v) {
 		GameElement bullet = new GameElement();
 		bullet.addBehavior(new MandatoryBehavior(bullet, "Bullet", xpos, ypos, "rectangle", 20.0, 20.0, 20.0, 20.0, "Bulletimage"));
@@ -164,6 +223,9 @@ public class ModelGamePart1 {
 		return bullet;
 	}
 	
+	/**
+	 * @return The GamePart Object Created For Testing
+	 */
 	public GamePart getGamePart() {
 		return modelGamePart1;
 	}

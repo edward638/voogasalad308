@@ -18,7 +18,7 @@ import engine.behaviors.MandatoryBehavior;
 import engine.behaviors.Movable;
 import engine.behaviors.MovableCharacter;
 import engine.behaviors.Shooter;
-import engine.behaviors.TimeRoutine2;
+import engine.behaviors.TimeRoutine;
 import engine.behaviors.TimeTracker;
 import engine.events.elementevents.KeyInputEvent;
 import javafx.scene.input.KeyCode;
@@ -122,10 +122,10 @@ public class ModelGamePart2 {
 		mario.addBehavior(new MainCharacter(mario, 1, true, true));
 		mario.addBehavior(new Gravity(mario));
 		mario.addBehavior(new TimeTracker(mario));
-		mario.addBehavior(new TimeRoutine2(mario));
+		mario.addBehavior(new TimeRoutine(mario));
 		mario.addBehavior(new Shooter(mario, 100.0, 5.0));
 		
-		TimeRoutine2 marioRoutines = (TimeRoutine2) mario.getBehavior(TimeRoutine2.class);
+		TimeRoutine marioRoutines = (TimeRoutine) mario.getBehavior(TimeRoutine.class);
 		marioRoutines.addRoutine(2.0, new GroovyAction(
 				"Mario.getBehavior('Shooter').shootRight()"));
 				

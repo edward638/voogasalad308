@@ -18,7 +18,7 @@ import engine.behaviors.MandatoryBehavior;
 import engine.behaviors.Movable;
 import engine.behaviors.MovableCharacter;
 import engine.behaviors.Shooter;
-import engine.behaviors.TimeRoutine2;
+import engine.behaviors.TimeRoutine;
 import engine.behaviors.TimeTracker;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.KeyInputEvent;
@@ -75,7 +75,7 @@ public class ModelGameState3 {
 		mario.addBehavior(new MainCharacter(mario, 1, true, true));
 		mario.addBehavior(new Gravity(mario));
 		mario.addBehavior(new TimeTracker(mario));
-		TimeRoutine2 marioRoutines = new TimeRoutine2(mario);
+		TimeRoutine marioRoutines = new TimeRoutine(mario);
 		
 		marioRoutines.addRoutine(5.0, (e, ge) -> {
 			MovableCharacter mc = (MovableCharacter) mario.getBehavior(MovableCharacter.class);
@@ -91,7 +91,7 @@ public class ModelGameState3 {
 			MovableCharacter mc = (MovableCharacter) mario.getBehavior(MovableCharacter.class);
 			mc.setXVelocity(100.0);
 		});
-		mario.addBehavior(new TimeRoutine2(mario));
+		mario.addBehavior(new TimeRoutine(mario));
 		
 		// Response to up arrow key is to jump
 		mario.addEventResponse(new KeyInputEvent(KeyCode.W), (event, element) -> {

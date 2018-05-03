@@ -8,12 +8,12 @@ import engine.GameElement;
 import engine.actions.Action;
 import engine.events.elementevents.TimeEvent;
 
-public class TimeRoutine extends Behavior{
+public class TimeRoutine2 extends Behavior{
 
 	private Map<Action, Double> routineTimes;
 	private Map<Action, Double> timeRemaining;
 	
-	public TimeRoutine(GameElement ge) {
+	public TimeRoutine2(GameElement ge) {
 		super(ge);
 		routineTimes = new HashMap<>();
 		timeRemaining = new HashMap<>();

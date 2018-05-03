@@ -5,6 +5,7 @@ import authoring.GameObjectAdder;
 import authoring.GameScene;
 import authoring.SceneManager;
 import authoring.displayrefactored.authoringuicomponents.LevelPanelRefactored;
+import data.AudioManager;
 import data.ImageManager;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.layout.Pane;
@@ -24,13 +25,14 @@ public class LevelPanelController extends Controller implements GameObjectAdder 
 	
 	private static final String MANDATORY_BEHAVIOR_NAME = "MandatoryBehavior";
 	
-	public LevelPanelController(SceneManager sceneManager, ImageManager imageManager) {
+	public LevelPanelController(SceneManager sceneManager, ImageManager imageManager, AudioManager audioManager) {
 		super(imageManager);
 		this.sceneManager = sceneManager;
 		objectInfoPanelController = new ObjectInfoPanelController(this.sceneManager.getCurrentScene(),getImageManager());
 //		System.out.println("this is current scene: " + this.sceneManager.getCurrentScene());
 		gameViewWindowController = new GameViewWindowController(this.sceneManager.getCurrentScene(),getImageManager());
-		audioController = new AudioController(this.sceneManager.getCurrentScene(), getImageManager());
+		audioController = new AudioController(this.sceneManager.getCurrentScene(), getImageManager(), audioManager);
+		
 	}
 	
 	public ObjectInfoPanelController getObjectInfoPanelController() {

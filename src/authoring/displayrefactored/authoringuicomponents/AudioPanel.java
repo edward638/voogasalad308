@@ -1,7 +1,11 @@
 package authoring.displayrefactored.authoringuicomponents;
 
+import java.io.File;
 import java.util.Observable;
 import java.util.Observer;
+
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import authoring.AudioObservable;
 import authoring.displayrefactored.controllers.AudioController;
@@ -10,6 +14,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 public class AudioPanel extends AuthoringUIComponentRefactored implements Observer {
 
@@ -32,7 +39,6 @@ public class AudioPanel extends AuthoringUIComponentRefactored implements Observ
 		initializeFXComponents();
 		mapFXActions();
 		borderPane.setCenter(hBox);
-		System.out.println("audiopanel generate");
 	}
 
 	@Override
@@ -48,7 +54,7 @@ public class AudioPanel extends AuthoringUIComponentRefactored implements Observ
 	protected void mapFXActions() {
 		// TODO Auto-generated method stub
 		chooseAudioButton.setOnAction(e->{
-			
+			chooseAudioFile();
 		});
 	}
 
@@ -58,6 +64,14 @@ public class AudioPanel extends AuthoringUIComponentRefactored implements Observ
 		audioObservable = (AudioObservable) o;
 		currentAudio.setText(audioObservable.getAudioName());
 	}
-	
+
+	private void chooseAudioFile() {
+		String fileName=null;
+		FileChooser chooser = new FileChooser();
+		chooser.getExtensionFilters().addAll(new ExtensionFilter( "MP3 Files", "*.mp3")); 
+		File audioFile = chooser.showOpenDialog(new Stage());
+		audioController.setAudio(audioFile);
+		System.out.println(audioFile.toURI().toString());
+	}
 
 }

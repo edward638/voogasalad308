@@ -8,6 +8,7 @@ import authoring.displayrefactored.controllers.Controller;
 import authoring.displayrefactored.controllers.GameViewWindowController;
 import authoring.displayrefactored.controllers.LevelPanelController;
 import authoring.displayrefactored.popups.NewGameObjectPopupRefactored;
+import data.AudioManager;
 import data.GameObjectManager;
 import data.ImageManager;
 import data.propertiesFiles.ResourceBundleManager;
@@ -28,12 +29,13 @@ public class AuthoringEnvironmentRefactored {
 	private AudioController audioController;
 	private GameObjectManager gameObjectManager;
 	private ImageManager imageManager;
+	private AudioManager audioManager;
 	private Pane pane;
 	
 	public AuthoringEnvironmentRefactored(Game game) {
-		System.out.println("56 Authoring Environment");
 		this.game = game;
 		imageManager = new ImageManager(game.getName());
+		audioManager = new AudioManager(game.getName());
 		pane = new Pane();
 		pane.setPrefSize(ResourceBundleManager.getPosition("ENVIRONMENTSIZE_X"), ResourceBundleManager.getPosition("ENVIRONMENTSIZE_Y"));
 		pane.setStyle("-fx-border-color: black");
@@ -46,7 +48,7 @@ public class AuthoringEnvironmentRefactored {
 		controllerList = new ArrayList<>();
 //		//TODO:
 //		gameViewWindowController = new GameViewWindowController(game);
-		levelPanelController = new LevelPanelController(game.getSceneManager(), imageManager);
+		levelPanelController = new LevelPanelController(game.getSceneManager(), imageManager, audioManager);
 //		objectInfoPanelController = new ObjectInfoPanelController(game);
 //		controllerList.add(gameViewWindowController);
 //		controllerList.add(objectInfoPanelController);

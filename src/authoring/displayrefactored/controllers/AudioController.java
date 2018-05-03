@@ -1,7 +1,10 @@
 package authoring.displayrefactored.controllers;
 
+import java.io.File;
+
 import authoring.GameScene;
 import authoring.displayrefactored.authoringuicomponents.AudioPanel;
+import data.AudioManager;
 import data.ImageManager;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.layout.Pane;
@@ -10,17 +13,18 @@ public class AudioController extends Controller {
 
 	private GameScene gameScene;
 	private AudioPanel audioPanel;
+	private AudioManager audioManager;
 	
-	public AudioController(GameScene gameScene, ImageManager imageManager) {
+	public AudioController(GameScene gameScene, ImageManager imageManager, AudioManager audioManager) {
 		super(imageManager);
 		this.gameScene = gameScene;
+		this.audioManager = audioManager;
 		initializeScreenComponents();
 	}
 
 	@Override
 	protected void initializeScreenComponents() {
 		// TODO Auto-generated method stub
-		System.out.println("audiocontroller initialized screen components");
 		audioPanel = new AudioPanel(this);
 	}
 
@@ -50,8 +54,10 @@ public class AudioController extends Controller {
 		gameScene.notifyMyObservers();
 	}
 	
-	public void setAudio(String audioPath) {
-		
+	public void setAudio(File audio) {
+		System.out.println(audio.getName());
+		audioManager.storeAudio(audio);
+		gameScene.setAudioName(audio.getName());
 	}
 
 }

@@ -20,6 +20,7 @@ public class LevelPanelController extends Controller implements GameObjectAdder 
 	LevelPanelRefactored levelPanelRefactored;
 	ObjectInfoPanelController objectInfoPanelController;
 	GameViewWindowController gameViewWindowController;
+	AudioController audioController;
 	
 	private static final String MANDATORY_BEHAVIOR_NAME = "MandatoryBehavior";
 	
@@ -27,8 +28,9 @@ public class LevelPanelController extends Controller implements GameObjectAdder 
 		super(imageManager);
 		this.sceneManager = sceneManager;
 		objectInfoPanelController = new ObjectInfoPanelController(this.sceneManager.getCurrentScene(),getImageManager());
-		System.out.println("this is current scene: " + this.sceneManager.getCurrentScene());
+//		System.out.println("this is current scene: " + this.sceneManager.getCurrentScene());
 		gameViewWindowController = new GameViewWindowController(this.sceneManager.getCurrentScene(),getImageManager());
+		audioController = new AudioController(this.sceneManager.getCurrentScene(), getImageManager());
 	}
 	
 	public ObjectInfoPanelController getObjectInfoPanelController() {
@@ -37,6 +39,10 @@ public class LevelPanelController extends Controller implements GameObjectAdder 
 	
 	public GameViewWindowController getGameViewWindowController() {
 		return gameViewWindowController;
+	}
+	
+	public AudioController getAudioController() {
+		return audioController;
 	}
 	
 	@Override
@@ -83,6 +89,7 @@ public class LevelPanelController extends Controller implements GameObjectAdder 
 	private void updateMyControllers(GameScene gameScene) {
 		objectInfoPanelController.setGameScene(gameScene);
 		gameViewWindowController.setGameScene(gameScene);
+		audioController.setGameScene(gameScene);
 	}
 
 	@Override

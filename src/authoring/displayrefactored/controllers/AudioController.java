@@ -14,11 +14,13 @@ public class AudioController extends Controller {
 	public AudioController(GameScene gameScene, ImageManager imageManager) {
 		super(imageManager);
 		this.gameScene = gameScene;
+		initializeScreenComponents();
 	}
 
 	@Override
 	protected void initializeScreenComponents() {
 		// TODO Auto-generated method stub
+		System.out.println("audiocontroller initialized screen components");
 		audioPanel = new AudioPanel(this);
 	}
 
@@ -40,6 +42,12 @@ public class AudioController extends Controller {
 	protected void refreshView() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void setGameScene(GameScene gameScene) {
+		this.gameScene = gameScene;
+		setUpConnections();
+		gameScene.notifyMyObservers();
 	}
 	
 	public void setAudio(String audioPath) {

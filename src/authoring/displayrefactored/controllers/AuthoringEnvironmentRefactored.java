@@ -25,11 +25,13 @@ public class AuthoringEnvironmentRefactored {
 	private GameViewWindowController gameViewWindowController;
 	private LevelPanelController levelPanelController;
 	private ObjectInfoPanelController objectInfoPanelController;
+	private AudioController audioController;
 	private GameObjectManager gameObjectManager;
 	private ImageManager imageManager;
 	private Pane pane;
 	
 	public AuthoringEnvironmentRefactored(Game game) {
+		System.out.println("56 Authoring Environment");
 		this.game = game;
 		imageManager = new ImageManager(game.getName());
 		pane = new Pane();
@@ -51,8 +53,10 @@ public class AuthoringEnvironmentRefactored {
 		controllerList.add(levelPanelController);
 		gameViewWindowController = levelPanelController.getGameViewWindowController();
 		objectInfoPanelController = levelPanelController.getObjectInfoPanelController();
+		audioController = levelPanelController.getAudioController();
 		controllerList.add(gameViewWindowController);
 		controllerList.add(objectInfoPanelController);
+		controllerList.add(audioController);
 	}
 	
 	

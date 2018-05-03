@@ -21,6 +21,7 @@ public class AudioPanel extends AuthoringUIComponentRefactored implements Observ
 	
 	public AudioPanel(AudioController audioController) {
 		// TODO Auto-generated constructor stub
+		super();
 		this.audioController = audioController;
 	}
 	
@@ -31,6 +32,7 @@ public class AudioPanel extends AuthoringUIComponentRefactored implements Observ
 		initializeFXComponents();
 		mapFXActions();
 		borderPane.setCenter(hBox);
+		System.out.println("audiopanel generate");
 	}
 
 	@Override

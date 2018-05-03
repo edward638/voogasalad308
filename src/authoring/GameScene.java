@@ -46,7 +46,7 @@ public class GameScene extends Observable implements GameViewObservable, ObjectI
 		backgroundImageSerializables = scene.getBackgroundImageSerializables();
 		currentGameObject = scene.getCurrentGameObject();
 		myObjectNames = scene.getMyObjectNames();
-		
+		backgroundImageName = scene.getBackgroundImageName();
 	}
 	
 	@Override

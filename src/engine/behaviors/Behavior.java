@@ -55,12 +55,12 @@ public abstract class Behavior {
 	
 	// Method to allow adding required behaviors if they do not already 
 	// exist for the parent GameElement 
-	protected void addRequiredBehaviors(List<Behavior> reqs) {
-		reqs.stream()
+	protected void addBehaviorsIfNotExisting (List<Class<? extends Behavior>> list) {
+		list.stream()
 		.forEach(behavior -> {
 			if (!(getParent().hasBehavior(behavior.getClass()))) {
 				try {
-					Constructor<? extends Behavior> construct = behavior.getClass().getConstructor(GameElement.class);
+					Constructor<? extends Behavior> construct = behavior.getConstructor(GameElement.class);
 					getParent().addBehavior(construct.newInstance(getParent()));
 				} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 						| InvocationTargetException | NoSuchMethodException | SecurityException e) {
@@ -69,6 +69,11 @@ public abstract class Behavior {
 				} 
 			}
 		});
+	}
+	
+	protected void addRequiredBehaviors() {
+		// Do Nothing in default case
+		// Calls addBehaviorsIfNotExsiting in subclasses of Behavior with a list of required behaviors
 	}
 	
 	

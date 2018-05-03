@@ -1,4 +1,4 @@
-package authoring.display;
+package authoring.displaydeprecated;
 
 import java.util.ResourceBundle;
 
@@ -23,13 +23,13 @@ import javafx.scene.layout.VBox;
  * @author Maddie Wilkinson
  *
  */
-public class ObjectInfoPanel extends MainWindowComponent {
+public class ObjectInfoPanelDeprecated extends MainWindowComponentDeprecated {
 	private static final String IMAGES_FILEPATH = "./";
 	private static final double PANEL_MIN_WIDTH = 300;
 
 	private VBox myVBox;
 
-	public ObjectInfoPanel(ResourceBundle resources, Game game, Node root) {
+	public ObjectInfoPanelDeprecated(ResourceBundle resources, Game game, Node root) {
 		super(resources, game, root);
 		myVBox = new VBox(DEFAULT_SPACING);
 		myVBox.setMinWidth(PANEL_MIN_WIDTH);

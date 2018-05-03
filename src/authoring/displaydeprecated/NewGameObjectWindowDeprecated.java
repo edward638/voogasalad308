@@ -1,4 +1,4 @@
-package authoring.display;
+package authoring.displaydeprecated;
 
 import java.io.IOException;
 import java.util.ResourceBundle;
@@ -23,17 +23,17 @@ import javafx.stage.FileChooser;
  * @author Maddie Wilkinson
  *
  */
-public class NewGameObjectWindow extends PopupWindow {
+public class NewGameObjectWindowDeprecated extends PopupWindowDeprecated {
 	
 	private static final String INITIAL_DIRECTORY = "./data/gamedata/games/";
 	private static final String MANDATORY_BEHAVIOR_NAME = "engine.behaviors.MandatoryBehavior";
 	
 	private VBox myVBox;
 	private ListView<GameObject> myLevelObjects;
-	private GameViewWindow myGameViewWindow;
+	private GameViewWindowDeprecated myGameViewWindow;
 	private String myInitialDirectory;
 
-	public NewGameObjectWindow(ResourceBundle resources, Game game, Node root, ListView<GameObject> levelObjects, GameViewWindow gameViewWindow) {
+	public NewGameObjectWindowDeprecated(ResourceBundle resources, Game game, Node root, ListView<GameObject> levelObjects, GameViewWindowDeprecated gameViewWindow) {
 		super(resources, game, root);
 		myInitialDirectory = INITIAL_DIRECTORY + game.getName() + "/images";
 		myLevelObjects = levelObjects;
@@ -62,7 +62,7 @@ public class NewGameObjectWindow extends PopupWindow {
 		
 		FileChooser fileChooser = new FileChooser();
 		
-		ChooseImageEvent buttonAction = new ChooseImageEvent(imageText, myInitialDirectory, fileChooser);
+		ChooseImageEventDeprecated buttonAction = new ChooseImageEventDeprecated(imageText, myInitialDirectory, fileChooser);
 		Button chooseImageButton = makeButton("ChooseImageButton", event -> buttonAction.pressed()); 
 		
 		imageInfo.getChildren().addAll(chooseImageButton, new Label("Image name: "), imageText);

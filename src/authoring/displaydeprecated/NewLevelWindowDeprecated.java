@@ -1,4 +1,4 @@
-package authoring.display;
+package authoring.displaydeprecated;
 
 import java.util.ResourceBundle;
 
@@ -18,11 +18,11 @@ import javafx.stage.Stage;
  * @author Maddie Wilkinson
  *
  */
-public class NewLevelWindow extends PopupWindow {
+public class NewLevelWindowDeprecated extends PopupWindowDeprecated {
 
 	private ComboBox<GameScene> myLevelDropdown;
 
-	public NewLevelWindow(ResourceBundle resources, Game game, Node root, ComboBox<GameScene> levelDropdown) {
+	public NewLevelWindowDeprecated(ResourceBundle resources, Game game, Node root, ComboBox<GameScene> levelDropdown) {
 		super(resources, game, root);
 		myLevelDropdown = levelDropdown;
 		setStage(setUpScene());

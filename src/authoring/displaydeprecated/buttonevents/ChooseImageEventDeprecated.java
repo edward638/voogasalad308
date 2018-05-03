@@ -1,4 +1,4 @@
-package authoring.display.buttonevents;
+package authoring.displaydeprecated.buttonevents;
 
 import java.io.File;
 
@@ -9,13 +9,13 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 
-public class ChooseImageEvent implements ButtonEvent {
+public class ChooseImageEventDeprecated implements ButtonEvent {
 	private TextField myTextField;
 	private String myDirectory;
 	private FileChooser myFileChooser;
 	private File myImage;
 
-	public ChooseImageEvent(TextField textField, String directory, FileChooser fileChooser) {
+	public ChooseImageEventDeprecated(TextField textField, String directory, FileChooser fileChooser) {
 		myTextField = textField;
 		myDirectory = directory;
 		myFileChooser = fileChooser;

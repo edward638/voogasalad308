@@ -20,6 +20,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
 
 public class AudioPanel extends AuthoringUIComponentRefactored implements Observer {
 
+	private static final int SPACING = 30;
 	private HBox hBox;
 	private Button chooseAudioButton;
 	private Label currentAudio;
@@ -44,7 +45,7 @@ public class AudioPanel extends AuthoringUIComponentRefactored implements Observ
 	@Override
 	protected void initializeFXComponents() {
 		// TODO Auto-generated method stub
-		hBox = new HBox();
+		hBox = new HBox(SPACING);
 		chooseAudioButton = new Button(ResourceBundleManager.getAuthoring("ChooseAudio"));
 		currentAudio = new Label();
 		hBox.getChildren().addAll(chooseAudioButton, currentAudio);
@@ -62,7 +63,7 @@ public class AudioPanel extends AuthoringUIComponentRefactored implements Observ
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		audioObservable = (AudioObservable) o;
-		currentAudio.setText(audioObservable.getAudioName());
+		currentAudio.setText("Current Audio: " + audioObservable.getAudioName());
 	}
 
 	private void chooseAudioFile() {

@@ -1,4 +1,4 @@
-package authoring.display;
+package authoring.displaydeprecated;
 
 import java.io.File;
 import java.util.ResourceBundle;
@@ -26,7 +26,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
  * @author Maddie Wilkinson
  *
  */
-public class LevelPanel extends MainWindowComponent {
+public class LevelPanelDeprecated extends MainWindowComponentDeprecated {
 
 	private VBox myVBox;
 	private HBox myHBox;
@@ -37,10 +37,10 @@ public class LevelPanel extends MainWindowComponent {
 	private Button myAddSceneBackgroundImageButton;
 	private ListView<GameObject> myLevelObjects;
 	
-	private GameViewWindow myGameViewWindow;
-	private ObjectInfoPanel myObjectInfoPanel;
+	private GameViewWindowDeprecated myGameViewWindow;
+	private ObjectInfoPanelDeprecated myObjectInfoPanel;
 
-	public LevelPanel(ResourceBundle resources, Game game, Node root, GameViewWindow gameViewWindow, ObjectInfoPanel objectInfoPanel) {
+	public LevelPanelDeprecated(ResourceBundle resources, Game game, Node root, GameViewWindowDeprecated gameViewWindow, ObjectInfoPanelDeprecated objectInfoPanel) {
 		super(resources, game, root); //pass resources to super constructor
 		myGameViewWindow = gameViewWindow;
 		myObjectInfoPanel = objectInfoPanel;
@@ -62,14 +62,14 @@ public class LevelPanel extends MainWindowComponent {
 
 	private Button makeAddLevelButton() {
 		myAddLevelButton =  makeButton("AddSceneButton", event -> { 
-			new NewLevelWindow(getResources(), getGame(), getRoot(), myLevelDropdown);
+			new NewLevelWindowDeprecated(getResources(), getGame(), getRoot(), myLevelDropdown);
 		});
 		return myAddLevelButton;
 	}
 	
 	private Button makeAddGameObjectButton() {
 		myAddGameObjectButton =  makeButton("AddGameObjectButton", event -> { 
-			new NewGameObjectWindow(getResources(), getGame(), getRoot(), myLevelObjects, myGameViewWindow);
+			new NewGameObjectWindowDeprecated(getResources(), getGame(), getRoot(), myLevelObjects, myGameViewWindow);
 		});
 		return myAddGameObjectButton;
 	}
@@ -98,7 +98,7 @@ public class LevelPanel extends MainWindowComponent {
 		myLevelDropdown.setPromptText(super.getResources().getString("SelectSceneDropDown")); //make super.getString method?
 		myLevelDropdown.getItems().addAll(getGame().getSceneManager().getScenes());
 		myLevelDropdown.valueProperty().addListener((o, old, neww) -> {
-			getGame().getSceneManager().setCurrentScene(neww);
+//			getGame().getSceneManager().setCurrentScene(neww);
 			myLevelObjects.setItems(FXCollections.observableArrayList(getGame().getSceneManager().getCurrentScene().getMyObjects()));
 			myGameViewWindow.updateWindow();
 			System.out.println("Level Panel tried to call updateWindow");

@@ -1,4 +1,4 @@
-package authoring.display;
+package authoring.displaydeprecated;
 
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
@@ -13,14 +13,14 @@ import javafx.scene.control.Button;
  * @author Maddie Wilkinson
  *
  */
-public abstract class AuthoringUIComponent {
+public abstract class AuthoringUIComponentDeprecated {
 	protected static final double DEFAULT_SPACING = 5;
 	
 	private ResourceBundle myResources;
 	private Game myGame;
 	private Node myRoot;
 	
-	public AuthoringUIComponent(ResourceBundle resources, Game game, Node root) {
+	public AuthoringUIComponentDeprecated(ResourceBundle resources, Game game, Node root) {
 		myResources = resources;
 		myGame = game;
 		myRoot = root;

@@ -1,4 +1,4 @@
-package authoring.display;
+package authoring.displaydeprecated;
 
 import java.util.ResourceBundle;
 import authoring.Game;
@@ -11,7 +11,7 @@ import javafx.stage.Stage;
  * @author Maddie Wilkinson
  *
  */
-public class AuthoringDisplay {
+public class AuthoringDisplayDeprecated {
 	public static final String DEFAULT_RESOURCE_PATH = "authoring.display.resources/";
 	public static final String DEFAULT_CSS_PATH = "authoring/display/resources/";
 
@@ -22,13 +22,13 @@ public class AuthoringDisplay {
 	private ResourceBundle myResources; //rename more accurately; it's the button names & stuff specifically
 	private Game myGame;
 
-	private LevelPanel myLevelPanel;
-	private GameViewWindow myGameViewWindow;
-	private ObjectInfoPanel myObjectInfoPanel;
-	private TemplateObjectPanel myTemplatePanel;
-	private SaveBar mySaveBar;
+	private LevelPanelDeprecated myLevelPanel;
+	private GameViewWindowDeprecated myGameViewWindow;
+	private ObjectInfoPanelDeprecated myObjectInfoPanel;
+	private TemplateObjectPanelDeprecated myTemplatePanel;
+	private SaveBarDeprecated mySaveBar;
 
-	public AuthoringDisplay(Stage stage, Game game) {
+	public AuthoringDisplayDeprecated(Stage stage, Game game) {
 		myGame = new Game();
 		loadResources();
 		initialize(stage);
@@ -66,28 +66,28 @@ public class AuthoringDisplay {
 		mySaveBar = makeSaveBar();
 	}
 
-	private LevelPanel makeLevelPanel(GameViewWindow gameViewWindow, ObjectInfoPanel objectInfoPanel) {
-		LevelPanel levelPanel = new LevelPanel(myResources, myGame, root, gameViewWindow, objectInfoPanel);
+	private LevelPanelDeprecated makeLevelPanel(GameViewWindowDeprecated gameViewWindow, ObjectInfoPanelDeprecated objectInfoPanel) {
+		LevelPanelDeprecated levelPanel = new LevelPanelDeprecated(myResources, myGame, root, gameViewWindow, objectInfoPanel);
 		return levelPanel;
 	}
 
-	private TemplateObjectPanel makeTemplatePanel() {
-		TemplateObjectPanel templatePanel = new TemplateObjectPanel(myResources, myGame, root);
+	private TemplateObjectPanelDeprecated makeTemplatePanel() {
+		TemplateObjectPanelDeprecated templatePanel = new TemplateObjectPanelDeprecated(myResources, myGame, root);
 		return templatePanel;
 	}
 
-	private ObjectInfoPanel makeObjectPropertyPanel() {
-		ObjectInfoPanel objectInfoPanel = new ObjectInfoPanel(myResources, myGame, root);
+	private ObjectInfoPanelDeprecated makeObjectPropertyPanel() {
+		ObjectInfoPanelDeprecated objectInfoPanel = new ObjectInfoPanelDeprecated(myResources, myGame, root);
 		return objectInfoPanel;
 	}
 
-	private GameViewWindow makeGameViewWindow() {
-		GameViewWindow gameViewWindow = new GameViewWindow(myResources, myGame, root, 600, 600);
+	private GameViewWindowDeprecated makeGameViewWindow() {
+		GameViewWindowDeprecated gameViewWindow = new GameViewWindowDeprecated(myResources, myGame, root, 600, 600);
 		return gameViewWindow;
 	}
 
-	private SaveBar makeSaveBar() {
-		SaveBar saveBar = new SaveBar(myResources, myGame, root);
+	private SaveBarDeprecated makeSaveBar() {
+		SaveBarDeprecated saveBar = new SaveBarDeprecated(myResources, myGame, root);
 		return saveBar;
 	}
 }

@@ -1,4 +1,4 @@
-package authoring.display;
+package authoring.displaydeprecated;
 
 import java.util.ResourceBundle;
 
@@ -12,11 +12,11 @@ import javafx.scene.layout.HBox;
  * @author madelinewilkinson
  *
  */
-public class SaveBar extends MainWindowComponent {
+public class SaveBarDeprecated extends MainWindowComponentDeprecated {
 	
 	private HBox myHBox;
 
-	public SaveBar(ResourceBundle resources, Game game, Node root) {
+	public SaveBarDeprecated(ResourceBundle resources, Game game, Node root) {
 		super(resources, game, root);
 		myHBox = new HBox();
 		

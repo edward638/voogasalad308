@@ -1,4 +1,4 @@
-package authoring.display;
+package authoring.displaydeprecated;
 
 import java.util.List;
 import java.util.ResourceBundle;
@@ -17,7 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
-public class GameViewWindow extends MainWindowComponent{
+public class GameViewWindowDeprecated extends MainWindowComponentDeprecated{
 
 	
 	
@@ -29,7 +29,7 @@ public class GameViewWindow extends MainWindowComponent{
 	ImageManager imageManager;
 	int xSize, ySize;
 
-	public GameViewWindow(ResourceBundle resources, Game game, Node root, int x_Size, int y_Size){
+	public GameViewWindowDeprecated(ResourceBundle resources, Game game, Node root, int x_Size, int y_Size){
 		super(resources, game, root);
 		scrollPane = new ScrollPane();
 		stackPane = new StackPane();

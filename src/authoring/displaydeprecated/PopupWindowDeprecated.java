@@ -1,4 +1,4 @@
-package authoring.display;
+package authoring.displaydeprecated;
 
 import java.util.ResourceBundle;
 
@@ -11,11 +11,11 @@ import javafx.stage.Stage;
  * @author Maddie Wilkinson
  *
  */
-public abstract class PopupWindow extends AuthoringUIComponent {
+public abstract class PopupWindowDeprecated extends AuthoringUIComponentDeprecated {
 
 	private Stage myStage;
 	
-	public PopupWindow(ResourceBundle resources, Game game, Node root) {
+	public PopupWindowDeprecated(ResourceBundle resources, Game game, Node root) {
 		super(resources, game, root);
 		myStage = new Stage();
 	}

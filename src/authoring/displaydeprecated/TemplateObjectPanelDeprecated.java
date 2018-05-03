@@ -1,4 +1,4 @@
-package authoring.display;
+package authoring.displaydeprecated;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,14 +18,14 @@ import javafx.scene.layout.Pane;
 /*
  * @author Edward Zhuang
  */
-public class TemplateObjectPanel extends MainWindowComponent {
+public class TemplateObjectPanelDeprecated extends MainWindowComponentDeprecated {
 
 	ListView<String> myListView;
 	GameObjectManager myGameObjectManager;
 	TreeMap<String, GameObject> myMap;
 	BorderPane myPane;
 	
-	public TemplateObjectPanel(ResourceBundle resources, Game game, Node root) {
+	public TemplateObjectPanelDeprecated(ResourceBundle resources, Game game, Node root) {
 		super(resources, game, root);
 		myListView = new ListView<String>();
 		myGameObjectManager = new GameObjectManager();

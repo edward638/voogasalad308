@@ -102,6 +102,10 @@ public class Converter2 {
 		return part;
 	}
 	
+	public GameElement getBackgroundElement(GameScene scene) {
+		
+	}
+	
 	
 	/*
 	 * Method reviews game objects stored as parts

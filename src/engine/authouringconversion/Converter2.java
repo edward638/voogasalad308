@@ -95,16 +95,13 @@ public class Converter2 {
 	
 
 	public GamePart gameScene2GamePart(GameScene scene) {
-		GamePart part = new GamePart(scene.getName(), scene.getId());
+		GamePart part = new GamePart(scene.getName(), "0");
 		for (GameObject go: scene.getMyObjects()) {
 			part.addGameElement(gameObject2GameElement(go));
 		}
 		return part;
 	}
 	
-	public List<GameElement> getBackgroundObjects(GameScene scene) {
-		
-	}
 	
 	/*
 	 * Method reviews game objects stored as parts

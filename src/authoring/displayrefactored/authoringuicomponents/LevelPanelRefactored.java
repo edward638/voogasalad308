@@ -30,47 +30,16 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 	private TextField gameSceneId, levelId;
 	
 	public LevelPanelRefactored(LevelPanelController controller) {
-		// TODO Auto-generated constructor stub
 		super();
 		this.controller = controller;	
-	}
-	
-	private void initializeButtons() {
-		myAddLevelButton = new Button(ResourceBundleManager.getAuthoring("AddSceneButton"));
-		setSceneIdButton = new Button(ResourceBundleManager.getAuthoring("SetSceneIdButton"));
-		setLevelIdButton = new Button(ResourceBundleManager.getAuthoring("SetLevelIdButton"));
-		chooseLevelButton = new Button(ResourceBundleManager.getAuthoring("SetLevelButton"));
-		gameSceneId = new TextField();
-		levelId = new TextField();
-	}
-	
-	private void initializeComboBoxes() {
-		myLevelDropdown = new ComboBox<>();
-		myLevelDropdown.setPromptText(ResourceBundleManager.getAuthoring("SelectSceneDropDown"));
-	}
-	
-	private void setActions() {
-		myAddLevelButton.setOnAction(e -> {
-			NewLevelPopupRefactored popupRefactored = new NewLevelPopupRefactored(controller);
-		});
-		setSceneIdButton.setOnAction(e->{
-			controller.setCurrentSceneName(gameSceneId.getText());
-		});
-		setLevelIdButton.setOnAction(e->{
-			controller.setCurrentLevelId(levelId.getText());
-		});
-		chooseLevelButton.setOnAction(e->{
-			controller.setLevel(myLevelDropdown.getSelectionModel().getSelectedItem());
-		});
 	}
 	
 	@Override
 	protected void generateComponent() {
 		// TODO Auto-generated method stub
 		BorderPane borderPane = getBorderPane();
-		initializeButtons();
-		initializeComboBoxes();
-		setActions();
+		initializeFXComponents();
+		mapFXActions();
 		levelChooser = new HBox();
 		levelChooser.getChildren().addAll(myAddLevelButton, myLevelDropdown, chooseLevelButton,gameSceneId,setSceneIdButton,levelId,setLevelIdButton);
 		borderPane.setCenter(levelChooser);
@@ -99,16 +68,36 @@ public class LevelPanelRefactored extends AuthoringUIComponentRefactored impleme
 		for (GameScene scene: list) {
 			myLevelDropdown.getItems().add(scene.getName());
 		}
-		
-		
 	}
 
-//	public void updateLevelDropdown(int i, GameScene scene) {
-//		// TODO Auto-generated method stub
-//		myLevelDropdown.getItems().add(i, scene);
-//		
-//	}
-	
-	
+	@Override
+	protected void initializeFXComponents() {
+		// TODO Auto-generated method stub
+		myAddLevelButton = new Button(ResourceBundleManager.getAuthoring("AddSceneButton"));
+		setSceneIdButton = new Button(ResourceBundleManager.getAuthoring("SetSceneIdButton"));
+		setLevelIdButton = new Button(ResourceBundleManager.getAuthoring("SetLevelIdButton"));
+		chooseLevelButton = new Button(ResourceBundleManager.getAuthoring("SetLevelButton"));
+		gameSceneId = new TextField();
+		levelId = new TextField();
+		myLevelDropdown = new ComboBox<>();
+		myLevelDropdown.setPromptText(ResourceBundleManager.getAuthoring("SelectSceneDropDown"));
+	}
+
+	@Override
+	protected void mapFXActions() {
+		// TODO Auto-generated method stub
+		myAddLevelButton.setOnAction(e -> {
+			NewLevelPopupRefactored popupRefactored = new NewLevelPopupRefactored(controller);
+		});
+		setSceneIdButton.setOnAction(e->{
+			controller.setCurrentSceneName(gameSceneId.getText());
+		});
+		setLevelIdButton.setOnAction(e->{
+			controller.setCurrentLevelId(levelId.getText());
+		});
+		chooseLevelButton.setOnAction(e->{
+			controller.setLevel(myLevelDropdown.getSelectionModel().getSelectedItem());
+		});
+	}
 
 }

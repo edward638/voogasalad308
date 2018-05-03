@@ -36,7 +36,8 @@ public class ObjectLibrary extends AuthoringUIComponentRefactored {
 		generateComponent();
 	}
 	
-	public void initializeFXComponents() {
+	@Override
+	protected void initializeFXComponents() {
 		addToGameButton = new Button(ResourceBundleManager.getAuthoring("AddLevel"));
 		addToLibrary = new Button(ResourceBundleManager.getAuthoring("AddLibrary"));
 		bottomHBox = new HBox();
@@ -61,7 +62,8 @@ public class ObjectLibrary extends AuthoringUIComponentRefactored {
 		objectList.getItems().addAll(FXCollections.observableArrayList(list));
 	}
 	
-	private void mapFXActions() {
+	@Override
+	protected void mapFXActions() {
 		addToGameButton.setOnAction(e->{
 			manager.addObjectToGame();
 		});

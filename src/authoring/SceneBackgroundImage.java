@@ -1,6 +1,6 @@
 package authoring;
 
-import authoring.displayrefactored.popups.BackgroundSizePopupRefactored;
+import authoring.display.popups.BackgroundSizePopup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -103,7 +103,7 @@ public class SceneBackgroundImage {
 //		
 		
 		if (t.getButton().equals(MouseButton.SECONDARY)) {
-			new BackgroundSizePopupRefactored(this, serializable);
+			new BackgroundSizePopup(this, serializable);
 		}
 	}
 	

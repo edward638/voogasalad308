@@ -1,7 +1,7 @@
 package display.buttonevents;
 
-import authoring.displayrefactored.popups.eventspopup.TWKPopup;
-import authoring.displayrefactored.popups.eventspopup.TriggerWindow;
+import authoring.display.popups.eventspopup.TWKPopup;
+import authoring.display.popups.eventspopup.TriggerWindow;
 
 public class TriggerKeyboardPress implements ButtonEvent {
 	

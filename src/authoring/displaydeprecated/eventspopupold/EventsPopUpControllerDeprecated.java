@@ -7,12 +7,12 @@
 //import authoring.Event;
 //import authoring.Game;
 //import authoring.GameObject;
-//import authoring.displayrefactored.popups.eventspopup.BehaviorsWindow;
-//import authoring.displayrefactored.popups.eventspopup.EventsWindow;
-//import authoring.displayrefactored.popups.eventspopup.GroovyWindow;
-//import authoring.displayrefactored.popups.eventspopup.MFWindow;
-//import authoring.displayrefactored.popups.eventspopup.ResponseWindow;
-//import authoring.displayrefactored.popups.eventspopup.TriggerWindow;
+//import authoring.display.popups.eventspopup.BehaviorsWindow;
+//import authoring.display.popups.eventspopup.EventsWindow;
+//import authoring.display.popups.eventspopup.GroovyWindow;
+//import authoring.display.popups.eventspopup.MFWindow;
+//import authoring.display.popups.eventspopup.ResponseWindow;
+//import authoring.display.popups.eventspopup.TriggerWindow;
 //import javafx.scene.layout.VBox;
 //
 ///**

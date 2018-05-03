@@ -61,13 +61,18 @@ public class GameElement {
 	 */
 	public Behavior getBehavior (Class<?> behavior_type) {
 		try {
+			
+			System.out.println("Size: " + behaviors.stream()
+			.filter(behavior -> behavior_type.isAssignableFrom(behavior.getClass()))
+			.collect(Collectors.toList())
+			.size()  + " for " + getIdentifier());
 			return behaviors.stream()
 					.filter(behavior -> behavior_type.isAssignableFrom(behavior.getClass()))
 					.collect(Collectors.toList())
 					.get(0);
 		}
-		catch (NullPointerException n) {
-			throw new IllegalArgumentException(behavior_type + " does not exist for GameElement" + getIdentifier());
+		catch (Exception e) {
+			throw new IllegalArgumentException(behavior_type + " does not exist for GameElement " + getIdentifier());
 		}
 	}
 	

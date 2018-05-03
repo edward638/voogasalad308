@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 import authoring.AuthBehavior;
 import authoring.Game;
 import authoring.GameObject;
-import authoring.display.buttonevents.ChooseImageEvent;
 import data.GameObjectManager;
 import javafx.scene.Node;
 import javafx.scene.Scene;

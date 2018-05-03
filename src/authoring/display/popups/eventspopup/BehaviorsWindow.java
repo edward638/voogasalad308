@@ -55,6 +55,7 @@ public class BehaviorsWindow extends VBox {
 	}
 	
 	private void mouseClicked(AuthBehavior selectedBehavior) {
+		if (selectedBehavior == null) return;
 		currentBehavior = selectedBehavior;
 		epuc.updateFromBehavior();
 		epuc.concatenateString(currentBehavior.getDisplayName(), "BehaviorsWindow");
@@ -68,7 +69,6 @@ public class BehaviorsWindow extends VBox {
 			return;
 		}
 		currentGO = newGO;
-		System.out.println("From behaviorsWindow: current game object: " + currentGO.getName());
 		createVBox();
 	}
 }

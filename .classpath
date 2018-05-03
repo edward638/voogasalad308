@@ -28,6 +28,6 @@
 	<classpathentry kind="lib" path="lib/reflection/annotations-2.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/reflection/reflections-0.9.10.jar"/>
 	<classpathentry kind="lib" path="lib/annotations-2.0.1.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/Home"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

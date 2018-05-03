@@ -18,6 +18,7 @@ public class GamePart {
 	private List<GameElement> gameElements;
 	private final String gamePartID;
 	private final String myLevelID;
+	private String audioName = "";
 	
 	/**
 	 * Instantiates a GamePart with it's GamePart ID, Level ID, and empty list of GameElement objects.
@@ -41,6 +42,14 @@ public class GamePart {
 			}
 		}
 		return false;
+	}
+	
+	/**
+	 * Adds background audio to play during this GamePart playthrough
+	 * @param audioName Name of Audio File
+	 */
+	public void addAudio (String audioName) {
+		this.audioName = audioName;
 	}
 	
 	/**

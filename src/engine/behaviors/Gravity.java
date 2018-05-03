@@ -40,5 +40,11 @@ public class Gravity extends Behavior{
 	protected void addDefaultBehavior() {
 		this.getParent().addEventResponse(new TimeEvent(0.0), new TimeGravity());
 	}
+	
+	@Override
+	protected void addRequiredBehaviors() {
+		if (getParent().c)
+		getParent().addBehavior(new Movabl);
+	}
 
 }

@@ -1,4 +1,4 @@
-package authoring.display;
+	package authoring.display;
 
 import java.util.ResourceBundle;
 
@@ -49,5 +49,4 @@ public class BehaviorView extends MainWindowComponent {
 	protected Node asNode() {
 		return myVBox;
 	}
-
 }

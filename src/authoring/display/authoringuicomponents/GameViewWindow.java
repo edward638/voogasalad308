@@ -42,11 +42,8 @@ public class GameViewWindow extends AuthoringUIComponent implements Observer {
 	private static final double TRANSPARENT = 0.25;
 	private static final String FOREGROUND = "Foreground";
 	private static final String BACKGROUND = "Background";
-	private int sizeX;
-	private int sizeY;
 	private List<ImageView> objectImageViews;
 	private ScrollPane scrollPane;
-	private StackPane stackPane;
 	private Pane backgroundPane;
 	private SceneBackground sceneBackground;
 	private List<SceneBackgroundImage> list;
@@ -154,9 +151,9 @@ public class GameViewWindow extends AuthoringUIComponent implements Observer {
 	
 	/**
 	 * Switches between foreground and background editing, based on which option is selected in Combobox
-	 * @param key
+	 * @param key key = FOREGROUND or BACKGROUND
 	 */
-	public void switchPanes(String key) {
+	private void switchPanes(String key) {
 		if (key.equals(BACKGROUND)) {
 			for (ImageView imageView: objectImageViews) {
 				imageView.setOpacity(TRANSPARENT);
@@ -173,9 +170,6 @@ public class GameViewWindow extends AuthoringUIComponent implements Observer {
 					imageView.setOpacity(1);
 					imageView.setMouseTransparent(false);
 				}
-				for (SceneBackgroundImage image: list) {
-//					image.setOpacity(TRANSPARENT);
-				}
 				foregroundPane.setMouseTransparent(false);
 			}
 		}
@@ -186,17 +180,14 @@ public class GameViewWindow extends AuthoringUIComponent implements Observer {
 	 * @param y_size new window size y
 	 */
 	public void updatePaneSize(int x_size, int y_size) {
-		sizeX = x_size;
-		sizeY = y_size;
-		backgroundPane.setMinSize(sizeX, sizeY);
-		foregroundPane.setMinSize(sizeX, sizeY);
-		sceneBackground.setRectangle(sizeX, sizeY);
+		backgroundPane.setMinSize(x_size, y_size);
+		foregroundPane.setMinSize(x_size, y_size);
+		sceneBackground.setRectangle(x_size, y_size);
 	}
 
 	@Override
 	protected void initializeFXComponents() {
-		// TODO Auto-generated method stub
-		stackPane = new StackPane();
+		StackPane stackPane = new StackPane();
 		list = new ArrayList<>();
 		hBox = new HBox();
 		myPanelSelector = new ComboBox<>();
@@ -215,7 +206,6 @@ public class GameViewWindow extends AuthoringUIComponent implements Observer {
 
 	@Override
 	protected void mapFXActions() {
-		// TODO Auto-generated method stub
 		myLevelSizeButton.setOnAction(e-> {
 			LevelSizePopup popup = new LevelSizePopup(this);
 		});

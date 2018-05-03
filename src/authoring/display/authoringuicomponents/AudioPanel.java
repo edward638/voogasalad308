@@ -29,7 +29,6 @@ public class AudioPanel extends AuthoringUIComponent implements Observer {
 	private HBox hBox;
 	private Button chooseAudioButton;
 	private Label currentAudio;
-	private AudioObservable audioObservable;
 	private AudioController audioController;
 	
 	public AudioPanel(AudioController audioController) {
@@ -64,7 +63,7 @@ public class AudioPanel extends AuthoringUIComponent implements Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		audioObservable = (AudioObservable) o;
+		AudioObservable audioObservable = (AudioObservable) o;
 		currentAudio.setText("Current Audio: " + audioObservable.getAudioName());
 	}
 

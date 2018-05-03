@@ -17,19 +17,23 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * @author Edward Zhuang
+ * Front end component which shows saved objects which can be used in any game
+ */
 public class ObjectLibrary extends AuthoringUIComponent {
 
 	private static final String NPC = "npc";
 	private static final String BLOCK = "block";
 	private static final String PLAYER = "player";
+	private static final String ADD_LEVEL = "AddLevel";
+	private static final String ADD_LIBRARY = "AddLibrary";
 	private Button addToGameButton;
 	private Button addToLibrary;
 	private ListView<GameObject> objectList;
 	private ComboBox<String> objectType;
 	private GameObjectManager manager;
-	private HBox bottomHBox;
 	private VBox vBox;
-	private GameObject currentObject;
 	
 	public ObjectLibrary(GameObjectManager manager) {
 		this.manager = manager;
@@ -38,9 +42,9 @@ public class ObjectLibrary extends AuthoringUIComponent {
 	
 	@Override
 	protected void initializeFXComponents() {
-		addToGameButton = new Button(ResourceBundleManager.getAuthoring("AddLevel"));
-		addToLibrary = new Button(ResourceBundleManager.getAuthoring("AddLibrary"));
-		bottomHBox = new HBox();
+		addToGameButton = new Button(ResourceBundleManager.getAuthoring(ADD_LEVEL));
+		addToLibrary = new Button(ResourceBundleManager.getAuthoring(ADD_LIBRARY));
+		HBox bottomHBox = new HBox();
 		bottomHBox.getChildren().addAll(addToGameButton,addToLibrary);
 		objectList = new ListView<>();
 		objectType = new ComboBox<>();
@@ -56,7 +60,11 @@ public class ObjectLibrary extends AuthoringUIComponent {
 		mapFXActions();
 		borderPane.setCenter(vBox);
 	}
-	
+
+	/**
+	 * Updates front end list of GameObjects for users to choose
+	 * @param list list of GameObjects
+	 */
 	public void updateObjectList(List<GameObject> list) {
 		objectList.getItems().clear();
 		objectList.getItems().addAll(FXCollections.observableArrayList(list));

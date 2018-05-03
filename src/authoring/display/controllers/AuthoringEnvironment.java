@@ -17,17 +17,15 @@ import javafx.scene.layout.Pane;
 /**
  * 
  * @author Edward Zhuang
- *
+ * Main game holding class in authoring which holds all front end components and controllers
  */
 public class AuthoringEnvironment {
 
+	private static final String ENVIRONMENTSIZE_X = "ENVIRONMENTSIZE_X";
+	private static final String ENVIRONMENTSIZE_Y = "ENVIRONMENTSIZE_Y";
 	private List<Controller> controllerList;
 	private Game game;
-	private GameViewWindowController gameViewWindowController;
 	private LevelPanelController levelPanelController;
-	private ObjectInfoPanelController objectInfoPanelController;
-	private AudioController audioController;
-	private GameObjectManager gameObjectManager;
 	private ImageManager imageManager;
 	private AudioManager audioManager;
 	private Pane pane;
@@ -37,7 +35,7 @@ public class AuthoringEnvironment {
 		imageManager = new ImageManager(game.getName());
 		audioManager = new AudioManager(game.getName());
 		pane = new Pane();
-		pane.setPrefSize(ResourceBundleManager.getPosition("ENVIRONMENTSIZE_X"), ResourceBundleManager.getPosition("ENVIRONMENTSIZE_Y"));
+		pane.setPrefSize(ResourceBundleManager.getPosition(ENVIRONMENTSIZE_X), ResourceBundleManager.getPosition(ENVIRONMENTSIZE_Y));
 		pane.setStyle("-fx-border-color: black");
 		createControllers();
 		setUpControllers();
@@ -46,22 +44,16 @@ public class AuthoringEnvironment {
 	
 	private void createControllers() {
 		controllerList = new ArrayList<>();
-//		//TODO:
-//		gameViewWindowController = new GameViewWindowController(game);
 		levelPanelController = new LevelPanelController(game.getSceneManager(), imageManager, audioManager);
-//		objectInfoPanelController = new ObjectInfoPanelController(game);
-//		controllerList.add(gameViewWindowController);
-//		controllerList.add(objectInfoPanelController);
 		controllerList.add(levelPanelController);
-		gameViewWindowController = levelPanelController.getGameViewWindowController();
-		objectInfoPanelController = levelPanelController.getObjectInfoPanelController();
-		audioController = levelPanelController.getAudioController();
+		GameViewWindowController gameViewWindowController = levelPanelController.getGameViewWindowController();
+		ObjectInfoPanelController objectInfoPanelController = levelPanelController.getObjectInfoPanelController();
+		AudioController audioController = levelPanelController.getAudioController();
 		controllerList.add(gameViewWindowController);
 		controllerList.add(objectInfoPanelController);
 		controllerList.add(audioController);
 	}
-	
-	
+
 	private void setUpControllers() {
 		for (Controller controller: controllerList) {
 			controller.initializeScreenComponents();
@@ -73,13 +65,16 @@ public class AuthoringEnvironment {
 	}
 	
 	private void addLibrary() {
-		gameObjectManager = new GameObjectManager(levelPanelController, imageManager);
+		GameObjectManager gameObjectManager = new GameObjectManager(levelPanelController, imageManager);
 		gameObjectManager.addToGUI(pane);
 		levelPanelController.getObjectInfoPanelController().getObjectInfoPanelRefactored().setLibraryObservable(gameObjectManager);
 		gameObjectManager.setObserver(levelPanelController.getObjectInfoPanelController().getObjectInfoPanelRefactored());
 	}
 
-	
+	/**
+	 * Gets the pane and passes it to authoring display
+	 * @return pane containing all front end components
+	 */
 	public Pane getGUI() {
 		return pane;	
 	}

@@ -70,8 +70,7 @@ public class Engine implements EngineInterface{
 	
 	@Override
 	public void close() {
-		//playerUpdater.addHighScore((int) ((TimeTracker)currentGameState.getCurrentGamePart().getMainCharacter().getBehavior(TimeTracker.class)).getTimePassed());
-		animation.stop();
+		playerUpdater.addHighScore((int) ((TimeTracker)currentGameState.getCurrentGamePart().getMainCharacter().getBehavior(TimeTracker.class)).getTimePassed());
 		currentGameState.getAudioManager().stop();
 	}
 	

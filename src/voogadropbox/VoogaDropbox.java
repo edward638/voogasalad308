@@ -7,6 +7,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
@@ -126,7 +128,7 @@ public class VoogaDropbox {
 	 * 
 	 *             errors - see above
 	 */
-	public void downloadFile(String dropBoxFilePath, String localFilePath) throws DbxException, IOException {
+	private void downloadFile(String dropBoxFilePath, String localFilePath) throws DbxException, IOException {
 
 		OutputStream downloadFile = new FileOutputStream(localFilePath);
 
@@ -232,6 +234,17 @@ public class VoogaDropbox {
 	public void createFolder(String folderName) throws DbxException {
 		FolderMetadata folder = client.files().createFolder(folderName);
 
+	}
+
+	public List<String> getOnlineGames() throws ListFolderErrorException, DbxException {
+
+		List<String> gameNames = new ArrayList<>();
+		ListFolderResult files = client.files().listFolderBuilder("/games/").start();
+		for (Metadata file : files.getEntries()) {
+			gameNames.add(file.getName());
+		}
+
+		return gameNames;
 	}
 
 }

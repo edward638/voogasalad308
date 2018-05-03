@@ -1,6 +1,6 @@
 package data;
 
-import authoring.displayrefactored.objectinfoboxes.LibraryObjectInfoBox;
+import authoring.display.objectinfoboxes.LibraryObjectInfoBox;
 
 public interface LibraryObservable {
 	LibraryObjectInfoBox getLibraryObjectInfoBox();

@@ -80,8 +80,9 @@ public class Converter2 {
 		// Remove the default Authoring MandatoryBehavior
 		go.removeBehavior(go.getMandatoryBehavior());
 		// Translate MandatoryBehavior to AuthoringBehavior and add it
-		go.setName(ge.getIdentifier());
+		
 		go.addBehavior(behavior2AuthBehavior(ge.getBehavior(MandatoryBehavior.class))); 
+		//go.setName(ge.getIdentifier());
 		for (Behavior engB: ge.getAllBehaviors()) {
 			if (engB.getClass().equals(MandatoryBehavior.class)) { continue;}
 			go.addBehavior(behavior2AuthBehavior(engB));

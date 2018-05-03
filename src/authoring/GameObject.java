@@ -79,7 +79,7 @@ public class GameObject {
 		//			newEvents.add(e.clone());
 		//		}
 		myEvents = toCopy.getEvents();
-		myName = toCopy.getName();
+		setName(toCopy.getName());
 		addBehavior(MandatoryBehavior.class.getCanonicalName());
 		this.setxPos((double) toCopy.getMandatoryBehavior().getProperty("xPos").getValue());
 		this.setyPos((double) toCopy.getMandatoryBehavior().getProperty("yPos").getValue());

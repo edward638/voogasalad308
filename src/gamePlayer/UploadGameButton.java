@@ -1,5 +1,9 @@
 package gamePlayer;
 
+import java.io.IOException;
+
+import com.dropbox.core.DbxException;
+
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.control.Button;
 import voogadropbox.VoogaDropbox;
@@ -10,7 +14,7 @@ public class UploadGameButton extends Button {
 
 	private final static String BASELOCATION = ResourceBundleManager.getPath("BASELOCATION");
 
-	public UploadGameButton (String gameName /* and Whatever other Parameters you need*/) {
+	public UploadGameButton (String gameName/*, /*Whatever other Parameters you need*/) {
 		this.gameName = gameName;
 		setupButtonProperties(); //fill this in
 		setupAction();
@@ -38,7 +42,12 @@ public class UploadGameButton extends Button {
 
 	private void saveGameOnline() {
 		VoogaDropbox vd = new VoogaDropbox(BASELOCATION);
-		vd.downloadGame(gameName);
+		try {
+			vd.downloadGame(gameName);
+		} catch (DbxException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

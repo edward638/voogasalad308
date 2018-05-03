@@ -1,51 +1,48 @@
 package engine.tests;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import engine.Engine;
-import engine.GameState;
 import gamePlayer.ConcreteHUD;
 import gamePlayer.ConcretePlayerUpdater;
 import gamePlayer.HUD;
 import gamePlayer.PlayerUpdater;
 import gamePlayer.highScores.ConcreteHighScores;
 import gamePlayer.highScores.HighScores;
-import engine.GamePart;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Group;
-import javafx.scene.ParallelCamera;
-import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
+/**
+ * @author Yashas Manjunatha
+ * Class to launch an application to test all parts of the Engine including display, 
+ * audio, interactions, event raising and handling, collisions, etc.
+ *
+ */
 public class EngineTesting extends Application {
 	public static final int FRAMES_PER_SECOND = 60;
 	public static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
     public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 	public static final Paint BACKGROUND = Color.WHITE;
-	private ParallelCamera vcp;
 	
 	private Engine gameEngine;
-	private GameState modelGameState;
 
+	/**
+	 * Starts the Engine Testing Application
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		Application.launch(args);
 	} 
 
+	/* (non-Javadoc)
+	 * @see javafx.application.Application#start(javafx.stage.Stage)
+	 */
 	@Override
 	public void start(Stage stage) throws Exception {
-		//List<GamePart> levels = new ArrayList<GamePart>();
-		//levels.add(new ModelGameState3().getPart());
-		//levels.add(new ModelGameState2().getPart());
-		//modelGameState = new GameState(levels , 0, levels.get(1), "enginetestmario");
-		//gameEngine = new Engine(modelGameState);
 		HUD hud = new ConcreteHUD("enginetestmario");
 		HighScores highScores = new ConcreteHighScores("enginetestmario");
 		PlayerUpdater concretePlayerUpdater = new ConcretePlayerUpdater(hud, highScores, "hello");
@@ -54,6 +51,13 @@ public class EngineTesting extends Application {
 		stage.show();
 	}
 	
+	/**
+	 * Sets up the JavaFX Scene
+	 * @param width Width of the Scene
+	 * @param height Height of the Scene
+	 * @param background Background color of the Scene
+	 * @return The Scene after Set Up
+	 */
 	private Scene setupLevel (int width, int height, Paint background) {
 		Group root = new Group();
 		Scene scene = new Scene(root, width, height, background);

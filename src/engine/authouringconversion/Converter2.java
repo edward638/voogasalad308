@@ -51,6 +51,8 @@ public class Converter2 {
 		GameElement ge = new GameElement();
 		// Must add MandatoryBehavior first
 		Behavior mandEngB = authBehavior2Behavior(go.getBehavior(MandatoryBehavior.class.getCanonicalName()), ge);
+		printer.printAuthBehavior(go.getBehavior(MandatoryBehavior.class.getCanonicalName()));
+		printer.printEngineBehavior(mandEngB);
 		ge.addBehavior(mandEngB);
 		// Add remaining Behaviors besides MainCharacter
 		
@@ -130,22 +132,18 @@ public class Converter2 {
 	public Behavior authBehavior2Behavior (AuthBehavior authB, GameElement ge) {
 		Behavior newEngBehavior;
 		try {
-			//System.out.println(authB.getName());
 			Constructor<?> use = getConstructor(Class.forName(authB.getName()));
-			System.out.println("COnstructor made");
-			System.out.println(use);
 			newEngBehavior = (Behavior) use.newInstance(ge);
-			
-			System.out.println("Behaior instantiatted");
 		} catch (ClassNotFoundException|InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e1) {
 			e1.printStackTrace();
 			throw (new RuntimeException("Failed to instantiate newEngBehavior from " + authB.getName()));
 		}
+		
 		Class<?> newEngBehaviorClass = newEngBehavior.getClass();
 		for (Field f: newEngBehaviorClass.getDeclaredFields()) {
 			if (Modifier.isPublic(f.getModifiers())) {continue;}
 			f.setAccessible(true);
-			//System.out.println("Field: " + f);
+			System.out.println("Field: " + f);
 			try {
 				f.set(newEngBehavior, authB.getProperty(f.getName()).getValue());
 			} catch (IllegalArgumentException | IllegalAccessException e) {

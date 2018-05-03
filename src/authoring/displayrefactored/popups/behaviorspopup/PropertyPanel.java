@@ -3,6 +3,7 @@ package authoring.displayrefactored.popups.behaviorspopup;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import authoring.AuthBehavior;
 import authoring.GameObject;
@@ -47,7 +48,11 @@ public class PropertyPanel {
 		myVBox.getChildren().add(makeSaveButton());
 		currBehavior = myController.getCurrBehavior();
 		if(currBehavior != null) {
-			for(Property property : myController.getCurrBehavior().getProperties()) {
+			Set<Property> properties =  myController.getCurrBehavior().getProperties();
+			if(properties.size() == 0) {
+				myVBox.getChildren().add(new Label("This behavior has no properties"));
+			}
+			for(Property property : properties) {
 				System.out.println(property.getValueType().getName());
 				myVBox.getChildren().add(makePropertyFields(property));
 			}
@@ -55,9 +60,8 @@ public class PropertyPanel {
 	}
 
 	private Node makePropertyFields(Property property) {
-		HBox hBox = new HBox();
-		hBox.setPadding(new Insets(10));
-		hBox.getChildren().add(new Label(property.getName()));
+		HBox hBox = new HBox(10);
+		hBox.getChildren().add(new Label(property.getName() + " (" + property.getValueType().getSimpleName() + ") "));
 		TextField propField = null;
 		if(myPropTexts.containsKey(property)) {
 			System.out.println("has Key" + property);
@@ -103,6 +107,14 @@ public class PropertyPanel {
 					case "Boolean":
 						System.out.println("it's a boolean!" + value);
 						prop.setValue(Boolean.parseBoolean(value));
+						break;
+					case "List":
+						System.out.println("it's a list!" + value);
+//						prop.setValue(Boolean.parseBoolean(value));
+						break;
+					case "Map":
+						System.out.println("it's a map!" + value);
+//						prop.setValue(Boolean.parseBoolean(value));
 						break;
 					default: 
 						System.out.println("ripperoni");

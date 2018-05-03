@@ -1,4 +1,6 @@
 package engine.behaviors;
+import java.util.Arrays;
+
 import authoring.groovy.GroovyMethod;
 import engine.GameElement;
 import engine.actions.TimeGravity;
@@ -11,7 +13,9 @@ import engine.events.elementevents.TimeEvent;
  */
 public class Gravity extends Behavior{
 	public static final Double GRAVITATIONAL_FORCE_DEFAULT = 9.8*10;
+	
 	private Double gravityForce;
+	
 	public Gravity(GameElement ge) {
 		super(ge);
 		gravityForce = GRAVITATIONAL_FORCE_DEFAULT;
@@ -38,5 +42,12 @@ public class Gravity extends Behavior{
 	protected void addDefaultBehavior() {
 		this.getParent().addEventResponse(new TimeEvent(0.0), new TimeGravity());
 	}
+	
+	@Override
+	protected void addRequiredBehaviors() {
+		addBehaviorsIfNotExisting(Arrays.asList(Movable.class));
+	}
+	
+
 
 }

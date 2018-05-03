@@ -10,5 +10,6 @@ public interface GameSceneSerializableCreator {
 	String getName();
 	GameObject getCurrentGameObject();
 	Set<String> getMyObjectNames();
-	
+	String getBackgroundImageName();
+	String getAudioName();
 }

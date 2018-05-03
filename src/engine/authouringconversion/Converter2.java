@@ -18,6 +18,7 @@ import authoring.Event;
 import authoring.GameObject;
 import authoring.GameScene;
 import authoring.Property;
+import authoring.SceneBackgroundImageSerializable;
 import engine.EventResponder;
 import engine.GameElement;
 import engine.GamePart;
@@ -50,7 +51,7 @@ public class Converter2 {
 	public GameElement gameObject2GameElement(GameObject go) {
 		GameElement ge = new GameElement();
 		// Must add MandatoryBehavior first
-		Behavior mandEngB = authBehavior2Behavior(go.getBehavior(MandatoryBehavior.class.getCanonicalName()), ge);
+		Behavior mandEngB = authBehavior2Behavior(go.getMandatoryBehavior(), ge);
 		ge.addBehavior(mandEngB);
 		// Add remaining Behaviors besides MainCharacter
 		
@@ -77,10 +78,11 @@ public class Converter2 {
 	public GameObject gameElement2GameObject(GameElement ge) {
 		GameObject go = new GameObject();
 		// Remove the default Authoring MandatoryBehavior
-		go.removeBehavior(go.getBehavior(MandatoryBehavior.class.getCanonicalName()));
+		go.removeBehavior(go.getMandatoryBehavior());
 		// Translate MandatoryBehavior to AuthoringBehavior and add it
-		go.setName(ge.getIdentifier());
+		
 		go.addBehavior(behavior2AuthBehavior(ge.getBehavior(MandatoryBehavior.class))); 
+		//go.setName(ge.getIdentifier());
 		for (Behavior engB: ge.getAllBehaviors()) {
 			if (engB.getClass().equals(MandatoryBehavior.class)) { continue;}
 			go.addBehavior(behavior2AuthBehavior(engB));
@@ -93,11 +95,20 @@ public class Converter2 {
 
 	public GamePart gameScene2GamePart(GameScene scene) {
 		GamePart part = new GamePart(scene.getName(), "0");
+		part.addGameElement(getBackgroundElement(scene));
 		for (GameObject go: scene.getMyObjects()) {
 			part.addGameElement(gameObject2GameElement(go));
 		}
 		return part;
 	}
+	
+	public GameElement getBackgroundElement(GameScene scene) {
+		GameElement ge = new GameElement();
+		MandatoryBehavior mand = new MandatoryBehavior(ge, "Background Image", scene.getBackgroundImageName(),0.0, 0.0);
+		ge.addBehavior(mand);
+		return ge;
+	}
+	
 	
 	/*
 	 * Method reviews game objects stored as parts
@@ -130,27 +141,23 @@ public class Converter2 {
 	public Behavior authBehavior2Behavior (AuthBehavior authB, GameElement ge) {
 		Behavior newEngBehavior;
 		try {
-			//System.out.println(authB.getName());
 			Constructor<?> use = getConstructor(Class.forName(authB.getName()));
-			System.out.println("COnstructor made");
-			System.out.println(use);
 			newEngBehavior = (Behavior) use.newInstance(ge);
-			
-			System.out.println("Behaior instantiatted");
 		} catch (ClassNotFoundException|InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e1) {
 			e1.printStackTrace();
 			throw (new RuntimeException("Failed to instantiate newEngBehavior from " + authB.getName()));
 		}
+		
 		Class<?> newEngBehaviorClass = newEngBehavior.getClass();
 		for (Field f: newEngBehaviorClass.getDeclaredFields()) {
 			if (Modifier.isPublic(f.getModifiers())) {continue;}
 			f.setAccessible(true);
-			//System.out.println("Field: " + f);
 			try {
-				f.set(newEngBehavior, authB.getProperty(f.getName()).getValue());
+				if (authB.getProperty(f.getName()).getValue() != null) {
+					f.set(newEngBehavior, authB.getProperty(f.getName()).getValue());
+				}
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 				e.printStackTrace();
-				throw(new RuntimeException("Failed to set " + authB.getProperty(newEngBehaviorClass.getCanonicalName()).getValue() + " for " + f.getName() + " of " + newEngBehaviorClass));
 			}
 		}
 		return newEngBehavior;
@@ -202,14 +209,14 @@ public class Converter2 {
 
 	
 	/*
-	 * Convert an authoring EventResponse object, defining how an object responds 
-	 * to events to Engine Action events that can be executed on an element
+	 * Moves GroovyAction from authoring environment to Engine
 	 */
 	public void addResponsesAuth2Engine(GameElement ge, GameObject go) {
 		EventResponder responder = ge.getResponder();
 		for (Event event: go.getEvents()) {
 			ElementEvent ee = authEvent2ElementEvent(ge, event);
-			System.out.println("event.getResponses class: " + event.getResponses().size());
+			System.out.println(ee);
+			System.out.println(event.getResponses());
 			for (GroovyAction response: event.getResponses()) {
 				responder.addResponse(ee, response);
 			}
@@ -225,9 +232,5 @@ public class Converter2 {
 		return retEvent;
 	}
 	
-//	public Action eventResponse2Action(EventResponse response) {
-//		GroovyAction groovyAction = new GroovyAction(response.getMyContent());
-//		return groovyAction;
-//	}
 	
 }

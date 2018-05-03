@@ -11,33 +11,35 @@ import java.util.TreeSet;
  * 
  * @author: Summer
  **/
-public class GameScene extends Observable implements GameViewObservable, ObjectInfoObservable, GameSceneSerializableCreator {
+public class GameScene extends Observable implements AudioObservable, GameViewObservable, ObjectInfoObservable, GameSceneSerializableCreator {
 	
 	//has a list of objects
 	private String myName;
 	private String levelId;
+	private String backgroundImageName;
 	private List<SceneBackgroundImageSerializable> backgroundImageSerializables;
 	private List<GameObject> myObjects;
 	private Set<String> myObjectNames;
 	private GameObject currentGameObject;
 	private GameSceneToCareTaker memento;
+	private String audioName;
 
 	public GameScene(String name, String id) {
 		myName = name;
 		levelId = id;
 		myObjects = new ArrayList<>();
 		myObjectNames = new TreeSet<>();
-		backgroundImageSerializables = new ArrayList<>();
-		
+		backgroundImageSerializables = new ArrayList<>();	
 	}
 	
-	public GameScene(GameSceneSerializable scene) {
+	public GameScene(GameSceneSerializableCreator scene) {
 		myName = scene.getName();
 		myObjects = scene.getMyObjects();
 		backgroundImageSerializables = scene.getBackgroundImageSerializables();
 		currentGameObject = scene.getCurrentGameObject();
 		myObjectNames = scene.getMyObjectNames();
-		
+		backgroundImageName = scene.getBackgroundImageName();
+		audioName = scene.getAudioName();
 	}
 	
 	@Override
@@ -127,7 +129,7 @@ public class GameScene extends Observable implements GameViewObservable, ObjectI
 	@Override
 	public String getCurrentImageName() {
 		// TODO Auto-generated method stub
-		AuthBehavior mandatoryBehavior = getCurrentGameObject().getBehavior("MandatoryBehavior");
+		AuthBehavior mandatoryBehavior = getCurrentGameObject().getMandatoryBehavior();
 		Property imagePathProperty = mandatoryBehavior.getProperty("imagePath");
 		String imagePath = (String) imagePathProperty.getValue();
 //		System.out.println(imagePath);
@@ -157,6 +159,25 @@ public class GameScene extends Observable implements GameViewObservable, ObjectI
 		GameObject newGo = new GameObject(currentGameObject);
 		myObjects.add(newGo);
 	}
+
+	public String getAudioName() {
+		return audioName;
+	}
+
+	public void setAudioName(String audio) {
+		this.audioName = audio;
+		notifyMyObservers();
+	}
+
+	public String getBackgroundImageName() {
+		return backgroundImageName;
+	}
+
+	public void setBackgroundImageName() {
+		this.backgroundImageName = myName.replaceAll("\\s", "") + "backgroundimage";
+		System.out.println(backgroundImageName);
+	}
+	
 
 	
 	

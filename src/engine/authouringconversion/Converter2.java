@@ -18,6 +18,7 @@ import authoring.Event;
 import authoring.GameObject;
 import authoring.GameScene;
 import authoring.Property;
+import authoring.SceneBackgroundImageSerializable;
 import engine.EventResponder;
 import engine.GameElement;
 import engine.GamePart;
@@ -101,6 +102,7 @@ public class Converter2 {
 		return part;
 	}
 	
+	
 	/*
 	 * Method reviews game objects stored as parts
 	 */
@@ -143,9 +145,10 @@ public class Converter2 {
 		for (Field f: newEngBehaviorClass.getDeclaredFields()) {
 			if (Modifier.isPublic(f.getModifiers())) {continue;}
 			f.setAccessible(true);
-			System.out.println("Field: " + f);
 			try {
-				f.set(newEngBehavior, authB.getProperty(f.getName()).getValue());
+				if (authB.getProperty(f.getName()).getValue() != null) {
+					f.set(newEngBehavior, authB.getProperty(f.getName()).getValue());
+				}
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 				e.printStackTrace();
 				throw(new RuntimeException("Failed to set " + authB.getProperty(newEngBehaviorClass.getCanonicalName()).getValue() + " for " + f.getName() + " of " + newEngBehaviorClass));

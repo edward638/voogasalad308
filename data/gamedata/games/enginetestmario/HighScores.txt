@@ -1,4 +1,3 @@
-dima 12
 asf 15
 asdf 17
 sdf 24

@@ -65,7 +65,6 @@ public class ResponseWindow extends VBox {
 	private void deleteResponse(MouseEvent me, GroovyAction ga) {
 		if (me.getButton().equals(MouseButton.PRIMARY)) return;
 		epuc.getCurrEvent().deleteResponse(ga);
-		System.out.println(epuc.getCurrEvent().getResponses().size());
 		createVBox();
 	}
 	

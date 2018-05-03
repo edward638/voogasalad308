@@ -4,11 +4,9 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
@@ -18,7 +16,6 @@ import authoring.Event;
 import authoring.GameObject;
 import authoring.GameScene;
 import authoring.Property;
-import authoring.SceneBackgroundImageSerializable;
 import engine.EventResponder;
 import engine.GameElement;
 import engine.GamePart;
@@ -214,8 +211,6 @@ public class Converter2 {
 		EventResponder responder = ge.getResponder();
 		for (Event event: go.getEvents()) {
 			ElementEvent ee = authEvent2ElementEvent(ge, event);
-			System.out.println(ee);
-			System.out.println(event.getResponses());
 			for (GroovyAction response: event.getResponses()) {
 				responder.addResponse(ee, response);
 			}

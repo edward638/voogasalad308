@@ -136,7 +136,7 @@ public class GameScene extends Observable implements GameViewObservable, ObjectI
 	@Override
 	public String getCurrentImageName() {
 		// TODO Auto-generated method stub
-		AuthBehavior mandatoryBehavior = getCurrentGameObject().getBehavior("MandatoryBehavior");
+		AuthBehavior mandatoryBehavior = getCurrentGameObject().getMandatoryBehavior();
 		Property imagePathProperty = mandatoryBehavior.getProperty("imagePath");
 		String imagePath = (String) imagePathProperty.getValue();
 //		System.out.println(imagePath);

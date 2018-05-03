@@ -51,7 +51,7 @@ public class Converter2 {
 	public GameElement gameObject2GameElement(GameObject go) {
 		GameElement ge = new GameElement();
 		// Must add MandatoryBehavior first
-		Behavior mandEngB = authBehavior2Behavior(go.getBehavior(MandatoryBehavior.class.getCanonicalName()), ge);
+		Behavior mandEngB = authBehavior2Behavior(go.getMandatoryBehavior(), ge);
 		ge.addBehavior(mandEngB);
 		// Add remaining Behaviors besides MainCharacter
 		
@@ -78,7 +78,7 @@ public class Converter2 {
 	public GameObject gameElement2GameObject(GameElement ge) {
 		GameObject go = new GameObject();
 		// Remove the default Authoring MandatoryBehavior
-		go.removeBehavior(go.getBehavior(MandatoryBehavior.class.getCanonicalName()));
+		go.removeBehavior(go.getMandatoryBehavior());
 		// Translate MandatoryBehavior to AuthoringBehavior and add it
 		go.setName(ge.getIdentifier());
 		go.addBehavior(behavior2AuthBehavior(ge.getBehavior(MandatoryBehavior.class))); 

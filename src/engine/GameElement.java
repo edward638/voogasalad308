@@ -64,7 +64,6 @@ public class GameElement {
 			return behaviors.stream()
 					.filter(behavior -> behavior_type.isAssignableFrom(behavior.getClass()))
 					.collect(Collectors.toList())
-					.forEach(behavior -> System.out.println(behavior))
 					.get(0);
 		}
 		catch (NullPointerException n) {

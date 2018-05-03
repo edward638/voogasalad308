@@ -39,10 +39,7 @@ public class GameScene extends Observable implements AudioObservable, GameViewOb
 		currentGameObject = scene.getCurrentGameObject();
 		myObjectNames = scene.getMyObjectNames();
 		backgroundImageName = scene.getBackgroundImageName();
-<<<<<<< HEAD
-=======
 		audioName = scene.getAudioName();
->>>>>>> AUTHORING_ed
 	}
 	
 	@Override

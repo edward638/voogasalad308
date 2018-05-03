@@ -54,6 +54,11 @@ public class MandatoryBehavior extends Behavior{
 		this(ge, REFER_ALL_ELEMENTS);
 	}
 	
+	public MandatoryBehavior(GameElement ge, String name, String imagePath, Double startX, Double startY)  {
+		this(ge, name, startX, startY, "rectangle", 1.0, 1.0, 1.0, 1.0, imagePath);
+
+	}
+	
 	@GroovyMethod
 	public void setPosition(double x, double y) {
 		xPos = x;

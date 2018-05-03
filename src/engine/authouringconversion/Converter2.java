@@ -157,7 +157,6 @@ public class Converter2 {
 				}
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 				e.printStackTrace();
-				throw(new RuntimeException("Failed to set " + authB.getProperty(newEngBehaviorClass.getCanonicalName()).getValue() + " for " + f.getName() + " of " + newEngBehaviorClass));
 			}
 		}
 		return newEngBehavior;
@@ -209,14 +208,14 @@ public class Converter2 {
 
 	
 	/*
-	 * Convert an authoring EventResponse object, defining how an object responds 
-	 * to events to Engine Action events that can be executed on an element
+	 * Moves GroovyAction from authoring environment to Engine
 	 */
 	public void addResponsesAuth2Engine(GameElement ge, GameObject go) {
 		EventResponder responder = ge.getResponder();
 		for (Event event: go.getEvents()) {
 			ElementEvent ee = authEvent2ElementEvent(ge, event);
-			System.out.println("event.getResponses class: " + event.getResponses().size());
+			System.out.println(ee);
+			System.out.println(event.getResponses());
 			for (GroovyAction response: event.getResponses()) {
 				responder.addResponse(ee, response);
 			}
@@ -232,9 +231,5 @@ public class Converter2 {
 		return retEvent;
 	}
 	
-//	public Action eventResponse2Action(EventResponse response) {
-//		GroovyAction groovyAction = new GroovyAction(response.getMyContent());
-//		return groovyAction;
-//	}
 	
 }

@@ -30,7 +30,7 @@ public class Printer {
 		System.out.println("Finished printing scene");
 	}
 	
-	private void printEngineBehavior(Behavior b) {
+	public void printEngineBehavior(Behavior b) {
 		System.out.println("Behavior: " + b.getClass().getCanonicalName());
 		System.out.println(b.reportProperties());
 	}

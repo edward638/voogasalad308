@@ -25,7 +25,7 @@
 	<classpathentry kind="lib" path="lib/xstream-1.4.10.jar"/>
 	<classpathentry kind="lib" path="lib/reflection/javassist-3.19.0-GA.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-simple-1.7.25.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_151">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>

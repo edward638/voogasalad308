@@ -23,6 +23,10 @@ public abstract class AuthoringUIComponentRefactored {
 	
 	protected abstract void generateComponent();
 	
+	protected abstract void initializeFXComponents();
+	
+	protected abstract void mapFXActions();
+	
 	/**
 	 * Protected getter for borderPane which subclass can use to attach FX components onto
 	 * @return borderPane
@@ -42,5 +46,6 @@ public abstract class AuthoringUIComponentRefactored {
 		borderPane.setLayoutY(yPosition);
 		pane.getChildren().add(borderPane);
 	}
+	
 	
 }

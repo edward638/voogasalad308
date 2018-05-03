@@ -59,6 +59,7 @@ public class GroovyWindow extends VBox {
 	}
 	
 	public void concatenateString(String stringToAdd, String caller) {
+		try {
 		String[] pieces = groovyInput.getText().split("\\.");
 		String newInput = "";
 		if(caller.contains("ResponseWindow")) {
@@ -71,6 +72,9 @@ public class GroovyWindow extends VBox {
 			newInput = pieces[0] + "." + pieces [1] + "." + stringToAdd;
 		}
 		groovyInput.setText(newInput);
+		} catch (Exception e) {
+			return;
+		}
 	}
 	
 	public String getGroovyString() {

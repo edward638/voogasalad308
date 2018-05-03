@@ -12,6 +12,8 @@ import engine.events.elementevents.ElementEvent;
 import javafx.geometry.Insets;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -58,10 +60,10 @@ public class EventsWindow extends VBox {
 		retrieved = classRetriever.getClasses(EVENTS_SUPERCLASS, EVENTS_PACKAGE);
 		retrieved.forEach(c -> {
 							String[] holder = c.toString().split(" ");
-							String fullName = holder[holder.length-1];
-//							String[] name = holder[holder.length - 1].split("\\.");
-//							String use = name[name.length-1];
-							possibleEvents.getItems().add(fullName);
+
+							String[] name = holder[holder.length - 1].split("\\.");
+							String use = name[name.length-1];
+							possibleEvents.getItems().add(use);
 		});
 		possibleEvents.setOnAction(e -> comboBoxAction(possibleEvents.getValue()));
 		return possibleEvents;
@@ -79,12 +81,19 @@ public class EventsWindow extends VBox {
 	private ListView<Event> makeEventList(){
 		myEvents.getItems().clear();
 		myEvents.getItems().setAll(gos.get(0).getEvents());
-		myEvents.setOnMouseClicked(e -> eventListAction(myEvents.getSelectionModel().getSelectedItem()));
+		myEvents.setOnMouseClicked(e -> eventListAction(e, myEvents.getSelectionModel().getSelectedItem()));
 		return myEvents;
 	}
 	
-	private void eventListAction(Event e) {
+	private void eventListAction(MouseEvent me, Event e) {
+		if (me.getButton().equals(MouseButton.PRIMARY)) {
 		currentEvent = e;
+		} else if (me.getButton().equals(MouseButton.SECONDARY)) {
+			for (GameObject go : gos) {
+				go.deleteEvent(e);
+			}
+			currentEvent = null;
+		}
 		epuc.updateFromEvent();
 	}
 	

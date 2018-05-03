@@ -103,12 +103,7 @@ public class Converter2 {
 	}
 	
 	public List<GameElement> getBackgroundObjects(GameScene scene) {
-		List<GameElement> elements = new ArrayList<>();
-		List<SceneBackgroundImageSerializable> elementDefs = scene.getBackgroundImageSerializables();
-		elementDefs.stream().forEach(bgs -> {
-			GameElement ge = new GameElement();
-			MandatoryBehavior mandB = new MandatoryBehavior()
-		});
+		
 	}
 	
 	/*

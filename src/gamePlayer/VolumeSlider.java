@@ -1,7 +1,6 @@
 package gamePlayer;
 
 import engine.EngineInterface;
-import gamePlayer.buttons.ButtonData;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Label;
@@ -16,7 +15,6 @@ import javafx.scene.text.Font;
  */
 
 public class VolumeSlider extends Slider {
-	private ButtonData buttonData;
 	private boolean musicOn;
 	private double volumeBeforeMuting;
 	private double volume;
@@ -28,10 +26,9 @@ public class VolumeSlider extends Slider {
 	private Label volumeText;
 	private String font = "Din Alternate";
 
-	public VolumeSlider(ButtonData buttonData, EngineInterface engine) {
+	public VolumeSlider(EngineInterface engine) {
 		musicOn = true;
 		volume = INITIAL_VOLUME;
-		this.buttonData = buttonData;
 		this.engine = engine;
 		setupVolumeSlider();
 		setupVolumeText();

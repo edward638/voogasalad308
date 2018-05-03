@@ -55,4 +55,9 @@ public class MainCharacter extends Behavior{
 		}
 		return offset;
 	}
+	
+	@Override
+	protected void addRequiredBehaviors() {
+		addBehaviorsIfNotExisting(Arrays.asList(Movable.class, Killable.class, TimeTracker.class));
+	}
 }

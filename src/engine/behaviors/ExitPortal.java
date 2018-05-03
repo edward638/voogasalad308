@@ -19,10 +19,5 @@ public class ExitPortal extends Behavior{
 	public Integer getPortalID() {
 		return portalID; 
 	}
-	
-	@Override
-	protected void addDefaultBehavior() {
-		
-	}
 
 }

@@ -58,16 +58,13 @@ public class GameSelector extends ScrollPane {
 		for (File game : gameList) {
 			String gameName = game.getName();
 			try {
-				if (gameName.contains("DS_Store")) {
-					continue;
-				}
 				String gameString = gameDescriptionProvider.getGameName(gameName);
 				String gameDescription = gameDescriptionProvider.getGameDescription(gameName);
-	
 				Image gameImage = gameDescriptionProvider.getDescriptionImage(gameName);
 				Pane gameDescriptionPane = setupNewGamePane(gameName, gameString, gameDescription, gameImage);
 				gameSelectorBox.getChildren().add(gameDescriptionPane);
 			} catch (Exception e ) {
+				System.out.println("Failed to load in game from folder " + gameName);
 				continue;
 			}
 		}

@@ -1,93 +1,161 @@
 package authoring.display;
 
-import java.util.ResourceBundle;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.List;
+
+import com.dropbox.core.DbxException;
+
 import authoring.Game;
-import javafx.scene.Node;
+import authoring.display.controllers.AuthoringEnvironment;
+import authoring.display.popups.NewGamePopup;
+import data.GameLoader;
+import data.GameSaver;
+import data.propertiesFiles.ResourceBundleManager;
+import display.AnimatedButton;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import voogadropbox.VoogaDropbox;
 
-/**
- * @author Maddie Wilkinson
- *
- */
-public class AuthoringDisplay {
-	public static final String DEFAULT_RESOURCE_PATH = "authoring.display.resources/";
-	public static final String DEFAULT_CSS_PATH = "authoring/display/resources/";
-
-	public static final String DEFAULT_LANGUAGE = "English";
-	public static final String DEFAULT_STYLE = "myStyle.css";
-
-	private BorderPane root;
-	private ResourceBundle myResources; //rename more accurately; it's the button names & stuff specifically
-	private Game myGame;
-
-	private LevelPanel myLevelPanel;
-	private GameViewWindow myGameViewWindow;
-	private ObjectInfoPanel myObjectInfoPanel;
-	private TemplateObjectPanel myTemplatePanel;
-	private SaveBar mySaveBar;
-
-	public AuthoringDisplay(Stage stage, Game game) {
-		myGame = new Game();
-		loadResources();
+public class AuthoringDisplay implements LoadAuthoringInterface {
+	
+	private static final int GUI_LAYOUT_X = 20;
+	private static final int GUI_LAYOUT_Y = 40;
+	private static final String SAVE_GAME = "Save Game";
+	private static final String LOAD_GAME = "Load Game";
+	private static final String NEW_GAME = "New Game";
+	private static final String NAME = "Authoring Environment";
+	private static final String baseLocation = "./data/gamedata/games/";
+	
+	private static final int WIDTH = 1500;
+	private static final int HEIGHT = 1000;
+	private Pane root;
+	private HBox buttonBox;
+	private Button newGameButton;
+	private Button loadGameButton;
+	private Button saveGameButton;
+	private Button saveOnlineButton;
+	private ComboBox<String> gameNames;
+	private Game currentGame;
+	private AuthoringEnvironment authoringEnvironmentRefactored;
+	
+	public AuthoringDisplay(Stage stage) {
 		initialize(stage);
+		initializeButtonBox();
 	}
 
-	public void loadResources() {
-		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PATH + DEFAULT_LANGUAGE);
-	}
-
-	public void initialize(Stage stage) {
-		Scene newScene = setUpScene();
-//		newScene.getStylesheets().add(DEFAULT_CSS_PATH + DEFAULT_STYLE);
-		stage.setScene(newScene);
+	private void initialize(Stage stage) {
+		// TODO Auto-generated method stub
+		root = new Pane();
+		Scene scene = new Scene(root, WIDTH, HEIGHT);
+//		scene.getStylesheets().add(this.getClass().getResource("teststyle.css").toExternalForm());
+		stage.setScene(scene);
+		stage.setTitle(NAME);
 		stage.show();
 	}
-
-
-	public Scene setUpScene() {
-		initVars();
-		root = new BorderPane();
-		root.setRight(myGameViewWindow.asNode());
-		root.setLeft(myLevelPanel.asNode());
-		root.setCenter(myObjectInfoPanel.asNode());
-//		root.setBottom(myTemplatePanel.asNode());
-		root.setTop(mySaveBar.asNode());
-
-		return new Scene(root);
+	
+	private void initializeButtonBox() {
+		buttonBox = new HBox();
+		buttonBox.setSpacing(30);
+		gameNames = new ComboBox<>();
+		AnimatedButton newGame = new AnimatedButton(ResourceBundleManager.getButton("NewGame"), NEW_GAME);
+		AnimatedButton loadGame = new AnimatedButton(ResourceBundleManager.getButton("SaveGame"), LOAD_GAME);
+		AnimatedButton saveGame = new AnimatedButton(ResourceBundleManager.getButton("LoadGame"), SAVE_GAME);
+		saveOnlineButton = new Button(ResourceBundleManager.getAuthoring("SaveOnline"));
+		
+		newGameButton = newGame.getButton();
+		loadGameButton = loadGame.getButton();
+		saveGameButton = saveGame.getButton();
+		buttonBox.getChildren().addAll(newGame.getHBox(),saveGame.getHBox(),loadGame.getHBox(),gameNames,saveOnlineButton);
+		setButtonActions();
+		initializeComboBoxes();
+		root.getChildren().add(buttonBox);
 	}
 
-	private void initVars() {
-		myGameViewWindow = makeGameViewWindow();
-		myObjectInfoPanel = makeObjectPropertyPanel();
-		myLevelPanel = makeLevelPanel(myGameViewWindow, myObjectInfoPanel);
-		myTemplatePanel = makeTemplatePanel();
-		mySaveBar = makeSaveBar();
+	private void initializeComboBoxes() {
+		gameNames.getItems().clear();
+		gameNames.setPromptText(ResourceBundleManager.getAuthoring("RecentGames"));
+		File directory = new File(baseLocation);
+		File[] directoryListing = directory.listFiles();
+	        
+	        if (directoryListing != null){
+	            for (File f : directoryListing){
+	                String path = f.getName();
+	                gameNames.getItems().add(path);
+	            }
+	        }
+		
+	}
+	
+	private void setButtonActions() {
+		// TODO Auto-generated method stub
+		newGameButton.setOnAction(e -> {
+			NewGamePopup popup = new NewGamePopup(this);
+		});
+		saveGameButton.setOnAction(e -> {
+			GameSaver saver = new GameSaver(currentGame.getName());
+			try {
+				System.out.println(currentGame.getScenes());
+				saver.gameAuthorToXML(currentGame.getScenes(), true);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			initializeComboBoxes();
+		});
+		saveOnlineButton.setOnAction(e->{
+			GameSaver saver = new GameSaver(currentGame.getName());
+			try {
+				System.out.println(currentGame.getScenes());
+				saver.gameAuthorToXML(currentGame.getScenes(), true);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			initializeComboBoxes();
+			VoogaDropbox voogaDropbox = new VoogaDropbox(ResourceBundleManager.getPath("BASELOCATION"));
+			try {
+				voogaDropbox.uploadGame(currentGame.getName());
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+		
+		loadGameButton.setOnAction(e -> {
+			String gameName = gameNames.getSelectionModel().getSelectedItem();
+			GameLoader gameLoader = new GameLoader(gameNames.getSelectionModel().getSelectedItem());
+			currentGame = new Game(gameName);
+			
+			root.getChildren().clear();
+			root.getChildren().add(buttonBox);
+			currentGame.restoreGame(gameLoader.getGameScenes(true));
+			authoringEnvironmentRefactored = new AuthoringEnvironment(currentGame);
+			Pane GUIPane = authoringEnvironmentRefactored.getGUI();
+			GUIPane.setLayoutX(GUI_LAYOUT_X);
+			GUIPane.setLayoutY(GUI_LAYOUT_Y);
+			root.getChildren().add(GUIPane);
+			
+		});
+		
+	}
+	
+	public void loadAuthoringEnvironment(Game game) {
+		root.getChildren().clear();
+		root.getChildren().add(buttonBox);
+		currentGame = game;
+		authoringEnvironmentRefactored = new AuthoringEnvironment(game);
+		Pane GUIPane = authoringEnvironmentRefactored.getGUI();
+		GUIPane.setLayoutX(GUI_LAYOUT_X);
+		GUIPane.setLayoutY(GUI_LAYOUT_Y);
+		root.getChildren().add(GUIPane);
 	}
 
-	private LevelPanel makeLevelPanel(GameViewWindow gameViewWindow, ObjectInfoPanel objectInfoPanel) {
-		LevelPanel levelPanel = new LevelPanel(myResources, myGame, root, gameViewWindow, objectInfoPanel);
-		return levelPanel;
-	}
-
-	private TemplateObjectPanel makeTemplatePanel() {
-		TemplateObjectPanel templatePanel = new TemplateObjectPanel(myResources, myGame, root);
-		return templatePanel;
-	}
-
-	private ObjectInfoPanel makeObjectPropertyPanel() {
-		ObjectInfoPanel objectInfoPanel = new ObjectInfoPanel(myResources, myGame, root);
-		return objectInfoPanel;
-	}
-
-	private GameViewWindow makeGameViewWindow() {
-		GameViewWindow gameViewWindow = new GameViewWindow(myResources, myGame, root, 600, 600);
-		return gameViewWindow;
-	}
-
-	private SaveBar makeSaveBar() {
-		SaveBar saveBar = new SaveBar(myResources, myGame, root);
-		return saveBar;
-	}
 }

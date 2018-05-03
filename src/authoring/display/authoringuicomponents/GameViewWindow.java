@@ -137,12 +137,10 @@ public class GameViewWindow extends AuthoringUIComponent implements Observer {
 			mandatoryBehavior.getProperty("displayHeight").setValue(imageView.getBoundsInLocal().getHeight());
 			imageView.setPreserveRatio(false);
 		}
-
 		return imageView;
 	}
 	
 	private void updateBackground(List<SceneBackgroundImageSerializable> serializables) {
-		
 		list = new ArrayList<>();
 		for (SceneBackgroundImageSerializable s: serializables) {
 			list.add(controller.getBackgroundImage(s));

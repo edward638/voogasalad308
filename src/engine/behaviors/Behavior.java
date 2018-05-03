@@ -1,10 +1,12 @@
 package engine.behaviors;
 
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.lang.reflect.Field;
 
 import engine.GameElement;
 
@@ -54,7 +56,19 @@ public abstract class Behavior {
 	// Method to allow adding required behaviors if they do not already 
 	// exist for the parent GameElement 
 	protected void addRequiredBehaviors(List<Behavior> reqs) {
-		// Do Nothing if no required Behavior objects
+		reqs.stream()
+		.forEach(behavior -> {
+			if (!(getParent().hasBehavior(behavior.getClass()))) {
+				try {
+					Constructor<? extends Behavior> construct = behavior.getClass().getConstructor(GameElement.class);
+					getParent().addBehavior(construct.newInstance(getParent()));
+				} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+						| InvocationTargetException | NoSuchMethodException | SecurityException e) {
+					e.printStackTrace();
+					throw new RuntimeException("Cannot add " + behavior + " to " + getParent().getIdentifier() + " which does not already have it");
+				} 
+			}
+		});
 	}
 	
 	

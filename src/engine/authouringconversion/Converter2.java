@@ -228,6 +228,7 @@ public class Converter2 {
 	 */
 	private ElementEvent authEvent2ElementEvent(GameElement ge, Event authE) {
 		EventConverter eventConverter = new EventConverter();
+		System.out.println("authEvent2ElementEvent: Auth Event " + authE);
 		ElementEvent retEvent = eventConverter.authEvent2ElementEvent(ge, authE);
 		return retEvent;
 	}

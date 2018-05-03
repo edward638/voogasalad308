@@ -38,7 +38,7 @@ public class EventConverter {
 	}
 	
 	private KeyInputEvent toKeyInputEvent(Event authEvent) {
-		return new KeyInputEvent(KeyCode.getKeyCode(authEvent.getTrigger()));
+		return new KeyInputEvent(KeyCode.getKeyCode(authEvent.getTrigger().toUpperCase()));
 	}
 	
 	private MouseInputEvent toMouseInputEvent(Event authEvent) {

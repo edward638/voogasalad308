@@ -116,28 +116,23 @@ public class GameViewWindow extends AuthoringUIComponent implements Observer {
 	}
 	
 	private ImageView toImageView(GameObject go) {
-		AuthBehavior mandatoryBehavior = go.getBehavior("MandatoryBehavior");	
-		Property xPositionProperty = mandatoryBehavior.getProperty("xPos");
-		Property yPositionProperty = mandatoryBehavior.getProperty("yPos");
-		Property imagePathProperty = mandatoryBehavior.getProperty("imagePath");
-		Double xPosition = (Double) xPositionProperty.getValue();
-		Double yPosition = (Double) yPositionProperty.getValue();			
-		String imagePath = (String) imagePathProperty.getValue();
+		Double xPosition = go.getxPos();
+		Double yPosition = go.getyPos();			
+		String imagePath = go.getImagePath();
 		ImageView imageView = new ImageView(controller.getImage(imagePath + ".png"));
 		imageView.setLayoutX(xPosition);
 		imageView.setLayoutY(yPosition);
 		
 		try {
-		imageView.setFitWidth((double) mandatoryBehavior.getProperty("displayWidth").getValue());
-		imageView.setFitHeight((double) mandatoryBehavior.getProperty("displayHeight").getValue());
+		imageView.setFitWidth(go.getDisplayWidth());
+		imageView.setFitHeight(go.getDisplayHeight());
 		} catch (NullPointerException e) {
 			imageView.setPreserveRatio(true);
 			imageView.setFitWidth(200);		
-			mandatoryBehavior.getProperty("displayWidth").setValue(imageView.getBoundsInLocal().getWidth());
-			mandatoryBehavior.getProperty("displayHeight").setValue(imageView.getBoundsInLocal().getHeight());
+			go.setDisplayWidth(imageView.getBoundsInLocal().getWidth());
+			go.setDisplayHeight(imageView.getBoundsInLocal().getHeight());
 			imageView.setPreserveRatio(false);
 		}
-
 		return imageView;
 	}
 	

@@ -65,7 +65,6 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 		this.controller = controller;
 		objectImageViews = new ArrayList<>();
 		updatePaneSize(DEFAULTSIZEX, DEFAULTSIZEY);
-		System.out.println("constructor");
 	}
 	
 	@Override

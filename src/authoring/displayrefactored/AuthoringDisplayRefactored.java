@@ -1,8 +1,11 @@
 package authoring.displayrefactored;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+
+import com.dropbox.core.DbxException;
 
 import authoring.Game;
 import authoring.displayrefactored.controllers.AuthoringEnvironmentRefactored;
@@ -17,6 +20,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import voogadropbox.VoogaDropbox;
 
 public class AuthoringDisplayRefactored implements LoadAuthoringInterface {
 	
@@ -35,6 +39,7 @@ public class AuthoringDisplayRefactored implements LoadAuthoringInterface {
 	private Button newGameButton;
 	private Button loadGameButton;
 	private Button saveGameButton;
+	private Button saveOnlineButton;
 	private ComboBox<String> gameNames;
 	private Game currentGame;
 	private AuthoringEnvironmentRefactored authoringEnvironmentRefactored;
@@ -61,12 +66,12 @@ public class AuthoringDisplayRefactored implements LoadAuthoringInterface {
 		AnimatedButton newGame = new AnimatedButton(ResourceBundleManager.getButton("NewGame"), NEW_GAME);
 		AnimatedButton loadGame = new AnimatedButton(ResourceBundleManager.getButton("SaveGame"), LOAD_GAME);
 		AnimatedButton saveGame = new AnimatedButton(ResourceBundleManager.getButton("LoadGame"), SAVE_GAME);
-		
+		saveOnlineButton = new Button(ResourceBundleManager.getAuthoring("SaveOnline"));
 		
 		newGameButton = newGame.getButton();
 		loadGameButton = loadGame.getButton();
 		saveGameButton = saveGame.getButton();
-		buttonBox.getChildren().addAll(newGame.getHBox(),saveGame.getHBox(),loadGame.getHBox(),gameNames);
+		buttonBox.getChildren().addAll(newGame.getHBox(),saveGame.getHBox(),loadGame.getHBox(),gameNames,saveOnlineButton);
 		setButtonActions();
 		initializeComboBoxes();
 		root.getChildren().add(buttonBox);
@@ -104,6 +109,26 @@ public class AuthoringDisplayRefactored implements LoadAuthoringInterface {
 			
 			initializeComboBoxes();
 		});
+		saveOnlineButton.setOnAction(e->{
+			GameSaver saver = new GameSaver(currentGame.getName());
+			try {
+				System.out.println(currentGame.getScenes());
+				saver.gameAuthorToXML(currentGame.getScenes(), true);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			initializeComboBoxes();
+			VoogaDropbox voogaDropbox = new VoogaDropbox(ResourceBundleManager.getPath("BASELOCATION"));
+			try {
+				voogaDropbox.uploadGame(currentGame.getName());
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+		
 		loadGameButton.setOnAction(e -> {
 			String gameName = gameNames.getSelectionModel().getSelectedItem();
 			GameLoader gameLoader = new GameLoader(gameNames.getSelectionModel().getSelectedItem());

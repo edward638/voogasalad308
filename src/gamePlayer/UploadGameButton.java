@@ -10,7 +10,7 @@ public class UploadGameButton extends Button {
 
 	private final static String BASELOCATION = ResourceBundleManager.getPath("BASELOCATION");
 
-	public UploadGameButton (String gameName, /*Whatever other Parameters you need*/) {
+	public UploadGameButton (String gameName /* and Whatever other Parameters you need*/) {
 		this.gameName = gameName;
 		setupButtonProperties(); //fill this in
 		setupAction();

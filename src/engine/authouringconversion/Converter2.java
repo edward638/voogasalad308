@@ -145,7 +145,10 @@ public class Converter2 {
 			f.setAccessible(true);
 			System.out.println("Field: " + f);
 			try {
-				f.set(newEngBehavior, authB.getProperty(f.getName()).getValue());
+				System.out.println(f.getName() + ": " + authB.getProperty(f.getName()).getValue() + " set");
+				if (authB.getProperty(f.getName()).getValue() != null) {
+					f.set(newEngBehavior, authB.getProperty(f.getName()).getValue());
+				}
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 				e.printStackTrace();
 				throw(new RuntimeException("Failed to set " + authB.getProperty(newEngBehaviorClass.getCanonicalName()).getValue() + " for " + f.getName() + " of " + newEngBehaviorClass));

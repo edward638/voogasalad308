@@ -25,7 +25,6 @@ public class ImageElement extends ImageView {
 	 */
 	public ImageElement(GameElement elementReference, ImageManager imageManager) {
 		this.elementReference = elementReference;
-		
 		this.imageManager = imageManager;
 		imageName = (String)elementReference.reportProperties().get("imagePath");
 		Image image = imageManager.getImage(imageName + ".png");

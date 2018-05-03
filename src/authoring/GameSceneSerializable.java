@@ -10,6 +10,7 @@ public class GameSceneSerializable {
 	private List<GameObject> myObjects;
 	private Set<String> myObjectNames;
 	private GameObject currentGameObject;
+	private String backgroundImageName;
 	
 	public GameSceneSerializable(GameSceneSerializableCreator scene) {
 		myName = scene.getName();
@@ -17,6 +18,7 @@ public class GameSceneSerializable {
 		backgroundImageSerializables = scene.getBackgroundImageSerializables();
 		currentGameObject = scene.getCurrentGameObject();
 		myObjectNames = scene.getMyObjectNames();
+		backgroundImageName = scene.getBackgroundImageName();
 	}
 	
 	public Set<String> getMyObjectNames(){
@@ -37,6 +39,11 @@ public class GameSceneSerializable {
 	
 	public String getName() {
 		return myName;
+	}
+
+	public String getBackgroundImageName() {
+		// TODO Auto-generated method stub
+		return backgroundImageName;
 	}
 
 	

@@ -37,6 +37,7 @@ public class GameScene extends Observable implements GameViewObservable, ObjectI
 
 	public void setBackgroundImageName() {
 		this.backgroundImageName = myName.replaceAll("\\s", "") + "backgroundimage";
+		System.out.println(backgroundImageName);
 	}
 	
 	public GameScene(GameSceneSerializable scene) {

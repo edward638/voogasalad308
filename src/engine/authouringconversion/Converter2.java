@@ -51,6 +51,8 @@ public class Converter2 {
 		GameElement ge = new GameElement();
 		// Must add MandatoryBehavior first
 		Behavior mandEngB = authBehavior2Behavior(go.getBehavior(MandatoryBehavior.class.getCanonicalName()), ge);
+		printer.printAuthBehavior(go.getBehavior(MandatoryBehavior.class.getCanonicalName()));
+		printer.printEngineBehavior(mandEngB);
 		ge.addBehavior(mandEngB);
 		// Add remaining Behaviors besides MainCharacter
 		

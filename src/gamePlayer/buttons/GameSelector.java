@@ -57,15 +57,19 @@ public class GameSelector extends ScrollPane {
 		File[] gameList = directory.listFiles();
 		for (File game : gameList) {
 			String gameName = game.getName();
-			if (gameName.contains("DS_Store")) {
+			try {
+				if (gameName.contains("DS_Store")) {
+					continue;
+				}
+				String gameString = gameDescriptionProvider.getGameName(gameName);
+				String gameDescription = gameDescriptionProvider.getGameDescription(gameName);
+	
+				Image gameImage = gameDescriptionProvider.getDescriptionImage(gameName);
+				Pane gameDescriptionPane = setupNewGamePane(gameName, gameString, gameDescription, gameImage);
+				gameSelectorBox.getChildren().add(gameDescriptionPane);
+			} catch (Exception e ) {
 				continue;
 			}
-			String gameString = gameDescriptionProvider.getGameName(gameName);
-			String gameDescription = gameDescriptionProvider.getGameDescription(gameName);
-
-			Image gameImage = gameDescriptionProvider.getDescriptionImage(gameName);
-			Pane gameDescriptionPane = setupNewGamePane(gameName, gameString, gameDescription, gameImage);
-			gameSelectorBox.getChildren().add(gameDescriptionPane);
 		}
 		this.setContent(gameSelectorBox);
 	}

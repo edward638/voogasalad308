@@ -61,11 +61,6 @@ public class GameElement {
 	 */
 	public Behavior getBehavior (Class<?> behavior_type) {
 		try {
-			
-			System.out.println("Size: " + behaviors.stream()
-			.filter(behavior -> behavior_type.isAssignableFrom(behavior.getClass()))
-			.collect(Collectors.toList())
-			.size()  + " for " + getIdentifier());
 			return behaviors.stream()
 					.filter(behavior -> behavior_type.isAssignableFrom(behavior.getClass()))
 					.collect(Collectors.toList())

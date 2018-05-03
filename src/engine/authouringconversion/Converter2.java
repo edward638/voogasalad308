@@ -143,9 +143,7 @@ public class Converter2 {
 		for (Field f: newEngBehaviorClass.getDeclaredFields()) {
 			if (Modifier.isPublic(f.getModifiers())) {continue;}
 			f.setAccessible(true);
-			System.out.println("Field: " + f);
 			try {
-				System.out.println(f.getName() + ": " + authB.getProperty(f.getName()).getValue() + " set");
 				if (authB.getProperty(f.getName()).getValue() != null) {
 					f.set(newEngBehavior, authB.getProperty(f.getName()).getValue());
 				}

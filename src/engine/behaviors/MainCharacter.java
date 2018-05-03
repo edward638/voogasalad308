@@ -58,6 +58,6 @@ public class MainCharacter extends Behavior{
 	
 	@Override
 	protected void addRequiredBehaviors() {
-		addBehaviorsIfNotExisting(Arrays.asList(Movable.class, Killable.class, TimeTracker.class));
+		addBehaviorsIfNotExisting(Arrays.asList(MovableCharacter.class, Killable.class, TimeTracker.class));
 	}
 }

@@ -9,15 +9,16 @@ import java.util.List;
 import java.util.Map;
 
 import engine.GameElement;
+import engine.authouringconversion.Printer;
 
 public abstract class Behavior {
 
 	private GameElement parent;
 	
-	
 	public Behavior(GameElement ge) {
 		parent = ge;
 		addDefaultBehavior();
+		addRequiredBehaviors();
 	}
 	
 	
@@ -33,11 +34,7 @@ public abstract class Behavior {
 			try {
 				value = field.get(this);
 				returnValues.put(name,  value);
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
+			} catch (IllegalArgumentException | IllegalAccessException  e) {
 				e.printStackTrace();
 			}
 	    }

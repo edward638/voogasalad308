@@ -108,6 +108,14 @@ public class PropertyPanel {
 						System.out.println("it's a boolean!" + value);
 						prop.setValue(Boolean.parseBoolean(value));
 						break;
+					case "List":
+						System.out.println("it's a list!" + value);
+//						prop.setValue(Boolean.parseBoolean(value));
+						break;
+					case "Map":
+						System.out.println("it's a map!" + value);
+//						prop.setValue(Boolean.parseBoolean(value));
+						break;
 					default: 
 						System.out.println("ripperoni");
 					}

@@ -1,12 +1,12 @@
 package authoring.tests;
 
-import authoring.displayrefactored.AuthoringDisplayRefactored;
+import authoring.display.AuthoringDisplay;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class RefactorTest extends Application {
 	
-	AuthoringDisplayRefactored authoringDisplayRefactored;
+	AuthoringDisplay authoringDisplayRefactored;
 	
 	public static void main(String args[]) {
 		launch(args);
@@ -15,7 +15,7 @@ public class RefactorTest extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
-		authoringDisplayRefactored = new AuthoringDisplayRefactored(primaryStage);
+		authoringDisplayRefactored = new AuthoringDisplay(primaryStage);
 		primaryStage.show();
 	}
 }

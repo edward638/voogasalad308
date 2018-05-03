@@ -3,7 +3,7 @@ package authoring;
 import java.util.List;
 import java.util.Set;
 
-public class GameSceneSerializable {
+public class GameSceneSerializable implements GameSceneSerializableCreator {
 	
 	private String myName;
 	private List<SceneBackgroundImageSerializable> backgroundImageSerializables;
@@ -11,6 +11,7 @@ public class GameSceneSerializable {
 	private Set<String> myObjectNames;
 	private GameObject currentGameObject;
 	private String backgroundImageName;
+	private String audioName;
 	
 	public GameSceneSerializable(GameSceneSerializableCreator scene) {
 		myName = scene.getName();
@@ -19,6 +20,7 @@ public class GameSceneSerializable {
 		currentGameObject = scene.getCurrentGameObject();
 		myObjectNames = scene.getMyObjectNames();
 		backgroundImageName = scene.getBackgroundImageName();
+		audioName = scene.getAudioName();
 	}
 	
 	public Set<String> getMyObjectNames(){
@@ -47,5 +49,9 @@ public class GameSceneSerializable {
 		return backgroundImageName;
 	}
 
+	public String getAudioName() {
+		return audioName;
+	}
+	
 	
 }

@@ -28,7 +28,7 @@ Yashas: Worked with Gouttham, Trishul, and Martin on the game engine component o
 
 Martin: Worked on developing game engine. Developed collision logic, experimented with potential collision utility, created initial testing scenarios, integrated shape behaviors and hitboxes, worked on designing and writing code for game and element events, created old GameMetaData with Gouttham, made design decisions related to integrating game player with engine.
 
-Trishul:
+Trishul: Worked with Gouttham, Trishul, and Martin to build the GameEngine part of the project. We collaborated to come up with the original design for composition style back end we have for the Engine. I built the GameElement class and many of the behaviors like Movable, Shootable, Movable Character, Time Routine, etc. I also worked with authoring to build the conversion tool from authoring environment objects into their engine equivalent. 
 
 August: Worked with Edward to make game data to save and load various authoring and frontend elements to XML using XStream. Made various Authoring GUI frontend components such as the Event pop up window, Duplicate button, GameObject resizing, etc.
 

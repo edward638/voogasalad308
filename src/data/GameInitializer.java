@@ -22,6 +22,7 @@ public class GameInitializer {
     private String gameImagesLocation;
 	private String gameSavesLocation;
 	private String gameBackgroundImagesLocation;
+	private String gameAudioLocation;
     
 	public GameInitializer(String gameName) {
 		
@@ -31,7 +32,8 @@ public class GameInitializer {
         gameImagesLocation = gameLocation + ResourceBundleManager.getPath("IMAGES");
         gameBackgroundImagesLocation = gameLocation + ResourceBundleManager.getPath("BACKGROUNDIMAGES");
         gameSavesLocation = gameLocation + ResourceBundleManager.getPath("SAVES");
-
+        gameAudioLocation = gameLocation + ResourceBundleManager.getPath("AUDIO");
+        
         if ( new File(gameLocation).exists()){
 //        	System.out.println("game exists already!");
         } else {
@@ -51,6 +53,7 @@ public class GameInitializer {
         new File(gameImagesLocation).mkdirs();
         new File(gameSavesLocation).mkdirs();
         new File( gameBackgroundImagesLocation).mkdirs();
+        new File(gameAudioLocation).mkdirs();
     }
     
     private void addDefaultDescription(String gameName) {

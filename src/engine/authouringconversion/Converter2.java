@@ -18,6 +18,7 @@ import authoring.Event;
 import authoring.GameObject;
 import authoring.GameScene;
 import authoring.Property;
+import authoring.SceneBackgroundImageSerializable;
 import engine.EventResponder;
 import engine.GameElement;
 import engine.GamePart;
@@ -94,11 +95,20 @@ public class Converter2 {
 	
 
 	public GamePart gameScene2GamePart(GameScene scene) {
-		GamePart part = new GamePart(scene.getName(), "0");
+		GamePart part = new GamePart(scene.getName(), scene.getId());
 		for (GameObject go: scene.getMyObjects()) {
 			part.addGameElement(gameObject2GameElement(go));
 		}
 		return part;
+	}
+	
+	public List<GameElement> getBackgroundObjects(GameScene scene) {
+		List<GameElement> elements = new ArrayList<>();
+		List<SceneBackgroundImageSerializable> elementDefs = scene.getBackgroundImageSerializables();
+		elementDefs.stream().forEach(bgs -> {
+			GameElement ge = new GameElement();
+			MandatoryBehavior mandB = new MandatoryBehavior()
+		});
 	}
 	
 	/*

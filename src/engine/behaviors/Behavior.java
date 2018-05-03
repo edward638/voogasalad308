@@ -1,8 +1,10 @@
 package engine.behaviors;
 
-import java.lang.reflect.Field;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.lang.reflect.Field;
 
 import engine.GameElement;
 
@@ -45,6 +47,15 @@ public abstract class Behavior {
 	}
 	
 	protected void addDefaultBehavior() {
-		// Do Nothing if no default behavior
+		// Do Nothing if no default behavior 
+		// (in this case behavior implies adding things to the EventResponder
 	}
+	
+	// Method to allow adding required behaviors if they do not already 
+	// exist for the parent GameElement 
+	protected void addRequiredBehaviors(List<Behavior> reqs) {
+		// Do Nothing if no required Behavior objects
+	}
+	
+	
 }

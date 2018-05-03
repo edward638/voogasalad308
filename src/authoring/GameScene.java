@@ -16,6 +16,7 @@ public class GameScene extends Observable implements GameViewObservable, ObjectI
 	//has a list of objects
 	private String myName;
 	private String levelId;
+	private String backgroundImageName;
 	private List<SceneBackgroundImageSerializable> backgroundImageSerializables;
 	private List<GameObject> myObjects;
 	private Set<String> myObjectNames;
@@ -27,8 +28,16 @@ public class GameScene extends Observable implements GameViewObservable, ObjectI
 		levelId = id;
 		myObjects = new ArrayList<>();
 		myObjectNames = new TreeSet<>();
-		backgroundImageSerializables = new ArrayList<>();
-		
+		backgroundImageSerializables = new ArrayList<>();	
+	}
+
+	public String getBackgroundImageName() {
+		return backgroundImageName;
+	}
+
+	public void setBackgroundImageName() {
+		this.backgroundImageName = myName.replaceAll("\\s", "") + "backgroundimage";
+		System.out.println(backgroundImageName);
 	}
 	
 	public GameScene(GameSceneSerializable scene) {
@@ -37,7 +46,7 @@ public class GameScene extends Observable implements GameViewObservable, ObjectI
 		backgroundImageSerializables = scene.getBackgroundImageSerializables();
 		currentGameObject = scene.getCurrentGameObject();
 		myObjectNames = scene.getMyObjectNames();
-		
+		backgroundImageName = scene.getBackgroundImageName();
 	}
 	
 	@Override

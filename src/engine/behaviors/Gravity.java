@@ -11,6 +11,7 @@ import engine.events.elementevents.TimeEvent;
  */
 public class Gravity extends Behavior{
 	public static final Double GRAVITATIONAL_FORCE_DEFAULT = 9.8*10;
+	
 	private Double gravityForce;
 	
 	public Gravity(GameElement ge) {
@@ -39,5 +40,7 @@ public class Gravity extends Behavior{
 	protected void addDefaultBehavior() {
 		this.getParent().addEventResponse(new TimeEvent(0.0), new TimeGravity());
 	}
+	
+
 
 }

@@ -86,7 +86,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 		keyInputDictionary = new KeyInputDictionary(engine);
 		myScene.setOnKeyPressed(keyPress -> keyInputDictionary.handleAction(keyPress.getCode()));
 
-		volumeSlider = new VolumeSlider(buttonData, engine);
+		volumeSlider = new VolumeSlider(engine);
 		username = new Username();
 		buttonData = new ConcreteButtonData(stage, this, volumeSlider, root, keyInputDictionary, username);
 

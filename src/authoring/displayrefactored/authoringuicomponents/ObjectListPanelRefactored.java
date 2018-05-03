@@ -49,12 +49,8 @@ public class ObjectListPanelRefactored extends AuthoringUIComponentRefactored im
 	@Override
 	protected void generateComponent() {
 		BorderPane borderPane = getBorderPane();
-		initializeButtons();
-		initializeListViews();
-		setActions();
-		myVBox = new VBox();
-		upperHBox = new HBox();
-		lowerHBox = new HBox();
+		initializeFXComponents();
+		mapFXActions();
 		upperHBox.getChildren().addAll(myAddSceneBackgroundImageButton);
 		lowerHBox.getChildren().addAll(myDeleteObjectButton,undoActionButton);
 		myVBox.getChildren().addAll(myLevelObjects, upperHBox, lowerHBox);
@@ -118,6 +114,49 @@ public class ObjectListPanelRefactored extends AuthoringUIComponentRefactored im
 		myLevelObjects.getItems().clear();
 		myLevelObjects.getItems().addAll(set);
 		myLevelObjects.getSelectionModel().select(observable.getCurrentGameObject());
+	}
+
+	@Override
+	protected void initializeFXComponents() {
+		// TODO Auto-generated method stub
+		myAddSceneBackgroundImageButton = new Button(ResourceBundleManager.getAuthoring("AddSceneBackgroundImageButton"));
+		myDeleteObjectButton = new Button(ResourceBundleManager.getAuthoring("AddDeleteObjectButton"));
+		undoActionButton = new Button(ResourceBundleManager.getAuthoring("AddUndoActionButton"));
+		myLevelObjects = new ListView<>();
+		myLevelObjects.setMaxHeight(300);
+		myVBox = new VBox();
+		upperHBox = new HBox();
+		lowerHBox = new HBox();
+	}
+
+	@Override
+	protected void mapFXActions() {
+		// TODO Auto-generated method stub
+		myAddSceneBackgroundImageButton.setOnAction(e -> {
+			try {
+				FileChooser fileChooser = new FileChooser();
+				fileChooser.setTitle("Choose Object Image");
+				fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+				File image = fileChooser.showOpenDialog(new Stage());
+				controller.addBackgroundImage(new Image(image.toURI().toString()));
+				
+				//put image.getName into SceneBackground
+			} catch (Exception exception) {
+				//do nothing
+				//this just means the user didn't choose an image
+		
+			}//
+		});
+		myDeleteObjectButton.setOnAction(e -> {
+			int index = myLevelObjects.getSelectionModel().getSelectedIndex();
+			controller.deleteGameObject(index);
+		});
+		myLevelObjects.setOnMouseClicked(e->{
+			controller.setCurrentGameObject(myLevelObjects.getSelectionModel().getSelectedItem());
+		});
+		undoActionButton.setOnMouseClicked(e->{
+			controller.restorePreviousGameScene();
+		});
 	}
 
 }

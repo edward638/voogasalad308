@@ -10,6 +10,7 @@ public class SpaceRoutine extends Movable {
 	
 	private List<List<Double>> points2Visit;
 	private Integer currentIndex;
+	
 	public SpaceRoutine(GameElement ge) {
 		this (ge, new ArrayList<>(), 20.0);
 	}

@@ -58,4 +58,16 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 		libraryObjectInfoBox.addToBorderPane(getBorderPane());
 	}
 
+	@Override
+	protected void initializeFXComponents() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void mapFXActions() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

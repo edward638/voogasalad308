@@ -2,15 +2,15 @@ package gamePlayer.buttons;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.dropbox.core.DbxException;
-import com.dropbox.core.v2.files.ListFolderErrorException;
-
 import data.propertiesFiles.ResourceBundleManager;
 import gamePlayer.GameListViewer;
-import javafx.scene.control.Button;
 import voogadropbox.VoogaDropbox;
 
+/**
+ * button pressed when users want to load a game from online
+ * @author calvinma, jeffreyli
+ *
+ */
 public class LoadOnlineButton extends PlayerButtons {
 
 	private static final String BUTTONTEXT = "Download Game from Online";

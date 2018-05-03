@@ -24,8 +24,7 @@ in terms of what games they want and how they wanted to interact with a game out
 the backend and frontend of this part, but mostly frontend as gameplayer was mainly a frontend thing. Also created two utilities for our group, 
 one of which could not be reviewed by Facebook so we can't use it. Did like a couple things for the frontend for authoring. 
 
-
-Yashas:
+Yashas: Worked with Gouttham, Trishul, and Martin on the game engine component of the project. Helped design the inital structure for the Engine. Worked on implementing the display and audio aspects of the Engine. Also worked on impelemnting behaviors and game events related to audio playing, and level flow/transition. Also, worked with Gouttham to do a major refactoring of the Engine design to be more flexible for level flow and better understandable. Also, worked with Player team to integrate Engine display and Player's HUD and with Game Data team to integrate game data with Engine to be able to load and save games in Engine.
 
 Martin: Worked on developing game engine. Developed collision logic, experimented with potential collision utility, created initial testing scenarios, integrated shape behaviors and hitboxes, worked on designing and writing code for game and element events, created old GameMetaData with Gouttham, made design decisions related to integrating game player with engine.
 

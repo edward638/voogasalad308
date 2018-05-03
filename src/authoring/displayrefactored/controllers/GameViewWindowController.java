@@ -48,7 +48,8 @@ public class GameViewWindowController extends Controller implements ViewRefreshI
 	}
 	
 	public void storeBackgroundImage(RenderedImage ri) {
-		getImageManager().storeCompositeBackgroundImage(gameScene.getName()+"backgroundimage.png", ri);
+		getImageManager().storeCompositeBackgroundImage(gameScene.getName().replaceAll("\\s", "")+"backgroundimage.png", ri);
+		gameScene.setBackgroundImageName();
 	}
 
 	public SceneBackgroundImage getBackgroundImage(SceneBackgroundImageSerializable s) {

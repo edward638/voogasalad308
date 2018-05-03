@@ -23,7 +23,7 @@ import engine.behaviors.MainCharacter;
 import engine.behaviors.MandatoryBehavior;
 import engine.behaviors.Movable;
 import engine.behaviors.MovableCharacter;
-import engine.behaviors.TimeRoutine;
+import engine.behaviors.TimeRoutine2;
 import engine.behaviors.TimeTracker;
 import engine.behaviors.TrackMainCharacter;
 import engine.events.elementevents.CollisionEvent;
@@ -75,7 +75,7 @@ public class ModelGameState {
 		//block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, new RectangleShape(40.0, 40.0), "mario_block.png"));
 		block.addBehavior(new MandatoryBehavior(block, "Block", xpos, ypos, "rectangle", 40.0, 40.0, 40.0, 40.0, "mario_block.png"));
 		block.addBehavior(new TimeTracker(block));
-		block.addBehavior(new TimeRoutine(block, 5, true));
+		block.addBehavior(new TimeRoutine2(block, 5, true));
 		block.addBehavior(new TrackMainCharacter(block, getCreatedMario()));
 		block.addBehavior(new Movable(block, 20.0, direction));
 		block.addEventResponse(new TimeEvent(0.0), new IncrementTimeTracker());
@@ -107,7 +107,7 @@ public class ModelGameState {
 		mario.addBehavior(new MainCharacter(mario, 1, true, true));
 		mario.addBehavior(new Gravity(mario));
 		mario.addBehavior(new TimeTracker(mario));
-		mario.addBehavior(new TimeRoutine(mario, 7, true));
+		mario.addBehavior(new TimeRoutine2(mario, 7, true));
 		mario.addBehavior(new AddsGameElement(mario, getCreatedBlock(0.0, 0.0)));
 		
 		mario.addEventResponse(new TimeEvent(0.0), new TimeCreateGameElement());

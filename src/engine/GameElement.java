@@ -66,8 +66,8 @@ public class GameElement {
 					.collect(Collectors.toList())
 					.get(0);
 		}
-		catch (NullPointerException n) {
-			throw new IllegalArgumentException(behavior_type + " does not exist for GameElement" + getIdentifier());
+		catch (Exception e) {
+			throw new IllegalArgumentException(behavior_type + " does not exist for GameElement " + getIdentifier());
 		}
 	}
 	

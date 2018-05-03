@@ -13,7 +13,7 @@ import javax.script.ScriptException;
  **/
 public class GroovyExecutor {
 
-	private ScriptEngine engine;
+	private static ScriptEngine engine;
 	
 	public GroovyExecutor() {
 		engine = new ScriptEngineManager().getEngineByName("groovy");

@@ -54,6 +54,7 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 	private Pane foregroundPane;
 	private GameViewWindowController controller;
 	private Button myLevelSizeButton;
+	private HBox hBox;
 	private Button saveBackground;
 	private GameViewObservable gameViewObservable;
 	
@@ -64,49 +65,20 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 		this.controller = controller;
 		objectImageViews = new ArrayList<>();
 		updatePaneSize(DEFAULTSIZEX, DEFAULTSIZEY);
-		System.out.println("constructor");
 	}
 	
 	@Override
 	protected void generateComponent() {
 		BorderPane borderPane = getBorderPane();
-		stackPane = new StackPane();
-		list = new ArrayList<>();
-		HBox hBox = new HBox();
-		myPanelSelector = new ComboBox<>();
-		initializeComboBoxes();
-		initializeButtons();
-		hBox.getChildren().addAll(myPanelSelector, myLevelSizeButton,saveBackground);
-		sceneBackground = new SceneBackground(ResourceBundleManager.getPosition("GAMEVIEWSIZE_X"), ResourceBundleManager.getPosition("GAMEVIEWSIZE_Y"));
-		backgroundPane = sceneBackground.getPane();
-		foregroundPane = new Pane();
-		stackPane.setStyle("-fx-border-color: black");
-		stackPane.setPrefSize(ResourceBundleManager.getPosition("GAMEVIEWSIZE_X"), ResourceBundleManager.getPosition("GAMEVIEWSIZE_Y"));
-		scrollPane = new ScrollPane(stackPane);
-		stackPane.getChildren().add(backgroundPane);
-		stackPane.getChildren().add(foregroundPane);
-
+		initializeFXComponents();
+		mapFXActions();
 		borderPane.setCenter(scrollPane);
 		borderPane.setTop(hBox);
 	}
 
 	private void initializeButtons() {
 		myLevelSizeButton = new Button(ResourceBundleManager.getAuthoring("EditLevelSize"));
-		myLevelSizeButton.setOnAction(e-> {
-			LevelSizePopupRefactored popup = new LevelSizePopupRefactored(this);
-		});
 		saveBackground = new Button(ResourceBundleManager.getAuthoring("SaveBackground"));
-		saveBackground.setOnAction(e->{
-			WritableImage wi = new WritableImage((int) backgroundPane.getPrefWidth(), (int) backgroundPane.getPrefHeight());
-			 backgroundPane.snapshot(new SnapshotParameters(), wi);
-	
-			    try {
-			    	RenderedImage ri = SwingFXUtils.fromFXImage(wi, null);
-			        controller.storeBackgroundImage(ri);
-			    } catch (Exception e1) {
-			    	e1.printStackTrace();
-			    }
-		});
 	}
 
 	private void initializeComboBoxes() {
@@ -160,11 +132,9 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 		imageView.setFitHeight((double) mandatoryBehavior.getProperty("displayHeight").getValue());
 		} catch (NullPointerException e) {
 			imageView.setPreserveRatio(true);
-			imageView.setFitWidth(200);
-			
+			imageView.setFitWidth(200);		
 			mandatoryBehavior.getProperty("displayWidth").setValue(imageView.getBoundsInLocal().getWidth());
 			mandatoryBehavior.getProperty("displayHeight").setValue(imageView.getBoundsInLocal().getHeight());
-			
 			imageView.setPreserveRatio(false);
 		}
 
@@ -223,5 +193,44 @@ public class GameViewWindowRefactored extends AuthoringUIComponentRefactored imp
 		backgroundPane.setMinSize(sizeX, sizeY);
 		foregroundPane.setMinSize(sizeX, sizeY);
 		sceneBackground.setRectangle(sizeX, sizeY);
+	}
+
+	@Override
+	protected void initializeFXComponents() {
+		// TODO Auto-generated method stub
+		stackPane = new StackPane();
+		list = new ArrayList<>();
+		hBox = new HBox();
+		myPanelSelector = new ComboBox<>();
+		initializeButtons();
+		initializeComboBoxes();
+		hBox.getChildren().addAll(myPanelSelector, myLevelSizeButton,saveBackground);
+		sceneBackground = new SceneBackground(ResourceBundleManager.getPosition("GAMEVIEWSIZE_X"), ResourceBundleManager.getPosition("GAMEVIEWSIZE_Y"));
+		backgroundPane = sceneBackground.getPane();
+		foregroundPane = new Pane();
+		stackPane.setStyle("-fx-border-color: black");
+		stackPane.setPrefSize(ResourceBundleManager.getPosition("GAMEVIEWSIZE_X"), ResourceBundleManager.getPosition("GAMEVIEWSIZE_Y"));
+		scrollPane = new ScrollPane(stackPane);
+		stackPane.getChildren().add(backgroundPane);
+		stackPane.getChildren().add(foregroundPane);
+	}
+
+	@Override
+	protected void mapFXActions() {
+		// TODO Auto-generated method stub
+		myLevelSizeButton.setOnAction(e-> {
+			LevelSizePopupRefactored popup = new LevelSizePopupRefactored(this);
+		});
+		saveBackground.setOnAction(e->{
+			WritableImage wi = new WritableImage((int) backgroundPane.getPrefWidth(), (int) backgroundPane.getPrefHeight());
+			 backgroundPane.snapshot(new SnapshotParameters(), wi);
+	
+			    try {
+			    	RenderedImage ri = SwingFXUtils.fromFXImage(wi, null);
+			        controller.storeBackgroundImage(ri);
+			    } catch (Exception e1) {
+			    	e1.printStackTrace();
+			    }
+		});
 	}
 }

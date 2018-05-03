@@ -18,6 +18,7 @@ import authoring.Event;
 import authoring.GameObject;
 import authoring.GameScene;
 import authoring.Property;
+import authoring.SceneBackgroundImageSerializable;
 import engine.EventResponder;
 import engine.GameElement;
 import engine.GamePart;
@@ -93,11 +94,20 @@ public class Converter2 {
 
 	public GamePart gameScene2GamePart(GameScene scene) {
 		GamePart part = new GamePart(scene.getName(), "0");
+		part.addGameElement(getBackgroundElement(scene));
 		for (GameObject go: scene.getMyObjects()) {
 			part.addGameElement(gameObject2GameElement(go));
 		}
 		return part;
 	}
+	
+	public GameElement getBackgroundElement(GameScene scene) {
+		GameElement ge = new GameElement();
+		MandatoryBehavior mand = new MandatoryBehavior(ge, "Background Image", scene.getBackgroundImageName(),0.0, 0.0);
+		ge.addBehavior(mand);
+		return ge;
+	}
+	
 	
 	/*
 	 * Method reviews game objects stored as parts
@@ -130,24 +140,21 @@ public class Converter2 {
 	public Behavior authBehavior2Behavior (AuthBehavior authB, GameElement ge) {
 		Behavior newEngBehavior;
 		try {
-			//System.out.println(authB.getName());
 			Constructor<?> use = getConstructor(Class.forName(authB.getName()));
-			System.out.println("COnstructor made");
-			System.out.println(use);
 			newEngBehavior = (Behavior) use.newInstance(ge);
-			
-			System.out.println("Behaior instantiatted");
 		} catch (ClassNotFoundException|InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e1) {
 			e1.printStackTrace();
 			throw (new RuntimeException("Failed to instantiate newEngBehavior from " + authB.getName()));
 		}
+		
 		Class<?> newEngBehaviorClass = newEngBehavior.getClass();
 		for (Field f: newEngBehaviorClass.getDeclaredFields()) {
 			if (Modifier.isPublic(f.getModifiers())) {continue;}
 			f.setAccessible(true);
-			//System.out.println("Field: " + f);
 			try {
-				f.set(newEngBehavior, authB.getProperty(f.getName()).getValue());
+				if (authB.getProperty(f.getName()).getValue() != null) {
+					f.set(newEngBehavior, authB.getProperty(f.getName()).getValue());
+				}
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 				e.printStackTrace();
 				throw(new RuntimeException("Failed to set " + authB.getProperty(newEngBehaviorClass.getCanonicalName()).getValue() + " for " + f.getName() + " of " + newEngBehaviorClass));

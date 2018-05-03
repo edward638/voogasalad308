@@ -2,9 +2,13 @@ package gamePlayer.buttons;
 
 import java.util.Optional;
 
-import gamePlayer.Username;
 import javafx.scene.control.TextInputDialog;
 
+/**
+ * button pressed for changing the username
+ * @author jeffreyli
+ *
+ */
 public class ChangeNameButton extends PlayerButtons {
 	String newName;
 

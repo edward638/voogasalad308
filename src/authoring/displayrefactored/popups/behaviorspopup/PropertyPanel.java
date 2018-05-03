@@ -1,5 +1,7 @@
 package authoring.displayrefactored.popups.behaviorspopup;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +11,8 @@ import authoring.AuthBehavior;
 import authoring.GameObject;
 import authoring.Property;
 import authoring.displayrefactored.controllers.BehaviorPopupController;
+import engine.actions.Action;
+import engine.actions.GroovyAction;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -20,9 +24,7 @@ import javafx.scene.layout.VBox;
 public class PropertyPanel {
 
 	private List<GameObject> myGameObjects;
-	//	private Set<Property> myProperties;
 	private VBox myVBox;
-	//	private List<TextField> myTextFields;
 	private Map<Property, TextField> myPropTexts;
 	private BehaviorPopupController myController;
 	private AuthBehavior currBehavior;
@@ -42,7 +44,7 @@ public class PropertyPanel {
 	private void initializeRoot() {
 		myVBox.setPadding(new Insets(10));
 		myVBox.setSpacing(10);
-		myVBox.setMinWidth(450);
+		myVBox.setMinWidth(500);
 		myVBox.setMinHeight(450);
 		myVBox.getChildren().add(new Label("Properties"));
 		myVBox.getChildren().add(makeSaveButton());
@@ -64,15 +66,14 @@ public class PropertyPanel {
 		hBox.getChildren().add(new Label(property.getName() + " (" + property.getValueType().getSimpleName() + ") "));
 		TextField propField = null;
 		if(myPropTexts.containsKey(property)) {
-			System.out.println("has Key" + property);
+			System.out.println("has Key " + property); //a got damn print statement
 			propField = myPropTexts.get(property);
-			propField.setText(property.getValue().toString());
 		} else {
 			propField = new TextField();
 			myPropTexts.put(property, propField);
-			if(property.getValue() != null) {
-				propField.setText(property.getValue().toString());
-			}
+		}
+		if(property.getValue() != null) {
+			propField.setText(property.getValue().toString());
 		}
 		hBox.getChildren().add(propField);
 		return hBox;
@@ -91,38 +92,88 @@ public class PropertyPanel {
 				Property prop = g.getBehavior(currBehavior.getName()).getProperty(p.getName());
 				String value = myPropTexts.get(p).getText();
 				if (value != null && prop != null) {
-					switch(prop.getValueType().getSimpleName()) {
-					case "Double":
-						System.out.println("it's a double!" + value);
-						prop.setValue(Double.parseDouble(value));
-						break;
-					case "String":
-						System.out.println("it's a string!" + value);
-						prop.setValue(value);
-						break;
-					case "Integer":
-						System.out.println("it's a integer!" + value);
-						prop.setValue(Integer.parseInt(value));
-						break;
-					case "Boolean":
-						System.out.println("it's a boolean!" + value);
-						prop.setValue(Boolean.parseBoolean(value));
-						break;
-					case "List":
-						System.out.println("it's a list!" + value);
-//						prop.setValue(Boolean.parseBoolean(value));
-						break;
-					case "Map":
-						System.out.println("it's a map!" + value);
-//						prop.setValue(Boolean.parseBoolean(value));
-						break;
-					default: 
-						System.out.println("ripperoni");
-					}
-					System.out.println("property value set");
+					checkTypeAndStore(value, prop);
 				}
 			}
 		}
+	}
+
+	private void checkTypeAndStore(String value, Property prop) {
+		switch(prop.getValueType().getSimpleName()) {
+		case "Double":
+			System.out.println("it's a double! " + value);
+			prop.setValue(Double.parseDouble(value));
+			break;
+		case "String":
+			System.out.println("it's a string! " + value);
+			prop.setValue(value);
+			break;
+		case "Integer":
+			System.out.println("it's a integer! " + value);
+			prop.setValue(Integer.parseInt(value));
+			break;
+		case "Boolean":
+			System.out.println("it's a boolean! " + value);
+			prop.setValue(Boolean.parseBoolean(value));
+			break;
+		case "List":
+			System.out.println("it's a list! " + value);
+			if(currBehavior.getDisplayName().equals("SpaceRoutine")) {
+				prop.setValue(parseListList(value));
+			} else if(currBehavior.getDisplayName().equals("EntrancePortal")) {
+				prop.setValue(parseListString(value));
+			}
+			break;
+		case "Map":
+			System.out.println("it's a map! " + value);
+			if(prop.getName().equals("routineTimes")) {
+				prop.setValue(parseMap(value));
+			}
+			break;
+		default: 
+			System.out.println("ripperoni");
+		}
+		System.out.println("property value set");
+	}
+
+	private List<List<Double>> parseListList(String value) {
+		List<List<Double>> listOfLists = new ArrayList<>();
+		String[] pointArray = value.split(";");
+		for(String point : pointArray) {
+			String[] coords = point.split(",");
+			List<Double> list = new ArrayList<>();
+			list.add(Double.parseDouble(coords[0])); //x coordinate
+			list.add(Double.parseDouble(coords[1])); //y coordinate
+			listOfLists.add(list);
+		}
+		return listOfLists;
+	}
+
+	private List<String> parseListString(String value) {
+		String[] pointArray = value.split(",");
+		return Arrays.asList(pointArray);
+	}
+
+	/**
+	 * This method parses the string in the Property's TextField and returns it as a Map<Action, Double>. 
+	 * This parsing method should only be used when the behavior is TimeRoutine.
+	 * 
+	 * @param value A String gotten from the TextField
+	 * @return
+	 */
+	private Map<Action, Double> parseMap(String value) {
+		Map<Action, Double> map = new HashMap<>();
+		String[] keyPairs = value.split(";");
+		for(String keyPair : keyPairs) {
+			System.out.println(keyPair);
+			String[] keyPairArr = keyPair.split(",");
+			System.out.println("" + keyPairArr[0]);
+			System.out.println(keyPairArr[1]);
+			Action newAction = new GroovyAction(keyPairArr[0]);
+			Double newDouble = Double.parseDouble(keyPairArr[1]);
+			map.put(newAction, newDouble);
+		}
+		return map;
 	}
 
 	public void refresh() {

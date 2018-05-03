@@ -17,15 +17,11 @@ import data.LibraryObserver;
  */
 public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored implements Observer, LibraryObserver {
 
-
 	private ObjectInfoPanelController controller;
 	private ObjectInfoObservable observable;
 	private LibraryObservable libraryObservable;
 
-
-
 	public ObjectInfoPanelRefactored(ObjectInfoPanelController controller) {
-		// TODO Auto-generated constructor stub
 		this.controller = controller;
 	}
 
@@ -39,7 +35,6 @@ public class ObjectInfoPanelRefactored extends AuthoringUIComponentRefactored im
 
 	@Override
 	protected void generateComponent() {
-		// TODO Auto-generated method stub
 
 	}
 

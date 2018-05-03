@@ -69,17 +69,6 @@ public class BehaviorPopupController extends PopupController {
 	
 	private Set<AuthBehavior> getAllBehaviors() {
 		BehaviorFactory behaviorFactory = new BehaviorFactory();
-		//got the below from StackOverflow
-//		List<ClassLoader> classLoadersList = new LinkedList<ClassLoader>();
-//		classLoadersList.add(ClasspathHelper.contextClassLoader());
-//		classLoadersList.add(ClasspathHelper.staticClassLoader());
-//
-//		Reflections reflections = new Reflections(new ConfigurationBuilder()
-//		    .setScanners(new SubTypesScanner(false), new ResourcesScanner())
-//		    .setUrls(ClasspathHelper.forClassLoader(classLoadersList.toArray(new ClassLoader[0])))
-//		    .filterInputsBy(new FilterBuilder().include(FilterBuilder.prefix(PACKAGE_NAME))));
-//		
-//		Set<Class<?>> classes = reflections.getSubTypesOf(Object.class);
 		
 		EngineClassRetriever retriever = new EngineClassRetriever();
 		Set<Class<?>> classes = (Set<Class<?>>) retriever.getClasses(Behavior.class, "engine.behaviors");

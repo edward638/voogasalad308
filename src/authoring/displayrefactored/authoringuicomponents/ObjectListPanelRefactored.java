@@ -48,7 +48,6 @@ public class ObjectListPanelRefactored extends AuthoringUIComponentRefactored im
 	
 	@Override
 	protected void generateComponent() {
-		// TODO Auto-generated method stub
 		BorderPane borderPane = getBorderPane();
 		initializeButtons();
 		initializeListViews();
@@ -108,7 +107,6 @@ public class ObjectListPanelRefactored extends AuthoringUIComponentRefactored im
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
 		observable = (ObjectInfoObservable) arg0;
 		updateLevelObjects(observable.getMyObjects());
 	}

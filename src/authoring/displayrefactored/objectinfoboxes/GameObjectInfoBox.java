@@ -62,7 +62,6 @@ private Label properties;
 	
 	@Override
 	public void initializeFXComponents() {
-		// TODO Auto-generated method stub
 		imageView.setPreserveRatio(true);
 		imageView.setFitWidth(200);
 		buttonsHBox = new HBox();
@@ -166,7 +165,6 @@ private Label properties;
 
 	@Override
 	public void initializeVBox() {
-		// TODO Auto-generated method stub
 		getVBox().getChildren().clear();
 		getVBox().getChildren().addAll(properties, imageView, objectName, nameHBox, buttonsHBox, instances, gameObjectCoordinates);
 	}

@@ -13,11 +13,11 @@ import engine.behaviors.MandatoryBehavior;
 public class GameObject {
 
 	private String myName;
-	private double xPos;
-	private double yPos;
-	private double displayWidth;
-	private double displayHeight;
-	private String imagePath;
+//	private double xPos;
+//	private double yPos;
+//	private double displayWidth;
+//	private double displayHeight;
+//	private String imagePath;
 	private Set<AuthBehavior> myBehaviors;
 	private Set<Event> myEvents;
 	private BehaviorFactory myBehaviorFactory;
@@ -153,51 +153,51 @@ public class GameObject {
 	}
 
 	public double getxPos() {
-		return xPos;
+		return (Double) getMandatoryBehavior().getProperty("xPos").getValue();
 	}
 
 	public void setxPos(double xPos) {
-		this.xPos = xPos;
+//		this.xPos = xPos;
 		getMandatoryBehavior().getProperty("xPos").setValue(xPos);
 	}
 
 	public double getyPos() {
-		return yPos;
+		return (Double) getMandatoryBehavior().getProperty("yPos").getValue();
 	}
 
 	public void setyPos(double yPos) {
-		this.yPos = yPos;
+//		this.yPos = yPos;
 		getMandatoryBehavior().getProperty("yPos").setValue(yPos);
 	}
 
 	public double getDisplayWidth() {
-		return displayWidth;
+		return (Double) getMandatoryBehavior().getProperty("displayWidth").getValue();
 	}
 
 	public void setDisplayWidth(double displayWidth) {
-		this.displayWidth = displayWidth;
+//		this.displayWidth = displayWidth;
 		getMandatoryBehavior().getProperty("displayWidth").setValue(displayWidth);
 	}
 	
 	public double getDisplayHeight() {
-		return displayHeight;
+		return (Double) getMandatoryBehavior().getProperty("displayHeight").getValue();
 	}
 
 	public void setDisplayHeight(double displayHeight) {
-		this.displayHeight = displayHeight;
+//		this.displayHeight = displayHeight;
 		getMandatoryBehavior().getProperty("displayHeight").setValue(displayHeight);
-	}
-
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
-		this.getMandatoryBehavior().getProperty("imagePath").setValue(imagePath);
 	}
 	
 	/**
 	 * @return The String filepath to the image of this GameObject.
 	 */
 	public String getImagePath() {
-		return (String) this.getMandatoryBehavior().getProperty("imagePath").getValue();
+		return ((String) this.getMandatoryBehavior().getProperty("imagePath").getValue());
+	}
+	
+	public void setImagePath(String imagePath) {
+//		this.imagePath = imagePath;
+		this.getMandatoryBehavior().getProperty("imagePath").setValue(imagePath);
 	}
 
 	public String toString() {

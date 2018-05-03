@@ -55,6 +55,7 @@ private Label properties;
 		objectName = new TextField();
 		objectName.setPrefWidth(50);
 		objectName.setText(this.gameObject.getName());
+		System.out.println(gameObject.getImagePath());
 		imageView = new ImageView(saver.getImage(gameObject.getImagePath()+".png"));
 		initializeFXComponents();
 		mapFXActions();

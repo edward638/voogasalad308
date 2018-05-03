@@ -12,6 +12,7 @@ import engine.events.elementevents.TimeEvent;
 public class Gravity extends Behavior{
 	public static final Double GRAVITATIONAL_FORCE_DEFAULT = 9.8*10;
 	private Double gravityForce;
+	
 	public Gravity(GameElement ge) {
 		super(ge);
 		gravityForce = GRAVITATIONAL_FORCE_DEFAULT;

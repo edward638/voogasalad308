@@ -154,6 +154,7 @@ public class GameObject {
 
 	public void setName(String name) {
 		myName = name;
+		getMandatoryBehavior().getProperty("elementName").setValue(name);
 	}
 
 	public String getName() {

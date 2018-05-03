@@ -103,7 +103,6 @@ public class Converter2 {
 	
 	public GameElement getBackgroundElement(GameScene scene) {
 		GameElement ge = new GameElement();
-		System.out.println("Backgound Image path: " + scene.getBackgroundImageName());
 		MandatoryBehavior mand = new MandatoryBehavior(ge, "Background Image", scene.getBackgroundImageName(),0.0, 0.0);
 		ge.addBehavior(mand);
 		return ge;

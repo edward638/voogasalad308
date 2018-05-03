@@ -52,8 +52,6 @@ public class Converter2 {
 		GameElement ge = new GameElement();
 		// Must add MandatoryBehavior first
 		Behavior mandEngB = authBehavior2Behavior(go.getBehavior(MandatoryBehavior.class.getCanonicalName()), ge);
-		printer.printAuthBehavior(go.getBehavior(MandatoryBehavior.class.getCanonicalName()));
-		printer.printEngineBehavior(mandEngB);
 		ge.addBehavior(mandEngB);
 		// Add remaining Behaviors besides MainCharacter
 		
@@ -96,6 +94,7 @@ public class Converter2 {
 
 	public GamePart gameScene2GamePart(GameScene scene) {
 		GamePart part = new GamePart(scene.getName(), "0");
+		part.addGameElement(getBackgroundElement(scene));
 		for (GameObject go: scene.getMyObjects()) {
 			part.addGameElement(gameObject2GameElement(go));
 		}
@@ -103,7 +102,11 @@ public class Converter2 {
 	}
 	
 	public GameElement getBackgroundElement(GameScene scene) {
-		
+		GameElement ge = new GameElement();
+		System.out.println("Backgound Image path: " + scene.getBackgroundImageName());
+		MandatoryBehavior mand = new MandatoryBehavior(ge, "Background Image", scene.getBackgroundImageName(),0.0, 0.0);
+		ge.addBehavior(mand);
+		return ge;
 	}
 	
 	

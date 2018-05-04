@@ -19,9 +19,9 @@ public class EventManager2 {
 	}
 	
 	public void processElementEvent(ElementEvent ee) {
-		if (ee instanceof KeyInputEvent) {
-			System.out.println(ee);
-		}
+//		if (ee instanceof KeyInputEvent) {
+//			System.out.println(ee);
+//		}
 		List<GameEvent> gameEvents = new ArrayList<>();
 		for (GameElement ge: gameSate.getCurrentGamePart().getElements()) {
 			gameEvents.addAll(ge.processEvent(ee));

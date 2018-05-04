@@ -41,8 +41,12 @@ public class Shooter extends Behavior {
 //		System.out.println("Shooter GE hashcode: " + getParent().hashCode());
 		toShoot.setxPos(startx);
 		toShoot.setyPos(starty);
-//		System.out.println("Shooter: Set X and Y");
 		GameElement bullet = new Converter2().gameObject2GameElement(toShoot);
+		if (bullet.hasBehavior(Movable.class)) {
+			Movable m = (Movable)bullet.getBehavior(Movable.class);
+			m.setDirection(direction);
+			m.setVelocity(v);
+		}
 		new Printer().printGameElement(bullet);
 		getParent().addGameEvent(new AddElementEvent(bullet));
 	}

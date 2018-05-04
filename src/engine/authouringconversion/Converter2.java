@@ -97,6 +97,7 @@ public class Converter2 {
 		for (GameObject go: scene.getMyObjects()) {
 			part.addGameElement(gameObject2GameElement(go));
 		}
+		part.addAudio(scene.getAudioName());
 		return part;
 	}
 	
@@ -115,6 +116,7 @@ public class Converter2 {
 				.filter(el -> !el.getIdentifier().equals(BG_IMAGE_NAME)).collect(Collectors.toList())) {
 			scene.addObject(gameElement2GameObject(element));
 		}
+		scene.setAudioName(part.getBackgroundAudio());
 		return scene;
 	}
 	

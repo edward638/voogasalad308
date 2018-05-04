@@ -34,6 +34,8 @@ public class KeyInputDictionary {
 	public void handleAction(KeyCode input) {
 		if (dictionary.containsKey(input)) {
 			engine.handleKeyInput(dictionary.get(input));
+		} else {
+			engine.handleKeyInput(input);
 		}
 		else {
 			engine.handleKeyInput(input);

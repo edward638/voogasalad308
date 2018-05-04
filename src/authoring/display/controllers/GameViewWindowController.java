@@ -55,6 +55,7 @@ public class GameViewWindowController extends Controller implements ViewRefreshI
 	 */
 	public void storeBackgroundImage(Pane pane) {
 		gameScene.setBackgroundImageName();
+		System.out.println("gamename: " + gameScene.getName());
 		WritableImage wi = new WritableImage((int) pane.getWidth(), (int) pane.getHeight());
 		pane.snapshot(new SnapshotParameters(), wi);
 		RenderedImage ri = SwingFXUtils.fromFXImage(wi, null);
@@ -99,7 +100,4 @@ public class GameViewWindowController extends Controller implements ViewRefreshI
 		gameScene.notifyMyObservers();
 	
 	}
-	
-	
-
 }

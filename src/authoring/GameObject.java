@@ -81,6 +81,8 @@ public class GameObject {
 		if(toCopy.getMandatoryBehavior().getProperty("displayWidth").getValue() != null) {
 			setDisplayWidth((double) toCopy.getMandatoryBehavior().getProperty("displayWidth").getValue());
 			setDisplayHeight((double) toCopy.getMandatoryBehavior().getProperty("displayHeight").getValue());
+			setHitboxWidth((double) toCopy.getMandatoryBehavior().getProperty("hitBoxWidth").getValue());
+			setHitboxHeight((double) toCopy.getMandatoryBehavior().getProperty("hitBoxHeight").getValue());
 		}
 		this.setImagePath((String) toCopy.getMandatoryBehavior().getProperty("imagePath").getValue());
 	}
@@ -241,6 +243,7 @@ public class GameObject {
 	public void setDisplayWidth(double displayWidth) {
 //		this.displayWidth = displayWidth;
 		getMandatoryBehavior().getProperty("displayWidth").setValue(displayWidth);
+		getMandatoryBehavior().getProperty("hitBoxWidth").setValue(displayWidth);
 	}
 	
 	/**
@@ -258,6 +261,25 @@ public class GameObject {
 	public void setDisplayHeight(double displayHeight) {
 //		this.displayHeight = displayHeight;
 		getMandatoryBehavior().getProperty("displayHeight").setValue(displayHeight);
+		getMandatoryBehavior().getProperty("hitBoxHeight").setValue(displayHeight);
+	}
+
+	/**
+	 * 
+	 * @param hitboxWidth sets hitbox width to hitboxWidth
+	 */
+	public void setHitboxWidth(double hitboxWidth) {
+//		this.displayWidth = displayWidth;
+		getMandatoryBehavior().getProperty("hitBoxWidth").setValue(hitboxWidth);
+	}
+
+	/**
+	 * 
+	 * @param hitboxHeight sets hitbox height to hitboxHeight
+	 */
+	public void setHitboxHeight(double hitboxHeight) {
+//		this.displayHeight = displayHeight;
+		getMandatoryBehavior().getProperty("hitBoxHeight").setValue(hitboxHeight);
 	}
 	
 	/**

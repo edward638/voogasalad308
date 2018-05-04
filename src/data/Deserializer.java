@@ -26,7 +26,6 @@ import java.util.*;
 public class Deserializer {
 
     private static final String DS_STORE = "DS_Store";
-    private Map<GameScene, List<GameObject>> objectMap;
     private XStream xstream;
     private static final String SAVE = "save";
     

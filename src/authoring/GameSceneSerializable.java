@@ -3,6 +3,10 @@ package authoring;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * @author Edward Zhuang
+ * A serializable form of GameScene. Since GameScene implements Observable interfaces, it cannot be serialized.
+ */
 public class GameSceneSerializable implements GameSceneSerializableCreator {
 	
 	private String myName;

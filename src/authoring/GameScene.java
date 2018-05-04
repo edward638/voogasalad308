@@ -9,7 +9,7 @@ import java.util.TreeSet;
 /** 
  * GameScene is the background image of each level
  * 
- * @author: Summer
+ * @author: Summer, Edward Zhuang
  **/
 public class GameScene extends Observable implements AudioObservable, GameViewObservable, ObjectInfoObservable, GameSceneSerializableCreator {
 	

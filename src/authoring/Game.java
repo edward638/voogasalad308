@@ -18,7 +18,7 @@ import authoring.display.GameObjectImageView;
  * Game keeps track of an entire game 
  * This includes the name, description, image, and managers
  * 
- * @author: Summer
+ * @author: Summer, Edward Zhuang
  **/
 public class Game {
 

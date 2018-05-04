@@ -8,14 +8,12 @@ import engine.events.gameevents.RemoveGameElementEvent;
 public class Killable extends Behavior{
 	private Double health;
 	private Double decayRate;
-	private Double lifeHealth;
 	private Double default_health;
 	
 	public Killable(GameElement ge, Double health, Double decayRate, Double lifeHealth) {
 		super(ge);
 		this.health = health;
 		this.decayRate = decayRate;
-		this.lifeHealth = lifeHealth;
 		default_health = lifeHealth;
 	}
 	
@@ -35,18 +33,28 @@ public class Killable extends Behavior{
 	public void reduceHealth(Double h) {
 		this.health -= h;
 		if (health < 0) {
-		//	System.out.println("health less than 0");
+			System.out.println("Health below 0");
 			getParent().addGameEvent(new RemoveGameElementEvent(getParent()));
 			if (getParent().hasBehavior(MainCharacter.class)) {
-				getParent().addGameEvent(new GameOverEvent(getParent()));
+				MainCharacter mc = (MainCharacter) getParent().getBehavior(MainCharacter.class);
+				if (mc.getLives()>0) {
+					mc.removeLife();
+					restoreHealth();
+					return;
+				}
+				else {
+					getParent().addGameEvent(new GameOverEvent(getParent()));
+				}
+				
+				
 			}
 		}
 	}
 	
-	@GroovyMethod
-	public void loseLife() {
-	//	System.out.println("Losing life: " + health);
-		reduceHealth(lifeHealth);
+	public void restoreHealth() {
+		System.out.println("Restore health method ran");
+		System.out.println("Default health: " + default_health);
+		health = default_health;
 	}
 	
 	@GroovyMethod

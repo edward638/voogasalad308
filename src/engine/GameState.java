@@ -45,7 +45,7 @@ public class GameState {
 		
 		constructGameState(loadGame(this.gameName, newGame));
 		
-		audioPlayerManager.newAudioPlayer(this.currentGameLevel.getCurrentGamePart().getBackgroundAudio());
+		audioPlayerManager.newAudioPlayer(this.currentGameLevel.getCurrentGamePart().getBackgroundAudio()).loop();
 	}
 	
 	/**
@@ -220,7 +220,7 @@ public class GameState {
 			}
 		}
 		
-		audioPlayerManager.newAudioPlayer(this.currentGameLevel.getCurrentGamePart().getBackgroundAudio());
+		audioPlayerManager.newAudioPlayer(this.currentGameLevel.getCurrentGamePart().getBackgroundAudio()).loop();
 	}
 	
 	/**

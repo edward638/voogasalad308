@@ -2,6 +2,7 @@ package engine.audio;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 
 /**
  * @author Yashas Manjunatha
@@ -56,7 +57,8 @@ public class AudioPlayer {
 		mediaPlayer.setVolume(volume);
 	}
 	
-	protected MediaPlayer getMediaPlayer() {
-		return this.mediaPlayer;
+	public void loop() {
+		mediaPlayer.setStartTime(Duration.seconds(0));
+		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 	}
 }

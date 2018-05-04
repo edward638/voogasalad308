@@ -29,8 +29,7 @@ public class GameState {
 	private List<GameElement> addToDisplay;
 	private List<GameElement> removeFromDisplay;
 	
-	private AudioPlayerManager audioManager;
-	private String musicPath = "data/music/WiiShopChannelMusic.mp3";
+	private AudioPlayerManager audioPlayerManager;
 
 	/**
 	 * Instantiates a GameState for a game.
@@ -42,10 +41,11 @@ public class GameState {
 		gameLevels = new ArrayList<>();
 		addToDisplay = new ArrayList<>();
 		removeFromDisplay = new ArrayList<>();
-		audioManager = new AudioPlayerManager(1);
-		audioManager.newAudioPlayer(musicPath);
+		audioPlayerManager = new AudioPlayerManager(this.gameName, 1);
 		
 		constructGameState(loadGame(this.gameName, newGame));
+		
+		audioPlayerManager.newAudioPlayer(this.currentGameLevel.getCurrentGamePart().getBackgroundAudio());
 	}
 	
 	/**
@@ -108,7 +108,7 @@ public class GameState {
 	 * @return Reference to the AudioManager of the Game
 	 */
 	public AudioPlayerManager getAudioManager() {
-		return audioManager;
+		return audioPlayerManager;
 	}
 	
 	/**
@@ -186,9 +186,12 @@ public class GameState {
 	 * @param portalID ID of the Portal object, used to place the Main Character in the new GamePart.
 	 */
 	public void changeCurrentGamePart(String newPartID, Integer portalID) {
+		audioPlayerManager.stop();
+		
 		for (GameLevel gl : gameLevels) {
 			for (GamePart newGamePart : gl.getGameParts()) {
 				if(newGamePart.getGamePartID().equals(newPartID)) {
+					
 					GameElement mainCharacter = this.getCurrentGamePart().getMainCharacter();
 					this.getCurrentGamePart().removeGameElement(mainCharacter);
 					
@@ -213,11 +216,11 @@ public class GameState {
 					for (GameElement element : this.getCurrentGamePart().getElements()) {
 						addToDisplay(element);
 					}
-					
 				}
 			}
 		}
 		
+		audioPlayerManager.newAudioPlayer(this.currentGameLevel.getCurrentGamePart().getBackgroundAudio());
 	}
 	
 	/**

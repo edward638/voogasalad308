@@ -4,6 +4,9 @@ import authoring.GameObject;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**
+ * @author Calvin Ma
+ */
 public class ObjectCoordinatesInsertion {
 
 	private String xPos;
@@ -25,7 +28,6 @@ public class ObjectCoordinatesInsertion {
 	}
 
 	public void setXpos(double xPos) {
-		
 		this.xPos = Double.toString(xPos);
 		gameObject.getMandatoryBehavior().getProperty("xPos").setValue(xPos);
 	

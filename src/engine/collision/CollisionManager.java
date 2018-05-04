@@ -14,8 +14,24 @@ import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
+/**
+ * @author Martin
+ * 
+ * Create a new Collision Manager, used to search for and act on any collisions found between two active
+ * game elements in the current GamePart.
+ *
+ */
 public class CollisionManager {
 	
+	/**
+	 * Loops through each distinct pair of GameElements in the given GamePart, and determines if a rough collision
+	 * exists between any two GameParts. If there is a collision, a ElementEvent containing the colliding GameElements
+	 * is created and passed to the two GameElements to be processed. The GameEvents returned by this process are 
+	 * consolidated and returned by this method.
+	 * 
+	 * @param gamePart 	Current GamePart to be analyzed for collisions
+	 * @return 	List of GameEvents returned by the GameElements in the GamePart
+	 */
 	public List<GameEvent> handleCollisions(GamePart gamePart) {
 		List<GameEvent> returnEvents = new ArrayList<>();
 		for (int i = 0; i < gamePart.getElements().size(); i++) {

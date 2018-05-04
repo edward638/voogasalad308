@@ -4,7 +4,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import authoring.ObjectInfoObservable;
-import authoring.display.controllers.ObjectInfoPanelController;
+import authoring.display.controllers.ObjectInfoController;
 import authoring.display.objectinfoboxes.GameObjectInfoBox;
 import authoring.display.objectinfoboxes.LibraryObjectInfoBox;
 import data.LibraryObservable;
@@ -17,10 +17,10 @@ import data.LibraryObserver;
  */
 public class ObjectInfoPanel extends AuthoringUIComponent implements Observer, LibraryObserver {
 
-	private ObjectInfoPanelController controller;
+	private ObjectInfoController controller;
 	private LibraryObservable libraryObservable;
 
-	public ObjectInfoPanel(ObjectInfoPanelController controller) {
+	public ObjectInfoPanel(ObjectInfoController controller) {
 		this.controller = controller;
 	}
 	

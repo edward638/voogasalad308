@@ -9,10 +9,8 @@ import java.util.Set;
 
 import authoring.GameObject;
 import authoring.ObjectInfoObservable;
-import authoring.display.controllers.ObjectInfoPanelController;
-import authoring.display.popups.NewGameObjectPopup;
+import authoring.display.controllers.ObjectInfoController;
 import data.propertiesFiles.ResourceBundleManager;
-import javafx.collections.FXCollections;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
@@ -38,10 +36,10 @@ public class ObjectListPanel extends AuthoringUIComponent implements Observer {
 	private ListView<GameObject> myLevelObjects;
 	private Button myDeleteObjectButton;
 	private Button undoActionButton;
-	private ObjectInfoPanelController controller;
+	private ObjectInfoController controller;
 	private ObjectInfoObservable observable = null;
 	
-	public ObjectListPanel(ObjectInfoPanelController controller) {
+	public ObjectListPanel(ObjectInfoController controller) {
 		this.controller = controller;
 	}
 	

@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import authoring.Game;
-import authoring.display.controllers.Controller;
-import authoring.display.controllers.GameViewWindowController;
-import authoring.display.controllers.LevelPanelController;
-import authoring.display.popups.NewGameObjectPopup;
 import data.AudioManager;
 import data.GameObjectManager;
 import data.ImageManager;
@@ -47,10 +43,10 @@ public class AuthoringEnvironment {
 		levelPanelController = new LevelPanelController(game.getSceneManager(), imageManager, audioManager);
 		controllerList.add(levelPanelController);
 		GameViewWindowController gameViewWindowController = levelPanelController.getGameViewWindowController();
-		ObjectInfoPanelController objectInfoPanelController = levelPanelController.getObjectInfoPanelController();
+		ObjectInfoController objectInfoController = levelPanelController.getObjectInfoController();
 		AudioController audioController = levelPanelController.getAudioController();
 		controllerList.add(gameViewWindowController);
-		controllerList.add(objectInfoPanelController);
+		controllerList.add(objectInfoController);
 		controllerList.add(audioController);
 	}
 
@@ -67,8 +63,8 @@ public class AuthoringEnvironment {
 	private void addLibrary() {
 		GameObjectManager gameObjectManager = new GameObjectManager(levelPanelController, imageManager);
 		gameObjectManager.addToGUI(pane);
-		levelPanelController.getObjectInfoPanelController().getObjectInfoPanelRefactored().setLibraryObservable(gameObjectManager);
-		gameObjectManager.setObserver(levelPanelController.getObjectInfoPanelController().getObjectInfoPanelRefactored());
+		levelPanelController.getObjectInfoController().getObjectInfoPanelRefactored().setLibraryObservable(gameObjectManager);
+		gameObjectManager.setObserver(levelPanelController.getObjectInfoController().getObjectInfoPanelRefactored());
 	}
 
 	/**

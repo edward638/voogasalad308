@@ -1,11 +1,8 @@
 package authoring.display;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.List;
 
-import com.dropbox.core.DbxException;
 
 import authoring.Game;
 import authoring.display.controllers.AuthoringEnvironment;
@@ -22,8 +19,13 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import voogadropbox.VoogaDropbox;
 
+/**
+ * @author Edward Zhuang
+ * Main authoring class. Contains buttons which allow user to save, create, and load games.
+ * Contains the pane on which all front end authoring components are ultimate attached to.
+ */
 public class AuthoringDisplay implements LoadAuthoringInterface {
-	
+
 	private static final int GUI_LAYOUT_X = 20;
 	private static final int GUI_LAYOUT_Y = 40;
 	private static final String SAVE_GAME = "Save Game";
@@ -34,6 +36,12 @@ public class AuthoringDisplay implements LoadAuthoringInterface {
 	
 	private static final int WIDTH = 1500;
 	private static final int HEIGHT = 1000;
+	private static final String RECENT_GAMES = "RecentGames";
+	private static final String NEW_GAME_BUTTON = "NewGame";
+	private static final String SAVE_GAME_BUTTON = "SaveGame";
+	private static final String LOAD_GAME_BUTTON = "LoadGame";
+	private static final String SAVE_ONLINE_BUTTON = "SaveOnline";
+	private static final int BUTTON_BOX_SPACING = 30;
 	private Pane root;
 	private HBox buttonBox;
 	private Button newGameButton;
@@ -50,10 +58,8 @@ public class AuthoringDisplay implements LoadAuthoringInterface {
 	}
 
 	private void initialize(Stage stage) {
-		// TODO Auto-generated method stub
 		root = new Pane();
 		Scene scene = new Scene(root, WIDTH, HEIGHT);
-//		scene.getStylesheets().add(this.getClass().getResource("teststyle.css").toExternalForm());
 		stage.setScene(scene);
 		stage.setTitle(NAME);
 		stage.show();
@@ -61,12 +67,12 @@ public class AuthoringDisplay implements LoadAuthoringInterface {
 	
 	private void initializeButtonBox() {
 		buttonBox = new HBox();
-		buttonBox.setSpacing(30);
+		buttonBox.setSpacing(BUTTON_BOX_SPACING);
 		gameNames = new ComboBox<>();
-		AnimatedButton newGame = new AnimatedButton(ResourceBundleManager.getButton("NewGame"), NEW_GAME);
-		AnimatedButton loadGame = new AnimatedButton(ResourceBundleManager.getButton("SaveGame"), LOAD_GAME);
-		AnimatedButton saveGame = new AnimatedButton(ResourceBundleManager.getButton("LoadGame"), SAVE_GAME);
-		saveOnlineButton = new Button(ResourceBundleManager.getAuthoring("SaveOnline"));
+		AnimatedButton newGame = new AnimatedButton(ResourceBundleManager.getButton(NEW_GAME_BUTTON), NEW_GAME);
+		AnimatedButton loadGame = new AnimatedButton(ResourceBundleManager.getButton(SAVE_GAME_BUTTON), LOAD_GAME);
+		AnimatedButton saveGame = new AnimatedButton(ResourceBundleManager.getButton(LOAD_GAME_BUTTON), SAVE_GAME);
+		saveOnlineButton = new Button(ResourceBundleManager.getAuthoring(SAVE_ONLINE_BUTTON));
 		
 		newGameButton = newGame.getButton();
 		loadGameButton = loadGame.getButton();
@@ -79,7 +85,7 @@ public class AuthoringDisplay implements LoadAuthoringInterface {
 
 	private void initializeComboBoxes() {
 		gameNames.getItems().clear();
-		gameNames.setPromptText(ResourceBundleManager.getAuthoring("RecentGames"));
+		gameNames.setPromptText(ResourceBundleManager.getAuthoring(RECENT_GAMES));
 		File directory = new File(baseLocation);
 		File[] directoryListing = directory.listFiles();
 	        
@@ -93,7 +99,6 @@ public class AuthoringDisplay implements LoadAuthoringInterface {
 	}
 	
 	private void setButtonActions() {
-		// TODO Auto-generated method stub
 		newGameButton.setOnAction(e -> {
 			NewGamePopup popup = new NewGamePopup(this);
 		});
@@ -103,7 +108,6 @@ public class AuthoringDisplay implements LoadAuthoringInterface {
 				System.out.println(currentGame.getScenes());
 				saver.gameAuthorToXML(currentGame.getScenes(), true);
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			
@@ -115,7 +119,6 @@ public class AuthoringDisplay implements LoadAuthoringInterface {
 				System.out.println(currentGame.getScenes());
 				saver.gameAuthorToXML(currentGame.getScenes(), true);
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			
@@ -124,16 +127,13 @@ public class AuthoringDisplay implements LoadAuthoringInterface {
 			try {
 				voogaDropbox.uploadGame(currentGame.getName());
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		});
-		
 		loadGameButton.setOnAction(e -> {
 			String gameName = gameNames.getSelectionModel().getSelectedItem();
 			GameLoader gameLoader = new GameLoader(gameNames.getSelectionModel().getSelectedItem());
 			currentGame = new Game(gameName);
-			
 			root.getChildren().clear();
 			root.getChildren().add(buttonBox);
 			currentGame.restoreGame(gameLoader.getGameScenes(true));
@@ -146,7 +146,11 @@ public class AuthoringDisplay implements LoadAuthoringInterface {
 		});
 		
 	}
-	
+
+	/**
+	 * Initializes the AuthoringEnvironment, which can be done from a new or saved game
+	 * @param game game to be edited in AuthoringEnvironment.
+	 */
 	public void loadAuthoringEnvironment(Game game) {
 		root.getChildren().clear();
 		root.getChildren().add(buttonBox);

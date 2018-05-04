@@ -28,6 +28,8 @@ public class KeyBindingPopup extends Pane {
 	private static final int FIRST_BINDING_Y_POSITION = 60;
 	private static final int SPACE_BETWEEN_BINDINGS = 60;
 	private static final int SPACE_BETWEEN_NODES = 125;
+	private static final String CLOSE_BUTTON_TEXT = "Close";
+	private static final String TITLE_TEXT = "Key Bindings";
 
 	public KeyBindingPopup(ButtonData buttonData) {
 		this.setLayoutX(300);
@@ -73,7 +75,7 @@ public class KeyBindingPopup extends Pane {
 	}
 
 	private void setupCloseButton() {
-		Button close = new Button("Close");
+		Button close = new Button(CLOSE_BUTTON_TEXT);
 		close.setLayoutX(175);
 		close.setLayoutY(350);
 		close.setOnAction(event -> {
@@ -93,7 +95,7 @@ public class KeyBindingPopup extends Pane {
 
 	private void setUpTitle() {
 		Text title = new Text();
-		title.setText("Key Bindings");
+		title.setText(TITLE_TEXT);
 		title.setStyle("-fx-font: 24 Verdana;");
 		title.setFill(Color.LIGHTSKYBLUE);
 		title.setX(40);

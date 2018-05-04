@@ -12,6 +12,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
+/**
+ * one single key binding, front end and back end
+ * 
+ * @author jeffreyli
+ *
+ */
 public class KeyBinding {
 	private KeyCode defaultKeyCode;
 	private KeyCode currentBinding;
@@ -33,7 +39,9 @@ public class KeyBinding {
 	private static final Duration FADE_TRANSITION_DURATION = Duration.millis(300);
 	private static final String CHANGE_BUTTON_TEXT = "Change";
 	private static final int CYCLECOUNT = 2;
-
+	
+	
+	
 	public KeyBinding(KeyCode keyCode, String theAction, KeyInputDictionary keyMap, Pane popUp) {
 		defaultKeyCode = keyCode;
 		action = theAction;
@@ -47,7 +55,8 @@ public class KeyBinding {
 		setUpFadeTransition();
 		makeChangeButton();
 	}
-
+	
+	
 	private void setupFlashTransition() {
 		flashTransition = new FadeTransition(FADE_TRANSITION_DURATION, repeatedKeyText);
 		flashTransition.setFromValue(0);
@@ -56,7 +65,7 @@ public class KeyBinding {
 		flashTransition.setAutoReverse(true);
 
 	}
-
+	
 	private void setupRepeatedKeyText() {
 		repeatedKeyText = new Label(errorMessage);
 		repeatedKeyText.setLayoutX(REPEAT_KEY_X);
@@ -81,7 +90,10 @@ public class KeyBinding {
 		keyText.setTextFill(WORDS_COLOR);
 		nodeList.add(keyText);
 	}
-
+	
+	/**
+	 * settings up the fade transition
+	 */
 	private void setUpFadeTransition() {
 		fadeTransition = new FadeTransition(FADE_TRANSITION_DURATION, keyText);
 		fadeTransition.setFromValue(1.0);

@@ -5,8 +5,6 @@ import java.util.List;
 
 import authoring.groovy.GroovyMethod;
 import engine.GameElement;
-import javafx.geometry.Bounds;
-import javafx.scene.input.KeyCode;
 
 public class MainCharacter extends Behavior{
 	

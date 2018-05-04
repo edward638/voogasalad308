@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import engine.actions.GroovyAction;
-import engine.events.elementevents.ElementEvent;
 
 /**
  * Event is owned by a GameObject
@@ -29,10 +28,17 @@ public class Event {
 		return myResponses;
 	}
 	
+	/**
+	 * 
+	 * @param type sets event type
+	 */
 	public void setEventType(String type) {
 		eventType = type;
 	}
 	
+	/**
+	 * returns event type
+	 */
 	public String getEventType() {
 		return eventType;
 	}
@@ -65,12 +71,18 @@ public class Event {
 		myResponses.remove(toDelete);
 	}
 	
+	/**
+	 * prints the name of the event
+	 */
 	public String toString() {
 		String[] name = eventType.split("\\.");
 		String use = name[name.length-1];
 		return use;
 	}
 	
+	/**
+	 * method is used to clone the event when an object is cloned 
+	 */
 	public Event clone() {
 		Event event = new Event();
 		event.setEventType(this.getEventType());

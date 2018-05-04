@@ -5,8 +5,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import engine.behaviors.Killable;
+import engine.actions.Action;
+import engine.actions.GroovyAction;
 import engine.behaviors.MainCharacter;
 import engine.behaviors.TimeTracker;
+import engine.events.elementevents.ElementEvent;
 import engine.events.elementevents.KeyInputEvent;
 import engine.events.elementevents.MouseInputEvent;
 import engine.events.elementevents.TimeEvent;
@@ -74,7 +77,6 @@ public class Engine implements EngineInterface{
 		double gameSteps = elapsedTime * currentGameState.getGameSpeed();
     	eventManager.processElementEvent(new TimeEvent(gameSteps));
     	displayState.update(currentGameState);
-
     	playerUpdater.updateHUD(populateHUD());
     }
 	
@@ -162,5 +164,20 @@ public class Engine implements EngineInterface{
 	@Override
 	public void save() {
 		currentGameState.saveGame();
+	}
+
+	/* (non-Javadoc)
+	 * @see engine.EngineInterface#getKeyAssignments()
+	 */
+	@Override
+	public Map<KeyCode, String> getKeyAssignments() {
+		Map<KeyCode, String> keyAssignments = new HashMap<>();
+		Map<ElementEvent, Action> events = currentGameState.getCurrentGamePart().getMainCharacter().getResponder().getResponses();
+		for (ElementEvent elementEvent : events.keySet()) {
+			if ((elementEvent instanceof KeyInputEvent) && (events.get(elementEvent) instanceof GroovyAction)) {
+				keyAssignments.put(((KeyInputEvent) elementEvent).getKeyCode(), ((GroovyAction) events.get(elementEvent)).getContent());
+			}
+		}
+		return keyAssignments;
 	}
 }

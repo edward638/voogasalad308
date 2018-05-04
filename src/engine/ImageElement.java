@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
- * @author Yashas Manjunatha and Gouttham Chandraekar
+ * @author Yashas Manjunatha, Gouttham Chandraekar, Martin Muenster
  * Wrapper around the JavaFX ImageView object mapping to a GameElement. Constructed and used 
  * in the DisplayState of the game. All GameElement objects are translated to an ImageElement object
  * and then displayed in the DisplayState.

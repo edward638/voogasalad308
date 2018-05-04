@@ -34,7 +34,14 @@ public class AudioPlayerManager {
 	public AudioPlayer newAudioPlayer(String mediaFile) {
 		Media media = audioManager.getAudioMedia(mediaFile);
 		AudioPlayer audioPlayer = new AudioPlayer(media, volume);
+		/*audioPlayer.addOnEndEvent(new Runnable(){
+			@Override
+			public void run(){
+				audioPlayers.remove(audioPlayer);
+			}
+		});*/
 		audioPlayers.add(audioPlayer);
+		audioPlayer.play();
 		return audioPlayer;
 	}
 	
@@ -56,6 +63,7 @@ public class AudioPlayerManager {
 		for (AudioPlayer a : audioPlayers) {
 			a.stop();
 		}
+		audioPlayers.clear();
 	}
 	
 	/**
@@ -74,5 +82,12 @@ public class AudioPlayerManager {
 		for (AudioPlayer a : audioPlayers) {
 			a.play();
 		}
+	}
+	
+	/**
+	 * Method Used to See Active Audio Players
+	 */
+	public void printAudioPlayers() {
+		System.out.println(audioPlayers.toString());
 	}
 }

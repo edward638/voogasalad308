@@ -20,7 +20,11 @@ public class AudioPlayer {
 		//Media media = new Media(new File(audioFile).toURI().toString());
 		mediaPlayer = new MediaPlayer(media);
 		setVolume(volume);
-		mediaPlayer.play();
+		//this.play();
+	}
+	
+	protected void addOnEndEvent(Runnable value) {
+		mediaPlayer.setOnEndOfMedia(value);
 	}
 	
 	/**
@@ -33,7 +37,7 @@ public class AudioPlayer {
 	/**
 	 * Calling this method resumes the audio player.
 	 */
-	protected void play() {
+	public void play() {
 		mediaPlayer.play();
 	}
 	
@@ -50,5 +54,9 @@ public class AudioPlayer {
 	 */
 	protected void setVolume(double volume) {
 		mediaPlayer.setVolume(volume);
+	}
+	
+	protected MediaPlayer getMediaPlayer() {
+		return this.mediaPlayer;
 	}
 }

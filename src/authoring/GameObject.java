@@ -13,6 +13,11 @@ import engine.behaviors.MandatoryBehavior;
 public class GameObject {
 
 	private String myName;
+//	private double xPos;
+//	private double yPos;
+//	private double displayWidth;
+//	private double displayHeight;
+//	private String imagePath;
 	private Set<AuthBehavior> myBehaviors;
 	private Set<Event> myEvents;
 	private BehaviorFactory myBehaviorFactory;
@@ -37,10 +42,6 @@ public class GameObject {
 	public GameObject(AuthBehavior initBehavior) {
 		this();
 		myBehaviors.add(initBehavior);
-	}
-	
-	public String getImagePath() {
-		return (String) this.getMandatoryBehavior().getProperty("imagePath").getValue();
 	}
 
 	/**
@@ -73,23 +74,20 @@ public class GameObject {
 		}
 		myBehaviors = newBehaviors;
 
-//		Set<Event> newEvents = new HashSet<>();
-//		for (Event e : toCopy.getEvents()) {
-//			newEvents.add(e.clone());
-//		}
+		//		Set<Event> newEvents = new HashSet<>();
+		//		for (Event e : toCopy.getEvents()) {
+		//			newEvents.add(e.clone());
+		//		}
 		myEvents = toCopy.getEvents();
-		
-		myName = toCopy.getName();
-		
+		setName(toCopy.getName());
 		addBehavior(MandatoryBehavior.class.getCanonicalName());
-				
-		this.getMandatoryBehavior().getProperty("xPos").setValue(toCopy.getMandatoryBehavior().getProperty("xPos").getValue());
-		this.getMandatoryBehavior().getProperty("yPos").setValue(toCopy.getMandatoryBehavior().getProperty("yPos").getValue());
-		this.getMandatoryBehavior().getProperty("displayWidth").setValue(toCopy.getMandatoryBehavior().getProperty("displayWidth").getValue());
-		this.getMandatoryBehavior().getProperty("displayHeight").setValue(toCopy.getMandatoryBehavior().getProperty("displayHeight").getValue());
-
-		this.getMandatoryBehavior().getProperty("imagePath").setValue(toCopy.getMandatoryBehavior().getProperty("imagePath").getValue());
-		
+		this.setxPos((double) toCopy.getMandatoryBehavior().getProperty("xPos").getValue());
+		this.setyPos((double) toCopy.getMandatoryBehavior().getProperty("yPos").getValue());
+		if(toCopy.getMandatoryBehavior().getProperty("displayWidth").getValue() != null) {
+			this.setDisplayWidth((double) toCopy.getMandatoryBehavior().getProperty("displayWidth").getValue());
+			this.setDisplayHeight((double) toCopy.getMandatoryBehavior().getProperty("displayHeight").getValue());
+		}
+		this.setImagePath((String) toCopy.getMandatoryBehavior().getProperty("imagePath").getValue());
 	}
 
 	public void addBehavior(String behaviorToAdd) {
@@ -100,12 +98,12 @@ public class GameObject {
 	public void addBehavior(AuthBehavior behaviorToAdd) {
 		myBehaviors.add(behaviorToAdd);
 	}
-	
+
 	public boolean hasBehavior(String s) {
 		return !myBehaviors.stream().filter(beh -> beh.getName().contains(s))
 				.collect(Collectors.toList()).isEmpty();
 	}
-	
+
 
 	public void removeBehavior(AuthBehavior behaviorToRemove) {
 		myBehaviors.remove(behaviorToRemove);
@@ -123,11 +121,6 @@ public class GameObject {
 		try {
 			for (AuthBehavior curr : myBehaviors) {
 				if (curr.getName().equals(behavior) || curr.getDisplayName().equals(behavior)) {
-					// is the above ok? i'm not sure whether that makes it more or less confusing
-					//i think it should be fine if we allow both methods of accessing it I can't see any problems with that
-//					System.out.println("RETURNED BEHAVIOR: " + curr);
-					// i think it should be fine if we allow both methods of accessing it I can't
-					// see any problems with that
 					return curr;
 				}
 			}
@@ -152,19 +145,67 @@ public class GameObject {
 		return myEvents;
 	}
 
+	public String getName() {
+		return myName;
+	}
+	
 	public void setName(String name) {
 		myName = name;
 		getMandatoryBehavior().getProperty("elementName").setValue(name);
 	}
 
-	public String getName() {
-		return myName;
+	public double getxPos() {
+		return (Double) getMandatoryBehavior().getProperty("xPos").getValue();
+	}
+
+	public void setxPos(double xPos) {
+//		this.xPos = xPos;
+		getMandatoryBehavior().getProperty("xPos").setValue(xPos);
+	}
+
+	public double getyPos() {
+		return (Double) getMandatoryBehavior().getProperty("yPos").getValue();
+	}
+
+	public void setyPos(double yPos) {
+//		this.yPos = yPos;
+		getMandatoryBehavior().getProperty("yPos").setValue(yPos);
+	}
+
+	public double getDisplayWidth() {
+		return (Double) getMandatoryBehavior().getProperty("displayWidth").getValue();
+	}
+
+	public void setDisplayWidth(double displayWidth) {
+//		this.displayWidth = displayWidth;
+		getMandatoryBehavior().getProperty("displayWidth").setValue(displayWidth);
+	}
+	
+	public double getDisplayHeight() {
+		return (Double) getMandatoryBehavior().getProperty("displayHeight").getValue();
+	}
+
+	public void setDisplayHeight(double displayHeight) {
+//		this.displayHeight = displayHeight;
+		getMandatoryBehavior().getProperty("displayHeight").setValue(displayHeight);
+	}
+	
+	/**
+	 * @return The String filepath to the image of this GameObject.
+	 */
+	public String getImagePath() {
+		return ((String) this.getMandatoryBehavior().getProperty("imagePath").getValue());
+	}
+	
+	public void setImagePath(String imagePath) {
+//		this.imagePath = imagePath;
+		this.getMandatoryBehavior().getProperty("imagePath").setValue(imagePath);
 	}
 
 	public String toString() {
 		return myName;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null)

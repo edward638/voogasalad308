@@ -4,11 +4,9 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
@@ -18,7 +16,6 @@ import authoring.Event;
 import authoring.GameObject;
 import authoring.GameScene;
 import authoring.Property;
-import authoring.SceneBackgroundImageSerializable;
 import engine.EventResponder;
 import engine.GameElement;
 import engine.GamePart;
@@ -47,16 +44,16 @@ public class Converter2 {
 	 * engine environment GameElement
 	 */
 	Printer printer = new Printer();
+	public static final String BG_IMAGE_NAME = "BackgroundImage";
 	
 	public GameElement gameObject2GameElement(GameObject go) {
 		GameElement ge = new GameElement();
-		// Must add MandatoryBehavior first
-		Behavior mandEngB = authBehavior2Behavior(go.getBehavior(MandatoryBehavior.class.getCanonicalName()), ge);
-		printer.printAuthBehavior(go.getBehavior(MandatoryBehavior.class.getCanonicalName()));
-		printer.printEngineBehavior(mandEngB);
-		ge.addBehavior(mandEngB);
-		// Add remaining Behaviors besides MainCharacter
 		
+		// Must add MandatoryBehavior first
+		Behavior mandEngB = authBehavior2Behavior(go.getMandatoryBehavior(), ge);
+		ge.addBehavior(mandEngB);
+		
+		// Add remaining Behaviors besides MainCharacter
 		for (AuthBehavior authB: go.getBehaviors()) {
 			if (authB.getName().contains("Mandatory") || authB.getName().contains("MainCharacter")) {continue;}
 			ge.addBehavior(authBehavior2Behavior(authB, ge));
@@ -80,10 +77,11 @@ public class Converter2 {
 	public GameObject gameElement2GameObject(GameElement ge) {
 		GameObject go = new GameObject();
 		// Remove the default Authoring MandatoryBehavior
-		go.removeBehavior(go.getBehavior(MandatoryBehavior.class.getCanonicalName()));
+		go.removeBehavior(go.getMandatoryBehavior());
 		// Translate MandatoryBehavior to AuthoringBehavior and add it
-		go.setName(ge.getIdentifier());
+		
 		go.addBehavior(behavior2AuthBehavior(ge.getBehavior(MandatoryBehavior.class))); 
+		//go.setName(ge.getIdentifier());
 		for (Behavior engB: ge.getAllBehaviors()) {
 			if (engB.getClass().equals(MandatoryBehavior.class)) { continue;}
 			go.addBehavior(behavior2AuthBehavior(engB));
@@ -96,10 +94,18 @@ public class Converter2 {
 
 	public GamePart gameScene2GamePart(GameScene scene) {
 		GamePart part = new GamePart(scene.getName(), "0");
+		part.addGameElement(getBackgroundElement(scene));
 		for (GameObject go: scene.getMyObjects()) {
 			part.addGameElement(gameObject2GameElement(go));
 		}
 		return part;
+	}
+	
+	public GameElement getBackgroundElement(GameScene scene) {
+		GameElement ge = new GameElement();
+		MandatoryBehavior mand = new MandatoryBehavior(ge, BG_IMAGE_NAME, scene.getBackgroundImageName(),0.0, 0.0);
+		ge.addBehavior(mand);
+		return ge;
 	}
 	
 	
@@ -122,14 +128,16 @@ public class Converter2 {
 	
 	public GameScene gamePart2GameScene(GamePart part) {
 		GameScene scene = new GameScene(part.getGamePartID(), part.getMyLevelID());
-		for (GameElement element: part.getElements()) {
+		scene.setBackgroundImageName();
+		for (GameElement element: part.getElements().stream()
+				.filter(el -> !el.getIdentifier().equals(BG_IMAGE_NAME)).collect(Collectors.toList())) {
 			scene.addObject(gameElement2GameObject(element));
 		}
 		return scene;
 	}
 	
 	/*
-	 * Converts authoring behavior into Engine Behavior through reflection
+	 * Constructs all behaviors defined in authoring in the game element
 	 */
 	public Behavior authBehavior2Behavior (AuthBehavior authB, GameElement ge) {
 		Behavior newEngBehavior;
@@ -151,7 +159,6 @@ public class Converter2 {
 				}
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 				e.printStackTrace();
-				throw(new RuntimeException("Failed to set " + authB.getProperty(newEngBehaviorClass.getCanonicalName()).getValue() + " for " + f.getName() + " of " + newEngBehaviorClass));
 			}
 		}
 		return newEngBehavior;
@@ -203,14 +210,12 @@ public class Converter2 {
 
 	
 	/*
-	 * Convert an authoring EventResponse object, defining how an object responds 
-	 * to events to Engine Action events that can be executed on an element
+	 * Moves GroovyAction from authoring environment to Engine
 	 */
 	public void addResponsesAuth2Engine(GameElement ge, GameObject go) {
 		EventResponder responder = ge.getResponder();
 		for (Event event: go.getEvents()) {
 			ElementEvent ee = authEvent2ElementEvent(ge, event);
-			System.out.println("event.getResponses class: " + event.getResponses().size());
 			for (GroovyAction response: event.getResponses()) {
 				responder.addResponse(ee, response);
 			}
@@ -226,9 +231,5 @@ public class Converter2 {
 		return retEvent;
 	}
 	
-//	public Action eventResponse2Action(EventResponse response) {
-//		GroovyAction groovyAction = new GroovyAction(response.getMyContent());
-//		return groovyAction;
-//	}
 	
 }

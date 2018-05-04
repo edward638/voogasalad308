@@ -6,6 +6,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.text.Font;
 
+/**
+ * class for managing everything username related including setting, changing, adding high scores
+ * @author jeffreyli, calvinma
+ *
+ */
 public class Username {
 	private String userName;
 	private static final String FONT = "Din Alternate";

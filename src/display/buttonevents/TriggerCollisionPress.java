@@ -3,8 +3,8 @@ package display.buttonevents;
 import java.util.List;
 
 import authoring.GameObject;
-import authoring.displayrefactored.popups.eventspopup.TWCPopup;
-import authoring.displayrefactored.popups.eventspopup.TriggerWindow;
+import authoring.display.popups.eventspopup.TWCPopup;
+import authoring.display.popups.eventspopup.TriggerWindow;
 
 public class TriggerCollisionPress implements ButtonEvent {
 	

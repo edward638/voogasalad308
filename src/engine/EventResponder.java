@@ -5,6 +5,7 @@ import java.util.Map;
 
 import engine.actions.Action;
 import engine.events.elementevents.ElementEvent;
+import engine.events.elementevents.KeyInputEvent;
 
 public class EventResponder {
 	private Map <ElementEvent, Action> responses;
@@ -21,6 +22,9 @@ public class EventResponder {
 	
 	public void respondTo(ElementEvent other) {
 		for (ElementEvent e: responses.keySet()) {
+			if (other instanceof KeyInputEvent) {
+				System.out.println(other);
+			}
 			if (e.matchesEvent(other)) {
 				responses.get(e).act(other, parent);
 			}

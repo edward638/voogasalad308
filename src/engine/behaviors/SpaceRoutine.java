@@ -1,6 +1,7 @@
 package engine.behaviors;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import authoring.groovy.GroovyMethod;
@@ -10,6 +11,7 @@ public class SpaceRoutine extends Movable {
 	
 	private List<List<Double>> points2Visit;
 	private Integer currentIndex;
+	
 	public SpaceRoutine(GameElement ge) {
 		this (ge, new ArrayList<>(), 20.0);
 	}
@@ -27,7 +29,5 @@ public class SpaceRoutine extends Movable {
 		setDirection(points2Visit.get(currentIndex));
 		super.move(time);
 	}
-	
-
 	
 }

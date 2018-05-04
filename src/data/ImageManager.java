@@ -64,6 +64,7 @@ public class ImageManager {
             img = ImageIO.read(new File(location + imageName));
         } catch (IOException e) {
             e.printStackTrace(); //TODO: remove this print stacktrace!
+            System.out.println(imageName);
             throw new NullPointerException();
         }
         return img;

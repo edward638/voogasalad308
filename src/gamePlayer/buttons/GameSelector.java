@@ -26,6 +26,10 @@ public class GameSelector extends ScrollPane {
 	private ButtonData buttonData;
 	private boolean isNew;
 	private String playOrLoadGame;
+	private VBox gameSelectorBox;
+	private static final int boxWidth = 900;
+	private static final int boxHeight = 900;
+	private static final int paneHeight = 200;
 
 	public GameSelector(ButtonData buttonData, boolean isNew) {
 		this.buttonData = buttonData;
@@ -44,80 +48,93 @@ public class GameSelector extends ScrollPane {
 	}
 
 	private void initializeGameSelections() {
-		VBox gameSelectorBox = new VBox();
-		gameSelectorBox.setSpacing(5);
-		gameSelectorBox.setStyle("-fx-background-color:white;");
-
-		gameSelectorBox.setMinWidth(900);
-		gameSelectorBox.setMaxWidth(900);
+		setUpGameSelectorBox();
 
 		String currentPath = Paths.get(".").toAbsolutePath().normalize().toString() + "/data/gamedata/games";
 		File directory = new File(currentPath);
 		GameDescriptionProvider gameDescriptionProvider = new GameDescriptionProvider();
 
-		File[] fList = directory.listFiles();
-		for (File file : fList) {
-			String gameName = file.getName();
-			if (gameName.contains("DS_Store")) {
+		File[] gameList = directory.listFiles();
+		for (File game : gameList) {
+			String gameName = game.getName();
+			try {
+				String gameString = gameDescriptionProvider.getGameName(gameName);
+				String gameDescription = gameDescriptionProvider.getGameDescription(gameName);
+				Image gameImage = gameDescriptionProvider.getDescriptionImage(gameName);
+				Pane gameDescriptionPane = setupNewGamePane(gameName, gameString, gameDescription, gameImage);
+				gameSelectorBox.getChildren().add(gameDescriptionPane);
+			} catch (Exception e ) {
+				System.out.println("Failed to load in game from folder " + gameName);
 				continue;
 			}
-			String gameString = gameDescriptionProvider.getGameName(gameName);
-			String gameDescription = gameDescriptionProvider.getGameDescription(gameName);
-			Image gameImage = gameDescriptionProvider.getDescriptionImage(gameName);
-
-			Pane gameDescriptionPane = setupNewGamePane(gameName, gameString, gameDescription, gameImage);
-
-			Button playButton = new Button(playOrLoadGame);
-			playButton.setLayoutX(750);
-			playButton.setLayoutY(90);
-			playButton.setOnAction((event) -> {
-				buttonData.removeFromRoot(gameSelectorBox);
-				buttonData.removeFromRoot(this);
-				buttonData.playGame(gameName, isNew);
-
-			});
-
-			gameDescriptionPane.getChildren().add(playButton);
-			gameSelectorBox.getChildren().add(gameDescriptionPane);
-
 		}
-
 		this.setContent(gameSelectorBox);
+	}
 
+	private void setUpGameSelectorBox() {
+		gameSelectorBox = new VBox();
+		gameSelectorBox.setSpacing(5);
+		gameSelectorBox.setStyle("-fx-background-color:white;");
+		gameSelectorBox.setMinWidth(boxWidth);
+		gameSelectorBox.setMaxWidth(boxHeight);
 	}
 
 	private Pane setupNewGamePane(String gameName, String gameString, String gameDescription, Image gameImage) {
 		Pane pane = new Pane();
 
-		pane.setMinWidth(900);
-		pane.setMaxWidth(900);
-		pane.setMinHeight(200);
-		pane.setMaxHeight(200);
+		pane.setMinWidth(boxWidth);
+		pane.setMaxWidth(boxWidth);
+		pane.setMinHeight(paneHeight);
+		pane.setMaxHeight(paneHeight);
 		pane.setStyle("-fx-background-color:black;");
 
+		ImageView imageView = setUpGameImage(gameImage);
+		Text nameText = setUpGameText(gameString);
+		Text descriptionText = setUpGameDescriptionText(gameDescription);
+		Button playButton = makePlayButton(gameName);
+		pane.getChildren().addAll(imageView, nameText, descriptionText, playButton);
+
+		return pane;
+	}
+
+	private Button makePlayButton(String gameName) {
+		Button playButton = new Button(playOrLoadGame);
+		playButton.setLayoutX(750);
+		playButton.setLayoutY(90);
+		playButton.setOnAction((event) -> {
+			buttonData.removeFromRoot(gameSelectorBox);
+			buttonData.removeFromRoot(this);
+			buttonData.playGame(gameName, isNew);
+		});
+		return playButton;
+	}
+
+	private Text setUpGameDescriptionText(String gameDescription) {
+		Text descriptionText = new Text(gameDescription);
+		descriptionText.setX(230);
+		descriptionText.setY(90);
+		descriptionText.setFont(new Font("Times New Roman", 20));
+		descriptionText.setFill(Color.WHITE);
+		return descriptionText;
+	}
+
+	private ImageView setUpGameImage(Image gameImage) {
 		ImageView imageView = new ImageView();
 		imageView.setImage(gameImage);
 		imageView.setX(20);
 		imageView.setY(20);
 		imageView.setFitHeight(160);
 		imageView.setFitWidth(160);
+		return imageView;
+	}
 
+	private Text setUpGameText(String gameString) {
 		Text nameText = new Text(gameString);
 		nameText.setX(225);
 		nameText.setY(60);
 		nameText.setStyle(" -fx-font: 50px Helvetica;\r\n"
 				+ "    -fx-fill: linear-gradient(from 0% 0% to 100% 200%, repeat, aqua 0%, red 50%);\r\n"
 				+ "    -fx-stroke: black;\r\n" + "    -fx-stroke-width: 1;");
-
-		Text descriptionText = new Text(gameDescription);
-		descriptionText.setX(230);
-		descriptionText.setY(90);
-		descriptionText.setFont(new Font("Times New Roman", 20));
-		descriptionText.setFill(Color.WHITE);
-
-		pane.getChildren().addAll(imageView, nameText, descriptionText);
-
-		return pane;
+		return nameText;
 	}
-
 }

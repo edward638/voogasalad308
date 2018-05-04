@@ -44,14 +44,16 @@ public class Converter2 {
 	 * engine environment GameElement
 	 */
 	Printer printer = new Printer();
+	public static final String BG_IMAGE_NAME = "BackgroundImage";
 	
 	public GameElement gameObject2GameElement(GameObject go) {
 		GameElement ge = new GameElement();
+		
 		// Must add MandatoryBehavior first
 		Behavior mandEngB = authBehavior2Behavior(go.getMandatoryBehavior(), ge);
 		ge.addBehavior(mandEngB);
-		// Add remaining Behaviors besides MainCharacter
 		
+		// Add remaining Behaviors besides MainCharacter
 		for (AuthBehavior authB: go.getBehaviors()) {
 			if (authB.getName().contains("Mandatory") || authB.getName().contains("MainCharacter")) {continue;}
 			ge.addBehavior(authBehavior2Behavior(authB, ge));
@@ -100,7 +102,7 @@ public class Converter2 {
 	
 	public GameElement getBackgroundElement(GameScene scene) {
 		GameElement ge = new GameElement();
-		MandatoryBehavior mand = new MandatoryBehavior(ge, "Background Image", scene.getBackgroundImageName(),0.0, 0.0);
+		MandatoryBehavior mand = new MandatoryBehavior(ge, BG_IMAGE_NAME, scene.getBackgroundImageName(),0.0, 0.0);
 		ge.addBehavior(mand);
 		return ge;
 	}
@@ -125,14 +127,16 @@ public class Converter2 {
 	
 	public GameScene gamePart2GameScene(GamePart part) {
 		GameScene scene = new GameScene(part.getGamePartID(), part.getMyLevelID());
-		for (GameElement element: part.getElements()) {
+		scene.setBackgroundImageName();
+		for (GameElement element: part.getElements().stream()
+				.filter(el -> !el.getIdentifier().equals(BG_IMAGE_NAME)).collect(Collectors.toList())) {
 			scene.addObject(gameElement2GameObject(element));
 		}
 		return scene;
 	}
 	
 	/*
-	 * Converts authoring behavior into Engine Behavior through reflection
+	 * Constructs all behaviors defined in authoring in the game element
 	 */
 	public Behavior authBehavior2Behavior (AuthBehavior authB, GameElement ge) {
 		Behavior newEngBehavior;

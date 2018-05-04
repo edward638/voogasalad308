@@ -1,10 +1,7 @@
 package data;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 import data.propertiesFiles.ResourceBundleManager;
 
@@ -64,9 +61,8 @@ public class GameInitializer {
         try {
 			GameSaver saver = new GameSaver(gameName);
 	    	saver.addDescription(gameName, PLACEHOLDER);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (IOException ignored) {
+			// File should be found as it is created in the GameSaver
 		}
     	
     }

@@ -3,6 +3,11 @@ package data;
 import javax.imageio.ImageIO;
 import java.awt.*;
 
+/**
+ * 
+ * @author Edward Zhuang
+ * Interface which provides description to Game Player
+ */
 public interface DescriptionProvider {
 	
 	 /**

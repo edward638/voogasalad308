@@ -47,7 +47,6 @@ public class AudioController extends Controller {
 
 	@Override
 	protected void refreshView() {
-		// TODO Auto-generated method stub
 	}
 
 	/**
@@ -65,7 +64,6 @@ public class AudioController extends Controller {
 	 * @param audio audio file
 	 */
 	public void setAudio(File audio) {
-		System.out.println(audio.getName());
 		audioManager.storeAudio(audio);
 		gameScene.setAudioName(audio.getName());
 	}

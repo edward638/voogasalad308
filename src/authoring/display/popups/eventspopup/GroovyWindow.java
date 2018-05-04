@@ -56,6 +56,7 @@ public class GroovyWindow extends VBox {
 		groovyString = groovyInput.getText();
 		String actionName = groovyName.getText();
 		GroovyAction action = new GroovyAction(groovyString);
+		action.setName(actionName);
 		// apply the groovy response to the event
 		epuc.getCurrEvent().addResponse(action);
 		// display the groovy input text on the response

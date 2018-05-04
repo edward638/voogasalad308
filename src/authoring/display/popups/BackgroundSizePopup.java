@@ -68,6 +68,7 @@ public class BackgroundSizePopup extends Popup {
 			double newWidth = Double.parseDouble(tfx.getText());
 			double newHeight = Double.parseDouble(tfy.getText());
 			
+			sbi.getImageView().setPreserveRatio(false);
 			sbi.getImageView().setFitHeight(newWidth);
 			sbi.getImageView().setFitWidth(newHeight);
 			

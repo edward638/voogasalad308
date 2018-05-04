@@ -16,7 +16,7 @@ public class ReplayButton extends PlayerButtons {
 	protected void setAction() {
 
 		this.setOnAction(event -> {
-			if (buttonData.getMostRecentFile() != null) {
+			if (buttonData.engineRunning()) {
 				buttonData.playGame(buttonData.getMostRecentFile(), true);
 			}
 		});

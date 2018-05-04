@@ -45,7 +45,7 @@ public class AudioManager {
 	 * @return Media file
 	 */
 	public Media getAudioMedia(String audioName) {
-		return new Media(new File(gameAudioLocation+audioName+ MP3).toURI().toString());
+		return new Media(new File(gameAudioLocation+audioName).toURI().toString());
 	}
 	
 }

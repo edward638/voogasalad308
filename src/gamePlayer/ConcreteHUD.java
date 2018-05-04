@@ -69,7 +69,7 @@ public class ConcreteHUD extends Pane implements HUD {
 
 	private void setUpName() {
 		Label nameText = new Label(gameName);
-		nameText.setTextFill(Color.BLACK);
+		nameText.setTextFill(Color.WHITE);
 		nameText.setLayoutX(xLabel);
 		nameText.setLayoutY(yLabel - 25);
 		nameText.setFont(new Font(fontSize));

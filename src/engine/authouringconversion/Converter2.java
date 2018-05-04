@@ -7,6 +7,7 @@ import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
@@ -22,8 +23,8 @@ import engine.GamePart;
 import engine.actions.Action;
 import engine.actions.GroovyAction;
 import engine.behaviors.Behavior;
-import engine.behaviors.MainCharacter;
 import engine.behaviors.MandatoryBehavior;
+import engine.behaviors.Shooter;
 import engine.events.elementevents.ElementEvent;
 
 
@@ -50,16 +51,24 @@ public class Converter2 {
 		GameElement ge = new GameElement();
 		ge.addBehavior(authBehavior2Behavior(go.getBehavior(MandatoryBehavior.class.getCanonicalName()), ge));
 		setBehavior2AuthorValues(go.getBehavior(MandatoryBehavior.class.getCanonicalName()), ge);
-		go.removeBehavior(go.getBehavior(MandatoryBehavior.class.getCanonicalName()));
-		for (AuthBehavior authB: go.getBehaviors()) {
+		List<AuthBehavior> remainingBehaviors = go.getBehaviors().stream()
+				.filter(b -> !(b.getName().contains("Mandatory")))
+				.collect(Collectors.toList());
+		for (AuthBehavior authB: remainingBehaviors) {
 			ge.addBehavior(authBehavior2Behavior(authB, ge));
+		}
+		if (go.getName().contains("Link")) {
+//			printer.printGameObject(go);
+//			printer.printAuthBehavior(go.getBehavior("Shooter"));
+			System.out.println(go.getBehavior("Shooter").getProperty("toShoot").getValue());
+//			printer.printGameObject((GameObject)(go.getBehavior("Shooter").getProperty("toShoot").getValue()));
 		}
 		for (AuthBehavior authB: go.getBehaviors()) {
 			setBehavior2AuthorValues(authB, ge);
 		}
 		addResponsesAuth2Engine(ge, go);	
-		System.out.println(ge.getIdentifier());
-		System.out.println(ge.getResponder().getResponses());
+//		System.out.println(ge.getIdentifier());
+//		System.out.println(ge.getResponder().getResponses());
 		return ge;
 	}
 	
@@ -88,12 +97,13 @@ public class Converter2 {
 		for (GameObject go: scene.getMyObjects()) {
 			part.addGameElement(gameObject2GameElement(go));
 		}
+		part.addAudio(scene.getAudioName());
 		return part;
 	}
 	
 	public GameElement getBackgroundElement(GameScene scene) {
 		GameElement ge = new GameElement();
-		MandatoryBehavior mand = new MandatoryBehavior(ge, BG_IMAGE_NAME, scene.getBackgroundImageName(),0.0, 0.0);
+		MandatoryBehavior mand = new MandatoryBehavior(ge, BG_IMAGE_NAME, scene.getBackgroundImageName(), 0.0, 0.0);
 		ge.addBehavior(mand);
 		return ge;
 	}
@@ -106,6 +116,7 @@ public class Converter2 {
 				.filter(el -> !el.getIdentifier().equals(BG_IMAGE_NAME)).collect(Collectors.toList())) {
 			scene.addObject(gameElement2GameObject(element));
 		}
+		scene.setAudioName(part.getBackgroundAudio());
 		return scene;
 	}
 	
@@ -114,6 +125,7 @@ public class Converter2 {
 	 */
 	public Behavior authBehavior2Behavior (AuthBehavior authB, GameElement ge) {
 		Behavior newEngBehavior;
+		
 		try {
 			Constructor<?> use = getConstructor(Class.forName(authB.getName()));
 			newEngBehavior = (Behavior) use.newInstance(ge);
@@ -133,6 +145,9 @@ public class Converter2 {
 		String className = parts[parts.length - 1];
 		Behavior behavior = ge.getBehavior(className);
 		Class<?> newEngBehaviorClass = behavior.getClass();
+		if (newEngBehaviorClass.equals(Shooter.class)) {
+			printer.printEngineBehavior(behavior);
+		}
 		for (Field f: newEngBehaviorClass.getDeclaredFields()) {
 			if (Modifier.isPublic(f.getModifiers())) {continue;}
 			f.setAccessible(true);
@@ -144,6 +159,12 @@ public class Converter2 {
 				e.printStackTrace();
 			}
 		}
+//		if (newEngBehaviorClass.equals(Shooter.class)) {
+//			System.out.println("Converter2: Post Property Setting ");
+//			printer.printEngineBehavior(behavior);
+//			printer.printGameObject((GameObject)(behavior.reportProperties().get("toShoot")));
+//			System.out.println("Converter2: parent hash code:" + ge.hashCode());
+//		}
 		
 	}
 

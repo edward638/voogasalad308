@@ -55,12 +55,14 @@ public class ImageManager {
      * @return BufferedImage
      */
     public Image getImage(String imageName){
-	    	try {
-	        return bufferedImagetoJavaFXImage(getBufferedImage(imageName, gameImagesLocation));
-	    	} catch (NullPointerException e) {
-	    		ImageManager defaultIM = new ImageManager("default");
-	    		return defaultIM.getImage(imageName);
-	    	}
+    	try {
+    		return bufferedImagetoJavaFXImage(getBufferedImage(imageName, gameImagesLocation));
+    	} catch (NullPointerException e) {
+    		ImageManager defaultIM = new ImageManager("default");
+    		//return defaultIM.getImage(imageName);
+    		System.out.println(imageName);
+    		throw new NullPointerException();
+    	}
     }
 
     private void storeBufferedImage(String imageName, BufferedImage image, String location){

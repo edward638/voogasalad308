@@ -47,11 +47,14 @@ public class GameElement {
 	 */
 	public void addBehavior(Behavior behave) {
 		List<Behavior> existing = behaviors.stream()
-				.filter(b -> b.getClass() == behave.getClass())
+				.filter(b -> b.getClass().isAssignableFrom(behave.getClass()))
 				.collect(Collectors.toList());
 		if (existing.size() > 0) {
-			behaviors.remove(existing.get(0));
-//			throw new TooManyBehaviorsException("Trying to add " + behave.getClass() + " to a GameElement that already has this behavior");
+			if (existing.get(0).getClass().isAssignableFrom(behave.getClass())) {
+				behaviors.remove(existing.get(0));
+			} else {
+				throw new TooManyBehaviorsException("Trying to add " + behave.getClass() + " to a GameElement that already has this behavior: " + existing.get(0));
+			}
 		}
 		behaviors.add(behave);
 	}
@@ -91,9 +94,17 @@ public class GameElement {
 	/*
 	 * Checks if this GameElement has a Behavior object of the requested type
 	 */
-	public boolean hasBehavior(Class<?> behavior_type) {
+	public boolean hasBehavior(Class<?> behaviorType) {
+//		System.out.println("GameElement: hasBehavior: incoming: " + behaviorType);
+//		System.out.println("GameElement: " + behaviors.stream()
+//			.filter(behavior -> behaviorType.isAssignableFrom(behavior.getClass()) || behaviorType.equals(behavior.getClass()))
+//			.collect(Collectors.toList()));
+//		behaviors.stream().forEach(b -> {
+////			System.out.println("Game Element: hasBehavior Existing Behavior: " + b.getClass());
+////			System.out.println("Game Element: hasBehavior Existing Behavior: " + b.getClass());
+//		});
 		return behaviors.stream()
-			.filter(behavior -> behavior_type.isAssignableFrom(behavior.getClass()))
+			.filter(behavior -> behaviorType.isAssignableFrom(behavior.getClass()) || behaviorType.equals(behavior.getClass()))
 			.collect(Collectors.toList()).size() > 0;
 	}
 	

@@ -13,11 +13,6 @@ import engine.behaviors.MandatoryBehavior;
 public class GameObject {
 
 	private String myName;
-//	private double xPos;
-//	private double yPos;
-//	private double displayWidth;
-//	private double displayHeight;
-//	private String imagePath;
 	private Set<AuthBehavior> myBehaviors;
 	private Set<Event> myEvents;
 	private BehaviorFactory myBehaviorFactory;
@@ -217,6 +212,7 @@ public class GameObject {
 	 */
 	public void setxPos(double xPos) {
 //		this.xPos = xPos;
+		System.out.println("Game Object Mandatory Behavior: " + getMandatoryBehavior());
 		getMandatoryBehavior().getProperty("xPos").setValue(xPos);
 	}
 

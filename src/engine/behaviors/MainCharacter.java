@@ -32,6 +32,11 @@ public class MainCharacter extends Behavior{
 	}
 	
 	@GroovyMethod
+	public int removeLife() {
+		return gamelives -= gamelives;
+	}
+	
+	@GroovyMethod
 	public boolean isXscroll() {
 		return xscroll;
 	}
@@ -39,8 +44,7 @@ public class MainCharacter extends Behavior{
 	@GroovyMethod
 	public boolean isYScroll() {
 		return yscroll;
-	}
-	
+	}	
 	
 	public List<Double> getImageViewOffset(Double width, Double height) {
 		List<Double> offset = Arrays.asList(0.0,0.0);
@@ -60,4 +64,6 @@ public class MainCharacter extends Behavior{
 	protected void addRequiredBehaviors() {
 		addBehaviorsIfNotExisting(Arrays.asList(MovableCharacter.class, Killable.class, TimeTracker.class));
 	}
+
+
 }

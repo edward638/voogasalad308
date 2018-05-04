@@ -23,10 +23,14 @@
         <authoring.AuthBehavior>
           <myProperties>
             <authoring.Property>
-              <myValue class="boolean">true</myValue>
-              <myName>xscroll</myName>
-              <myValueType>java.lang.Boolean</myValueType>
+              <myName>gravityForce</myName>
+              <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.Gravity</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior>
+          <myProperties>
             <authoring.Property>
               <myValue class="int">5</myValue>
               <myName>gamelives</myName>
@@ -35,6 +39,11 @@
             <authoring.Property>
               <myValue class="boolean">true</myValue>
               <myName>yscroll</myName>
+              <myValueType>java.lang.Boolean</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="boolean">true</myValue>
+              <myName>xscroll</myName>
               <myValueType>java.lang.Boolean</myValueType>
             </authoring.Property>
           </myProperties>
@@ -52,8 +61,7 @@
         <authoring.AuthBehavior>
           <myProperties>
             <authoring.Property>
-              <myValue class="string">donkeyimage</myValue>
-              <myName>imagePath</myName>
+              <myName>elementName</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
             <authoring.Property>
@@ -61,7 +69,20 @@
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myValue class="double">51.0</myValue>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">121.19999694824219</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">390.20001220703125</myValue>
               <myName>yPos</myName>
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
@@ -71,38 +92,17 @@
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myName>hitBoxHeight</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myName>elementName</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
               <myValue class="double">200.0</myValue>
               <myName>displayWidth</myName>
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myValue class="double">30.0</myValue>
-              <myName>xPos</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myName>shapeType</myName>
+              <myValue class="string">donkeyimage</myValue>
+              <myName>imagePath</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
           </myProperties>
           <myName>engine.behaviors.MandatoryBehavior</myName>
-        </authoring.AuthBehavior>
-        <authoring.AuthBehavior>
-          <myProperties>
-            <authoring.Property>
-              <myName>gravityForce</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-          </myProperties>
-          <myName>engine.behaviors.Gravity</myName>
         </authoring.AuthBehavior>
       </myBehaviors>
       <myEvents>

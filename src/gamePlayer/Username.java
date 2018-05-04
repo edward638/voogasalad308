@@ -15,6 +15,7 @@ public class Username {
 	private String userName;
 	private static final String FONT = "Din Alternate";
 	private Label nameText;
+	private static final int fontSize = 20;
 
 	public Username() {
 		setupUserNameInput();
@@ -34,7 +35,7 @@ public class Username {
 		nameText = new Label("User: " + userName);
 		nameText.setLayoutX(970);
 		nameText.setLayoutY(10);
-		nameText.setFont(Font.font(FONT, 20));
+		nameText.setFont(Font.font(FONT, fontSize));
 	}
 
 	public Label getNameText() {

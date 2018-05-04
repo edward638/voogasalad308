@@ -11,6 +11,7 @@ import voogadropbox.VoogaDropbox;
 public class UploadGameButton extends Button {
 
 	private String gameName;
+	private static final String buttonText = "Save and Upload";
 
 	private final static String BASELOCATION = ResourceBundleManager.getPath("BASELOCATION");
 
@@ -22,7 +23,7 @@ public class UploadGameButton extends Button {
 	}
 	
 	private void setupButtonProperties() {
-		this.setText("Save and Upload");
+		this.setText(buttonText);
 	}
 
 	private void setupAction() {

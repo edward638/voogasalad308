@@ -9,8 +9,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+
 /**
  * The pop up pane that appears for the user to change keybindings
+ * 
  * @author jeffreyli, calvinma
  *
  */
@@ -29,7 +31,7 @@ public class KeyBindingPopup extends Pane {
 		this.buttonData = buttonData;
 
 		setupBackground();
-		setupChangeButtons();
+		setupBindings();
 		setupCloseButton();
 		setUpTitle();
 	}
@@ -44,8 +46,9 @@ public class KeyBindingPopup extends Pane {
 		this.getChildren().add(title);
 	}
 
-	private void setupChangeButtons() {
+	private void setupBindings() {
 
+		initialiseOGKeyBindings();
 		KeyBinding W = new KeyBinding(KeyCode.W, "Jump", keyMap, this);
 		KeyBinding A = new KeyBinding(KeyCode.A, "Left", keyMap, this);
 		KeyBinding D = new KeyBinding(KeyCode.D, "Right", keyMap, this);
@@ -53,6 +56,15 @@ public class KeyBindingPopup extends Pane {
 		addNodeListToGui(90, 80, W.getNodeList());
 		addNodeListToGui(150, 80, A.getNodeList());
 		addNodeListToGui(210, 80, D.getNodeList());
+	}
+
+	/**
+	 * initialises the hardcoded default key bindings
+	 */
+	private void initialiseOGKeyBindings() {
+		buttonData.getKeyBindings().replaceKey(KeyCode.A, KeyCode.A, KeyCode.A);
+		buttonData.getKeyBindings().replaceKey(KeyCode.D, KeyCode.D, KeyCode.D);
+		buttonData.getKeyBindings().replaceKey(KeyCode.W, KeyCode.W, KeyCode.W);
 	}
 
 	/**

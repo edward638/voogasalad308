@@ -7,9 +7,10 @@ package gamePlayer.buttons;
  *
  */
 public class LoadButton extends PlayerButtons {
+	private static final String buttonString = "Load Game";
 
 	public LoadButton(double x, double y, double width, double height, ButtonData buttonData) {
-		super(x, y, width, height, buttonData, "Load Game");
+		super(x, y, width, height, buttonData, buttonString);
 	}
 
 	protected void setAction() {

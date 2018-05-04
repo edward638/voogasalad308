@@ -107,7 +107,6 @@ public class AuthoringDisplay implements LoadAuthoringInterface {
 			try {
 				GameSaver saver = new GameSaver(currentGame.getName());
 				saver.gameAuthorToXML(currentGame.getScenes(), true);
-				saver.addDescription(currentGame.getName(), currentGame.getGameDescription());
 			} catch (Exception e1) {
 				new ErrorBox("No Game Selected", "Please select/load a game before saving");
 			}
@@ -118,7 +117,6 @@ public class AuthoringDisplay implements LoadAuthoringInterface {
 			try {
 				GameSaver saver = new GameSaver(currentGame.getName());
 				saver.gameAuthorToXML(currentGame.getScenes(), true);
-				saver.addDescription(currentGame.getName(), currentGame.getGameDescription());
 			} catch (Exception e1) {
 				new ErrorBox("No Game Selected", "Please select/load a game before saving");
 			}

@@ -1,0 +1,154 @@
+<authoring.GameSceneSerializable>
+  <myName>Scene 1</myName>
+  <backgroundImageSerializables>
+    <authoring.SceneBackgroundImageSerializable>
+      <xPos>0.5</xPos>
+      <yPos>-0.5</yPos>
+      <xSize>2000.0</xSize>
+      <ySize>2000.0</ySize>
+      <imagePath>background0.png</imagePath>
+    </authoring.SceneBackgroundImageSerializable>
+    <authoring.SceneBackgroundImageSerializable>
+      <xPos>-0.5</xPos>
+      <yPos>-0.5</yPos>
+      <xSize>2000.0</xSize>
+      <ySize>2000.0</ySize>
+      <imagePath>background1.png</imagePath>
+    </authoring.SceneBackgroundImageSerializable>
+  </backgroundImageSerializables>
+  <myObjects>
+    <authoring.GameObject>
+      <myName>MazeBall</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">MazeBallimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">21.0</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">976.0</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">50.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">50.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">MazeBall</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">20.0</myValue>
+              <myName>yVel</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">20.0</myValue>
+              <myName>xVel</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.Movable</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="boolean">true</myValue>
+              <myName>xscroll</myName>
+              <myValueType>java.lang.Boolean</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="int">1</myValue>
+              <myName>gamelives</myName>
+              <myValueType>java.lang.Integer</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="boolean">true</myValue>
+              <myName>yscroll</myName>
+              <myValueType>java.lang.Boolean</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MainCharacter</myName>
+        </authoring.AuthBehavior>
+      </myBehaviors>
+      <myEvents>
+        <authoring.Event>
+          <myResponses>
+            <engine.actions.GroovyAction>
+              <content>MazeBall.getBehavior(&apos;Movable&apos;).setXVelocity(-20)</content>
+              <actionName></actionName>
+            </engine.actions.GroovyAction>
+          </myResponses>
+          <eventType>KeyInputEvent</eventType>
+          <myTrigger>a</myTrigger>
+        </authoring.Event>
+        <authoring.Event>
+          <myResponses>
+            <engine.actions.GroovyAction>
+              <content>MazeBall.getBehavior(&apos;Movable&apos;).setYVelocity(20)</content>
+              <actionName></actionName>
+            </engine.actions.GroovyAction>
+          </myResponses>
+          <eventType>KeyInputEvent</eventType>
+          <myTrigger>s</myTrigger>
+        </authoring.Event>
+        <authoring.Event>
+          <myResponses>
+            <engine.actions.GroovyAction>
+              <content>MazeBall.getBehavior(&apos;Movable&apos;).setYVelocity(-20)</content>
+              <actionName></actionName>
+            </engine.actions.GroovyAction>
+          </myResponses>
+          <eventType>KeyInputEvent</eventType>
+          <myTrigger>w</myTrigger>
+        </authoring.Event>
+        <authoring.Event>
+          <myResponses>
+            <engine.actions.GroovyAction>
+              <content>MazeBall.getBehavior(&apos;Movable&apos;).setXVelocity(20)</content>
+              <actionName></actionName>
+            </engine.actions.GroovyAction>
+          </myResponses>
+          <eventType>KeyInputEvent</eventType>
+          <myTrigger>d</myTrigger>
+        </authoring.Event>
+      </myEvents>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+  </myObjects>
+  <myObjectNames class="sorted-set"/>
+  <currentGameObject reference="../myObjects/authoring.GameObject"/>
+  <audioName>Time.mp3</audioName>
+</authoring.GameSceneSerializable>

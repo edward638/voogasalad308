@@ -1,7 +1,10 @@
 package authoring.display.popups;
 
+import java.io.FileNotFoundException;
+
 import authoring.Game;
 import authoring.display.LoadAuthoringInterface;
+import data.GameSaver;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -58,7 +61,13 @@ public class NewGamePopup extends Popup {
 		{	
 			game = new Game(gameNameText.getText());
 			game.setGameDescription(gameDescriptionText.getText()); 
-			System.out.println(game.getGameDescription());
+			GameSaver saver = new GameSaver(game.getName());
+			try {
+				saver.addDescription(game.getName(), game.getGameDescription());
+			} catch (FileNotFoundException e1) {
+				// This should never happen, as the game is just made.
+				return;
+			}
 			loadAuthorer.loadAuthoringEnvironment(game);
 			close();
 		});

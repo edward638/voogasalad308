@@ -95,6 +95,7 @@ public class Converter2 {
 		GamePart part = new GamePart(scene.getName(), "0");
 		part.addGameElement(getBackgroundElement(scene));
 		for (GameObject go: scene.getMyObjects()) {
+			System.out.println(go.getName());
 			part.addGameElement(gameObject2GameElement(go));
 		}
 		part.addAudio(scene.getAudioName());

@@ -29,7 +29,7 @@ import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 
 /**
- * @author Edward Zhuang
+ * @author Edward Zhuang, Calvin Ma
  * GameObjectInfoBox class that shows information about the current GameObject in the GameScene.
  * The user is able to edit properties and behaviors of this GameObject and all other instances of it.
  */
@@ -98,8 +98,8 @@ public class GameObjectInfoBox extends ObjectInfoBox {
         List<ObjectCoordinatesInsertion> insertions = new ArrayList<>();
         for (GameObject gameObject : objectInstances) {
             insertions.add(new ObjectCoordinatesInsertion(gameObject,
-                    (Double) gameObject.getMandatoryBehavior().getProperty("xPos").getValue(),
-                    (Double) gameObject.getMandatoryBehavior().getProperty("yPos").getValue()));
+            		gameObject.getxPos(),
+                    gameObject.getyPos()));
         }
         ObservableList<ObjectCoordinatesInsertion> observableInsertions = FXCollections.observableArrayList(insertions);
         gameObjectCoordinates.setItems(observableInsertions);
@@ -116,8 +116,8 @@ public class GameObjectInfoBox extends ObjectInfoBox {
 
     private void setupXposCol(TableColumn<ObjectCoordinatesInsertion, String> xposCol) {
         xposCol.setCellValueFactory(f -> new ReadOnlyStringWrapper(f.getValue().getXpos()));
-        xposCol.setMinWidth(COLUMN_WIDTH); // set this col width
-        xposCol.setMaxWidth(COLUMN_WIDTH); // set this col width
+        xposCol.setMinWidth(COLUMN_WIDTH);
+        xposCol.setMaxWidth(COLUMN_WIDTH);
         xposCol.setResizable(false);
         xposCol.setEditable(true);
         xposCol.setCellFactory(TextFieldTableCell.<ObjectCoordinatesInsertion>forTableColumn());
@@ -131,8 +131,8 @@ public class GameObjectInfoBox extends ObjectInfoBox {
 
     private void setupYposCol(TableColumn<ObjectCoordinatesInsertion, String> yposCol) {
         yposCol.setCellValueFactory(f -> new ReadOnlyStringWrapper(f.getValue().getYpos()));
-        yposCol.setMinWidth(COLUMN_WIDTH); // set this col width
-        yposCol.setMaxWidth(COLUMN_WIDTH); // set this col width
+        yposCol.setMinWidth(COLUMN_WIDTH); 
+        yposCol.setMaxWidth(COLUMN_WIDTH); 
         yposCol.setResizable(false);
         yposCol.setEditable(true);
         yposCol.setCellFactory(TextFieldTableCell.<ObjectCoordinatesInsertion>forTableColumn());

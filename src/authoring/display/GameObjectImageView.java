@@ -1,26 +1,21 @@
 package authoring.display;
 
 
-import authoring.AuthBehavior;
 import authoring.GameObject;
 import authoring.ViewRefreshInterface;
 import authoring.display.popups.GameObjectSizePopup;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.shape.Rectangle;
 
 public class GameObjectImageView {
 
-	private Rectangle myRectangle;
 	private ImageView myImage;
 	private GameObject gameObject;
 	private double currentX;
 	private double currentY;
 	private double positionX;
 	private double positionY;
-	private boolean wasEdited = false;
-	private boolean selected = false;
 
 	private ViewRefreshInterface viewRefreshInterface;
 	
@@ -71,7 +66,6 @@ public class GameObjectImageView {
 		double translateY = newY - currentY + positionY;
 		myImage.setTranslateX(translateX);
 		myImage.setTranslateY(translateY);
-		wasEdited = true;
 	}
 
 	/**

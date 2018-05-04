@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.dropbox.core.DbxException;
 
 import data.propertiesFiles.ResourceBundleManager;
+import engine.exceptions.ErrorBox;
 import javafx.scene.control.Button;
 import voogadropbox.VoogaDropbox;
 
@@ -47,7 +48,7 @@ public class UploadGameButton extends Button {
 			vd.downloadGame(gameName);
 		} catch (DbxException | IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			new ErrorBox("DropBox save failed!", "Couldn't save to DropBox");
 		}
 	}
 

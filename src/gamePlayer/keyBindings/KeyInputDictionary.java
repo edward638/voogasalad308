@@ -37,9 +37,6 @@ public class KeyInputDictionary {
 		} else {
 			engine.handleKeyInput(input);
 		}
-		else {
-			engine.handleKeyInput(input);
-		}
 	}
 
 	public void setGame(EngineInterface engine) {

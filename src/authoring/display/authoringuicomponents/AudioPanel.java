@@ -72,7 +72,6 @@ public class AudioPanel extends AuthoringUIComponent implements Observer {
 		chooser.getExtensionFilters().addAll(new ExtensionFilter( "MP3 Files", "*.mp3")); 
 		File audioFile = chooser.showOpenDialog(new Stage());
 		audioController.setAudio(audioFile);
-		System.out.println(audioFile.toURI().toString());
 	}
 
 }

@@ -90,7 +90,6 @@ public class LevelPanelController extends Controller implements GameObjectAdder 
 
 	@Override
 	public void addToCurrentScene(GameObject gameObject) {
-		// TODO Auto-generated method stub
 		sceneManager.getCurrentScene().addObject(gameObject);
 	}
 }

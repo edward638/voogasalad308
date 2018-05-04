@@ -43,9 +43,8 @@ public class AnimatedButton {
 		stylizeButton(button);
 		
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			// This shouldn't happen
+			}
 	}
 	
 	private void setRotate(Button button) {

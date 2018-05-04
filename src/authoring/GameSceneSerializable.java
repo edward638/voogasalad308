@@ -48,8 +48,6 @@ public class GameSceneSerializable implements GameSceneSerializableCreator {
 	}
 
 	public String getBackgroundImageName() {
-		// TODO Auto-generated method stub
-		System.out.println("Serializable backgroundImageName: " + backgroundImageName);
 		return backgroundImageName;
 	}
 

@@ -1,7 +1,5 @@
 package engine.audio;
 
-import java.io.File;
-
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -18,8 +16,8 @@ public class AudioPlayer {
 	 * @param audioFile The File Path for the Audio File
 	 * @param volume Volume of the Audio File (double between 0 and 1)
 	 */
-	public AudioPlayer(String audioFile, double volume) {
-		Media media = new Media(new File(audioFile).toURI().toString());
+	public AudioPlayer(Media media, double volume) {
+		//Media media = new Media(new File(audioFile).toURI().toString());
 		mediaPlayer = new MediaPlayer(media);
 		setVolume(volume);
 		mediaPlayer.play();

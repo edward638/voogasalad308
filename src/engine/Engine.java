@@ -4,6 +4,7 @@ package engine;
 import java.util.HashMap;
 import java.util.Map;
 
+import engine.behaviors.Killable;
 import engine.behaviors.MainCharacter;
 import engine.behaviors.TimeTracker;
 import engine.events.elementevents.KeyInputEvent;
@@ -89,7 +90,7 @@ public class Engine implements EngineInterface{
 			info.put("Current Level", currentGameState.getCurrentGameLevel().getCurrentGamePart().getGamePartID());
 			info.put("Game Time", (int)((TimeTracker)mainCharacter.getBehavior(TimeTracker.class)).getTimePassed());
 			info.put("Lives", ((MainCharacter)mainCharacter.getBehavior(MainCharacter.class)).getLives());
-			//info.put("Health", value);
+			info.put("Health", ((Killable)mainCharacter.getBehavior(Killable.class)).getHealth());
 			//info.put("Score", value);
 		}
 		return info;

@@ -29,8 +29,8 @@ public class GameState {
 	private List<GameElement> addToDisplay;
 	private List<GameElement> removeFromDisplay;
 	
-	private AudioPlayerManager audioManager;
-	private String musicPath = "data/music/WiiShopChannelMusic.mp3";
+	private AudioPlayerManager audioPlayerManager;
+	private String musicPath = "WiiShopChannelMusic";
 
 	/**
 	 * Instantiates a GameState for a game.
@@ -42,8 +42,8 @@ public class GameState {
 		gameLevels = new ArrayList<>();
 		addToDisplay = new ArrayList<>();
 		removeFromDisplay = new ArrayList<>();
-		audioManager = new AudioPlayerManager(1);
-		audioManager.newAudioPlayer(musicPath);
+		audioPlayerManager = new AudioPlayerManager(this.gameName, 1);
+		audioPlayerManager.newAudioPlayer(musicPath);
 		
 		constructGameState(loadGame(this.gameName, newGame));
 	}
@@ -108,7 +108,7 @@ public class GameState {
 	 * @return Reference to the AudioManager of the Game
 	 */
 	public AudioPlayerManager getAudioManager() {
-		return audioManager;
+		return audioPlayerManager;
 	}
 	
 	/**

@@ -17,7 +17,7 @@ import javafx.scene.layout.Pane;
 
 /**
  * @author Maddie Wilkinson
- *
+ * 
  */
 public class BehaviorPopupController extends PopupController {
 	private final String PACKAGE_NAME = "engine.behaviors";

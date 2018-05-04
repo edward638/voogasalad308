@@ -3,6 +3,9 @@ package engine.audio;
 import java.util.ArrayList;
 import java.util.List;
 
+import data.AudioManager;
+import javafx.scene.media.Media;
+
 /**
  * @author Yashas Manjunatha
  * Manages all the AudioPlayer objects in the Engine. Also provides public methods to allow
@@ -10,14 +13,16 @@ import java.util.List;
  */
 public class AudioPlayerManager {
 	List<AudioPlayer> audioPlayers;
+	private AudioManager audioManager;
 	private double volume;
 	
 	/**
 	 * Instantiates the AudioManager. Called when the Engine is instantiated.
 	 * @param volume Initial volume for all new AudioPlayer objects. (double between 0 and 1)
 	 */
-	public AudioPlayerManager(double volume) {
+	public AudioPlayerManager(String gameName, double volume) {
 		audioPlayers = new ArrayList<>();
+		audioManager = new AudioManager(gameName);
 		this.volume = volume;
 	}
 	
@@ -27,8 +32,16 @@ public class AudioPlayerManager {
 	 * @return The AudioPlayer object createds
 	 */
 	public AudioPlayer newAudioPlayer(String mediaFile) {
-		AudioPlayer audioPlayer = new AudioPlayer(mediaFile, volume);
+		Media media = audioManager.getAudioMedia(mediaFile);
+		AudioPlayer audioPlayer = new AudioPlayer(media, volume);
+		/*audioPlayer.addOnEndEvent(new Runnable(){
+			@Override
+			public void run(){
+				audioPlayers.remove(audioPlayer);
+			}
+		});*/
 		audioPlayers.add(audioPlayer);
+		audioPlayer.play();
 		return audioPlayer;
 	}
 	
@@ -50,6 +63,7 @@ public class AudioPlayerManager {
 		for (AudioPlayer a : audioPlayers) {
 			a.stop();
 		}
+		audioPlayers.clear();
 	}
 	
 	/**
@@ -68,5 +82,12 @@ public class AudioPlayerManager {
 		for (AudioPlayer a : audioPlayers) {
 			a.play();
 		}
+	}
+	
+	/**
+	 * Method Used to See Active Audio Players
+	 */
+	public void printAudioPlayers() {
+		System.out.println(audioPlayers.toString());
 	}
 }

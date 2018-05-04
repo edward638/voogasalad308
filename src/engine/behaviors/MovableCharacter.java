@@ -3,7 +3,7 @@ import java.util.List;
 
 import authoring.groovy.GroovyMethod;
 import engine.GameElement;
-import engine.events.gameevents.PlayAudioEvent;
+import engine.authouringconversion.Printer;
 
 public class MovableCharacter extends Movable {
 //	private String jumpAudioFilePath = "";
@@ -40,8 +40,11 @@ public class MovableCharacter extends Movable {
 	
 	@GroovyMethod
 	public void jump() {
-		System.out.println("Jumping");
+//		System.out.println("Jumping");
 		setYVelocity(getYVelocity() - jumpSpeed);
+//		System.out.println(getParent());
+//		System.out.println(getParent().hashCode());
+//		new Printer().printGameElement(getParent());
 //		if (!jumpAudioFilePath.equals("")) {
 //			getParent().addGameEvent(new PlayAudioEvent(jumpAudioFilePath));
 //		}
@@ -49,11 +52,13 @@ public class MovableCharacter extends Movable {
 	
 	@GroovyMethod
 	public void moveLeft() {
+		System.out.println("Moing Left");
 		setXVelocity(-leftSpeed);
 	}
 	
 	@GroovyMethod
 	public void moveRight() {
+		System.out.println("Moing Right");
 		setXVelocity(leftSpeed);
 	}
 

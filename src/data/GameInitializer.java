@@ -9,13 +9,20 @@ import javax.imageio.ImageIO;
 import data.propertiesFiles.ResourceBundleManager;
 
 /**
- * Used when a game is first made. Creates all the necessary game files
+ * Used when a game is first made. Creates all the necessary game files.
  * @author Edward Zhuang
  *
  */
 public class GameInitializer {
-	
-    private String baseLocation = ResourceBundleManager.getPath("BASELOCATION");
+
+    private static final String PLACEHOLDER = "This is a placeholder description.";
+    private static final String BASE_LOCATION = ResourceBundleManager.getPath("BASELOCATION");
+    private static final String DESCRIPTION = ResourceBundleManager.getPath("DESCRIPTION");
+    private static final String SCENES = ResourceBundleManager.getPath("SCENES");
+    private static final String IMAGES = ResourceBundleManager.getPath("IMAGES");
+    private static final String BACKGROUNDIMAGES = ResourceBundleManager.getPath("BACKGROUNDIMAGES");
+    private static final String SAVES = ResourceBundleManager.getPath("SAVES");
+    private static final String AUDIO = ResourceBundleManager.getPath("AUDIO");
     private String gameLocation;
     private String gameDescriptionLocation;
     private String gameScenesLocation;
@@ -25,14 +32,14 @@ public class GameInitializer {
 	private String gameAudioLocation;
     
 	public GameInitializer(String gameName) {
-		
-        gameLocation = baseLocation + gameName + "/";
-        gameDescriptionLocation = gameLocation + ResourceBundleManager.getPath("DESCRIPTION");
-        gameScenesLocation = gameLocation + ResourceBundleManager.getPath("SCENES");
-        gameImagesLocation = gameLocation + ResourceBundleManager.getPath("IMAGES");
-        gameBackgroundImagesLocation = gameLocation + ResourceBundleManager.getPath("BACKGROUNDIMAGES");
-        gameSavesLocation = gameLocation + ResourceBundleManager.getPath("SAVES");
-        gameAudioLocation = gameLocation + ResourceBundleManager.getPath("AUDIO");
+
+        gameLocation = BASE_LOCATION + gameName + "/";
+        gameDescriptionLocation = gameLocation + DESCRIPTION;
+        gameScenesLocation = gameLocation + SCENES;
+        gameImagesLocation = gameLocation + IMAGES;
+        gameBackgroundImagesLocation = gameLocation + BACKGROUNDIMAGES;
+        gameSavesLocation = gameLocation + SAVES;
+        gameAudioLocation = gameLocation + AUDIO;
         
         if (! new File(gameLocation).exists()){
         	 makeDirectories();
@@ -54,10 +61,9 @@ public class GameInitializer {
     }
     
     private void addDefaultDescription(String gameName) {
-    	String description = "This is a placeholder description.";
-    	try {
+        try {
 			GameSaver saver = new GameSaver(gameName);
-	    	saver.addDescription(gameName, description);
+	    	saver.addDescription(gameName, PLACEHOLDER);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

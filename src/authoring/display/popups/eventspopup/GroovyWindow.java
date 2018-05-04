@@ -12,14 +12,25 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+/**
+ * Window for groovy action string field
+ * @author August Ning
+ *
+ */
 public class GroovyWindow extends VBox {
 
 	private EventsPopupController epuc;
+	@SuppressWarnings("unused")
 	private List<GameObject> gos;
 	private TextArea groovyInput;
 	private TextField groovyName;
 	private Button save;
 	private String groovyString;
+	
+	private static final String GROOVY = "Groovy";
+	private static final int SPACING = 10;
+	private static final int SIZE = 200;
+
 
 	private static final String SAVE = "Save";
 
@@ -30,19 +41,22 @@ public class GroovyWindow extends VBox {
 		groovyString = "";
 		createVBox();
 	}
+	/**
+	 * Creates the VBox for the Groovy Window
+	 */
 	public void createVBox() {
 		this.getChildren().clear();
-		this.setPadding(new Insets(10));
-	    this.setSpacing(8);
-	    this.setMinWidth(200);
-	    this.setMinHeight(200);
-	    Text title = new Text("Groovy");
+		this.setPadding(new Insets(SPACING));
+	    this.setSpacing(SPACING);
+	    this.setMinWidth(SIZE);
+	    this.setMinHeight(SIZE);
+	    Text title = new Text(GROOVY);
 	    this.getChildren().add(title);
 	    addTextAreas();
 	}
 	private void addTextAreas() {
 		groovyInput = new TextArea();
-		groovyInput.setPrefWidth(200);
+		groovyInput.setPrefWidth(SIZE);
 		groovyInput.setWrapText(true);
 		groovyName = new TextField();
 		this.getChildren().add(groovyInput);
@@ -56,12 +70,18 @@ public class GroovyWindow extends VBox {
 		groovyString = groovyInput.getText();
 		String actionName = groovyName.getText();
 		GroovyAction action = new GroovyAction(groovyString);
+		action.setName(actionName);
 		// apply the groovy response to the event
 		epuc.getCurrEvent().addResponse(action);
 		// display the groovy input text on the response
 		epuc.updateResponseWindow();
 	}
 	
+	/**
+	 * Concatenates strings on the groovy window
+	 * @param stringToAdd 	The string to add to the window
+	 * @param caller 		The name of the class that called the function
+	 */
 	public void concatenateString(String stringToAdd, String caller) {
 		try {
 		String[] pieces = groovyInput.getText().split("\\.");
@@ -81,11 +101,4 @@ public class GroovyWindow extends VBox {
 		}
 	}
 	
-	public String getGroovyString() {
-		return groovyString;
-	}
-	
-	public void clearGroovy() {
-		groovyInput.clear();
-	}
 }

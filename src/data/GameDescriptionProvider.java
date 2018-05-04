@@ -12,34 +12,53 @@ import data.propertiesFiles.ResourceBundleManager;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
+/**
+ * @author Edward Zhuang
+ * Provides description of game for the GameDescriptionProvider.
+ */
 public class GameDescriptionProvider {
-	
+
+	private static final String DESCRIPTION = ResourceBundleManager.getPath("DESCRIPTION");
+	private static final String DESCRIPTION_TEXT = ResourceBundleManager.getPath("DESCRIPTIONTEXT");
+	private static final String NAME = ResourceBundleManager.getPath("NAME");
+	private static final String DESCRIPTION_IMAGE = ResourceBundleManager.getPath("DESCRIPTIONIMAGE");
 	private String baseLocation = ResourceBundleManager.getPath("BASELOCATION");
 	
-	public GameDescriptionProvider() {
-		
-	};
+	public GameDescriptionProvider() { }
 
+	/**
+	 * Gets name of game
+	 * @param gameName game root file name
+	 * @return Game name
+	 */
 	public String getGameName(String gameName) {
 		String gameLocation = baseLocation + gameName + "/";
-		String gameDescriptionLocation = gameLocation + ResourceBundleManager.getPath("DESCRIPTION");
-		System.out.println(gameDescriptionLocation + ResourceBundleManager.getPath("NAME"));
-		return retrieveStringFromTextFile(gameDescriptionLocation + ResourceBundleManager.getPath("NAME"));
+		String gameDescriptionLocation = gameLocation + DESCRIPTION;
+		return retrieveStringFromTextFile(gameDescriptionLocation + NAME);
 	}
 
-
+	/**
+	 * Gets description of game
+	 * @param gameName game root file name
+	 * @return Game description
+	 */
 	public String getGameDescription(String gameName) {
 		String gameLocation = baseLocation + gameName + "/";
-		String gameDescriptionLocation = gameLocation + ResourceBundleManager.getPath("DESCRIPTION");
-		return retrieveStringFromTextFile(gameDescriptionLocation + ResourceBundleManager.getPath("DESCRIPTIONTEXT"));
+		String gameDescriptionLocation = gameLocation + DESCRIPTION;
+		return retrieveStringFromTextFile(gameDescriptionLocation + DESCRIPTION_TEXT);
 	}
 
+	/**
+	 * Gets description image of game
+	 * @param gameName game root file name
+	 * @return Game description image
+	 */
 	public Image getDescriptionImage(String gameName) {
 		String gameLocation = baseLocation + gameName + "/";
-		String gameDescriptionLocation = gameLocation + ResourceBundleManager.getPath("DESCRIPTION");
+		String gameDescriptionLocation = gameLocation + DESCRIPTION;
 		
 	    try {
-	    	BufferedImage bufferedImage = ImageIO.read(new File(gameDescriptionLocation + ResourceBundleManager.getPath("DESCRIPTIONIMAGE")));
+	    	BufferedImage bufferedImage = ImageIO.read(new File(gameDescriptionLocation + DESCRIPTION_IMAGE));
 	    	return SwingFXUtils.toFXImage(bufferedImage, null);
 	    } catch (IOException e) {
             e.printStackTrace(); //TODO: fix!
@@ -56,8 +75,7 @@ public class GameDescriptionProvider {
     	Scanner scanner = null;
         try {
             scanner = new Scanner( new File(fileName));
-        } catch (FileNotFoundException e) {
-//            e.printStackTrace(); //TODO: fix!
+        } catch (FileNotFoundException ignored) {
             
         }
         String text = scanner.useDelimiter("\\A").next();

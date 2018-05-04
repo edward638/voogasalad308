@@ -99,6 +99,11 @@ public class MandatoryBehavior extends Behavior{
 	}
 	
 	@GroovyMethod
+	public String getImagePath() {
+		return imagePath;
+	}
+	
+	@GroovyMethod
 	public Shape getShape() {
 		hitBoxWidth = displayWidth;
 		hitBoxHeight = displayHeight;

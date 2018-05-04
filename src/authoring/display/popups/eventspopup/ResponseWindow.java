@@ -6,6 +6,9 @@ import authoring.GameObject;
 import authoring.display.controllers.EventsPopupController;
 import engine.actions.GroovyAction;
 import javafx.geometry.Insets;
+import javafx.scene.control.ListView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -50,15 +53,19 @@ public class ResponseWindow extends VBox {
 			this.getChildren().add(collisionName);
 			}
 		}
-		
 		this.getChildren().add(new Text("Current Groovy Response(s):"));
-		for (GroovyAction ga : epuc.getCurrEvent().getResponses()) {
-			Text groovyText = new Text(ga.toString());
-			groovyText.setWrappingWidth(180);
-			this.getChildren().add(groovyText);
-		}
-	
 		
+		ListView<GroovyAction> gaList = new ListView<>();
+		gaList.setMinSize(200, 200);
+		gaList.getItems().addAll(epuc.getCurrEvent().getResponses());
+		gaList.setOnMouseClicked(e -> deleteResponse(e, gaList.getSelectionModel().getSelectedItem()));
+		this.getChildren().add(gaList);
+	}
+	
+	private void deleteResponse(MouseEvent me, GroovyAction ga) {
+		if (me.getButton().equals(MouseButton.PRIMARY)) return;
+		epuc.getCurrEvent().deleteResponse(ga);
+		createVBox();
 	}
 	
 	private void GOClicked(String name) {

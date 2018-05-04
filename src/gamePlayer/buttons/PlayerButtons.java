@@ -4,7 +4,8 @@ import javafx.scene.control.Button;
 import javafx.scene.text.Font;
 
 public abstract class PlayerButtons extends Button {
-
+	
+	private static final int fontSize = 12;
 	protected ButtonData buttonData;
 	private String font = "Din Alternate";
 
@@ -14,7 +15,7 @@ public abstract class PlayerButtons extends Button {
 			this.setMinWidth(width);
 			this.setHeight(height);
 			this.setText(text);
-			this.setFont(Font.font(font, 12));
+			this.setFont(Font.font(font, fontSize));
 			this.buttonData = buttonData;
 			setAction();
 	}

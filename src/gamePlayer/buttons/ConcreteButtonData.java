@@ -1,5 +1,7 @@
 package gamePlayer.buttons;
 
+import java.util.Map;
+
 import engine.EngineInterface;
 import gamePlayer.GamePlayer;
 import gamePlayer.Username;
@@ -8,6 +10,7 @@ import gamePlayer.highScores.HighScores;
 import gamePlayer.keyBindings.KeyInputDictionary;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -115,14 +118,12 @@ public class ConcreteButtonData implements ButtonData {
 			title.setFill(Color.LIGHTSKYBLUE);
 			title.setX(450);
 			title.setY(325);
-			
+
 			background = new Rectangle(440, 300, 105, 40);
 			background.setFill(Color.BLACK);
 			background.setOpacity(0.3);
 			root.getChildren().add(background);
 			root.getChildren().add(title);
-			
-			
 		}
 	}
 
@@ -134,6 +135,11 @@ public class ConcreteButtonData implements ButtonData {
 	@Override
 	public void saveGame() {
 		engine.save();
+	}
+
+	@Override
+	public Map<KeyCode, String> getKeyAssignments() {
+		return engine.getKeyAssignments();
 	}
 
 }

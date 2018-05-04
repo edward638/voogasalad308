@@ -3,7 +3,6 @@ package authoring.display.popups;
 import java.io.File;
 import java.io.IOException;
 
-import authoring.display.controllers.ObjectInfoPanelController;
 import data.GameObjectManager;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.control.Button;
@@ -19,20 +18,24 @@ import javafx.stage.FileChooser.ExtensionFilter;
 
 public class NewLibraryObjectPopup extends Popup {
 
+	private static final String CHOOSE_OBJECT_IMAGE = "Choose Object Image";
 	private static final int xSize = 400;
 	private static final int ySize = 600;
 	private static final int DEFAULT_SPACING = 50;
+	private static final String NAME = "Name: ";
+	private static final String CHOOSE_IMAGE_BUTTON = "ChooseImageButton";
+	private static final String SAVE = "Save";
+	private static final String IMAGE_FILES = "Image Files";
+	private static final String PNG = "*.png";
+	private static final String JPG = "*.jpg";
+	private static final String GIF = "*.gif";
 	private GameObjectManager manager;
-	private VBox myVBox;
-	TextField nameText;
-	TextField imageText;
-	Button chooseImageButton;
-	Button saveButton;
-	Image image;
-	
-	//TODO: make interface
+	private TextField nameText;
+	private Button chooseImageButton;
+	private Button saveButton;
+	private Image image;
+
 	public NewLibraryObjectPopup(GameObjectManager manager) {
-		// TODO Auto-generated constructor stub
 		super();
 		this.manager = manager;
 		open(xSize, ySize);
@@ -42,55 +45,43 @@ public class NewLibraryObjectPopup extends Popup {
 	
 	@Override
 	protected void generatePopup() {
-		// TODO Auto-generated method stub
-		myVBox = new VBox(DEFAULT_SPACING);
+		VBox myVBox = new VBox(DEFAULT_SPACING);
 		image = null;
 		HBox nameObject = new HBox(DEFAULT_SPACING);
 		nameText = new TextField();
-		nameObject.getChildren().addAll(new Label("Name: "), nameText);
-		chooseImageButton = new Button(ResourceBundleManager.getAuthoring("ChooseImageButton"));
-
-		saveButton = new Button(ResourceBundleManager.getAuthoring("Save"));
-
+		nameObject.getChildren().addAll(new Label(NAME), nameText);
+		chooseImageButton = new Button(ResourceBundleManager.getAuthoring(CHOOSE_IMAGE_BUTTON));
+		saveButton = new Button(ResourceBundleManager.getAuthoring(SAVE));
 		myVBox.getChildren().addAll(nameObject, chooseImageButton, saveButton);
-
 		BorderPane borderPane = getPane();
 		borderPane.setCenter(myVBox);
 	}
 
 	@Override
 	protected void mapButtons() {
-		// TODO Auto-generated method stub
 		chooseImageButton.setOnAction(e -> {
 			try {
 				FileChooser fileChooser = new FileChooser();
-				fileChooser.setTitle("Choose Object Image");
-				fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+				fileChooser.setTitle(CHOOSE_OBJECT_IMAGE);
+				fileChooser.getExtensionFilters().addAll(new ExtensionFilter(IMAGE_FILES, PNG, JPG, GIF));
 				File imageFile = fileChooser.showOpenDialog(new Stage());
 				image = new Image(imageFile.toURI().toString());
-				// put image.getName into SceneBackground
 			} catch (Exception exception) {
 				// do nothing
 				// this just means the user didn't choose an image
-
-			} //
+			}
 		});
 
 		saveButton.setOnAction(e -> {
-			// System.out.println("ADDING TO GAMEOBJECT NAME: " + nameText.getText());
 			if (manager.checkUniqueName(nameText.getText())) {
 				try {
 					manager.saveCustomGameObject(nameText.getText(), image);
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				close();
-
 			} else {
-				
 				new ErrorBox("Duplicate Object Name", "Please Change the Name of Your Object");
-
 			}
 		});
 	}

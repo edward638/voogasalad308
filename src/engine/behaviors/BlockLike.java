@@ -1,7 +1,5 @@
 package engine.behaviors;
 
-import java.util.Arrays;
-
 import engine.GameElement;
 import engine.actions.CollisionStopXMotion;
 import engine.actions.CollisionStopYMotion;

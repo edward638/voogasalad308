@@ -65,7 +65,7 @@ It is intuitive and has a lot of click and drag. It also uses Groovy for handlin
 
 ### any decisions, assumptions, or simplifications you made to handle vague, ambiguous, or conflicting requirements
 
-We took out a lot of possible flexible features from the Authoring environment to prevent user error. This includes things such as using non letter character keybindings, only one main character, etc.
+We took out a lot of possible flexible features from the Authoring environment to prevent user error. This includes things such as using non letter character keybindings, only one main character, etc. When a game is created, the necessary image and music files are always generated within the game folder. Therefore we assume that these images and music files always exist. (the only reason this wouldn't be the case is if the user goes into the game folder and deletes these files).
 
 ### any known bugs, crashes, or problems with the project's functionality
 

@@ -22,7 +22,6 @@ import engine.GamePart;
 import engine.actions.Action;
 import engine.actions.GroovyAction;
 import engine.behaviors.Behavior;
-import engine.behaviors.MainCharacter;
 import engine.behaviors.MandatoryBehavior;
 import engine.events.elementevents.ElementEvent;
 
@@ -48,36 +47,18 @@ public class Converter2 {
 	
 	public GameElement gameObject2GameElement(GameObject go) {
 		GameElement ge = new GameElement();
-		
-//		// Must add MandatoryBehavior first
-//		Behavior mandEngB = authBehavior2Behavior(go.getMandatoryBehavior(), ge);
-//		ge.addBehavior(mandEngB);
-//		setBehavior2AuthorValues(go.getMandatoryBehavior(), ge);
-//		
-		// Add remaining Behaviors besides MainCharacter
+		ge.addBehavior(authBehavior2Behavior(go.getBehavior(MandatoryBehavior.class.getCanonicalName()), ge));
+		setBehavior2AuthorValues(go.getBehavior(MandatoryBehavior.class.getCanonicalName()), ge);
+		go.removeBehavior(go.getBehavior(MandatoryBehavior.class.getCanonicalName()));
 		for (AuthBehavior authB: go.getBehaviors()) {
-//			if (authB.getName().contains("Mandatory") || authB.getName().contains("MainCharacter")) {continue;}
 			ge.addBehavior(authBehavior2Behavior(authB, ge));
 		}
-		
-		// Add remaining Behaviors besides MainCharacter
 		for (AuthBehavior authB: go.getBehaviors()) {
-//			if (authB.getName().contains("Mandatory") || authB.getName().contains("MainCharacter")) {continue;}
 			setBehavior2AuthorValues(authB, ge);
-//			ge.addBehavior(authBehavior2Behavior(authB, ge));
 		}
-		
-//		// Add MainCharacter Behavior
-//		Integer size = go.getBehaviors()
-//				.stream()
-//				.filter(authB -> authB.getName().contains("MainCharacter"))
-//				.collect(Collectors.toList())
-//				.size();
-//		if (size > 0) {
-//			ge.addBehavior(authBehavior2Behavior(go.getBehavior(MainCharacter.class.getCanonicalName()), ge));
-//		}
-			
 		addResponsesAuth2Engine(ge, go);	
+		System.out.println(ge.getIdentifier());
+		System.out.println(ge.getResponder().getResponses());
 		return ge;
 	}
 	
@@ -117,23 +98,6 @@ public class Converter2 {
 	}
 	
 	
-	/*
-	 * Method reviews game objects stored as parts
-	 */
-//	private GamePart fillGameObjects(GamePart part, GameScene scene) {
-//		List<Property> properties2fix = new ArrayList<>();
-//		for (GameObject go: scene.getMyObjects()) {
-//			go.getBehaviors().stream().forEach(beh -> {
-//				beh.getProperties().stream().forEach(prop -> {
-//					if (prop.getValue() instanceof GameElement) {
-//						properties2fix.add(prop);
-//					}
-//				});
-//			});
-//		}
-//		properties2fix.stream().forEach(prop -> fixProperty(prop, part));
-//	}
-	
 	public GameScene gamePart2GameScene(GamePart part) {
 		GameScene scene = new GameScene(part.getGamePartID(), part.getMyLevelID());
 		scene.setBackgroundImageName();
@@ -166,7 +130,6 @@ public class Converter2 {
 	private void setBehavior2AuthorValues (AuthBehavior authB, GameElement ge) {
 		String[] parts = authB.getName().split("\\.");
 		String className = parts[parts.length - 1];
-		System.out.println(className);
 		Behavior behavior = ge.getBehavior(className);
 		Class<?> newEngBehaviorClass = behavior.getClass();
 		for (Field f: newEngBehaviorClass.getDeclaredFields()) {

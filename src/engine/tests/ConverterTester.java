@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.reflections.Reflections;
 
 import authoring.AuthBehavior;
 import authoring.GameObject;
@@ -16,7 +15,6 @@ import engine.authouringconversion.Converter2;
 import engine.authouringconversion.Printer;
 import engine.behaviors.Behavior;
 import engine.behaviors.MandatoryBehavior;
-import engine.events.elementevents.ElementEvent;
 
 class ConverterTester {
 	GamePart testPart;

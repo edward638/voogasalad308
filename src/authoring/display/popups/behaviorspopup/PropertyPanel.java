@@ -23,6 +23,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * @author Maddie Wilkinson
+ *
+ */
 public class PropertyPanel {
 
 	private List<GameObject> myGameObjects;
@@ -31,6 +35,10 @@ public class PropertyPanel {
 	private BehaviorPopupController myController;
 	private AuthBehavior currBehavior;
 
+	/**
+	 * @param behaviorPopupController
+	 * @param gameObjects
+	 */
 	public PropertyPanel(BehaviorPopupController behaviorPopupController, List<GameObject> gameObjects) {
 		myGameObjects = gameObjects;
 		myController = behaviorPopupController;
@@ -141,6 +149,7 @@ public class PropertyPanel {
 		for(GameObject g : projectiles) {
 			if(value.equals(g.getName())) {
 				System.out.println("got the gameobject hell yih");
+				System.out.println("MandatoryBehavior: " + g.getMandatoryBehavior());
 				return g;
 			}
 		}
@@ -187,11 +196,17 @@ public class PropertyPanel {
 		return map;
 	}
 
+	/**
+	 * 
+	 */
 	public void refresh() {
 		myVBox.getChildren().clear();
 		initializeRoot();
 	}
 
+	/**
+	 * @return
+	 */
 	public Node asNode() {
 		return myVBox;
 	}

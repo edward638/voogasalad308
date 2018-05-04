@@ -1,12 +1,6 @@
-<<<<<<< HEAD
 poi 7
 poi 8
 poi 15
 poi 44
 poi 44
 poi 44
-=======
-sdf 16
-sdf 16
-sdf 121
->>>>>>> 18c7143c8236a8eb60e37e4a718791f2a219d41d

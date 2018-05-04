@@ -206,15 +206,16 @@ public class GameViewWindow extends AuthoringUIComponent implements Observer {
 			LevelSizePopup popup = new LevelSizePopup(this);
 		});
 		saveBackground.setOnAction(e->{
-			WritableImage wi = new WritableImage((int) backgroundPane.getPrefWidth(), (int) backgroundPane.getPrefHeight());
-			 backgroundPane.snapshot(new SnapshotParameters(), wi);
-	
-			    try {
-			    	RenderedImage ri = SwingFXUtils.fromFXImage(wi, null);
-			        controller.storeBackgroundImage(ri);
-			    } catch (Exception e1) {
-			    	e1.printStackTrace();
-			    }
+			controller.storeBackgroundImage(backgroundPane);
+//			WritableImage wi = new WritableImage((int) backgroundPane.getPrefWidth(), (int) backgroundPane.getPrefHeight());
+//			 backgroundPane.snapshot(new SnapshotParameters(), wi);
+//	
+//			    try {
+//			    	RenderedImage ri = SwingFXUtils.fromFXImage(wi, null);
+//			        controller.storeBackgroundImage(ri);
+//			    } catch (Exception e1) {
+//			    	e1.printStackTrace();
+//			    }
 		});
 	}
 }

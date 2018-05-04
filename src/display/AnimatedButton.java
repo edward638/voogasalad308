@@ -15,16 +15,19 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 
+/**
+ * @author Edward Zhuang
+ * Class which makes a button with a spinning animation
+ */
 public class AnimatedButton {
 
 	private static final int IMAGE_HEIGHT = 20;
 	private Button button;
 	private HBox hBox;
-	private Label label;
-	
+
 	public AnimatedButton(String imagePath, String labelText) {
 		hBox = new HBox();
-		label = new Label(labelText);
+		Label label = new Label(labelText);
 		button = new Button();
 		hBox.getChildren().addAll(button, label);
 		File imageFile = new File(imagePath);
@@ -43,7 +46,6 @@ public class AnimatedButton {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 	
 	private void setRotate(Button button) {
@@ -52,13 +54,10 @@ public class AnimatedButton {
 		rotation.setInterpolator(Interpolator.LINEAR);
 		rotation.setByAngle(360);
 		button.setOnMouseEntered(e -> rotation.play());
-//		button.setOnMouseExited(e -> rotation.stop());
 	}
 	
 	private void stylizeButton(Button button) {
-		
 		button.setStyle( "-fx-border-color: transparent; -fx-border-width: 0;  -fx-background-radius: 0; -fx-background-color: transparent;");
-		
 	}
 	
 	public HBox getHBox() {

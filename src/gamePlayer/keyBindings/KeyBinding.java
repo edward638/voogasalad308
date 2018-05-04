@@ -12,6 +12,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
+/**
+ * one single key binding, front end and back end
+ * 
+ * @author jeffreyli
+ *
+ */
 public class KeyBinding {
 	private KeyCode defaultKeyCode;
 	private KeyCode currentBinding;
@@ -25,8 +31,17 @@ public class KeyBinding {
 	private Label keyText;
 	private Label repeatedKeyText;
 	private static final String errorMessage = "KEY ALREADY BOUND";
-	private static final Color errorColor = Color.RED;
-
+	private static final Color ERROR_COLOR = Color.RED;
+	private static final int REPEAT_KEY_X = 110;
+	private static final int REPEAT_KEY_Y = 275;
+	private static final String REPEAT_KEY_STYLE = "-fx-font: 18 Euphemia;";
+	private static final Color WORDS_COLOR = Color.ALICEBLUE;
+	private static final Duration FADE_TRANSITION_DURATION = Duration.millis(300);
+	private static final String CHANGE_BUTTON_TEXT = "Change";
+	private static final int CYCLECOUNT = 2;
+	
+	
+	
 	public KeyBinding(KeyCode keyCode, String theAction, KeyInputDictionary keyMap, Pane popUp) {
 		defaultKeyCode = keyCode;
 		action = theAction;
@@ -35,27 +50,28 @@ public class KeyBinding {
 		this.popUp = popUp;
 		nodeList = new ArrayList<>();
 		addWords();
-		setupRepeatKeyText();
+		setupRepeatedKeyText();
 		setupFlashTransition();
 		setUpFadeTransition();
 		makeChangeButton();
 	}
-
+	
+	
 	private void setupFlashTransition() {
-		flashTransition = new FadeTransition(Duration.millis(300), repeatedKeyText);
+		flashTransition = new FadeTransition(FADE_TRANSITION_DURATION, repeatedKeyText);
 		flashTransition.setFromValue(0);
 		flashTransition.setToValue(1);
-		flashTransition.setCycleCount(2);
+		flashTransition.setCycleCount(CYCLECOUNT);
 		flashTransition.setAutoReverse(true);
 
 	}
-
-	private void setupRepeatKeyText() {
+	
+	private void setupRepeatedKeyText() {
 		repeatedKeyText = new Label(errorMessage);
-		repeatedKeyText.setLayoutX(110);
-		repeatedKeyText.setLayoutY(275);
-		repeatedKeyText.setStyle("-fx-font: 18 Euphemia;");
-		repeatedKeyText.setTextFill(errorColor);
+		repeatedKeyText.setLayoutX(REPEAT_KEY_X);
+		repeatedKeyText.setLayoutY(REPEAT_KEY_Y);
+		repeatedKeyText.setStyle(REPEAT_KEY_STYLE);
+		repeatedKeyText.setTextFill(ERROR_COLOR);
 		repeatedKeyText.setOpacity(0);
 		popUp.getChildren().add(repeatedKeyText);
 	}
@@ -66,17 +82,20 @@ public class KeyBinding {
 	private void addWords() {
 		Label actionText = new Label(action + ":");
 		actionText.setStyle("-fx-font: 18 Euphemia;");
-		actionText.setTextFill(Color.ALICEBLUE);
+		actionText.setTextFill(WORDS_COLOR);
 		nodeList.add(actionText);
 
 		keyText = new Label(currentBinding.toString());
 		keyText.setStyle("-fx-font: 20 Euphemia;");
-		keyText.setTextFill(Color.ALICEBLUE);
+		keyText.setTextFill(WORDS_COLOR);
 		nodeList.add(keyText);
 	}
-
+	
+	/**
+	 * settings up the fade transition
+	 */
 	private void setUpFadeTransition() {
-		fadeTransition = new FadeTransition(Duration.millis(300), keyText);
+		fadeTransition = new FadeTransition(FADE_TRANSITION_DURATION, keyText);
 		fadeTransition.setFromValue(1.0);
 		fadeTransition.setToValue(0.1);
 		fadeTransition.setCycleCount(Timeline.INDEFINITE);
@@ -88,7 +107,7 @@ public class KeyBinding {
 	 */
 	private void makeChangeButton() {
 
-		Button change = new Button("Change");
+		Button change = new Button(CHANGE_BUTTON_TEXT);
 		change.setOnAction(pushButtonEvent -> {
 			fadeTransition.play();
 			keyIsChanged = false;

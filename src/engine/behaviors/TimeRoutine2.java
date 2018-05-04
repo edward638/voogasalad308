@@ -30,6 +30,9 @@ public class TimeRoutine2 extends Behavior{
 		getParent().addEventResponse(new TimeEvent(0.0), (e, a) -> {
 			TimeEvent te = (TimeEvent) e;
 			for (Action routine:  routineTimes.keySet()) {
+				if (!(timeRemaining.containsKey(routine))) {
+					timeRemaining.put(routine, routineTimes.get(routine));
+				}
 				timeRemaining.put(routine, timeRemaining.get(routine) - te.getTime());
 				if (timeRemaining.get(routine) < 0) {
 					routine.act(new TimeEvent(0.0), getParent());
@@ -37,7 +40,6 @@ public class TimeRoutine2 extends Behavior{
 				}
 			}
 		});
-		
 	}
 	
 }

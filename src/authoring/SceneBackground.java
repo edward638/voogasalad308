@@ -12,21 +12,17 @@ import javafx.scene.shape.Rectangle;
 /**
  * 
  * @author Edward Zhuang
- *
+ * The SceneBackground holds all SceneBackgroundImages. Its pane is added to the StackPane of the GameViewWindow.
  */
 public class SceneBackground {
 	
 	private Pane pane;
 	private Rectangle borderRectangle;
-	private int myXSize;
-	private int myYSize;
 	private List<SceneBackgroundImage> list;
 	
 	public SceneBackground(int xSize, int ySize) {
 		pane = new Pane();
 		list = new ArrayList<>();
-		myXSize = xSize;
-		myYSize = ySize;
 		pane.setPrefSize(xSize, ySize);
 		borderRectangle = new Rectangle(xSize, ySize);
 		pane.getChildren().add(borderRectangle);
@@ -38,7 +34,12 @@ public class SceneBackground {
 	public Pane getPane() {
 		return pane;
 	}
-	
+
+	/**
+	 * Sets border rectangle with boundaries for SceneBackgroundImages.
+	 * @param xSize width
+	 * @param ySize height
+	 */
 	public void setRectangle(int xSize, int ySize) {
 		pane.getChildren().remove(borderRectangle);
 		borderRectangle = new Rectangle(xSize, ySize);
@@ -50,17 +51,22 @@ public class SceneBackground {
 			
 		}
 	}
-	
+
+	/**
+	 * Adds SceneBackgroundImage to the pane.
+	 * @param sceneBackgroundImage SceneBackgroundImage
+	 */
 	public void addImage(SceneBackgroundImage sceneBackgroundImage) {
 		sceneBackgroundImage.setRectangle(borderRectangle);
 		Pane imagePane = sceneBackgroundImage.getPane();
-//		imagePane.setLayoutX(myXSize/2);
-//		imagePane.setLayoutY(myYSize/2);
 		pane.getChildren().add(imagePane);
 		list.add(sceneBackgroundImage);
 		sceneBackgroundImage.translate();
 	}
-	
+
+	/**
+	 * Removes the SceneBackgroundImages
+	 */
 	public void clearPane() {
 		list.clear();
 		pane.getChildren().clear();

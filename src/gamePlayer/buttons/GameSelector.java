@@ -39,6 +39,7 @@ public class GameSelector extends ScrollPane {
 
 	public GameSelector(ButtonData buttonData, boolean isNew) {
 		this.buttonData = buttonData;
+		buttonData.setEngineRunning(false);
 		buttonData.pauseGame();
 		this.setLayoutX(30);
 		this.setLayoutY(30);

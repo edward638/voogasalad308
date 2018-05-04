@@ -37,9 +37,8 @@ public class GameObjectImageView {
 	}
 	
 	private void onMouseReleased() {
-		AuthBehavior mandatory = gameObject.getMandatoryBehavior();
-		mandatory.getProperty("xPos").setValue(myImage.localToParent(myImage.getBoundsInLocal()).getMinX());
-		mandatory.getProperty("yPos").setValue(myImage.localToParent(myImage.getBoundsInLocal()).getMinY());
+		gameObject.setxPos(myImage.localToParent(myImage.getBoundsInLocal()).getMinX());
+		gameObject.setyPos(myImage.localToParent(myImage.getBoundsInLocal()).getMinY());		
 		viewRefreshInterface.notifyObjectInfoObservers(gameObject);
 	}
 
@@ -82,6 +81,4 @@ public class GameObjectImageView {
 	public ImageView getMyImage() {
 		return myImage;
 	}
-
-
 }

@@ -1,13 +1,9 @@
 package engine.actions;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import engine.GameElement;
 import engine.behaviors.Gravity;
 import engine.events.elementevents.ElementEvent;
 import engine.events.elementevents.TimeEvent;
-import engine.events.gameevents.GameEvent;
 
 public class TimeGravity implements Action{
 

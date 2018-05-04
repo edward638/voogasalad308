@@ -10,6 +10,9 @@ import authoring.ViewRefreshInterface;
 import authoring.display.authoringuicomponents.GameViewWindow;
 import data.ImageManager;
 import data.propertiesFiles.ResourceBundleManager;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
 
 /**
@@ -45,14 +48,21 @@ public class GameViewWindowController extends Controller implements ViewRefreshI
 		int y = ResourceBundleManager.getPosition(GAMEVIEWWINDOW_Y);
 		gameViewWindowRefactored.attachToPane(pane, x, y);
 	}
-
+	
 	/**
 	 * Stores compositeBackgroundImage into game files through ImageManager and updates GameScene's background image path
-	 * @param ri RenderedImage
+	 * @param pane the background pane
 	 */
+	public void storeBackgroundImage(Pane pane) {
+		System.out.println(pane.getWidth() + " " + pane.getHeight());
+		WritableImage wi = new WritableImage((int) pane.getWidth(), (int) pane.getHeight());
+		pane.snapshot(new SnapshotParameters(), wi);
+		RenderedImage ri = SwingFXUtils.fromFXImage(wi, null);
+		getImageManager().storeCompositeBackgroundImage(gameScene.getName().replaceAll("\\s", "")+"backgroundimage.png", ri);
+	}
+
 	public void storeBackgroundImage(RenderedImage ri) {
 		getImageManager().storeCompositeBackgroundImage(gameScene.getName().replaceAll("\\s", "")+"backgroundimage.png", ri);
-		gameScene.setBackgroundImageName();
 	}
 
 	/**

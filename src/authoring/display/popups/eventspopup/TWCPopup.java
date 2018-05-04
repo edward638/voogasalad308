@@ -11,6 +11,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+/**
+ * @author August Ning
+ * Popup window for editing the Trigger on Collision events
+ */
 public class TWCPopup extends Popup {
 	
 	private TriggerWindow tw;
@@ -23,6 +27,7 @@ public class TWCPopup extends Popup {
 	private static final int xSize = 300;
 	private static final int ySize = 200;
 	private static final String SAVE = "Save";
+	private static final String PROMPT = "Select a GameObject to collide with:";
 	
 	public TWCPopup(TriggerWindow intw, List<GameObject> inGos) {
 		tw = intw;
@@ -34,6 +39,9 @@ public class TWCPopup extends Popup {
 		open(xSize, ySize);
 	}
 
+	/**
+	 * Finds the unique named game objects
+	 */
 	private void trainUniqueGameObjects() {
 		uniqueGoNames = new TreeSet<>();
 		for (GameObject go : allGos) {
@@ -46,7 +54,7 @@ public class TWCPopup extends Popup {
 	@Override
 	protected void generatePopup() {
 		VBox box = new VBox();
-		box.getChildren().add(new Text("Select a GameObject to collide with:"));
+		box.getChildren().add(new Text(PROMPT));
 		
 		otherObjects = new ComboBox<>();
 		otherObjects.getItems().addAll(uniqueGoNames);

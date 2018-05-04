@@ -7,7 +7,7 @@ import java.util.List;
  * Game keeps track of an entire game 
  * This includes the name, description, image, and managers
  * 
- * @author: Summer
+ * @author: Summer, Edward Zhuang
  **/
 public class Game {
 
@@ -33,7 +33,6 @@ public class Game {
 	 */
 	public void restoreGame(List<GameScene> list) {
 		mySceneManager.restoreScenes(list);
-		System.out.println("restoreGame: " + list);
 	}
 	
 	/**
@@ -67,15 +66,7 @@ public class Game {
 	public String getGameDescription() {
 		return gameDescription;
 	}
-	
-	/**
-	 * 
-	 * @param image is new image path
-	 */
-	public void setGameImage(String image) {
-		gameImage = image;
-	}
-	
+
 	/**
 	 * 
 	 * @return gameImage
@@ -91,23 +82,6 @@ public class Game {
 	public List<GameScene> getScenes(){
 		return mySceneManager.getScenes();
 	}
-//TODO: are these necessary?	
-//	//makes a game object with the given property
-//	public GameObject makeGameObject(AuthBehavior basic) { 
-//		GameObject gameObject = new GameObject(basic);
-//		return gameObject;
-//	}
-//	
-//	//removes a game object from its scenes list of objects
-//	public void removeGameObject(GameObject gameObject) {
-//		for(GameScene current : mySceneManager.getScenes()) {
-//			for(GameObject object : current.getMyObjects()) {
-//				if (object.equals(gameObject)) {
-//					current.getMyObjects().remove(gameObject);
-//				}
-//			}
-//		}
-//	}
 	
 	/**
 	 * 
@@ -116,13 +90,5 @@ public class Game {
 	public SceneManager getSceneManager() {
 		return mySceneManager;
 	}
-	
-	/**
-	 * 
-	 * @param sceneManager is new sceneManager
-	 */
-	public void setSceneManager(SceneManager sceneManager) {
-		mySceneManager = sceneManager;
-	}
-	
+
 }

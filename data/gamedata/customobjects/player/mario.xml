@@ -1,11 +1,25 @@
 <authoring.GameObject>
-  <myName>mario</myName>
+  <myName>Mario</myName>
   <myBehaviors>
     <authoring.AuthBehavior>
       <myProperties>
         <authoring.Property>
+          <myValue class="string">Marioimage</myValue>
+          <myName>imagePath</myName>
+          <myValueType>java.lang.String</myValueType>
+        </authoring.Property>
+        <authoring.Property>
+          <myName>hitBoxHeight</myName>
+          <myValueType>java.lang.Double</myValueType>
+        </authoring.Property>
+        <authoring.Property>
+          <myValue class="string">Mario</myValue>
           <myName>elementName</myName>
           <myValueType>java.lang.String</myValueType>
+        </authoring.Property>
+        <authoring.Property>
+          <myName>displayWidth</myName>
+          <myValueType>java.lang.Double</myValueType>
         </authoring.Property>
         <authoring.Property>
           <myName>shapeType</myName>
@@ -16,16 +30,7 @@
           <myValueType>java.lang.Double</myValueType>
         </authoring.Property>
         <authoring.Property>
-          <myName>hitBoxHeight</myName>
-          <myValueType>java.lang.Double</myValueType>
-        </authoring.Property>
-        <authoring.Property>
-          <myValue class="double">0.0</myValue>
-          <myName>yPos</myName>
-          <myValueType>java.lang.Double</myValueType>
-        </authoring.Property>
-        <authoring.Property>
-          <myName>displayWidth</myName>
+          <myName>hitBoxWidth</myName>
           <myValueType>java.lang.Double</myValueType>
         </authoring.Property>
         <authoring.Property>
@@ -34,12 +39,8 @@
           <myValueType>java.lang.Double</myValueType>
         </authoring.Property>
         <authoring.Property>
-          <myValue class="string">marioimage</myValue>
-          <myName>imagePath</myName>
-          <myValueType>java.lang.String</myValueType>
-        </authoring.Property>
-        <authoring.Property>
-          <myName>hitBoxWidth</myName>
+          <myValue class="double">0.0</myValue>
+          <myName>yPos</myName>
           <myValueType>java.lang.Double</myValueType>
         </authoring.Property>
       </myProperties>

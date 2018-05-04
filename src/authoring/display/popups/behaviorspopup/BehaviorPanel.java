@@ -15,6 +15,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * @author Maddie Wilkinson
+ *
+ */
 public class BehaviorPanel {
 	private List<GameObject> myGameObjects;
 	private Set<AuthBehavior> myBehaviors;
@@ -26,6 +30,11 @@ public class BehaviorPanel {
 	private VBox myVBox;
 	private BehaviorPopupController myController;
 	
+	/**
+	 * @param behaviorPopupController
+	 * @param gameObjects
+	 * @param everyBehavior
+	 */
 	public BehaviorPanel(BehaviorPopupController behaviorPopupController, List<GameObject> gameObjects, Set<AuthBehavior> everyBehavior) {
 		myController = behaviorPopupController;
 		myGameObjects = gameObjects;
@@ -117,19 +126,31 @@ public class BehaviorPanel {
 		}
 	}
 
+	/**
+	 * @return
+	 */
 	public AuthBehavior getBehaviorToAdd() {
 		return myBehaviorDropdown.getSelectionModel().getSelectedItem();
 	}	
 	
+	/**
+	 * @return
+	 */
 	public AuthBehavior getCurrBehavior() {
 		return myBehaviorList.getSelectionModel().getSelectedItem();
 	}
 	
+	/**
+	 * 
+	 */
 	public void refresh() {
 		myVBox.getChildren().clear();
 		initializeRoot();
 	}
 
+	/**
+	 * @return
+	 */
 	public Node asNode() {
 		return myVBox;
 	}

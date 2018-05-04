@@ -17,29 +17,34 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * @author Edward Zhuang
+ * This class is responsible for saving games from both the
+ */
 public class GameSaver {
 
+	public static final String BASELOCATION = ResourceBundleManager.getPath("BASELOCATION");
+	private static final String DESCRIPTION = ResourceBundleManager.getPath("DESCRIPTION");
+	private static final String SCENES = ResourceBundleManager.getPath("SCENES");
+	private static final String SAVES = ResourceBundleManager.getPath("SAVES");
+	private static final String NAME = ResourceBundleManager.getPath("NAME");
+	private static final String DESCRIPTIONTEXT = ResourceBundleManager.getPath("DESCRIPTIONTEXT");
+	private static final String DEFAULTIMAGE = ResourceBundleManager.getPath("DEFAULTIMAGE");
+	private static final String DESCRIPTIONIMAGE = ResourceBundleManager.getPath("DESCRIPTIONIMAGE");
 	private Serializer serializer;
-	private String baseLocation = ResourceBundleManager.getPath("BASELOCATION");
-	private String gameLocation;
 	private String gameDescriptionLocation;
 	private String gameScenesLocation;
-	private String gameImagesLocation;
 	private String gameSavesLocation;
 
 	/**
 	 * GameSaver constructor
-	 * 
-	 * @param gameName
-	 *            desired name of game root file
+	 * @param gameName desired name of game root file
 	 */
 	public GameSaver(String gameName) {
-		gameLocation = baseLocation + gameName + "/";
-		gameDescriptionLocation = gameLocation + ResourceBundleManager.getPath("DESCRIPTION");
-		gameScenesLocation = gameLocation + ResourceBundleManager.getPath("SCENES");
-		gameImagesLocation = gameLocation + ResourceBundleManager.getPath("IMAGES");
-		gameSavesLocation = gameLocation + ResourceBundleManager.getPath("SAVES");
-
+		String gameLocation = BASELOCATION + gameName + "/";
+		gameDescriptionLocation = gameLocation + DESCRIPTION;
+		gameScenesLocation = gameLocation + SCENES;
+		gameSavesLocation = gameLocation + SAVES;
 		serializer = new Serializer();
 
 		if (!new File(gameLocation).exists()) {
@@ -49,28 +54,23 @@ public class GameSaver {
 	}
 
 	/**
-	 * provides a description of the game
-	 * 
-	 * @param name
-	 *            of game
-	 * @param description
-	 *            description of game
-	 * @param descriptionImage
-	 *            thumbnail image to represent game
+	 * provides a description of the game. Adds logo as game description image
+	 * @param name name of game
+	 * @param description description of game
 	 */
 	public void addDescription(String name, String description) throws FileNotFoundException {
-		try (PrintWriter out = new PrintWriter(gameDescriptionLocation + ResourceBundleManager.getPath("NAME"))) {
+		try (PrintWriter out = new PrintWriter(gameDescriptionLocation + NAME)) {
 			out.println(name);
 		}
 		try (PrintWriter out = new PrintWriter(
-				gameDescriptionLocation + ResourceBundleManager.getPath("DESCRIPTIONTEXT"))) {
+				gameDescriptionLocation + DESCRIPTIONTEXT)) {
 			out.println(description);
 		}
 
 		try {
-			BufferedImage img = ImageIO.read(new File(ResourceBundleManager.getPath("DEFAULTIMAGE")));
+			BufferedImage img = ImageIO.read(new File(DEFAULTIMAGE));
 			ImageIO.write(img, "jpg",
-					new File(gameDescriptionLocation + ResourceBundleManager.getPath("DESCRIPTIONIMAGE")));
+					new File(gameDescriptionLocation + DESCRIPTIONIMAGE));
 		} catch (IOException e) {
 			e.printStackTrace(); // TODO: remove this print stacktrace!
 		}
@@ -78,12 +78,8 @@ public class GameSaver {
 	}
 
 	/**
-	 * Saves the game that authoring environment has created. A folder is created
-	 * for each level, and in that folder the scene is created along with xml files
-	 * for each game object
-	 * 
-	 * @param objectMap
-	 *            map of gamescenes (levels) to game objects in that level
+	 * Saves the game that authoring environment has created. An xml file is created
+	 * for each scene.
 	 */
 	public void gameAuthorToXML(List<GameScene> gameSceneList, boolean isAuthoring) throws IOException {
 		List<GameSceneSerializable> serializables = new ArrayList<>();
@@ -95,12 +91,10 @@ public class GameSaver {
 		} else {
 			serializer.gameAuthorToXML(gameSavesLocation, serializables);
 		}
-
 	}
 
 	/**
 	 * Saves the game when the game is being played in game engine
-	 * 
 	 * @throws IOException
 	 */
 	public void saveGamePart(GamePart gamePart) throws IOException {

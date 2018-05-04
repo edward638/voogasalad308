@@ -33,5 +33,22 @@ public class GUIButton extends Button {
 		this.setPrefSize(X_SIZE, Y_SIZE);
 		this.setOnAction(e -> eventResponse.pressed());
 	}
-
+	
+	/**
+	 * Change the label of the button
+	 * @param newLabel the new name
+	 */
+	public void setLabel(String newLabel) {
+		buttonLabel = newLabel;
+		this.setText(buttonLabel);
+	}
+	
+	/**
+	 * Change the response of the setOnAction of the button
+	 * @param newEvent the new ButtonEvent that is desired to be called by the button
+	 */
+	public void setButtonEvent(ButtonEvent newEvent) {
+		eventResponse = newEvent;
+		this.setOnAction(e -> eventResponse.pressed());
+	}
 }

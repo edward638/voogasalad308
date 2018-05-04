@@ -18,7 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 /**
- * 
+ * Class that is used to selected and add new events to the game object
  * @author Summer and August
  *
  */
@@ -34,33 +34,41 @@ public class EventsWindow extends VBox {
 	private Event currentEvent;
 	private EventsPopupController epuc;
 	
+	private static final String EVENTS = "Events";
+	private static final String EVENTOPTIONS = "Events Options";
+	private static final int SPACING = 10;
+	private static final int SIZE = 200;
+	
+	/**
+	 * @param myEPUC 	controller
+	 * @param myGos 	the list of game objects to be edited 
+	 */
 	public EventsWindow(EventsPopupController myEPUC, List<GameObject> myGos) {
 		gos = myGos;
 		classRetriever = new EngineClassRetriever();
 		epuc = myEPUC;
 		myEvents = new ListView<>();
-		myEvents.setMinHeight(200);
+		myEvents.setMinHeight(SIZE);
 		currentEvent = null;
 		createVBox();
 	}
 	
 	private void createVBox() {
-		this.setPadding(new Insets(10));
-	    this.setSpacing(8);
-	    this.setMinWidth(200);
-	    Text title = new Text("Events");
+		this.setPadding(new Insets(SPACING));
+	    this.setSpacing(SPACING);
+	    this.setMinWidth(SIZE);
+	    Text title = new Text(EVENTS);
 	    this.getChildren().add(title);
 	    this.getChildren().addAll(makeEventDropdown(), makeEventList());
 	}
 	
 	private ComboBox<String> makeEventDropdown(){
 		possibleEvents = new ComboBox<>();
-		possibleEvents.setPromptText("Event options");
+		possibleEvents.setPromptText(EVENTOPTIONS);
 		Set<?> retrieved = new TreeSet<>();
 		retrieved = classRetriever.getClasses(EVENTS_SUPERCLASS, EVENTS_PACKAGE);
 		retrieved.forEach(c -> {
 							String[] holder = c.toString().split(" ");
-
 							String[] name = holder[holder.length - 1].split("\\.");
 							String use = name[name.length-1];
 							possibleEvents.getItems().add(use);

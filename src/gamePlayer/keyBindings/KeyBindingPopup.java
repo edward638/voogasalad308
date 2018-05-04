@@ -1,6 +1,8 @@
 package gamePlayer.keyBindings;
 
 import java.util.ArrayList;
+import java.util.Map;
+
 import gamePlayer.buttons.ButtonData;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -20,51 +22,34 @@ public class KeyBindingPopup extends Pane {
 
 	private ButtonData buttonData;
 	private KeyInputDictionary keyMap;
+	private Map<KeyCode, String> defaultBindings;
 
-	private static final int SPACE_BETWEEN_BUTTONS = 80;
+	private static final int BINDING_X_POSITION = 50;
+	private static final int FIRST_BINDING_Y_POSITION = 60;
+	private static final int SPACE_BETWEEN_BINDINGS = 60;
+	private static final int SPACE_BETWEEN_NODES = 80;
 
 	public KeyBindingPopup(ButtonData buttonData) {
 		this.setLayoutX(300);
 		this.setLayoutY(100);
 		keyMap = buttonData.getKeyBindings();
+		defaultBindings = buttonData.getKeyAssignments();
 
 		this.buttonData = buttonData;
-
 		setupBackground();
 		setupBindings();
 		setupCloseButton();
 		setUpTitle();
 	}
 
-	private void setUpTitle() {
-		Text title = new Text();
-		title.setText("Key Bindings");
-		title.setStyle("-fx-font: 24 Verdana;");
-		title.setFill(Color.LIGHTSKYBLUE);
-		title.setX(40);
-		title.setY(30);
-		this.getChildren().add(title);
-	}
-
 	private void setupBindings() {
-
-		initialiseOGKeyBindings();
-		KeyBinding W = new KeyBinding(KeyCode.W, "Jump", keyMap, this);
-		KeyBinding A = new KeyBinding(KeyCode.A, "Left", keyMap, this);
-		KeyBinding D = new KeyBinding(KeyCode.D, "Right", keyMap, this);
-
-		addNodeListToGui(90, 80, W.getNodeList());
-		addNodeListToGui(150, 80, A.getNodeList());
-		addNodeListToGui(210, 80, D.getNodeList());
-	}
-
-	/**
-	 * initialises the hardcoded default key bindings
-	 */
-	private void initialiseOGKeyBindings() {
-		buttonData.getKeyBindings().replaceKey(KeyCode.A, KeyCode.A, KeyCode.A);
-		buttonData.getKeyBindings().replaceKey(KeyCode.D, KeyCode.D, KeyCode.D);
-		buttonData.getKeyBindings().replaceKey(KeyCode.W, KeyCode.W, KeyCode.W);
+		int yPosition = FIRST_BINDING_Y_POSITION;
+		for (KeyCode key : defaultBindings.keySet()) {
+			buttonData.getKeyBindings().replaceKey(key, key, key);
+			KeyBinding keyBinding = new KeyBinding(key, defaultBindings.get(key), keyMap, this);
+			addNodeListToGui(yPosition, BINDING_X_POSITION, keyBinding.getNodeList());
+			yPosition += SPACE_BETWEEN_BINDINGS;
+		}
 	}
 
 	/**
@@ -82,7 +67,7 @@ public class KeyBindingPopup extends Pane {
 		for (Node n : nodeList) {
 			n.setLayoutY(yPosition);
 			n.setLayoutX(xPosition);
-			xPosition = xPosition + SPACE_BETWEEN_BUTTONS;
+			xPosition = xPosition + SPACE_BETWEEN_NODES;
 		}
 		this.getChildren().addAll(nodeList);
 	}
@@ -104,6 +89,16 @@ public class KeyBindingPopup extends Pane {
 		background.setFill(Color.BLACK);
 		background.setOpacity(0.3);
 		this.getChildren().add(background);
+	}
+
+	private void setUpTitle() {
+		Text title = new Text();
+		title.setText("Key Bindings");
+		title.setStyle("-fx-font: 24 Verdana;");
+		title.setFill(Color.LIGHTSKYBLUE);
+		title.setX(40);
+		title.setY(30);
+		this.getChildren().add(title);
 	}
 
 	public void show() {

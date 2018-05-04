@@ -2,6 +2,7 @@ package gamePlayer.buttons;
 
 /**
  * a button for restarting the current game
+ * 
  * @author jeffreyli
  *
  */
@@ -15,8 +16,9 @@ public class ReplayButton extends PlayerButtons {
 	protected void setAction() {
 
 		this.setOnAction(event -> {
-			buttonData.playGame(buttonData.getMostRecentFile(), true);
+			if (buttonData.getMostRecentFile() != null) {
+				buttonData.playGame(buttonData.getMostRecentFile(), true);
+			}
 		});
 	}
-
 }

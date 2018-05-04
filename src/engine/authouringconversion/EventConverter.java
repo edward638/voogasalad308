@@ -38,8 +38,6 @@ public class EventConverter {
 	}
 	
 	private KeyInputEvent toKeyInputEvent(Event authEvent) {
-		System.out.println("Converting " + authEvent);
-		System.out.println("Trigger: " + authEvent.getTrigger());
 		return new KeyInputEvent(KeyCode.getKeyCode(authEvent.getTrigger().toUpperCase()));
 	}
 	

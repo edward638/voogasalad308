@@ -8,6 +8,13 @@ import engine.GameElement;
 import engine.behaviors.MandatoryBehavior;
 import javafx.scene.shape.Shape;
 
+/**
+ * @author Martin
+ *
+ * Collision events are used to communicate collisions between two GameElements. They compute the exact side
+ * of the collision with respect to each element, and give this information to be processed by a GameElement's
+ * event responder.
+ */
 public class CollisionEvent extends ElementEvent {
 	
 	public static final String LEFT = "LEFT";
@@ -24,6 +31,14 @@ public class CollisionEvent extends ElementEvent {
 	private List<String> e1side;
 	private List<String> e2side;
 	
+	/**
+	 * Create a new CollisionEvent
+	 * 
+	 * @param elem1 Collided GameElement1
+	 * @param sides1 Significant collision sides of GameElement1 
+	 * @param elem2 Collided GameElement2
+	 * @param sides2 Significant collision sides of GameElement2
+	 */
 	public CollisionEvent(GameElement elem1, List<String> sides1, GameElement elem2, List<String> sides2) {
 		e1 = elem1;
 		e2 = elem2;
@@ -33,6 +48,12 @@ public class CollisionEvent extends ElementEvent {
 		e2side.addAll(sides2);
 	}
 	
+	/**
+	 * Create a new CollisionEvent
+	 * 
+	 * @param elem1 Collided GameElement1
+	 * @param elem2 Collided GameElement2
+	 */
 	public CollisionEvent(GameElement elem1, GameElement elem2) {
 		e1 = elem1;
 		e2 = elem2;
@@ -41,6 +62,12 @@ public class CollisionEvent extends ElementEvent {
 		processCollisionSides();
 	}
 	
+	/**
+	 * Returns the GameElement involved in the collision that is not the one given.
+	 * 
+	 * @param notThisOne GameElement of one of the collision elements
+	 * @return	the other GameElement
+	 */
 	public GameElement getOtherElement(GameElement notThisOne) {
 		if (e1.equals(notThisOne)) {
 			return e2;
@@ -85,7 +112,7 @@ public class CollisionEvent extends ElementEvent {
 		return ret;
 	}
 
-	public List<GameElement> getCollidedElements() {
+	private List<GameElement> getCollidedElements() {
 		List<GameElement> ret = new ArrayList<>();
 		ret.add(e1); ret.add(e2);
 		return ret;
@@ -96,11 +123,17 @@ public class CollisionEvent extends ElementEvent {
 		return "Collision Event: " + e1 + " " + e2 + " collided.";
 	}
 	
+	/**
+	 * Determine whether a GameElement is contained within the collision represented
+	 * by this event.
+	 * @param el GameElement of question
+	 * @return 	whether this GameElement is involved in the collision
+	 */
 	public boolean containsElement(GameElement el) {
 		return getCollidedElements().contains(el);
 	}
 	
-	/*
+	/**
 	 * Checks if another Collision matches this one as a trigger
 	 * For a collision this means:
 	 * other has this.e1 as one of the elements that collided
@@ -108,15 +141,13 @@ public class CollisionEvent extends ElementEvent {
 	 * the same identifier as this.e2
 	 * 
 	 */
+	@Override
 	public boolean matchesEvent(ElementEvent incomingEvent) {
 		if (incomingEvent instanceof CollisionEvent) {
 			CollisionEvent incomingCollision = (CollisionEvent) incomingEvent;
-//			System.out.println(incomingCollision);
 			if (incomingCollision.containsElement(e1)) {
-//				System.out.println("Contains e1");
 				GameElement incomingOther = incomingCollision.getOtherElement(e1);
 				if (incomingOther.matchesType(e2)) {
-//					System.out.println("Matches other type");
 					String incomingOtherSide = incomingCollision.getSidesForElement(incomingOther).get(0);
 					String incomingThisSide = incomingCollision.getSidesForElement(e1).get(0);
 					if (e1side.contains(incomingThisSide) && e2side.contains(incomingOtherSide)) {
@@ -136,7 +167,7 @@ public class CollisionEvent extends ElementEvent {
 		}
 		return null;
 	}
-	
+	@Override
 	public String getTriggerString() {
 		return e2.getIdentifier();
 	}

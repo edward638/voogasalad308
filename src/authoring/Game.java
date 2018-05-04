@@ -1,18 +1,7 @@
 package authoring;
 
 import data.GameInitializer;
-import data.ImageManager;
-import engine.behaviors.Behavior;
-import javafx.beans.InvalidationListener;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-
-import authoring.display.GameObjectImageView;
 
 /** 
  * Game keeps track of an entire game 
@@ -38,35 +27,67 @@ public class Game {
 		gameImage = "draw-more-few-cloud.png";
 	}
 	
+	/**
+	 * @param list is a list of scenes that represents one game
+	 * restores a certain scene in a game
+	 */
 	public void restoreGame(List<GameScene> list) {
 		mySceneManager.restoreScenes(list);
 		System.out.println("restoreGame: " + list);
 	}
 	
+	/**
+	 * 
+	 * @param name new game name
+	 */
 	public void setGameName(String name) {
 		gameName = name;
 	}
 	
+	/**
+	 * 
+	 * @return gameName
+	 */
 	public String getName() {
 		return gameName;
 	}
 	
+	/**
+	 * 
+	 * @param description is the new game description 
+	 */
 	public void setGameDescription(String description) {
 		gameDescription = description;
 	}
 	
+	/**
+	 * 
+	 * @return gameDescription
+	 */
 	public String getGameDescription() {
 		return gameDescription;
 	}
 	
+	/**
+	 * 
+	 * @param image is new image path
+	 */
 	public void setGameImage(String image) {
 		gameImage = image;
 	}
 	
+	/**
+	 * 
+	 * @return gameImage
+	 */
 	public String getGameImage() {
 		return gameImage;
 	}
 
+	/** 
+	 * 
+	 * @return gameScenes in the game
+	 */
 	public List<GameScene> getScenes(){
 		return mySceneManager.getScenes();
 	}
@@ -88,10 +109,18 @@ public class Game {
 //		}
 //	}
 	
+	/**
+	 * 
+	 * @return sceneManager
+	 */
 	public SceneManager getSceneManager() {
 		return mySceneManager;
 	}
 	
+	/**
+	 * 
+	 * @param sceneManager is new sceneManager
+	 */
 	public void setSceneManager(SceneManager sceneManager) {
 		mySceneManager = sceneManager;
 	}

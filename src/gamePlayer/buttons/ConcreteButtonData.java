@@ -1,5 +1,7 @@
 package gamePlayer.buttons;
 
+import java.util.Map;
+
 import engine.EngineInterface;
 import gamePlayer.GamePlayer;
 import gamePlayer.Username;
@@ -8,6 +10,7 @@ import gamePlayer.highScores.HighScores;
 import gamePlayer.keyBindings.KeyInputDictionary;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -52,6 +55,7 @@ public class ConcreteButtonData implements ButtonData {
 		highScores.clear();
 	}
 
+	@Override
 	public void setMostRecentFile(String file) {
 		mostRecentFile = file;
 	}
@@ -132,6 +136,11 @@ public class ConcreteButtonData implements ButtonData {
 	@Override
 	public void saveGame() {
 		engine.save();
+	}
+
+	@Override
+	public Map<KeyCode, String> getKeyAssignments() {
+		return engine.getKeyAssignments();
 	}
 
 }

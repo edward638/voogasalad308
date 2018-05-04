@@ -9,7 +9,7 @@ import engine.behaviors.MainCharacter;
 import javafx.scene.Group;
 
 /**
- * @author Yashas Manjunatha and Gouttham Chandraekar
+ * @author Yashas Manjunatha, Gouttham Chandraekar, and Martin Muenster
  * Handles the Display of the Engine. Our design provides separation between the current game state
  * and the display state of the engine. The engine is constructed and updated from the current game state.
  * We use lists of elements to add and remove from the display to keep updating smart. Each element also update's

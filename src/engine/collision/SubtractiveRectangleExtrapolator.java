@@ -12,8 +12,6 @@ public class SubtractiveRectangleExtrapolator implements ShapeExtrapolator {
 
 	@Override
 	public Shape extrapolateShape(Image image, double x, double y, double width, double height) {
-		
-		
 		Rectangle s = new Rectangle(x, y, width, height);
 		Shape result = new Rectangle(x, y, width, height);
 		
@@ -25,19 +23,15 @@ public class SubtractiveRectangleExtrapolator implements ShapeExtrapolator {
 		
 		Rectangle empty = new Rectangle(x, y, shapeWidthStep, shapeHeightStep);
 		
-		//System.out.println(s.toString() + "\n" + widthStep + "\n" + image.toString());
 		PixelReader px = image.getPixelReader();
 		
 		for (int i = 0; i < resolution; i++) {
 			for (int j = 0; j < resolution; j++) {
-				//System.out.println((i*imageWidthStep + imageWidthStep/2) + " ," + (j*imageHeightStep + imageHeightStep/2) + " ," + (px.getArgb((i*imageWidthStep + imageWidthStep/2), (j*imageHeightStep + imageHeightStep/2))>>24));
 				if (px.getArgb((i*imageWidthStep + imageWidthStep/2), (j*imageHeightStep + imageHeightStep/2))>>24 == 0) {
 					empty.setX(x + i*shapeWidthStep);
 					empty.setY(y + j*shapeHeightStep);
 					
 					result = Shape.subtract(result, empty);
-					//System.out.println(result.toString());
-					
 				}
 			}
 		}

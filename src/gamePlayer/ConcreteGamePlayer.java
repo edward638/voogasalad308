@@ -160,6 +160,7 @@ public class ConcreteGamePlayer implements GamePlayer {
 		PlayerUpdater concretePlayerUpdater = new ConcretePlayerUpdater(hud, highScores, username.getName());
 
 		engine = new Engine(gameName, isNewGame, concretePlayerUpdater);
+		buttonData.setEngineRunning(true);
 		updateEngines(engine);
 
 		pauseButton = new PauseButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("pauseButtonY")),

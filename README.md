@@ -69,7 +69,18 @@ We took out a lot of possible flexible features from the Authoring environment t
 
 ### any known bugs, crashes, or problems with the project's functionality
 
-lol
+Ocasionally, the hitbox for elements that contain the boxlike behavior will malfunction, and other elements will fall through the box. In the authoring environment, the user must set audio for each scene or else loading the game will cause the program to crash. There is also no error checking for the Groovy Scripts, because we assume that the user will follow the instructions for the auto generated scripts. The game will also not function if there is not a GameObject with the MainCharacter behavior.
+
+TimeRoutines occasionally do not execute on GameElement in GameState likely due to the references passed into groovy actions not being the GameElement in the GameSatate.
+Improper conversion from GameScene to GamePart will sometimes introduce new GameElements that contain only a mandatory behavior - origin unknown.
+Display and Hitbox Height and Width default to 1 pixel across and are sometimes not overridden by Library GameObjects
+Must manually transfer images from GameObject library folder "default images" into Game specific folder
+ShapeRoutine Behavior causes limitations on movement of other GameElements, seemingly by creating aformentioned random objects Object with ShapeRoutine also doesn't appear
+
+When you add an object to the GameViewWindow for the first time, the size may be distorted. This can be fixed by moving the object and the size will correct. There are also issues with deleting and duplicating GameObjects, as you have to move a GameObject to force the frontend to update. Whenever you open a level, the level pane is set to 1000x1000 by default, and if you want to see all the items on your GameScene, you will have to resize each time. If you have too many GameObjects, the authoring will run very slowly.
+
+
+
 
 ### any extra features included in the project
 
@@ -87,11 +98,15 @@ the flexibility of the code. If the code is flexible, then integration shouldn't
 guideline for what each group could have accomplished by the demo. Looking back now, I feel like we were behind at the first demo point 
 even though I had thought we were pretty on track at the time of the demo. 
 
-Yashas:
+Yashas: This project was both very challenging and very rewarding. The aspect of designing the project to be both flexible and follow good design principles, while also 
+maintaining practicality and functionalty proved to be especially challenging because of the difficulty with integrating all parts of the project. Also, working with a 
+large group like this was a great learning experience because with so many voices and opinions in the conversation, communication was probably the most important aspect 
+of the project. Overall, I learned a lot about making the decisions to balance design and functionality, as well as having meaningful but also efficient conversations
+about design and goals with a large group of people.
 
 Martin: I really enjoyed planning this project, and figuring out how each team would do its part to create a finished product. It really helped solidify my understanding of internal/external APIs, as we had 4 distinct parts of the project that needed to communicate with each other through private channels. Overall, it was fun but very tough.
 
-Trishul:
+Trishul: This project was a very interesting challenge with a completely open-ended goal that allowed us to be as creative as possible in maintaining quality flexible code. It was certainly a huge challenge staying tied together to a large group of 10 people and communicating effectively between us but I am very happy with the team I worked in and enjoyed the experience of learning how to work in such a large team. I feel learning how to use Git has been an especially important feature of this project that I was not expecting to learn so much about.
 
 August: Project was really hard, and learned a lot about designing good and flexible code. It does take a lot of time and lots of debugging to get external jar files to work and getting consistent classpaths. Overall a worthy endeavor that made me learn that I don't like programming. However I feel like this project is seminal to the legend of the CS308, so I would be sad if future students got it easier. 
 

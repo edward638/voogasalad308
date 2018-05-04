@@ -7,35 +7,43 @@ import java.nio.file.StandardCopyOption;
 
 import javafx.scene.media.Media;
 
+/**
+ * @author Edward Zhuang
+ * Audio Manager class which allows user to save and retrieve audio files for games.
+ */
 public class AudioManager {
 
-    private static final String BACKSLASH = "/";
+	private static final String BACKSLASH = "/";
     private static final String AUDIO = "audio/";
-    private String gameLocation;
-    private String gameAudioLocation;
+	private static final String MP3 = ".mp3";
+	private String gameAudioLocation;
     private static final String baseLocation = "./data/gamedata/games/";
 	
 	public AudioManager(String gameName) {
-		gameLocation = baseLocation + gameName + BACKSLASH;
+		String gameLocation = baseLocation + gameName + BACKSLASH;
 		gameAudioLocation = gameLocation + AUDIO;
 	}
-	
+
+	/**
+	 * Stores mp3 file into the current game's data.
+	 * @param audioFile file to be saved
+	 */
 	public void storeAudio(File audioFile) {
 		try {
-			System.out.println("storeAudio AudioManager: " + gameAudioLocation + audioFile.getName());
 			Files.copy(audioFile.toPath(), 
 					(new File(gameAudioLocation + audioFile.getName())).toPath(), 
 					StandardCopyOption.REPLACE_EXISTING);
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-//			e.printStackTrace();
+		} catch (Exception ignored) {
 		}
 	}
-	
+
+	/**
+	 * Returns media file from audio file name
+	 * @param audioName name of audio file
+	 * @return Media file
+	 */
 	public Media getAudioMedia(String audioName) {
-		Media media = new Media(new File(gameAudioLocation+audioName+".mp3").toURI().toString());
-		return media;
+		return new Media(new File(gameAudioLocation+audioName+ MP3).toURI().toString());
 	}
 	
 }

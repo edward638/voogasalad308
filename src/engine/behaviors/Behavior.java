@@ -57,7 +57,7 @@ public abstract class Behavior {
 			if (!(getParent().hasBehavior(behavior))) {
 				try {
 					Constructor<? extends Behavior> construct = behavior.getConstructor(GameElement.class);
-					System.out.println("Behavior: From addBehaviorsIfNotExisting");
+//					System.out.println("Behavior: From addBehaviorsIfNotExisting");
 					getParent().addBehavior(construct.newInstance(getParent()));
 				} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 						| InvocationTargetException | NoSuchMethodException | SecurityException e) {

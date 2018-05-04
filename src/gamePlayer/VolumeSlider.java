@@ -5,6 +5,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 /**
@@ -56,6 +57,7 @@ public class VolumeSlider extends Slider {
 	private void setupVolumeText() {
 		volumeText = new Label("Volume: ");
 		volumeText.setFont(Font.font(font, 20));
+		volumeText.setTextFill(Color.WHITE);
 		volumeText.setLayoutX(970);
 		volumeText.setLayoutY(420);
 	}

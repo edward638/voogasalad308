@@ -24,6 +24,7 @@ public class MandatoryBehavior extends Behavior{
 	
 	
 	public static final String REFER_ALL_ELEMENTS = "ANY_ELEMENT";
+	public static final String REFER_MAIN_CHARACTER = "MAIN_CHARACTER";
 	
 	/**
 	 * NEW way to initialize mandatory behavior w/ shape included
@@ -55,7 +56,7 @@ public class MandatoryBehavior extends Behavior{
 	}
 	
 	public MandatoryBehavior(GameElement ge, String name, String imagePath, Double startX, Double startY)  {
-		this(ge, name, startX, startY, "rectangle", 1000.0, 1000.0, 1000.0, 1000.0, imagePath);
+		this(ge, name, startX, startY, "rectangle", 0.0, 0.0, 0.0, 0.0, imagePath);
 
 	}
 	

@@ -24,10 +24,10 @@ public class KeyBindingPopup extends Pane {
 	private KeyInputDictionary keyMap;
 	private Map<KeyCode, String> defaultBindings;
 
-	private static final int BINDING_X_POSITION = 50;
+	private static final int BINDING_X_POSITION = 40;
 	private static final int FIRST_BINDING_Y_POSITION = 60;
 	private static final int SPACE_BETWEEN_BINDINGS = 60;
-	private static final int SPACE_BETWEEN_NODES = 80;
+	private static final int SPACE_BETWEEN_NODES = 125;
 
 	public KeyBindingPopup(ButtonData buttonData) {
 		this.setLayoutX(300);

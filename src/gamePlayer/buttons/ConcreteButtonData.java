@@ -55,6 +55,7 @@ public class ConcreteButtonData implements ButtonData {
 		highScores.clear();
 	}
 
+	@Override
 	public void setMostRecentFile(String file) {
 		mostRecentFile = file;
 	}

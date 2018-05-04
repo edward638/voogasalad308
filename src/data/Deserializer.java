@@ -40,7 +40,7 @@ public class Deserializer {
      * @return GameScene
      */
     public List<GameSceneSerializable> getGameSceneSerializables(String fileName){
-        File directory = new File(filename);
+        File directory = new File(fileName);
         File[] directoryListing = directory.listFiles();
         List<GameSceneSerializable> list = new ArrayList<>();
         if (directoryListing != null){

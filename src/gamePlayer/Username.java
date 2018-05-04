@@ -16,6 +16,7 @@ public class Username {
 	private String userName;
 	private static final String FONT = "Din Alternate";
 	private Label nameText;
+	private static final int fontSize = 20;
 
 	public Username() {
 		setupUserNameInput();

@@ -3,9 +3,9 @@ package authoring.tests;
 import java.util.ArrayList;
 
 import authoring.GameObject;
-import authoring.displayrefactored.popups.EventsPopupRefactored;
-import authoring.displayrefactored.popups.eventspopup.TWKPopup;
-import authoring.displayrefactored.popups.eventspopup.TriggerWindow;
+import authoring.display.popups.EventsPopup;
+import authoring.display.popups.eventspopup.TWKPopup;
+import authoring.display.popups.eventspopup.TriggerWindow;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -39,7 +39,7 @@ public class EventsPopUpTest extends Application {
 		gos2.add(go4);
 		gos2.add(go5);
 		
-		new EventsPopupRefactored(gos1, gos2);
+		new EventsPopup(gos1, gos2);
 	}
 
 

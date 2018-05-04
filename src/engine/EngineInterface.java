@@ -1,5 +1,7 @@
 package engine;
 
+import java.util.Map;
+
 import javafx.scene.SubScene;
 import javafx.scene.input.KeyCode;
 
@@ -55,4 +57,11 @@ public interface EngineInterface {
 	 * Saves the current state of the game to game data.
 	 */
 	public void save();
+	
+	/**
+	 * Returns a map of the string bindings (decided by authoring environment) 
+	 * to their corresponding groovy actions.
+	 * @return map of key string to groovy action.
+	 */
+	public Map<KeyCode, String> getKeyAssignments();
 }

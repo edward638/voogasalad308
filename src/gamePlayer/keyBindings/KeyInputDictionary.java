@@ -3,8 +3,6 @@ package gamePlayer.keyBindings;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
-import engine.Engine;
 import engine.EngineInterface;
 import javafx.scene.input.KeyCode;
 /**
@@ -13,14 +11,15 @@ import javafx.scene.input.KeyCode;
  *
  */
 public class KeyInputDictionary {
-	Map<KeyCode, KeyCode> dictionary;
-	EngineInterface engine;
+	private Map<KeyCode, KeyCode> dictionary;
+	private EngineInterface engine;
 
 	public KeyInputDictionary(EngineInterface engine2) {
 		dictionary = new HashMap<KeyCode, KeyCode>();
 		this.engine = engine2;
 	}
-
+	
+	
 	public void replaceKey(KeyCode input, KeyCode mapTo, KeyCode oldInput) {
 
 		dictionary.remove(oldInput);
@@ -37,8 +36,8 @@ public class KeyInputDictionary {
 		} 
 	}
 
-	public void setGame(EngineInterface engine2) {
-		this.engine = engine2;
+	public void setGame(EngineInterface engine) {
+		this.engine = engine;
 
 	}
 
@@ -51,7 +50,6 @@ public class KeyInputDictionary {
 	}
 
 	public void removeKey(KeyCode k) {
-		System.out.println(dictionary);
 		dictionary.remove(k);
 
 	}

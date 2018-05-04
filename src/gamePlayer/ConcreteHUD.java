@@ -12,11 +12,12 @@ import javafx.scene.text.Font;
 
 public class ConcreteHUD extends Pane implements HUD {
 
-	String gameName;
-	Map<String, Object> info;
+	private String gameName;
+	private Map<String, Object> info;
 	private int xLabel = 0;
 	private int yLabel = 0;
-	List<Label> labelList;
+	private List<Label> labelList;
+	private static final int fontSize = 20;
 
 	public ConcreteHUD(String name) {
 		gameName = name;
@@ -53,7 +54,7 @@ public class ConcreteHUD extends Pane implements HUD {
 			text.setTextFill(Color.WHITE);
 			text.setLayoutX(xLabel);
 			text.setLayoutY(yLabel);
-			text.setFont(new Font(20));
+			text.setFont(new Font(fontSize));
 			this.getChildren().add(text);
 			labelList.add(text);
 			xLabel = (int) (xLabel + text.getText().length() * 12);
@@ -71,7 +72,7 @@ public class ConcreteHUD extends Pane implements HUD {
 		nameText.setTextFill(Color.WHITE);
 		nameText.setLayoutX(xLabel);
 		nameText.setLayoutY(yLabel - 25);
-		nameText.setFont(new Font(20));
+		nameText.setFont(new Font(fontSize));
 		this.getChildren().add(nameText);
 	}
 

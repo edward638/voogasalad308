@@ -10,26 +10,26 @@ Started: March 20th
 
 Ended: April 29th
 
-Hours worked: 10^2
+Hours worked: 10^3
 
 ### each person's role in developing the project
 
 Gouttham: Worked with Trishul, Martin and Yashas to create a game engine. Helped design the engine's code structure as well as implemented specific behaviors, and actions that GameElements can inherit.
 Worked on coding the game-flow allowing user to travel from one gameLevel to another. 
 
-Jeffrey:
+Jeffrey: Worked with Calvin to make entire front end and back end of GamePlayer which manages selecting games, loading games, saving games, high scores, HUD,
+changing key bindings dynamically, handling username, loading games from online.
 
 Calvin: Worked with Jeffrey on the gameplayer. The gameplayer was used in order to initialize our engine and give the user some flexibility 
 in terms of what games they want and how they wanted to interact with a game outside of the game itself such as keybindings and volume. Worked
 the backend and frontend of this part, but mostly frontend as gameplayer was mainly a frontend thing. Also created two utilities for our group, 
 one of which could not be reviewed by Facebook so we can't use it. Did like a couple things for the frontend for authoring. 
 
-
-Yashas:
+Yashas: Worked with Gouttham, Trishul, and Martin on the game engine component of the project. Helped design the inital structure for the Engine. Worked on implementing the display and audio aspects of the Engine. Also worked on impelemnting behaviors and game events related to audio playing, and level flow/transition. Also, worked with Gouttham to do a major refactoring of the Engine design to be more flexible for level flow and better understandable. Also, worked with Player team to integrate Engine display and Player's HUD and with Game Data team to integrate game data with Engine to be able to load and save games in Engine.
 
 Martin: Worked on developing game engine. Developed collision logic, experimented with potential collision utility, created initial testing scenarios, integrated shape behaviors and hitboxes, worked on designing and writing code for game and element events, created old GameMetaData with Gouttham, made design decisions related to integrating game player with engine.
 
-Trishul:
+Trishul: Worked with Gouttham, Trishul, and Martin to build the GameEngine part of the project. We collaborated to come up with the original design for composition style back end we have for the Engine. I built the GameElement class and many of the behaviors like Movable, Shootable, Movable Character, Time Routine, etc. I also worked with authoring to build the conversion tool from authoring environment objects into their engine equivalent. 
 
 August: Worked with Edward to make game data to save and load various authoring and frontend elements to XML using XStream. Made various Authoring GUI frontend components such as the Event pop up window, Duplicate button, GameObject resizing, etc.
 
@@ -76,7 +76,7 @@ You can upload and download games to and from Dropbox to share with your friends
 
 Gouttham:
 
-Jeffrey:
+Jeffrey: It was a fun and useful project that gave good exposure to what it's like working in a large team.
 
 Calvin: I think the hardest part of this project was integration, which makes a lot of sense. When we split up into our own groups, we will
 naturally have conflicts between parts of the project that we end up having to spend a lot of time fixing. This integration also speaks to

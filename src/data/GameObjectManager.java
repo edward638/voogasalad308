@@ -12,8 +12,8 @@ import authoring.GameObject;
 import authoring.GameObjectAdder;
 import authoring.GameScene;
 import authoring.Property;
-import authoring.displayrefactored.authoringuicomponents.ObjectLibrary;
-import authoring.displayrefactored.objectinfoboxes.LibraryObjectInfoBox;
+import authoring.display.authoringuicomponents.ObjectLibrary;
+import authoring.display.objectinfoboxes.LibraryObjectInfoBox;
 import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
@@ -22,7 +22,6 @@ public class GameObjectManager implements LibraryObjectSaver, LibraryObservable 
 	
 	private static final String defaultObjectLocation = "./data/gamedata/customobjects/";
 	private String key = "block";
-	private Deserializer deserializer;
 	private Serializer serializer;
 	private ImageManager defaultManager;
 	private ImageManager gameImageManager;
@@ -32,7 +31,6 @@ public class GameObjectManager implements LibraryObjectSaver, LibraryObservable 
 	private LibraryObserver observer;
 	
 	public GameObjectManager(GameObjectAdder adder, ImageManager imageManager) {
-		deserializer = new Deserializer();
 		serializer = new Serializer();
 		levelPanelController = adder;
 		gameImageManager = imageManager;
@@ -40,8 +38,8 @@ public class GameObjectManager implements LibraryObjectSaver, LibraryObservable 
 		library = new ObjectLibrary(this);
 	}
 	
-	public List<GameObject> getSavedGameObjects(){
-		
+	public static List<GameObject> getSavedGameObjects(String key){
+		Deserializer deserializer = new Deserializer();
 		List<GameObject> list = new ArrayList<>();
 		File directory = new File(defaultObjectLocation + key);
         File[] directoryListing = directory.listFiles();
@@ -61,7 +59,7 @@ public class GameObjectManager implements LibraryObjectSaver, LibraryObservable 
 	
 	public void changeObjectType(String key) {
 		this.key = key;
-		library.updateObjectList(getSavedGameObjects());
+		library.updateObjectList(getSavedGameObjects(key));
 	}
 	
 	public void setCurrentObject(GameObject gameObject) {
@@ -79,7 +77,7 @@ public class GameObjectManager implements LibraryObjectSaver, LibraryObservable 
 		mandatory.getProperty("imagePath").setValue(name+"image");
 		System.out.println(defaultObjectLocation+key);
 		serializer.saveGameObject(defaultObjectLocation + key + "/", gameObject, name);
-		library.updateObjectList(getSavedGameObjects());
+		library.updateObjectList(getSavedGameObjects(key));
 	}
 	
 	private void transferImageToGame(String imageName) {
@@ -100,10 +98,11 @@ public class GameObjectManager implements LibraryObjectSaver, LibraryObservable 
 		boolean isUnique = true;
 		String originalKey = key;
 		
-		String[] keys = {"player","block","npc"};
+		String[] keys = {"player","block","npc", "projectiles"};
+//		String[] keys = {"player","block","npc"};
 		for (int x = 0; x < keys.length; x++) {
 			key = keys[x];
-			for (GameObject go: getSavedGameObjects()) {
+			for (GameObject go: getSavedGameObjects(key)) {
 				if (name.equals(go.getName())) {
 					isUnique = false;
 				}
@@ -120,25 +119,23 @@ public class GameObjectManager implements LibraryObjectSaver, LibraryObservable 
 
 	@Override
 	public void saveUpdatedLibraryObject(GameObject gameObject) {
-		// TODO Auto-generated method stub
 		try {
 			serializer.saveGameObject(defaultObjectLocation + key + "/", gameObject, gameObject.getName());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		library.updateObjectList(getSavedGameObjects());
+		library.updateObjectList(getSavedGameObjects(key));
 	}
 
 	@Override
 	public LibraryObjectInfoBox getLibraryObjectInfoBox() {
-		// TODO Auto-generated method stub
 		List<GameObject> allObjects = new ArrayList<>();
 		
-		String[] keys = {"player","block","npc"};
+		String[] keys = {"Player","Block","NPC","Projectile"};
 		for (int x = 0; x < keys.length; x++) {
 			key = keys[x];
-			for (GameObject go: getSavedGameObjects()) {
+			for (GameObject go: getSavedGameObjects(key)) {
 				allObjects.add(go);
 			}
 		}
@@ -146,6 +143,6 @@ public class GameObjectManager implements LibraryObjectSaver, LibraryObservable 
 		
 		return new LibraryObjectInfoBox(currentObject, allObjects, this, defaultManager.getImage(imageName));
 	}
-	
+		
 	
 }

@@ -10,10 +10,10 @@ class AuthoringTest {
 
 	@Test
 	void testGameObjectCopy() {
-		AuthBehavior behave = new AuthBehavior("Moveable", new HashSet<Property>());
+		AuthBehavior behave = new AuthBehavior("Movable", new HashSet<Property>());
 		GameObject go = new GameObject(behave);
 		GameObject goCopy = new GameObject(go);
-		assertEquals("Moveable", goCopy.getBehavior("Moveable").getName());
+		assertEquals("Moveable", goCopy.getBehavior("Movable").getName());
 	}
 	
 	@Test

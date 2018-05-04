@@ -42,16 +42,16 @@ public class GameElement {
 	
 	/*
 	 * Adds the Behavior object containing the fields and methods that correspond to a specific behavior.
-	 * Checks if there already exists a behavior object for this behavior and throws an exception if the 
-	 * type of the one being added matches that of an existing behavior
+	 * Checks if there already exists a behavior object for this type. If there is, it removes it and adds 
+	 * the incoming one. Can be used to help subclasses replace super classes
 	 */
 	public void addBehavior(Behavior behave) {
 		List<Behavior> existing = behaviors.stream()
 				.filter(b -> b.getClass() == behave.getClass())
 				.collect(Collectors.toList());
 		if (existing.size() > 0) {
-//			behaviors.remove(existing.get(0));
-			throw new TooManyBehaviorsException("Trying to add " + behave.getClass() + " to a GameElement that already has this behavior");
+			behaviors.remove(existing.get(0));
+//			throw new TooManyBehaviorsException("Trying to add " + behave.getClass() + " to a GameElement that already has this behavior");
 		}
 		behaviors.add(behave);
 	}
@@ -207,15 +207,10 @@ public class GameElement {
 			if ((thisProperties.get(thisKey) instanceof GameObject)) {
 				continue;
 			}
-//			id (otherProperties.get)
-//			System.out.println("thisKey: " + thisKey + ", this object: " + thisProperties.get(thisKey) + ", other obejct: " + otherProperties.get(thisKey));
-//			System.out.println("otherKey: " + otherKey + ", " + thisProperties.get(thisKey));
 			if (!(otherProperties.get(thisKey).equals(thisProperties.get(thisKey)))) {
 				return false;
 			}
 		}
 		return true;
 	}
-
-	
 }

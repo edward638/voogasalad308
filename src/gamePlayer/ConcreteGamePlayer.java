@@ -6,7 +6,6 @@ import data.GameDescriptionProvider;
 import engine.Engine;
 import engine.EngineInterface;
 import gamePlayer.buttons.ChangeNameButton;
-//import engine.tests.ModelGameState2;
 import gamePlayer.buttons.ConcreteButtonData;
 import gamePlayer.buttons.LoadButton;
 import gamePlayer.buttons.LoadOnlineButton;
@@ -171,7 +170,6 @@ public class ConcreteGamePlayer implements GamePlayer {
 		PlayerUpdater concretePlayerUpdater = new ConcretePlayerUpdater(hud, highScores, username.getName());
 
 		engine = new Engine(gameName, isNewGame, concretePlayerUpdater);
-		// engine = new Engine("enginetestmario", isNewGame, concretePlayerUpdater);
 		updateEngines(engine);
 
 		pauseButton = new PauseButton(BUTTONXLOCATION, Integer.parseInt(resources.getString("pauseButtonY")),

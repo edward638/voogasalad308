@@ -58,6 +58,7 @@ public class NewGamePopup extends Popup {
 		{	
 			game = new Game(gameNameText.getText());
 			game.setGameDescription(gameDescriptionText.getText()); 
+			System.out.println(game.getGameDescription());
 			loadAuthorer.loadAuthoringEnvironment(game);
 			close();
 		});

@@ -107,6 +107,7 @@ public class AuthoringDisplay implements LoadAuthoringInterface {
 			try {
 				System.out.println(currentGame.getScenes());
 				saver.gameAuthorToXML(currentGame.getScenes(), true);
+				saver.addDescription(currentGame.getName(), currentGame.getGameDescription());
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
@@ -116,8 +117,8 @@ public class AuthoringDisplay implements LoadAuthoringInterface {
 		saveOnlineButton.setOnAction(e->{
 			GameSaver saver = new GameSaver(currentGame.getName());
 			try {
-				System.out.println(currentGame.getScenes());
 				saver.gameAuthorToXML(currentGame.getScenes(), true);
+				saver.addDescription(currentGame.getName(), currentGame.getGameDescription());
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}

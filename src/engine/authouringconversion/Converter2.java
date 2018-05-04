@@ -97,12 +97,13 @@ public class Converter2 {
 		for (GameObject go: scene.getMyObjects()) {
 			part.addGameElement(gameObject2GameElement(go));
 		}
+		part.addAudio(scene.getAudioName());
 		return part;
 	}
 	
 	public GameElement getBackgroundElement(GameScene scene) {
 		GameElement ge = new GameElement();
-		MandatoryBehavior mand = new MandatoryBehavior(ge, BG_IMAGE_NAME, scene.getBackgroundImageName(),0.0, 0.0);
+		MandatoryBehavior mand = new MandatoryBehavior(ge, BG_IMAGE_NAME, scene.getBackgroundImageName(), 0.0, 0.0);
 		ge.addBehavior(mand);
 		return ge;
 	}
@@ -115,6 +116,7 @@ public class Converter2 {
 				.filter(el -> !el.getIdentifier().equals(BG_IMAGE_NAME)).collect(Collectors.toList())) {
 			scene.addObject(gameElement2GameObject(element));
 		}
+		scene.setAudioName(part.getBackgroundAudio());
 		return scene;
 	}
 	

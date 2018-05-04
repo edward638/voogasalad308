@@ -29,7 +29,6 @@ public class SceneBackgroundImage {
 	
 	
 	public SceneBackgroundImage(Image image, SceneBackgroundImageSerializable serializable) {
-		
 		this.serializable = serializable; 
 		myImage = new ImageView(image);
 		myImage.setPreserveRatio(true);

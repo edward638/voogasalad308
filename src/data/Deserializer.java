@@ -1,23 +1,24 @@
 package data;
 
-import authoring.GameObject;
-import authoring.GameScene;
-import engine.GamePart;
-import authoring.GameSceneSerializable;
-import engine.GameState;
-
-import com.thoughtworks.xstream.XStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.StringWriter;
-import java.util.*;
+
+import com.thoughtworks.xstream.XStream;
+
+import authoring.GameObject;
+import authoring.GameSceneSerializable;
+import authoring.display.popups.ErrorBox;
+import engine.GamePart;
 
 /**
  * @author Edward Zhuang
@@ -95,7 +96,7 @@ public class Deserializer {
             return stw.toString();
         }
         catch (Exception e) {
-            e.printStackTrace();
+        	new ErrorBox("Error Deserializing", "XML file could not be deserialized");
         }
         return null;
     }

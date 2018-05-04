@@ -52,7 +52,6 @@ public class EventsPopupController extends PopupController {
 	}
 
 	protected void refreshView() {
-		// does nothing
 		responseWindow.createVBox();
 		behaviorsWindow.createVBox();
 		mfWindow.createVBox();

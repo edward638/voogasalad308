@@ -147,6 +147,7 @@ public class CollisionEvent extends ElementEvent {
 			CollisionEvent incomingCollision = (CollisionEvent) incomingEvent;
 			if (incomingCollision.containsElement(e1)) {
 				GameElement incomingOther = incomingCollision.getOtherElement(e1);
+				//System.out.println("In Collision Event matching: " + incomingEvent);
 				if (incomingOther.matchesType(e2)) {
 					String incomingOtherSide = incomingCollision.getSidesForElement(incomingOther).get(0);
 					String incomingThisSide = incomingCollision.getSidesForElement(e1).get(0);

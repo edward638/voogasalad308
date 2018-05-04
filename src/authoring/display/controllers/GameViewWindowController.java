@@ -100,7 +100,4 @@ public class GameViewWindowController extends Controller implements ViewRefreshI
 		gameScene.notifyMyObservers();
 	
 	}
-	
-	
-
 }

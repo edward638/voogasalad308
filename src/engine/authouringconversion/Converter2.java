@@ -57,18 +57,15 @@ public class Converter2 {
 		for (AuthBehavior authB: remainingBehaviors) {
 			ge.addBehavior(authBehavior2Behavior(authB, ge));
 		}
-		if (go.getName().contains("Link")) {
-//			printer.printGameObject(go);
-//			printer.printAuthBehavior(go.getBehavior("Shooter"));
-			System.out.println(go.getBehavior("Shooter").getProperty("toShoot").getValue());
-//			printer.printGameObject((GameObject)(go.getBehavior("Shooter").getProperty("toShoot").getValue()));
+		if (go.getName().contains("co")) {
+			printer.printGameObject(go);
 		}
 		for (AuthBehavior authB: go.getBehaviors()) {
 			setBehavior2AuthorValues(authB, ge);
 		}
 		addResponsesAuth2Engine(ge, go);	
-//		System.out.println(ge.getIdentifier());
-//		System.out.println(ge.getResponder().getResponses());
+		System.out.println(ge.getIdentifier());
+		System.out.println(ge.getResponder().getResponses());
 		return ge;
 	}
 	

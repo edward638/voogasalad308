@@ -9,10 +9,8 @@ import java.util.Set;
 
 import authoring.GameObject;
 import authoring.ObjectInfoObservable;
-import authoring.display.controllers.ObjectInfoPanelController;
-import authoring.display.popups.NewGameObjectPopup;
+import authoring.display.controllers.ObjectInfoController;
 import data.propertiesFiles.ResourceBundleManager;
-import javafx.collections.FXCollections;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
@@ -27,7 +25,7 @@ import javafx.stage.Stage;
 /**
  * 
  * @author Edward Zhuang
- *
+ * Front end component that shows list of all objects in the current GameScene
  */
 public class ObjectListPanel extends AuthoringUIComponent implements Observer {
 
@@ -38,11 +36,10 @@ public class ObjectListPanel extends AuthoringUIComponent implements Observer {
 	private ListView<GameObject> myLevelObjects;
 	private Button myDeleteObjectButton;
 	private Button undoActionButton;
-	private ObjectInfoPanelController controller;
+	private ObjectInfoController controller;
 	private ObjectInfoObservable observable = null;
 	
-	public ObjectListPanel(ObjectInfoPanelController controller) {
-		// TODO Auto-generated constructor stub
+	public ObjectListPanel(ObjectInfoController controller) {
 		this.controller = controller;
 	}
 	
@@ -52,55 +49,16 @@ public class ObjectListPanel extends AuthoringUIComponent implements Observer {
 		initializeFXComponents();
 		mapFXActions();
 		upperHBox.getChildren().addAll(myAddSceneBackgroundImageButton);
-		lowerHBox.getChildren().addAll(myDeleteObjectButton,undoActionButton);
+		lowerHBox.getChildren().addAll(myDeleteObjectButton, undoActionButton);
 		myVBox.getChildren().addAll(myLevelObjects, upperHBox, lowerHBox);
 		borderPane.setCenter(myVBox);
 	}
-	
-	private void initializeButtons() {
-		myAddSceneBackgroundImageButton = new Button(ResourceBundleManager.getAuthoring("AddSceneBackgroundImageButton"));
-		myDeleteObjectButton = new Button(ResourceBundleManager.getAuthoring("AddDeleteObjectButton"));
-		undoActionButton = new Button(ResourceBundleManager.getAuthoring("AddUndoActionButton"));
-	}
-	
-	private void initializeListViews() {
-		myLevelObjects = new ListView<>();
-		myLevelObjects.setMaxHeight(300);
-	}
-	
-	private void setActions() {
-//		myAddGameObjectButton.setOnAction(e -> {
-//			NewGameObjectPopupRefactored popupRefactored = new NewGameObjectPopupRefactored(controller);
-//		});
-		myAddSceneBackgroundImageButton.setOnAction(e -> {
-			try {
-				FileChooser fileChooser = new FileChooser();
-				fileChooser.setTitle("Choose Object Image");
-				fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
-				File image = fileChooser.showOpenDialog(new Stage());
 
-				controller.addBackgroundImage(new Image(image.toURI().toString()));
-//				System.out.println("setOnAction");
-				
-				//put image.getName into SceneBackground
-			} catch (Exception exception) {
-				//do nothing
-				//this just means the user didn't choose an image
-		
-			}//
-		});
-		myDeleteObjectButton.setOnAction(e -> {
-			int index = myLevelObjects.getSelectionModel().getSelectedIndex();
-			controller.deleteGameObject(index);
-		});
-		myLevelObjects.setOnMouseClicked(e->{
-			controller.setCurrentGameObject(myLevelObjects.getSelectionModel().getSelectedItem());
-		});
-		undoActionButton.setOnMouseClicked(e->{
-			controller.restorePreviousGameScene();
-		});
-	}
-
+	/**
+	 * Updates front end list of gameobjects. Usually called when GameScene is changed or object is added.
+	 * @param arg0 Observable
+	 * @param arg1 Object
+	 */
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		observable = (ObjectInfoObservable) arg0;
@@ -108,9 +66,7 @@ public class ObjectListPanel extends AuthoringUIComponent implements Observer {
 	}
 	
 	private void updateLevelObjects(List<GameObject> list) {
-		
 		Set<GameObject> set = new HashSet<>(list);
-		
 		myLevelObjects.getItems().clear();
 		myLevelObjects.getItems().addAll(set);
 		myLevelObjects.getSelectionModel().select(observable.getCurrentGameObject());
@@ -139,13 +95,10 @@ public class ObjectListPanel extends AuthoringUIComponent implements Observer {
 				fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
 				File image = fileChooser.showOpenDialog(new Stage());
 				controller.addBackgroundImage(new Image(image.toURI().toString()));
-				
-				//put image.getName into SceneBackground
 			} catch (Exception exception) {
 				//do nothing
 				//this just means the user didn't choose an image
-		
-			}//
+			}
 		});
 		myDeleteObjectButton.setOnAction(e -> {
 			int index = myLevelObjects.getSelectionModel().getSelectedIndex();

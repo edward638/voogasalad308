@@ -17,16 +17,19 @@ import javafx.scene.layout.Pane;
 /**
  * 
  * @author Edward Zhuang
- *
+ * Controller class for ObjectInfoPanel and ObjectListPanel. Connects these objects to the current GameScene.
  */
-public class ObjectInfoPanelController extends Controller implements ObjectInfoSaver {
+public class ObjectInfoController extends Controller implements ObjectInfoSaver {
 
-	GameScene gameScene;
-	ObjectInfoPanel objectInfoPanelRefactored;
-	ObjectListPanel objectListPanelRefactored;
+	private static final String OBJECTINFO_X = "OBJECTINFO_X";
+	private static final String OBJECTINFO_Y = "OBJECTINFO_Y";
+	private static final String OBJECTLIST_X = "OBJECTLIST_X";
+	private static final String OBJECTLIST_Y = "OBJECTLIST_Y";
+	private GameScene gameScene;
+	private ObjectInfoPanel objectInfoPanelRefactored;
+	private ObjectListPanel objectListPanelRefactored;
 	
-	public ObjectInfoPanelController(GameScene gameScene, ImageManager imageManager) {
-		// TODO Auto-generated constructor stub
+	ObjectInfoController(GameScene gameScene, ImageManager imageManager) {
 		super(imageManager);
 		this.gameScene = gameScene;
 	}
@@ -56,10 +59,10 @@ public class ObjectInfoPanelController extends Controller implements ObjectInfoS
 
 	@Override
 	protected void addToGUI(Pane pane) {
-		int infoX = ResourceBundleManager.getPosition("OBJECTINFO_X");
-		int infoY = ResourceBundleManager.getPosition("OBJECTINFO_Y");
-		int listX = ResourceBundleManager.getPosition("OBJECTLIST_X");
-		int listY = ResourceBundleManager.getPosition("OBJECTLIST_Y");
+		int infoX = ResourceBundleManager.getPosition(OBJECTINFO_X);
+		int infoY = ResourceBundleManager.getPosition(OBJECTINFO_Y);
+		int listX = ResourceBundleManager.getPosition(OBJECTLIST_X);
+		int listY = ResourceBundleManager.getPosition(OBJECTLIST_Y);
 		objectInfoPanelRefactored.attachToPane(pane, infoX, infoY);
 		objectListPanelRefactored.attachToPane(pane, listX, listY);
 	}
@@ -101,8 +104,7 @@ public class ObjectInfoPanelController extends Controller implements ObjectInfoS
 	}
 	
 	public boolean checkUniqueName(String nameText) {
-		boolean isUniqueName = gameScene.checkUniqueObjectNames(nameText);
-		return isUniqueName;
+		return gameScene.checkUniqueObjectNames(nameText);
 	}
 	
 	@Override
@@ -119,7 +121,6 @@ public class ObjectInfoPanelController extends Controller implements ObjectInfoS
 
 	@Override
 	public void setImage(Image image, String imageName) {
-		// TODO Auto-generated method stub
 		getImageManager().storeImage(imageName, image);
 	}
 

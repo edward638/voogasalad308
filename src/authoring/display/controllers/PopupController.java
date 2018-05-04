@@ -1,6 +1,5 @@
 package authoring.display.controllers;
 
-
 /**
  * 
  * @author Edward Zhuang

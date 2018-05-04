@@ -10,6 +10,7 @@ import java.util.Set;
 public class GameSceneSerializable implements GameSceneSerializableCreator {
 	
 	private String myName;
+	private String levelId;
 	private List<SceneBackgroundImageSerializable> backgroundImageSerializables;
 	private List<GameObject> myObjects;
 	private Set<String> myObjectNames;
@@ -20,6 +21,7 @@ public class GameSceneSerializable implements GameSceneSerializableCreator {
 	public GameSceneSerializable(GameSceneSerializableCreator scene) {
 		myName = scene.getName();
 		myObjects = scene.getMyObjects();
+		levelId = scene.getId();
 		backgroundImageSerializables = scene.getBackgroundImageSerializables();
 		currentGameObject = scene.getCurrentGameObject();
 		myObjectNames = scene.getMyObjectNames();
@@ -53,6 +55,12 @@ public class GameSceneSerializable implements GameSceneSerializableCreator {
 
 	public String getAudioName() {
 		return audioName;
+	}
+
+	@Override
+	public String getId() {
+		// TODO Auto-generated method stub
+		return levelId;
 	}
 	
 	

@@ -45,6 +45,7 @@ public class DisplayState {
 	 * @param element GameElement object to be added.
 	 */
 	private void addElementToDisplay(GameElement element) {
+		System.out.println(element);
 		ImageElement imageElement = new ImageElement(element, imageManager);
 		imageElements.add(imageElement);
 		subSceneRoot.getChildren().add(imageElement);

@@ -57,15 +57,22 @@ public class Converter2 {
 		for (AuthBehavior authB: remainingBehaviors) {
 			ge.addBehavior(authBehavior2Behavior(authB, ge));
 		}
+<<<<<<< HEAD
 		if (go.getName().contains("co")) {
 			printer.printGameObject(go);
 		}
+=======
+
+>>>>>>> trishul_2
 		for (AuthBehavior authB: go.getBehaviors()) {
 			setBehavior2AuthorValues(authB, ge);
 		}
 		addResponsesAuth2Engine(ge, go);	
+<<<<<<< HEAD
 		System.out.println(ge.getIdentifier());
 		System.out.println(ge.getResponder().getResponses());
+=======
+>>>>>>> trishul_2
 		return ge;
 	}
 	
@@ -89,7 +96,7 @@ public class Converter2 {
 	
 
 	public GamePart gameScene2GamePart(GameScene scene) {
-		GamePart part = new GamePart(scene.getName(), "0");
+		GamePart part = new GamePart(scene.getName(), scene.getId());
 		part.addGameElement(getBackgroundElement(scene));
 		for (GameObject go: scene.getMyObjects()) {
 			part.addGameElement(gameObject2GameElement(go));
@@ -100,7 +107,11 @@ public class Converter2 {
 	
 	public GameElement getBackgroundElement(GameScene scene) {
 		GameElement ge = new GameElement();
+<<<<<<< HEAD
 		System.out.println("Converter2   " + scene.getBackgroundImageName());
+=======
+		scene.setBackgroundImageName();
+>>>>>>> trishul_2
 		MandatoryBehavior mand = new MandatoryBehavior(ge, BG_IMAGE_NAME, scene.getBackgroundImageName(), 0.0, 0.0);
 		ge.addBehavior(mand);
 		return ge;
@@ -108,7 +119,7 @@ public class Converter2 {
 	
 	
 	public GameScene gamePart2GameScene(GamePart part) {
-		GameScene scene = new GameScene(part.getGamePartID(), part.getMyLevelID());
+		GameScene scene = new GameScene(part.getGamePartID(), "0");
 		scene.setBackgroundImageName();
 		for (GameElement element: part.getElements().stream()
 				.filter(el -> !el.getIdentifier().equals(BG_IMAGE_NAME)).collect(Collectors.toList())) {

@@ -51,15 +51,19 @@ public class Converter2 {
 		GameElement ge = new GameElement();
 		ge.addBehavior(authBehavior2Behavior(go.getBehavior(MandatoryBehavior.class.getCanonicalName()), ge));
 		setBehavior2AuthorValues(go.getBehavior(MandatoryBehavior.class.getCanonicalName()), ge);
+		
 		List<AuthBehavior> remainingBehaviors = go.getBehaviors().stream()
 				.filter(b -> !(b.getName().contains("Mandatory")))
 				.collect(Collectors.toList());
+		
 		for (AuthBehavior authB: remainingBehaviors) {
 			ge.addBehavior(authBehavior2Behavior(authB, ge));
 		}
-		if (go.getName().contains("co")) {
+		
+		if (go.getName().contains("lakitu")) {
 			printer.printGameObject(go);
 		}
+
 		for (AuthBehavior authB: go.getBehaviors()) {
 			setBehavior2AuthorValues(authB, ge);
 		}
@@ -89,18 +93,22 @@ public class Converter2 {
 	
 
 	public GamePart gameScene2GamePart(GameScene scene) {
-		GamePart part = new GamePart(scene.getName(), "0");
+		GamePart part = new GamePart(scene.getName(), scene.getId());
 		part.addGameElement(getBackgroundElement(scene));
 		for (GameObject go: scene.getMyObjects()) {
 			System.out.println(go.getName());
 			part.addGameElement(gameObject2GameElement(go));
 		}
 		part.addAudio(scene.getAudioName());
+		printer.printPart(part);
+//		throw new RuntimeException();
 		return part;
 	}
 	
 	public GameElement getBackgroundElement(GameScene scene) {
 		GameElement ge = new GameElement();
+		scene.setBackgroundImageName();
+		System.out.println("Converter2   " + scene.getBackgroundImageName());
 		MandatoryBehavior mand = new MandatoryBehavior(ge, BG_IMAGE_NAME, scene.getBackgroundImageName(), 0.0, 0.0);
 		ge.addBehavior(mand);
 		return ge;
@@ -108,7 +116,7 @@ public class Converter2 {
 	
 	
 	public GameScene gamePart2GameScene(GamePart part) {
-		GameScene scene = new GameScene(part.getGamePartID(), part.getMyLevelID());
+		GameScene scene = new GameScene(part.getGamePartID(), "0");
 		scene.setBackgroundImageName();
 		for (GameElement element: part.getElements().stream()
 				.filter(el -> !el.getIdentifier().equals(BG_IMAGE_NAME)).collect(Collectors.toList())) {

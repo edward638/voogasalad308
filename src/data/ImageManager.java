@@ -41,6 +41,7 @@ public class ImageManager {
     private BufferedImage getBufferedImage(String imageName, String location) {
         BufferedImage img;
         try {
+        		System.out.println("help " + location + " " + imageName);
             img = ImageIO.read(new File(location + imageName));
             return img;
         } catch (IOException e) {
@@ -60,8 +61,8 @@ public class ImageManager {
     	} catch (NullPointerException e) {
     		ImageManager defaultIM = new ImageManager("default");
     		return defaultIM.getImage(imageName);
-    		/*System.out.println(imageName);
-    		throw new NullPointerException();*/
+//    		/*System.out.println(imageName);
+//    		throw new NullPointerException();*/
     	}
     }
 

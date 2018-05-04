@@ -1,0 +1,3965 @@
+<authoring.GameSceneSerializable>
+  <myName>Scene 1</myName>
+  <backgroundImageSerializables>
+    <authoring.SceneBackgroundImageSerializable>
+      <xPos>0.0</xPos>
+      <yPos>0.0</yPos>
+      <xSize>2048.0</xSize>
+      <ySize>1310.719970703125</ySize>
+      <imagePath>background0.png</imagePath>
+    </authoring.SceneBackgroundImageSerializable>
+  </backgroundImageSerializables>
+  <myObjects>
+    <authoring.GameObject>
+      <myName>long_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties/>
+          <myName>engine.behaviors.BlockLike</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="string">long_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">rectangle</myValue>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">2400.0</myValue>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">long_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1210.0</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">2400.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">-2.6666653156280518</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+      </myBehaviors>
+      <myEvents/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>medium_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">600.0</myValue>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">175.99998474121094</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">medium_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">medium_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">600.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1268.66650390625</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">rectangle</myValue>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior>
+          <myProperties/>
+          <myName>engine.behaviors.BlockLike</myName>
+        </authoring.AuthBehavior>
+      </myBehaviors>
+      <myEvents/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>medium_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1269.9998779296875</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">600.0</myValue>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">rectangle</myValue>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">medium_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">600.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">medium_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">235.99998474121094</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[2]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[2]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>medium_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">600.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1267.9998779296875</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">medium_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">236.66664123535156</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">600.0</myValue>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">rectangle</myValue>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">medium_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[2]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[2]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>medium_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="string">rectangle</myValue>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">237.33331298828125</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">medium_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1266.66650390625</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">medium_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">600.0</myValue>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">600.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[2]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[2]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>poopy</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="string">poopyimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1014.6666870117188</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">poopy</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">125.0</myValue>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">ellipse</myValue>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">97.99993896484375</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">43.0</myValue>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">43.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">125.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">0.0</myValue>
+              <myName>xVel</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">0.0</myValue>
+              <myName>yVel</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">40.0</myValue>
+              <myName>rightSpeed</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">40.0</myValue>
+              <myName>leftSpeed</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">100.0</myValue>
+              <myName>jumpSpeed</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MovableCharacter</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="int">3</myValue>
+              <myName>gamelives</myName>
+              <myValueType>java.lang.Integer</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="boolean">true</myValue>
+              <myName>yscroll</myName>
+              <myValueType>java.lang.Boolean</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="boolean">true</myValue>
+              <myName>xscroll</myName>
+              <myValueType>java.lang.Boolean</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MainCharacter</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myName>gravityForce</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.Gravity</myName>
+        </authoring.AuthBehavior>
+      </myBehaviors>
+      <myEvents>
+        <authoring.Event>
+          <myResponses>
+            <engine.actions.GroovyAction>
+              <content>poopy.getBehavior(&apos;MovableCharacter&apos;).setXVelocity(-60)</content>
+              <actionName>Hit!</actionName>
+            </engine.actions.GroovyAction>
+          </myResponses>
+          <eventType>CollisionEvent</eventType>
+          <myTrigger>trash_projectile</myTrigger>
+        </authoring.Event>
+        <authoring.Event>
+          <myResponses>
+            <engine.actions.GroovyAction>
+              <content>poopy.getBehavior(&apos;MovableCharacter&apos;).setYVelocity(-80)</content>
+              <actionName></actionName>
+            </engine.actions.GroovyAction>
+          </myResponses>
+          <eventType>KeyInputEvent</eventType>
+          <myTrigger>w</myTrigger>
+        </authoring.Event>
+        <authoring.Event>
+          <myResponses>
+            <engine.actions.GroovyAction>
+              <content>poopy.getBehavior(&apos;MovableCharacter&apos;).moveLeft()</content>
+              <actionName>Left</actionName>
+            </engine.actions.GroovyAction>
+          </myResponses>
+          <eventType>KeyInputEvent</eventType>
+          <myTrigger>a</myTrigger>
+        </authoring.Event>
+        <authoring.Event>
+          <myResponses>
+            <engine.actions.GroovyAction>
+              <content>poopy.getBehavior(&apos;MovableCharacter&apos;).moveRight()</content>
+              <actionName></actionName>
+            </engine.actions.GroovyAction>
+          </myResponses>
+          <eventType>KeyInputEvent</eventType>
+          <myTrigger>d</myTrigger>
+        </authoring.Event>
+        <authoring.Event>
+          <myResponses>
+            <engine.actions.GroovyAction>
+              <content>poopy.getBehavior(&apos;MovableCharacter&apos;).setYVelocity(-80)</content>
+              <actionName>Pop off!</actionName>
+            </engine.actions.GroovyAction>
+          </myResponses>
+          <eventType>CollisionEvent</eventType>
+          <myTrigger>trash</myTrigger>
+        </authoring.Event>
+      </myEvents>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>vert_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">792.0</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">-1.3333321809768677</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">120.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior>
+          <myProperties/>
+          <myName>engine.behaviors.BlockLike</myName>
+        </authoring.AuthBehavior>
+      </myBehaviors>
+      <myEvents/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>vert_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">-1.3333321809768677</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">673.3333129882812</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">120.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[7]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[7]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>vert_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">-1.3333321809768677</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">120.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">554.0</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[7]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[7]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>vert_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">120.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">-0.6666654944419861</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">434.0</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[7]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[7]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>vert_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">120.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">-0.6666654944419861</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">314.6666564941406</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[7]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[7]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>vert_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">-0.6666654944419861</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">194.66665649414062</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">120.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[7]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[7]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>vert_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="string">vert_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">75.33332061767578</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">120.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">-0.6666654944419861</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[7]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[7]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>vert_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="string">vert_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">-0.6666654944419861</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">120.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">-44.66667938232422</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[7]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[7]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>long_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">long_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">-74.0</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">47.33334732055664</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">long_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">2400.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+      </myBehaviors>
+      <myEvents/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>vert_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">120.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">910.6666870117188</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">-1.3333321809768677</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[7]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[7]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>vert_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="string">vert_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">120.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1030.0</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">-1.3333321809768677</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[7]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[7]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>vert_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="string">vert_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">120.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1980.0</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1030.6666259765625</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[7]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[7]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>vert_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1980.0</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">120.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">911.3333129882812</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[7]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[7]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>vert_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">792.0</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">120.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1980.0</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[7]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[7]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>vert_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1980.0</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">120.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">672.0</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[7]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[7]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>vert_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">552.0</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">120.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1980.0</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[7]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[7]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>vert_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">1980.0</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">120.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">432.6666564941406</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[7]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[7]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>vert_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1980.0</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">120.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">313.33331298828125</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[7]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[7]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>vert_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1980.0</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">120.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">193.99998474121094</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[7]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[7]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>vert_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">1980.0</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vert_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">75.99998474121094</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">120.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[7]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[7]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>medium_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">600.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">medium_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">600.0</myValue>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">medium_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1269.333251953125</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">rectangle</myValue>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">659.3333129882812</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[2]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[2]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>vlong_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties/>
+          <myName>engine.behaviors.BlockLike</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">-42.66666793823242</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vlong_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vlong_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">2400.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">59.33332824707031</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+      </myBehaviors>
+      <myEvents/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>vlong_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[28]/myBehaviors/authoring.AuthBehavior"/>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">-3.3333382606506348</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1270.0</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vlong_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">2400.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">vlong_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[28]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>long_boi2</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties/>
+          <myName>engine.behaviors.BlockLike</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="string">long_boi2image</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">2400.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">long_boi2</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string"></myValue>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1210.6666259765625</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">-4.000010013580322</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">2400.0</myValue>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+      </myBehaviors>
+      <myEvents/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>single_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="string">single_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">56.666664123535156</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1150.0</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior>
+          <myProperties/>
+          <myName>engine.behaviors.BlockLike</myName>
+        </authoring.AuthBehavior>
+      </myBehaviors>
+      <myEvents/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>single_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[31]/myBehaviors/authoring.AuthBehavior[2]"/>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="string">single_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">-3.3333332538604736</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1150.666748046875</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[31]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>single_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[31]/myBehaviors/authoring.AuthBehavior[2]"/>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="string">single_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1150.0</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">116.66667175292969</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[31]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>single_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[31]/myBehaviors/authoring.AuthBehavior[2]"/>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">236.00001525878906</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1150.0</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[31]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>single_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[31]/myBehaviors/authoring.AuthBehavior[2]"/>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">176.6666717529297</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1150.0</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[31]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>trash</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="string">trashimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">837.9999389648438</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">50.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">80.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">297.9999694824219</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">trash</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">0.0</myValue>
+              <myName>damagePower</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.BulletLike</myName>
+        </authoring.AuthBehavior>
+      </myBehaviors>
+      <myEvents>
+        <authoring.Event>
+          <myResponses/>
+          <eventType>CollisionEvent</eventType>
+          <myTrigger>poopy</myTrigger>
+        </authoring.Event>
+      </myEvents>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>single_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[31]/myBehaviors/authoring.AuthBehavior[2]"/>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">182.00001525878906</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">916.6666870117188</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[31]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>single_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">243.33334350585938</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">917.3333740234375</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[31]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[31]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>single_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[31]/myBehaviors/authoring.AuthBehavior[2]"/>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">916.6666870117188</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">303.3333435058594</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[31]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>single_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1150.0</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">296.0</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[31]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[31]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>single_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">363.3333435058594</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">916.6666870117188</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[31]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[31]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>single_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="string">single_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">423.3333435058594</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">916.6666870117188</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[31]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[31]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>single_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[31]/myBehaviors/authoring.AuthBehavior[2]"/>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">916.6666870117188</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">483.3333435058594</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[31]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>single_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">684.6666870117188</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">809.3333740234375</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[31]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[31]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>single_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">809.3333740234375</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">744.6666870117188</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[31]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[31]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>single_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">808.666748046875</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">804.6666870117188</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[31]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[31]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>trash</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">50.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">729.9999389648438</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">trashimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">770.6666259765625</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">80.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">trash</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[36]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[36]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>trash</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[36]/myBehaviors/authoring.AuthBehavior[2]"/>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1070.6666259765625</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">80.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">288.6666259765625</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">trash</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">50.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">trashimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[36]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>single_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1036.0</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">679.3333740234375</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[31]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[31]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>single_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[31]/myBehaviors/authoring.AuthBehavior[2]"/>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="string">single_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1096.0</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">679.3333740234375</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[31]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>single_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[31]/myBehaviors/authoring.AuthBehavior[2]"/>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1155.3333740234375</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">679.3333740234375</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[31]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>single_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[31]/myBehaviors/authoring.AuthBehavior[2]"/>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="string">single_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">679.3333740234375</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1214.666748046875</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[31]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>single_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">679.3333740234375</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1274.666748046875</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[31]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[31]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>single_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">679.3333740234375</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1334.666748046875</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[31]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[31]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>single_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">679.3333740234375</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1394.666748046875</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[31]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[31]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>single_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">679.3333740234375</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1454.0001220703125</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[31]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[31]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>single_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">1514.0001220703125</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">679.3333740234375</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[31]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[31]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>single_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[31]/myBehaviors/authoring.AuthBehavior[2]"/>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">679.3333740234375</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1574.0001220703125</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[31]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>trash_man</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="string">trash_man</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1542.6666259765625</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">80.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">558.6666870117188</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">120.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">trash_manimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">20.0</myValue>
+              <myName>rightSpeed</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">0.0</myValue>
+              <myName>yVel</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">100.0</myValue>
+              <myName>jumpSpeed</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">0.0</myValue>
+              <myName>xVel</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">20.0</myValue>
+              <myName>leftSpeed</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MovableCharacter</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myName>gravityForce</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.Gravity</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="authoring.GameObject">
+                <myName>trash_projectile</myName>
+                <myBehaviors>
+                  <authoring.AuthBehavior>
+                    <myProperties>
+                      <authoring.Property>
+                        <myValue class="string">trash_projectileimage</myValue>
+                        <myName>imagePath</myName>
+                        <myValueType>java.lang.String</myValueType>
+                      </authoring.Property>
+                      <authoring.Property>
+                        <myValue class="string">trash_projectile</myValue>
+                        <myName>elementName</myName>
+                        <myValueType>java.lang.String</myValueType>
+                      </authoring.Property>
+                      <authoring.Property>
+                        <myValue class="double">30.0</myValue>
+                        <myName>hitBoxWidth</myName>
+                        <myValueType>java.lang.Double</myValueType>
+                      </authoring.Property>
+                      <authoring.Property>
+                        <myValue class="double">30.0</myValue>
+                        <myName>displayWidth</myName>
+                        <myValueType>java.lang.Double</myValueType>
+                      </authoring.Property>
+                      <authoring.Property>
+                        <myValue class="double">0.0</myValue>
+                        <myName>xPos</myName>
+                        <myValueType>java.lang.Double</myValueType>
+                      </authoring.Property>
+                      <authoring.Property>
+                        <myValue class="double">50.0</myValue>
+                        <myName>hitBoxHeight</myName>
+                        <myValueType>java.lang.Double</myValueType>
+                      </authoring.Property>
+                      <authoring.Property>
+                        <myValue class="double">0.0</myValue>
+                        <myName>yPos</myName>
+                        <myValueType>java.lang.Double</myValueType>
+                      </authoring.Property>
+                      <authoring.Property>
+                        <myName>shapeType</myName>
+                        <myValueType>java.lang.String</myValueType>
+                      </authoring.Property>
+                      <authoring.Property>
+                        <myValue class="double">50.0</myValue>
+                        <myName>displayHeight</myName>
+                        <myValueType>java.lang.Double</myValueType>
+                      </authoring.Property>
+                    </myProperties>
+                    <myName>engine.behaviors.MandatoryBehavior</myName>
+                  </authoring.AuthBehavior>
+                  <authoring.AuthBehavior>
+                    <myProperties>
+                      <authoring.Property>
+                        <myValue class="double">-50.0</myValue>
+                        <myName>xVel</myName>
+                        <myValueType>java.lang.Double</myValueType>
+                      </authoring.Property>
+                      <authoring.Property>
+                        <myValue class="double">0.0</myValue>
+                        <myName>yVel</myName>
+                        <myValueType>java.lang.Double</myValueType>
+                      </authoring.Property>
+                    </myProperties>
+                    <myName>engine.behaviors.Movable</myName>
+                  </authoring.AuthBehavior>
+                </myBehaviors>
+                <myEvents/>
+                <myBehaviorFactory/>
+              </myValue>
+              <myName>toShoot</myName>
+              <myValueType>authoring.GameObject</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">-10.0</myValue>
+              <myName>distAway</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">30.0</myValue>
+              <myName>defaultVelocity</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.Shooter</myName>
+        </authoring.AuthBehavior>
+      </myBehaviors>
+      <myEvents>
+        <authoring.Event>
+          <myResponses>
+            <engine.actions.GroovyAction>
+              <content>trash_man.getBehavior(&apos;Shooter&apos;).shootLeft()</content>
+              <actionName>Shoot trash</actionName>
+            </engine.actions.GroovyAction>
+          </myResponses>
+          <eventType>KeyInputEvent</eventType>
+          <myTrigger>o</myTrigger>
+        </authoring.Event>
+        <authoring.Event>
+          <myResponses>
+            <engine.actions.GroovyAction>
+              <content>trash_man.getBehavior(&apos;MovableCharacter&apos;).setYVelocity(-80)</content>
+              <actionName>TrashMan Jump</actionName>
+            </engine.actions.GroovyAction>
+          </myResponses>
+          <eventType>KeyInputEvent</eventType>
+          <myTrigger>p</myTrigger>
+        </authoring.Event>
+      </myEvents>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>trash_projectile</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">0.0</myValue>
+              <myName>damagePower</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.BulletLike</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">-10.0</myValue>
+              <myName>xVel</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">0.0</myValue>
+              <myName>yVel</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.Movable</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">1.0</myValue>
+              <myName>default_health</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">0.2</myValue>
+              <myName>decayRate</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1.0</myValue>
+              <myName>health</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.Killable</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">30.0</myValue>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1941.3333740234375</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">50.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">trash_projectile</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">1149.3333740234375</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">trash_projectileimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">30.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">rectangle</myValue>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">50.0</myValue>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+      </myBehaviors>
+      <myEvents>
+        <authoring.Event>
+          <myResponses>
+            <engine.actions.GroovyAction>
+              <content>trash_projectile.getBehavior(&apos;Killable&apos;).reduceHealth(2)</content>
+              <actionName>reduce health!</actionName>
+            </engine.actions.GroovyAction>
+          </myResponses>
+          <eventType>CollisionEvent</eventType>
+          <myTrigger>poopy</myTrigger>
+        </authoring.Event>
+      </myEvents>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>single_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">502.0000305175781</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">856.6666870117188</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[31]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[31]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>single_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">502.0000305175781</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">796.6666870117188</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[31]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[31]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>single_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">501.3333740234375</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">736.6666870117188</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[31]/myBehaviors/authoring.AuthBehavior[2]"/>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[31]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>single_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[31]/myBehaviors/authoring.AuthBehavior[2]"/>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">501.3333740234375</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">676.6666870117188</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[31]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+    <authoring.GameObject>
+      <myName>single_truss</myName>
+      <myBehaviors>
+        <authoring.AuthBehavior reference="../../../authoring.GameObject[31]/myBehaviors/authoring.AuthBehavior[2]"/>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="double">500.6667175292969</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_truss</myValue>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">60.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">single_trussimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">616.6666870117188</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
+      </myBehaviors>
+      <myEvents reference="../../authoring.GameObject[31]/myEvents"/>
+      <myBehaviorFactory/>
+    </authoring.GameObject>
+  </myObjects>
+  <myObjectNames class="sorted-set"/>
+  <currentGameObject reference="../myObjects/authoring.GameObject[65]"/>
+  <backgroundImageName>Scene1backgroundimage</backgroundImageName>
+  <audioName>City.mp3</audioName>
+</authoring.GameSceneSerializable>

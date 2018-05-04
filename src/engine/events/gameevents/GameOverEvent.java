@@ -9,7 +9,6 @@ public class GameOverEvent extends GameEvent{
 	
 	public GameOverEvent(GameElement gameElement) {
 		
-		//System.out.println("Remove Event created");
 	}
 
 	@Override

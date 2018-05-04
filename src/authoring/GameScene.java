@@ -39,6 +39,7 @@ public class GameScene extends Observable implements AudioObservable, GameViewOb
 		myObjectNames = scene.getMyObjectNames();
 		backgroundImageName = scene.getBackgroundImageName();
 		audioName = scene.getAudioName();
+		levelId = scene.getId();
 	}
 	
 	/**
@@ -114,6 +115,7 @@ public class GameScene extends Observable implements AudioObservable, GameViewOb
 	 * @param id sets the scene ID
 	 */
 	public void setId(String id) {
+		System.out.println("setId: ");
 		levelId = id;
 	}
 	

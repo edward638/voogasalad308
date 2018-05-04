@@ -57,18 +57,11 @@ public class Converter2 {
 		for (AuthBehavior authB: remainingBehaviors) {
 			ge.addBehavior(authBehavior2Behavior(authB, ge));
 		}
-		if (go.getName().contains("Link")) {
-//			printer.printGameObject(go);
-//			printer.printAuthBehavior(go.getBehavior("Shooter"));
-			System.out.println(go.getBehavior("Shooter").getProperty("toShoot").getValue());
-//			printer.printGameObject((GameObject)(go.getBehavior("Shooter").getProperty("toShoot").getValue()));
-		}
+
 		for (AuthBehavior authB: go.getBehaviors()) {
 			setBehavior2AuthorValues(authB, ge);
 		}
 		addResponsesAuth2Engine(ge, go);	
-//		System.out.println(ge.getIdentifier());
-//		System.out.println(ge.getResponder().getResponses());
 		return ge;
 	}
 	
@@ -92,7 +85,7 @@ public class Converter2 {
 	
 
 	public GamePart gameScene2GamePart(GameScene scene) {
-		GamePart part = new GamePart(scene.getName(), "0");
+		GamePart part = new GamePart(scene.getName(), scene.getId());
 		part.addGameElement(getBackgroundElement(scene));
 		for (GameObject go: scene.getMyObjects()) {
 			part.addGameElement(gameObject2GameElement(go));
@@ -103,6 +96,7 @@ public class Converter2 {
 	
 	public GameElement getBackgroundElement(GameScene scene) {
 		GameElement ge = new GameElement();
+		scene.setBackgroundImageName();
 		MandatoryBehavior mand = new MandatoryBehavior(ge, BG_IMAGE_NAME, scene.getBackgroundImageName(), 0.0, 0.0);
 		ge.addBehavior(mand);
 		return ge;
@@ -110,7 +104,7 @@ public class Converter2 {
 	
 	
 	public GameScene gamePart2GameScene(GamePart part) {
-		GameScene scene = new GameScene(part.getGamePartID(), part.getMyLevelID());
+		GameScene scene = new GameScene(part.getGamePartID(), "0");
 		scene.setBackgroundImageName();
 		for (GameElement element: part.getElements().stream()
 				.filter(el -> !el.getIdentifier().equals(BG_IMAGE_NAME)).collect(Collectors.toList())) {

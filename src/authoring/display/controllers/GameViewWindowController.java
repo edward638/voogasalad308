@@ -15,22 +15,22 @@ import javafx.scene.layout.Pane;
 /**
  * 
  * @author Edward Zhuang
- *
+ * Controller class for GameViewWindow. Allows GameViewWindow to connect with the current GameScene.
  */
 public class GameViewWindowController extends Controller implements ViewRefreshInterface {
-	
+
+	private static final String GAMEVIEWWINDOW_X = "GAMEVIEWWINDOW_X";
+	private static final String GAMEVIEWWINDOW_Y = "GAMEVIEWWINDOW_Y";
 	private GameScene gameScene;
 	private GameViewWindow gameViewWindowRefactored;
 	
 	public GameViewWindowController(GameScene gameScene, ImageManager imageManager) {
-		// TODO Auto-generated constructor stub
 		super(imageManager);
 		this.gameScene = gameScene;
 	}
 
 	@Override
 	protected void initializeScreenComponents() {
-		// TODO Auto-generated method stub
 		gameViewWindowRefactored = new GameViewWindow(this);
 	}
 
@@ -41,17 +41,25 @@ public class GameViewWindowController extends Controller implements ViewRefreshI
 
 	@Override
 	protected void addToGUI(Pane pane) {
-		// TODO Auto-generated method stub 
-		int x = ResourceBundleManager.getPosition("GAMEVIEWWINDOW_X");
-		int y = ResourceBundleManager.getPosition("GAMEVIEWWINDOW_Y");
+		int x = ResourceBundleManager.getPosition(GAMEVIEWWINDOW_X);
+		int y = ResourceBundleManager.getPosition(GAMEVIEWWINDOW_Y);
 		gameViewWindowRefactored.attachToPane(pane, x, y);
 	}
-	
+
+	/**
+	 * Stores compositeBackgroundImage into game files through ImageManager and updates GameScene's background image path
+	 * @param ri RenderedImage
+	 */
 	public void storeBackgroundImage(RenderedImage ri) {
 		getImageManager().storeCompositeBackgroundImage(gameScene.getName().replaceAll("\\s", "")+"backgroundimage.png", ri);
 		gameScene.setBackgroundImageName();
 	}
 
+	/**
+	 * Gets a SceneBackgroundImage from a serializable form.
+	 * @param s SceneBackgroundImageSerializable
+	 * @return SceneBackgroundImage
+	 */
 	public SceneBackgroundImage getBackgroundImage(SceneBackgroundImageSerializable s) {
 		return new SceneBackgroundImage(getImageManager().getBackgroundImage(s.getImagePath()), s);
 	}
@@ -59,7 +67,11 @@ public class GameViewWindowController extends Controller implements ViewRefreshI
 	@Override
 	protected void refreshView() {
 	}
-	
+
+	/**
+	 * sets up observer/observable interactions between new GameScene. Used when the current GameScene switches.
+	 * @param gameScene new gameScene
+	 */
 	public void setGameScene(GameScene gameScene) {
 		this.gameScene = gameScene;
 		setUpConnections();
@@ -73,7 +85,6 @@ public class GameViewWindowController extends Controller implements ViewRefreshI
 	
 	@Override
 	public void notifyObjectInfoObservers(GameObject gameObject) {
-		// TODO Auto-generated method stub
 		gameScene.setCurrentGameObject(gameObject);
 		gameScene.notifyMyObservers();
 	

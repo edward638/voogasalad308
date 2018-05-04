@@ -24,6 +24,8 @@ public class KeyBinding {
 	private KeyInputDictionary keyMap;
 	private Label keyText;
 	private Label repeatedKeyText;
+	private static final String errorMessage = "KEY ALREADY BOUND";
+	private static final Color errorColor = Color.RED;
 
 	public KeyBinding(KeyCode keyCode, String theAction, KeyInputDictionary keyMap, Pane popUp) {
 		defaultKeyCode = keyCode;
@@ -45,15 +47,15 @@ public class KeyBinding {
 		flashTransition.setToValue(1);
 		flashTransition.setCycleCount(2);
 		flashTransition.setAutoReverse(true);
-		
+
 	}
 
 	private void setupRepeatKeyText() {
-		repeatedKeyText = new Label("KEY ALREADY BOUND");
+		repeatedKeyText = new Label(errorMessage);
 		repeatedKeyText.setLayoutX(110);
 		repeatedKeyText.setLayoutY(275);
 		repeatedKeyText.setStyle("-fx-font: 18 Euphemia;");
-		repeatedKeyText.setTextFill(Color.RED);
+		repeatedKeyText.setTextFill(errorColor);
 		repeatedKeyText.setOpacity(0);
 		popUp.getChildren().add(repeatedKeyText);
 	}

@@ -2,6 +2,7 @@ package authoring.display.popups;
 
 import authoring.Game;
 import authoring.display.LoadAuthoringInterface;
+import data.propertiesFiles.ResourceBundleManager;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -12,24 +13,20 @@ import javafx.scene.layout.VBox;
 /**
  * 
  * @author Edward Zhuang
- *
+ * Popup which allows the user to create a new game.
  */
 public class NewGamePopup extends Popup {
 
 	private static final int xSize = 300;
 	private static final int ySize = 200;
-	HBox gameName;
-	HBox gameDescription;
-//	HBox gameSizeX;
-//	HBox gameSizeY;
-	VBox vBox;
-	Button newGameButton;
-	TextField gameNameText;
-	TextField gameDescriptionText;
-//	TextField gameSizeXText;
-//	TextField gameSizeYText;
-	Game game;
-	LoadAuthoringInterface loadAuthorer;
+	private static final String DESCRIPTION = "Description";
+	private static final String NAME = "Name";
+	private static final String CREATE_GAME = "CreateGame";
+	private Button newGameButton;
+	private TextField gameNameText;
+	private TextField gameDescriptionText;
+	private Game game;
+	private LoadAuthoringInterface loadAuthorer;
 	
 	public NewGamePopup(LoadAuthoringInterface loadAuthoringInterface) {
 		super();
@@ -40,25 +37,16 @@ public class NewGamePopup extends Popup {
 	}
 	
 	protected void generatePopup() {
-		vBox = new VBox();
-		gameName = new HBox();
-		gameDescription = new HBox();
-//		gameSizeX = new HBox();
-//		gameSizeY = new HBox();
-		newGameButton = new Button("Create game!");
+		VBox vBox = new VBox();
+		HBox gameName = new HBox();
+		HBox gameDescription = new HBox();
+		newGameButton = new Button(ResourceBundleManager.getAuthoring(CREATE_GAME));
 		
 		gameNameText = new TextField();
-		gameName.getChildren().addAll(new Label("Name: "), gameNameText);
+		gameName.getChildren().addAll(new Label(ResourceBundleManager.getAuthoring(NAME)), gameNameText);
 		gameDescriptionText = new TextField();
-		gameDescription.getChildren().addAll(new Label("Description: "), gameDescriptionText);
-		
-//		gameSizeXText = new TextField();
-//		gameSizeX.getChildren().addAll(new Label("Game Size X: "), gameSizeXText);
-//		gameSizeYText = new TextField();
-//		gameSizeY.getChildren().addAll(new Label("Game Size Y: "), gameSizeYText);
-
-		
-		vBox.getChildren().addAll(gameName, gameDescription, /*gameSizeX, gameSizeY,*/ newGameButton);
+		gameDescription.getChildren().addAll(new Label(ResourceBundleManager.getAuthoring(DESCRIPTION)), gameDescriptionText);
+		vBox.getChildren().addAll(gameName, gameDescription, newGameButton);
 		
 		BorderPane borderPane = getPane();
 		borderPane.setCenter(vBox);
@@ -66,11 +54,11 @@ public class NewGamePopup extends Popup {
 	};
 
 	protected void mapButtons() {
-		// TODO Auto-generated method stub
 		newGameButton.setOnAction( e -> 
 		{	
 			game = new Game(gameNameText.getText());
 			game.setGameDescription(gameDescriptionText.getText()); 
+			System.out.println(game.getGameDescription());
 			loadAuthorer.loadAuthoringEnvironment(game);
 			close();
 		});

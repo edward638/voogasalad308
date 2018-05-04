@@ -18,33 +18,33 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 
+/**
+ * 
+ * @author Edward Zhuang
+ * Front end component which allows user to add audio files to game scene
+ */
 public class AudioPanel extends AuthoringUIComponent implements Observer {
 
 	private static final int SPACING = 30;
 	private HBox hBox;
 	private Button chooseAudioButton;
 	private Label currentAudio;
-	private AudioObservable audioObservable;
 	private AudioController audioController;
 	
 	public AudioPanel(AudioController audioController) {
-		// TODO Auto-generated constructor stub
 		super();
 		this.audioController = audioController;
 	}
 	
 	@Override
 	protected void generateComponent() {
-		// TODO Auto-generated method stub
-		BorderPane borderPane = getBorderPane();
 		initializeFXComponents();
 		mapFXActions();
-		borderPane.setCenter(hBox);
+		getBorderPane().setCenter(hBox);
 	}
 
 	@Override
 	protected void initializeFXComponents() {
-		// TODO Auto-generated method stub
 		hBox = new HBox(SPACING);
 		chooseAudioButton = new Button(ResourceBundleManager.getAuthoring("ChooseAudio"));
 		currentAudio = new Label();
@@ -53,21 +53,21 @@ public class AudioPanel extends AuthoringUIComponent implements Observer {
 
 	@Override
 	protected void mapFXActions() {
-		// TODO Auto-generated method stub
 		chooseAudioButton.setOnAction(e->{
 			chooseAudioFile();
 		});
 	}
 
+	/**
+	 * When gamescene song is set, front end updates to reflect this
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		audioObservable = (AudioObservable) o;
+		AudioObservable audioObservable = (AudioObservable) o;
 		currentAudio.setText("Current Audio: " + audioObservable.getAudioName());
 	}
 
 	private void chooseAudioFile() {
-		String fileName=null;
 		FileChooser chooser = new FileChooser();
 		chooser.getExtensionFilters().addAll(new ExtensionFilter( "MP3 Files", "*.mp3")); 
 		File audioFile = chooser.showOpenDialog(new Stage());

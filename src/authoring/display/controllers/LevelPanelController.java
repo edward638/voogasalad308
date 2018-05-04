@@ -13,30 +13,26 @@ import javafx.scene.layout.Pane;
 /**
  * 
  * @author Edward Zhuang
- *
+ * Controller class for LevelPanel. Allows LevelPanel to connect with the SceneManager.
  */
 public class LevelPanelController extends Controller implements GameObjectAdder {
 
-	SceneManager sceneManager;
-	LevelPanel levelPanelRefactored;
-	ObjectInfoPanelController objectInfoPanelController;
-	GameViewWindowController gameViewWindowController;
-	AudioController audioController;
-	
-	private static final String MANDATORY_BEHAVIOR_NAME = "MandatoryBehavior";
-	
+	private SceneManager sceneManager;
+	private LevelPanel levelPanelRefactored;
+	private ObjectInfoController objectInfoController;
+	private GameViewWindowController gameViewWindowController;
+	private AudioController audioController;
+
 	public LevelPanelController(SceneManager sceneManager, ImageManager imageManager, AudioManager audioManager) {
 		super(imageManager);
 		this.sceneManager = sceneManager;
-		objectInfoPanelController = new ObjectInfoPanelController(this.sceneManager.getCurrentScene(),getImageManager());
-//		System.out.println("this is current scene: " + this.sceneManager.getCurrentScene());
+		objectInfoController = new ObjectInfoController(this.sceneManager.getCurrentScene(),getImageManager());
 		gameViewWindowController = new GameViewWindowController(this.sceneManager.getCurrentScene(),getImageManager());
 		audioController = new AudioController(this.sceneManager.getCurrentScene(), getImageManager(), audioManager);
-		
 	}
 	
-	public ObjectInfoPanelController getObjectInfoPanelController() {
-		return objectInfoPanelController;
+	public ObjectInfoController getObjectInfoController() {
+		return objectInfoController;
 	}
 	
 	public GameViewWindowController getGameViewWindowController() {
@@ -79,8 +75,6 @@ public class LevelPanelController extends Controller implements GameObjectAdder 
 	public void addLevel(String name, String id) {
 		GameScene scene = sceneManager.makeScene(name, id);
 		setLevel(scene.getName());
-//		levelPanelRefactored.updateLevelDropdown(level - 1, scene);
-		
 	}
 	
 	public void setLevel(String name) {
@@ -89,7 +83,7 @@ public class LevelPanelController extends Controller implements GameObjectAdder 
 	}
 	
 	private void updateMyControllers(GameScene gameScene) {
-		objectInfoPanelController.setGameScene(gameScene);
+		objectInfoController.setGameScene(gameScene);
 		gameViewWindowController.setGameScene(gameScene);
 		audioController.setGameScene(gameScene);
 	}

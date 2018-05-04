@@ -13,6 +13,8 @@ import authoring.Property;
 import engine.actions.Action;
 import engine.actions.GroovyAction;
 import authoring.display.controllers.BehaviorPopupController;
+import authoring.display.popups.ErrorBox;
+import data.GameObjectManager;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -21,6 +23,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * @author Maddie Wilkinson
+ *
+ */
 public class PropertyPanel {
 
 	private List<GameObject> myGameObjects;
@@ -29,6 +35,10 @@ public class PropertyPanel {
 	private BehaviorPopupController myController;
 	private AuthBehavior currBehavior;
 
+	/**
+	 * @param behaviorPopupController
+	 * @param gameObjects
+	 */
 	public PropertyPanel(BehaviorPopupController behaviorPopupController, List<GameObject> gameObjects) {
 		myGameObjects = gameObjects;
 		myController = behaviorPopupController;
@@ -92,7 +102,11 @@ public class PropertyPanel {
 				Property prop = g.getBehavior(currBehavior.getName()).getProperty(p.getName());
 				String value = myPropTexts.get(p).getText();
 				if (value != null && prop != null) {
-					checkTypeAndStore(value, prop);
+					try {
+						checkTypeAndStore(value, prop);
+					} catch (Exception e) {
+						new ErrorBox("Invalid Input", "Invalid User Input");
+					}
 				}
 			}
 		}
@@ -101,23 +115,18 @@ public class PropertyPanel {
 	private void checkTypeAndStore(String value, Property prop) {
 		switch(prop.getValueType().getSimpleName()) {
 		case "Double":
-			System.out.println("it's a double! " + value);
 			prop.setValue(Double.parseDouble(value));
 			break;
 		case "String":
-			System.out.println("it's a string! " + value);
 			prop.setValue(value);
 			break;
 		case "Integer":
-			System.out.println("it's a integer! " + value);
 			prop.setValue(Integer.parseInt(value));
 			break;
 		case "Boolean":
-			System.out.println("it's a boolean! " + value);
 			prop.setValue(Boolean.parseBoolean(value));
 			break;
 		case "List":
-			System.out.println("it's a list! " + value);
 			if(currBehavior.getDisplayName().equals("SpaceRoutine")) {
 				prop.setValue(parseListList(value));
 			} else if(currBehavior.getDisplayName().equals("EntrancePortal")) {
@@ -125,15 +134,25 @@ public class PropertyPanel {
 			}
 			break;
 		case "Map":
-			System.out.println("it's a map! " + value);
 			if(prop.getName().equals("routineTimes")) {
 				prop.setValue(parseMap(value));
 			}
 			break;
-		default: 
-			System.out.println("ripperoni");
+		case "GameObject":
+			prop.setValue(storeBullet(value));
+			break;
 		}
-		System.out.println("property value set");
+	}
+
+	private Object storeBullet(String value) {
+		List<GameObject> projectiles = GameObjectManager.getSavedGameObjects("projectile");
+		for(GameObject g : projectiles) {
+			if(value.equals(g.getName())) {
+				System.out.println("got the gameobject hell yih");
+				return g;
+			}
+		}
+		return null;
 	}
 
 	private List<List<Double>> parseListList(String value) {
@@ -176,11 +195,17 @@ public class PropertyPanel {
 		return map;
 	}
 
+	/**
+	 * 
+	 */
 	public void refresh() {
 		myVBox.getChildren().clear();
 		initializeRoot();
 	}
 
+	/**
+	 * @return
+	 */
 	public Node asNode() {
 		return myVBox;
 	}

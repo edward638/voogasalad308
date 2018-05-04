@@ -29,6 +29,7 @@ import javafx.stage.Stage;
  */
 public class ObjectListPanel extends AuthoringUIComponent implements Observer {
 
+	private static final int MAX_HEIGHT = 300;
 	private HBox upperHBox;
 	private HBox lowerHBox;
 	private VBox myVBox;
@@ -74,12 +75,11 @@ public class ObjectListPanel extends AuthoringUIComponent implements Observer {
 
 	@Override
 	protected void initializeFXComponents() {
-		// TODO Auto-generated method stub
 		myAddSceneBackgroundImageButton = new Button(ResourceBundleManager.getAuthoring("AddSceneBackgroundImageButton"));
 		myDeleteObjectButton = new Button(ResourceBundleManager.getAuthoring("AddDeleteObjectButton"));
 		undoActionButton = new Button(ResourceBundleManager.getAuthoring("AddUndoActionButton"));
 		myLevelObjects = new ListView<>();
-		myLevelObjects.setMaxHeight(300);
+		myLevelObjects.setMaxHeight(MAX_HEIGHT);
 		myVBox = new VBox();
 		upperHBox = new HBox();
 		lowerHBox = new HBox();
@@ -87,7 +87,6 @@ public class ObjectListPanel extends AuthoringUIComponent implements Observer {
 
 	@Override
 	protected void mapFXActions() {
-		// TODO Auto-generated method stub
 		myAddSceneBackgroundImageButton.setOnAction(e -> {
 			try {
 				FileChooser fileChooser = new FileChooser();
@@ -98,6 +97,7 @@ public class ObjectListPanel extends AuthoringUIComponent implements Observer {
 			} catch (Exception exception) {
 				//do nothing
 				//this just means the user didn't choose an image
+				return;
 			}
 		});
 		myDeleteObjectButton.setOnAction(e -> {

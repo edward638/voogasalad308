@@ -41,10 +41,10 @@ public class AuthoringEnvironment {
 	private void createControllers() {
 		controllerList = new ArrayList<>();
 		levelPanelController = new LevelPanelController(game.getSceneManager(), imageManager, audioManager);
-		controllerList.add(levelPanelController);
 		GameViewWindowController gameViewWindowController = levelPanelController.getGameViewWindowController();
 		ObjectInfoController objectInfoController = levelPanelController.getObjectInfoController();
 		AudioController audioController = levelPanelController.getAudioController();
+		controllerList.add(levelPanelController);
 		controllerList.add(gameViewWindowController);
 		controllerList.add(objectInfoController);
 		controllerList.add(audioController);

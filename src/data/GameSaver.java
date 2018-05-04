@@ -5,6 +5,7 @@ import authoring.GameScene;
 import authoring.GameSceneSerializable;
 import data.propertiesFiles.ResourceBundleManager;
 import engine.GamePart;
+import engine.exceptions.ErrorBox;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -19,7 +20,7 @@ import java.util.Scanner;
 
 /**
  * @author Edward Zhuang
- * This class is responsible for saving games from both the
+ * This class is responsible for saving games from both the authoring and engine environment
  */
 public class GameSaver {
 
@@ -47,10 +48,6 @@ public class GameSaver {
 		gameSavesLocation = gameLocation + SAVES;
 		serializer = new Serializer();
 
-		if (!new File(gameLocation).exists()) {
-			System.out.println("Please initialize game first."); // TODO: throw an error here that says game isn't
-																	// initialized!
-		}
 	}
 
 	/**
@@ -72,7 +69,7 @@ public class GameSaver {
 			ImageIO.write(img, "jpg",
 					new File(gameDescriptionLocation + DESCRIPTIONIMAGE));
 		} catch (IOException e) {
-			e.printStackTrace(); // TODO: remove this print stacktrace!
+			new ErrorBox("Image Not Found", "Could not access default image");
 		}
 
 	}

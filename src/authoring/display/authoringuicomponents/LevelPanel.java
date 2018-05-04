@@ -18,15 +18,13 @@ import javafx.scene.layout.HBox;
 /**
  * 
  * @author Edward Zhuang
- *
+ * Front end component which allows user to add, select, and rename levels
  */
 public class LevelPanel extends AuthoringUIComponent implements Observer{
 
-	private HBox levelChooser;
 	private ComboBox<String> myLevelDropdown;
 	private Button myAddLevelButton, setSceneIdButton, setLevelIdButton, chooseLevelButton;
 	private LevelPanelController controller;
-	private LevelsObservable levelsObservable = null;
 	private TextField gameSceneId, levelId;
 	
 	public LevelPanel(LevelPanelController controller) {
@@ -36,11 +34,10 @@ public class LevelPanel extends AuthoringUIComponent implements Observer{
 	
 	@Override
 	protected void generateComponent() {
-		// TODO Auto-generated method stub
 		BorderPane borderPane = getBorderPane();
 		initializeFXComponents();
 		mapFXActions();
-		levelChooser = new HBox();
+		HBox levelChooser = new HBox();
 		levelChooser.getChildren().addAll(myAddLevelButton, myLevelDropdown, chooseLevelButton,gameSceneId,setSceneIdButton,levelId,setLevelIdButton);
 		borderPane.setCenter(levelChooser);
 	}
@@ -50,7 +47,7 @@ public class LevelPanel extends AuthoringUIComponent implements Observer{
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		levelsObservable = (LevelsObservable) o;
+		LevelsObservable levelsObservable = (LevelsObservable) o;
 		updateLevelDropdown(levelsObservable.getScenes());
 		updateLevelName(levelsObservable.getCurrentSceneName());
 		gameSceneId.setText(levelsObservable.getCurrentSceneName());
@@ -72,7 +69,6 @@ public class LevelPanel extends AuthoringUIComponent implements Observer{
 
 	@Override
 	protected void initializeFXComponents() {
-		// TODO Auto-generated method stub
 		myAddLevelButton = new Button(ResourceBundleManager.getAuthoring("AddSceneButton"));
 		setSceneIdButton = new Button(ResourceBundleManager.getAuthoring("SetSceneIdButton"));
 		setLevelIdButton = new Button(ResourceBundleManager.getAuthoring("SetLevelIdButton"));
@@ -85,7 +81,6 @@ public class LevelPanel extends AuthoringUIComponent implements Observer{
 
 	@Override
 	protected void mapFXActions() {
-		// TODO Auto-generated method stub
 		myAddLevelButton.setOnAction(e -> {
 			NewLevelPopup popupRefactored = new NewLevelPopup(controller);
 		});

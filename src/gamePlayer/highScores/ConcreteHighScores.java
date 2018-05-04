@@ -20,7 +20,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class ConcreteHighScores implements HighScores {
 
 	private List<Score> scores;
-	private String gameName;
 	private ScoreSaver scoreSaver;
 
 	private static final String NAMELABEL = "Name";
@@ -46,7 +45,6 @@ public class ConcreteHighScores implements HighScores {
 	 */
 	public ConcreteHighScores(String game) {
 		scores = new ArrayList<Score>();
-		gameName = game;
 		table = new TableView<Score>();
 		scoreSaver = new ScoreSaver(game);
 
@@ -93,7 +91,7 @@ public class ConcreteHighScores implements HighScores {
 		if (scores.size() < 10) {
 			scores.add(newScore);
 		} else {
-			if (scores.get(0).score < score) {
+			if (scores.get(0).getScore() < score) {
 				scores.remove(0);
 				scores.add(newScore);
 			}

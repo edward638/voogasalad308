@@ -15,8 +15,17 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * @author Edward Zhuang
+ * LibraryObjectInfoBox class that shows information about the current library GameObject.
+ * The user is able to edit this library GameObject.
+ */
 public class LibraryObjectInfoBox extends ObjectInfoBox {
 
+	private static final String LIBRARY_OBJECT_PROPERTIES = "LibraryObjectProperties";
+	private static final String EDIT_BEHAVIORS = "EditBehaviors";
+	private static final String EDIT_EVENTS = "EditEvents";
+	private static final String SAVE = "Save";
 	private HBox buttonsHBox;
 	private Button editBehaviorsButton;
 	private Button editEventsButton;
@@ -37,7 +46,7 @@ public class LibraryObjectInfoBox extends ObjectInfoBox {
 		this.imageView = new ImageView(image);
 		dummyList = new ArrayList<>();
 		dummyList.add(this.gameObject);
-		properties = new Label("Library Object Properties");
+		properties = new Label(ResourceBundleManager.getAuthoring(LIBRARY_OBJECT_PROPERTIES));
 		objectName = new Label(this.gameObject.getName());
 		initializeFXComponents();
 		mapFXActions();
@@ -48,7 +57,6 @@ public class LibraryObjectInfoBox extends ObjectInfoBox {
 		editBehaviorsButton.setOnAction(e -> {
 			new BehaviorPopup(dummyList);
 		});
-
 		editEventsButton.setOnAction(e -> {
 			new EventsPopup(dummyList, libraryObjects);
 		});
@@ -59,20 +67,18 @@ public class LibraryObjectInfoBox extends ObjectInfoBox {
 
 	@Override
 	public void initializeVBox() {
-		// TODO Auto-generated method stub
 		getVBox().getChildren().clear();
 		getVBox().getChildren().addAll(properties, imageView, objectName, buttonsHBox);
 	}
 
 	@Override
 	public void initializeFXComponents() {
-		// TODO Auto-generated method stub
 		imageView.setPreserveRatio(true);
 		imageView.setFitWidth(200);
 		buttonsHBox = new HBox();
-		editBehaviorsButton = new Button(ResourceBundleManager.getAuthoring("EditBehaviors"));
-		editEventsButton = new Button(ResourceBundleManager.getAuthoring("EditEvents"));
-		saveEditsButton = new Button(ResourceBundleManager.getAuthoring("Save"));
+		editBehaviorsButton = new Button(ResourceBundleManager.getAuthoring(EDIT_BEHAVIORS));
+		editEventsButton = new Button(ResourceBundleManager.getAuthoring(EDIT_EVENTS));
+		saveEditsButton = new Button(ResourceBundleManager.getAuthoring(SAVE));
 		buttonsHBox.getChildren().addAll(editBehaviorsButton,editEventsButton,saveEditsButton);
 	}
 

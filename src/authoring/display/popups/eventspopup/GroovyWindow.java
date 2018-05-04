@@ -8,6 +8,7 @@ import engine.actions.GroovyAction;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -22,6 +23,7 @@ public class GroovyWindow extends VBox {
 	@SuppressWarnings("unused")
 	private List<GameObject> gos;
 	private TextArea groovyInput;
+	private TextField groovyName;
 	private Button save;
 	private String groovyString;
 	
@@ -30,7 +32,6 @@ public class GroovyWindow extends VBox {
 	private static final int SIZE = 200;
 
 
-	
 	private static final String SAVE = "Save";
 
 	public GroovyWindow(EventsPopupController myEPUC, List<GameObject> myGos) {
@@ -51,13 +52,15 @@ public class GroovyWindow extends VBox {
 	    this.setMinHeight(SIZE);
 	    Text title = new Text(GROOVY);
 	    this.getChildren().add(title);
-	    addTextArea();
+	    addTextAreas();
 	}
-	private void addTextArea() {
+	private void addTextAreas() {
 		groovyInput = new TextArea();
 		groovyInput.setPrefWidth(SIZE);
 		groovyInput.setWrapText(true);
+		groovyName = new TextField();
 		this.getChildren().add(groovyInput);
+		this.getChildren().add(groovyName);
 		this.getChildren().add(save);
 		
 		save.setOnAction(e -> savePress());
@@ -65,7 +68,9 @@ public class GroovyWindow extends VBox {
 	
 	private void savePress() {
 		groovyString = groovyInput.getText();
+		String actionName = groovyName.getText();
 		GroovyAction action = new GroovyAction(groovyString);
+		action.setName(actionName);
 		// apply the groovy response to the event
 		epuc.getCurrEvent().addResponse(action);
 		// display the groovy input text on the response

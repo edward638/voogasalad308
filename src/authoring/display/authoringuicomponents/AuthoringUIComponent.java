@@ -37,9 +37,9 @@ public abstract class AuthoringUIComponent {
 	
 	/**
 	 * Used by Authoring Environment to position this class' borderpane onto a larger overall GUI pane. This way, no public getter is needed.
-	 * @param pane
-	 * @param xPosition
-	 * @param yPosition
+	 * @param pane pane to attach to
+	 * @param xPosition x coordinate
+	 * @param yPosition y coordinate
 	 */
 	public void attachToPane(Pane pane, int xPosition, int yPosition) {
 		borderPane.setLayoutX(xPosition);

@@ -7,6 +7,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+/**
+ * @author August Ning
+ * pop up that allows the user to edit the size of a background image
+ */
 public class BackgroundSizePopup extends Popup {
 	
 	SceneBackgroundImage sbi;
@@ -22,6 +26,10 @@ public class BackgroundSizePopup extends Popup {
 	private static final String xSizeText = "Enter the desired X size";
 	private static final String ySizeText = "Enter the desired Y size";
 	
+	/**
+	 * @param inSbi
+	 * @param inSbis
+	 */
 	public BackgroundSizePopup(SceneBackgroundImage inSbi, SceneBackgroundImageSerializable inSbis) {
 		super();
 		

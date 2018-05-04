@@ -4,6 +4,7 @@ package engine;
 import java.util.HashMap;
 import java.util.Map;
 
+import engine.behaviors.Killable;
 import engine.actions.Action;
 import engine.actions.GroovyAction;
 import engine.behaviors.MainCharacter;
@@ -91,7 +92,7 @@ public class Engine implements EngineInterface{
 			info.put("Current Level", currentGameState.getCurrentGameLevel().getCurrentGamePart().getGamePartID());
 			info.put("Game Time", (int)((TimeTracker)mainCharacter.getBehavior(TimeTracker.class)).getTimePassed());
 			info.put("Lives", ((MainCharacter)mainCharacter.getBehavior(MainCharacter.class)).getLives());
-			//info.put("Health", value);
+			info.put("Health", ((Killable)mainCharacter.getBehavior(Killable.class)).getHealth());
 			//info.put("Score", value);
 		}
 		return info;
@@ -174,7 +175,7 @@ public class Engine implements EngineInterface{
 		Map<ElementEvent, Action> events = currentGameState.getCurrentGamePart().getMainCharacter().getResponder().getResponses();
 		for (ElementEvent elementEvent : events.keySet()) {
 			if ((elementEvent instanceof KeyInputEvent) && (events.get(elementEvent) instanceof GroovyAction)) {
-				keyAssignments.put(((KeyInputEvent) elementEvent).getKeyCode(), ((GroovyAction) events.get(elementEvent)).getContent());
+				keyAssignments.put(((KeyInputEvent) elementEvent).getKeyCode(), ((GroovyAction) events.get(elementEvent)).getName());
 			}
 		}
 		return keyAssignments;

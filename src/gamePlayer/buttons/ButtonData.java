@@ -35,4 +35,6 @@ public interface ButtonData {
 	public void saveGame();
 	
 	public Map<KeyCode, String> getKeyAssignments();
+
+	public void setMostRecentFile(String file);
 }

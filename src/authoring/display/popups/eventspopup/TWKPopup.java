@@ -6,6 +6,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+/**
+ * @author August Ning
+ * Pop up for editing the keybinding for keybinding events
+ */
 public class TWKPopup extends Popup {
 	
 	private TriggerWindow tw;
@@ -15,6 +19,7 @@ public class TWKPopup extends Popup {
 	private static final int xSize = 300;
 	private static final int ySize = 200;
 	private static final String SAVE = "Save";
+	private static final String PROMPT = "Configure a keybinding";
 
 	public TWKPopup(TriggerWindow intw) {
 		kc = "";
@@ -29,7 +34,7 @@ public class TWKPopup extends Popup {
 	@Override
 	protected void generatePopup() {
 		VBox box = new VBox();
-		box.getChildren().add(new Text("Configure a keybinding"));
+		box.getChildren().add(new Text(PROMPT));
 		tf.setOnKeyTyped(e -> getKey(e.getCharacter()));
 		box.getChildren().add(tf);
 		box.getChildren().add(save);

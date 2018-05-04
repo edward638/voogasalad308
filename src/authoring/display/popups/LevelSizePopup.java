@@ -21,7 +21,13 @@ public class LevelSizePopup extends Popup {
 	
 	private static final int popupSizeX = 300;
 	private static final int popupSizeY = 200;
+	private static final String levelSizeX = "Level Size X: ";
+	private static final String levelSizeY = "Level Size Y: ";
 
+
+	/**
+	 * @param window 	The game view window that calls the pop up
+	 */
 	public LevelSizePopup(GameViewWindow window) {
 		super();
 		this.window = window;
@@ -41,8 +47,8 @@ public class LevelSizePopup extends Popup {
 		HBox sizeXBox = new HBox();
 		HBox sizeYBox = new HBox();
 		
-		sizeXBox.getChildren().addAll(new Label("Level Size X: "), sizeX);
-		sizeYBox.getChildren().addAll(new Label("Level Size Y: "), sizeY);
+		sizeXBox.getChildren().addAll(new Label(levelSizeX), sizeX);
+		sizeYBox.getChildren().addAll(new Label(levelSizeY), sizeY);
 
 		popupBox.getChildren().addAll(sizeXBox, sizeYBox, save);
 		super.getPane().setCenter(popupBox);

@@ -63,7 +63,12 @@ public class GroovyAction implements Action {
 	}
 	
 	public String getName() {
-		return actionName;
+		if (actionName != null) {
+			return actionName;
+		}
+		else {
+			return content.split("\\.")[content.split("\\.").length-1];
+		}
 	}
 	
 	public String toString() {

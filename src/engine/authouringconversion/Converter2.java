@@ -83,7 +83,7 @@ public class Converter2 {
 	
 
 	public GamePart gameScene2GamePart(GameScene scene) {
-		GamePart part = new GamePart(scene.getName(), "0");
+		GamePart part = new GamePart(scene.getName(), scene.getId());
 		part.addGameElement(getBackgroundElement(scene));
 		for (GameObject go: scene.getMyObjects()) {
 			System.out.println(go.getName());

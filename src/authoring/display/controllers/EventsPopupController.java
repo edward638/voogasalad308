@@ -46,18 +46,6 @@ public class EventsPopupController extends PopupController {
 		groovyWindow = new GroovyWindow(this, gos);
 	}
 
-	@Override
-	protected void setUpConnections() {
-		// does nothing
-		// the controller can call public methods between the windows for them
-	}
-
-	@Override
-	protected void addToGUI(Pane pane) {
-		// does nothing
-	}
-
-	@Override
 	protected void refreshView() {
 		// does nothing
 		responseWindow.createVBox();

@@ -51,13 +51,16 @@ public class Converter2 {
 		GameElement ge = new GameElement();
 		ge.addBehavior(authBehavior2Behavior(go.getBehavior(MandatoryBehavior.class.getCanonicalName()), ge));
 		setBehavior2AuthorValues(go.getBehavior(MandatoryBehavior.class.getCanonicalName()), ge);
+		
 		List<AuthBehavior> remainingBehaviors = go.getBehaviors().stream()
 				.filter(b -> !(b.getName().contains("Mandatory")))
 				.collect(Collectors.toList());
+		
 		for (AuthBehavior authB: remainingBehaviors) {
 			ge.addBehavior(authBehavior2Behavior(authB, ge));
 		}
-		if (go.getName().contains("co")) {
+		
+		if (go.getName().contains("lakitu")) {
 			printer.printGameObject(go);
 		}
 
@@ -96,6 +99,8 @@ public class Converter2 {
 			part.addGameElement(gameObject2GameElement(go));
 		}
 		part.addAudio(scene.getAudioName());
+		printer.printPart(part);
+//		throw new RuntimeException();
 		return part;
 	}
 	

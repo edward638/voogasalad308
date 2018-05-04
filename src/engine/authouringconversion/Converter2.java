@@ -22,7 +22,6 @@ import engine.GamePart;
 import engine.actions.Action;
 import engine.actions.GroovyAction;
 import engine.behaviors.Behavior;
-import engine.behaviors.MainCharacter;
 import engine.behaviors.MandatoryBehavior;
 import engine.events.elementevents.ElementEvent;
 

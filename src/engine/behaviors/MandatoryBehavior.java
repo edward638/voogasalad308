@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import authoring.groovy.GroovyMethod;
-import data.ImageManager;
 import engine.GameElement;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;

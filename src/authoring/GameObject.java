@@ -287,6 +287,9 @@ public class GameObject {
 		return myName;
 	}
 	
+	/**
+	 * determines whether one GameObject is the same as another
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null)
@@ -296,6 +299,9 @@ public class GameObject {
 		return ((GameObject) obj).getName().equals(this.getName());
 	}
 
+	/**
+	 * returns hashcode for a gameobject
+	 */
 	@Override
 	public int hashCode() {
 		return this.getName().hashCode();

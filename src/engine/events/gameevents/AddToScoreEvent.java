@@ -1,8 +1,6 @@
 package engine.events.gameevents;
 
-import engine.GamePart;
 import engine.GameState;
-import engine.behaviors.MainCharacter;
 
 public class AddToScoreEvent extends GameEvent {
 	public int score;

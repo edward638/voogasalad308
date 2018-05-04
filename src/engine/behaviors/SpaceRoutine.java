@@ -1,7 +1,6 @@
 package engine.behaviors;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import authoring.groovy.GroovyMethod;

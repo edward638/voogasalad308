@@ -59,7 +59,6 @@ public class GameState {
 		GameLoader gameLoader = new GameLoader(gameName);
 		Converter2 converter = new Converter2();
 		List<GamePart> gameDataParts = new ArrayList<>();
-
 		for (GameScene scene : gameLoader.getGameScenes(newGame)) {
 			gameDataParts.add(converter.gameScene2GamePart(scene));
 		}
@@ -312,5 +311,12 @@ public class GameState {
 			toReturn.addAll(gl.getGameParts());
 		}
 		return toReturn;
+	}
+
+	public void resetAllLevels() {
+		for (GameLevel l: gameLevels) {
+			System.out.println("Reseting level: " + l.getGameLevelID());
+			resetLevel(l.getGameLevelID());
+		}		
 	}
 }

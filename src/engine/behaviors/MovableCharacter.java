@@ -3,7 +3,6 @@ import java.util.List;
 
 import authoring.groovy.GroovyMethod;
 import engine.GameElement;
-import engine.authouringconversion.Printer;
 
 public class MovableCharacter extends Movable {
 //	private String jumpAudioFilePath = "";

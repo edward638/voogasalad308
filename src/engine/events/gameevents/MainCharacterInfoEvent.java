@@ -2,7 +2,6 @@ package engine.events.gameevents;
 
 import java.util.Map;
 
-import engine.GamePart;
 import engine.GameState;
 
 public class MainCharacterInfoEvent extends GameEvent {

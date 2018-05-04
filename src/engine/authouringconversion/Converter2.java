@@ -57,22 +57,16 @@ public class Converter2 {
 		for (AuthBehavior authB: remainingBehaviors) {
 			ge.addBehavior(authBehavior2Behavior(authB, ge));
 		}
-<<<<<<< HEAD
 		if (go.getName().contains("co")) {
 			printer.printGameObject(go);
 		}
-=======
 
->>>>>>> trishul_2
 		for (AuthBehavior authB: go.getBehaviors()) {
 			setBehavior2AuthorValues(authB, ge);
 		}
 		addResponsesAuth2Engine(ge, go);	
-<<<<<<< HEAD
 		System.out.println(ge.getIdentifier());
 		System.out.println(ge.getResponder().getResponses());
-=======
->>>>>>> trishul_2
 		return ge;
 	}
 	
@@ -107,11 +101,8 @@ public class Converter2 {
 	
 	public GameElement getBackgroundElement(GameScene scene) {
 		GameElement ge = new GameElement();
-<<<<<<< HEAD
-		System.out.println("Converter2   " + scene.getBackgroundImageName());
-=======
 		scene.setBackgroundImageName();
->>>>>>> trishul_2
+		System.out.println("Converter2   " + scene.getBackgroundImageName());
 		MandatoryBehavior mand = new MandatoryBehavior(ge, BG_IMAGE_NAME, scene.getBackgroundImageName(), 0.0, 0.0);
 		ge.addBehavior(mand);
 		return ge;

@@ -22,9 +22,6 @@ public class EventResponder {
 	
 	public void respondTo(ElementEvent other) {
 		for (ElementEvent e: responses.keySet()) {
-			if (other instanceof KeyInputEvent) {
-				System.out.println(other);
-			}
 			if (e.matchesEvent(other)) {
 				responses.get(e).act(other, parent);
 			}

@@ -10,14 +10,15 @@ Started: March 20th
 
 Ended: April 29th
 
-Hours worked: 10^2
+Hours worked: 10^3
 
 ### each person's role in developing the project
 
 Gouttham: Worked with Trishul, Martin and Yashas to create a game engine. Helped design the engine's code structure as well as implemented specific behaviors, and actions that GameElements can inherit.
 Worked on coding the game-flow allowing user to travel from one gameLevel to another. 
 
-Jeffrey:
+Jeffrey: Worked with Calvin to make entire front end and back end of GamePlayer which manages selecting games, loading games, saving games, high scores, HUD,
+changing key bindings dynamically, handling username, loading games from online.
 
 Calvin: Worked with Jeffrey on the gameplayer. The gameplayer was used in order to initialize our engine and give the user some flexibility 
 in terms of what games they want and how they wanted to interact with a game outside of the game itself such as keybindings and volume. Worked
@@ -75,7 +76,7 @@ You can upload and download games to and from Dropbox to share with your friends
 
 Gouttham:
 
-Jeffrey:
+Jeffrey: It was a fun and useful project that gave good exposure to what it's like working in a large team.
 
 Calvin: I think the hardest part of this project was integration, which makes a lot of sense. When we split up into our own groups, we will
 naturally have conflicts between parts of the project that we end up having to spend a lot of time fixing. This integration also speaks to

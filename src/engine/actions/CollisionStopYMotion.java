@@ -1,6 +1,5 @@
 package engine.actions;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -9,7 +8,6 @@ import engine.behaviors.MandatoryBehavior;
 import engine.behaviors.Movable;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.ElementEvent;
-import engine.events.gameevents.GameEvent;
 import javafx.scene.shape.Shape;
 
 public class CollisionStopYMotion implements Action{

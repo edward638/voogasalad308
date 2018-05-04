@@ -11,7 +11,7 @@ import engine.tests.ModelGamePart1;
  * SceneManager keeps track of all the GameScenes
  * and all the levels
  * 
- * @author: Summer
+ * @author: Summer, Edward Zhuang
  **/
 public class SceneManager extends Observable implements LevelsObservable {
 	

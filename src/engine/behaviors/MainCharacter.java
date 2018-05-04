@@ -5,8 +5,6 @@ import java.util.List;
 
 import authoring.groovy.GroovyMethod;
 import engine.GameElement;
-import javafx.geometry.Bounds;
-import javafx.scene.input.KeyCode;
 
 public class MainCharacter extends Behavior{
 	
@@ -32,6 +30,11 @@ public class MainCharacter extends Behavior{
 	}
 	
 	@GroovyMethod
+	public int removeLife() {
+		return gamelives -= gamelives;
+	}
+	
+	@GroovyMethod
 	public boolean isXscroll() {
 		return xscroll;
 	}
@@ -39,8 +42,7 @@ public class MainCharacter extends Behavior{
 	@GroovyMethod
 	public boolean isYScroll() {
 		return yscroll;
-	}
-	
+	}	
 	
 	public List<Double> getImageViewOffset(Double width, Double height) {
 		List<Double> offset = Arrays.asList(0.0,0.0);
@@ -60,4 +62,6 @@ public class MainCharacter extends Behavior{
 	protected void addRequiredBehaviors() {
 		addBehaviorsIfNotExisting(Arrays.asList(MovableCharacter.class, Killable.class, TimeTracker.class));
 	}
+
+
 }

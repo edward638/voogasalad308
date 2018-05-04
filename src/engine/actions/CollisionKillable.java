@@ -9,7 +9,7 @@ public class CollisionKillable implements Action {
 	@Override
 	public void act(ElementEvent event, GameElement element) {
 		Killable b = (Killable) element.getBehavior(Killable.class);
-		b.loseLife();
+		b.reduceHealth(0.0);
 	}
 
 }

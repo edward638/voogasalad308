@@ -8,8 +8,7 @@ import java.util.TreeSet;
 
 /** 
  * GameScene is the background image of each level
- * 
- * @author: Summer
+ * @author: Summer, Edward Zhuang
  **/
 public class GameScene extends Observable implements AudioObservable, GameViewObservable, ObjectInfoObservable, GameSceneSerializableCreator {
 	
@@ -177,16 +176,6 @@ public class GameScene extends Observable implements AudioObservable, GameViewOb
 	/**
 	 * returns image path of the current image
 	 */
-	@Override
-	public String getCurrentImageName() {
-		// TODO Auto-generated method stub
-		AuthBehavior mandatoryBehavior = getCurrentGameObject().getMandatoryBehavior();
-		Property imagePathProperty = mandatoryBehavior.getProperty("imagePath");
-		String imagePath = (String) imagePathProperty.getValue();
-//		System.out.println(imagePath);
-		return (imagePath + ".png");
-	}
-
 	@Override
 	public List<SceneBackgroundImageSerializable> getBackgroundImageSerializables() {
 		return backgroundImageSerializables;

@@ -5,7 +5,6 @@ import java.util.Map;
 
 import engine.actions.Action;
 import engine.events.elementevents.ElementEvent;
-import engine.events.elementevents.KeyInputEvent;
 
 public class EventResponder {
 	private Map <ElementEvent, Action> responses;

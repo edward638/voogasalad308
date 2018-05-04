@@ -149,6 +149,7 @@ public class PropertyPanel {
 		for(GameObject g : projectiles) {
 			if(value.equals(g.getName())) {
 				System.out.println("got the gameobject hell yih");
+				System.out.println("MandatoryBehavior: " + g.getMandatoryBehavior());
 				return g;
 			}
 		}

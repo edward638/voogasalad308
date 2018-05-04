@@ -1,14 +1,9 @@
 package engine.actions;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import engine.GameElement;
 import engine.behaviors.EntrancePortal;
-import engine.behaviors.Killable;
 import engine.events.elementevents.ElementEvent;
 import engine.events.elementevents.TimeEvent;
-import engine.events.gameevents.GameEvent;
 
 public class TimeDisablePortal implements Action{
 

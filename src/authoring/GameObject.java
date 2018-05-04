@@ -74,8 +74,8 @@ public class GameObject {
 		//			newEvents.add(e.clone());
 		//		}
 		myEvents = toCopy.getEvents();
-		setName(toCopy.getName());
 		addBehavior(MandatoryBehavior.class.getCanonicalName());
+		setName(toCopy.getName());
 		setxPos((double) toCopy.getMandatoryBehavior().getProperty("xPos").getValue());
 		setyPos((double) toCopy.getMandatoryBehavior().getProperty("yPos").getValue());
 		if(toCopy.getMandatoryBehavior().getProperty("displayWidth").getValue() != null) {
@@ -121,7 +121,6 @@ public class GameObject {
 	}
 
 	/**
-	 * 
 	 * @return the game object's set of behaviors
 	 */
 	public Set<AuthBehavior> getBehaviors() {
@@ -137,7 +136,6 @@ public class GameObject {
 	}
 
 	/**
-	 * 
 	 * @param behavior behavior to return
 	 * @returns behavior passed in or throws an exception
 	 */
@@ -156,7 +154,6 @@ public class GameObject {
 	}
 
 	/**
-	 * 
 	 * @param toAdd event to add
 	 */
 	public void addEvent(Event toAdd) {
@@ -164,7 +161,6 @@ public class GameObject {
 	}
 
 	/**
-	 * 
 	 * @param toDelete event to delete
 	 */
 	public void deleteEvent(Event toDelete) {
@@ -174,7 +170,6 @@ public class GameObject {
 	}
 
 	/**
-	 * 
 	 * @return set of object's events
 	 */
 	public Set<Event> getEvents() {
@@ -182,15 +177,16 @@ public class GameObject {
 	}
 
 	/**
-	 * 
 	 * @return name of object
 	 */
 	public String getName() {
+		if(getMandatoryBehavior().getProperty("elementName").getValue() != null) {
+			return (String) getMandatoryBehavior().getProperty("elementName").getValue();
+		}
 		return myName;
 	}
 	
 	/**
-	 * 
 	 * @param name new object name
 	 */
 	public void setName(String name) {
@@ -199,7 +195,6 @@ public class GameObject {
 	}
 
 	/**
-	 * 
 	 * @return x position of object
 	 */
 	public double getxPos() {
@@ -207,7 +202,6 @@ public class GameObject {
 	}
 
 	/**
-	 * 
 	 * @param xPos sets x position xPos
 	 */
 	public void setxPos(double xPos) {

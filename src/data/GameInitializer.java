@@ -34,13 +34,10 @@ public class GameInitializer {
         gameSavesLocation = gameLocation + ResourceBundleManager.getPath("SAVES");
         gameAudioLocation = gameLocation + ResourceBundleManager.getPath("AUDIO");
         
-        if ( new File(gameLocation).exists()){
-//        	System.out.println("game exists already!");
-        } else {
+        if (! new File(gameLocation).exists()){
         	 makeDirectories();
         	 addDefaultDescription(gameName);
-        }
-		
+        }	
 	}
 	
     /**
@@ -59,9 +56,8 @@ public class GameInitializer {
     private void addDefaultDescription(String gameName) {
     	String description = "This is a placeholder description.";
     	try {
-			BufferedImage img = ImageIO.read(new File(ResourceBundleManager.getPath("DEFAULTIMAGE")));
 			GameSaver saver = new GameSaver(gameName);
-	    	saver.addDescription(gameName, description, img);
+	    	saver.addDescription(gameName, description);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

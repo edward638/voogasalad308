@@ -24,6 +24,8 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
@@ -77,8 +79,10 @@ public class ConcreteGamePlayer implements GamePlayer {
 		gameDescriptionProvider = new GameDescriptionProvider();
 
 		root = new Group();
-		myScene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND);
+		myScene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT);
 		myStage = stage;
+		myScene.getStylesheets().add(getClass().getResource("styleSelector.css").toExternalForm());
+
 		myStage.setScene(myScene);
 
 		highScores = new ConcreteHighScores();
@@ -90,6 +94,12 @@ public class ConcreteGamePlayer implements GamePlayer {
 		username = new Username();
 		buttonData = new ConcreteButtonData(stage, this, volumeSlider, root, keyInputDictionary, username);
 
+		ImageView backgroundImage = new ImageView(new Image("file:background2.png"));
+		backgroundImage.setFitWidth(1250);
+		backgroundImage.setFitHeight(650);
+		
+		root.getChildren().add(backgroundImage);
+		
 		initialiseGUIElements();
 
 		addGuiElementsToRoot();

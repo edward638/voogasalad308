@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 /**
@@ -35,6 +36,7 @@ public class Username {
 		nameText.setLayoutX(970);
 		nameText.setLayoutY(10);
 		nameText.setFont(Font.font(FONT, 20));
+		nameText.setTextFill(Color.WHITE);
 	}
 
 	public Label getNameText() {

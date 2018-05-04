@@ -6,9 +6,10 @@ package gamePlayer.buttons;
  *
  */
 public class NewGameButton extends PlayerButtons {
+	private static final String buttonString = "New Game";
 
 	public NewGameButton(double x, double y, double width, double height, ButtonData buttonData) {
-		super(x, y, width, height, buttonData, "New Game");
+		super(x, y, width, height, buttonData, buttonString);
 	}
 
 	protected void setAction() {

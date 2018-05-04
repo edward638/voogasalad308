@@ -3,18 +3,18 @@ package gamePlayer.keyBindings;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
-import engine.Engine;
 import engine.EngineInterface;
 import javafx.scene.input.KeyCode;
+
 /**
  * Keeps track of what keys are matched to which other keys
+ * 
  * @author jeffreyli
  *
  */
 public class KeyInputDictionary {
-	Map<KeyCode, KeyCode> dictionary;
-	EngineInterface engine;
+	private Map<KeyCode, KeyCode> dictionary;
+	private EngineInterface engine;
 
 	public KeyInputDictionary(EngineInterface engine2) {
 		dictionary = new HashMap<KeyCode, KeyCode>();
@@ -26,7 +26,7 @@ public class KeyInputDictionary {
 		dictionary.remove(oldInput);
 		dictionary.put(input, mapTo);
 	}
-	
+
 	public boolean containsKey(KeyCode input) {
 		return dictionary.containsKey(input);
 	}
@@ -34,11 +34,17 @@ public class KeyInputDictionary {
 	public void handleAction(KeyCode input) {
 		if (dictionary.containsKey(input)) {
 			engine.handleKeyInput(dictionary.get(input));
-		} 
+		}
+		
+		
+		// gonna have to delete this code after, but there for engine testing purposes
+		else {
+			engine.handleKeyInput(input);
+		}
 	}
 
-	public void setGame(EngineInterface engine2) {
-		this.engine = engine2;
+	public void setGame(EngineInterface engine) {
+		this.engine = engine;
 
 	}
 
@@ -51,7 +57,6 @@ public class KeyInputDictionary {
 	}
 
 	public void removeKey(KeyCode k) {
-		System.out.println(dictionary);
 		dictionary.remove(k);
 
 	}
@@ -64,5 +69,5 @@ public class KeyInputDictionary {
 		}
 		return null;
 	}
-//
+	//
 }

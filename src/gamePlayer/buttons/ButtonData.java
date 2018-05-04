@@ -1,7 +1,10 @@
 package gamePlayer.buttons;
 
+import java.util.Map;
+
 import gamePlayer.keyBindings.KeyInputDictionary;
 import javafx.scene.Node;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 public interface ButtonData {
@@ -30,4 +33,6 @@ public interface ButtonData {
 	public void changeUsername(String newName);
 
 	public void saveGame();
+	
+	public Map<KeyCode, String> getKeyAssignments();
 }

@@ -52,7 +52,6 @@ public class EntrancePortal extends Behavior{
 	
 	public void changeLevel() {
 		if (active) {
-			System.out.println("Somethign is HAppeneing");
 			getParent().addGameEvent(new ChangePartEvent(partToChange, portalID));
 		}
 		

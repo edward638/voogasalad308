@@ -7,6 +7,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+/**
+ * @author August Ning
+ * Pop up that allows the user to edit the size of a game object
+ */
 public class GameObjectSizePopup extends Popup {
 	
 	private Button save;
@@ -20,8 +24,14 @@ public class GameObjectSizePopup extends Popup {
 	private static final String SAVE = "Save";
 	private static final String xSizeText = "Enter the desired X size";
 	private static final String ySizeText = "Enter the desired Y size";
+	private static final String displayWidthProperty = "displayWidth";
+	private static final String displayHeightProperty = "displayHeight";
 
 
+	/**
+	 * @param ingoiv 	The current GameObjectImageView to be edited
+	 * @param ingo		The current/corresponding GameObject that is being edited
+	 */
 	public GameObjectSizePopup(GameObjectImageView ingoiv, GameObject ingo) {
 		super();
 		goiv = ingoiv;
@@ -59,22 +69,11 @@ public class GameObjectSizePopup extends Popup {
 			double newWidth = Double.parseDouble(tfx.getText());
 			double newHeight = Double.parseDouble(tfy.getText());
 			
-//			double oldWidth = goiv.getMyImage().getBoundsInLocal().getWidth();
-//			double oldHeight = goiv.getMyImage().getBoundsInLocal().getHeight();
-//			System.out.println("Old width and height: " + oldWidth + " " + oldHeight);
-//			double newWidth = scale * oldWidth;
-//			double newHeight = scale * oldHeight;
-//			
-//			System.out.println("New width and height: " + newWidth + " " + newHeight);
-
-			
 			goiv.getMyImage().setFitWidth(newWidth);
 			goiv.getMyImage().setFitHeight(newHeight);
 			
-			go.getMandatoryBehavior().getProperty("displayWidth").setValue(newWidth);
-			go.getMandatoryBehavior().getProperty("displayHeight").setValue(newHeight);
-//			System.out.println(go.getMandatoryBehavior().getProperty("displayWidth").getValue());
-//			System.out.println(go.getMandatoryBehavior().getProperty("displayHeight").getValue());
+			go.getMandatoryBehavior().getProperty(displayWidthProperty).setValue(newWidth);
+			go.getMandatoryBehavior().getProperty(displayHeightProperty).setValue(newHeight);
 			super.close();
 		});
 	}

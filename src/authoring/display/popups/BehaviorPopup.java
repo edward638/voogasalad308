@@ -6,6 +6,10 @@ import authoring.GameObject;
 import authoring.display.controllers.BehaviorPopupController;
 import javafx.scene.layout.HBox;
 
+/**
+ * @author Maddie Wilkinson
+ *
+ */
 public class BehaviorPopup extends Popup {
 
 	private static final int xSize = 600;
@@ -15,6 +19,9 @@ public class BehaviorPopup extends Popup {
 	private List<GameObject> myGameObjects;
 	private HBox myHBox;
 	
+	/**
+	 * @param currentObjects
+	 */
 	public BehaviorPopup(List<GameObject> currentObjects) {
 		super();
 		myHBox = new HBox(DEFAULT_SPACING);

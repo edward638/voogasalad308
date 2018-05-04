@@ -12,6 +12,7 @@ import engine.groovy.GroovyExecutor;
 public class GroovyAction implements Action {
 	
 	private String content;
+	private String actionName;
 	
 	public GroovyAction() {
 		
@@ -30,6 +31,7 @@ public class GroovyAction implements Action {
 	public void act(ElementEvent e, GameElement ge) {
 		ScriptEngine engine = GroovyEngine.returnScriptEngine();
 		engine.put(ge.getIdentifier(), ge);
+//		System.out.println("Groovy Action Executing");
 		if (e instanceof CollisionEvent) {
 			CollisionEvent ce = (CollisionEvent) e;
 			engine.put(ce.getOtherElement(ge).getIdentifier(), ce.getOtherElement(ge));
@@ -54,6 +56,19 @@ public class GroovyAction implements Action {
 		GroovyAction er = new GroovyAction();
 		er.setContent(this.getContent());
 		return er;
+	}
+	
+	public void setName(String name) {
+		actionName = name;
+	}
+	
+	public String getName() {
+		if (actionName != null) {
+			return actionName;
+		}
+		else {
+			return content.split("\\.")[content.split("\\.").length-1];
+		}
 	}
 	
 	public String toString() {

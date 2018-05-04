@@ -5,8 +5,10 @@ import java.util.Map;
 import java.util.Set;
 import engine.EngineInterface;
 import javafx.scene.input.KeyCode;
+
 /**
  * Keeps track of what keys are matched to which other keys
+ * 
  * @author jeffreyli
  *
  */
@@ -14,18 +16,17 @@ public class KeyInputDictionary {
 	private Map<KeyCode, KeyCode> dictionary;
 	private EngineInterface engine;
 
-	public KeyInputDictionary(EngineInterface engine2) {
+	public KeyInputDictionary(EngineInterface engine) {
 		dictionary = new HashMap<KeyCode, KeyCode>();
-		this.engine = engine2;
+		this.engine = engine;
 	}
-	
-	
+
 	public void replaceKey(KeyCode input, KeyCode mapTo, KeyCode oldInput) {
 
 		dictionary.remove(oldInput);
 		dictionary.put(input, mapTo);
 	}
-	
+
 	public boolean containsKey(KeyCode input) {
 		return dictionary.containsKey(input);
 	}
@@ -33,7 +34,7 @@ public class KeyInputDictionary {
 	public void handleAction(KeyCode input) {
 		if (dictionary.containsKey(input)) {
 			engine.handleKeyInput(dictionary.get(input));
-		} 
+		}
 	}
 
 	public void setGame(EngineInterface engine) {
@@ -62,5 +63,5 @@ public class KeyInputDictionary {
 		}
 		return null;
 	}
-//
+	//
 }

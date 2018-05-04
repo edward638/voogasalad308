@@ -63,7 +63,7 @@ public class ImageManager {
 //        		System.out.println(location + imageName);
             img = ImageIO.read(new File(location + imageName));
         } catch (IOException e) {
-            e.printStackTrace(); //TODO: remove this print stacktrace!
+            //e.printStackTrace(); //TODO: remove this print stacktrace!
             System.out.println(imageName);
             throw new NullPointerException();
         }
@@ -76,7 +76,12 @@ public class ImageManager {
      * @return BufferedImage
      */
     public Image getImage(String imageName){
-        return bufferedImagetoJavaFXImage(getBufferedImage(imageName, gameImagesLocation));
+	    	try {
+	        return bufferedImagetoJavaFXImage(getBufferedImage(imageName, gameImagesLocation));
+	    	} catch (NullPointerException e) {
+	    		ImageManager defaultIM = new ImageManager("default");
+	    		return defaultIM.getImage(imageName);
+	    	}
     }
 
 

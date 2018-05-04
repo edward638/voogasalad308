@@ -3,7 +3,7 @@ package data.propertiesFiles;
 import java.util.ResourceBundle;
 
 /**
- * Class responsible for accessing items from properties files
+ * Class responsible for accessing items from properties files.
  * @author Edward Zhuang
  *
  */
@@ -27,24 +27,42 @@ public final class ResourceBundleManager {
 		resources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PATH + PATHS);
 		return resources.getString(s);
 	}
-	
+
+	/**
+	 * retrieves string from UIPositions.properties
+	 * @param s string key
+	 * @return resource bundle property value
+	 */
 	public static int getPosition(String s) {
 		resources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PATH + UI_POSITIONS);
 		return Integer.parseInt(resources.getString(s));
 	}
-	
+
+	/**
+	 * retrieves string from Authoring.properties
+	 * @param s string key
+	 * @return resource bundle property value
+	 */
 	public static String getAuthoring(String s) {
 		resources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PATH + AUTHORING);
 		return resources.getString(s);
 	}
-	
 
+	/**
+	 * retrieves string from ButtonImages.properties
+	 * @param s string key
+	 * @return resource bundle property value
+	 */
 	public static String getButton(String s) {
 		resources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PATH + BUTTON);
 		return resources.getString(s);
 	}
-	
 
+	/**
+	 * retrieves string from Splash.properties
+	 * @param s string key
+	 * @return resource bundle property value
+	 */
 	public static String getSplash(String s) {
 		resources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PATH + SPLASH);
 		return resources.getString(s);

@@ -49,7 +49,6 @@ public class ObjectInfoPanel extends AuthoringUIComponent implements Observer, L
 		} else {
 			getBorderPane().getChildren().clear();
 		}
-		
 	}
 
 	@Override

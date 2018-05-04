@@ -50,7 +50,6 @@ public class AuthoringDisplay implements LoadAuthoringInterface {
 	}
 
 	private void initialize(Stage stage) {
-		// TODO Auto-generated method stub
 		root = new Pane();
 		Scene scene = new Scene(root, WIDTH, HEIGHT);
 //		scene.getStylesheets().add(this.getClass().getResource("teststyle.css").toExternalForm());
@@ -93,7 +92,6 @@ public class AuthoringDisplay implements LoadAuthoringInterface {
 	}
 	
 	private void setButtonActions() {
-		// TODO Auto-generated method stub
 		newGameButton.setOnAction(e -> {
 			NewGamePopup popup = new NewGamePopup(this);
 		});

@@ -115,14 +115,12 @@ public class ConcreteButtonData implements ButtonData {
 			title.setFill(Color.LIGHTSKYBLUE);
 			title.setX(450);
 			title.setY(325);
-			
+
 			background = new Rectangle(440, 300, 105, 40);
 			background.setFill(Color.BLACK);
 			background.setOpacity(0.3);
 			root.getChildren().add(background);
 			root.getChildren().add(title);
-			
-			
 		}
 	}
 

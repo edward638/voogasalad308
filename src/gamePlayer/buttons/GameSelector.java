@@ -30,6 +30,10 @@ public class GameSelector extends ScrollPane {
 	private static final int boxWidth = 900;
 	private static final int boxHeight = 900;
 	private static final int paneHeight = 200;
+	private static final String selectGameString = "Select Game";
+	private static final String loadGameString = "Load Game";
+	private static final String font = "Times New Roman";
+	private static final Color color = Color.WHITE;
 
 	public GameSelector(ButtonData buttonData, boolean isNew) {
 		this.buttonData = buttonData;
@@ -40,9 +44,9 @@ public class GameSelector extends ScrollPane {
 		this.setHbarPolicy(ScrollBarPolicy.NEVER);
 		this.isNew = isNew;
 		if (isNew) {
-			playOrLoadGame = "Select Game";
+			playOrLoadGame = selectGameString;
 		} else {
-			playOrLoadGame = "Load Game";
+			playOrLoadGame = loadGameString;
 		}
 		initializeGameSelections();
 	}
@@ -57,15 +61,16 @@ public class GameSelector extends ScrollPane {
 		File[] gameList = directory.listFiles();
 		for (File game : gameList) {
 			String gameName = game.getName();
-			if (gameName.contains("DS_Store")) {
+			try {
+				String gameString = gameDescriptionProvider.getGameName(gameName);
+				String gameDescription = gameDescriptionProvider.getGameDescription(gameName);
+				Image gameImage = gameDescriptionProvider.getDescriptionImage(gameName);
+				Pane gameDescriptionPane = setupNewGamePane(gameName, gameString, gameDescription, gameImage);
+				gameSelectorBox.getChildren().add(gameDescriptionPane);
+			} catch (Exception e) {
+				System.out.println("Failed to load in game from folder " + gameName);
 				continue;
 			}
-			String gameString = gameDescriptionProvider.getGameName(gameName);
-			String gameDescription = gameDescriptionProvider.getGameDescription(gameName);
-
-			Image gameImage = gameDescriptionProvider.getDescriptionImage(gameName);
-			Pane gameDescriptionPane = setupNewGamePane(gameName, gameString, gameDescription, gameImage);
-			gameSelectorBox.getChildren().add(gameDescriptionPane);
 		}
 		this.setContent(gameSelectorBox);
 	}
@@ -88,6 +93,7 @@ public class GameSelector extends ScrollPane {
 		pane.setStyle("-fx-background-color:black;");
 
 		ImageView imageView = setUpGameImage(gameImage);
+
 		Text nameText = setUpGameText(gameString);
 		Text descriptionText = setUpGameDescriptionText(gameDescription);
 		Button playButton = makePlayButton(gameName);
@@ -112,8 +118,8 @@ public class GameSelector extends ScrollPane {
 		Text descriptionText = new Text(gameDescription);
 		descriptionText.setX(230);
 		descriptionText.setY(90);
-		descriptionText.setFont(new Font("Times New Roman", 20));
-		descriptionText.setFill(Color.WHITE);
+		descriptionText.setFont(new Font(font, 20));
+		descriptionText.setFill(color);
 		return descriptionText;
 	}
 

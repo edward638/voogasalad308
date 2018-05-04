@@ -100,6 +100,18 @@ public class GamePart {
 				.collect(Collectors.toList()).get(0);
 	}
 	
+	/**
+	 * @return List of GameElements that have the desired identifier
+	 * @param String identifier: what the .getIdentifier() method should be for the desired elements
+	 */
+	public List<GameElement> getElementsByIdentifier(String identifier) {
+		List<GameElement> elements = new ArrayList<>();
+		gameElements.stream()
+		.filter(el -> el.getIdentifier().equals(identifier))
+		.forEach(el -> elements.add(el));
+		return gameElements;
+	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

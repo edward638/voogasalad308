@@ -2,7 +2,7 @@ package display.buttonevents;
 
 import authoring.Game;
 import authoring.display.AuthoringDisplay;
-import authoring.displayrefactored.AuthoringDisplayRefactored;
+import authoring.display.AuthoringDisplay;
 import javafx.stage.Stage;
 
 /**
@@ -21,7 +21,7 @@ public class GameAuthoringPress implements ButtonEvent {
 
 	@Override
 	public void pressed() {	
-		new AuthoringDisplayRefactored(new Stage());
+		new AuthoringDisplay(new Stage());
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import authoring.groovy.GroovyMethod;
+import data.ImageManager;
 import engine.GameElement;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
@@ -55,7 +56,7 @@ public class MandatoryBehavior extends Behavior{
 	}
 	
 	public MandatoryBehavior(GameElement ge, String name, String imagePath, Double startX, Double startY)  {
-		this(ge, name, startX, startY, "rectangle", 1.0, 1.0, 1.0, 1.0, imagePath);
+		this(ge, name, startX, startY, "rectangle", 1000.0, 1000.0, 1000.0, 1000.0, imagePath);
 
 	}
 	
@@ -95,6 +96,11 @@ public class MandatoryBehavior extends Behavior{
 	@GroovyMethod
 	public void setHeight(Double newHeight) {
 		displayHeight = newHeight;
+	}
+	
+	@GroovyMethod
+	public String getImagePath() {
+		return imagePath;
 	}
 	
 	@GroovyMethod

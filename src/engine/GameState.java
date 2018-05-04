@@ -7,7 +7,7 @@ import java.util.List;
 import authoring.GameScene;
 import data.GameLoader;
 import data.GameSaver;
-import engine.audio.AudioManager;
+import engine.audio.AudioPlayerManager;
 import engine.authouringconversion.Converter2;
 import engine.behaviors.ExitPortal;
 import engine.exceptions.ErrorBox;
@@ -29,7 +29,7 @@ public class GameState {
 	private List<GameElement> addToDisplay;
 	private List<GameElement> removeFromDisplay;
 	
-	private AudioManager audioManager;
+	private AudioPlayerManager audioManager;
 	private String musicPath = "data/music/WiiShopChannelMusic.mp3";
 
 	/**
@@ -42,7 +42,7 @@ public class GameState {
 		gameLevels = new ArrayList<>();
 		addToDisplay = new ArrayList<>();
 		removeFromDisplay = new ArrayList<>();
-		audioManager = new AudioManager(1);
+		audioManager = new AudioPlayerManager(1);
 		audioManager.newAudioPlayer(musicPath);
 		
 		constructGameState(loadGame(this.gameName, newGame));
@@ -107,7 +107,7 @@ public class GameState {
 	/**
 	 * @return Reference to the AudioManager of the Game
 	 */
-	public AudioManager getAudioManager() {
+	public AudioPlayerManager getAudioManager() {
 		return audioManager;
 	}
 	

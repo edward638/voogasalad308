@@ -4,8 +4,8 @@ import java.util.Comparator;
 
 public class Score {
 
-	String playerName;
-	int score;
+	private String playerName;
+	private int score;
 
 	public Score(String name, int score) {
 		playerName = name;

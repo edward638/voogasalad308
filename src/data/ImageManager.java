@@ -59,9 +59,9 @@ public class ImageManager {
     		return bufferedImagetoJavaFXImage(getBufferedImage(imageName, gameImagesLocation));
     	} catch (NullPointerException e) {
     		ImageManager defaultIM = new ImageManager("default");
-    		//return defaultIM.getImage(imageName);
-    		System.out.println(imageName);
-    		throw new NullPointerException();
+    		return defaultIM.getImage(imageName);
+    		/*System.out.println(imageName);
+    		throw new NullPointerException();*/
     	}
     }
 

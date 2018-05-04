@@ -82,23 +82,6 @@ public class Game {
 	public List<GameScene> getScenes(){
 		return mySceneManager.getScenes();
 	}
-//TODO: are these necessary?	
-//	//makes a game object with the given property
-//	public GameObject makeGameObject(AuthBehavior basic) { 
-//		GameObject gameObject = new GameObject(basic);
-//		return gameObject;
-//	}
-//	
-//	//removes a game object from its scenes list of objects
-//	public void removeGameObject(GameObject gameObject) {
-//		for(GameScene current : mySceneManager.getScenes()) {
-//			for(GameObject object : current.getMyObjects()) {
-//				if (object.equals(gameObject)) {
-//					current.getMyObjects().remove(gameObject);
-//				}
-//			}
-//		}
-//	}
 	
 	/**
 	 * 

@@ -33,6 +33,12 @@ public interface ButtonData {
 	public void changeUsername(String newName);
 
 	public void saveGame();
-	
+
 	public Map<KeyCode, String> getKeyAssignments();
+
+	public void setMostRecentFile(String file);
+
+	public boolean engineRunning();
+
+	public void setEngineRunning(boolean running);
 }

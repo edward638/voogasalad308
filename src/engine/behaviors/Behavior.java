@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import engine.GameElement;
-import engine.authouringconversion.Printer;
 
 public abstract class Behavior {
 
@@ -55,9 +54,10 @@ public abstract class Behavior {
 	protected void addBehaviorsIfNotExisting (List<Class<? extends Behavior>> list) {
 		list.stream()
 		.forEach(behavior -> {
-			if (!(getParent().hasBehavior(behavior.getClass()))) {
+			if (!(getParent().hasBehavior(behavior))) {
 				try {
 					Constructor<? extends Behavior> construct = behavior.getConstructor(GameElement.class);
+//					System.out.println("Behavior: From addBehaviorsIfNotExisting");
 					getParent().addBehavior(construct.newInstance(getParent()));
 				} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 						| InvocationTargetException | NoSuchMethodException | SecurityException e) {

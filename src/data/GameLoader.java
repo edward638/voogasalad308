@@ -1,28 +1,22 @@
 package data;
 
-import authoring.GameObject;
 import authoring.GameScene;
 import authoring.GameSceneSerializable;
 import data.propertiesFiles.ResourceBundleManager;
 import engine.GamePart;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
 
-
+/**
+ * @author Edward Zhuang
+ * The GameLoader class is used to retrieve a saved game for either the authoring environment or the engine.
+ */
 public class GameLoader {
 
+    private static final String BASE_LOCATION = ResourceBundleManager.getPath("BASELOCATION");
+    private static final String SCENES = ResourceBundleManager.getPath("SCENES");
+    private static final String SAVES = ResourceBundleManager.getPath("SAVES");
     private Deserializer deserializer;
-    private String baseLocation = ResourceBundleManager.getPath("BASELOCATION");
-    private String gameLocation;
-    private String gameDescriptionLocation;
     private String gameScenesLocation;
     private String gameSavesLocation;
 
@@ -33,16 +27,14 @@ public class GameLoader {
      */
     public GameLoader(String gameName){
         deserializer = new Deserializer();
-        gameLocation = baseLocation + gameName + "/";
-        gameDescriptionLocation = gameLocation + ResourceBundleManager.getPath("DESCRIPTION");
-        gameScenesLocation = gameLocation + ResourceBundleManager.getPath("SCENES");
-        gameSavesLocation = gameLocation + ResourceBundleManager.getPath("SAVES");
+        String gameLocation = BASE_LOCATION + gameName + "/";
+        gameScenesLocation = gameLocation + SCENES;
+        gameSavesLocation = gameLocation + SAVES;
     }
 
-
     /**
-     * Gets map for game authoring/game engine to use to load game
-     * @return map
+     * Gets list of GameScenes for game authoring/game engine to use to load game
+     * @return list of GameScenes
      */
     public List<GameScene> getGameScenes(boolean isNew){
     	List<GameScene> list = new ArrayList<>();
@@ -56,12 +48,13 @@ public class GameLoader {
             	list.add(new GameScene(s));
             }
     	}
-    	
         return list;
     }
-    
-    
 
+    /**
+     * Gets GamePart
+      * @return GamePart
+     */
     public GamePart getGamePart(){
     	return deserializer.getSavePart(gameSavesLocation);
     }

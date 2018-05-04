@@ -19,9 +19,11 @@ public class KeyboardBindingButton extends PlayerButtons {
 	@Override
 	protected void setAction() {
 		this.setOnAction(event -> {
-			buttonData.pauseGame();
-			KeyBindingPopup keyPopup = new KeyBindingPopup(buttonData);
-			keyPopup.show();
+			if (buttonData.engineRunning()) {
+				buttonData.pauseGame();
+				KeyBindingPopup keyPopup = new KeyBindingPopup(buttonData);
+				keyPopup.show();
+			}
 		});
 	}
 

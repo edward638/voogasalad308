@@ -8,26 +8,19 @@
           <myValueType>java.lang.Double</myValueType>
         </authoring.Property>
         <authoring.Property>
-          <myValue class="string">onion</myValue>
-          <myName>elementName</myName>
-          <myValueType>java.lang.String</myValueType>
-        </authoring.Property>
-        <authoring.Property>
-          <myValue class="string">onionimage</myValue>
-          <myName>imagePath</myName>
-          <myValueType>java.lang.String</myValueType>
-        </authoring.Property>
-        <authoring.Property>
+          <myValue class="string"></myValue>
           <myName>shapeType</myName>
           <myValueType>java.lang.String</myValueType>
         </authoring.Property>
         <authoring.Property>
-          <myName>displayWidth</myName>
+          <myValue class="double">100.0</myValue>
+          <myName>displayHeight</myName>
           <myValueType>java.lang.Double</myValueType>
         </authoring.Property>
         <authoring.Property>
-          <myName>displayHeight</myName>
-          <myValueType>java.lang.Double</myValueType>
+          <myValue class="string">onion</myValue>
+          <myName>elementName</myName>
+          <myValueType>java.lang.String</myValueType>
         </authoring.Property>
         <authoring.Property>
           <myValue class="double">0.0</myValue>
@@ -41,6 +34,16 @@
         </authoring.Property>
         <authoring.Property>
           <myName>hitBoxWidth</myName>
+          <myValueType>java.lang.Double</myValueType>
+        </authoring.Property>
+        <authoring.Property>
+          <myValue class="string">onionimage</myValue>
+          <myName>imagePath</myName>
+          <myValueType>java.lang.String</myValueType>
+        </authoring.Property>
+        <authoring.Property>
+          <myValue class="double">100.0</myValue>
+          <myName>displayWidth</myName>
           <myValueType>java.lang.Double</myValueType>
         </authoring.Property>
       </myProperties>

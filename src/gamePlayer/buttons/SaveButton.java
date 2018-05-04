@@ -15,7 +15,9 @@ public class SaveButton extends PlayerButtons {
 
 	protected void setAction() {
 		this.setOnAction(event -> {
-			buttonData.saveGame();
+			if (buttonData.engineRunning()) {
+				buttonData.saveGame();
+			}
 		});
 	}
 

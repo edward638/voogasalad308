@@ -15,11 +15,6 @@ public class AuthBehavior {
 	private Set<Property> myProperties;
 	private String myName;
 
-	// likely won't need this constructor
-	// public Behavior() {
-	// myProperties = new HashSet<>();
-	// }
-
 	public AuthBehavior(String name, Set<Property> properties) {
 		myName = name;
 		myProperties = properties;
@@ -64,15 +59,25 @@ public class AuthBehavior {
 		return myName;
 	}
 
+	/**
+	 * to string method for AuthBehavior
+	 */
 	public String toString() {
 		return getDisplayName();
 	}
 
+	/**
+	 * clones an AuthBehavior
+	 * used for duplicating gameObjects
+	 */
 	public AuthBehavior clone() {
 		AuthBehavior ab = new AuthBehavior(this.getName(), this.myProperties);
 		return ab;
 	}
 
+	/**
+	 * determines whether two AuthBehaviors are the same
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null)

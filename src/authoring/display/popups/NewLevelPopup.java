@@ -9,13 +9,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-
 /**
  * 
- * @author Edward Zhuang
- * Popup which allows the user to create a new level.
+ * @author Edward Zhuang Popup which allows the user to create a new level.
  */
-public class NewLevelPopup extends Popup{
+public class NewLevelPopup extends Popup {
 
 	private static final int xSize = 300;
 	private static final int ySize = 400;
@@ -26,7 +24,7 @@ public class NewLevelPopup extends Popup{
 	private TextField levelText;
 	private TextField indexText;
 	private LevelPanelController controller;
-	
+
 	public NewLevelPopup(LevelPanelController controller) {
 		super();
 		this.controller = controller;
@@ -34,7 +32,7 @@ public class NewLevelPopup extends Popup{
 		generatePopup();
 		mapButtons();
 	}
-	
+
 	@Override
 	protected void generatePopup() {
 		VBox root = new VBox();
@@ -48,32 +46,24 @@ public class NewLevelPopup extends Popup{
 		root.getChildren().addAll(nameLevel, levelIndex, saveButton);
 		BorderPane borderPane = getPane();
 		borderPane.setCenter(root);
-		
+
 	}
 
 	@Override
 	protected void mapButtons() {
 		saveButton.setOnAction(event -> {
-			if(!levelText.getText().isEmpty() && !indexText.getText().isEmpty()) {
-				try {
-					String levelName = levelText.getText();
-					String levelId = indexText.getText();
-					controller.addLevel(levelName, levelId);
-					close();
-					//after slider is implemented, only catch general exception
-				} catch(NumberFormatException e) {
-					System.out.println("Invalid index input numFormat");
-					new Error("Invalid index input"); //this isn't being displayed yet
-				}catch(IndexOutOfBoundsException e) {
-					System.out.println("Invalid index input OOB");
-					//this isn't being displayed yet 
-					new Error("Invalid index input"); //eventually to fix this you can get the size of the array and make a slider so they can choose where to put it
-				}	
+			if (!levelText.getText().isEmpty() && !indexText.getText().isEmpty()) {
+
+				String levelName = levelText.getText();
+				String levelId = indexText.getText();
+				controller.addLevel(levelName, levelId);
+				close();
+
 			} else {
 				close();
 			}
 		});
-		
+
 	}
-	
+
 }

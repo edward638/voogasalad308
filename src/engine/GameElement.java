@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import authoring.GameObject;
 import engine.actions.Action;
 import engine.behaviors.Behavior;
+import engine.behaviors.MainCharacter;
 import engine.behaviors.MandatoryBehavior;
 import engine.events.elementevents.ElementEvent;
 import engine.events.gameevents.GameEvent;
@@ -190,7 +191,9 @@ public class GameElement {
 	}
 	
 	public boolean matchesType(GameElement other) {
-		return other.getIdentifier().equals(getIdentifier()) || other.getIdentifier().equals(MandatoryBehavior.REFER_ALL_ELEMENTS);
+		return other.getIdentifier().equals(getIdentifier()) 
+				|| other.getIdentifier().equals(MandatoryBehavior.REFER_ALL_ELEMENTS)
+				|| (getIdentifier().equals(MandatoryBehavior.REFER_MAIN_CHARACTER) && other.hasBehavior(MainCharacter.class));
 	}
 	
 	/*

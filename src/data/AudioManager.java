@@ -33,7 +33,9 @@ public class AudioManager {
 			Files.copy(audioFile.toPath(), 
 					(new File(gameAudioLocation + audioFile.getName())).toPath(), 
 					StandardCopyOption.REPLACE_EXISTING);
-		} catch (Exception ignored) {
+		} catch (Exception e) {
+			//this will always work due to file chooser
+			return;
 		}
 	}
 
@@ -43,7 +45,7 @@ public class AudioManager {
 	 * @return Media file
 	 */
 	public Media getAudioMedia(String audioName) {
-		return new Media(new File(gameAudioLocation+audioName+ MP3).toURI().toString());
+		return new Media(new File(gameAudioLocation+audioName).toURI().toString());
 	}
 	
 }

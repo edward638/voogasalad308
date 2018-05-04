@@ -60,8 +60,8 @@ public class GameDescriptionProvider {
 	    try {
 	    	BufferedImage bufferedImage = ImageIO.read(new File(gameDescriptionLocation + DESCRIPTION_IMAGE));
 	    	return SwingFXUtils.toFXImage(bufferedImage, null);
-	    } catch (IOException e) {
-            e.printStackTrace(); //TODO: fix!
+	    } catch (IOException ignored) {
+	    	// image should always be found
         }
         return null;
 	}
@@ -76,7 +76,7 @@ public class GameDescriptionProvider {
         try {
             scanner = new Scanner( new File(fileName));
         } catch (FileNotFoundException ignored) {
-            
+            // File should always be found
         }
         String text = scanner.useDelimiter("\\A").next();
         scanner.close();

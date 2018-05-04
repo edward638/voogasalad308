@@ -29,6 +29,7 @@ public class GameScene extends Observable implements AudioObservable, GameViewOb
 		myObjects = new ArrayList<>();
 		myObjectNames = new TreeSet<>();
 		backgroundImageSerializables = new ArrayList<>();	
+		backgroundImageName = myName.replaceAll("\\s", "") + "backgroundimage";
 	}
 	
 	public GameScene(GameSceneSerializableCreator scene) {
@@ -81,7 +82,6 @@ public class GameScene extends Observable implements AudioObservable, GameViewOb
 	 */
 	public void setCurrentGameObject(GameObject selectedGameObject) {
 		currentGameObject = selectedGameObject;
-//		System.out.println("Current game object is: " + currentGameObject);
 		notifyMyObservers();
 	}
 
@@ -183,12 +183,9 @@ public class GameScene extends Observable implements AudioObservable, GameViewOb
 	
 	public void backupGameScene() {
 		memento = new GameSceneMemento(myObjects, backgroundImageSerializables);
-		System.out.println("backupGameScene() memento " + ((GameSceneToOriginator)memento).getGameObjects());
-
 	}
 	
 	public void restorePreviousGameScene() {
-		System.out.println("restorepreviousgamescene " + ((GameSceneToOriginator)memento).getGameObjects());
 		myObjects = ((GameSceneToOriginator)memento).getGameObjects();
 		backgroundImageSerializables = ((GameSceneToOriginator)memento).getSerializables();
 		notifyMyObservers();

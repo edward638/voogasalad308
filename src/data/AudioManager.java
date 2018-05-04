@@ -33,7 +33,9 @@ public class AudioManager {
 			Files.copy(audioFile.toPath(), 
 					(new File(gameAudioLocation + audioFile.getName())).toPath(), 
 					StandardCopyOption.REPLACE_EXISTING);
-		} catch (Exception ignored) {
+		} catch (Exception e) {
+			//this will always work due to file chooser
+			return;
 		}
 	}
 

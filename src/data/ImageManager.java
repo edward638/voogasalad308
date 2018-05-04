@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import engine.exceptions.ErrorBox;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
@@ -41,12 +42,11 @@ public class ImageManager {
         BufferedImage img;
         try {
             img = ImageIO.read(new File(location + imageName));
+            return img;
         } catch (IOException e) {
-            //e.printStackTrace(); //TODO: remove this print stacktrace!
-            System.out.println(imageName);
-            throw new NullPointerException();
+        	new ErrorBox("Image Unaccessable", "Could not access image from data");
         }
-        return img;
+        return null;
     }
 
     /**
@@ -65,10 +65,10 @@ public class ImageManager {
 
     private void storeBufferedImage(String imageName, BufferedImage image, String location){
         try {
-            System.out.println("storeBufferedImage " + location + imageName);
         	ImageIO.write(image, "png", new File(location + imageName + ".png"));
         } catch (IOException e) {
-            e.printStackTrace(); //TODO: remove this print stacktrace!
+        	// This would not happen, as the location is initialized in the constructor.
+        	return;
         }
     }
 
@@ -112,8 +112,8 @@ public class ImageManager {
     	try {
 			ImageIO.write(ri, PNG, new File(gameImagesLocation+imageName));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// This would not happen, as the location is initialized in the constructor.
+			return;
 		}
     }
     

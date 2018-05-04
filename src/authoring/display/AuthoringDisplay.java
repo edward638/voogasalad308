@@ -11,6 +11,7 @@ import data.GameLoader;
 import data.GameSaver;
 import data.propertiesFiles.ResourceBundleManager;
 import display.AnimatedButton;
+import engine.exceptions.ErrorBox;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -100,27 +101,26 @@ public class AuthoringDisplay implements LoadAuthoringInterface {
 	
 	private void setButtonActions() {
 		newGameButton.setOnAction(e -> {
-			NewGamePopup popup = new NewGamePopup(this);
+			new NewGamePopup(this);
 		});
 		saveGameButton.setOnAction(e -> {
-			GameSaver saver = new GameSaver(currentGame.getName());
 			try {
-				System.out.println(currentGame.getScenes());
+				GameSaver saver = new GameSaver(currentGame.getName());
 				saver.gameAuthorToXML(currentGame.getScenes(), true);
 				saver.addDescription(currentGame.getName(), currentGame.getGameDescription());
-			} catch (IOException e1) {
-				e1.printStackTrace();
+			} catch (Exception e1) {
+				new ErrorBox("No Game Selected", "Please select/load a game before saving");
 			}
 			
 			initializeComboBoxes();
 		});
 		saveOnlineButton.setOnAction(e->{
-			GameSaver saver = new GameSaver(currentGame.getName());
 			try {
+				GameSaver saver = new GameSaver(currentGame.getName());
 				saver.gameAuthorToXML(currentGame.getScenes(), true);
 				saver.addDescription(currentGame.getName(), currentGame.getGameDescription());
-			} catch (IOException e1) {
-				e1.printStackTrace();
+			} catch (Exception e1) {
+				new ErrorBox("No Game Selected", "Please select/load a game before saving");
 			}
 			
 			initializeComboBoxes();
@@ -128,9 +128,10 @@ public class AuthoringDisplay implements LoadAuthoringInterface {
 			try {
 				voogaDropbox.uploadGame(currentGame.getName());
 			} catch (Exception e1) {
-				e1.printStackTrace();
+				new ErrorBox("Could Not Upload Game", "Please try again");
 			}
 		});
+		
 		loadGameButton.setOnAction(e -> {
 			String gameName = gameNames.getSelectionModel().getSelectedItem();
 			GameLoader gameLoader = new GameLoader(gameNames.getSelectionModel().getSelectedItem());

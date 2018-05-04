@@ -4,17 +4,15 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 import authoring.AuthBehavior;
 import authoring.GameObject;
 import authoring.GameObjectAdder;
-import authoring.GameScene;
 import authoring.Property;
 import authoring.display.authoringuicomponents.ObjectLibrary;
 import authoring.display.objectinfoboxes.LibraryObjectInfoBox;
 import data.propertiesFiles.ResourceBundleManager;
+import engine.exceptions.ErrorBox;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
@@ -167,7 +165,7 @@ public class GameObjectManager implements LibraryObjectSaver, LibraryObservable 
 		try {
 			serializer.saveGameObject(defaultObjectLocation + key + "/", gameObject, gameObject.getName());
 		} catch (IOException e) {
-			e.printStackTrace();
+			new ErrorBox("Serialization Failed", gameObject.getName() + ": Object could not be serialized");
 		}
 		library.updateObjectList(getSavedGameObjects(key));
 	}
@@ -185,7 +183,6 @@ public class GameObjectManager implements LibraryObjectSaver, LibraryObservable 
 			allObjects.addAll(getSavedGameObjects(key));
 		}
 		String imageName = currentObject.getName() + IMAGE_PNG;
-		
 		return new LibraryObjectInfoBox(currentObject, allObjects, this, defaultManager.getImage(imageName));
 	}
 		

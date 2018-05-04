@@ -80,11 +80,10 @@ public class ObjectInfoController extends Controller implements ObjectInfoSaver 
 	public void addGameObject(String name, Double xPos, Double yPos, String imageName, Image image) {
 		getImageManager().storeImage(imageName, image);
 		GameObject gameObject = new GameObject();
-		AuthBehavior mandatory = gameObject.getMandatoryBehavior();
 		gameObject.setName(name);
-		mandatory.getProperty("xPos").setValue(xPos);
-		mandatory.getProperty("yPos").setValue(yPos);
-		mandatory.getProperty("imagePath").setValue(imageName);
+		gameObject.setxPos(xPos);
+		gameObject.setyPos(yPos);
+		gameObject.setImagePath(imageName);
 		gameScene.getMyObjects().add(gameObject);
 		setCurrentGameObject(gameObject);
 	}

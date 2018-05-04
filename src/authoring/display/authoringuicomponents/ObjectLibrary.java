@@ -50,7 +50,6 @@ public class ObjectLibrary extends AuthoringUIComponent {
 		objectList = new ListView<>();
 		objectType = new ComboBox<>();
 		objectType.getItems().addAll(PLAYER,BLOCK,NPC,PROJECTILE);
-//		objectType.getItems().addAll(PLAYER,BLOCK,NPC);
 		vBox = new VBox();
 		vBox.getChildren().addAll(bottomHBox, objectType,objectList);
 	}
@@ -78,7 +77,7 @@ public class ObjectLibrary extends AuthoringUIComponent {
 			manager.addObjectToGame();
 		});
 		addToLibrary.setOnAction(e->{
-			NewLibraryObjectPopup popupRefactored = new NewLibraryObjectPopup(manager);
+			new NewLibraryObjectPopup(manager);
 		});
 		objectList.setOnMouseClicked(e->{
 			manager.setCurrentObject(objectList.getSelectionModel().getSelectedItem());

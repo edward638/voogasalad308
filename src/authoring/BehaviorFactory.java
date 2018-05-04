@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import engine.exceptions.ErrorBox;
+
 /**
  * @author Maddie Wilkinson
  *
@@ -25,9 +27,7 @@ public class BehaviorFactory {
 			Set<Property> properties = makeProperties(clazz);
 			return new AuthBehavior(behaviorName, properties);
 		} catch (ClassNotFoundException e) {
-			new Error("Invalid Behavior: " + behaviorName);
-			System.out.println("Invalid Behavior: " + behaviorName);
-			e.printStackTrace();
+			new ErrorBox("Class Not Found Exception", "The behavior couldn't be made!");
 		}
 		return null;
 	}

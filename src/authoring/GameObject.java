@@ -149,7 +149,6 @@ public class GameObject {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			throw new RuntimeException("Tried to access a behavior that this object does not have");
 		}
 		return null;

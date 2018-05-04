@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import authoring.GameObject;
 import engine.actions.Action;
 import engine.behaviors.Behavior;
+import engine.behaviors.MainCharacter;
 import engine.behaviors.MandatoryBehavior;
 import engine.events.elementevents.ElementEvent;
 import engine.events.gameevents.GameEvent;
@@ -46,16 +47,19 @@ public class GameElement {
 	 * the incoming one. Can be used to help subclasses replace super classes
 	 */
 	public void addBehavior(Behavior behave) {
+//		System.out.println("GameElement: Incoming Behavior: " + behave);
 		List<Behavior> existing = behaviors.stream()
 				.filter(b -> b.getClass().isAssignableFrom(behave.getClass()))
 				.collect(Collectors.toList());
 		if (existing.size() > 0) {
 			if (existing.get(0).getClass().isAssignableFrom(behave.getClass())) {
 				behaviors.remove(existing.get(0));
+//				System.out.println("Game Element: Removed Behavior " + existing.get(0));
 			} else {
 				throw new TooManyBehaviorsException("Trying to add " + behave.getClass() + " to a GameElement that already has this behavior: " + existing.get(0));
 			}
 		}
+//		System.out.println("GameElement: Added Behavior: " + behave);
 		behaviors.add(behave);
 	}
 	
@@ -99,10 +103,10 @@ public class GameElement {
 //		System.out.println("GameElement: " + behaviors.stream()
 //			.filter(behavior -> behaviorType.isAssignableFrom(behavior.getClass()) || behaviorType.equals(behavior.getClass()))
 //			.collect(Collectors.toList()));
-//		behaviors.stream().forEach(b -> {
-////			System.out.println("Game Element: hasBehavior Existing Behavior: " + b.getClass());
-////			System.out.println("Game Element: hasBehavior Existing Behavior: " + b.getClass());
-//		});
+		behaviors.stream().forEach(b -> {
+//			System.out.println("Game Element: hasBehavior Existing Behavior: " + b.getClass());
+//			System.out.println("Game Element: hasBehavior Existing Behavior: " + b.getClass());
+		});
 		return behaviors.stream()
 			.filter(behavior -> behaviorType.isAssignableFrom(behavior.getClass()) || behaviorType.equals(behavior.getClass()))
 			.collect(Collectors.toList()).size() > 0;
@@ -187,7 +191,9 @@ public class GameElement {
 	}
 	
 	public boolean matchesType(GameElement other) {
-		return other.getIdentifier().equals(getIdentifier()) || other.getIdentifier().equals(MandatoryBehavior.REFER_ALL_ELEMENTS);
+		return other.getIdentifier().equals(getIdentifier()) 
+				|| other.getIdentifier().equals(MandatoryBehavior.REFER_ALL_ELEMENTS)
+				|| (getIdentifier().equals(MandatoryBehavior.REFER_MAIN_CHARACTER) && other.hasBehavior(MainCharacter.class));
 	}
 	
 	/*

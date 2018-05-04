@@ -54,11 +54,11 @@ public class GameViewWindowController extends Controller implements ViewRefreshI
 	 * @param pane the background pane
 	 */
 	public void storeBackgroundImage(Pane pane) {
-		System.out.println(pane.getWidth() + " " + pane.getHeight());
 		WritableImage wi = new WritableImage((int) pane.getWidth(), (int) pane.getHeight());
 		pane.snapshot(new SnapshotParameters(), wi);
 		RenderedImage ri = SwingFXUtils.fromFXImage(wi, null);
-
+		getImageManager().storeCompositeBackgroundImage(gameScene.getName().replaceAll("\\s", "")+"backgroundimage.png", ri);
+	}
 
 	public void storeBackgroundImage(RenderedImage ri) {
 		getImageManager().storeCompositeBackgroundImage(gameScene.getName().replaceAll("\\s", "")+"backgroundimage.png", ri);

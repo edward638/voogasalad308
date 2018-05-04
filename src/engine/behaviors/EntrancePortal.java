@@ -65,6 +65,6 @@ public class EntrancePortal extends Behavior{
 	
 	@Override
 	protected void addDefaultBehavior() {
-		getParent().addEventResponse(new CollisionEvent(getParent(), CollisionEvent.ALL_SIDES, new GameElement("Mario"), CollisionEvent.ALL_SIDES), new ChangeLevel());
+		getParent().addEventResponse(new CollisionEvent(getParent(), CollisionEvent.ALL_SIDES, new GameElement(MandatoryBehavior.REFER_MAIN_CHARACTER), CollisionEvent.ALL_SIDES), new ChangeLevel());
 	}
 }

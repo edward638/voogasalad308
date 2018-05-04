@@ -7,6 +7,7 @@ import authoring.GameObject;
 import authoring.groovy.GroovyMethod;
 import engine.GameElement;
 import engine.authouringconversion.Converter2;
+import engine.authouringconversion.Printer;
 import engine.events.gameevents.AddElementEvent;
 
 public class Shooter extends Behavior {
@@ -35,9 +36,18 @@ public class Shooter extends Behavior {
 		Double startx = mand.getX() + distAway * direction.get(0)/magDirection + mand.getShape().getBoundsInLocal().getWidth()/2;
 		Double starty = mand.getY() + distAway * direction.get(1)/magDirection + mand.getShape().getBoundsInLocal().getHeight()/2;
 //		GameElement bullet = new ModelGamePart1().getBullet(startx, starty, v, direction);
+//		System.out.println("Shooter toShoot: " + toShoot);
+//		new Printer().printGameObject(toShoot);
+//		System.out.println("Shooter GE hashcode: " + getParent().hashCode());
 		toShoot.setxPos(startx);
 		toShoot.setyPos(starty);
 		GameElement bullet = new Converter2().gameObject2GameElement(toShoot);
+		if (bullet.hasBehavior(Movable.class)) {
+			Movable m = (Movable)bullet.getBehavior(Movable.class);
+			m.setDirection(direction);
+			m.setVelocity(v);
+		}
+		new Printer().printGameElement(bullet);
 		getParent().addGameEvent(new AddElementEvent(bullet));
 	}
 	

@@ -82,7 +82,7 @@ public class LevelPanel extends AuthoringUIComponent implements Observer{
 	@Override
 	protected void mapFXActions() {
 		myAddLevelButton.setOnAction(e -> {
-			NewLevelPopup popupRefactored = new NewLevelPopup(controller);
+			new NewLevelPopup(controller);
 		});
 		setSceneIdButton.setOnAction(e->{
 			controller.setCurrentSceneName(gameSceneId.getText());

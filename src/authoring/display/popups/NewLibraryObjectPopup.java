@@ -69,6 +69,7 @@ public class NewLibraryObjectPopup extends Popup {
 			} catch (Exception exception) {
 				// do nothing
 				// this just means the user didn't choose an image
+				return;
 			}
 		});
 
@@ -77,7 +78,8 @@ public class NewLibraryObjectPopup extends Popup {
 				try {
 					manager.saveCustomGameObject(nameText.getText(), image);
 				} catch (IOException e1) {
-					e1.printStackTrace();
+					// this will never happen since we are using a file chooser
+					return;
 				}
 				close();
 			} else {

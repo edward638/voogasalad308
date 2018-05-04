@@ -23,16 +23,18 @@ public class PauseButton extends PlayerButtons {
 	protected void setAction() {
 
 		this.setOnAction(event -> {
-			if (paused) {
-				buttonData.resumeGame();
-				this.setText(PAUSE_GAME);
-			}
+			if (buttonData.engineRunning()) {
+				if (paused) {
+					buttonData.resumeGame();
+					this.setText(PAUSE_GAME);
+				}
 
-			else if (!paused) {
-				buttonData.pauseGame();
-				this.setText(RESUME_GAME);
+				else if (!paused) {
+					buttonData.pauseGame();
+					this.setText(RESUME_GAME);
+				}
+				paused = !paused;
 			}
-			paused = !paused;
 		});
 	}
 

@@ -30,6 +30,7 @@ public class ConcreteButtonData implements ButtonData {
 
 	private Text title;
 	private Rectangle background;
+	private boolean engineRunning;
 
 	public ConcreteButtonData(Stage stage, GamePlayer gamePlayer, VolumeSlider volumeSlider, Group root,
 			KeyInputDictionary keyInputDictionary, Username username) {
@@ -39,6 +40,7 @@ public class ConcreteButtonData implements ButtonData {
 		this.volumeSlider = volumeSlider;
 		this.username = username;
 		keyBindingMap = keyInputDictionary;
+		engineRunning = false;
 	}
 
 	@Override
@@ -141,6 +143,16 @@ public class ConcreteButtonData implements ButtonData {
 	@Override
 	public Map<KeyCode, String> getKeyAssignments() {
 		return engine.getKeyAssignments();
+	}
+
+	@Override
+	public boolean engineRunning() {
+		return engineRunning;
+	}
+
+	@Override
+	public void setEngineRunning(boolean running) {
+		engineRunning = running;
 	}
 
 }

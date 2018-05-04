@@ -3,7 +3,6 @@ package gamePlayer.buttons;
 import java.util.Optional;
 
 import javafx.scene.control.TextInputDialog;
-import javafx.scene.paint.Color;
 
 /**
  * button pressed for changing the username

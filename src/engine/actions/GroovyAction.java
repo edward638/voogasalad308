@@ -7,7 +7,6 @@ import engine.events.elementevents.CollisionEvent;
 import engine.events.elementevents.ElementEvent;
 import engine.groovy.GroovyEngine;
 import engine.groovy.GroovyException;
-import engine.groovy.GroovyExecutor;
 
 public class GroovyAction implements Action {
 	

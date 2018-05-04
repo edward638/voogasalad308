@@ -16,6 +16,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 /**
+ * Class used to control the EventsPopup, and creates the event pop up pane
  * @author August Ning 
  *
  */
@@ -30,6 +31,10 @@ public class EventsPopupController extends PopupController {
 	private ResponseWindow responseWindow;
 	private GroovyWindow groovyWindow;
 
+	/**
+	 * @param currentGos 	The list of objects to be edited
+	 * @param allGO 		The list of all game objects in the game
+	 */
 	public EventsPopupController(List<GameObject> currentGos, List<GameObject> allGO){
 		gos = currentGos;
 		allGos = allGO;
@@ -66,18 +71,34 @@ public class EventsPopupController extends PopupController {
 		eventsWindow.updateEventList();
 	}
 	
+	/**
+	 * @return the current selected event
+	 */
 	public Event getCurrEvent() {
 		return eventsWindow.getCurrEvent();
 	}
+	/**
+	 * @return the current selected AuthBehavior
+	 */
 	public AuthBehavior getCurrBehavior() {
 		return behaviorsWindow.getCurrBehavior();
 	}
+	/**
+	 * @return if a valid event is selected or not
+	 */
 	public boolean validEvent() {
 		return eventsWindow.validEvent();
 	}
+	/**
+	 * @param stringToAdd 	The desired string to be added to the groovy windwo
+	 * @param caller 		The panel that called the command
+	 */
 	public void concatenateString(String stringToAdd, String caller) {
 		groovyWindow.concatenateString(stringToAdd, caller);
 	}
+	/**
+	 * @return Creates the windows in the Event Popup
+	 */
 	public List<VBox> getWindows() {
 		List<VBox> windows = new ArrayList<>();
 		windows.add(eventsWindow);
@@ -89,6 +110,9 @@ public class EventsPopupController extends PopupController {
 		return windows;
 	}
 	
+	/**
+	 * Refresh the windows
+	 */
 	public void updateFromEvent() {
 		triggerWindow.createVBox();
 		responseWindow.createVBox();
@@ -98,18 +122,30 @@ public class EventsPopupController extends PopupController {
 		groovyWindow.createVBox();
 	}
 	
+	/**
+	 * Refresh the MFWindow
+	 */
 	public void updateFromBehavior() {
 		mfWindow.createVBox();
 	}
 	
+	/**
+	 * Refreshes the response window
+	 */
 	public void updateResponseWindow() {
 		responseWindow.createVBox();
 	}
 	
+	/**
+	 * @return the current game object that it will collide with
+	 */
 	public GameObject getCurrCollisionObject() {
 		return triggerWindow.getCollideObject();
 	}
 	
+	/**
+	 * @param name the name of the selected current object
+	 */
 	public void setCurrObject(String name) {
 		for (GameObject go : allGos) {
 			if (go.getName().equals(name)) {
@@ -117,10 +153,6 @@ public class EventsPopupController extends PopupController {
 				return;
 			}
 		}
-	}
-	
-	public String getGroovyString() {
-		return groovyWindow.getGroovyString();
 	}
 	
 }

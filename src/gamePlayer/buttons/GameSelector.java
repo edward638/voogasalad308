@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -28,7 +30,7 @@ public class GameSelector extends ScrollPane {
 	private String playOrLoadGame;
 	private VBox gameSelectorBox;
 	private static final int boxWidth = 900;
-	private static final int boxHeight = 900;
+	private static final int boxHeight = 210;
 	private static final int paneHeight = 200;
 	private static final String selectGameString = "Select Game";
 	private static final String loadGameString = "Load Game";
@@ -78,8 +80,9 @@ public class GameSelector extends ScrollPane {
 
 	private void setUpGameSelectorBox() {
 		gameSelectorBox = new VBox();
-		gameSelectorBox.setSpacing(5);
-		gameSelectorBox.setStyle("-fx-background-color:white;");
+		gameSelectorBox.setSpacing(10);
+		gameSelectorBox.setStyle("-fx-background-color: transparent;");
+
 		gameSelectorBox.setMinWidth(boxWidth);
 		gameSelectorBox.setMaxWidth(boxHeight);
 	}
@@ -87,11 +90,17 @@ public class GameSelector extends ScrollPane {
 	private Pane setupNewGamePane(String gameName, String gameString, String gameDescription, Image gameImage) {
 		Pane pane = new Pane();
 
+		ImageView paneImage = new ImageView(new Image("file:background_image.jpg"));
+		paneImage.setOpacity(0.4);
+		paneImage.setFitWidth(boxWidth);
+		paneImage.setFitHeight(boxHeight);
+		pane.getChildren().add(paneImage);
+
 		pane.setMinWidth(boxWidth);
 		pane.setMaxWidth(boxWidth);
 		pane.setMinHeight(paneHeight);
 		pane.setMaxHeight(paneHeight);
-		pane.setStyle("-fx-background-color:black;");
+		pane.setStyle("-fx-background-color: transparent;");
 
 		ImageView imageView = setUpGameImage(gameImage);
 

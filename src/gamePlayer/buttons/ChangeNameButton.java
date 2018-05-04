@@ -3,6 +3,7 @@ package gamePlayer.buttons;
 import java.util.Optional;
 
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.paint.Color;
 
 /**
  * button pressed for changing the username
@@ -11,9 +12,10 @@ import javafx.scene.control.TextInputDialog;
  */
 public class ChangeNameButton extends PlayerButtons {
 	String newName;
+	private static final String buttonText = "Change";
 
 	public ChangeNameButton(double x, double y, double width, double height, ButtonData buttonData) {
-		super(x, y, width, height, buttonData, "Change");
+		super(x, y, width, height, buttonData, buttonText);
 	}
 
 	@Override

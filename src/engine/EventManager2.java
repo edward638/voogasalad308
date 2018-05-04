@@ -5,6 +5,7 @@ import java.util.List;
 
 import engine.collision.CollisionManager;
 import engine.events.elementevents.ElementEvent;
+import engine.events.elementevents.KeyInputEvent;
 import engine.events.gameevents.GameEvent;
 
 /**
@@ -35,6 +36,9 @@ public class EventManager2 {
 	 * @param ee
 	 */
 	public void processElementEvent(ElementEvent ee) {
+//		if (ee instanceof KeyInputEvent) {
+//			System.out.println(ee);
+//		}
 		List<GameEvent> gameEvents = new ArrayList<>();
 		for (GameElement ge: gameSate.getCurrentGamePart().getElements()) {
 			gameEvents.addAll(ge.processEvent(ee));

@@ -76,7 +76,6 @@ public class Engine implements EngineInterface{
 		double gameSteps = elapsedTime * currentGameState.getGameSpeed();
     	eventManager.processElementEvent(new TimeEvent(gameSteps));
     	displayState.update(currentGameState);
-    	System.out.println(getKeyAssignments());
     	playerUpdater.updateHUD(populateHUD());
     }
 	

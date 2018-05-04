@@ -30,6 +30,7 @@ public class GroovyAction implements Action {
 	public void act(ElementEvent e, GameElement ge) {
 		ScriptEngine engine = GroovyEngine.returnScriptEngine();
 		engine.put(ge.getIdentifier(), ge);
+		System.out.println("Groovy Action Executing");
 		if (e instanceof CollisionEvent) {
 			CollisionEvent ce = (CollisionEvent) e;
 			engine.put(ce.getOtherElement(ge).getIdentifier(), ce.getOtherElement(ge));

@@ -16,9 +16,9 @@ public class KeyInputDictionary {
 	private Map<KeyCode, KeyCode> dictionary;
 	private EngineInterface engine;
 
-	public KeyInputDictionary(EngineInterface engine2) {
+	public KeyInputDictionary(EngineInterface engine) {
 		dictionary = new HashMap<KeyCode, KeyCode>();
-		this.engine = engine2;
+		this.engine = engine;
 	}
 
 	public void replaceKey(KeyCode input, KeyCode mapTo, KeyCode oldInput) {
@@ -35,8 +35,7 @@ public class KeyInputDictionary {
 		if (dictionary.containsKey(input)) {
 			engine.handleKeyInput(dictionary.get(input));
 		}
-		
-		
+
 		// gonna have to delete this code after, but there for engine testing purposes
 		else {
 			engine.handleKeyInput(input);

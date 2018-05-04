@@ -2,7 +2,6 @@ package gamePlayer.keyBindings;
 
 import gamePlayer.buttons.ButtonData;
 import gamePlayer.buttons.PlayerButtons;
-import javafx.scene.input.KeyCode;
 
 /**
  * the button to press if you want to launch key bindings editing

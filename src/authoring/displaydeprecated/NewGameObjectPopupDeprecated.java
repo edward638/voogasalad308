@@ -1,12 +1,11 @@
-package authoring.display.popups;
+package authoring.displaydeprecated;
 
 import java.io.File;
 
-import authoring.display.controllers.LevelPanelController;
-import authoring.display.controllers.ObjectInfoPanelController;
+import authoring.display.controllers.ObjectInfoController;
+import authoring.display.popups.ErrorBox;
+import authoring.display.popups.Popup;
 import data.propertiesFiles.ResourceBundleManager;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -23,22 +22,21 @@ import javafx.stage.FileChooser.ExtensionFilter;
  * @author Edward Zhuang
  *
  */
-public class NewGameObjectPopup extends Popup {
+public class NewGameObjectPopupDeprecated extends Popup {
 
 	private static final int xSize = 300;
 	private static final int ySize = 200;
 	private static final int DEFAULT_SPACING = 10;
-	private ObjectInfoPanelController controller;
-	private VBox myVBox;
-	TextField nameText;
-	TextField xText;
+	private ObjectInfoController controller;
+	private TextField nameText;
+	private TextField xText;
 	TextField yText;
 	TextField imageText;
 	Button chooseImageButton;
 	Button saveButton;
 	Image image;
 
-	public NewGameObjectPopup(ObjectInfoPanelController controller) {
+	public NewGameObjectPopupDeprecated(ObjectInfoController controller) {
 		// TODO Auto-generated constructor stub
 		super();
 		this.controller = controller;
@@ -50,7 +48,7 @@ public class NewGameObjectPopup extends Popup {
 	@Override
 	protected void generatePopup() {
 		// TODO Auto-generated method stub
-		myVBox = new VBox(DEFAULT_SPACING);
+		VBox myVBox = new VBox(DEFAULT_SPACING);
 		image = null;
 		HBox nameObject = new HBox(DEFAULT_SPACING);
 		nameText = new TextField();
@@ -78,20 +76,20 @@ public class NewGameObjectPopup extends Popup {
 	@Override
 	protected void mapButtons() {
 		// TODO Auto-generated method stub
-		chooseImageButton.setOnAction(e -> {
-			try {
-				FileChooser fileChooser = new FileChooser();
-				fileChooser.setTitle("Choose Object Image");
-				fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
-				File imageFile = fileChooser.showOpenDialog(new Stage());
-				image = new Image(imageFile.toURI().toString());
-				// put image.getName into SceneBackground
-			} catch (Exception exception) {
-				// do nothing
-				// this just means the user didn't choose an image
-
-			} //
-		});
+//		chooseImageButton.setOnAction(e -> {
+//			try {
+//				FileChooser fileChooser = new FileChooser();
+//				fileChooser.setTitle("Choose Object Image");
+//				fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+//				File imageFile = fileChooser.showOpenDialog(new Stage());
+//				image = new Image(imageFile.toURI().toString());
+//				// put image.getName into SceneBackground
+//			} catch (Exception exception) {
+//				// do nothing
+//				// this just means the user didn't choose an image
+//
+//			} //
+//		});
 
 		saveButton.setOnAction(e -> {
 			// System.out.println("ADDING TO GAMEOBJECT NAME: " + nameText.getText());

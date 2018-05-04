@@ -1,7 +1,5 @@
 package engine.audio;
 
-import java.io.File;
-
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -18,11 +16,15 @@ public class AudioPlayer {
 	 * @param audioFile The File Path for the Audio File
 	 * @param volume Volume of the Audio File (double between 0 and 1)
 	 */
-	public AudioPlayer(String audioFile, double volume) {
-		Media media = new Media(new File(audioFile).toURI().toString());
+	public AudioPlayer(Media media, double volume) {
+		//Media media = new Media(new File(audioFile).toURI().toString());
 		mediaPlayer = new MediaPlayer(media);
 		setVolume(volume);
-		mediaPlayer.play();
+		//this.play();
+	}
+	
+	protected void addOnEndEvent(Runnable value) {
+		mediaPlayer.setOnEndOfMedia(value);
 	}
 	
 	/**
@@ -35,7 +37,7 @@ public class AudioPlayer {
 	/**
 	 * Calling this method resumes the audio player.
 	 */
-	protected void play() {
+	public void play() {
 		mediaPlayer.play();
 	}
 	
@@ -52,5 +54,9 @@ public class AudioPlayer {
 	 */
 	protected void setVolume(double volume) {
 		mediaPlayer.setVolume(volume);
+	}
+	
+	protected MediaPlayer getMediaPlayer() {
+		return this.mediaPlayer;
 	}
 }

@@ -39,6 +39,9 @@ Maddie: Worked with Summer to design the authoring backend; designed and impleme
 
 Edward: Works with August Ning to create the game data component of the project. Used XStream based serialization to store data files for game authoring and game engine analysis. Also worked extensively
 on authoring component of project with August, Summer, and Maddie.
+### demo video link
+[Demo video](https://drive.google.com/file/d/1wH8nZ2e_FIRgZW0fB2MYkwMlT3A_LPkR/view)
+
 
 ### any books, papers, online, or human resources that you used in developing the project
 

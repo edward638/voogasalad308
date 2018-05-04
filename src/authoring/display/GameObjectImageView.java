@@ -38,7 +38,7 @@ public class GameObjectImageView {
 	
 	private void onMouseReleased() {
 		gameObject.setxPos(myImage.localToParent(myImage.getBoundsInLocal()).getMinX());
-		gameObject.setxPos(myImage.localToParent(myImage.getBoundsInLocal()).getMinY());		
+		gameObject.setyPos(myImage.localToParent(myImage.getBoundsInLocal()).getMinY());		
 		viewRefreshInterface.notifyObjectInfoObservers(gameObject);
 	}
 

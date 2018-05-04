@@ -20,11 +20,12 @@ import java.io.StringWriter;
 import java.util.*;
 
 /**
+ * @author Edward Zhuang
  * Class used to deserialize XML files. Used by the GameLoader class.
  */
 public class Deserializer {
 
-    private Map<GameScene, List<GameObject>> objectMap;
+    private static final String DS_STORE = "DS_Store";
     private XStream xstream;
     private static final String SAVE = "save";
     
@@ -33,82 +34,49 @@ public class Deserializer {
     }
 
     /**
-     * Creates the gameMap used by GameAuthoringEngine to produce the game
-     * @param filename file name of the levels directory
-     * @return map with gamescene mapped to list of game objects
+     * Gets a list of GameSceneSerializables from xml files.
+     * @param fileName name of file;
+     * @return GameScene
      */
-//    public Map<GameScene, List<GameObject>> getGameMap(String filename){
-//        File directory = new File(filename);
-//        File[] directoryListing = directory.listFiles();
-//        objectMap = new TreeMap<>();
-//        if (directoryListing != null){
-//            for (File level : directoryListing){
-//                String path = level.getAbsolutePath();
-////                System.out.println(path);
-//                List<GameObject> objectList = retrieveGameObjectsFromLevel(path + "/" + "objects" + "/");
-//                GameScene gameScene = retrieveGameScene(path + "/" + "scene.xml");
-//                objectMap.put(gameScene, objectList);
-//            }
-//        }
-//        return objectMap;
-//    }
-
-    public List<GameSceneSerializable> getGameSceneSerializables(String filename){
-        File directory = new File(filename);
+    public List<GameSceneSerializable> getGameSceneSerializables(String fileName){
+        File directory = new File(fileName);
         File[] directoryListing = directory.listFiles();
         List<GameSceneSerializable> list = new ArrayList<>();
-        
         if (directoryListing != null){
             for (File level : directoryListing){
                 String path = level.getAbsolutePath();
-                System.out.println("getgamesceneserializable:" +path);
-                if (path.contains("DS_Store")) {continue;}
+                if (path.contains(DS_STORE)) {continue;}
                 list.add(retrieveGameSceneSerializable(path));
             }
         }
         return list;
     }
-    
+
+    /**
+     * Gets a GameObject from xml file
+     * @param fileName name of file
+     * @return GameObject
+     */
     public GameObject getGameObject(String fileName) {
     	 File file = new File(fileName);
          return (GameObject) xstream.fromXML(convertXMLFileToString(file));
     }
 
-    
-    /**
-     * gets a list of game objects for getGameMap
-     * @param fileName directory with game objects
-     * @return list of game objects
-     */
-    private List<GameObject> retrieveGameObjectsFromLevel(String fileName){
-        List<GameObject> list = new ArrayList<>();
-        File directory = new File(fileName);
-        File[] directoryListing = directory.listFiles();
-        if (directoryListing != null){
-            for (File child : directoryListing){
-                GameObject gameObject = (GameObject) xstream.fromXML(convertXMLFileToString(child));
-                list.add(gameObject);
-            }
-        }
-        return list;
-    }
-
-    /**
-     * Gets a gamescene for getGameMap
-     * @param fileName name of gamescene file;
-     * @return GameScene
-     */
     private GameSceneSerializable retrieveGameSceneSerializable(String fileName) {
         File file = new File(fileName);
         return (GameSceneSerializable) xstream.fromXML(convertXMLFileToString(file));
     }
-    
+
+    /**
+     * Gets a GamePart from xml file
+     * @param fileName name of file
+     * @return GamePart
+     */
     public GamePart getSavePart(String fileName) {
     	String saveState = fileName + "/" + SAVE + ".xml";
     	File file = new File(saveState);
         return (GamePart) xstream.fromXML(convertXMLFileToString(file));
     }
-   
 
     /**
      * converts a file to string. taken from http://techdiary.bitourea.com/2008/07/convert-xml-file-to-xml-string-in-java.html

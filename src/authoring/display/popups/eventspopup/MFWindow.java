@@ -14,14 +14,27 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+/**
+ * Vbox for configuring Methods and Fields for a chosen behavior
+ * @author August Ning
+ *
+ */
 public class MFWindow extends VBox {
 
 	private EventsPopupController epuc;
+	@SuppressWarnings("unused")
 	private List<GameObject> gos;
 	private AuthBehavior currentBehavior;
 	private GroovyCommandFactory gcf;
 	
+	private static final String MF = "Methods and Fields";
 	private static final String NONVALID = "No Behavior or Event selected";
+	private static final String METHODS = "Methods";
+	private static final String NOMETHODS = "No available methods\nfor this behavior";
+	private static final String FIELDS = "Fields";
+	private static final String NOFIELDS = "No available fields\nfor this behavior";
+	private static final int SPACING = 10;
+	private static final int SIZE = 200;
 	
 	public MFWindow(EventsPopupController myEPUC, List<GameObject> myGos) {
 		gos = myGos;
@@ -31,12 +44,15 @@ public class MFWindow extends VBox {
 		createVBox();
 	}
 	
+	/**
+	 * creates the VBox for the MF window
+	 */
 	public void createVBox() {
 		this.getChildren().clear();
-		this.setPadding(new Insets(10));
-	    this.setSpacing(8);
-	    this.setMinWidth(200);
-	    Text title = new Text("Methods and Fields");
+		this.setPadding(new Insets(SPACING));
+	    this.setSpacing(SPACING);
+	    this.setMinWidth(SIZE);
+	    Text title = new Text(MF);
 	    this.getChildren().add(title);
 	    createLists();
 	}
@@ -55,11 +71,11 @@ public class MFWindow extends VBox {
 	private void addMethods() {
 		List<Method> methods = gcf.getMethods(currentBehavior);
 		if (methods == null) {
-			Text noMethods = new Text("No available methods\nfor this behavior");
+			Text noMethods = new Text(NOMETHODS);
 			this.getChildren().add(noMethods);
 			return;
 		}
-		this.getChildren().add(new Text("Methods"));
+		this.getChildren().add(new Text(METHODS));
 		List<String> methodNames = new ArrayList<>();
 		methods.forEach(m -> parseMethod(m, methodNames));
 		ListView<String> methodsList = new ListView<>();
@@ -79,17 +95,17 @@ public class MFWindow extends VBox {
 	}
 	private void methodsClicked(String method) {
 		// This is something you can implement on epuc, since you can set text to the text plane in the groovy window
-		epuc.concatenateString(method, "MFWindow");
+		epuc.concatenateString(method, this.getClass().getSimpleName());
 	}
 	
 	private void addFields() {
 		List<Field> fields = gcf.getFields(currentBehavior);
 		if (fields == null) {
-			Text noFields = new Text("No available fields\nfor this behavior");
+			Text noFields = new Text(NOFIELDS);
 			this.getChildren().add(noFields);
 			return;
 		}
-		this.getChildren().add(new Text("Fields"));
+		this.getChildren().add(new Text(FIELDS));
 		List<String> fieldNames = new ArrayList<>();
 		fields.forEach(f -> parseField(f, fieldNames));
 		ListView<String> fieldsList = new ListView<>();
@@ -108,7 +124,7 @@ public class MFWindow extends VBox {
 	}
 	private void fieldsClicked(String field) {
 		// This is something you can implement on epuc, since you can set text to the text plane in the groovy window
-		epuc.concatenateString(field, "MFWindow");
+		epuc.concatenateString(field, this.getClass().getSimpleName());
 	}
 	
 	private void assignCurrentBehavior() {

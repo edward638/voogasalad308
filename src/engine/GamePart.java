@@ -18,7 +18,7 @@ public class GamePart {
 	private List<GameElement> gameElements;
 	private final String gamePartID;
 	private final String myLevelID;
-	private String audioName = "";
+	private String audioName = "WiiShopChannelMusic";
 	
 	/**
 	 * Instantiates a GamePart with it's GamePart ID, Level ID, and empty list of GameElement objects.
@@ -50,6 +50,13 @@ public class GamePart {
 	 */
 	public void addAudio (String audioName) {
 		this.audioName = audioName;
+	}
+	
+	/**
+	 * @return Name of Audio File Used for Background Music
+	 */
+	public String getBackgroundAudio() {
+		return this.audioName;
 	}
 	
 	/**

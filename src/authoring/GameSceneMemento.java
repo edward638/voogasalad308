@@ -7,6 +7,10 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Edward Zhuang
+ * WORK IN PROGRESS - class designed to take in a previous state of GameScene to allow for undoing of user actions.
+ */
 public class GameSceneMemento implements GameSceneToCareTaker, GameSceneToOriginator {
 
 	private List<GameObject> gameObjects;

@@ -25,7 +25,6 @@ import javafx.util.Duration;
 public class SplashScreen {
 
 	private Stage currStage;
-	private Pane myRoot;
 	private List<GUIButton> buttons;
 
 	public SplashScreen(Stage stage) {
@@ -47,6 +46,17 @@ public class SplashScreen {
 		gameAuthoringButton.setId(ResourceBundleManager.getSplash("AUTHBUTTONID"));
 
 		File playImageFile = new File(ResourceBundleManager.getSplash("PLAYFILE"));
+		setButtonGraphic(gamePlayerButton, playImageFile);
+
+		File authorImageFile = new File(ResourceBundleManager.getSplash("WRITEFILE"));
+		setButtonGraphic(gameAuthoringButton, authorImageFile);
+		buttons.add(gamePlayerButton);
+		buttons.add(gameAuthoringButton);
+
+		rotateButtons(buttons);
+	}
+
+	private void setButtonGraphic(GUIButton gamePlayerButton, File playImageFile) {
 		Image imagePlay;
 		try {
 			imagePlay = new Image(playImageFile.toURI().toURL().toExternalForm());
@@ -57,22 +67,6 @@ public class SplashScreen {
 		} catch (MalformedURLException e) {
 			throw new IllegalArgumentException();
 		}
-
-		File authorImageFile = new File(ResourceBundleManager.getSplash("WRITEFILE"));
-		Image imageAuthor;
-		try {
-			imageAuthor = new Image(authorImageFile.toURI().toURL().toExternalForm());
-			ImageView im = new ImageView(imageAuthor);
-			im.setPreserveRatio(true);
-			im.setFitHeight(Integer.parseInt(ResourceBundleManager.getSplash("FILEHEIGHT")));
-			gameAuthoringButton.setGraphic(im);
-		} catch (MalformedURLException e) {
-			throw new IllegalArgumentException();
-		}
-		buttons.add(gamePlayerButton);
-		buttons.add(gameAuthoringButton);
-
-		rotateButtons(buttons);
 	}
 
 	private void rotateButtons(List<GUIButton> buttons) {
@@ -105,7 +99,7 @@ public class SplashScreen {
 	 * @return a Scene that can be displayed on the splash screen
 	 */
 	public Scene getSplashScreen() {
-		myRoot = new Pane();
+		Pane myRoot = new Pane();
 		myRoot.setId("pane");
 		Scene scene = new Scene(myRoot, Integer.parseInt(ResourceBundleManager.getSplash("WINDOWSIZEX")),
 				Integer.parseInt(ResourceBundleManager.getSplash("WINDOWSIZEY")));

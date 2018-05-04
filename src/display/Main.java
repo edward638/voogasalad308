@@ -12,7 +12,6 @@ import javafx.stage.Stage;
  * Main driver class that is used for choosing between game authoring and game player
  */
 public class Main extends Application {
-	private SplashScreen splash; 
 	private static final String ICON_IMAGE = "./data/images/icon.png";
 
 	public static void main(String args[]) {
@@ -21,7 +20,7 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		splash = new SplashScreen(stage);
+		SplashScreen splash = new SplashScreen(stage);
 		stage.setTitle("VOOGA");
 		stage.setScene(splash.getSplashScreen());
 		stage.getIcons().add(createIcon());

@@ -20,11 +20,10 @@ public class AnimatedButton {
 	private static final int IMAGE_HEIGHT = 20;
 	private Button button;
 	private HBox hBox;
-	private Label label;
-	
+
 	public AnimatedButton(String imagePath, String labelText) {
 		hBox = new HBox();
-		label = new Label(labelText);
+		Label label = new Label(labelText);
 		button = new Button();
 		hBox.getChildren().addAll(button, label);
 		File imageFile = new File(imagePath);
@@ -43,7 +42,6 @@ public class AnimatedButton {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 	
 	private void setRotate(Button button) {

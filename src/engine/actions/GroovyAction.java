@@ -41,7 +41,7 @@ public class GroovyAction implements Action {
 		try {
 			return eng.eval(script);
 		} catch (ScriptException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			throw new GroovyException("cannot evaluate groovy expression");
 		}
 	}
@@ -65,7 +65,7 @@ public class GroovyAction implements Action {
 			return actionName;
 		}
 		else {
-			return content.split("\\.")[content.split("\\.").length-1];
+			return (content.split("\\.")[content.split("\\.").length-1]).split("\\(")[0];
 		}
 	}
 	

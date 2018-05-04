@@ -20,7 +20,8 @@ public class ObjectInfoPanel extends AuthoringUIComponent implements Observer, L
 	private ObjectInfoController controller;
 	private LibraryObservable libraryObservable;
 
-	public ObjectInfoPanel(ObjectInfoController controller) {
+
+	public ObjectInfoPanel(ObjectInfoPanelController controller) {
 		this.controller = controller;
 	}
 	

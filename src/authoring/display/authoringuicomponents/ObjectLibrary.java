@@ -28,6 +28,7 @@ public class ObjectLibrary extends AuthoringUIComponent {
 	private static final String PLAYER = "player";
 	private static final String ADD_LEVEL = "AddLevel";
 	private static final String ADD_LIBRARY = "AddLibrary";
+	private static final String PROJECTILE = "Projectile";
 	private Button addToGameButton;
 	private Button addToLibrary;
 	private ListView<GameObject> objectList;
@@ -48,7 +49,8 @@ public class ObjectLibrary extends AuthoringUIComponent {
 		bottomHBox.getChildren().addAll(addToGameButton,addToLibrary);
 		objectList = new ListView<>();
 		objectType = new ComboBox<>();
-		objectType.getItems().addAll(PLAYER,BLOCK,NPC);
+		objectType.getItems().addAll(PLAYER,BLOCK,NPC,PROJECTILE);
+//		objectType.getItems().addAll(PLAYER,BLOCK,NPC);
 		vBox = new VBox();
 		vBox.getChildren().addAll(bottomHBox, objectType,objectList);
 	}

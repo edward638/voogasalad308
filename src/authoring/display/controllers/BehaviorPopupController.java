@@ -43,17 +43,6 @@ public class BehaviorPopupController extends PopupController {
 		myPropertyPanel = new PropertyPanel(this, myGameObjects);
 	}
 
-	@Override
-	protected void setUpConnections() {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	protected void addToGUI(Pane pane) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
 	protected void refreshView() {
 		myBehaviorPanel.refresh();
 		myPropertyPanel.refresh();

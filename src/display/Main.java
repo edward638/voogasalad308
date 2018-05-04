@@ -13,6 +13,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 	private static final String ICON_IMAGE = "./data/images/icon.png";
+	private static final String VOOGA = "VOOGA";
 
 	public static void main(String args[]) {
 		launch(args);
@@ -21,7 +22,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		SplashScreen splash = new SplashScreen(stage);
-		stage.setTitle("VOOGA");
+		stage.setTitle(VOOGA);
 		stage.setScene(splash.getSplashScreen());
 		stage.getIcons().add(createIcon());
 		stage.show();

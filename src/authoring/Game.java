@@ -33,7 +33,6 @@ public class Game {
 	 */
 	public void restoreGame(List<GameScene> list) {
 		mySceneManager.restoreScenes(list);
-		System.out.println("restoreGame: " + list);
 	}
 	
 	/**
@@ -67,15 +66,7 @@ public class Game {
 	public String getGameDescription() {
 		return gameDescription;
 	}
-	
-	/**
-	 * 
-	 * @param image is new image path
-	 */
-	public void setGameImage(String image) {
-		gameImage = image;
-	}
-	
+
 	/**
 	 * 
 	 * @return gameImage
@@ -116,13 +107,5 @@ public class Game {
 	public SceneManager getSceneManager() {
 		return mySceneManager;
 	}
-	
-	/**
-	 * 
-	 * @param sceneManager is new sceneManager
-	 */
-	public void setSceneManager(SceneManager sceneManager) {
-		mySceneManager = sceneManager;
-	}
-	
+
 }

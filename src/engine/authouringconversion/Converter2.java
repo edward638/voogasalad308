@@ -48,6 +48,9 @@ public class Converter2 {
 	
 	public GameElement gameObject2GameElement(GameObject go) {
 		GameElement ge = new GameElement();
+		ge.addBehavior(authBehavior2Behavior(go.getBehavior(MandatoryBehavior.class.getCanonicalName()), ge));
+		setBehavior2AuthorValues(go.getBehavior(MandatoryBehavior.class.getCanonicalName()), ge);
+		go.removeBehavior(go.getBehavior(MandatoryBehavior.class.getCanonicalName()));
 		for (AuthBehavior authB: go.getBehaviors()) {
 			ge.addBehavior(authBehavior2Behavior(authB, ge));
 		}
@@ -55,6 +58,8 @@ public class Converter2 {
 			setBehavior2AuthorValues(authB, ge);
 		}
 		addResponsesAuth2Engine(ge, go);	
+		System.out.println(ge.getIdentifier());
+		System.out.println(ge.getResponder().getResponses());
 		return ge;
 	}
 	
@@ -81,6 +86,7 @@ public class Converter2 {
 		GamePart part = new GamePart(scene.getName(), "0");
 		part.addGameElement(getBackgroundElement(scene));
 		for (GameObject go: scene.getMyObjects()) {
+			System.out.println(go.getName());
 			part.addGameElement(gameObject2GameElement(go));
 		}
 		return part;
@@ -126,14 +132,12 @@ public class Converter2 {
 	private void setBehavior2AuthorValues (AuthBehavior authB, GameElement ge) {
 		String[] parts = authB.getName().split("\\.");
 		String className = parts[parts.length - 1];
-		System.out.println(className);
 		Behavior behavior = ge.getBehavior(className);
 		Class<?> newEngBehaviorClass = behavior.getClass();
 		for (Field f: newEngBehaviorClass.getDeclaredFields()) {
 			if (Modifier.isPublic(f.getModifiers())) {continue;}
 			f.setAccessible(true);
 			try {
-				System.out.println(f);
 				if (authB.getProperty(f.getName()).getValue() != null) {
 					f.set(behavior, authB.getProperty(f.getName()).getValue());
 				}

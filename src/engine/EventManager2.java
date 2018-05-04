@@ -5,7 +5,6 @@ import java.util.List;
 
 import engine.collision.CollisionManager;
 import engine.events.elementevents.ElementEvent;
-import engine.events.elementevents.KeyInputEvent;
 import engine.events.gameevents.GameEvent;
 
 /**

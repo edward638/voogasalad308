@@ -8,10 +8,7 @@ import engine.GamePart;
 import engine.behaviors.MandatoryBehavior;
 import engine.events.elementevents.CollisionEvent;
 import engine.events.gameevents.GameEvent;
-import javafx.geometry.Bounds;
-import javafx.geometry.Point2D;
 import javafx.scene.shape.Path;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 /**

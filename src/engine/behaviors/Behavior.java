@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import engine.GameElement;
-import engine.authouringconversion.Printer;
 
 public abstract class Behavior {
 

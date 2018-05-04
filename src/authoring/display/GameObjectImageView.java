@@ -40,17 +40,9 @@ public class GameObjectImageView {
 	}
 	
 	private void onMouseReleased() {
-		
-		AuthBehavior mandatory = gameObject.getMandatoryBehavior();
-		mandatory.getProperty("xPos").setValue(myImage.localToParent(myImage.getBoundsInLocal()).getMinX());
-		
-		mandatory.getProperty("yPos").setValue(myImage.localToParent(myImage.getBoundsInLocal()).getMinY());
-		
-//		System.out.println("Onmousereleased " + mandatory.getProperty("xPos"));
-//		System.out.println("Onmousereleased " + mandatory.getProperty("yPos"));
-		
+		gameObject.setxPos(myImage.localToParent(myImage.getBoundsInLocal()).getMinX());
+		gameObject.setxPos(myImage.localToParent(myImage.getBoundsInLocal()).getMinY());		
 		viewRefreshInterface.notifyObjectInfoObservers(gameObject);
-		
 	}
 
 	private void onMouseClicked(MouseEvent t) {
@@ -85,7 +77,6 @@ public class GameObjectImageView {
 	}
 	
 	private void onMouseDragged(MouseEvent t) {
-		
 		double currentX2 = t.getSceneX();
 		double currentY2 = t.getSceneY();
 		
@@ -97,7 +88,6 @@ public class GameObjectImageView {
 	}
 	
 	private void dragImage(MouseEvent t) {
-		
 		double newX = t.getSceneX();
 		double newY = t.getSceneY();	
 		translateX = newX - currentX + positionX;
@@ -131,12 +121,9 @@ public class GameObjectImageView {
 		myImage.setTranslateY(translateY);
 		
 		wasEdited = true;
-		
 	}
 
 	public ImageView getMyImage() {
 		return myImage;
 	}
-
-
 }

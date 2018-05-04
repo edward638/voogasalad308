@@ -23,6 +23,10 @@ import engine.behaviors.Behavior;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 
+/**
+ * @author Maddie Wilkinson
+ *
+ */
 public class BehaviorPopupController extends PopupController {
 	private final String PACKAGE_NAME = "engine.behaviors";
 	private final String SUPERCLASS_NAME = "engine.behaviors.Behavior";
@@ -32,6 +36,9 @@ public class BehaviorPopupController extends PopupController {
 	private BehaviorPanel myBehaviorPanel;
 	private PropertyPanel myPropertyPanel;
 
+	/**
+	 * @param gameObjects
+	 */
 	public BehaviorPopupController(List<GameObject> gameObjects) {
 		myGameObjects = gameObjects;
 		getAllBehaviors();
@@ -60,6 +67,9 @@ public class BehaviorPopupController extends PopupController {
 		myPropertyPanel.refresh();
 	}
 	
+	/**
+	 * @return The BehaviorPanel and the PropertyPanel in the BehaviorPopup.
+	 */
 	public List<Node> getPanels() {
 		List<Node> panels = new ArrayList<>();
 		panels.add(myBehaviorPanel.asNode());
@@ -83,10 +93,16 @@ public class BehaviorPopupController extends PopupController {
 		return allBehaviors;
 	}
 	
+	/**
+	 * @return The currently selected AuthBehavior in the BehaviorPanel
+	 */
 	public AuthBehavior getCurrBehavior() {
 		return myBehaviorPanel.getCurrBehavior();
 	}
 
+	/**
+	 * Refreshes the displayed Properties in the PropertyPanel.
+	 */
 	public void refreshProperties() {
 		myPropertyPanel.refresh();
 	}

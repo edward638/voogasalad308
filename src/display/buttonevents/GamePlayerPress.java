@@ -1,7 +1,6 @@
 package display.buttonevents;
 
 import gamePlayer.ConcreteGamePlayer;
-import gamePlayer.GamePlayer;
 import javafx.stage.Stage;
 
 /**
@@ -12,17 +11,17 @@ import javafx.stage.Stage;
  */
 public class GamePlayerPress implements ButtonEvent {
 
-	private Stage splashStage;
 	private Stage gamePlayerStage;
 
 	public GamePlayerPress(Stage stage) {
-		splashStage = stage;
 		gamePlayerStage = new Stage();
 	}
 
+	/* (non-Javadoc)
+	 * @see display.buttonevents.ButtonEvent#pressed()
+	 */
 	@Override
 	public void pressed() {
-//		splashStage.close();
 		
 	ConcreteGamePlayer gamePlayer = new ConcreteGamePlayer(gamePlayerStage);
 	gamePlayerStage.show();

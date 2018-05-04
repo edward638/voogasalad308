@@ -22,30 +22,41 @@ public class BehaviorsWindow extends VBox {
 	private ListView<AuthBehavior> behaviors;
 	private GameObject currentGO;
 	
+	private static final String BEHAVIORS = "Behaviors";
+	private static final String NOEVENT = "No Event selected";
+	private static final int SPACING = 10;
+	private static final int SIZE = 200;
+	
+	/**
+	 * @param myEPUC 	The controller
+	 * @param myGos 	The current game objects
+	 */
 	public BehaviorsWindow(EventsPopupController myEPUC, List<GameObject> myGos) {
 		epuc = myEPUC;
 		gos = myGos;
 		behaviors = new ListView<>();
-		behaviors.setMinHeight(200);
+		behaviors.setMinHeight(SIZE);
 		currentGO = gos.get(0);
 		currentBehavior = null;
 		createVBox();
 	}
 	
+	/**
+	 * Creates the layout for the VBox
+	 */
 	public void createVBox() {
 		this.getChildren().clear();
-		this.setPadding(new Insets(10));
-	    this.setSpacing(10);
-	    this.setMinWidth(200);
-	    Text title = new Text("Behaviors");
+		this.setPadding(new Insets(SPACING));
+	    this.setSpacing(SPACING);
+	    this.setMinWidth(SIZE);
+	    Text title = new Text(BEHAVIORS);
 	    this.getChildren().add(title);
 	    createListView();
 	}
 	
 	private void createListView() {
 		if (!epuc.validEvent()) {
-			Text nonvalid = new Text("No event selected");
-			this.getChildren().add(nonvalid);
+			this.getChildren().add(new Text(NOEVENT));
 			return;
 		}
 		behaviors.getItems().clear();
@@ -58,12 +69,19 @@ public class BehaviorsWindow extends VBox {
 		if (selectedBehavior == null) return;
 		currentBehavior = selectedBehavior;
 		epuc.updateFromBehavior();
-		epuc.concatenateString(currentBehavior.getDisplayName(), "BehaviorsWindow");
+		epuc.concatenateString(currentBehavior.getDisplayName(), this.getClass().getSimpleName());
 	}
 	
+	/**
+	 * @return the current AuthBehavior
+	 */
 	public AuthBehavior getCurrBehavior() {
 		return currentBehavior;
 	}
+	/**
+	 * Make the current object the passed in game object
+	 * @param newGO 	The desired game object to be the current game object
+	 */
 	public void setCurrObject(GameObject newGO) {
 		if (newGO == null) {
 			return;

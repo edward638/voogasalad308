@@ -49,25 +49,33 @@ public class Converter2 {
 	public GameElement gameObject2GameElement(GameObject go) {
 		GameElement ge = new GameElement();
 		
-		// Must add MandatoryBehavior first
-		Behavior mandEngB = authBehavior2Behavior(go.getMandatoryBehavior(), ge);
-		ge.addBehavior(mandEngB);
-		
+//		// Must add MandatoryBehavior first
+//		Behavior mandEngB = authBehavior2Behavior(go.getMandatoryBehavior(), ge);
+//		ge.addBehavior(mandEngB);
+//		setBehavior2AuthorValues(go.getMandatoryBehavior(), ge);
+//		
 		// Add remaining Behaviors besides MainCharacter
 		for (AuthBehavior authB: go.getBehaviors()) {
-			if (authB.getName().contains("Mandatory") || authB.getName().contains("MainCharacter")) {continue;}
+//			if (authB.getName().contains("Mandatory") || authB.getName().contains("MainCharacter")) {continue;}
 			ge.addBehavior(authBehavior2Behavior(authB, ge));
 		}
 		
-		// Add MainCharacter Behavior
-		Integer size = go.getBehaviors()
-				.stream()
-				.filter(authB -> authB.getName().contains("MainCharacter"))
-				.collect(Collectors.toList())
-				.size();
-		if (size > 0) {
-			ge.addBehavior(authBehavior2Behavior(go.getBehavior(MainCharacter.class.getCanonicalName()), ge));
+		// Add remaining Behaviors besides MainCharacter
+		for (AuthBehavior authB: go.getBehaviors()) {
+//			if (authB.getName().contains("Mandatory") || authB.getName().contains("MainCharacter")) {continue;}
+			setBehavior2AuthorValues(authB, ge);
+//			ge.addBehavior(authBehavior2Behavior(authB, ge));
 		}
+		
+//		// Add MainCharacter Behavior
+//		Integer size = go.getBehaviors()
+//				.stream()
+//				.filter(authB -> authB.getName().contains("MainCharacter"))
+//				.collect(Collectors.toList())
+//				.size();
+//		if (size > 0) {
+//			ge.addBehavior(authBehavior2Behavior(go.getBehavior(MainCharacter.class.getCanonicalName()), ge));
+//		}
 			
 		addResponsesAuth2Engine(ge, go);	
 		return ge;
@@ -148,20 +156,30 @@ public class Converter2 {
 			e1.printStackTrace();
 			throw (new RuntimeException("Failed to instantiate newEngBehavior from " + authB.getName()));
 		}
-		
-		Class<?> newEngBehaviorClass = newEngBehavior.getClass();
+		return newEngBehavior;
+	}
+	
+	/*
+	 * Sets the behavior properties of a game element to what the author specified
+	 */
+	
+	private void setBehavior2AuthorValues (AuthBehavior authB, GameElement ge) {
+		String[] parts = authB.getName().split("\\.");
+		String className = parts[parts.length - 1];
+		System.out.println(className);
+		Behavior behavior = ge.getBehavior(className);
+		Class<?> newEngBehaviorClass = behavior.getClass();
 		for (Field f: newEngBehaviorClass.getDeclaredFields()) {
 			if (Modifier.isPublic(f.getModifiers())) {continue;}
 			f.setAccessible(true);
 			try {
 				if (authB.getProperty(f.getName()).getValue() != null) {
-					f.set(newEngBehavior, authB.getProperty(f.getName()).getValue());
+					f.set(behavior, authB.getProperty(f.getName()).getValue());
 				}
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 				e.printStackTrace();
 			}
 		}
-		return newEngBehavior;
 		
 	}
 

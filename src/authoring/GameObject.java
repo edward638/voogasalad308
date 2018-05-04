@@ -81,11 +81,11 @@ public class GameObject {
 		myEvents = toCopy.getEvents();
 		setName(toCopy.getName());
 		addBehavior(MandatoryBehavior.class.getCanonicalName());
-		this.setxPos((double) toCopy.getMandatoryBehavior().getProperty("xPos").getValue());
-		this.setyPos((double) toCopy.getMandatoryBehavior().getProperty("yPos").getValue());
+		setxPos((double) toCopy.getMandatoryBehavior().getProperty("xPos").getValue());
+		setyPos((double) toCopy.getMandatoryBehavior().getProperty("yPos").getValue());
 		if(toCopy.getMandatoryBehavior().getProperty("displayWidth").getValue() != null) {
-			this.setDisplayWidth((double) toCopy.getMandatoryBehavior().getProperty("displayWidth").getValue());
-			this.setDisplayHeight((double) toCopy.getMandatoryBehavior().getProperty("displayHeight").getValue());
+			setDisplayWidth((double) toCopy.getMandatoryBehavior().getProperty("displayWidth").getValue());
+			setDisplayHeight((double) toCopy.getMandatoryBehavior().getProperty("displayHeight").getValue());
 		}
 		this.setImagePath((String) toCopy.getMandatoryBehavior().getProperty("imagePath").getValue());
 	}

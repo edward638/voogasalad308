@@ -77,6 +77,7 @@ public class Engine implements EngineInterface{
     	eventManager.processElementEvent(new TimeEvent(gameSteps));
     	displayState.update(currentGameState);
     	playerUpdater.updateHUD(populateHUD());
+    	System.out.println(getKeyAssignments());
     }
 	
 	/**
@@ -174,12 +175,7 @@ public class Engine implements EngineInterface{
 		Map<ElementEvent, Action> events = currentGameState.getCurrentGamePart().getMainCharacter().getResponder().getResponses();
 		for (ElementEvent elementEvent : events.keySet()) {
 			if ((elementEvent instanceof KeyInputEvent) && (events.get(elementEvent) instanceof GroovyAction)) {
-				if (((GroovyAction) events.get(elementEvent)).getName() != null) {
-					keyAssignments.put(((KeyInputEvent) elementEvent).getKeyCode(), ((GroovyAction) events.get(elementEvent)).getName());
-				}
-				else {
-					keyAssignments.put(((KeyInputEvent) elementEvent).getKeyCode(), ((GroovyAction) events.get(elementEvent)).getContent());
-				}
+				keyAssignments.put(((KeyInputEvent) elementEvent).getKeyCode(), ((GroovyAction) events.get(elementEvent)).getName());
 			}
 		}
 		return keyAssignments;

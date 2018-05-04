@@ -16,6 +16,20 @@
         <authoring.AuthBehavior>
           <myProperties>
             <authoring.Property>
+              <myValue class="double">35.0</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">566.0</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
               <myName>shapeType</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
@@ -25,13 +39,9 @@
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myName>hitBoxWidth</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">35.0</myValue>
-              <myName>xPos</myName>
-              <myValueType>java.lang.Double</myValueType>
+              <myValue class="string">brickimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
             </authoring.Property>
             <authoring.Property>
               <myValue class="double">50.0</myValue>
@@ -39,22 +49,12 @@
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myName>elementName</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">566.0</myValue>
-              <myName>yPos</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
               <myName>hitBoxHeight</myName>
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myValue class="string">brickimage</myValue>
-              <myName>imagePath</myName>
-              <myValueType>java.lang.String</myValueType>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
           </myProperties>
           <myName>engine.behaviors.MandatoryBehavior</myName>
@@ -69,21 +69,11 @@
         <authoring.AuthBehavior>
           <myProperties>
             <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
               <myName>elementName</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">50.0</myValue>
-              <myName>displayWidth</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">50.0</myValue>
-              <myName>displayHeight</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myName>shapeType</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
             <authoring.Property>
@@ -92,9 +82,18 @@
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myValue class="double">567.0</myValue>
-              <myName>yPos</myName>
+              <myValue class="double">50.0</myValue>
+              <myName>displayHeight</myName>
               <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">50.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
             </authoring.Property>
             <authoring.Property>
               <myValue class="string">brickimage</myValue>
@@ -106,7 +105,8 @@
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myName>hitBoxHeight</myName>
+              <myValue class="double">567.0</myValue>
+              <myName>yPos</myName>
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
           </myProperties>
@@ -122,31 +122,27 @@
         <authoring.AuthBehavior>
           <myProperties>
             <authoring.Property>
-              <myValue class="double">50.0</myValue>
-              <myName>displayWidth</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
               <myValue class="double">567.0</myValue>
               <myName>yPos</myName>
               <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">brickimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
             </authoring.Property>
             <authoring.Property>
               <myName>hitBoxHeight</myName>
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myName>elementName</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
               <myName>shapeType</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myValue class="string">brickimage</myValue>
-              <myName>imagePath</myName>
-              <myValueType>java.lang.String</myValueType>
+              <myValue class="double">50.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
               <myName>hitBoxWidth</myName>
@@ -162,6 +158,10 @@
               <myName>xPos</myName>
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
+            <authoring.Property>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
           </myProperties>
           <myName>engine.behaviors.MandatoryBehavior</myName>
         </authoring.AuthBehavior>
@@ -175,31 +175,13 @@
         <authoring.AuthBehavior>
           <myProperties>
             <authoring.Property>
-              <myValue class="double">50.0</myValue>
-              <myName>displayWidth</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myName>elementName</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
               <myValue class="double">194.0</myValue>
               <myName>xPos</myName>
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myValue class="double">50.0</myValue>
-              <myName>displayHeight</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
               <myValue class="string">brickimage</myValue>
               <myName>imagePath</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myName>shapeType</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
             <authoring.Property>
@@ -211,9 +193,27 @@
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
+              <myValue class="double">50.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">50.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
               <myValue class="double">568.0</myValue>
               <myName>yPos</myName>
               <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
             </authoring.Property>
           </myProperties>
           <myName>engine.behaviors.MandatoryBehavior</myName>
@@ -228,15 +228,6 @@
         <authoring.AuthBehavior>
           <myProperties>
             <authoring.Property>
-              <myName>elementName</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">50.0</myValue>
-              <myName>displayHeight</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
               <myValue class="double">50.0</myValue>
               <myName>displayWidth</myName>
               <myValueType>java.lang.Double</myValueType>
@@ -244,20 +235,6 @@
             <authoring.Property>
               <myName>hitBoxWidth</myName>
               <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">567.0</myValue>
-              <myName>yPos</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="string">brickimage</myValue>
-              <myName>imagePath</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myName>shapeType</myName>
-              <myValueType>java.lang.String</myValueType>
             </authoring.Property>
             <authoring.Property>
               <myValue class="double">297.0</myValue>
@@ -265,7 +242,30 @@
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
+              <myValue class="string">brickimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">567.0</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
               <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">50.0</myValue>
+              <myName>displayHeight</myName>
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
           </myProperties>
@@ -286,16 +286,11 @@
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myName>hitBoxHeight</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
               <myName>elementName</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myValue class="double">568.0</myValue>
-              <myName>yPos</myName>
+              <myName>hitBoxHeight</myName>
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
@@ -304,22 +299,27 @@
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myValue class="double">50.0</myValue>
-              <myName>displayWidth</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
               <myName>shapeType</myName>
               <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myName>hitBoxWidth</myName>
-              <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
               <myValue class="string">brickimage</myValue>
               <myName>imagePath</myName>
               <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">568.0</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">50.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
           </myProperties>
           <myName>engine.behaviors.MandatoryBehavior</myName>
@@ -334,12 +334,17 @@
         <authoring.AuthBehavior>
           <myProperties>
             <authoring.Property>
-              <myName>hitBoxWidth</myName>
-              <myValueType>java.lang.Double</myValueType>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myName>elementName</myName>
+              <myValue class="string">brickimage</myValue>
+              <myName>imagePath</myName>
               <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
               <myValue class="double">368.0</myValue>
@@ -356,22 +361,17 @@
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myName>shapeType</myName>
+              <myName>elementName</myName>
               <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="string">brickimage</myValue>
-              <myName>imagePath</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">500.0</myValue>
-              <myName>displayWidth</myName>
-              <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
               <myValue class="double">446.0</myValue>
               <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">500.0</myValue>
+              <myName>displayWidth</myName>
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
           </myProperties>
@@ -392,7 +392,16 @@
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myName>hitBoxHeight</myName>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">50.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
@@ -401,30 +410,21 @@
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myValue class="double">297.0</myValue>
-              <myName>xPos</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myName>shapeType</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myName>hitBoxWidth</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
               <myValue class="string">brickimage</myValue>
               <myName>imagePath</myName>
               <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">297.0</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
               <myName>elementName</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myValue class="double">50.0</myValue>
-              <myName>displayWidth</myName>
+              <myName>hitBoxHeight</myName>
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
           </myProperties>
@@ -440,29 +440,12 @@
         <authoring.AuthBehavior>
           <myProperties>
             <authoring.Property>
+              <myValue class="string">brickimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
               <myName>hitBoxHeight</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myName>hitBoxWidth</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myName>shapeType</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">50.0</myValue>
-              <myName>displayHeight</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myName>elementName</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">461.0</myValue>
-              <myName>yPos</myName>
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
@@ -471,9 +454,26 @@
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myValue class="string">brickimage</myValue>
-              <myName>imagePath</myName>
+              <myName>elementName</myName>
               <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">50.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">461.0</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
               <myValue class="double">50.0</myValue>
@@ -493,12 +493,18 @@
         <authoring.AuthBehavior>
           <myProperties>
             <authoring.Property>
-              <myValue class="double">50.0</myValue>
-              <myName>displayHeight</myName>
+              <myValue class="double">461.0</myValue>
+              <myName>yPos</myName>
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myName>hitBoxHeight</myName>
+              <myValue class="double">50.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">50.0</myValue>
+              <myName>displayHeight</myName>
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
@@ -512,26 +518,20 @@
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myValue class="double">461.0</myValue>
-              <myName>yPos</myName>
-              <myValueType>java.lang.Double</myValueType>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
             </authoring.Property>
             <authoring.Property>
               <myName>elementName</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myValue class="double">50.0</myValue>
-              <myName>displayWidth</myName>
+              <myName>hitBoxHeight</myName>
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
               <myName>hitBoxWidth</myName>
               <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myName>shapeType</myName>
-              <myValueType>java.lang.String</myValueType>
             </authoring.Property>
           </myProperties>
           <myName>engine.behaviors.MandatoryBehavior</myName>
@@ -546,21 +546,8 @@
         <authoring.AuthBehavior>
           <myProperties>
             <authoring.Property>
-              <myValue class="string">brickimage</myValue>
-              <myName>imagePath</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myName>shapeType</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myName>hitBoxHeight</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">403.0</myValue>
-              <myName>xPos</myName>
+              <myValue class="double">461.0</myValue>
+              <myName>yPos</myName>
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
@@ -569,21 +556,34 @@
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">403.0</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
               <myValue class="double">50.0</myValue>
               <myName>displayWidth</myName>
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myName>hitBoxWidth</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">461.0</myValue>
-              <myName>yPos</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
               <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="string">brickimage</myValue>
+              <myName>imagePath</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
           </myProperties>
@@ -603,27 +603,18 @@
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
             <authoring.Property>
+              <myValue class="double">50.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
               <myValue class="string">Seanimage</myValue>
               <myName>imagePath</myName>
               <myValueType>java.lang.String</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myName>hitBoxWidth</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">50.0</myValue>
-              <myName>displayHeight</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myName>hitBoxHeight</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">50.0</myValue>
-              <myName>displayWidth</myName>
-              <myValueType>java.lang.Double</myValueType>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
             </authoring.Property>
             <authoring.Property>
               <myValue class="double">310.0</myValue>
@@ -636,8 +627,17 @@
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myName>elementName</myName>
-              <myValueType>java.lang.String</myValueType>
+              <myValue class="double">50.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
           </myProperties>
           <myName>engine.behaviors.MandatoryBehavior</myName>
@@ -649,6 +649,52 @@
     <authoring.GameObject>
       <myName>Summer</myName>
       <myBehaviors>
+        <authoring.AuthBehavior>
+          <myProperties>
+            <authoring.Property>
+              <myValue class="string">Summerimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">44.0</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">40.0</myValue>
+              <myName>displayHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">40.0</myValue>
+              <myName>displayWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">520.0</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxWidth</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+          </myProperties>
+          <myName>engine.behaviors.MandatoryBehavior</myName>
+        </authoring.AuthBehavior>
         <authoring.AuthBehavior>
           <myProperties>
             <authoring.Property>
@@ -677,51 +723,10 @@
         <authoring.AuthBehavior>
           <myProperties>
             <authoring.Property>
-              <myValue class="string">Summerimage</myValue>
-              <myName>imagePath</myName>
-              <myValueType>java.lang.String</myValueType>
+              <myValue class="int">3</myValue>
+              <myName>gamelives</myName>
+              <myValueType>java.lang.Integer</myValueType>
             </authoring.Property>
-            <authoring.Property>
-              <myName>elementName</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myName>shapeType</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">44.0</myValue>
-              <myName>xPos</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">40.0</myValue>
-              <myName>displayHeight</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">520.0</myValue>
-              <myName>yPos</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myName>hitBoxWidth</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">40.0</myValue>
-              <myName>displayWidth</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myName>hitBoxHeight</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-          </myProperties>
-          <myName>engine.behaviors.MandatoryBehavior</myName>
-        </authoring.AuthBehavior>
-        <authoring.AuthBehavior>
-          <myProperties>
             <authoring.Property>
               <myValue class="boolean">true</myValue>
               <myName>yscroll</myName>
@@ -732,24 +737,14 @@
               <myName>xscroll</myName>
               <myValueType>java.lang.Boolean</myValueType>
             </authoring.Property>
-            <authoring.Property>
-              <myValue class="int">3</myValue>
-              <myName>gamelives</myName>
-              <myValueType>java.lang.Integer</myValueType>
-            </authoring.Property>
           </myProperties>
           <myName>engine.behaviors.MainCharacter</myName>
         </authoring.AuthBehavior>
       </myBehaviors>
       <myEvents>
         <authoring.Event>
-          <myResponses>
-            <engine.actions.GroovyAction>
-              <content>Summer.getBehavior(&apos;MovableCharacter&apos;).jump()</content>
-            </engine.actions.GroovyAction>
-          </myResponses>
-          <eventType>engine.events.elementevents.KeyInputEvent</eventType>
-          <myTrigger>w</myTrigger>
+          <myResponses/>
+          <eventType>KeyInputEvent</eventType>
         </authoring.Event>
       </myEvents>
       <myBehaviorFactory/>
@@ -760,6 +755,33 @@
         <authoring.AuthBehavior>
           <myProperties>
             <authoring.Property>
+              <myValue class="string">saheelimage</myValue>
+              <myName>imagePath</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>elementName</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>shapeType</myName>
+              <myValueType>java.lang.String</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">364.0</myValue>
+              <myName>xPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myName>hitBoxHeight</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
+              <myValue class="double">417.0</myValue>
+              <myName>yPos</myName>
+              <myValueType>java.lang.Double</myValueType>
+            </authoring.Property>
+            <authoring.Property>
               <myName>hitBoxWidth</myName>
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
@@ -769,36 +791,9 @@
               <myValueType>java.lang.Double</myValueType>
             </authoring.Property>
             <authoring.Property>
-              <myValue class="double">417.0</myValue>
-              <myName>yPos</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="double">364.0</myValue>
-              <myName>xPos</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
               <myValue class="double">40.0</myValue>
               <myName>displayWidth</myName>
               <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myName>hitBoxHeight</myName>
-              <myValueType>java.lang.Double</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myName>elementName</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myValue class="string">saheelimage</myValue>
-              <myName>imagePath</myName>
-              <myValueType>java.lang.String</myValueType>
-            </authoring.Property>
-            <authoring.Property>
-              <myName>shapeType</myName>
-              <myValueType>java.lang.String</myValueType>
             </authoring.Property>
           </myProperties>
           <myName>engine.behaviors.MandatoryBehavior</myName>

@@ -4,25 +4,26 @@ import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.imageio.ImageIO;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
+/**
+ * @author Edward Zhuang
+ * Class responsible for storing and accessing images from game data.
+ */
 public class ImageManager {
 
     private static final String BACKSLASH = "/";
-    private static final String BACKGROUNDIMAGES = "backgroundimages";
+    private static final String BACKGROUND_IMAGES = "backgroundimages";
     private static final String IMAGES = "images";
-    private String gameLocation;
+    private static final String PNG = "png";
     private String gameImagesLocation;
     private String gameBackgroundImagesLocation;
     private static final String defaultImageLocation = "./data/gamedata/defaultimages/";
     private static final String baseLocation = "./data/gamedata/games/";
-    private static final String GAMES = "games/";
     private static final String DEFAULT = "default";
 
 
@@ -30,37 +31,15 @@ public class ImageManager {
     	if (gameName.equals(DEFAULT)) {
     		gameImagesLocation = defaultImageLocation;
     	} else {
-	        gameLocation = baseLocation + gameName + BACKSLASH;
+            String gameLocation = baseLocation + gameName + BACKSLASH;
 	        gameImagesLocation = gameLocation + IMAGES + BACKSLASH;
-	        gameBackgroundImagesLocation = gameLocation + BACKGROUNDIMAGES + BACKSLASH;
+	        gameBackgroundImagesLocation = gameLocation + BACKGROUND_IMAGES + BACKSLASH;
     	}
-    }
-    
-    /**
-     * Provides a list of images for game authoring to use.
-     * @return list of all images (can be used by 
-     */
-    public List<Image> getAllImages(){
-    	ArrayList<Image> imageList = new ArrayList<>();
-    	File directory = new File(gameImagesLocation);
-        File[] directoryListing = directory.listFiles();
-        
-        if (directoryListing != null){
-            for (File level : directoryListing){
-                String path = level.getName();
-                imageList.add(getImage("/" + path));
-            }
-        }
-    	
-    	return imageList;
     }
 
     private BufferedImage getBufferedImage(String imageName, String location) {
-        BufferedImage img = null;
-        try {	
-//        	System.out.println(gameImagesLocation + imageName);
-//        	System.out.println(location+imageName);
-//        		System.out.println(location + imageName);
+        BufferedImage img;
+        try {
             img = ImageIO.read(new File(location + imageName));
         } catch (IOException e) {
             e.printStackTrace(); //TODO: remove this print stacktrace!
@@ -79,7 +58,6 @@ public class ImageManager {
         return bufferedImagetoJavaFXImage(getBufferedImage(imageName, gameImagesLocation));
     }
 
-
     private void storeBufferedImage(String imageName, BufferedImage image, String location){
         try {
             System.out.println("storeBufferedImage " + location + imageName);
@@ -88,18 +66,25 @@ public class ImageManager {
             e.printStackTrace(); //TODO: remove this print stacktrace!
         }
     }
-    
-    
+
+    /**
+     * Stores BackgroundImage
+     * @param image Image to be saved
+     * @return string of saved background image
+     */
     public String storeBackgroundImage(Image image) {
-    	ArrayList<Image> imageList = new ArrayList<>();
-    	File directory = new File(gameBackgroundImagesLocation);
+        File directory = new File(gameBackgroundImagesLocation);
     	int number = directory.listFiles().length;
     	String background = "background" + number;
     	storeBufferedImage(background, javaFXToBufferedImage(image), gameBackgroundImagesLocation);
     	return background;
-    	
     }
-    
+
+    /**
+     * Retrieves Background Image
+     * @param imageName name of image
+     * @return Image
+     */
     public Image getBackgroundImage(String imageName) {
     	return bufferedImagetoJavaFXImage(getBufferedImage(imageName, gameBackgroundImagesLocation));
     }
@@ -110,14 +95,17 @@ public class ImageManager {
      * @param image to be stored
      */
     public void storeImage(String imageName, Image image){
-    	System.out.println("storeImage " + imageName);
         storeBufferedImage(imageName, javaFXToBufferedImage(image), gameImagesLocation);
     }
 
+    /**
+     * Stores the composite background image
+     * @param imageName name of image
+     * @param ri image to be stored
+     */
     public void storeCompositeBackgroundImage(String imageName, RenderedImage ri) {
     	try {
-    		System.out.println(gameImagesLocation);
-			ImageIO.write(ri, "png", new File(gameImagesLocation+imageName));
+			ImageIO.write(ri, PNG, new File(gameImagesLocation+imageName));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -126,7 +114,7 @@ public class ImageManager {
     
     /**
      * Converts JavaFX image to BufferedImage
-     * @param image
+     * @param image FX image
      * @return BufferedImage
      */
     private BufferedImage javaFXToBufferedImage(Image image){

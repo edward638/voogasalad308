@@ -88,6 +88,7 @@ public class GameSelector extends ScrollPane {
 		pane.setStyle("-fx-background-color:black;");
 
 		ImageView imageView = setUpGameImage(gameImage);
+		
 		Text nameText = setUpGameText(gameString);
 		Text descriptionText = setUpGameDescriptionText(gameDescription);
 		Button playButton = makePlayButton(gameName);

@@ -6,7 +6,6 @@ import data.GameDescriptionProvider;
 import engine.Engine;
 import engine.EngineInterface;
 import gamePlayer.buttons.ChangeNameButton;
-//import engine.tests.ModelGameState2;
 import gamePlayer.buttons.ConcreteButtonData;
 import gamePlayer.buttons.LoadButton;
 import gamePlayer.buttons.LoadOnlineButton;

@@ -29,6 +29,7 @@ public class GameScene extends Observable implements AudioObservable, GameViewOb
 		myObjects = new ArrayList<>();
 		myObjectNames = new TreeSet<>();
 		backgroundImageSerializables = new ArrayList<>();	
+		backgroundImageName = myName.replaceAll("\\s", "") + "backgroundimage";
 	}
 	
 	public GameScene(GameSceneSerializableCreator scene) {

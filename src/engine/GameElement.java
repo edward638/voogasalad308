@@ -191,9 +191,12 @@ public class GameElement {
 	}
 	
 	public boolean matchesType(GameElement other) {
+//		System.out.println("GameElement: hasBehavior: " + other);
+//		System.out.println("GameElement: hasBehavior: " + other.hasBehavior(MainCharacter.class));
 		return other.getIdentifier().equals(getIdentifier()) 
 				|| other.getIdentifier().equals(MandatoryBehavior.REFER_ALL_ELEMENTS)
-				|| (getIdentifier().equals(MandatoryBehavior.REFER_MAIN_CHARACTER) && other.hasBehavior(MainCharacter.class));
+				|| (getIdentifier().equals(MandatoryBehavior.REFER_MAIN_CHARACTER) && other.hasBehavior(MainCharacter.class))
+				|| (other.getIdentifier().equals(MandatoryBehavior.REFER_MAIN_CHARACTER) && hasBehavior(MainCharacter.class));
 	}
 	
 	/*

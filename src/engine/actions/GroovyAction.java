@@ -12,6 +12,7 @@ import engine.groovy.GroovyExecutor;
 public class GroovyAction implements Action {
 	
 	private String content;
+	private String actionName;
 	
 	public GroovyAction() {
 		
@@ -54,6 +55,14 @@ public class GroovyAction implements Action {
 		GroovyAction er = new GroovyAction();
 		er.setContent(this.getContent());
 		return er;
+	}
+	
+	public void setName(String name) {
+		actionName = name;
+	}
+	
+	public String getName() {
+		return actionName;
 	}
 	
 	public String toString() {

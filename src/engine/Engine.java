@@ -77,7 +77,6 @@ public class Engine implements EngineInterface{
     	eventManager.processElementEvent(new TimeEvent(gameSteps));
     	displayState.update(currentGameState);
     	playerUpdater.updateHUD(populateHUD());
-    	System.out.println(getKeyAssignments());
     }
 	
 	/**

@@ -48,35 +48,12 @@ public class Converter2 {
 	
 	public GameElement gameObject2GameElement(GameObject go) {
 		GameElement ge = new GameElement();
-		
-//		// Must add MandatoryBehavior first
-//		Behavior mandEngB = authBehavior2Behavior(go.getMandatoryBehavior(), ge);
-//		ge.addBehavior(mandEngB);
-//		setBehavior2AuthorValues(go.getMandatoryBehavior(), ge);
-//		
-		// Add remaining Behaviors besides MainCharacter
 		for (AuthBehavior authB: go.getBehaviors()) {
-//			if (authB.getName().contains("Mandatory") || authB.getName().contains("MainCharacter")) {continue;}
 			ge.addBehavior(authBehavior2Behavior(authB, ge));
 		}
-		
-		// Add remaining Behaviors besides MainCharacter
 		for (AuthBehavior authB: go.getBehaviors()) {
-//			if (authB.getName().contains("Mandatory") || authB.getName().contains("MainCharacter")) {continue;}
 			setBehavior2AuthorValues(authB, ge);
-//			ge.addBehavior(authBehavior2Behavior(authB, ge));
 		}
-		
-//		// Add MainCharacter Behavior
-//		Integer size = go.getBehaviors()
-//				.stream()
-//				.filter(authB -> authB.getName().contains("MainCharacter"))
-//				.collect(Collectors.toList())
-//				.size();
-//		if (size > 0) {
-//			ge.addBehavior(authBehavior2Behavior(go.getBehavior(MainCharacter.class.getCanonicalName()), ge));
-//		}
-			
 		addResponsesAuth2Engine(ge, go);	
 		return ge;
 	}
@@ -117,23 +94,6 @@ public class Converter2 {
 	}
 	
 	
-	/*
-	 * Method reviews game objects stored as parts
-	 */
-//	private GamePart fillGameObjects(GamePart part, GameScene scene) {
-//		List<Property> properties2fix = new ArrayList<>();
-//		for (GameObject go: scene.getMyObjects()) {
-//			go.getBehaviors().stream().forEach(beh -> {
-//				beh.getProperties().stream().forEach(prop -> {
-//					if (prop.getValue() instanceof GameElement) {
-//						properties2fix.add(prop);
-//					}
-//				});
-//			});
-//		}
-//		properties2fix.stream().forEach(prop -> fixProperty(prop, part));
-//	}
-	
 	public GameScene gamePart2GameScene(GamePart part) {
 		GameScene scene = new GameScene(part.getGamePartID(), part.getMyLevelID());
 		scene.setBackgroundImageName();
@@ -173,6 +133,7 @@ public class Converter2 {
 			if (Modifier.isPublic(f.getModifiers())) {continue;}
 			f.setAccessible(true);
 			try {
+				System.out.println(f);
 				if (authB.getProperty(f.getName()).getValue() != null) {
 					f.set(behavior, authB.getProperty(f.getName()).getValue());
 				}

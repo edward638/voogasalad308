@@ -8,7 +8,7 @@ public class KeyInputEvent extends ElementEvent {
 	String code;
 	
 	public KeyInputEvent(KeyCode co) {
-		this.code = co.getChar();
+		this.code = co.getName();
 	}
 	
 	public KeyCode getKeyCode() {

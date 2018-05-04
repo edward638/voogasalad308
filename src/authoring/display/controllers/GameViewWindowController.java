@@ -10,6 +10,9 @@ import authoring.ViewRefreshInterface;
 import authoring.display.authoringuicomponents.GameViewWindow;
 import data.ImageManager;
 import data.propertiesFiles.ResourceBundleManager;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
 
 /**
@@ -47,11 +50,18 @@ public class GameViewWindowController extends Controller implements ViewRefreshI
 		gameViewWindowRefactored.attachToPane(pane, x, y);
 	}
 	
-	public void storeBackgroundImage(RenderedImage ri) {
-		getImageManager().storeCompositeBackgroundImage(gameScene.getName().replaceAll("\\s", "")+"backgroundimage.png", ri);
-		gameScene.setBackgroundImageName();
-	}
+//	public void storeBackgroundImage(RenderedImage ri) {
+//		getImageManager().storeCompositeBackgroundImage(gameScene.getName().replaceAll("\\s", "")+"backgroundimage.png", ri);
+//		gameScene.setBackgroundImageName();
+//	}
 
+	public void storeBackgroundImage(Pane pane) {
+		System.out.println(pane.getWidth() + " " + pane.getHeight());
+		WritableImage wi = new WritableImage((int) pane.getWidth(), (int) pane.getHeight());
+		pane.snapshot(new SnapshotParameters(), wi);
+		RenderedImage ri = SwingFXUtils.fromFXImage(wi, null);
+		getImageManager().storeCompositeBackgroundImage(gameScene.getName().replaceAll("\\s", "")+"backgroundimage.png", ri);
+	}
 	public SceneBackgroundImage getBackgroundImage(SceneBackgroundImageSerializable s) {
 		return new SceneBackgroundImage(getImageManager().getBackgroundImage(s.getImagePath()), s);
 	}

@@ -22,6 +22,12 @@ public class VolumeSlider extends Slider {
 	private static final double INITIAL_VOLUME = 0.5;
 	private static final double MINIMUM_VOLUME = 0;
 	private static final double MAXIMUM_VOLUME = 1;
+	private static final double SLIDER_X = 1080;
+	private static final double SLIDER_Y = 427;
+	private static final double SLIDER_WIDTH = 130;
+	private static final double FONTSIZE = 20;
+	private static final double VOLUMETEXT_X = 970;
+	private static final double VOLUMETEXT_Y = 420;
 	private EngineInterface engine;
 	private Slider slider;
 	private Label volumeText;
@@ -37,9 +43,9 @@ public class VolumeSlider extends Slider {
 
 	private void setupVolumeSlider() {
 		slider = new Slider(MINIMUM_VOLUME, MAXIMUM_VOLUME, INITIAL_VOLUME);
-		slider.setLayoutX(1080);
-		slider.setLayoutY(427);
-		slider.setMaxWidth(130);
+		slider.setLayoutX(SLIDER_X);
+		slider.setLayoutY(SLIDER_Y);
+		slider.setMaxWidth(SLIDER_WIDTH);
 		slider.valueProperty().addListener(new ChangeListener<Number>() {
 			public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
 				volume = new_val.doubleValue();
@@ -56,10 +62,10 @@ public class VolumeSlider extends Slider {
 
 	private void setupVolumeText() {
 		volumeText = new Label("Volume: ");
-		volumeText.setFont(Font.font(font, 20));
+		volumeText.setFont(Font.font(font, FONTSIZE));
 		volumeText.setTextFill(Color.WHITE);
-		volumeText.setLayoutX(970);
-		volumeText.setLayoutY(420);
+		volumeText.setLayoutX(VOLUMETEXT_X);
+		volumeText.setLayoutY(VOLUMETEXT_Y);
 	}
 
 	public void toggleMusic() {

@@ -26,13 +26,17 @@ public class ConcreteHighScores implements HighScores {
 	private static final String PLAYERNAME = "playerName";
 	private static final String SCORELABEL = "Score";
 	private static final String SCORENAME = "score";
+	private static final int TABLE_X = 970;
+	private static final int TABLE_Y = 50;
+	private static final int TABLE_WIDTH = 235;
+	private static final int TABLE_HEIGHT = 265;
 
 	private TableView<Score> table;
 
 	public ConcreteHighScores() {
 		scores = new ArrayList<Score>();
 		table = new TableView<Score>();
-		setupTableProperties(970, 50, 235, 265);
+		setupTableProperties(TABLE_X, TABLE_Y, TABLE_WIDTH, TABLE_HEIGHT);
 	}
 
 	/**
@@ -51,7 +55,7 @@ public class ConcreteHighScores implements HighScores {
 		for (Score score : scoreSaver.loadSavedScores()) {
 			this.addScore(score.getPlayerName(), score.getScore());
 		}
-		setupTableProperties(970, 50, 235, 265);
+		setupTableProperties(TABLE_X, TABLE_Y, TABLE_WIDTH, TABLE_HEIGHT);
 	}
 
 	private void setupTableProperties(double xPos, double yPos, double width, double height) {
